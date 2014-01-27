@@ -1,0 +1,26 @@
+/*-----------------------------------------------------------------------------
+    Helper Classes Utilities Examples
+-----------------------------------------------------------------------------*/
+
+.float-boxes {
+	margin: 20px;
+	padding: 20px;
+	border: 1px solid $grey;
+	background-color: white;
+	@include drm-clearfix();
+}
+
+.box {
+	background-color: lighten($dark-pink, 20%);
+	border: 1px solid $dark-pink;
+	text-align: center;
+	color: white;
+	@include drm-square(200px);
+}
+
+.typography-classes {
+	margin: 20px;
+	padding: 20px;
+	border: 1px solid $grey;
+	background-color: white;
+}

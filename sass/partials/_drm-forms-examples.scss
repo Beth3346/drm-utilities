@@ -1,0 +1,21 @@
+/*-----------------------------------------------------------------------------
+    Forms Utilities Examples
+-----------------------------------------------------------------------------*/
+
+.form-state {
+	margin: 20px;
+	padding: 20px;
+	background-color: white;
+	border: 1px solid $grey;
+	@include box-sizing(border-box);
+
+	form {
+		padding: 20px;
+	}
+
+	input {
+		padding: 5px;
+		width: 80%;
+		@include drm-form-state();		
+	}
+}

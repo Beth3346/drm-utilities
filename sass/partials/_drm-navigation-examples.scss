@@ -1,0 +1,51 @@
+/*-----------------------------------------------------------------------------
+    Navigation Utilities Examples
+-----------------------------------------------------------------------------*/
+
+h3 {
+	margin: 20px;
+	font-weight: bold;
+}
+
+.nav-bar {
+	margin: 10px;
+	@include drm-nav-bar;
+}
+
+.nav-bar-stacked {
+	margin: 10px;
+	@include drm-nav-bar-stacked;
+}
+
+.nav-bar-solid {
+	margin: 10px;
+	@include drm-nav-bar-solid;
+}
+
+.nav-bar-solid-stacked {
+	margin: 10px;
+	width: 300px;
+	@include drm-nav-bar-solid-stacked;
+}
+
+.nav-bar-pills {
+	margin: 10px;
+	@include drm-nav-bar-pills;
+}
+
+.nav-bar-pills-stacked {
+	margin: 10px;
+	width: 300px;
+	@include drm-nav-bar-pills-stacked;
+}
+
+.nav-bar-pills-solid {
+	margin: 10px;
+	@include drm-nav-bar-pills-solid;
+}
+
+.nav-bar-pills-solid-stacked {
+	margin: 10px;
+	width: 300px;
+	@include drm-nav-bar-pills-solid-stacked;
+}

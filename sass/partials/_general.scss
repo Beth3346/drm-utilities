@@ -1,0 +1,9 @@
+.wrapper {
+	@extend %drm-container;
+}
+
+.example-holder {
+	background-color: $light-grey;
+	border: 1px solid $grey;
+	margin: 20px auto 20px auto;
+}
