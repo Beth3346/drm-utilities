@@ -12,18 +12,28 @@
     </head>
     <body>
         <div class="wrapper">
-            <h1>DRM Utilities</h1>
-            <?php 
-                include 'includes/_effects-examples.php';
-                include 'includes/_forms-examples.php';
-                include 'includes/_helper-classes-examples.php';
-                include 'includes/_layout-examples.php';
-                include 'includes/_media-queries-examples.php';
-                include 'includes/_navigation-examples.php';
-                include 'includes/_page-elements-examples.php';
-                include 'includes/_shapes-examples.php';
-            ?>        
+            <section class="sass">
+                 <h1>DRM Utilities</h1>
+                <?php 
+                    include 'includes/_effects-examples.php';
+                    include 'includes/_forms-examples.php';
+                    include 'includes/_helper-classes-examples.php';
+                    include 'includes/_layout-examples.php';
+                    include 'includes/_media-queries-examples.php';
+                    include 'includes/_navigation-examples.php';
+                    include 'includes/_page-elements-examples.php';
+                    include 'includes/_shapes-examples.php';
+                ?>                 
+            </section>
+            <section class="js">
+                <h1>JavaScript Utilities</h1>
+                <?php 
+                    include 'includes/_accordion-demo.php';
+                    include 'includes/_alerts-demo.php';
+                ?>
+            </section>
         </div>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="js/drm-utilities.0.1.0.min.js"></script>
     </body>
 </html>

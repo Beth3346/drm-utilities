@@ -1,3 +1,7 @@
+/*-----------------------------------------------------------------------------
+    General Styles
+-----------------------------------------------------------------------------*/
+
 .wrapper {
 	@extend %drm-container;
 }
@@ -6,4 +10,10 @@
 	background-color: $light-grey;
 	border: 1px solid $grey;
 	margin: 20px auto 20px auto;
+	min-height: 30px;
+}
+
+section {
+	@extend %drm-container-full-width;
+	padding: 20px;
 }
