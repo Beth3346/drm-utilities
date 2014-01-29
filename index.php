@@ -30,6 +30,7 @@
                 <?php 
                     include 'includes/_accordion-demo.php';
                     include 'includes/_alerts-demo.php';
+                    include 'includes/_dropdown-demo.php';
                 ?>
             </section>
         </div>
