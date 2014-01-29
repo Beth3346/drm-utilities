@@ -8,7 +8,14 @@
 				<li><a href="#">Item Seven</a></li>
 				<li><a href="#">Item Eight</a></li>
 				<li><a href="#">Item Nine</a></li>
-				<li><a href="#">Item Ten</a></li>
+				<li><a href="#">Item Ten</a>
+					<ul class="nested-list">
+						<li><a href="#">Item Seven</a></li>
+						<li><a href="#">Item Eight</a></li>
+						<li><a href="#">Item Nine</a></li>
+						<li><a href="#">Item Ten</a></li>
+					</ul>
+				</li>
 			</ul>
 		</li>
 		<li><a href="#">Item Three</a>
