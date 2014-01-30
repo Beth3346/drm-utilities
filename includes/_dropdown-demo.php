@@ -20,9 +20,10 @@
 		</li>
 		<li><a href="#">Item Three</a>
 			<ul>
-				<li><a href="#">Item Seven</a></li>
+				<li><a href="#" class="text-disabled">Item Seven</a></li>
 				<li><a href="#">Item Eight</a></li>
 				<li><a href="#">Item Nine</a></li>
+				<li class="divider"></li>
 				<li><a href="#">Item Ten</a></li>
 			</ul>
 		</li>

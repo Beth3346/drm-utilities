@@ -31,6 +31,7 @@
                     include 'includes/_accordion-demo.php';
                     include 'includes/_alerts-demo.php';
                     include 'includes/_dropdown-demo.php';
+                    include 'includes/_dropdown-buttons-demo.php';
                 ?>
             </section>
         </div>
