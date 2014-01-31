@@ -22,8 +22,6 @@ if length > 1
 	nextButton.show()
 	prevButton.show()
 
-console.log length	
-
 prevImage = ->
 	slides.fadeOut(speed)
 

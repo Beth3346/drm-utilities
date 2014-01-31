@@ -32,6 +32,18 @@
                     include 'includes/_alerts-demo.php';
                     include 'includes/_dropdown-demo.php';
                     include 'includes/_dropdown-buttons-demo.php';
+                    include 'includes/_lightbox-demo.php';
+                    include 'includes/_modal-demo.php';
+                    include 'includes/_offscreen-menu-demo.php';
+                    include 'includes/_popover-demo.php';
+                    include 'includes/_resize-image-holder-demo.php';
+                    include 'includes/_scrollspy-demo.php';
+                    include 'includes/_simple-slider-demo.php';
+                    include 'includes/_slide-show-demo.php';
+                    include 'includes/_sticky-nav-demo.php';
+                    include 'includes/_tabs-demo.php';
+                    include 'includes/_tooltips-demo.php';
+                    include 'includes/_validation-demo.php';
                 ?>
             </section>
         </div>
