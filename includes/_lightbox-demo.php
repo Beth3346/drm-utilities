@@ -3,7 +3,7 @@
 <div class="example-holder">
 	<ul class="drm-lightbox-thumbnails">
 		<li>
-			<a href="http://placekitten.com/600/600">
+			<a href="http://placekitten.com/700/700">
 				<img src="http://placekitten.com/200/200" alt="thumbnail">
 			</a>
 		</li>
