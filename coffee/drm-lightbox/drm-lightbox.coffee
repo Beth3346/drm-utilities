@@ -26,12 +26,12 @@
 		## create html for thumbnail-list
 
 		$.each(thumbnailList, (index, value) ->
-			thumbnails += '<li><a href="' + value + '"><img src="' + value + '" /></a><li>'
+			thumbnails += "<li><a href='#{value}'><img src='#{value}' /></a><li>"
 		)
 
 		## html for the actual lightbox
 
-		lightboxHtml = '<div class="drm-blackout"><button class="close">x</button><img src="' + img + '" alt="thumbnail" class="img-visible"><ul class="thumbnail-list">' + thumbnails + '</div>'				
+		lightboxHtml = "<div class='drm-blackout'><button class='close'>x</button><img src='#{img}' alt='thumbnail' class='img-visible'><ul class='thumbnail-list'>#{thumbnails}</div>"			
 
 		## if the lightbox isn't already showing, append it to body and fade it into view	
 

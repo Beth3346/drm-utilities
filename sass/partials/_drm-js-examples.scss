@@ -37,4 +37,14 @@
 
 .drm-blackout {
 	@include drm-lightbox();
-}	
+}
+
+.drm-modal-demo-buttons {
+	margin: 10px;
+	@include drm-button-group($drm-blue, white, 3px);	
+}
+
+.drm-modal-lightbox {
+	display: none;
+	@include drm-lightbox();
+}
