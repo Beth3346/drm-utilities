@@ -13,7 +13,7 @@
 
 	links.each( ->
 		that = $ @
-		thumbnailList.push(that.attr('href'));
+		thumbnailList.push that.attr 'href'
 	)
 
 	## show lightbox when a thumbnail is clicked
@@ -40,24 +40,30 @@
 
 		e.preventDefault()	
 
-	body.on('click', '.drm-blackout .close' , ->
+	body.on 'click', '.drm-blackout .close', () ->
 		$(@).parent().fadeOut(speed).remove()
-	)
 
-	body.on('click', '.drm-blackout .thumbnail-list a', (e) ->
+	body.on 'click', '.drm-blackout .thumbnail-list a', (e) ->
 		that = $ @
-		img = that.attr('href')
-		oldImg = $('.drm-blackout .img-visible')
-		oldImgSrc = oldImg.attr('src')
+		img = that.attr 'href'
+		oldImg = $ '.drm-blackout .img-visible'
+		oldImgSrc = oldImg.attr 'src'
 
 		e.preventDefault()
 
 		if oldImgSrc != img
 			
-			oldImg.fadeOut(speed, -> 
+			oldImg.fadeOut speed, -> 
 				that = $ @
-				that.attr('src', img).fadeIn(speed)
-			)
-	)		
+				that.attr('src', img).fadeIn speed
+
+	body.on 'click', '.drm-blackout', () ->
+		$(@).fadeOut(speed).remove()
+
+	body.on 'click', '.drm-blackout .thumbnail-list a', (e) ->
+	    e.stopPropagation()
+
+	body.on 'click', '.drm-blackout .img-visible', (e) ->
+	    e.stopPropagation()
 
 ) jQuery

@@ -3,9 +3,9 @@
 ###############################################################################
 
 ( ($) ->
-	body = $ 'body'
 	modalButtons = $ '.drm-modal-open'
-	modals = $ '.drm-modal-lightbox'
+	lightboxes = $ '.drm-modal-lightbox'
+	modals = lightboxes.find '.drm-modal'
 	close = modals.find '.drm-modal-close'
 
 	modalButtons.click () ->
@@ -15,11 +15,14 @@
 		$("##{modalId}").fadeIn()
 
 	close.click (e) ->
-		that = $ @
-		that.closest(modals).fadeOut()
+		lightboxes.fadeOut()
 
 		e.preventDefault()
 
-		console.log 'default prevented'
+	lightboxes.click () ->
+		lightboxes.fadeOut()
+
+	modals.click (e) ->
+	    e.stopPropagation()
 
 ) jQuery
