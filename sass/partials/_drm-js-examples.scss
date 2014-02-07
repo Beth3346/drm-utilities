@@ -6,11 +6,6 @@
 	@include drm-accordion($drm-blue, 5px);
 }
 
-.drm-show-all, .drm-hide-all {
-	margin: 5px;
-	@include drm-button-solid($drm-blue, white, 200px, null, 3px, none, inline-block);
-}
-
 .drm-dropdown-nav {
 	@include drm-dropdown-nav(white, $drm-blue, white);
 }
@@ -47,4 +42,30 @@
 .drm-modal-lightbox {
 	display: none;
 	@include drm-lightbox();
+}
+
+.popover-holder {
+	float: left;
+	position: relative;
+
+	button {
+		margin: 5px;	
+		@include drm-button-solid($drm-blue, white, 200px, null, 3px, $drm-blue, inline-block);	
+	}
+}
+
+.drm-popover-bottom {
+	@include drm-popover(bottom);
+}
+
+.drm-popover-top {
+	@include drm-popover(top);
+}
+
+.drm-popover-left {
+	@include drm-popover(left);
+}
+
+.drm-popover-right {
+	@include drm-popover(right);
 }

@@ -1,7 +1,7 @@
 <h2>Forms Examples</h2>
 
 <div class="example-holder">
-    <div class="form-examples">
+    <div class="example">
 		<h2>Form State</h2>
     	<form role="form" action="" class="form-state">
     		<label for="name">Name:</label>
@@ -9,7 +9,7 @@
     	</form>
     </div>
 
-    <div class="form-examples">
+    <div class="example">
     	<h2>Tabular Form</h2>
     	<form role="form" action="" class="tabular-form">
 			<label for="full-name">Name:</label>
@@ -138,7 +138,7 @@
     	</form>
     </div>
 
-    <div class="form-examples">
+    <div class="example">
     	<h2>Inline Form</h2>
     	<form role="form" action="" class="inline-form">
 			<label for="username">Email:</label>
@@ -157,7 +157,7 @@
     	</form>
     </div>
 
-    <div class="form-examples">
+    <div class="example">
     	<h2>Form Validation Styles</h2>
     	<form role="form" action="" class="tabular-form">
 			<label for="fname">Name:</label>

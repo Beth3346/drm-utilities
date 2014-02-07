@@ -18,3 +18,22 @@ section {
 	@extend %drm-container-full-width;
 	padding: 20px;
 }
+
+.example {
+	margin: 20px;
+	padding: 20px;
+	background-color: white;
+	border: 1px solid $grey;
+	@include box-sizing(border-box);
+	@include drm-clearfix();
+}
+
+.drm-button {
+	margin: 5px;	
+	@include drm-button-solid($drm-blue, white, 200px);
+}
+
+.drm-button-inline {
+	margin: 5px;	
+	@include drm-button-solid($drm-blue, white, 200px, null, 3px, $drm-blue, inline-block);
+}

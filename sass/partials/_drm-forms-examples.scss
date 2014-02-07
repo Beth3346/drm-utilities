@@ -2,14 +2,6 @@
     Forms Utilities Examples
 -----------------------------------------------------------------------------*/
 
-.form-examples {
-	margin: 20px;
-	padding: 20px;
-	background-color: white;
-	border: 1px solid $grey;
-	@include box-sizing(border-box);
-}	
-
 .form-state {
 	padding: 20px;
 	@include drm-tabular-form();
