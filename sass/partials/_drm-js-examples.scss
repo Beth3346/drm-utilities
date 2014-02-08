@@ -69,3 +69,64 @@
 .drm-popover-right {
 	@include drm-popover(right);
 }
+
+.drm-content-holder {
+	@extend %drm-center-block;
+	width: 95%;
+	margin-top: 2%;
+	margin-bottom: 2%;
+	position: relative;
+	background-color: white;
+	overflow: hidden;
+	@include box-sizing(border-box);
+	@include drm-clearfix();
+}
+
+.drm-offscreen-menu {
+	width: 15%;
+	position: absolute;
+	left: 0;
+	overflow-y: scroll;
+	height: 100%;
+	background-color: $drm-blue;
+	@include box-sizing(border-box);
+
+	ul {
+		@include drm-nav-bar-solid-stacked();
+
+		li a {
+			padding: 10px 15px 10px 15px;
+		}
+	}	
+}
+
+.drm-menu-button {
+	border: none;
+	background-color: $dark-grey;
+	color: white;
+	padding: 5px 10px 5px 10px;
+
+	&:hover {
+		cursor: pointer;
+		background-color: white;
+		color: $dark-grey;
+	}
+}
+
+.drm-offscreen-nav {
+	width: 100%;
+	padding: 10px;
+	background-color: $dark-grey;
+	@include box-sizing(border-box);	
+}
+
+.drm-offscreen-content {
+	width: 85%;
+	position: relative;
+	left: 15%;
+	@include box-sizing(border-box);
+
+	p {		
+		padding: 10px 20px 10px 20px;
+	}
+}

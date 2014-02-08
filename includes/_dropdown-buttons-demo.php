@@ -31,7 +31,7 @@
 	</div>
 	<div class="drm-dropdown-split-btn-holder">
 		<div class="button-group">
-			<button>Alert</button><button>v</button>
+			<button>Alert</button><button>&#9662;</button>
 			<ul>
 				<li><a href="#">Info 1</a></li>
 				<li><a href="#">Info 2</a></li>
@@ -42,7 +42,7 @@
 	</div>	
 	<div class="drm-dropdown-split-btn-holder">
 		<div class="button-group">
-			<button>This Is Another Alert</button><button>v</button>
+			<button>This Is Another Alert</button><button>&#9662;</button>
 			<ul>
 				<li><a href="#">Info 1</a></li>
 				<li><a href="#">Info 2</a></li>
