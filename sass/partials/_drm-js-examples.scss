@@ -83,7 +83,7 @@
 }
 
 .drm-offscreen-menu {
-	@include drm-offscreen-menu($link-color, 15%);	
+	@include drm-offscreen-menu($link-color, 20%);	
 }
 
 .drm-menu-button {
@@ -107,9 +107,9 @@
 }
 
 .drm-offscreen-content {
-	width: 85%;
+	width: 80%;
 	position: relative;
-	left: 15%;
+	left: 20%;
 	@include box-sizing(border-box);
 
 	p {		

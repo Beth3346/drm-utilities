@@ -36,7 +36,7 @@
                     include 'includes/_modal-demo.php';
                     include 'includes/_offscreen-menu-demo.php';
                     include 'includes/_popover-demo.php';
-                    include 'includes/_resize-image-holder-demo.php';
+                    // include 'includes/_resize-image-holder-demo.php';
                     include 'includes/_scrollspy-demo.php';
                     include 'includes/_simple-slider-demo.php';
                     include 'includes/_slide-show-demo.php';
