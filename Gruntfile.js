@@ -142,7 +142,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
 
   // Default task(s).
-  grunt.registerTask('default', ['clean', 'imagemin', 'coffee', 'concat', 'uglify', 'compass', 'csslint', 'jshint']);
+  grunt.registerTask('default', ['clean', 'imagemin', 'coffee', 'concat', 'uglify', 'compass', 'csslint', 'jshint', 'watch']);
+  grunt.registerTask('build', ['clean', 'imagemin', 'coffee', 'concat', 'uglify', 'compass', 'csslint', 'jshint']);
   grunt.registerTask('cssstuff', ['compass', 'csslint']);
   grunt.registerTask('jsstuff', ['coffee', 'concat', 'jshint', 'uglify']);
   

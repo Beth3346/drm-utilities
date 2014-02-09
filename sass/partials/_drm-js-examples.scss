@@ -83,21 +83,7 @@
 }
 
 .drm-offscreen-menu {
-	width: 15%;
-	position: absolute;
-	left: 0;
-	overflow-y: scroll;
-	height: 100%;
-	background-color: $drm-blue;
-	@include box-sizing(border-box);
-
-	ul {
-		@include drm-nav-bar-solid-stacked();
-
-		li a {
-			padding: 10px 15px 10px 15px;
-		}
-	}	
+	@include drm-offscreen-menu($link-color, 15%);	
 }
 
 .drm-menu-button {
