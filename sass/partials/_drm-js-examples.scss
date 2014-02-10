@@ -116,3 +116,43 @@
 		padding: 10px 20px 10px 20px;
 	}
 }
+
+.drm-scrollspy {
+	@include drm-clearfix();
+
+	.drm-scroll-content {
+		overflow-y: scroll;
+		margin: 0;
+		width: 80%;
+		float: right;
+		height: 300px;
+		background-color: white;
+		position: relative;		
+		@include box-sizing(border-box);
+	}
+
+	section {
+		padding: 5px 20px 5px 20px;
+		position: relative;
+	}
+
+	nav {
+		margin: 1% 1% 0 1%;
+		width: 18%;
+		float: left;
+		position: relative;
+		top: 0;
+		@include box-sizing(border-box);
+	}
+
+	ul {
+		margin: 0;
+		width: 100%;
+		@include drm-nav-bar-pills-solid-stacked;
+
+		a.active {
+			background-color: white;
+			color: $drm-blue;
+		}
+	}
+}
