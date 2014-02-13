@@ -1,150 +1,245 @@
 module.exports = function(grunt) {
 
-  // Project configuration.
-  grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),    
+    // Project configuration.
+    grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
+        appFolder: 'app/',
+        distFolder: 'dist/',
 
-    coffee: {
-        glob_to_multiple: {
-      expand: true,
-      flatten: true,
-      cwd: '',
-      src: ['coffee/**/*.coffee'],
-      dest: 'js/coffee-compiled',
-      ext: '.js'
-      }  
-    },
+        copy: {
+            build: {
+                cwd: '<%= appFolder %>',
+                src: [ '**', '!**/partials/**/*', '!*.jade' , '!**/images/**/*', '!**/sass/**/*', '!**/coffee/**/*'],
+                dest: '<%= distFolder %>',
+                expand: true
+            }
+        }, 
 
-    concat: {
-        options: {
-        // define a string to put between each file in the concatenated output
-        separator: ' '
-      },
+        clean: {
+            build: {
+                nonull: false,
+                src: ['<%= distFolder %>']
+            },
 
-      dist: {
-        // the files to concatenate
-        src: ['js/coffee-compiled/*.js', 'assets/**/*.js'],
-        // the location of the resulting JS file
-        dest: 'js/dist/<%= pkg.name %>.<%= pkg.version %>.js'
-      }
-    },
+            stylesheets: {
+                nonull: false,
+                src: ['<%= distFolder %>*.css']
+            },
 
-    jshint: {
-      files: ['js/dist/*.js'],
-      options: {
+            scripts: {
+                nonull: false,
+                src: ['<%= distFolder %>js']        
+            },
 
-      }
-    },
-    
-    uglify: {
-      options: {
-        mangle: false
-      },
+            images: {
+                nonull: false,
+                src: ['<%= distFolder %>images']
+            },
 
-      my_target: {
-        files: {
-          'js/<%= pkg.name %>.<%= pkg.version %>.min.js': ['js/dist/<%= pkg.name %>.<%= pkg.version %>.js']
-        }
-      }
-    },
-
-    imagemin: {                          // Task
-      dist: {                            // Target
-        options: {                       // Target options
-          optimizationLevel: 7
+            postbuild: {
+                nonull: false,
+                src: ['<%= distFolder %>coffee','<%= distFolder %>js/coffee-compiled','<%= distFolder %>js/dist','<%= distFolder %>sass','<%= distFolder %>partials','<%= distFolder %>assets']
+            }
         },
-            files: [{
+
+        jade: {
+            dev: {
+                options: {
+                    pretty: true,
+                    data: {
+                        debug: false
+                    }
+                },
+                files: [{
+                    expand: true,
+                    cwd: '<%= appFolder %>',
+                    src: [ '*.jade' ],
+                    dest: '<%= distFolder %>',
+                    ext: '.html'
+                }]
+            },
+            dist: {
+                options: {
+                    pretty: false,
+                    data: {
+                        debug: false
+                    }
+                },
+                files: [{
+                    expand: true,
+                    cwd: '<%= appFolder %>',
+                    src: [ '*.jade' ],
+                    dest: '<%= distFolder %>',
+                    ext: '.html'
+                }]
+            }
+        },
+
+        coffee: {
+            glob_to_multiple: {
                 expand: true,
-                cwd: 'images/uncompressed',
-                src: '**/*.{png,jpg,jpeg}',
-                dest: 'images/compressed'
-            }]
-      }
-    },
-
-    compass: {
-      dist: {
-        options: {
-          cssDir: './css',
-          httpPath: '/',
-          sassDir: 'sass',
-          fontsDir: 'fonts',
-          imagesDir: 'images/compressed',
-          javascriptsDir: 'js',
-          outputStyle: 'expanded',
-          relativeAssets: true,
-          lineComments: false
-        }
-      }
-    },
-
-    csslint: {
-      strict: {
-        options: {
-          "unique-headings": false,
-          "font-sizes": false,
-          "box-sizing": false,
-          "floats": false,
-          "duplicate-background-images": false,
-          "font-faces": false,
-          "star-property-hack": false,
-          "qualified-headings": false,
-          "ids": false,
-          "text-indent": false
+                flatten: true,
+                cwd: '<%= appFolder %>',
+                src: ['coffee/**/*.coffee'],
+                dest: '<%= distFolder %>js/coffee-compiled',
+                ext: '.js'
+            }  
         },
-        src: ['*.css']
-      }
-    },
 
-    clean: {
-      build: {
-        src: ['js', 'images/compressed', 'css']
-      }
-    },
+        concat: {
+            options: {
+                    // define a string to put between each file in the concatenated output
+                separator: ';'
+            },
 
-    watch: {
-      images: {
-        files: ['images/uncompressed/**/*.{png,jpg,jpeg}'],
-        tasks: ['imagemin'],
-      },
+            dist: {
+                // the files to concatenate
+                src: ['<%= distFolder %>js/coffee-compiled/*.js'],
+                // the location of the resulting JS file
+                dest: '<%= distFolder %>js/dist/<%= pkg.name %>.<%= pkg.version %>.js'
+            }
+        },
 
-      compass: {
-        // We watch and compile sass files as normal but don't live reload here
-        files: ['sass/**/*.scss'],
-        tasks: ['compass', 'csslint'],
-      },
+        jshint: {
+            files: ['<%= distFolder %>js/dist/*.js'],
+            options: {
 
-      scripts: {
-        // We watch and compile sass files as normal but don't live reload here
-        files: ['assets/**/*.js', 'coffee/**/*.coffee'],
-        tasks: ['coffee', 'concat', 'uglify', 'jshint'],
-      },
+            }
+        },
 
-      livereload: {
-        // Here we watch the files the sass task will compile to
-        // These files are sent to the live reload server after sass compiles to them
-        options: { livereload: true },
-        files: ['**/*.coffee', '**/*.scss', '**/*.php'],
-      },
-    }
+        uglify: {
+            my_target: {
+                options: {
+                    mangle: false
+                },
 
-  });
+                files: {
+                    '<%= distFolder %>js/<%= pkg.name %>.<%= pkg.version %>.min.js': ['<%= distFolder %>js/dist/<%= pkg.name %>.<%= pkg.version %>.js']
+                }
+            }
+        },
 
-  // Load the plugin that provides the "uglify" task.
-  grunt.loadNpmTasks('grunt-contrib-coffee');
-  grunt.loadNpmTasks('grunt-contrib-compass');
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-imagemin');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-csslint');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
+        imagemin: {                          // Task
+            dist: {                            // Target
+                options: {                       // Target options
+                    optimizationLevel: 7
+                },
+                files: [{
+                    expand: true,
+                    cwd: '<%= appFolder %>images',
+                    src: '**/*.{png,jpg,jpeg}',
+                    dest: '<%= distFolder %>images'
+                }]
+            }
+        },
 
-  // Default task(s).
-  grunt.registerTask('default', ['clean', 'imagemin', 'coffee', 'concat', 'uglify', 'compass', 'csslint', 'jshint', 'watch']);
-  grunt.registerTask('build', ['clean', 'imagemin', 'coffee', 'concat', 'uglify', 'compass', 'csslint', 'jshint']);
-  grunt.registerTask('cssstuff', ['compass', 'csslint']);
-  grunt.registerTask('jsstuff', ['coffee', 'concat', 'jshint', 'uglify']);
-  
+        compass: {
+            dev: {
+                options: {
+                    cssDir: '<%= distFolder %>',
+                    httpPath: '/',
+                    sassDir: '<%= appFolder %>sass',
+                    fontsDir: '<%= distFolder %>fonts',
+                    imagesDir: '<%= distFolder %>images',
+                    javascriptsDir: '<%= distFolder %>js',
+                    outputStyle: 'expanded',
+                    relativeAssets: true,
+                    lineComments: false
+                }
+            },
+
+            dist: {
+                options: {
+                    cssDir: '<%= distFolder %>',
+                    httpPath: '/',
+                    sassDir: '<%= appFolder %>sass',
+                    fontsDir: '<%= distFolder %>fonts',
+                    imagesDir: '<%= distFolder %>images',
+                    javascriptsDir: '<%= distFolder %>js',
+                    outputStyle: 'compressed',
+                    relativeAssets: true,
+                    lineComments: false
+                }
+            }
+        },
+
+        csslint: {
+            strict: {
+                options: {
+                    "unique-headings": false,
+                    "font-sizes": false,
+                    "box-sizing": false,
+                    "floats": false,
+                    "duplicate-background-images": false,
+                    "font-faces": false,
+                    "star-property-hack": false,
+                    "qualified-headings": false,
+                    "ids": false,
+                    "text-indent": false,
+                    "box-model": false
+                },
+                src: ['<%= distFolder %>*.css']
+            }
+        },
+
+        watch: {
+
+            jade: {
+                files: ['<%= appFolder %>/**/*.jade'],
+                tasks: [ 'jade:dev' ],
+            },
+
+            images: {
+                files: ['<%= appFolder %>images/**/*.{png,jpg,jpeg}'],
+                tasks: [ 'imagemin' ],
+            },
+
+            compass: {
+                // We watch and compile sass files as normal but don't live reload here
+                files: ['<%= appFolder %>sass/**/*.scss'],
+                tasks: [ 'compass:dev', 'csslint' ],
+            },
+
+            scripts: {
+                // We watch and compile sass files as normal but don't live reload here
+                files: ['<%= appFolder %>assets/*.js', '<%= appFolder %>coffee/*.coffee'],
+                tasks: [ 'coffee', 'concat', 'jshint', 'uglify' ],
+            },
+
+            copy: {
+                files: [ '<%= appFolder %>**', '!<%= appFolder %>**/*.scss', '!<%= appFolder %>**/*.coffee', '!<%= appFolder %>**/*.{png,jpg,jpeg}' ],
+                tasks: [ 'copy' ]
+            },
+
+            livereload: {
+                // These files are sent to the live reload server after sass compiles to them
+                options: { livereload: true },
+                files: ['<%= distFolder %>**/*'],
+            },
+        }
+
+    });
+
+    // Load the plugin that provides the "uglify" task.
+    grunt.loadNpmTasks('grunt-contrib-coffee');
+    grunt.loadNpmTasks('grunt-contrib-compass');
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-imagemin');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-csslint');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-jade');
+    grunt.loadNpmTasks('grunt-rev');
+    grunt.loadNpmTasks('grunt-usemin');
+
+    // Default task(s).
+    grunt.registerTask('default', ['clean:build', 'copy', 'jade:dev', 'imagemin', 'coffee', 'concat', 'uglify', 'compass:dev', 'csslint', 'jshint', 'clean:postbuild', 'watch']);
+    grunt.registerTask('cssstuff', ['clean:stylesheets', 'copy', 'compass:dev', 'csslint', 'clean:postbuild']);
+    grunt.registerTask('jsstuff', ['clean:scripts', 'copy', 'coffee', 'concat', 'jshint', 'uglify', 'clean:postbuild']);
+    grunt.registerTask('imgstuff', ['clean:images', 'copy', 'imagemin', 'clean:postbuild']);
+    grunt.registerTask('build', ['clean:build', 'copy', 'jade:dist', 'imagemin', 'coffee', 'concat', 'uglify', 'compass:dist', 'csslint', 'jshint', 'clean:postbuild'])
+
 };

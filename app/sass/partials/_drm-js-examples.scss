@@ -1,0 +1,158 @@
+/*-----------------------------------------------------------------------------
+    JavaScript Examples
+-----------------------------------------------------------------------------*/
+
+.drm-accordion {
+	@include drm-accordion($drm-blue, 5px);
+}
+
+.drm-dropdown-nav {
+	@include drm-dropdown-nav(white, $drm-blue, white);
+}
+
+.drm-dropdown-solid-btn-holder {
+	margin: 20px 10px 200px 10px;
+	float: left;
+	@include drm-dropdown-button-solid($drm-blue, white, 200px);
+}
+
+.drm-dropdown-split-btn-holder {
+	margin: 20px 10px 200px 10px;
+	float: left;
+	@include drm-dropdown-button-split($drm-blue, white, $light-grey, 3px);
+
+	.button-group {
+		margin: 0;
+	}
+}
+
+.drm-lightbox-thumbnails {
+	@include drm-thumbnail-list();
+}
+
+.drm-blackout {
+	@include drm-lightbox();
+}
+
+.drm-modal-demo-buttons {
+	margin: 10px;
+	@include drm-button-group($drm-blue, white, 3px);	
+}
+
+.drm-modal-lightbox {
+	display: none;
+	@include drm-lightbox();
+}
+
+.popover-holder {
+	float: left;
+	position: relative;
+
+	button {
+		margin: 5px;	
+		@include drm-button-solid($drm-blue, white, 200px, null, 3px, $drm-blue, inline-block);	
+	}
+}
+
+.drm-popover-bottom {
+	@include drm-popover(bottom);
+}
+
+.drm-popover-top {
+	@include drm-popover(top);
+}
+
+.drm-popover-left {
+	@include drm-popover(left);
+}
+
+.drm-popover-right {
+	@include drm-popover(right);
+}
+
+.drm-content-holder {
+	@extend %drm-center-block;
+	width: 95%;
+	margin-top: 2%;
+	margin-bottom: 2%;
+	position: relative;
+	background-color: white;
+	overflow: hidden;
+	@include box-sizing(border-box);
+	@include drm-clearfix();
+}
+
+.drm-offscreen-menu {
+	@include drm-offscreen-menu($link-color, 20%);	
+}
+
+.drm-menu-button {
+	border: none;
+	background-color: $dark-grey;
+	color: white;
+	padding: 5px 10px 5px 10px;
+
+	&:hover {
+		cursor: pointer;
+		background-color: white;
+		color: $dark-grey;
+	}
+}
+
+.drm-offscreen-nav {
+	width: 100%;
+	padding: 10px;
+	background-color: $dark-grey;
+	@include box-sizing(border-box);	
+}
+
+.drm-offscreen-content {
+	width: 80%;
+	position: relative;
+	left: 20%;
+	@include box-sizing(border-box);
+
+	p {		
+		padding: 10px 20px 10px 20px;
+	}
+}
+
+.drm-scrollspy {
+	@include drm-clearfix();
+
+	.drm-scroll-content {
+		overflow-y: scroll;
+		margin: 0;
+		width: 80%;
+		float: right;
+		height: 300px;
+		background-color: white;
+		position: relative;		
+		@include box-sizing(border-box);
+	}
+
+	section {
+		padding: 5px 20px 5px 20px;
+		position: relative;
+	}
+
+	nav {
+		margin: 1% 1% 0 1%;
+		width: 18%;
+		float: left;
+		position: relative;
+		top: 0;
+		@include box-sizing(border-box);
+	}
+
+	ul {
+		margin: 0;
+		width: 100%;
+		@include drm-nav-bar-pills-solid-stacked;
+
+		.active {
+			background-color: white;
+			color: $drm-blue;
+		}
+	}
+}
