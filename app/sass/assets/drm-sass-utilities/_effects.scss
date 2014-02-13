@@ -40,7 +40,7 @@
 	border-radius: $border-radius;
 
 	@if $border-color == none {
-		box-shadow: rgba($color, $opacity), 0, 0, 0, 5px;
+		box-shadow: rgba($color, $opacity) 0 0 0 5px;
 	} @else {
 		box-shadow: 0 0 0 5px rgba($color, $opacity), 0 0 0 6px $border-color;
 	}
@@ -76,7 +76,7 @@
 	
 		@if $shadow == 'transparent' {
 			@if $border-color == none {
-				box-shadow: 0 0 0 3px rgba($color, $opacity));
+				box-shadow: 0 0 0 3px rgba($color, $opacity);
 			} @else {
 				box-shadow: 0 0 0 3px rgba($color, $opacity + 0.2), 0 0 0 4px $border-color;
 			}			
@@ -93,7 +93,7 @@
 	
 		@if $shadow == 'transparent' {
 			@if $border-color == none {
-				box-shadow: 0 0 0 3px rgba($color, $opacity));
+				box-shadow: 0 0 0 3px rgba($color, $opacity);
 			} @else {
 				box-shadow: 0 0 0 3px rgba($color, $opacity), 0 0 0 4px $border-color;
 			}			
@@ -161,15 +161,15 @@
 // creates a thick bottom drop shadow
 
 @mixin drm-boxy-drop-shadow($shadow-color: $grey) {
-	box-shadow: $shadow-color, 0, 30px, 15px, -20px;
+	box-shadow: $shadow-color 0 30px 15px -20px;
 }
 
 @mixin drm-softer-thick-box-shadow($shadow-color: $dark-grey) {
-	box-shadow: $dark-grey, 0, 65px, 46px, -60px;
+	box-shadow: $dark-grey 0 65px 46px -60px;
 }
 
 @mixin drm-thumbnail($border-color: white, $width: 150px, $height: 125px) {
 	border: 5px solid $border-color;
-	box-shadow: $grey, 0, 0, 0, 1px;
+	box-shadow: $grey 0 0 0 1px;
 	@include drm-rectangle($width, $height);
 }

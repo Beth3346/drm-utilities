@@ -474,7 +474,7 @@
 		@include drm-thumbnail();
 
 		&:hover {
-			transition: box-shadow, .3s, ease-in);
+			transition: box-shadow, .3s, ease-in;
 			box-shadow: $grey 0 0 0 1px, $glow 0 0 3px 2px;
 		}
 	}	

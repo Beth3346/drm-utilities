@@ -104,7 +104,7 @@
 
 	a {
 		color: $text-color;
-		border-radius: 5px);
+		border-radius: 5px;
 
 		&:visited {
 			color: $text-color;
@@ -368,7 +368,7 @@
 	text-decoration: none;
 	cursor: pointer;
 	line-height: 1.8;
-	border-radius: $height / 2);
+	border-radius: ($height / 2);
 	text-shadow: none;
 	box-shadow: none;
 	box-sizing: border-box;
@@ -415,7 +415,7 @@
 	text-decoration: none;
 	cursor: pointer;
 	line-height: 1.8;
-	border-radius: $height / 2);
+	border-radius: ($height / 2);
 	text-shadow: none;
 	box-sizing: border-box;
 	transition: all, .3s ease-out;
@@ -520,7 +520,7 @@
 		padding: 5px 0 5px 0;
 		display: none;
 		z-index: 100;
-		border-radius: 3px);
+		border-radius: 3px;
 		@include drm-nav-bar-solid-stacked($bk-color, $color, left, $divider-color);
 	}
 }	

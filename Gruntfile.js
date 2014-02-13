@@ -38,7 +38,7 @@ module.exports = function(grunt) {
 
             postbuild: {
                 nonull: false,
-                src: ['<%= distFolder %>coffee','<%= distFolder %>js/coffee-compiled','<%= distFolder %>js/dist','<%= distFolder %>sass','<%= distFolder %>partials','<%= distFolder %>assets']
+                src: ['<%= distFolder %>coffee','<%= distFolder %>js/coffee-compiled','<%= distFolder %>js/dist','<%= distFolder %>sass','<%= distFolder %>partials','<%= distFolder %>assets','<%= distFolder %>css']
             }
         },
 
@@ -164,11 +164,14 @@ module.exports = function(grunt) {
         },
 
 		autoprefixer: {
+            options: {
+            
+            },
 			build: {
 				expand: false,
 				cwd: '<%= distFolder %>',
-				src: ['<%= distFolder %>*.css'],
-				dest: '<%= distFolder %>*.css'
+				src: ['<%= distFolder %>styles.css'],
+				dest: '<%= distFolder %>styles.css'
 			}
 		},
 
