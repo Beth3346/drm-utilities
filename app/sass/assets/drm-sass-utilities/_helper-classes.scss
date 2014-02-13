@@ -10,7 +10,7 @@ body {
 	line-height: $default-line-height;
 	font-size: $default-font-size#{px};
 	font-family: $font-family;
-	color: #333;
+	color: $dark-grey;
 	background-color: white;
 
 	@include drm-breakpoint(tall) {		

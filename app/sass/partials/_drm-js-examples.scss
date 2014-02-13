@@ -78,7 +78,7 @@
 	position: relative;
 	background-color: white;
 	overflow: hidden;
-	@include box-sizing(border-box);
+	box-sizing: border-box;
 	@include drm-clearfix();
 }
 
@@ -103,14 +103,14 @@
 	width: 100%;
 	padding: 10px;
 	background-color: $dark-grey;
-	@include box-sizing(border-box);	
+	box-sizing: border-box)	
 }
 
 .drm-offscreen-content {
 	width: 80%;
 	position: relative;
 	left: 20%;
-	@include box-sizing(border-box);
+	box-sizing: border-box;
 
 	p {		
 		padding: 10px 20px 10px 20px;
@@ -128,7 +128,7 @@
 		height: 300px;
 		background-color: white;
 		position: relative;		
-		@include box-sizing(border-box);
+		box-sizing: border-box;
 	}
 
 	section {
@@ -142,7 +142,7 @@
 		float: left;
 		position: relative;
 		top: 0;
-		@include box-sizing(border-box);
+		box-sizing: border-box;
 	}
 
 	ul {

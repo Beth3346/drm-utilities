@@ -20,8 +20,8 @@
 			text-align: $align;
 			color: $text-color;
 			text-decoration: none;
-			@include box-sizing(border-box);
-			@include transition(all, .3s);
+			box-sizing: border-box;
+			transition: all, .3s;
 			@include drm-em-font(14);
 
 			&.text-disabled {
@@ -31,7 +31,7 @@
 
 			&:hover, &:focus {
 				color: $hover-color;
-				@include transition(all, .3s);
+				transition: all, .3s;
 			}	
 		}	
 	}
@@ -104,7 +104,7 @@
 
 	a {
 		color: $text-color;
-		@include border-radius(5px);
+		border-radius: 5px);
 
 		&:visited {
 			color: $text-color;
@@ -240,11 +240,11 @@
 	text-decoration: none;
 	cursor: pointer;
 	background-color: transparent;
-	@include border-radius($border-radius);
-	@include text-shadow(none);
-	@include box-shadow(none);
-	@include box-sizing(border-box);
-	@include transition(all, .3s ease-out);
+	border-radius: $border-radius;
+	text-shadow: none;
+	box-shadow: none;
+	box-sizing: border-box;
+	transition: all, .3s ease-out;
 
 	@if $center == center {
 		margin-left: auto;
@@ -266,9 +266,9 @@
 		background-color: $color;
 		color: $bk-color;
 		text-decoration: none;
-		@include text-shadow(none);
-		@include box-shadow(none);
-		@include transition(all, .3s ease-in);
+		text-shadow: none;
+		box-shadow: none;
+		transition: all, .3s ease-in;
 	}	
 }
 
@@ -285,10 +285,10 @@
 	padding: 10px 0 10px 0;
 	text-decoration: none;
 	cursor: pointer;
-	@include border-radius($border-radius);
-	@include text-shadow(none);
-	@include box-sizing(border-box);
-	@include transition(all, .3s ease-out);
+	border-radius: $border-radius;
+	text-shadow: none;
+	box-sizing: border-box;
+	transition: all, .3s ease-out;
 
 	@if $border-color != none {
 		border: 1px solid $border-color;		
@@ -309,9 +309,9 @@
 		background-color: $color;
 		color: $bk-color;
 		text-decoration: none;
-		@include text-shadow(none);
-		@include box-shadow(none);
-		@include transition(all, .3s ease-in);
+		text-shadow: none;
+		box-shadow: none;
+		transition: all, .3s ease-in;
 	}	
 }
 
@@ -328,10 +328,10 @@
 	text-decoration: none;
 	display: $display;
 	text-align: center;
-	@include drm-solid-drop-shadow(darken($color, 10%));
-	@include transition(all, .3s ease-out);
-	@include box-sizing(border-box);
-	@include border-radius($border-radius);	
+	transition: all, .3s ease-out;
+	box-sizing: border-box;
+	border-radius: $border-radius;
+	@include drm-solid-drop-shadow(darken($color, 10%));	
 
 	@if $center == center {
 		margin: 10px auto 10px auto;		
@@ -348,7 +348,7 @@
 		background-color: lighten($color, 10%);
 		border: 1px solid $color;
 		@include drm-solid-drop-shadow($color);
-		@include transition(all, .3s ease-in);
+		transition: all, .3s ease-in;
 	}	
 }
 
@@ -368,11 +368,11 @@
 	text-decoration: none;
 	cursor: pointer;
 	line-height: 1.8;
-	@include border-radius($height / 2);
-	@include text-shadow(none);
-	@include box-shadow(none);
-	@include box-sizing(border-box);
-	@include transition(all, .3s ease-out);
+	border-radius: $height / 2);
+	text-shadow: none;
+	box-shadow: none;
+	box-sizing: border-box;
+	transition: all, .3s ease-out;
 
 	@if $center == center {
 		margin-left: auto;
@@ -394,9 +394,9 @@
 		background-color: $color;
 		color: $bk-color;
 		text-decoration: none;
-		@include text-shadow(none);
-		@include box-shadow(none);
-		@include transition(all, .3s ease-in);
+		text-shadow: none;
+		box-shadow: none;
+		transition: all, .3s ease-in;
 	}	
 }
 
@@ -415,10 +415,10 @@
 	text-decoration: none;
 	cursor: pointer;
 	line-height: 1.8;
-	@include border-radius($height / 2);
-	@include text-shadow(none);
-	@include box-sizing(border-box);
-	@include transition(all, .3s ease-out);
+	border-radius: $height / 2);
+	text-shadow: none;
+	box-sizing: border-box;
+	transition: all, .3s ease-out;
 
 	@if $border-color != none {
 		border: 1px solid $border-color;		
@@ -441,9 +441,9 @@
 		background-color: $color;
 		color: $bk-color;
 		text-decoration: none;
-		@include text-shadow(none);
-		@include box-shadow(none);
-		@include transition(all, .3s ease-in);
+		text-shadow: none;
+		box-shadow: none;
+		transition: all, .3s ease-in;
 	}	
 }
 
@@ -462,10 +462,10 @@
 		cursor: pointer;
 		margin: 0;
 		border: none;
-		@include text-shadow(none);
-		@include box-sizing(border-box);
-		@include transition(all, .3s ease-out);
-		@include box-shadow(none);
+		text-shadow: none;
+		box-sizing: border-box;
+		transition: all, .3s ease-out;
+		box-shadow: none;
 
 		&:visited {
 			color: $color;
@@ -475,18 +475,18 @@
 			background-color: $color;
 			color: $bk-color;
 			text-decoration: none;
-			@include text-shadow(none);
-			@include box-shadow(none);
-			@include transition(all, .3s ease-in);
+			text-shadow: none;
+			box-shadow: none;
+			transition: all, .3s ease-in;
 		}
 
 		@if $border-radius != 0 {
 			&:first-of-type {
-				@include border-radius($border-radius 0 0 $border-radius);
+				border-radius: $border-radius 0 0 $border-radius;
 			}
 
 			&:last-of-type {
-				@include border-radius(0 $border-radius $border-radius 0);	
+				border-radius: 0 $border-radius $border-radius 0;	
 			}
 		}
 	}
@@ -520,7 +520,7 @@
 		padding: 5px 0 5px 0;
 		display: none;
 		z-index: 100;
-		@include border-radius(3px);
+		border-radius: 3px);
 		@include drm-nav-bar-solid-stacked($bk-color, $color, left, $divider-color);
 	}
 }	
@@ -552,7 +552,7 @@
 		top: 100%;
 		display: none;
 		z-index: 100;
-		@include border-radius($border-radius);
+		border-radius: $border-radius;
 		@include drm-nav-bar-solid-stacked($bk-color, $color, left, $divider-color);
 	}
 }
@@ -565,7 +565,7 @@
 	height: 100%;
 	background-color: $bk-color;
 	z-index: 100;
-	@include box-sizing(border-box);
+	box-sizing: border-box;
 
 	ul {
 		@include drm-nav-bar-solid-stacked();

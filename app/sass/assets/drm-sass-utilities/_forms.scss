@@ -5,19 +5,19 @@
 @mixin drm-form-state($glow: $drm-blue, $background: $lightest-grey, $border: $grey) {
 	background-color: $background;
 	border: 1px solid $border;
-	@include transition(border .5s ease-out, box-shadow .5s ease-out);
+	transition: border .5s ease-out, box-shadow .5s ease-out;
 
 	&:hover {
 		border: 1px solid $glow;
-		@include box-shadow(0 0 2px $glow);
-		@include transition(border .5s ease-in, box-shadow .5s ease-in);
+		box-shadow: 0 0 2px $glow;
+		transition: border .5s ease-in, box-shadow .5s ease-in;
 	}
 
 	&:focus {
 		outline: none;
 		border: 1px solid darken($border, 20%);
 		background-color: lighten($background, 20%);
-		@include transition(border .5s ease-in, background .5s ease-in);
+		transition: border .5s ease-in, background .5s ease-in;
 	}
 
 	&.drm-form-success {
@@ -26,15 +26,15 @@
 
 		&:hover {
 			border: 1px solid $success-color;
-			@include box-shadow(0 0 2px $success-color);
-			@include transition(border .5s ease-in, box-shadow .5s ease-in);
+			box-shadow: 0 0 2px $success-color;
+			transition: border .5s ease-in, box-shadow .5s ease-in;
 		}
 
 		&:focus {
 			outline: none;
 			border: 1px solid darken($success-color, 20%);
 			background-color: white;
-			@include transition(border .5s ease-in, background .5s ease-in);
+			transition: border .5s ease-in, background .5s ease-in;
 		}	
 	}
 
@@ -44,15 +44,15 @@
 
 		&:hover {
 			border: 1px solid $warning-color;
-			@include box-shadow(0 0 2px $warning-color);
-			@include transition(border .5s ease-in, box-shadow .5s ease-in);
+			box-shadow: 0 0 2px $warning-color;
+			transition: border .5s ease-in, box-shadow .5s ease-in;
 		}
 
 		&:focus {
 			outline: none;
 			border: 1px solid darken($warning-color, 20%);
 			background-color: white;
-			@include transition(border .5s ease-in, background .5s ease-in);
+			transition: border .5s ease-in, background .5s ease-in;
 		}	
 	}
 
@@ -62,35 +62,35 @@
 
 		&:hover {
 			border: 1px solid $danger-color;
-			@include box-shadow(0 0 2px $danger-color);
-			@include transition(border .5s ease-in, box-shadow .5s ease-in);
+			box-shadow: 0 0 2px $danger-color;
+			transition: border .5s ease-in, box-shadow .5s ease-in;
 		}
 
 		&:focus {
 			outline: none;
 			border: 1px solid darken($danger-color, 20%);
 			background-color: white;
-			@include transition(border .5s ease-in, background .5s ease-in);
+			transition: border .5s ease-in, background .5s ease-in;
 		}	
 	}
 
 	&[disabled] {
 		background-color: darken($background, 10%);
 		border: 1px solid darken($border, 10%);	
-		@include transition(none);
+		transition: none;
 
 		&:hover {
 			cursor: not-allowed;
 			border:  1px solid darken($border, 10%);
-			@include box-shadow(none);
-			@include transition(none);
+			box-shadow: none;
+			transition: none;
 		}
 
 		&:focus {
 			outline: none;
 			border:  1px solid darken($border, 10%);
 			background-color: darken($background, 10%);
-			@include transition(none);
+			transition: none;
 		}
 	}
 }
@@ -98,7 +98,7 @@
 @mixin drm-form($glow: $drm-blue, $background: $lightest-grey, $border: $grey) {
 	padding: 10px;
 	width: 100%;
-	@include box-sizing(border-box);
+	box-sizing: border-box;
 
 	small {
 		display: block;
@@ -116,8 +116,8 @@
 	input, textarea, select {
 		margin: 5px 0 5px 0;
 		padding: 5px 10px 5px 10px;
-		@include border-radius(3px);
-		@include box-sizing(border-box);
+		border-radius: 3px;
+		box-sizing: border-box;
 		@include drm-form-state($glow, $background, $border);
 	}
 
@@ -180,7 +180,7 @@
 			cursor: not-allowed;
 			background-color: #6ebbbe;
 			color: white;
-			@include transition(none);
+			transition: none;
 		}
 	}
 }
@@ -228,7 +228,6 @@
 	input[type="submit"], button {		
 		margin: 5px;
 		@include drm-button-solid($drm-blue, white, 100px, null, 3px, $drm-blue, block);
-		// padding: 6px 0 5px 0;
 		@include drm-em-font(12);
 	}
 

@@ -24,28 +24,28 @@
 	width: 95%;
 	margin-left: 2.5%;
 	margin-right: 2.5%;
-	@include box-sizing(border-box);
+	box-sizing: border-box;
 	@include drm-clearfix();
 
 	@include drm-breakpoint(trenta) {
 		width: 80%;
 		margin-left: 10%;
 		margin-right: 10%;
-		@include box-sizing(border-box);
+		box-sizing: border-box;
 	}
 
 	@include drm-breakpoint(venti) {
 		width: 95%;
 		margin-left: 2.5%;
 		margin-right: 2.5%;
-		@include box-sizing(border-box);
+		box-sizing: border-box;
 	}
 
 	@include drm-breakpoint(grande) {
 		width: 100%;
 		margin-left: 0;
 		margin-right: 0;
-		@include box-sizing(border-box);
+		box-sizing: border-box;
 	}
 }
 
@@ -54,25 +54,25 @@
 	margin-right: 0;
 	padding-left: 2.5%;
 	padding-right: 2.5%;
+	box-sizing: border-box;
 	@include drm-clearfix();
-	@include box-sizing(border-box);
 
 	@include drm-breakpoint(trenta) {
 		padding-left: 10%;
 		padding-right: 10%;
-		@include box-sizing(border-box);
+		box-sizing: border-box;
 	}
 
 	@include drm-breakpoint(venti) {
 		padding-left: 2.5%;
 		padding-right: 2.5%;
-		@include box-sizing(border-box);
+		box-sizing: border-box;
 	}
 
 	@include drm-breakpoint(grande) {
 		padding-left: 0;
 		padding-right: 0;
-		@include box-sizing(border-box);
+		box-sizing: border-box;
 	}	
 }
 
@@ -91,8 +91,8 @@
 	margin-right: 0;
 	width: 100%;
 	display: block;
+	box-sizing: border-box;
 	@include drm-clearfix();
-	@include box-sizing(border-box);
 }
 
 // Centers an element horizontally on the page
@@ -126,13 +126,13 @@
 	margin: $margin-top 0 $margin-bottom 0;
 	width: ( 100% / $total );
 	float: left;
-	@include box-sizing(border-box);
+	box-sizing: border-box;
 
 	@include drm-breakpoint(tall) {
 		padding: 10px;
 		width: 100%;
 		float: none;
-		@include box-sizing(border-box);
+		box-sizing: border-box;
 	}
 }
 
@@ -144,14 +144,14 @@
 	margin: $margin-top $margin $margin-bottom $margin;
 	width: (100% / $total) - ($margin * 2);
 	float: left;
-	@include box-sizing(border-box);
+	box-sizing: border-box;
 
 	@include drm-breakpoint(tall) {
 		padding: 10px;
 		margin: 0;
 		width: 100%;
 		float: none;
-		@include box-sizing(border-box);
+		box-sizing: border-box;
 	}	
 }
 
@@ -161,13 +161,13 @@
 	float: left;
 	margin: $margin;
 	@include drm-circle( ( $container-width - 120 ) / $total );
-	@include box-sizing(border-box);	
+	box-sizing: border-box;
 
 	@include drm-breakpoint(tall) {
 		padding: 10px;
 		margin: $margin auto $margin auto;
 		float: none;
-		@include box-sizing(border-box);
+		box-sizing: border-box;
 	}
 }
 

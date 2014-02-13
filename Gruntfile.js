@@ -163,6 +163,15 @@ module.exports = function(grunt) {
             }
         },
 
+		autoprefixer: {
+			build: {
+				expand: false,
+				cwd: '<%= distFolder %>',
+				src: ['<%= distFolder %>*.css'],
+				dest: '<%= distFolder %>*.css'
+			}
+		},
+
         csslint: {
             strict: {
                 options: {
@@ -234,12 +243,13 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jade');
     grunt.loadNpmTasks('grunt-rev');
     grunt.loadNpmTasks('grunt-usemin');
+    grunt.loadNpmTasks('grunt-autoprefixer');
 
     // Default task(s).
-    grunt.registerTask('default', ['clean:build', 'copy', 'jade:dev', 'imagemin', 'coffee', 'concat', 'uglify', 'compass:dev', 'csslint', 'jshint', 'clean:postbuild', 'watch']);
-    grunt.registerTask('cssstuff', ['clean:stylesheets', 'copy', 'compass:dev', 'csslint', 'clean:postbuild']);
+    grunt.registerTask('cssstuff', ['clean:stylesheets', 'copy', 'compass:dev', 'autoprefixer', 'csslint', 'clean:postbuild']);
     grunt.registerTask('jsstuff', ['clean:scripts', 'copy', 'coffee', 'concat', 'jshint', 'uglify', 'clean:postbuild']);
     grunt.registerTask('imgstuff', ['clean:images', 'copy', 'imagemin', 'clean:postbuild']);
-    grunt.registerTask('build', ['clean:build', 'copy', 'jade:dist', 'imagemin', 'coffee', 'concat', 'uglify', 'compass:dist', 'csslint', 'jshint', 'clean:postbuild'])
+    grunt.registerTask('default', ['clean:build', 'copy', 'jade:dev', 'imagemin', 'coffee', 'concat', 'uglify', 'compass:dev', 'autoprefixer', 'csslint', 'jshint', 'clean:postbuild', 'watch']);
+    grunt.registerTask('build', ['clean:build', 'copy', 'jade:dist', 'imagemin', 'coffee', 'concat', 'uglify', 'compass:dist', 'autoprefixer', 'csslint', 'jshint', 'clean:postbuild'])
 
 };

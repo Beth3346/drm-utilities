@@ -24,7 +24,7 @@ section {
 	padding: 20px;
 	background-color: white;
 	border: 1px solid $grey;
-	@include box-sizing(border-box);
+	box-sizing: border-box;
 	@include drm-clearfix();
 }
 
