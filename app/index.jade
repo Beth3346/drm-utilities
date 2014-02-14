@@ -2,34 +2,11 @@ include partials/head
 
 body
     .wrapper
-        section.sass
-            h1 DRM Utilities
-            include partials/effects
-            //- include partials/forms
-            //- include partials/helper-classes
-            //- include partials/layout
-            //- include partials/media-queries
-            //- include partials/navigation
-            //- include partials/page-elements
-            //- include partials/shapes                 
-        
-        section.js
-            h1 JavaScript Utilities
-            include partials/accordion
-            include partials/alerts
-            include partials/dropdown
-            include partials/dropdown-buttons
-            //- include partials/lightbox
-            //- include partials/modal
-            //- include partials/offscreen-menu
-            //- include partials/popover
-            //- include partials/resize-image-holder
-            //- include partials/scrollspy
-            //- include partials/simple-slider
-            //- include partials/slide-show
-            //- include partials/sticky-nav
-            //- include partials/tabs
-            //- include partials/tooltips
-            //- include partials/validation
+        section
+            h1: a(href="js-utilities.html") JavaScript Utilities
+            include partials/js-utilities-list
+        section
+            h1: a(href="sass-utilities.html") Sass Utilities
+            include partials/sass-utilities-list
 
 include partials/footer
