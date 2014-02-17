@@ -1,80 +1,241 @@
-h2 Effects
+section
+    h1 Effects
 
-.example-holder
-    .solid-drop-shadow
-        h3 Solid Drop Shadow
-        p. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
-            maxime molestias est numquam quos recusandae dignissimos commodi 
-            vero sequi ipsum sed nesciunt optio?
+    section
+        h1 Solid Drop Shadow
+        p Creates a solid drop shadow effect
+        .solid-drop-shadow.example
+            p.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
+                maxime molestias est numquam quos recusandae dignissimos commodi 
+                vero sequi ipsum sed nesciunt optio?
+        h2 Usage:
+        pre @include drm-solid-drop-shadow($color);
+        h2 Options:
+        ul
+            li $color - color of drop shadow      
+
+    section
+        h1 Background Transparent
+        p Creates a transparent background with a hex color backup for browsers that do not support rgba colors
+        .background-transparent.example        
+            p.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
+                maxime molestias est numquam quos recusandae dignissimos commodi 
+                vero sequi ipsum sed nesciunt optio?
+        h2 Usage:
+        pre @include drm-background-transparent($color, $opacity: 0.7);
+        h2 Options:
+        ul
+            li $color - background color
+            li $opacity - opacity of background color - default: 0.7          
     
-    .background-transparent
-        h3 Background Transparent
-        p. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
-            maxime molestias est numquam quos recusandae dignissimos commodi 
-            vero sequi ipsum sed nesciunt optio?   
+    section            
+        h1 Border Transparent
+        p Creates a transparent border with a hex color backup for browsers that do not support rgba colors 
+        .border-transparent.example        
+            p.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
+                maxime molestias est numquam quos recusandae dignissimos commodi 
+                vero sequi ipsum sed nesciunt optio?
+
+        h2 Usage:
+
+        pre @include drm-border-transparent($color, $thickness: 5px, $opacity: 0.7);
+
+        h2 Options:
+
+        ul
+            li $color - color of border
+            li $thickness - thickness of the border - default: 5px
+            li $opacity - opacity of background color - default: 0.7          
     
-    .border-transparent
-        h3 Border Transparent
-        p. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
-            maxime molestias est numquam quos recusandae dignissimos commodi 
-            vero sequi ipsum sed nesciunt optio?
+    section            
+        h1 Stitched Box
+              
+        .stitched-box.example        
+            p.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
+                maxime molestias est numquam quos recusandae dignissimos commodi 
+                vero sequi ipsum sed nesciunt optio?
+
+        h2 Usage:
+
+        pre @include drm-solid-drop-shadow($color);
+
+        h2 Options:
+
+        ul
+            li $color - Color of drop shadow                
     
-    .stitched-box
-        h3 Stitched Box
-        p. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
-            maxime molestias est numquam quos recusandae dignissimos commodi 
-            vero sequi ipsum sed nesciunt optio?     
+    section            
+        h1 Stitched Row 
+
+        .stitched-row
+            p.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
+                maxime molestias est numquam quos recusandae dignissimos commodi 
+                vero sequi ipsum sed nesciunt optio?
+
+        h2 Usage:
+
+        pre @include drm-solid-drop-shadow($color);
+
+        h2 Options:
+
+        ul
+            li $color - Color of drop shadow                     
     
-    .stitched-row
-        h3 Stitched Row        
+    section            
+        h1 Stitched Row Transparent
+
+        .stitched-row-transparent
+            p.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
+                maxime molestias est numquam quos recusandae dignissimos commodi 
+                vero sequi ipsum sed nesciunt optio?
+
+        h2 Usage:
+
+        pre @include drm-solid-drop-shadow($color);
+
+        h2 Options:
+
+        ul
+            li $color - Color of drop shadow                           
     
-    .stitched-row-transparent
-        h3 Stitched Row Transparent        
+    section            
+        h1 Stitched Row Shadow 
+
+        .stitched-row-shadow
+            p.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
+                maxime molestias est numquam quos recusandae dignissimos commodi 
+                vero sequi ipsum sed nesciunt optio?
+
+        h2 Usage:
+
+        pre @include drm-solid-drop-shadow($color);
+
+        h2 Options:
+
+        ul
+            li $color - Color of drop shadow                          
     
-    .stitched-row-shadow
-        h3 Stitched Row Shadow        
+    section            
+        h1 Transparent Figure Border
+          
+        .figure-border               
+            figure 
+                img(src="images/cat.jpg" alt="Kitten")
+
+        h2 Usage:
+
+        pre @include drm-solid-drop-shadow($color);
+
+        h2 Options:
+
+        ul
+            li $color - Color of drop shadow               
     
-    .figure-border
-        h3 Transparent Figure Border        
-        figure 
-            img(src="images/cat.jpg" alt="Kitten")
+    section            
+        h1 Triple Shadow
+
+        .triple-shadow.example        
+            p.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
+                maxime molestias est numquam quos recusandae dignissimos commodi 
+                vero sequi ipsum sed nesciunt optio?
+
+        h2 Usage:
+
+        pre @include drm-solid-drop-shadow($color);
+
+        h2 Options:
+
+        ul
+            li $color - Color of drop shadow                   
     
-    .triple-shadow
-        h3 Triple Shadow
-        p. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
-            maxime molestias est numquam quos recusandae dignissimos commodi 
-            vero sequi ipsum sed nesciunt optio?        
+    section            
+        h1 Inset Text
+           
+        .inset-text.example        
+            p.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
+                maxime molestias est numquam quos recusandae dignissimos commodi 
+                vero sequi ipsum sed nesciunt optio?
+
+        h2 Usage:
+
+        pre @include drm-solid-drop-shadow($color);
+
+        h2 Options:
+
+        ul
+            li $color - Color of drop shadow                     
     
-    .inset-text
-        h3 Inset Text
-        p. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
-            maxime molestias est numquam quos recusandae dignissimos commodi 
-            vero sequi ipsum sed nesciunt optio?          
+    section            
+        h1 Inset Border
+          
+        .inset-border.example        
+            ul 
+                li List Item
+                li List Item
+                li List Item
+
+        h2 Usage:
+
+        pre @include drm-solid-drop-shadow($color);
+
+        h2 Options:
+
+        ul
+            li $color - Color of drop shadow                  
     
-    .inset-border
-        h3 Inset Border
-        ul 
-            li List Item
-            li List Item
-            li List Item       
+    section            
+        h1 Inset Box
+
+        .example-holder    
+            .inset-box.example        
+                p.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
+                    maxime molestias est numquam quos recusandae dignissimos commodi 
+                    vero sequi ipsum sed nesciunt optio?
+
+        h2 Usage:
+
+        pre @include drm-solid-drop-shadow($color);
+
+        h2 Options:
+
+        ul
+            li $color - Color of drop shadow                         
     
-    .inset-box
-        h3 Inset Box
-        p. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
-            maxime molestias est numquam quos recusandae dignissimos commodi 
-            vero sequi ipsum sed nesciunt optio?          
-    
-    .boxy-drop-shadow
-        h3 Boxy Drop Shadow
-        p. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
-            maxime molestias est numquam quos recusandae dignissimos commodi 
-            vero sequi ipsum sed nesciunt optio?          
-    
+    section            
+        h1 Boxy Drop Shadow
+           
+        .boxy-drop-shadow.example        
+            p.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
+                maxime molestias est numquam quos recusandae dignissimos commodi 
+                vero sequi ipsum sed nesciunt optio?
+
+        h2 Usage:
+
+        pre @include drm-solid-drop-shadow($color);
+
+        h2 Options:
+
+        ul
+            li $color - Color of drop shadow           

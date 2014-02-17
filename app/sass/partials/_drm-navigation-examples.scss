@@ -2,11 +2,6 @@
     Navigation Utilities Examples
 -----------------------------------------------------------------------------*/
 
-h3 {
-	margin: 20px;
-	font-weight: bold;
-}
-
 .nav-bar {
 	margin: 10px;
 	@include drm-nav-bar;

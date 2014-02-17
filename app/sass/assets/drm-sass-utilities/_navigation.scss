@@ -170,7 +170,6 @@
 }
 
 @mixin drm-dropdown-nav($text-color: white, $background-color: $link-color, $divider-color: $light-grey) {
-	margin-bottom: 300px;
 	@include drm-nav-bar-solid();
 
 	li {

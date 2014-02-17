@@ -214,7 +214,7 @@ module.exports = function(grunt) {
 
             scripts: {
                 // We watch and compile sass files as normal but don't live reload here
-                files: ['<%= appFolder %>assets/*.js', '<%= appFolder %>coffee/*.coffee'],
+                files: ['<%= appFolder %>assets/*.js', '<%= appFolder %>coffee/**/*.coffee'],
                 tasks: [ 'coffee', 'concat', 'jshint', 'uglify' ],
             },
 

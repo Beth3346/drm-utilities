@@ -6,6 +6,11 @@
 	@extend %drm-container;
 }
 
+h3 {
+	margin: 20px 0 20px 0;
+	font-weight: bold;
+}
+
 .example-holder {
 	background-color: $light-grey;
 	border: 1px solid $grey;
@@ -36,4 +41,8 @@ section {
 .drm-button-inline {
 	margin: 5px;	
 	@include drm-button-solid($drm-blue, white, 200px, null, 3px, $drm-blue, inline-block);
+}
+
+pre {
+	max-width: 800px;
 }

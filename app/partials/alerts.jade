@@ -1,21 +1,47 @@
-h2 Dismissable Alerts Demo
+section
+    h1 Dismissable Alerts
 
-.example-holder
-	.info-alert.drm-dismissable-alert
-		button.close x 
-		| This is just an informative alert
-	.danger-alert.drm-dismissable-alert
-		button.close x 
-		| Danger Danger Danger!
-	.warning-alert.drm-dismissable-alert
-		button.close x 
-		| This is just a gentle warning
-	.success-alert.drm-dismissable-alert
-		button.close x 
-		| The operation was completed succussfully
-	.muted-alert.drm-dismissable-alert
-		button.close x 
-		| A muted alert that will probably be ignored
-	.custom-alert.drm-dismissable-alert
-		button.close x 
-		| This is a custom alert
+    p Show or hide content on click with optional show all and hide all buttons.
+
+    h2 Live Demo 
+
+    .example-holder
+        .info-alert.drm-dismissable-alert
+            button.close x 
+            | This is just an informative alert
+        .danger-alert.drm-dismissable-alert
+            button.close x 
+            | Danger Danger Danger!
+        .warning-alert.drm-dismissable-alert
+            button.close x 
+            | This is just a gentle warning
+        .success-alert.drm-dismissable-alert
+            button.close x 
+            | The operation was completed succussfully
+        .muted-alert.drm-dismissable-alert
+            button.close x 
+            | A muted alert that will probably be ignored
+        .custom-alert.drm-dismissable-alert
+            button.close x 
+            | This is a custom alert
+
+    h2 Usage
+
+    p Just add class "drm-dismissable-alert" to the element you want to make dismissable. Add the "close" class to the element you want the user to click on to dismiss the alert.
+
+    h3.bold Alert Types:
+
+    ul
+        li Info "info-alert"
+        li Danger "danger-alert"
+        li Warning "warning-alert"
+        li Success "success-alert"
+        li Muted "muted-alert"
+        li Custom "custom-alert"
+            p You can create custom alerts using the @mixin drm-context-box
+
+    pre.prettyprint.
+        &lt;div class="info-alert drm-dismissable-alert"&gt;
+        &lt;button class="close"&gt;x&lt;/button&gt;
+        This is just an informative alert
+        &lt;/div&gt;

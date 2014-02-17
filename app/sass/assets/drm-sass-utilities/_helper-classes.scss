@@ -146,6 +146,19 @@ cite {
 	font-style: normal;
 }
 
+pre {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	background-color: $lightest-grey;
+	border: 1px solid $light-grey;
+	padding: 10px;
+	box-sizing: border-box;
+	border-radius: 3px;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+	@include drm-em-font(14);
+}
+
 /*-----------------------------------------------------------------------------
 	Headings
 -----------------------------------------------------------------------------*/
@@ -185,12 +198,12 @@ h6 {
 -----------------------------------------------------------------------------*/
 
 ul {
-	padding: 10px 10px 10px 40px;
+	padding: 10px 10px 10px 20px;
 	list-style: disc;	
 }
 
 ol {
-	padding: 10px 10px 10px 40px;
+	padding: 10px 10px 10px 20px;
 	list-style: decimal;
 }
 

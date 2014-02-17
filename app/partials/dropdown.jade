@@ -1,35 +1,99 @@
-h2 Navigation Menu with Dropdowns Demo
+section
+    h1 Navigation Menu with Dropdowns
 
-.example-holder
-    ul.drm-dropdown-nav
-        li: a(href="#") Item One
-        li 
-            a(href="#") Item Two
-            ul
-                li: a(href="#") Item Seven
-                li: a(href="#") Item Eight
-                li: a(href="#") Item Nine
+    p A navigation menu with dropdowns that appear when the user hovers. Supports up to 3 levels deep. We believe that after 3 levels dropdowns get too unruly
+
+    h2 Live Demo
+
+    .example-holder
+        nav
+            ul.drm-dropdown-nav
+                li
+                    a(href="#") Animals
+                    ul
+                        li: a(href="#") Dogs
+                        li 
+                            a(href="#") Bears
+                            ul
+                                li: a(href="#") Black
+                                li: a(href="#") Brown
+                                li: a(href="#") Polar
+                                li: a(href="#") Grizzly
+                                li: a(href="#") Panda
+                        li: a(href="#") Lions
+                        li: a(href="#") Birds
+                        li: a(href="#") Fish
                 li 
-                    a(href="#") Item Ten
-                    ul.nested-list
-                        li: a(href="#") Item Nineteen
-                        li: a(href="#") Item Twenty
-                        li: a(href="#") Item Twenty One
-                        li: a(href="#") Item Twenty Two
-        li
-            a(href="#") Item Three
-            ul
-                li: a.text-disabled(href="#") Item Eleven
-                li: a(href="#") Item Twelve
-                li: a(href="#") Item Thirteen
-                li.divider
-                li: a(href="#") Item Fourteen
-        li: a(href="#") Item Four
-        li: a(href="#") Item Five
-        li
-            a(href="#") Item Six
-            ul
-                li: a(href="#") Item Fifteen
-                li: a(href="#") Item Sixteen
-                li: a(href="#") Item Seventeen
-                li: a(href="#") Item Eighteen
+                    a(href="#") Food
+                    ul
+                        li: a(href="#") Meats
+                        li: a(href="#") Dairy
+                        li: a(href="#") Grains
+                        li 
+                            a(href="#") Fruits
+                            ul
+                                li: a(href="#") Apples
+                                li: a(href="#") Oranges
+                                li: a(href="#") Lemons
+                                li: a(href="#") Bananas
+                li
+                    a(href="#") Colors
+                    ul
+                        li: a.text-disabled(href="#") Red
+                        li: a(href="#") Orange
+                        li: a(href="#") Yellow
+                        li.divider
+                        li: a(href="#") Magenta
+                li: a(href="#") Languages
+                li
+                    a(href="#") Countries
+                    ul
+                        li: a(href="#") United States
+                        li: a(href="#") France
+                        li: a(href="#") Mexico
+                        li: a(href="#") Canada
+                li
+                    a(href="#") Furniture
+                    ul
+                        li: a(href="#") Couches
+                        li: a(href="#") Tables
+                        li: a(href="#") Desks
+                        li: a(href="#") Chairs
+
+    h3 Usage
+
+    p Just add the class "drm-dropdown-nav" to the ul element.  You can place ul inside a nav element or on its own.
+    p Links that activate dropdowns are disabled by default. You can add a href attribute that will be usable if JavaScript is disabled.
+
+    pre.prettyprint.
+        &lt;nav&gt;
+        &lt;ul class="drm-dropdown-nav"&gt;
+        &lt;li&gt;&lt;a&gt;Animals&lt;a&gt;
+        &lt;ul&gt;
+        &lt;li&gt;&lt;a&gt;Dogs&lt;a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a&gt;Bears&lt;a&gt;    
+        &lt;ul&gt;
+        &lt;li&gt;&lt;a&gt;Black&lt;a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a&gt;Brown&lt;a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a&gt;Polar&lt;a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a&gt;Grizzly&lt;a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a&gt;Panda&lt;a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;&lt;a&gt;Lions&lt;a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a&gt;Birds&lt;a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a&gt;Fish&lt;a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;/nav&gt;
+
+    p Add a divider
+
+    pre.prettyprint.
+        &lt;li class="divider"&gt;&lt;&lt;li&gt;
+
+    p Add a disabled link
+
+    pre.prettyprint.
+        &lt;li&gt;&lt;a class="text-disabled"&gt;Bears&lt;a&gt;

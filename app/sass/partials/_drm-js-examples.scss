@@ -3,21 +3,23 @@
 -----------------------------------------------------------------------------*/
 
 .drm-accordion {
+	max-width: 800px;
 	@include drm-accordion($drm-blue, 5px);
 }
 
 .drm-dropdown-nav {
+	margin-bottom: 200px;
 	@include drm-dropdown-nav(white, $drm-blue, white);
 }
 
 .drm-dropdown-solid-btn-holder {
-	margin: 20px 10px 200px 10px;
+	margin: 20px 10px 20px 10px;
 	float: left;
 	@include drm-dropdown-button-solid($drm-blue, white, 200px);
 }
 
 .drm-dropdown-split-btn-holder {
-	margin: 20px 10px 200px 10px;
+	margin: 20px 10px 20px 10px;
 	float: left;
 	@include drm-dropdown-button-split($drm-blue, white, $light-grey, 3px);
 
