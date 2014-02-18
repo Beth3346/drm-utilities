@@ -1,32 +1,29 @@
 ( ($) ->
-	menu = $ '.drm-dropdown-nav'
-	listItem = menu.children 'li:has(ul)'
-	link = listItem.children 'a'
-	dropdown = listItem.children 'ul'
-	nestedListItem = dropdown.children 'li:has(ul)'
-	nestedDropdown = nestedListItem.children 'ul'
-	nestedLink = nestedListItem.children 'a'
-	speed = 1000
 
-	link.addClass 'carat'
-	nestedLink.addClass 'carat-right'	
+    drmDropdownMenu = {
+        menu: $ '.drm-dropdown-nav'
 
-	listItem.on 'mouseenter', ->
-		$(@).find(dropdown).fadeIn()
+        config: {
+            speed: 1000
+        }
 
-	listItem.on 'mouseleave', ->
-		$(@).find(dropdown).fadeOut speed
+        init: (config) ->
+            $.extend(@.config, config)
+            listItem = @.menu.find 'li:has(ul)'
 
-	link.on 'click', (e) ->
-		e.preventDefault()
+            listItem.on 'mouseenter', @.showMenu
+            listItem.on 'mouseleave', @.hideMenu       
 
-	nestedListItem.on 'mouseenter', ->
-		$(@).find(nestedDropdown).fadeIn()
+            listItem.children('a').on 'click', (e) ->
+                e.preventDefault()
 
-	nestedListItem.on 'mouseleave', ->
-		$(@).find(nestedDropdown).fadeOut speed
+        showMenu: ->
+            $(@).children('ul').fadeIn()
+        
+        hideMenu: ->
+            $(@).children('ul').fadeOut drmDropdownMenu.config.speed
+    }
 
-	nestedLink.on 'click', (e) ->
-		e.preventDefault()
+    drmDropdownMenu.init()
 
 ) jQuery

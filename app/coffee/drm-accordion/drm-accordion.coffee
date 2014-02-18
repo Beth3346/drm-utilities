@@ -42,7 +42,7 @@
 
 		hideAll: ->
 			drmAccordion.content.slideUp drmAccordion.config.speed
-	}	
+	}
 
 	drmAccordion.init()
 		

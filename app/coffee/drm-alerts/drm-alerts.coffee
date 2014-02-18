@@ -3,10 +3,8 @@
 ###############################################################################
 
 ( ($) ->
-	
-	alert = $ '.drm-dismissable-alert'
 
-	alert.on 'click', '.close', ->
+	$('.drm-dismissable-alert').on 'click', '.close', ->
 		$(@).parent().fadeOut 300
 		
 ) jQuery	

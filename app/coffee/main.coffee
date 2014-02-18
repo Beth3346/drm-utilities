@@ -4,10 +4,9 @@
 
 ( ($) ->
 
-	disabledLinks = $('a.text-disabled')
-
-	disabledLinks.click (event) ->
-		event.preventDefault()
+	$('a.text-disabled').click (e) ->
+		e.preventDefault()
 		
-	prettyPrint()	
+	prettyPrint()
+
 ) jQuery
