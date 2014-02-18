@@ -6,13 +6,18 @@
 
 	drmAccordion = {
 		container: $ '.drm-accordion'
-		content: $ '.drm-accordion-inner'
-		state: $('.drm-accordion').data 'state'
+		content: $ '.drm-accordion-inner'		
 
-		init: ->
+		config: {
+			speed: 200,
+			state: $('.drm-accordion').data 'state'
+		}
+
+		init: (config) ->
+			$.extend(@.config, config)
 			# if no defaultState value is supplied, hide content
-			if @.state == 'expanded' then @.content.show() else @.content.hide()
-			
+			if drmAccordion.config.state == 'expanded' then @.content.show() else @.content.hide()
+
 			$('<button></button>', {
 				text: 'Show All',
 				class: 'drm-show-all drm-button-inline'
@@ -26,13 +31,13 @@
 			@.container.on 'click', '.drm-accordion-label', @.toggle
 
 		toggle: ->
-			$(@).next().slideToggle(200).siblings('.drm-accordion-inner').slideUp 200
+			$(@).next().slideToggle(drmAccordion.config.speed).siblings('.drm-accordion-inner').slideUp drmAccordion.config.speed
 
 		showAll: ->		
-			drmAccordion.content.slideDown 200
+			drmAccordion.content.slideDown drmAccordion.config.speed
 
 		hideAll: ->
-			drmAccordion.content.slideUp 200
+			drmAccordion.content.slideUp drmAccordion.config.speed
 	}	
 
 	drmAccordion.init()
