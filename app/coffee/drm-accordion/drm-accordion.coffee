@@ -31,7 +31,11 @@
 			@.container.on 'click', '.drm-accordion-label', @.toggle
 
 		toggle: ->
-			$(@).next().slideToggle(drmAccordion.config.speed).siblings('.drm-accordion-inner').slideUp drmAccordion.config.speed
+			content = $(@).next()
+			if ( content.is(':hidden') )
+				content.slideDown(drmAccordion.config.speed).siblings('.drm-accordion-inner').slideUp drmAccordion.config.speed
+			else
+				content.slideUp drmAccordion.config.speed
 
 		showAll: ->		
 			drmAccordion.content.slideDown drmAccordion.config.speed
