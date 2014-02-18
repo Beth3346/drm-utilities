@@ -4,25 +4,37 @@
 
 ( ($) ->
 
-	accordion = $ '.drm-accordion'
-	content = $ '.drm-accordion-inner'
-	defaultState = accordion.data 'state'
+	drmAccordion = {
+		container: $ '.drm-accordion'
+		content: $ '.drm-accordion-inner'
+		state: $('.drm-accordion').data 'state'
 
-	# Initialize
+		init: ->
+			# if no defaultState value is supplied, hide content
+			if @.state == 'expanded' then @.content.show() else @.content.hide()
+			
+			$('<button></button>', {
+				text: 'Show All',
+				class: 'drm-show-all drm-button-inline'
+			}).prependTo(@.container).on 'click', @.showAll
 
-	# if no defaultState value is supplied, hide content
+			$('<button></button>', {
+				text: 'Hide All',
+				class: 'drm-hide-all drm-button-inline'
+			}).prependTo(@.container).on 'click', @.hideAll
 
-	if defaultState == 'expanded' then content.show() else content.hide()
+			@.container.on 'click', '.drm-accordion-label', @.toggle
 
-	# Toggle Accordion State
+		toggle: ->
+			$(@).next().slideToggle(200).siblings('.drm-accordion-inner').slideUp 200
 
-	accordion.on 'click', '.drm-accordion-label', ->
-		$(@).next().slideToggle(200).siblings('.drm-accordion-inner').slideUp 200
+		showAll: ->		
+			drmAccordion.content.slideDown 200
 
-	$('button.drm-show-all').on 'click', ->
-		content.slideDown 200
+		hideAll: ->
+			drmAccordion.content.slideUp 200
+	}	
 
-	$('button.drm-hide-all').on 'click', ->
-		content.slideUp 200
+	drmAccordion.init()
 		
 ) jQuery							
