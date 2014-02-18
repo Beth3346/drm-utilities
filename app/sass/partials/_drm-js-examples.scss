@@ -151,10 +151,5 @@
 		margin: 0;
 		width: 100%;
 		@include drm-nav-bar-pills-solid-stacked;
-
-		.active {
-			background-color: white;
-			color: $drm-blue;
-		}
 	}
 }

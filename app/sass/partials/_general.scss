@@ -46,3 +46,7 @@ section {
 pre {
 	max-width: 800px;
 }
+
+.options-list {
+	@include drm-em-font(14);
+}
