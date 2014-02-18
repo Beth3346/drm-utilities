@@ -1,12 +1,15 @@
-include partials/head
+doctype html
+html.no-js(lang="en")
 
-body
-    .wrapper
-        section
-            h1: a(href="js-utilities.html") JavaScript Utilities
-            include partials/js-utilities-list
-        section
-            h1: a(href="sass-utilities.html") Sass Utilities
-            include partials/sass-utilities-list
+    include partials/head
 
-include partials/footer
+    body
+        .wrapper
+            section
+                h1: a(href="js-utilities.html") JavaScript Utilities
+                include partials/js-utilities-list
+            section
+                h1: a(href="sass-utilities.html") Sass Utilities
+                include partials/sass-utilities-list
+
+        include partials/footer
