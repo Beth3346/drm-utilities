@@ -18,7 +18,7 @@
                 e.preventDefault()
 
         showMenu: ->
-            $(@).children('ul').fadeIn()
+            $(@).children('ul').fadeIn 300
         
         hideMenu: ->
             $(@).children('ul').fadeOut drmDropdownMenu.config.speed

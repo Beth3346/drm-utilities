@@ -3,45 +3,47 @@
 ###############################################################################
 
 ( ($) ->
-    
-    buttonHolder = $ '.drm-dropdown-solid-btn-holder'
-    button = buttonHolder.find('button')
-    splitButtonHolder = $ '.drm-dropdown-split-btn-holder'
-    menuButton = splitButtonHolder.find('button:last()')
-    html = $ 'html'
 
-    # when a solid button is clicked show a dropdown menu
-    # hide all other menus that are in the same container
+    drmDropdownButton = {
+        solidContainer: $ '.drm-dropdown-solid-btn-holder'
+        splitContainer: $ '.drm-dropdown-split-btn-holder'
 
-    buttonHolder.on 'click', 'button', (e) ->
-        that = $ @
-        # show menu
-        that.toggleClass('clicked').next('ul').slideToggle()
-        # hide solid button menus
-        that.parent().siblings().find(button).removeClass('clicked').next('ul').slideUp()
-        # hide split button menus
-        that.parent().siblings().find(menuButton).removeClass('clicked').next('ul').slideUp()
-        e.stopPropagation()
+        config: {
+            speed: 300
+        }
 
-    # when the user clicks outside a dropbdown button hide all menus
+        init: (config) ->
+            $.extend(@.config, config)
+            @.solidContainer.on 'click', 'button', @.toggleMenu
+            @.splitContainer.on 'click', 'button:last()', @.toggleMenu
+            $('html').on 'click', @.hideOpenMenus
 
-    html.on 'click', () ->
-        # hide solid button menus
-        button.removeClass('clicked').next('ul').slideUp()
-        # hide split button menus
-        menuButton.removeClass('clicked').next('ul').slideUp()
+        toggleMenu: (e) ->
+            that = $ @
+            menu = that.next 'ul'
+            drmDropdownButton.hideOpenMenus.call that
 
-    # when a split button is clicked show a dropdown menu
-    # hide all other menus that are in the same container
+            if menu.is ':hidden'
+                drmDropdownButton.showMenu.call that       
+            else
+                drmDropdownButton.hideMenu.call that
 
-    splitButtonHolder.on 'click', 'button:last()', (e) ->
-        that = $ @
-        # show menu
-        that.toggleClass('clicked').next('ul').slideToggle()
-        # hide solid button menus
-        that.parent().parent().siblings().find(button).removeClass('clicked').next('ul').slideUp()
-        # hide split button menus
-        that.parent().parent().siblings().find(menuButton).removeClass('clicked').next('ul').slideUp()
-        e.stopPropagation()
+            e.stopPropagation()
+
+        showMenu: ->
+            $(@).addClass('clicked').next('ul').slideDown drmDropdownButton.config.speed
+
+        hideMenu: ->
+            $(@).removeClass('clicked').next('ul').slideUp drmDropdownButton.config.speed
+
+        hideOpenMenus: ->
+            openSolidButtons = drmDropdownButton.solidContainer.find('ul').not(':hidden').prev 'button'
+            openSplitButtons = drmDropdownButton.splitContainer.find('ul').not(':hidden').prev 'button'
+
+            drmDropdownButton.hideMenu.call openSolidButtons
+            drmDropdownButton.hideMenu.call openSplitButtons
+    }
+
+    drmDropdownButton.init({speed: 400})
 
 ) jQuery

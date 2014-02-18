@@ -32,10 +32,11 @@
 
 		toggle: ->
 			content = $(@).next()
+			speed = drmAccordion.config.speed
 			if ( content.is(':hidden') )
-				content.slideDown(drmAccordion.config.speed).siblings('.drm-accordion-inner').slideUp drmAccordion.config.speed
+				content.slideDown(speed).siblings('.drm-accordion-inner').slideUp speed
 			else
-				content.slideUp drmAccordion.config.speed
+				content.slideUp speed
 
 		showAll: ->		
 			drmAccordion.content.slideDown drmAccordion.config.speed
