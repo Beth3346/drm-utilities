@@ -1,82 +1,80 @@
-$ = jQuery
-win = $ window
-slider = $ '.drm-slider'
-slideHolder = $ '.drm-slide-holder'
-autoplay = 5000
-nextButton = $ '.next-img'
-prevButton = $ '.prev-img'
-slides = slideHolder.find '.drm-slide'
-current = 0
-firstSlide = slides.first()
-lastSlide = slides.last()
-play = 5000
-speed = 2000
-length = slides.length
-last = length - 1	
+###############################################################################
+# A simple jQuery slider
+###############################################################################
 
-## Initialize
+( ($) ->
 
-slides.hide()
-firstSlide.show()
-if length > 1
-	nextButton.show()
-	prevButton.show()
+	slider = $ '.drm-slider'
+	slideHolder = $ '.drm-slide-holder'
+	autoplay = 5000
+	nextButton = $ '.next-img'
+	prevButton = $ '.prev-img'
+	slides = slideHolder.find '.drm-slide'
+	current = 0
+	firstSlide = slides.first()
+	lastSlide = slides.last()
+	play = 5000
+	speed = 2000
+	length = slides.length
+	last = length - 1	
 
-prevImage = ->
-	slides.fadeOut speed
+	## Initialize
 
-	if current == 0
-		lastSlide.fadeIn speed
-		current = last
-	else
-		current = current - 1
-		slides.eq(current).fadeIn speed
-	return	
+	slides.hide()
+	firstSlide.show()
+	if length > 1
+		nextButton.show()
+		prevButton.show()
 
-nextImage = ->	
-	slides.fadeOut speed	
+	prevImage = ->
+		slides.fadeOut speed
 
-	if current == last
-		firstSlide.fadeIn speed
-		current = 0
-	else
-		current = current + 1
-		slides.eq(current).fadeIn speed
-	return
-
-startShow = ->
-	clearInterval play
-	play = setInterval ->
-		nextImage()
-		return
-	, autoplay		
-	return
-
-stopShow = ->
-	clearInterval play	
-	return
-
-win.load ->
-	if length > 1 
-		startShow()
+		if current == 0
+			lastSlide.fadeIn speed
+			current = last
+		else
+			current = current - 1
+			slides.eq(current).fadeIn speed
 		return	
 
-prevButton.click ->
-	prevImage()
-	stopShow()
-	return
+	nextImage = ->	
+		slides.fadeOut speed	
 
-nextButton.click ->
-	nextImage()
-	stopShow()
-	return
-
-slides.hover(
-	->
-		stopShow()
+		if current == last
+			firstSlide.fadeIn speed
+			current = 0
+		else
+			current = current + 1
+			slides.eq(current).fadeIn speed	
 		return
-	->
-		if length > 1
+
+	startShow = ->
+		clearInterval play
+		play = setInterval ->
+			nextImage()
+		, autoplay		
+		return
+
+	stopShow = ->
+		clearInterval play
+
+	$(window).load ->
+		if length > 1 
 			startShow()
-			return	
-)
+
+	prevButton.click ->
+		prevImage()
+		stopShow()
+
+	nextButton.click ->
+		nextImage()
+		stopShow()
+
+	slides.hover(
+		->
+			stopShow()
+		->
+			if length > 1
+				startShow()
+	)
+) jQuery
