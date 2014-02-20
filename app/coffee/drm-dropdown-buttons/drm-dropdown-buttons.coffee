@@ -44,6 +44,6 @@
             drmDropdownButton.hideMenu.call openSplitButtons
     }
 
-    drmDropdownButton.init({speed: 400})
+    drmDropdownButton.init {speed: 400}
 
 ) jQuery
