@@ -14,7 +14,7 @@
 		}
 
 		init: (config) ->
-			$.extend(@.config, config)
+			$.extend @.config, config
 
 			@.body.on 'click', '.drm-blackout .img-visible', (e) ->
 			    e.stopPropagation()

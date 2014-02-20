@@ -8,7 +8,7 @@
         }
 
         init: (config) ->
-            $.extend(@.config, config)
+            $.extend @.config, config
             listItem = @.menu.find 'li:has(ul)'
 
             listItem.on 'mouseenter', @.showMenu

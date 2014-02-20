@@ -14,7 +14,7 @@
 		}
 
 		init: (config) ->
-			$.extend(@.config, config)
+			$.extend @.config, config
 			# if no defaultState value is supplied, hide content
 			if drmAccordion.config.state == 'expanded' then @.content.show() else @.content.hide()
 

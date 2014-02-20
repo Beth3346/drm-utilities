@@ -13,7 +13,7 @@
         }
 
         init: (config) ->
-            $.extend(@.config, config)
+            $.extend @.config, config
             @.solidContainer.on 'click', 'button', @.toggleMenu
             @.splitContainer.on 'click', 'button:last()', @.toggleMenu
             $('html').on 'click', @.hideOpenMenus
@@ -44,6 +44,6 @@
             drmDropdownButton.hideMenu.call openSplitButtons
     }
 
-    drmDropdownButton.init {speed: 400}
+    drmDropdownButton.init()
 
 ) jQuery
