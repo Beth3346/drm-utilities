@@ -1,5 +1,6 @@
 ###############################################################################
-# Displays a lightbox
+# Displays a lightbox with an image slideshow built with images from a 
+# thumbnail set
 ###############################################################################
 
 ( ($) ->
@@ -18,13 +19,13 @@
 			@.body.on 'click', '.drm-blackout .img-visible', (e) ->
 			    e.stopPropagation()
 
-			images.on 'click', 'a', @.addLightbox	
+			@.images.on 'click', 'a', @.addLightbox	
 
-			body.on 'click', '.drm-blackout .close', @.removeLightbox
+			@.body.on 'click', '.drm-blackout .close', @.removeLightbox
 
-			body.on 'click', '.drm-blackout .thumbnail-list a', @.changeImage			
+			@.body.on 'click', '.drm-blackout .thumbnail-list a', @.changeImage			
 
-			body.on 'click', '.drm-blackout', @.removeLightbox
+			@.body.on 'click', '.drm-blackout', @.removeLightbox
 
 		createThumbnails: ->
 			links = @.images.find 'a'
@@ -48,13 +49,16 @@
 			# html for the actual lightbox
 			lightboxHtml = "<div class='drm-blackout'><button class='close'>x</button><img src='#{img}' alt='thumbnail' class='img-visible'><ul class='thumbnail-list'>#{thumbnails}</div>"
 
+			return lightboxHtml
+
 		addLightbox: (e) ->
 			lightbox = $ '.drm-blackout'
-			lightboxHtml = drmLightbox.createLightbox()
+			lightboxHtml = drmLightbox.createLightbox.call $ @
 
 			# if the lightbox isn't already showing, append it to body and fade it into view
 			if lightbox.length == 0
-				$(lightboxHtml).hide().appendTo(body).fadeIn drmLightbox.config.speed
+				console.log lightboxHtml
+				$(lightboxHtml).hide().appendTo(drmLightbox.body).fadeIn drmLightbox.config.speed
 
 			e.preventDefault()
 
@@ -73,7 +77,8 @@
 			e.stopPropagation()	
 
 		removeLightbox: ->
-			$('.drm-blackout').fadeOut(drmLightbox.config.speed).remove()
+			$('.drm-blackout').fadeOut drmLightbox.config.speed, ->
+				$(@).remove()
 	}
 
 	drmLightbox.init()
