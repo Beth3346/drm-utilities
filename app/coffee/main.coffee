@@ -3,10 +3,9 @@
 ###############################################################################
 
 ( ($) ->
+    prettyPrint()
 
-	$('a.text-disabled').click (e) ->
-		e.preventDefault()
-		
-	prettyPrint()
+    $('a.text-disabled').click (e) ->
+        e.preventDefault()
 
 ) jQuery

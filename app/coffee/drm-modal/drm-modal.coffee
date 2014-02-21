@@ -12,9 +12,9 @@
             speed: 300
         }
 
-        init: ->
+        init: (config) ->
             $.extend @.config, config
-            modals = lightbox.find '.drm-modal'
+            modals = @.lightbox.find '.drm-modal'
             close = modals.find '.drm-modal-close'
 
             @.modalButtons.on 'click', @.showModal
@@ -31,7 +31,7 @@
             $("##{modalId}").fadeIn drmModal.config.speed
 
         hideModal: (e) ->
-            lightbox.fadeOut drmModal.config.speed 
+            drmModal.lightbox.fadeOut drmModal.config.speed 
             e.preventDefault()
     }
 
