@@ -15,7 +15,7 @@
 		$("##{popoverId}").toggle()
 		e.stopPropagation()		
 
-	html.click () ->
+	html.click ->
 		popovers.hide()	
 
 ) jQuery
