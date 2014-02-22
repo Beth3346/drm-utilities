@@ -108,7 +108,7 @@
 
 // creates a nav-bar with a pill shaped button that shows on hover
 
-@mixin drm-nav-bar-pills($text-color: $link-color, $hover-color: white, $align: left ) {
+@mixin drm-nav-bar-pills($text-color: $link-color, $hover-color: white, $align: left, $border: none ) {
 	@include drm-nav-bar($text-color, $hover-color, $align);
 
 	li {
@@ -116,12 +116,18 @@
 
 		&:last-child {
 			margin-right: 0;
-		}		
+		}	
 	}
 
 	a {
 		color: $text-color;
 		border-radius: 5px;
+
+		@if $border != none {
+			border: 1px solid $border;		
+		} @else {
+			border: none;
+		}
 
 		&:visited {
 			color: $text-color;
@@ -139,8 +145,8 @@
 	}
 }
 
-@mixin drm-nav-bar-pills-stacked($text-color: $link-color, $hover-color: white, $align: left ) {
-	@include drm-nav-bar-pills($text-color, $hover-color, $align);
+@mixin drm-nav-bar-pills-stacked($text-color: $link-color, $hover-color: white, $align: left, $border: none ) {
+	@include drm-nav-bar-pills($text-color, $hover-color, $align, $border);
 
 	li {
 		float: none;
@@ -159,8 +165,8 @@
 
 // creates a nav-bar with pill shaped buttons
 
-@mixin drm-nav-bar-pills-solid($text-color: white, $background-color: $link-color, $align: left) {
-	@include drm-nav-bar-pills($text-color, $background-color, $align);
+@mixin drm-nav-bar-pills-solid($text-color: white, $background-color: $link-color, $align: left, $border: none) {
+	@include drm-nav-bar-pills($text-color, $background-color, $align, $border);
 
 	li {
 		margin-left: 5px;
@@ -175,8 +181,8 @@
 	}
 }
 
-@mixin drm-nav-bar-pills-solid-stacked($text-color: white, $background-color: $link-color, $align: left) {
-	@include drm-nav-bar-pills-stacked($text-color, $background-color, $align);
+@mixin drm-nav-bar-pills-solid-stacked($text-color: white, $background-color: $link-color, $align: left, $border: none) {
+	@include drm-nav-bar-pills-stacked($text-color, $background-color, $align, $border);
 
 	li {
 		margin-top: 5px;
@@ -468,7 +474,7 @@
 	}	
 }
 
-@mixin drm-button-group($bk-color: $link-color, $color: white, $border-radius: 0) {
+@mixin drm-button-group($bk-color: $link-color, $color: white, $border-radius: 0, $border: none) {
 	@include drm-clearfix();
 
 	button {
@@ -482,11 +488,16 @@
 		text-decoration: none;
 		cursor: pointer;
 		margin: 0;
-		border: none;
 		text-shadow: none;
 		box-sizing: border-box;
 		transition: all, .3s ease-out;
 		box-shadow: none;
+
+		@if $border == 'none' {
+ 			border: none;
+		} @else {
+			border: 1px solid $border;
+		}
 
 		&:visited {
 			color: $color;

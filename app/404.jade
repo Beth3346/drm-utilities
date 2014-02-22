@@ -1,11 +1,16 @@
 doctype html
 html.no-js(lang="en")
 
-include partials/head
-    
-body
-    h1 Page Not Found
-    p Sorry, but the page you were trying to view does not exist.
-    // IE requires 512+ bytes: http://www.404-error-page.com/404-error-page-too-short-problem-microsoft-ie.shtml
+    include partials/head
 
-    include partials/footer
+    body
+        include partials/header
+        .wrapper
+            .main-content
+                h1 Page Not Found
+                p Sorry, but the page you were trying to view does not exist.
+                // IE requires 512+ bytes: http://www.404-error-page.com/404-error-page-too-short-problem-microsoft-ie.shtml
+
+            include partials/sidebar
+
+        include partials/footer

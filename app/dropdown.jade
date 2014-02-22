@@ -1,8 +1,13 @@
 doctype html
 html.no-js(lang="en")
+
     include partials/head
+
     body
-        .wrapper    
-            section.js
+        include partials/header
+        .wrapper
+            .main-content
                 include partials/dropdown
+            include partials/sidebar
+
         include partials/footer

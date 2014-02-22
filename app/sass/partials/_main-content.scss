@@ -1,0 +1,28 @@
+/*-----------------------------------------------------------------------------
+    Main Content Styles
+-----------------------------------------------------------------------------*/
+
+.main-content {
+    width: (100% / 3) * 2;
+    float: left;
+    box-sizing: border-box;
+}
+
+.example-holder {
+    margin: 20px auto 20px auto;
+    @include drm-clearfix();
+}
+
+section {
+    @extend %drm-container-full-width;
+    padding: 20px;
+}
+
+.example {
+    margin: 20px;
+    padding: 20px;
+    background-color: white;
+    border: 1px solid $grey;
+    box-sizing: border-box;
+    @include drm-clearfix();
+}

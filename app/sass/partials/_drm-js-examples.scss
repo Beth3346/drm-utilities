@@ -37,8 +37,9 @@
 }
 
 .drm-modal-demo-buttons {
-	margin: 10px;
-	@include drm-button-group($drm-blue, white, 3px);	
+	margin: 10px auto 10px auto;
+	width: 350px;
+	@include drm-button-group($drm-blue, white, 3px, $drm-blue);
 }
 
 .drm-modal-lightbox {
@@ -81,6 +82,7 @@
 	background-color: white;
 	overflow: hidden;
 	box-sizing: border-box;
+	border: 1px solid $light-grey;
 	@include drm-clearfix();
 }
 
@@ -120,6 +122,7 @@
 }
 
 .drm-scrollspy {
+	border: 1px solid $light-grey;
 	@include drm-clearfix();
 
 	.drm-scroll-content {
@@ -150,6 +153,6 @@
 	ul {
 		margin: 0;
 		width: 100%;
-		@include drm-nav-bar-pills-solid-stacked;
+		@include drm-nav-bar-pills-solid-stacked(white, $drm-blue, left, $drm-blue);
 	}
 }

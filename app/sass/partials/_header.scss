@@ -1,0 +1,42 @@
+/*-----------------------------------------------------------------------------
+    Header
+-----------------------------------------------------------------------------*/
+
+header {
+
+    nav {
+        @extend %drm-container-full-width;
+        padding-top: 10px;
+        padding-bottom: 10px;
+
+        ul {
+            float: right;
+            margin: 10px;
+            @include drm-nav-bar-pills;
+        }        
+    }
+}
+
+.hero-unit {
+    @extend %drm-container-full-width;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: $drm-blue;
+    color: white;
+
+    h1 {
+        @extend %drm-reset-box;
+        text-align: left;
+        font-weight: bold;
+        @include drm-em-font(48);
+
+        a {
+            text-decoration: none;
+            color: white;
+
+            &:hover {
+                color: $dark-grey;
+            }
+        }
+    }
+}

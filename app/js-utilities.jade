@@ -1,9 +1,13 @@
 doctype html
 html.no-js(lang="en")
+
     include partials/head
+
     body
-        .wrapper    
-            section.js
-                h1 JavaScript Utilities
-                include partials/js-utilities-list
+        include partials/header
+        .wrapper
+            .main-content
+                include partials/js-utilities
+            include partials/sidebar
+
         include partials/footer

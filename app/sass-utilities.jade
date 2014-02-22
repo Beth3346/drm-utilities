@@ -1,9 +1,13 @@
 doctype html
 html.no-js(lang="en")
+
     include partials/head
+
     body
+        include partials/header
         .wrapper
-            section.sass
-                h1 DRM Sass Utilities
-                include partials/sass-utilities-list
+            .main-content
+                include partials/sass-utilities
+            include partials/sidebar
+
         include partials/footer
