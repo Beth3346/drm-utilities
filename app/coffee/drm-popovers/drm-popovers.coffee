@@ -5,26 +5,40 @@
 ( ($) ->
 
 	drmPopover = {
-		
+		holders: $ '.popover-holder'
+
+		init: ->
+			buttons = @.holders.find 'button'
+			popovers = @.holders.find '.drm-popover'
+
+			buttons.on 'click', @.togglePopover
+
+			$('html').click ->
+				popovers.hide()	
+
+		togglePopover: (e) ->
+			popoverId = $(@).data 'popover'
+			popover = $("##{popoverId}")
+
+			popover.toggle()
+			e.stopPropagation()
+
+			drmPopover.checkPosition.call popover
+
+		checkPosition: ->
+			that = $ @
+			positionLeft = that.position().left
+			offsetLeft = that.offset().left
+			positionTop = that.position().top
+			offsetTop = that.offset().top
+			popoverHeight = that.height()
+
+			if offsetLeft < 0				
+				that.css('left': (Math.abs(offsetLeft) + 10) + positionLeft)
+			else if offsetTop < 0
+				that.css('bottom': (Math.abs(positionTop) - popoverHeight) - Math.abs(offsetTop)) 					
 	}
-	
-	holders = $ '.popover-holder'
-	buttons = holders.find 'button'
-	popovers = holders.find '.drm-popover'
-	html = $ 'html'
 
-	buttons.on 'click', (e) ->
-		popoverId = $(@).data 'popover'
-		popover = $("##{popoverId}")
-
-		popover.toggle()
-		e.stopPropagation()
-		
-		if popover.offset().left < 0
-			position = popover.position().left
-			popover.css('left': (Math.abs(popover.offset().left) + 10) + position)
-
-	html.click ->
-		popovers.hide()	
+	drmPopover.init()	
 
 ) jQuery
