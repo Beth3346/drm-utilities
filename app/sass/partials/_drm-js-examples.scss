@@ -173,6 +173,8 @@
 	position: relative;
 	width: 700px;
 	height: 350px;
+	border: 1px solid $dark-grey;
+	overflow: hidden;
 	@include box-sizing(border-box);
 	@include drm-clearfix;
 }
@@ -182,7 +184,6 @@
 	z-index: 0;
 	width: 700px;
 	height: 350px;
-	border: 1px solid $dark-grey;
 	@include box-sizing(border-box);
 
 	figure {
@@ -212,9 +213,14 @@
 		text-decoration: none;
 		border: none;
 		cursor: pointer;
-		background-color: $drm-blue;
+		background-color: white;
+		margin: 0 2px 0 2px;
 		@include drm-circle(10px, inline-block);	
 		@include box-sizing(border-box);
+
+		&:hover, &:focus {
+		background-color: $drm-blue;
+		}
 	}
 }
 
@@ -223,7 +229,7 @@
 	padding: 0 20px 0 20px;
 	z-index: 1;
 	width: 100%;
-	@include drm-vertically-center(350px, 150px);
+	@include drm-vertically-center(350px, 64px);
 	@include box-sizing(border-box);
 	@include drm-clearfix;
 
@@ -232,7 +238,7 @@
 		border: none;
 		cursor: pointer;
 		@include opacity(.3);
-		@include drm-square(150px);
+		@include drm-square(64px);
 
 		&:hover, &:focus {
 			@include opacity(1);

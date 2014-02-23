@@ -4,77 +4,92 @@
 
 ( ($) ->
 
-	slider = $ '.drm-slider'
-	slideHolder = $ '.drm-slide-holder'
-	autoplay = 5000
-	nextButton = $ '.next-img'
-	prevButton = $ '.prev-img'
-	slides = slideHolder.find '.drm-slide'
-	current = 0
-	firstSlide = slides.first()
-	lastSlide = slides.last()
-	play = 5000
-	speed = 2000
-	length = slides.length
-	last = length - 1	
+	drmSimpleSlider = {
+		slider: $ '.drm-slider'
+		slideHolder: $ '.drm-slide-holder'
+		nextButton: $ '.next-img'
+		prevButton: $ '.prev-img'
 
-	## Initialize
+		config: {
+			autoplay: 5000
+			play: 5000
+			speed: 2000
+		}
 
-	slides.hide()
-	firstSlide.show()
-	if length > 1
-		nextButton.show()
-		prevButton.show()
-
-	prevImage = ->
-		slides.fadeOut speed
-
-		if current == 0
-			lastSlide.fadeIn speed
-			current = last
-		else
-			current = current - 1
-			slides.eq(current).fadeIn speed
-		return	
-
-	nextImage = ->	
-		slides.fadeOut speed	
-
-		if current == last
-			firstSlide.fadeIn speed
+		init: (config) ->
+			$.extend @.config, config	
+			slides = @.slideHolder.find '.drm-slide'
 			current = 0
-		else
-			current = current + 1
-			slides.eq(current).fadeIn speed	
-		return
+			firstSlide = slides.first()
+			lastSlide = slides.last()
+			length = slides.length
+			last = length - 1	
 
-	startShow = ->
-		clearInterval play
-		play = setInterval ->
-			nextImage()
-		, autoplay		
-		return
+			## Initialize
 
-	stopShow = ->
-		clearInterval play
-
-	$(window).load ->
-		if length > 1 
-			startShow()
-
-	prevButton.click ->
-		prevImage()
-		stopShow()
-
-	nextButton.click ->
-		nextImage()
-		stopShow()
-
-	slides.hover(
-		->
-			stopShow()
-		->
+			slides.hide()
+			firstSlide.show()
 			if length > 1
-				startShow()
-	)
+				@.nextButton.show()
+				@.prevButton.show()		
+
+			$(window).load ->
+				if length > 1 
+					startShow()
+
+			prevButton.click ->
+				prevImage()
+				stopShow()
+
+			nextButton.click ->
+				nextImage()
+				stopShow()
+
+			slides.hover(
+				->
+					stopShow()
+				->
+					if length > 1
+						startShow()
+			)
+
+		prevImage: ->
+			speed = drmSimpleSlider.config.speed
+
+			slides.fadeOut speed
+
+			if current == 0
+				lastSlide.fadeIn speed
+				current = last
+			else
+				current = current - 1
+				slides.eq(current).fadeIn speed
+			return		
+
+		nextImage: ->
+			speed = drmSimpleSlider.config.speed
+
+			slides.fadeOut speed	
+
+			if current == last
+				firstSlide.fadeIn speed
+				current = 0
+			else
+				current = current + 1
+				slides.eq(current).fadeIn speed	
+			return
+
+		startShow: ->
+			clearInterval drmSimpleSlider.config.play
+			play = setInterval ->
+				nextImage()
+			, autoplay		
+			return
+
+		stopShow: ->
+			clearInterval drmSimpleSlider.config.play	
+	}
+
+	drmSimpleSlider.init()
+
 ) jQuery
