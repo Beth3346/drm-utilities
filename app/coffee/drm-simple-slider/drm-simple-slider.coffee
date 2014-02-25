@@ -4,92 +4,91 @@
 
 ( ($) ->
 
-	drmSimpleSlider = {
-		slider: $ '.drm-slider'
-		slideHolder: $ '.drm-slide-holder'
-		nextButton: $ '.next-img'
-		prevButton: $ '.prev-img'
+    drmSimpleSlider = {
+        slider: $ '.drm-simple-slider'
+        slideHolder: $ '.drm-simple-slide-holder'
+        nextButton: $ '.drm-simple-slide-next '
+        prevButton: $ '.drm-simple-slide-prev'
 
-		config: {
-			autoplay: 5000
-			play: 5000
-			speed: 2000
-		}
+        config: {
+            play: 10000
+            speed: 1000
+        }
 
-		init: (config) ->
-			$.extend @.config, config	
-			slides = @.slideHolder.find '.drm-slide'
-			current = 0
-			firstSlide = slides.first()
-			lastSlide = slides.last()
-			length = slides.length
-			last = length - 1	
+        init: (config) ->
+            $.extend @.config, config
+            slides = @.slideHolder.find '.drm-simple-slide'
+            current = 0
+            firstSlide = slides.first()
 
-			## Initialize
+            ## Initialize
 
-			slides.hide()
-			firstSlide.show()
-			if length > 1
-				@.nextButton.show()
-				@.prevButton.show()		
+            slides.hide()
+            firstSlide.show()
+            
+            if length > 1
+                @.nextButton.show()
+                @.prevButton.show()     
 
-			$(window).load ->
-				if length > 1 
-					startShow()
+            $(window).on 'load', @.startShow
 
-			prevButton.click ->
-				prevImage()
-				stopShow()
+            @.prevButton.on 'click', @.prevImage
 
-			nextButton.click ->
-				nextImage()
-				stopShow()
+            @.nextButton.on 'click', @.nextImage
 
-			slides.hover(
-				->
-					stopShow()
-				->
-					if length > 1
-						startShow()
-			)
+            slides.on 'mouseover', @.stopShow
+            slides.on 'mouseout', @.startShow
 
-		prevImage: ->
-			speed = drmSimpleSlider.config.speed
+        getCurrent: ->            
+            slides = drmSimpleSlider.slideHolder.find '.drm-simple-slide'
+            currentSlide = slides.not ':hidden'
+            current = slides.index currentSlide
 
-			slides.fadeOut speed
+            return current
 
-			if current == 0
-				lastSlide.fadeIn speed
-				current = last
-			else
-				current = current - 1
-				slides.eq(current).fadeIn speed
-			return		
+        prevImage: ->
+            speed = drmSimpleSlider.config.speed
+            slides = drmSimpleSlider.slideHolder.find '.drm-simple-slide'
+            lastSlide = slides.last()
+            last = slides.length - 1
+            current = drmSimpleSlider.getCurrent()
 
-		nextImage: ->
-			speed = drmSimpleSlider.config.speed
+            slides.eq(current).fadeOut speed, ->
+                if current == 0
+                    current = last
+                    lastSlide.fadeIn speed
+                else
+                    current -= 1
+                    slides.eq(current).fadeIn speed
 
-			slides.fadeOut speed	
+        nextImage: ->
+            speed = drmSimpleSlider.config.speed
+            slides = drmSimpleSlider.slideHolder.find '.drm-simple-slide'
+            firstSlide = slides.first()
+            last = slides.length - 1
+            current = drmSimpleSlider.getCurrent()
 
-			if current == last
-				firstSlide.fadeIn speed
-				current = 0
-			else
-				current = current + 1
-				slides.eq(current).fadeIn speed	
-			return
+            slides.eq(current).fadeOut speed, ->
+                if current == last
+                    firstSlide.fadeIn speed
+                else
+                    current += 1
+                    slides.eq(current).fadeIn speed
 
-		startShow: ->
-			clearInterval drmSimpleSlider.config.play
-			play = setInterval ->
-				nextImage()
-			, autoplay		
-			return
+        startShow: ->
+            slides = drmSimpleSlider.slideHolder.find '.drm-simple-slide'
+            console.log "starting slideshow"
 
-		stopShow: ->
-			clearInterval drmSimpleSlider.config.play	
-	}
+            if slides.length > 1
+                window.setInterval ->
+                    drmSimpleSlider.nextImage()
+                , drmSimpleSlider.config.play      
+                return
 
-	drmSimpleSlider.init()
+        stopShow: ->
+            console.log "stop show"
+    }
+
+    drmSimpleSlider.init()
 
 ) jQuery

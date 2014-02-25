@@ -20,7 +20,7 @@
 			popoverId = $(@).data 'popover'
 			popover = $("##{popoverId}")
 
-			popover.toggle()
+			popover.fadeToggle()
 			e.stopPropagation()
 
 			drmPopover.checkPosition.call popover
