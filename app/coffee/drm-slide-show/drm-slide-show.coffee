@@ -94,7 +94,7 @@
 			current = imgNum
 			imgButtons.css('background-color', buttonBack)
 			$(@).css('background-color', buttonCurrentBack)
-			clearInterval start
+			clearInterval(start, 60000)
 			
 		return current
 

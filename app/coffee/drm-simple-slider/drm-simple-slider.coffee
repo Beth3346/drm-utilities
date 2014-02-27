@@ -7,37 +7,39 @@
     drmSimpleSlider = {
         slider: $ '.drm-simple-slider'
         slideHolder: $ '.drm-simple-slide-holder'
-        nextButton: $ '.drm-simple-slide-next '
-        prevButton: $ '.drm-simple-slide-prev'
+        slideList: $ '.drm-simple-slider-list'        
 
         config: {
             play: 10000
-            speed: 1000
+            speed: 300
+            pause: 60000
+            animate: 'yes'
         }
 
         init: (config) ->
             $.extend @.config, config
             slides = @.slideHolder.find '.drm-simple-slide'
             current = 0
-            firstSlide = slides.first()
+            sliderControls = $('.drm-simple-slider-nav').find 'button'
 
             ## Initialize
-
-            slides.hide()
-            firstSlide.show()
             
-            if length > 1
-                @.nextButton.show()
-                @.prevButton.show()     
+            if slides.length > 1
+                sliderControls.show()
+                @.slideList.show()
+                @.slideList.find('button').first().addClass 'active'
+                slides.hide()
+                slides.first().show()
+            else
+                sliderControls.hide()
+                @.slideList.hide()
+                slides.first().show()   
 
-            $(window).on 'load', @.startShow
+            if drmSimpleSlider.config.animate == 'yes'   
+                $(window).on 'load', @.startShow
 
-            @.prevButton.on 'click', @.prevImage
-
-            @.nextButton.on 'click', @.nextImage
-
-            slides.on 'mouseover', @.stopShow
-            slides.on 'mouseout', @.startShow
+            sliderControls.on 'click', @.advanceImage
+            @.slideList.on 'click', 'button', @.goToImage            
 
         getCurrent: ->            
             slides = drmSimpleSlider.slideHolder.find '.drm-simple-slide'
@@ -46,47 +48,55 @@
 
             return current
 
-        prevImage: ->
-            speed = drmSimpleSlider.config.speed
+        advanceImage: ->
             slides = drmSimpleSlider.slideHolder.find '.drm-simple-slide'
-            lastSlide = slides.last()
             last = slides.length - 1
             current = drmSimpleSlider.getCurrent()
+            dir = $(@).data 'dir'
 
-            slides.eq(current).fadeOut speed, ->
-                if current == 0
-                    current = last
-                    lastSlide.fadeIn speed
-                else
-                    current -= 1
-                    slides.eq(current).fadeIn speed
-
-        nextImage: ->
-            speed = drmSimpleSlider.config.speed
-            slides = drmSimpleSlider.slideHolder.find '.drm-simple-slide'
-            firstSlide = slides.first()
-            last = slides.length - 1
-            current = drmSimpleSlider.getCurrent()
-
-            slides.eq(current).fadeOut speed, ->
+            nextImage = (current) ->
                 if current == last
-                    firstSlide.fadeIn speed
+                    next = 0
+                else    
+                    next = current + 1
+                return next
+
+            prevImage = (current) ->
+                if current == 0
+                    next = last
                 else
-                    current += 1
-                    slides.eq(current).fadeIn speed
+                    next = current - 1
+                return next
+
+            next = if dir == 'prev' then prevImage(current) else nextImage(current)
+
+            drmSimpleSlider.replaceImage(current, next)       
+
+        goToImage: ->
+            current = drmSimpleSlider.getCurrent()
+            next = $(@).data 'item-num'
+            drmSimpleSlider.replaceImage(current, next)
+
+        replaceImage: (current, next) ->
+            links = drmSimpleSlider.slideList.find 'button'
+            speed = drmSimpleSlider.config.speed
+            slides = drmSimpleSlider.slideHolder.find '.drm-simple-slide'
+
+            slides.eq(current).fadeOut speed, ->
+                slides.eq(next).fadeIn speed
+                links.removeClass 'active'
+                links.eq(next).addClass 'active'
 
         startShow: ->
             slides = drmSimpleSlider.slideHolder.find '.drm-simple-slide'
-            console.log "starting slideshow"
+            nextControl = $('.drm-simple-slider-nav').find "button[data-dir='next']"
 
-            if slides.length > 1
-                window.setInterval ->
-                    drmSimpleSlider.nextImage()
-                , drmSimpleSlider.config.play      
-                return
+            if slides.length > 1                    
+                start = setInterval ->
+                    nextControl.trigger 'click'
+                , drmSimpleSlider.config.play
 
-        stopShow: ->
-            console.log "stop show"
+            return start
     }
 
     drmSimpleSlider.init()

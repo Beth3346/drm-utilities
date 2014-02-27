@@ -57,7 +57,6 @@
 
 			# if the lightbox isn't already showing, append it to body and fade it into view
 			if lightbox.length == 0
-				console.log lightboxHtml
 				$(lightboxHtml).hide().appendTo(drmLightbox.body).fadeIn drmLightbox.config.speed
 
 			e.preventDefault()

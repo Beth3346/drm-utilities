@@ -3,255 +3,272 @@
 -----------------------------------------------------------------------------*/
 
 .drm-accordion {
-	max-width: 800px;
-	@include drm-accordion($drm-blue, 5px);
+    max-width: 800px;
+    @include drm-accordion($drm-blue, 5px);
 }
 
 .drm-dropdown-nav {
-	margin-bottom: 200px;
-	@include drm-dropdown-nav(white, $drm-blue, white);
+    margin-bottom: 200px;
+    @include drm-dropdown-nav(white, $drm-blue, white);
 }
 
 .drm-dropdown-solid-btn-holder {
-	margin: 20px 10px 20px 10px;
-	float: left;
-	@include drm-dropdown-button-solid($drm-blue, white, 200px);
+    margin: 20px 10px 20px 10px;
+    float: left;
+    @include drm-dropdown-button-solid($drm-blue, white, 200px);
 }
 
 .drm-dropdown-split-btn-holder {
-	margin: 20px 10px 20px 10px;
-	float: left;
-	@include drm-dropdown-button-split($drm-blue, white, $light-grey, 3px);
+    margin: 20px 10px 20px 10px;
+    float: left;
+    @include drm-dropdown-button-split($drm-blue, white, $light-grey, 3px);
 
-	.button-group {
-		margin: 0;
-	}
+    .button-group {
+        margin: 0;
+    }
 }
 
 .drm-lightbox-thumbnails {
-	@include drm-thumbnail-list();
+    @include drm-thumbnail-list();
 }
 
 .drm-blackout {
-	@include drm-lightbox();
+    @include drm-lightbox();
 }
 
 .drm-modal-demo-buttons {
-	margin: 10px auto 10px auto;
-	width: 350px;
-	@include drm-button-group($drm-blue, white, 3px, $drm-blue);
+    margin: 10px auto 10px auto;
+    width: 350px;
+    @include drm-button-group($drm-blue, white, 3px, $drm-blue);
 }
 
 .drm-modal-lightbox {
-	display: none;
-	@include drm-lightbox();
+    display: none;
+    @include drm-lightbox();
 }
 
 .popover-holder {
-	float: left;
-	position: relative;
+    float: left;
+    position: relative;
 
-	button {
-		margin: 5px;	
-		@include drm-button-solid($drm-blue, white, 200px, null, 3px, $drm-blue, inline-block);	
-	}
+    button {
+        margin: 5px;    
+        @include drm-button-solid($drm-blue, white, 200px, null, 3px, $drm-blue, inline-block); 
+    }
 }
 
 .drm-popover-bottom {
-	@include drm-popover(bottom);
+    @include drm-popover(bottom);
 }
 
 .drm-popover-top {
-	@include drm-popover(top);
+    @include drm-popover(top);
 }
 
 .drm-popover-left {
-	@include drm-popover(left);
+    @include drm-popover(left);
 }
 
 .drm-popover-right {
-	@include drm-popover(right);
+    @include drm-popover(right);
 }
 
 .drm-content-holder {
-	@extend %drm-center-block;
-	width: 95%;
-	margin-top: 2%;
-	margin-bottom: 2%;
-	position: relative;
-	background-color: white;
-	overflow: hidden;
-	box-sizing: border-box;
-	border: 1px solid $light-grey;
-	@include drm-clearfix();
+    @extend %drm-center-block;
+    width: 95%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    position: relative;
+    background-color: white;
+    overflow: hidden;
+    box-sizing: border-box;
+    border: 1px solid $light-grey;
+    @include drm-clearfix();
 }
 
 .drm-offscreen-menu {
-	@include drm-offscreen-menu($link-color, 20%);	
+    @include drm-offscreen-menu($link-color, 20%);  
 }
 
 .drm-menu-button {
-	border: none;
-	background-color: $dark-grey;
-	color: white;
-	padding: 5px 10px 5px 10px;
+    border: none;
+    background-color: $dark-grey;
+    color: white;
+    padding: 5px 10px 5px 10px;
 
-	&:hover {
-		cursor: pointer;
-		background-color: white;
-		color: $dark-grey;
-	}
+    &:hover {
+        cursor: pointer;
+        background-color: white;
+        color: $dark-grey;
+    }
 }
 
 .drm-offscreen-nav {
-	width: 100%;
-	padding: 10px;
-	background-color: $dark-grey;
-	box-sizing: border-box;
+    width: 100%;
+    padding: 10px;
+    background-color: $dark-grey;
+    box-sizing: border-box;
 }
 
 .drm-offscreen-content {
-	width: 80%;
-	position: relative;
-	left: 20%;
-	box-sizing: border-box;
+    width: 80%;
+    position: relative;
+    left: 20%;
+    box-sizing: border-box;
 
-	p {		
-		padding: 10px 20px 10px 20px;
-	}
+    p {     
+        padding: 10px 20px 10px 20px;
+    }
 }
 
 .drm-scrollspy {
-	border: 1px solid $light-grey;
-	@include drm-clearfix();
+    border: 1px solid $light-grey;
+    @include drm-clearfix();
 
-	.drm-scroll-content {
-		overflow-y: scroll;
-		margin: 0;
-		width: 80%;
-		float: right;
-		height: 300px;
-		background-color: white;
-		position: relative;		
-		box-sizing: border-box;
-	}
+    .drm-scroll-content {
+        overflow-y: scroll;
+        margin: 0;
+        width: 80%;
+        float: right;
+        height: 300px;
+        background-color: white;
+        position: relative;     
+        box-sizing: border-box;
+    }
 
-	section {
-		padding: 5px 20px 5px 20px;
-		position: relative;
-	}
+    section {
+        padding: 5px 20px 5px 20px;
+        position: relative;
+    }
 
-	nav {
-		margin: 1% 1% 0 1%;
-		width: 18%;
-		float: left;
-		position: relative;
-		top: 0;
-		box-sizing: border-box;
-	}
+    nav {
+        margin: 1% 1% 0 1%;
+        width: 18%;
+        float: left;
+        position: relative;
+        top: 0;
+        box-sizing: border-box;
+    }
 
-	ul {
-		margin: 0;
-		width: 100%;
-		@include drm-nav-bar-pills-solid-stacked(white, $drm-blue, left, $drm-blue);
-	}
+    ul {
+        margin: 0;
+        width: 100%;
+        @include drm-nav-bar-pills-solid-stacked(white, $drm-blue, left, $drm-blue);
+    }
 }
 
 .drm-simple-slider {
-	@extend %drm-center-block;
-	margin-top: 0;
-	margin-bottom: 0;
-	z-index: -1;
-	width: 700px;
-	height: 350px;
-	@include drm-clearfix;
-	@include box-sizing(border-box);
+    @extend %drm-center-block;
+    margin-top: 50px;
+    margin-bottom: 0;
+    z-index: -1;
+    width: 700px;
+    height: 350px;
+    box-sizing: border-box;
+    @include drm-clearfix;
 }
 
-.drm-simple-slide-holder {	
-	@extend %drm-reset-box;
-	position: relative;
-	width: 700px;
-	height: 350px;
-	border: 1px solid $dark-grey;
-	overflow: hidden;
-	@include box-sizing(border-box);
-	@include drm-clearfix;
+.drm-simple-slide-holder {  
+    @extend %drm-reset-box;
+    position: relative;
+    width: 700px;
+    height: 350px;
+    overflow: hidden;
+    box-sizing: border-box;
+    @include drm-clearfix;
 }
 
 .drm-simple-slide {
-	@extend %drm-reset-box;
-	z-index: 0;
-	width: 700px;
-	height: 350px;
-	@include box-sizing(border-box);
+    @extend %drm-reset-box;
+    z-index: 0;
+    width: 700px;
+    height: 350px;
+    box-sizing: border-box;
 
-	figure {
-		@extend %drm-reset-box;
-		width: 100%;
-		height: 100%;
-		@include box-sizing(border-box);
+    figure {
+        @extend %drm-reset-box;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        box-sizing: border-box;
 
-		img {
-			width: 100%;
-			height: 100%;
-		}
-	}
-}	
+        img {
+            width: 100%;
+            height: 100%;
+        }
+
+        figcaption {
+            position: absolute;
+            top: 75%;
+            left: 0;
+            color: $dark-grey;
+            padding: 10px 10px 10px 20px;
+            margin: 0;
+            width: 80%;
+            box-sizing: border-box;
+            font-weight: bold;
+            @include drm-background-transparent(white, 0.5);
+        }
+    }
+}   
 
 .drm-simple-slider-list {
-	@extend %drm-reset-box;
-	position: absolute;
-	text-align: center;
-	z-index: 1;
-	width: 700px;
-	bottom: 10px;
-	@include box-sizing(border-box);
+    @extend %drm-reset-box;
+    position: absolute;
+    text-align: center;
+    z-index: 1;
+    width: 700px;
+    bottom: 10px;
+    box-sizing: border-box;
 
-	button {
-		@extend %drm-reset-box;
-		text-decoration: none;
-		border: none;
-		cursor: pointer;
-		background-color: white;
-		margin: 0 2px 0 2px;
-		@include drm-circle(10px, inline-block);	
-		@include box-sizing(border-box);
+    button {
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        margin: 0 1px 0 1px;
+        padding: 0;
+        @include drm-circle(10px, inline-block);    
+        box-sizing: border-box;
+        @include drm-background-transparent(white, 0.5);
 
-		&:hover, &:focus {
-		background-color: $drm-blue;
-		}
-	}
+        &:hover, &:focus {
+            background-color: white;
+        }
+
+        &.active {
+            background-color: $drm-blue;
+        }
+    }
 }
 
 .drm-simple-slider-nav {
-	margin: 0;
-	padding: 0 20px 0 20px;
-	z-index: 1;
-	width: 100%;
-	@include drm-vertically-center(350px, 64px);
-	@include box-sizing(border-box);
-	@include drm-clearfix;
+    margin: 0;
+    padding: 0 20px 0 20px;
+    z-index: 1;
+    width: 100%;
+    @include drm-vertically-center(350px, 64px);
+    box-sizing: border-box;
+    @include drm-clearfix;
 
-	button {
-		@extend %drm-reset-box;
-		border: none;
-		cursor: pointer;
-		@include opacity(.3);
-		@include drm-square(64px);
+    button {
+        @extend %drm-reset-box;
+        border: none;
+        cursor: pointer;
+        @include opacity(.3);
+        @include drm-square(64px);
 
-		&:hover, &:focus {
-			@include opacity(1);
-		}
-	}
+        &:hover, &:focus {
+            @include opacity(1);
+        }
+    }
 
-	.drm-simple-slide-prev {
-		float: left;
-		background: image-url("previous.png") no-repeat center transparent;
-	}
+    .drm-simple-slide-prev {
+        float: left;
+        background: image-url("previous.png") no-repeat center transparent;
+    }
 
-	.drm-simple-slide-next {
-		float: right;
-		background: image-url("next.png") no-repeat center transparent;	
-	}
+    .drm-simple-slide-next {
+        float: right;
+        background: image-url("next.png") no-repeat center transparent; 
+    }
 }
