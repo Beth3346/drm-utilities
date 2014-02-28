@@ -21,6 +21,8 @@
             slides = @.slideHolder.find '.drm-simple-slide'
             current = 0
             sliderControls = $('.drm-simple-slider-nav').find 'button'
+            begin = @.startShow()
+            pause = -> drmSimpleSlider.pauseShow(begin)
 
             ## Initialize
             
@@ -33,13 +35,14 @@
             else
                 sliderControls.hide()
                 @.slideList.hide()
-                slides.first().show()   
+                slides.first().show()
 
             if drmSimpleSlider.config.animate == 'yes'   
-                $(window).on 'load', @.startShow
+                $(window).on 'load', $.proxy(begin)
 
             sliderControls.on 'click', @.advanceImage
-            @.slideList.on 'click', 'button', @.goToImage            
+            @.slideList.on 'click', 'button', @.goToImage
+            @.slideHolder.on 'mouseenter', pause
 
         getCurrent: ->            
             slides = drmSimpleSlider.slideHolder.find '.drm-simple-slide'
@@ -95,8 +98,11 @@
                 start = setInterval ->
                     nextControl.trigger 'click'
                 , drmSimpleSlider.config.play
-
+            console.log "Starting: #{start}"    
             return start
+
+        pauseShow: (start) ->
+            clearInterval(start, drmSimpleSlider.config,pause)
     }
 
     drmSimpleSlider.init()
