@@ -188,7 +188,8 @@ module.exports = function(grunt) {
                     "qualified-headings": false,
                     "ids": false,
                     "text-indent": false,
-                    "box-model": false
+                    "box-model": false,
+                    "adjoining-classes": false
                 },
                 src: ['<%= distFolder %>*.css']
             }

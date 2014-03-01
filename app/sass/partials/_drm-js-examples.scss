@@ -158,117 +158,25 @@
 }
 
 .drm-simple-slider {
-    @extend %drm-center-block;
-    margin-top: 50px;
-    margin-bottom: 0;
-    z-index: -1;
-    width: 700px;
-    height: 350px;
-    box-sizing: border-box;
-    @include drm-clearfix;
+    @include drm-simple-slider;
 }
 
-.drm-simple-slide-holder {  
-    @extend %drm-reset-box;
+.drm-sticky-nav {
     position: relative;
-    width: 700px;
-    height: 350px;
-    overflow: hidden;
-    box-sizing: border-box;
-    @include drm-clearfix;
-}
 
-.drm-simple-slide {
-    @extend %drm-reset-box;
-    z-index: 0;
-    width: 700px;
-    height: 350px;
-    box-sizing: border-box;
+    ul {
+        @include drm-nav-bar-pills;
+    }
 
-    figure {
-        @extend %drm-reset-box;
+    &.sticky {
+        position: fixed;
+        left: 0;
+        top: 0;
         width: 100%;
-        height: 100%;
-        position: relative;
+        background-color: white;
+        height: 50px;
+        padding: 10px 10% 10px 10%;
         box-sizing: border-box;
-
-        img {
-            width: 100%;
-            height: 100%;
-        }
-
-        figcaption {
-            position: absolute;
-            top: 75%;
-            left: 0;
-            color: $dark-grey;
-            padding: 10px 10px 10px 20px;
-            margin: 0;
-            width: 80%;
-            box-sizing: border-box;
-            font-weight: bold;
-            @include drm-background-transparent(white, 0.5);
-        }
     }
-}   
-
-.drm-simple-slider-list {
-    @extend %drm-reset-box;
-    position: absolute;
-    text-align: center;
-    z-index: 1;
-    width: 700px;
-    bottom: 10px;
-    box-sizing: border-box;
-
-    button {
-        text-decoration: none;
-        border: none;
-        cursor: pointer;
-        margin: 0 1px 0 1px;
-        padding: 0;
-        @include drm-circle(10px, inline-block);    
-        box-sizing: border-box;
-        @include drm-background-transparent(white, 0.5);
-
-        &:hover, &:focus {
-            background-color: white;
-        }
-
-        &.active {
-            background-color: $drm-blue;
-        }
-    }
-}
-
-.drm-simple-slider-nav {
-    margin: 0;
-    padding: 0 20px 0 20px;
-    z-index: 1;
-    width: 100%;
-    @include drm-vertically-center(350px, 64px);
-    box-sizing: border-box;
-    @include drm-clearfix;
-
-    button {
-        @extend %drm-reset-box;
-        border: none;
-        cursor: pointer;
-        @include opacity(.3);
-        @include drm-square(64px);
-
-        &:hover, &:focus {
-            @include opacity(1);
-        }
-    }
-
-    .drm-simple-slide-prev {
-        float: left;
-        background: image-url("previous.png") no-repeat center transparent;
-    }
-
-    .drm-simple-slide-next {
-        float: right;
-        background: image-url("next.png") no-repeat center transparent; 
-    }
-}
+    
+}    
