@@ -5,42 +5,49 @@
 ( ($) ->
 
     drmScrollspy = {
-        holder: $ '.drm-scrollspy'
 
-        init: ->
-            content = @.holder.find '.drm-scroll-content'                
-            nav = @.holder.find '.drm-scroll-nav'
+        config: {
+            holder: $ '.drm-scrollspy'
+            content: '.drm-scroll-content'
+            nav: '.drm-scroll-nav'
+            activeClass: 'active'
+        }
+
+        init: (config) ->
+            $.extend @config, config
+            content = drmScrollspy.config.holder.find drmScrollspy.config.content          
+            nav = drmScrollspy.config.holder.find drmScrollspy.config.nav
             links = nav.find 'a[href^="#"]'
             hash = window.location.hash
             positions = @.findPositions(content)
             spy = -> drmScrollspy.scrollspy.call(content, positions)
             
             if hash
-                nav.find("a[href='#{hash}']").addClass 'active'
+                nav.find("a[href='#{hash}']").addClass drmScrollspy.config.activeClass
             else    
-                links.first().addClass 'active'
+                links.first().addClass drmScrollspy.config.activeClass
 
-            links.on 'click', @.gotoSection
+            links.on 'click', @.goToSection
             content.on 'scroll', spy
 
-        gotoSection: (e) ->
+        goToSection: (e) ->
             that = $ @
-            content = drmScrollspy.holder.find '.drm-scroll-content'
+            content = drmScrollspy.config.holder.find drmScrollspy.config.content  
             target = that.attr 'href'
-            scroll = content.scrollTop()
-            position = $(target).position().top
             offset = ->
-                if position < scroll
-                    position + scroll
-                else if position > scroll
-                    position - scroll
-                else if position == 0
-                    0
-                else    
-                    content.height()
+                scroll = content.scrollTop()
+                position = $(target).position().top
 
-            $('a.active').removeClass 'active'      
-            that.addClass 'active'
+                # if position is less than scroll "scroll up"
+                if position < scroll
+                    offset = position + scroll
+                # if position is greater than scroll "scroll down"
+                else
+                    offset = scroll + position
+                return offset    
+
+            $('a.active').removeClass drmScrollspy.config.activeClass      
+            that.addClass drmScrollspy.config.activeClass
 
             e.preventDefault()
 
@@ -52,17 +59,17 @@
 
         scrollspy: (positions) ->
             scroll = $(@).scrollTop()
-            links = drmScrollspy.holder.find('.drm-scroll-nav').find 'a[href^="#"]'
+            links = drmScrollspy.config.holder.find('.drm-scroll-nav').find 'a[href^="#"]'
 
             # find out which section position corresponds with scroll
             # if scroll is less than the next position highlight the link with the same index
             $.each positions, (index, value) ->
                 if scroll == 0
-                    $('a.active').removeClass 'active'  
-                    links.eq(0).addClass 'active'
+                    $('a.active').removeClass drmScrollspy.config.activeClass  
+                    links.eq(0).addClass drmScrollspy.config.activeClass
                 else if value < scroll
-                    $('a.active').removeClass 'active'  
-                    links.eq(index).addClass 'active'
+                    $('a.active').removeClass drmScrollspy.config.activeClass  
+                    links.eq(index).addClass drmScrollspy.config.activeClass
 
         findPositions: (content) ->
             sections = content.find 'section'

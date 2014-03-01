@@ -5,30 +5,70 @@
 ( ($) ->
 
     drmStickyNav = {
-        nav: $ '.drm-sticky-nav'
 
         config: {
-            navHeight: '50px'
+            nav: $ '.drm-sticky-nav'
+            activeClass: 'active'
+            content: $ 'body'
         }
 
         init: (config) ->
             $.extend @.config, config
-            container = @.nav.parent()
-            $(window).on 'scroll', @affixNav
+            links = drmStickyNav.config.nav.find 'a[href^="#"]'
+            hash = window.location.hash
+            
+            if hash
+                drmStickyNav.config.nav.find("a[href='#{hash}']").addClass drmStickyNav.config.activeClass
+            else    
+                links.first().addClass drmStickyNav.config.activeClass
+
+            if drmStickyNav.config.nav.length > 0
+                $(window).on 'scroll', @affixNav
+
+            drmStickyNav.config.nav.on 'click', 'a[href^="#"]', @goToSection
 
         affixNav: ->
-            body = $ 'body'
-            navPosition = drmStickyNav.nav.position().top
-            scroll = body.scrollTop()
-            console.log "Nav position is #{navPosition}"
-            console.log "Scroll is #{scroll}"
+            position = drmStickyNav.config.nav.data 'position'
+            navPosition = drmStickyNav.config.nav.position().top
+            scroll = drmStickyNav.config.content.scrollTop()
 
             if scroll > navPosition
-                drmStickyNav.nav.addClass 'sticky'
-                body.css 'padding-top': drmStickyNav.config.navHeight
+                drmStickyNav.config.nav.addClass 'sticky'
             else
-                drmStickyNav.nav.removeClass 'sticky' 
-                body.css 'padding-top': '0'
+                drmStickyNav.config.nav.removeClass 'sticky'
+
+        goToSection: (e) ->
+            that = $ @
+            target = that.attr 'href'
+            content = drmStickyNav.config.content
+
+            offset = ->
+                scroll = content.scrollTop()
+                position = $(target).position().top
+
+                # if position is less than scroll "scroll up"
+                if position < scroll
+                    offset = position + scroll
+                    console.log "scroll up"
+                # if position is greater than scroll "scroll down"
+                else
+                    offset = scroll + position
+                    console.log "scroll down"
+                return offset 
+
+            e.preventDefault()
+
+            $('a.active').removeClass drmStickyNav.config.activeClass
+            that.addClass drmStickyNav.config.activeClass
+
+            content.stop().animate {
+                'scrollTop': offset()   
+            }, 900, 'swing', ->
+                console.log "offset: #{offset}"
+                console.log "position: #{position}"
+                console.log "scroll: #{scroll}"
+                # window.location.hash = target
+                return
     }
 
     drmStickyNav.init()

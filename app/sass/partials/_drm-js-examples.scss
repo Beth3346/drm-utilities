@@ -173,10 +173,13 @@
         left: 0;
         top: 0;
         width: 100%;
-        background-color: white;
-        height: 50px;
+        background-color: $dark-grey;
         padding: 10px 10% 10px 10%;
         box-sizing: border-box;
+        
+        a {
+            color: white;
+        }    
     }
     
 }    
