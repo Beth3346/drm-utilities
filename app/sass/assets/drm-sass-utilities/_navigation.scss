@@ -524,14 +524,18 @@
 	}
 }	
 
-@mixin drm-dropdown-button-solid($bk-color: $link-color, $color: white, $width: 40%, $divider-color: $light-grey) {
+@mixin drm-dropdown-button-solid($bk-color: $link-color, $color: white, $width: 40%, $border: none, $border-radius: 0, $divider-color: $light-grey) {
 	width: $width;
 	position: relative;
 
 	button {
 		margin: 0 0 5px 0;
 		position: relative;
-		@include drm-button-solid($bk-color, $color, 100%);
+		@if $border == none {			
+			@include drm-button-solid($bk-color, $color, 100%);
+		} @else {
+			@include drm-button-solid($bk-color, $color, 100%, center, $border-radius, $border);
+		}
 		
 		&:after {
 			content: "\25BE";
@@ -552,17 +556,26 @@
 		padding: 5px 0 5px 0;
 		display: none;
 		z-index: 100;
-		border-radius: 3px;
+		border-radius: $border-radius;
+		@if $border != none {
+			border: 1px solid $divider-color;
+			box-sizing: border-box;
+		}
 		@include drm-nav-bar-solid-stacked($bk-color, $color, left, $divider-color);
 	}
 }	
 
-@mixin drm-dropdown-button-split($bk-color: $link-color, $color: white, $divider-color: $light-grey, $border-radius: 0) {
+@mixin drm-dropdown-button-split($bk-color: $link-color, $color: white, $border-radius: 0, $border: none, $divider-color: $light-grey) {
 	position: relative;
+
+    .drm-dropdown-button-group {
+		margin: 0 0 5px 0;
+        @include drm-button-group($drm-blue, white, $border-radius, $border);
+    }
 
 	button {
 		position: relative;
-		margin: 0 0 5px 0;
+		margin: 0;
 
 		&:last-of-type {
 			border-left: 1px solid darken($bk-color, 5%);
@@ -585,6 +598,10 @@
 		display: none;
 		z-index: 100;
 		border-radius: $border-radius;
+		@if $border != none {
+			border: 1px solid $divider-color;
+			box-sizing: border-box;
+		}
 		@include drm-nav-bar-solid-stacked($bk-color, $color, left, $divider-color);
 	}
 }
