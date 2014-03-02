@@ -128,7 +128,7 @@
         @include drm-nav-bar-pills;
     }
 
-    &.sticky {
+    &.sticky-top {
         position: fixed;
         left: 0;
         top: 0;
@@ -140,6 +140,38 @@
         a {
             color: white;
         }    
+    }    
+}
+
+.drm-sticky-sidebar {
+    @extend %drm-reset-box;
+    width: 25%;
+    position: relative;
+    float: left;
+    box-sizing: border-box;
+
+    ul {
+        @include drm-nav-bar-pills-solid-stacked(white, $drm-blue, left, $drm-blue);
     }
-    
-}    
+
+    &.sticky-left {
+        position: fixed;
+        left: 10%;
+        top: 5%;
+        width: 250px;
+        box-sizing: border-box;
+    }
+}
+
+.sticky-sidebar-content {
+    @extend %drm-reset-box;
+    width: 75%;
+    padding: 0 1% 0 2%;
+    float: right;
+    box-sizing: border-box;
+
+    section:first-child {
+        margin-top: 0;
+        padding-top: 0;
+    }
+}

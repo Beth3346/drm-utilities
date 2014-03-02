@@ -105,6 +105,9 @@
             return positions        
     }
 
-    drmStickyNav.init()
+    drmStickyNav.init({
+        nav: $ '.drm-sticky-sidebar'
+        content: $ '.sticky-sidebar-content'
+    })
 
 ) jQuery
