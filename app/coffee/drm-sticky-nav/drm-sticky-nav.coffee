@@ -9,30 +9,37 @@
         config: {
             nav: $ '.drm-sticky-nav'
             activeClass: 'active'
-            content: $ 'body'
+            content: $ '.sticky-nav-content'
         }
 
         init: (config) ->
             $.extend @.config, config
             links = drmStickyNav.config.nav.find 'a[href^="#"]'
             hash = window.location.hash
+            content = drmStickyNav.config.content
             
             if hash
-                drmStickyNav.config.nav.find("a[href='#{hash}']").addClass drmStickyNav.config.activeClass
+                hashLink = drmStickyNav.config.nav.find "a[href='#{hash}']"
+                hashLink.addClass drmStickyNav.config.activeClass
+                drmStickyNav.config.nav.on 'click', "a[href='#{hash}']", @goToSection
+                hashLink.trigger 'click'
             else    
                 links.first().addClass drmStickyNav.config.activeClass
 
             if drmStickyNav.config.nav.length > 0
-                $(window).on 'scroll', @affixNav
+                navPosition = drmStickyNav.config.nav.position().top
+                positions = @.findPositions(content)
+                spy = -> drmStickyNav.scrollSpy positions
+                affix = -> drmStickyNav.affixNav navPosition
+                $(window).on 'scroll', affix
+                $(window).on 'scroll', spy
 
             drmStickyNav.config.nav.on 'click', 'a[href^="#"]', @goToSection
 
-        affixNav: ->
-            position = drmStickyNav.config.nav.data 'position'
-            navPosition = drmStickyNav.config.nav.position().top
-            scroll = drmStickyNav.config.content.scrollTop()
+        affixNav: (navPosition) ->
+            scroll = $('body').scrollTop()
 
-            if scroll > navPosition
+            if scroll > (navPosition - 150)
                 drmStickyNav.config.nav.addClass 'sticky'
             else
                 drmStickyNav.config.nav.removeClass 'sticky'
@@ -40,21 +47,7 @@
         goToSection: (e) ->
             that = $ @
             target = that.attr 'href'
-            content = drmStickyNav.config.content
-
-            offset = ->
-                scroll = content.scrollTop()
-                position = $(target).position().top
-
-                # if position is less than scroll "scroll up"
-                if position < scroll
-                    offset = position + scroll
-                    console.log "scroll up"
-                # if position is greater than scroll "scroll down"
-                else
-                    offset = scroll + position
-                    console.log "scroll down"
-                return offset 
+            content = $ 'body'
 
             e.preventDefault()
 
@@ -62,13 +55,53 @@
             that.addClass drmStickyNav.config.activeClass
 
             content.stop().animate {
-                'scrollTop': offset()   
+                'scrollTop': $(target).position().top  
             }, 900, 'swing', ->
-                console.log "offset: #{offset}"
-                console.log "position: #{position}"
-                console.log "scroll: #{scroll}"
-                # window.location.hash = target
+                window.location.hash = target
                 return
+
+        scrollSpy: (positions) ->
+            scroll = $('body').scrollTop()
+            links = drmStickyNav.config.nav.find 'a[href^="#"]'
+
+            $.each positions, (index, value) ->
+                if scroll == 0
+                    $('a.active').removeClass drmStickyNav.config.activeClass  
+                    links.eq(0).addClass drmStickyNav.config.activeClass
+                # if value is less than scroll add activeClass to link with the same index
+                else if value < scroll
+                    $('a.active').removeClass drmStickyNav.config.activeClass  
+                    links.eq(index).addClass drmStickyNav.config.activeClass
+
+        findPositions: (content) ->
+            content = drmStickyNav.config.content
+            sections = content.find 'section'
+            positions = []
+            # populate positions array with the position of the top of each section element 
+            sections.each (index) ->
+                that = $ @
+                length = sections.length
+
+                # the first element's position should always be 0
+                if index == 0
+                    position = 0
+                # subtract the bottom container's full height so final scroll value is equivalent 
+                # to last container's position  
+                else if index == length - 1
+                    if that.height() > 200
+                        position = that.position().top - (that.height() / 2)
+                    else    
+                        position = that.position().top - that.height()
+                # for all other elements correct position by only subtracting half of its height 
+                # from its top position
+                else
+                    position = that.position().top - (that.height() / 2)
+
+                # correct for any elements that may have a negative position value  
+                if position < 0 then positions.push 0 else positions.push position
+                return positions           
+
+            return positions        
     }
 
     drmStickyNav.init()
