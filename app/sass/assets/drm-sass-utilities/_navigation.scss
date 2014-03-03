@@ -624,3 +624,30 @@
 		}
 	}	
 }
+
+@mixin drm-sticky-menu($position) {
+	@if $position == 'top' {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        background-color: $dark-grey;
+        padding: 10px 10% 10px 10%;
+        box-sizing: border-box;
+        
+        a {
+            color: white;
+        }  
+	} @elseif $position == 'left' {
+		position: fixed;
+        top: 5%;
+        
+        @include drm-breakpoint(trenta) {
+        	left: 10%;
+        }
+
+        @include drm-breakpoint(venti) {
+        	left: 2.5%;
+        }
+	}
+}
