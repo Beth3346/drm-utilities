@@ -596,7 +596,7 @@
 			position: absolute;
 			top: 20px;
 			left: 200px;
-			@include drm-triangle(right, 20px, half, $drm-blue);
+			@include drm-triangle(right, 20px, half, $bk-color);
 		}
 	} @elseif $direction == "top" {
 		bottom: 55px;
@@ -606,7 +606,7 @@
 			position: absolute;
 			bottom: -10px;
 			left: (200px / 2) - 10;
-			@include drm-triangle(bottom, 20px, half, $drm-blue);
+			@include drm-triangle(bottom, 20px, half, $bk-color);
 		}	
 	} @elseif $direction == "bottom" {
 		&:before {
@@ -614,7 +614,7 @@
 			position: absolute;
 			top: -10px;
 			left: (200px / 2) - 10;
-			@include drm-triangle(top, 20px, half, $drm-blue);
+			@include drm-triangle(top, 20px, half, $bk-color);
 		}
 	} @elseif $direction == "right" {
 		top: -13px;
@@ -625,7 +625,7 @@
 			position: absolute;
 			top: 20px;
 			left: -10px;
-			@include drm-triangle(left, 20px, half, $drm-blue);
+			@include drm-triangle(left, 20px, half, $bk-color);
 		}
 	} @else {
 		@warn "#{error("That's not a popover direction!")}";
@@ -746,4 +746,53 @@
 	        background: image-url("next.png") no-repeat center transparent; 
 	    }
 	}
+}
+
+@mixin drm-tooltip($direction, $bk-color: $link-color, $color: white, $width: 100px) {
+    width: $width;
+    padding: 5px 10px 5px 10px;
+    position: absolute;
+    background-color: $bk-color;
+    color: $color;
+    z-index: 100;
+    border-radius: 5px;
+    box-sizing: border-box;
+    text-align: center;
+    @include drm-em-font(12);
+
+    @if $direction == "left" {
+        &:before {
+            content: "";
+            position: absolute;
+            top: 10px;
+            left: $width;
+            @include drm-triangle(right, 10px, half, $bk-color);
+        }
+    } @elseif $direction == "top" {
+        &:before {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: ($width / 2) - 5;
+            @include drm-triangle(bottom, 10px, half, $bk-color);
+        }   
+    } @elseif $direction == "bottom" {
+        &:before {
+            content: "";
+            position: absolute;
+            top: -5px;
+            left: ($width / 2) - 5;
+            @include drm-triangle(top, 10px, half, $bk-color);
+        }
+    } @elseif $direction == "right" {    
+        &:before {
+            content: "";
+            position: absolute;
+            top: 10px;
+            left: -5px;
+            @include drm-triangle(left, 10px, half, $bk-color);
+        }
+    } @else {
+        @warn "#{error("That's not a popover direction!")}";
+    } 
 }

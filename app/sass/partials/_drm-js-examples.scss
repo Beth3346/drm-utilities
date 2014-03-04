@@ -260,3 +260,28 @@
         }
     }
 }
+
+span.drm-has-tooltip {
+    text-decoration: underline;
+    color: $drm-blue;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.drm-tooltip-left {
+    @include drm-tooltip(left, $dark-grey, white, 100px);
+}
+
+.drm-tooltip-right {
+    @include drm-tooltip(right, $dark-grey, white, 100px);
+}
+
+.drm-tooltip-top {
+    @include drm-tooltip(top, $dark-grey, white, 100px);
+}
+
+.drm-tooltip-bottom {
+    @include drm-tooltip(bottom, $dark-grey, white, 100px);
+}
