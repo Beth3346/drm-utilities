@@ -40,7 +40,7 @@
             scroll = $('body').scrollTop()
             position = drmStickyNav.config.nav.data 'position'
 
-            if scroll > (navPosition - 150)
+            if scroll > (navPosition - 100)
                 drmStickyNav.config.nav.addClass "sticky-#{position}"
             else
                 drmStickyNav.config.nav.removeClass "sticky-#{position}"

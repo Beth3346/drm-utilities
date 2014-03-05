@@ -19,41 +19,47 @@
         addTooltip: ->
             that = $ @
             content = that.data 'title'
-            position = that.data 'position'
             oldTooltip = $ ".drm-tooltip-#{position}:contains(#{content})"
-            positionTop = that.position().top
-            positionLeft = that.position().left
+            position = that.data 'position'
 
             if oldTooltip.length == 0
-                newTooltip = $('<div></div>', {
+                newTooltip = $ '<div></div>', {
                     text: content,
                     class: "drm-tooltip-#{position}"
-                })
+                }
 
                 newTooltip.hide().insertBefore that
-                height = parseInt(newTooltip.css('height'), 10) + parseInt(newTooltip.css('padding-top'), 10) + parseInt(newTooltip.css('padding-bottom'), 10)
-                width = parseInt(newTooltip.css('width'), 10) + parseInt(newTooltip.css('padding-left'), 10) + parseInt(newTooltip.css('padding-right'), 10)
-                elWidth = parseInt(that.css('width'), 10) + parseInt(that.css('padding-left'), 10) + parseInt(that.css('padding-right'), 10)
-                elHeight = parseInt(that.css('height'), 10) + parseInt(that.css('padding-top'), 10) + parseInt(that.css('padding-bottom'), 10)
+                tooltipCSS = drmTooltips.positionTooltip.call(that, newTooltip, position)
 
-                if position == 'left'
-                    tooltipTop = positionTop
-                    tooltipLeft = positionLeft - width + 10
-                else if position == 'right'
-                    tooltipTop = positionTop
-                    tooltipLeft = positionLeft + elWidth + 10
-                else if position == 'bottom'
-                    tooltipTop = positionTop
-                    tooltipLeft = positionLeft
-                else
-                    tooltipTop = positionTop
-                    tooltipLeft = positionLeft
-                
-                console.log "left: #{positionLeft}, top: #{positionTop}"
-                console.log "height: #{elHeight}, width: #{elWidth}"
-                console.log "left: #{tooltipLeft}, top: #{tooltipTop}"
+                newTooltip.css(tooltipCSS).fadeIn drmTooltips.config.speed
 
-                newTooltip.css({'top': "#{tooltipTop}px", 'left': "#{tooltipLeft}px"}).fadeIn drmTooltips.config.speed
+        positionTooltip: (newTooltip, position) ->
+            that = $ @
+            positionTop = that.offset().top + parseInt(that.css('padding-top'), 10)
+            positionLeft = that.offset().left + parseInt(that.css('padding-left'), 10)
+            height = parseInt(newTooltip.css('height'), 10) + parseInt(newTooltip.css('padding-top'), 10) + parseInt(newTooltip.css('padding-bottom'), 10)
+            width = parseInt(newTooltip.css('width'), 10) + parseInt(newTooltip.css('padding-left'), 10) + parseInt(newTooltip.css('padding-right'), 10)
+            elWidth = parseInt(that.css('width'), 10) + parseInt(that.css('padding-left'), 10) + parseInt(that.css('padding-right'), 10)
+            elHeight = parseInt(that.css('height'), 10) + parseInt(that.css('padding-top'), 10) + parseInt(that.css('padding-bottom'), 10)
+
+            if position == 'left'
+                tooltipTop = positionTop - (elHeight / 2)
+                tooltipLeft = positionLeft - width + 10
+            else if position == 'right'
+                tooltipTop = positionTop - (elHeight / 2)
+                tooltipLeft = positionLeft + elWidth + 15
+            else if position == 'bottom'
+                tooltipTop = positionTop
+                tooltipLeft = positionLeft
+            else
+                tooltipTop = positionTop - ((elHeight + height) / 2) - 10
+                tooltipLeft = positionLeft + ((elWidth + width) / 2)
+
+            console.log "Top: #{tooltipTop} #{positionTop}, Left: #{tooltipLeft} #{positionLeft}"
+            console.log "Height: #{height} #{elHeight}, Width: #{width} #{elWidth}"
+            tooltipCSS = {'top': "#{tooltipTop}px", 'left': "#{tooltipLeft}px"}
+
+            return tooltipCSS            
 
         removeTooltip: ->
             that = $ @
