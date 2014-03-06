@@ -54,7 +54,7 @@
             that = $ @
             status = null
             value = $.trim(that.val())
-            re = new RegExp("[0-9]*", 'g')
+            re = new RegExp "[\\d+$]*"
 
             evaluate = (result, value) ->
                 if result and value == result
@@ -80,15 +80,11 @@
             that = $ @
             status = null
             value = $.trim(that.val())
-            re = new RegExp("([0-9,.]*", 'g')
+            re = new RegExp "-?\\d*\\,?\\d*\\.?\\d*$"
 
             evaluate = (result, value) ->
                 if result and value == result
                     status = 'success'
-                else if result and value != result
-                    status = 'warning'
-                    message = 'acceptable characters: 0-9 , .'
-                    drmForms.issueNotice.call(that, status, message)
                 else
                     status = 'danger'
                     message = 'please enter a valid number'
