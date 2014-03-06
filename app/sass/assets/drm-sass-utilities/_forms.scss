@@ -107,6 +107,20 @@
 		padding: 0;
 	}
 
+	p{
+		&.form-success-notice {
+			@include drm-form-notice(success);
+		}
+
+		&.form-warning-notice {
+			@include drm-form-notice(warning);
+		}
+
+		&.form-danger-notice {
+			@include drm-form-notice(danger);
+		}
+	}
+
 	label {
 		margin: 15px 0 5px 0;
 		line-height: 2em;
@@ -238,5 +252,19 @@
 		input[type="checkbox"], input[type="radio"] {
 			margin-top: 4px;
 		}
+	}
+}
+
+@mixin drm-form-notice($type) {
+	margin: 0 0 20px 5px;
+	padding: 0;
+	@include drm-em-font(12);
+
+	@if $type == 'sucess' {
+		color: $success-color;
+	} @elseif $type == 'warning' {
+		color: $warning-color;
+	} @elseif $type == 'danger' {
+		color: $danger-color;
 	}
 }

@@ -1,3 +1,118 @@
 h2 Form Validation Demo
 
 .example-holder
+    h2 Tabular Form
+    form.tabular-form(role="form" action="" novalidate)
+        label(for="full-name") Name:
+        input(type="text" id="full-name" name="full-name" placeholder="First Last") 
+
+        label(for="email") Email:
+        input(type="email" id="email" name="email" placeholder="youremail@email.com" required)
+
+        label(for="phone") Phone:
+        input(type="tel" id="phone" name="phone" placeholder="212-867-5309")
+
+        label(for="age") Age:
+        input.drm-valid-integer(type="text" id="age" name="age" placeholder="25")
+
+        label(for="meters") Meters:
+        input.drm-valid-number(type="text" id="meters" name="meters" placeholder="12.5")
+
+        .drm-tabular-control-group
+            .drm-control-group
+                label
+                    input(type="checkbox" value="sign up") 
+                    | Sign me up!          
+
+            .drm-control-group
+                label
+                    input(type="checkbox" value="true" checked) 
+                    | Checked Option              
+                    
+        .drm-inline-control-group
+            .drm-control-group
+                label
+                    input(type="checkbox" value="one") 
+                    | One                  
+            
+            .drm-control-group
+                label
+                    input(type="checkbox" value="two") 
+                    | Two                  
+            
+            .drm-control-group
+                label
+                    input(type="checkbox" value="three")
+                    | Three                  
+            
+            .drm-control-group
+                label
+                    input(type="checkbox" value="four") 
+                    | Four               
+        
+
+        .drm-tabular-control-group
+            h3.drm-control-label Select an Option
+            .drm-control-group
+                label
+                    input(type="radio" name="radio-options" id="option1" value="option1" checked) 
+                    | Option 1  
+            
+            .drm-control-group
+                label
+                    input(type="radio" name="radio-options" id="option2" value="option2") 
+                    | Option 2
+
+            .drm-control-group
+                label
+                    input(type="radio" name="radio-options" id="option3" value="option3") 
+                    | Option 3              
+
+            .drm-control-group
+                label
+                    input(type="radio" name="radio-options" id="option4" value="option4") 
+                    | Option 4                      
+
+        .drm-inline-control-group
+            h3.drm-control-label Select a Color
+            .drm-control-group
+                label
+                    input(type="radio" name="radio-colors" value="red") 
+                    | Red                 
+            
+            .drm-control-group
+                label
+                    input(type="radio" name="radio-colors" value="green") 
+                    | Green                 
+            
+            .drm-control-group
+                label
+                    input(type="radio" name="radio-colors" value="blue") 
+                    | Blue   
+                
+        select
+            option(value="1") 1
+            option(value="2") 2
+            option(value="3") 3
+            option(value="4") 4
+            option(value="5") 5
+        
+        select
+            option(value="Red") Red
+            option(value="Yellow") Yellow
+            option(value="Green") Green
+            option(value="Blue") Blue
+            option(value="Orange") Orange           
+
+        select(multiple)
+            option(value="1") 1
+            option(value="2") 2
+            option(value="3") 3
+            option(value="4") 4
+            option(value="5") 5
+        
+        label(for="notes") Notes:
+        textarea(name="notes" id="notes" cols="30" rows="10" placeholder="These are some notes") 
+        small This is some instructional text
+
+        input(type="submit" id="submit" name="submit" value="Submit")
