@@ -17,9 +17,18 @@
             body.on 'click', ':disabled', (e) ->
                 e.preventDefault()
 
-            body.on 'blur', '.drm-valid-integer', @validateInteger
-            body.on 'blur', '.drm-valid-number', @validateNumber
-            body.on 'blur', '.drm-valid-url', @validateURL
+            body.on 'keyup', '.drm-valid-integer', @validateInteger
+            body.on 'keyup', '.drm-valid-number', @validateNumber
+            body.on 'keyup', '.drm-valid-url', @validateURL
+            body.on 'keyup', '.drm-valid-phone', @validatePhone
+            body.on 'keyup', '.drm-valid-email', @validateEmail
+            body.on 'keyup', '.drm-valid-full-name', @validateFullName
+            body.on 'keyup', '.drm-valid-alpha', @validateAlpha
+            body.on 'keyup', '.drm-valid-alphanum', @validateAlphaNum
+            body.on 'keyup', '.drm-valid-alphadash', @validateAlphaNumDash
+            body.on 'keyup', '.drm-valid-alpha-num-underscore', @validateAlphaNumUnderscore
+            body.on 'keyup', '.drm-valid-no-spaces', @validateNoSpaces
+            body.on 'keyup', '[required]', @validateRequired
 
         success: ->
             that = $ @
@@ -38,6 +47,8 @@
 
         issueNotice: (status, message) ->
             that = $ @
+            notices = $ ".form-#{status}-notice"
+            notices.remove()
             notice = $ '<p></p>', {
                 text: message,
                 class: "form-#{status}-notice"
@@ -61,20 +72,28 @@
             that.removeClass 'drm-form-warning'
             that.removeClass 'drm-form-success'
 
-        validateInteger: ->
+        validateRequired: ->
+            that = $ @
+            status = null
+            value = $.trim(that.val())
+
+            if value.length == 0
+                status = 'danger'
+                message = 'this field is required'
+                drmForms.issueNotice.call(that, status, message)
+
+            drmForms.applyValidationClass.call(that, status)
+
+        validate: (re, type) ->
             that = $ @
             status = null
             value = $.trim(that.val())
             # an integer can be negative or positive and can include one comma separator followed by exactly 3 numbers
-            re = new RegExp "^-?\\d*"
+            re = new RegExp "^\\-?\\d*"
 
             evaluate = (result, value) ->
                 if result and value == result
                     status = 'success'
-                else if result and value != result
-                    status = 'warning'
-                    message = 'please use integers only'
-                    drmForms.issueNotice.call(that, status, message)
                 else
                     status = 'danger'
                     message = 'please enter a valid integer'
@@ -85,18 +104,35 @@
                 result = $.trim(re.exec value)
                 status = evaluate(result, value)
 
-            console.log "Status: #{status}"
-            console.log "Value: #{value}"
-            console.log "Result: #{result}"
+            drmForms.applyValidationClass.call(that, status)
+
+        validateInteger: ->
+            that = $ @
+            status = null
+            value = $.trim(that.val())
+            # an integer can be negative or positive and can include one comma separator followed by exactly 3 numbers
+            re = new RegExp "^\\-?\\d*"
+
+            evaluate = (result, value) ->
+                if result and value == result
+                    status = 'success'
+                else
+                    status = 'danger'
+                    message = 'please enter a valid integer'
+                    drmForms.issueNotice.call(that, status, message)
+                return status
+
+            if value
+                result = $.trim(re.exec value)
+                status = evaluate(result, value)
 
             drmForms.applyValidationClass.call(that, status)
-            that.val result
 
         validateNumber: ->
             that = $ @
             status = null
             value = $.trim(that.val())
-            re = new RegExp "^-?\\d*\\.?\\d*"
+            re = new RegExp "^\\-?\\d*\\.?\\d*"
 
             evaluate = (result, value) ->
                 if result and value == result
@@ -109,20 +145,15 @@
 
             if value
                 result = $.trim(re.exec value)
-                status = evaluate(result, value)
-
-            console.log "Status: #{status}"
-            console.log "Value: #{value}"
-            console.log "Result: #{result}"          
+                status = evaluate(result, value)       
 
             drmForms.applyValidationClass.call(that, status)
-            that.val result
 
         validateURL: ->
             that = $ @
             status = null
             value = $.trim(that.val())
-            re = new RegExp "^https?:\\/\\/[\\da-z\\.-]+[\\.a-z\\.]{2,6}[\\/\\w\\.-]*\\/?$"
+            re = new RegExp('^https?:\\/\\/[\\da-z\\.\\-]+[\\.a-z]{2,6}[\\/\\w/.\\-]*\\/?$','gi')
 
             evaluate = (result, value) ->
                 if result and value == result
@@ -135,27 +166,22 @@
 
             if value
                 result = $.trim(re.exec value)
-                status = evaluate(result, value)
-
-            console.log "Status: #{status}"
-            console.log "Value: #{value}"
-            console.log "Result: #{result}"          
+                status = evaluate(result, value)        
 
             drmForms.applyValidationClass.call(that, status)
-            that.val result
 
         validateEmail: ->
             that = $ @
             status = null
             value = $.trim(that.val())
-            re = new RegExp ""
+            re = new RegExp('^[a-z][a-z\\-\\_\\.\\d]*@[a-z\\-\\_\\.\\d]*\\.[a-z]{2,6}$','gi')
 
             evaluate = (result, value) ->
                 if result and value == result
                     status = 'success'
                 else
                     status = 'danger'
-                    message = 'please enter a valid number'
+                    message = 'please enter a valid email address'
                     drmForms.issueNotice.call(that, status, message)
                 return status
 
@@ -163,25 +189,62 @@
                 result = $.trim(re.exec value)
                 status = evaluate(result, value)
 
-            console.log "Status: #{status}"
-            console.log "Value: #{value}"
-            console.log "Result: #{result}"
+            drmForms.applyValidationClass.call(that, status)
+
+        validatePhone: ->
+            that = $ @
+            status = null
+            value = $.trim(that.val())
+            re = new RegExp('^\\(?\\d{3}[\\)\\-\\.]?\\d{3}[\\-\\.]?\\d{4}(?:[xX]\\d+)?$','gi')
+
+            evaluate = (result, value) ->
+                if result and value == result
+                    status = 'success'
+                else
+                    status = 'danger'
+                    message = 'please enter a valid phone number'
+                    drmForms.issueNotice.call(that, status, message)
+                return status
+
+            if value
+                result = $.trim(re.exec value)
+                status = evaluate(result, value)
 
             drmForms.applyValidationClass.call(that, status)
-            that.val result
+
+        validateFullName: ->
+            that = $ @
+            status = null
+            value = $.trim(that.val())
+            re = new RegExp('^[a-z]+ [a-z\\.\\- ]+$','gi')
+
+            evaluate = (result, value) ->
+                if result and value == result
+                    status = 'success'
+                else
+                    status = 'danger'
+                    message = 'please enter your first and last name'
+                    drmForms.issueNotice.call(that, status, message)
+                return status
+
+            if value
+                result = $.trim(re.exec value)
+                status = evaluate(result, value)
+
+            drmForms.applyValidationClass.call(that, status)
 
         validateAlpha: ->
             that = $ @
             status = null
             value = $.trim(that.val())
-            re = new RegExp ""
+            re = new RegExp('^[a-z]*','gi')
 
             evaluate = (result, value) ->
                 if result and value == result
                     status = 'success'
                 else
                     status = 'danger'
-                    message = 'please enter a valid number'
+                    message = 'please use alpha characters only'
                     drmForms.issueNotice.call(that, status, message)
                 return status
 
@@ -189,25 +252,83 @@
                 result = $.trim(re.exec value)
                 status = evaluate(result, value)
 
-            console.log "Status: #{status}"
-            console.log "Value: #{value}"
-            console.log "Result: #{result}"
-
             drmForms.applyValidationClass.call(that, status)
-            that.val result
 
-        validateAlphaDash: ->
+        validateAlphaNum: ->
             that = $ @
             status = null
             value = $.trim(that.val())
-            re = new RegExp ""
+            re = new RegExp('^[a-z\\d]*$','gi')
 
             evaluate = (result, value) ->
                 if result and value == result
                     status = 'success'
                 else
                     status = 'danger'
-                    message = 'please enter a valid number'
+                    message = 'please use alphanumeric characters only'
+                    drmForms.issueNotice.call(that, status, message)
+                return status
+
+            if value
+                result = $.trim(re.exec value)
+                status = evaluate(result, value)
+
+            drmForms.applyValidationClass.call(that, status)
+
+        validateNoSpaces: ->
+            that = $ @
+            status = null
+            value = $.trim(that.val())
+            re = new RegExp('^\\S*$','gi')
+
+            evaluate = (result, value) ->
+                if result and value == result
+                    status = 'success'
+                else
+                    status = 'danger'
+                    message = 'no spaces'
+                    drmForms.issueNotice.call(that, status, message)
+                return status
+
+            if value
+                result = $.trim(re.exec value)
+                status = evaluate(result, value)
+
+            drmForms.applyValidationClass.call(that, status)
+
+        validateAlphaNumDash: ->
+            that = $ @
+            status = null
+            value = $.trim(that.val())
+            re = new RegExp('^[a-z\\d-]*$','gi')
+
+            evaluate = (result, value) ->
+                if result and value == result
+                    status = 'success'
+                else
+                    status = 'danger'
+                    message = 'please use alphanumeric and dashes only'
+                    drmForms.issueNotice.call(that, status, message)
+                return status
+
+            if value
+                result = $.trim(re.exec value)
+                status = evaluate(result, value)
+
+            drmForms.applyValidationClass.call(that, status)
+
+        validateAlphaNumUnderscore: ->
+            that = $ @
+            status = null
+            value = $.trim(that.val())
+            re = new RegExp('^[a-z\\d_]*$','gi')
+
+            evaluate = (result, value) ->
+                if result and value == result
+                    status = 'success'
+                else
+                    status = 'danger'
+                    message = 'please use alphanumeric and underscores only'
                     drmForms.issueNotice.call(that, status, message)
                 return status
 
@@ -220,7 +341,31 @@
             console.log "Result: #{result}"
 
             drmForms.applyValidationClass.call(that, status)
-            that.val result
+
+        validateNoTags: ->
+            that = $ @
+            status = null
+            value = $.trim(that.val())
+            re = new RegExp('<[a-z]+.*>.*<\/[a-z]+>','gi')
+
+            evaluate = (result, value) ->
+                if result and value == result
+                    status = 'success'
+                else
+                    status = 'danger'
+                    message = 'no html tags allowed'
+                    drmForms.issueNotice.call(that, status, message)
+                return status
+
+            if value
+                result = $.trim(re.exec value)
+                status = evaluate(result, value)
+
+            console.log "Status: #{status}"
+            console.log "Value: #{value}"
+            console.log "Result: #{result}"
+
+            drmForms.applyValidationClass.call(that, status)
     }
 
     drmForms.init()    

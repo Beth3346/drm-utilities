@@ -4,16 +4,27 @@ h2 Form Validation Demo
     h2 Tabular Form
     form.tabular-form(role="form" action="" novalidate)
         label(for="full_name") Name:
-        input(type="text" id="full-name" name="full_name" placeholder="First Last") 
+        input.drm-valid-full-name(type="text" id="full-name" name="full_name" placeholder="First Last")
 
-        label(for="email") Email:
-        input(type="email" id="email" name="email" placeholder="youremail@email.com" required)
+        label(for="nickname") Nickname:
+        input.drm-valid-alpha(type="text" id="nickname" name="nickname" placeholder="Nickname")
+
+        label(for="username") *Username:
+        input.drm-valid-alpha-num-underscore(type="text" id="username" name="username" placeholder="UserName" required)
+        small Can include letters, underscores, and numbers
+
+        label(for="password") *Password:
+        input.drm-valid-no-spaces(type="password" id="password" name="password" required)
+
+        label(for="email") *Email:
+        input.drm-valid-email(type="email" id="email" name="email" placeholder="youremail@email.com" required)
 
         label(for="phone") Phone:
-        input(type="tel" id="phone" name="phone" placeholder="212-867-5309")
+        input.drm-valid-phone(type="tel" id="phone" name="phone" placeholder="212-867-5309")
+        small 212-867-5309x78 no spaces
 
         label(for="fav_website") Favorite Website:
-        input.drm-valid-url(type="text" id="fav-website" name="fav_website" placeholder="http://amazon.com")
+        input.drm-valid-url(type="url" id="fav-website" name="fav_website" placeholder="http://amazon.com")
         small Must start with http://
 
         label(for="age") Age:
