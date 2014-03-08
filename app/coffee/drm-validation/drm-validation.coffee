@@ -36,6 +36,7 @@
             body.on 'keyup', ':input[data-min-length]:not([data-max-length])', @validateMinLength
             body.on 'keyup', ':input[data-min-value][data-max-value]', @validateBetweenValue
             body.on 'keyup', ':input[data-min-length][data-max-length]', @validateBetweenLength
+            body.on 'keyup', ':input', @trackLength
             body.on 'blur', ':input:not([required])', @validateEmpty
 
         success: ->
@@ -52,6 +53,29 @@
             that = $ @
             drmForms.removeValidationClass.call that
             that.addClass 'drm-form-danger'
+
+        trackLength: ->
+            that = $ @
+            value = $.trim that.val()
+            length = value.length
+            lengthNotice = $ ".form-length-notice"
+            createMessage = (length) ->
+                message = if length == 1 then "#{length} character" else "#{length} characters"
+                return message
+
+            if lengthNotice.length == 0
+                message = createMessage(length)
+                lengthNotice = $ '<p></p>', {
+                    text: message
+                    class: 'form-length-notice'
+                }
+                
+                lengthNotice.hide().insertAfter(that).show()
+            else if length == 0
+                lengthNotice.remove()
+            else
+                message = createMessage(length)
+                lengthNotice.text message
 
         issueNotice: (status, message) ->
             that = $ @

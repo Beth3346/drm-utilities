@@ -119,6 +119,10 @@
 		&.form-danger-notice {
 			@include drm-form-notice(danger);
 		}
+
+		&.form-length-notice {
+			@include drm-form-notice(info);	
+		}
 	}
 
 	label {
@@ -256,7 +260,7 @@
 }
 
 @mixin drm-form-notice($type) {
-	margin: 0 0 20px 5px;
+	margin: 0 0 5px 5px;
 	padding: 0;
 	@include drm-em-font(12);
 
@@ -266,5 +270,7 @@
 		color: $warning-color;
 	} @elseif $type == 'danger' {
 		color: $danger-color;
+	} @elseif $type == 'info' {
+		color: $info-color;
 	}
 }
