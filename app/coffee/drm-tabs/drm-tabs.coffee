@@ -7,7 +7,7 @@
     drmTabs = {
 
         config: {
-            holder: $ '.drm-tabs'
+            holder: $ 'div.drm-tabs'
             activeClass: 'active'
             speed: 300
         }

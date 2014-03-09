@@ -5,9 +5,9 @@
 ( ($) ->
 
     drmSimpleSlider = {
-        slider: $ '.drm-simple-slider'
-        slideHolder: $ '.drm-simple-slide-holder'
-        slideList: $ '.drm-simple-slider-list'        
+        slider: $ 'div.drm-simple-slider'
+        slideHolder: $ 'div.drm-simple-slide-holder'
+        slideList: $ 'ul.drm-simple-slider-list'        
 
         config: {
             play: 10000
@@ -17,9 +17,9 @@
 
         init: (config) ->
             $.extend @.config, config
-            slides = @.slideHolder.find '.drm-simple-slide'
+            slides = @.slideHolder.find 'div.drm-simple-slide'
             current = 0
-            sliderControls = $('.drm-simple-slider-nav').find 'button'
+            sliderControls = $('div.drm-simple-slider-nav').find 'button'
 
             ## Initialize
             

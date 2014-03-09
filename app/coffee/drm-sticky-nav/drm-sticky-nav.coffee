@@ -7,9 +7,9 @@
     drmStickyNav = {
 
         config: {
-            nav: $ '.drm-sticky-nav'
+            nav: $ 'nav.drm-sticky-nav'
             activeClass: 'active'
-            content: $ '.sticky-nav-content'
+            content: $ 'div.sticky-nav-content'
         }
 
         init: (config) ->

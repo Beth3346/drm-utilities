@@ -7,9 +7,9 @@
     drmStickyNav = {
 
         config: {
-            nav: $ '.drm-sticky-nav'
+            nav: $ 'nav.drm-sticky-nav'
             activeClass: 'active'
-            content: $ '.sticky-nav-content'
+            content: $ 'div.sticky-nav-content'
         }
 
         init: (config) ->
@@ -106,8 +106,8 @@
     }
 
     drmStickyNav.init({
-        nav: $ '.drm-sticky-sidebar'
-        content: $ '.sticky-sidebar-content'
+        nav: $ 'nav.drm-sticky-sidebar'
+        content: $ 'div.sticky-sidebar-content'
     })
 
 ) jQuery

@@ -695,14 +695,20 @@
 	    bottom: 10px;
 	    box-sizing: border-box;
 
+		li {
+	        margin: 0 1px 0 1px;
+	        padding: 0;
+	        display: inline-block;
+	        box-sizing: border-box;	
+		}
+
 	    button {
+	    	@extend %drm-reset-box;
 	        text-decoration: none;
 	        border: none;
 	        cursor: pointer;
-	        margin: 0 1px 0 1px;
-	        padding: 0;
-	        @include drm-circle(10px, inline-block);    
 	        box-sizing: border-box;
+	        @include drm-circle(10px);
 	        @include drm-background-transparent(white, 0.5);
 
 	        &:hover, &:focus {

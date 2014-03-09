@@ -5,8 +5,8 @@
 ( ($) ->
 
     drmDropdownButton = {
-        solidContainer: $ '.drm-dropdown-solid-btn-holder'
-        splitContainer: $ '.drm-dropdown-split-btn-holder'
+        solidContainer: $ 'div.drm-dropdown-solid-btn-holder'
+        splitContainer: $ 'div.drm-dropdown-split-btn-holder'
 
         config: {
             speed: 300

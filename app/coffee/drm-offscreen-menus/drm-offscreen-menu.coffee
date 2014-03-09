@@ -6,10 +6,10 @@
 
 	drmOffscreen = {
 	
-		menu: $ '.drm-offscreen-menu'
-		button: $ '.drm-menu-button'
-		content: $ '.drm-offscreen-content'
-		holder: $ '.drm-content-holder'
+		menu: $ 'nav.drm-offscreen-menu'
+		button: $ 'button.drm-menu-button'
+		content: $ 'div.drm-offscreen-content'
+		holder: $ 'div.drm-content-holder'
 
 		config: {
 			state: 'hide'

@@ -5,11 +5,11 @@
 ( ($) ->
 
 	drmPopover = {
-		holders: $ '.popover-holder'
+		holders: $ 'div.popover-holder'
 
 		init: ->
 			buttons = @.holders.find 'button'
-			popovers = @.holders.find '.drm-popover'
+			popovers = @.holders.find 'div.drm-popover'
 
 			buttons.on 'click', @.togglePopover
 
@@ -18,7 +18,7 @@
 
 		togglePopover: (e) ->
 			popoverId = $(@).data 'popover'
-			popover = $("##{popoverId}")
+			popover = $("div##{popoverId}")
 
 			popover.fadeToggle()
 			e.stopPropagation()

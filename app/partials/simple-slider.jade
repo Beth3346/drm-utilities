@@ -5,13 +5,13 @@ h2 Simple Slider Demo
         .drm-simple-slider-nav
             button.drm-simple-slide-prev(data-dir= 'prev')
             button.drm-simple-slide-next(data-dir= 'next') 
-        .drm-simple-slider-list
-            button(data-item-num="0")
-            button(data-item-num="1")
-            button(data-item-num="2")
-            button(data-item-num="3")
-            button(data-item-num="4")
-            button(data-item-num="5")
+        ul.drm-simple-slider-list
+            li: button(data-item-num="0")
+            li: button(data-item-num="1")
+            li: button(data-item-num="2")
+            li: button(data-item-num="3")
+            li: button(data-item-num="4")
+            li: button(data-item-num="5")
         .drm-simple-slide
             figure.drm-simple-slide-img
                 img(src='http://placekitten.com/700/350')

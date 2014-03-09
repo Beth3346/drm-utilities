@@ -19,7 +19,7 @@
         addTooltip: ->
             that = $ @
             content = that.data 'title'
-            oldTooltip = $ ".drm-tooltip-#{position}:contains(#{content})"
+            oldTooltip = $ "div.drm-tooltip-#{position}:contains(#{content})"
             position = that.data 'position'
 
             if oldTooltip.length == 0
@@ -65,7 +65,7 @@
             that = $ @
             content = that.data 'title'
             position = that.data 'position'
-            oldTooltip = $ ".drm-tooltip-#{position}:contains(#{content})"
+            oldTooltip = $ "div.drm-tooltip-#{position}:contains(#{content})"
 
             if oldTooltip.length > 0
                 oldTooltip.fadeOut drmTooltips.config.speed, ->

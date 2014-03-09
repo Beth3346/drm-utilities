@@ -17,18 +17,18 @@
             body.on 'click', ':disabled', (e) ->
                 e.preventDefault()
 
-            body.on 'keyup', '.drm-valid-integer', @validateInteger
-            body.on 'keyup', '.drm-valid-number', @validateNumber
-            body.on 'keyup', '.drm-valid-url', @validateURL
-            body.on 'keyup', '.drm-valid-phone', @validatePhone
-            body.on 'keyup', '.drm-valid-email', @validateEmail
-            body.on 'keyup', '.drm-valid-full-name', @validateFullName
-            body.on 'keyup', '.drm-valid-alpha', @validateAlpha
-            body.on 'keyup', '.drm-valid-alphanum', @validateAlphaNum
-            body.on 'keyup', '.drm-valid-alphadash', @validateAlphaNumDash
-            body.on 'keyup', '.drm-valid-alpha-num-underscore', @validateAlphaNumUnderscore
-            body.on 'keyup', '.drm-valid-no-spaces', @validateNoSpaces
-            body.on 'keyup', '.drm-valid-no-tags', @validateNoTags
+            body.on 'keyup', ':input.drm-valid-integer', @validateInteger
+            body.on 'keyup', ':input.drm-valid-number', @validateNumber
+            body.on 'keyup', ':input.drm-valid-url', @validateURL
+            body.on 'keyup', ':input.drm-valid-phone', @validatePhone
+            body.on 'keyup', ':input.drm-valid-email', @validateEmail
+            body.on 'keyup', ':input.drm-valid-full-name', @validateFullName
+            body.on 'keyup', ':input.drm-valid-alpha', @validateAlpha
+            body.on 'keyup', ':input.drm-valid-alphanum', @validateAlphaNum
+            body.on 'keyup', ':input.drm-valid-alphadash', @validateAlphaNumDash
+            body.on 'keyup', ':input.drm-valid-alpha-num-underscore', @validateAlphaNumUnderscore
+            body.on 'keyup', ':input.drm-valid-no-spaces', @validateNoSpaces
+            body.on 'keyup', ':input.drm-valid-no-tags', @validateNoTags
             body.on 'keyup', '[required]', @validateRequired
             body.on 'keyup', ':input[data-max-value]:not([data-min-value])', @validateMaxValue
             body.on 'keyup', ':input[data-min-value]:not([data-max-value])', @validateMinValue
@@ -80,7 +80,7 @@
 
         issueNotice: (status, message) ->
             that = $ @
-            notice = $ ".form-#{status}-notice:contains(#{message})"
+            notice = $ "p.form-#{status}-notice:contains(#{message})"
             
             if notice.length == 0
                 notice = $ '<p></p>', {
@@ -91,13 +91,13 @@
                 notice.hide().insertAfter(that).slideDown drmForms.config.speed
 
         removeNotice: (status, message) ->
-            notice = $ ".form-#{status}-notice:contains(#{message})"
+            notice = $ "p.form-#{status}-notice:contains(#{message})"
             notice.slideUp drmForms.config.speed, -> 
                 $(@).remove()  
 
         removeAllNotices: ->
             that = $ @
-            notices = that.nextUntil(':input','.form-success-notice, .form-warning-notice, .form-danger-notice')
+            notices = that.nextUntil(':input','p.form-success-notice, p.form-warning-notice, p.form-danger-notice')
             notices.slideUp drmForms.config.speed, -> 
                 $(@).remove()          
 

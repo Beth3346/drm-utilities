@@ -1,7 +1,7 @@
 ( ($) ->
 
     drmDropdownMenu = {
-        menu: $ '.drm-dropdown-nav'
+        menu: $ 'ul.drm-dropdown-nav'
 
         config: {
             speed: 1000

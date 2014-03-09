@@ -6,7 +6,7 @@
 ( ($) ->
 
 	drmLightbox = {
-		images: $ '.drm-lightbox-thumbnails'
+		images: $ 'ul.drm-lightbox-thumbnails'
 		body: $ 'body'
 
 		config: {
@@ -16,16 +16,16 @@
 		init: (config) ->
 			$.extend @.config, config
 
-			@.body.on 'click', '.drm-blackout .img-visible', (e) ->
+			@.body.on 'click', 'div.drm-blackout img.img-visible', (e) ->
 			    e.stopPropagation()
 
 			@.images.on 'click', 'a', @.addLightbox	
 
-			@.body.on 'click', '.drm-blackout .close', @.removeLightbox
+			@.body.on 'click', 'div.drm-blackout button.close', @.removeLightbox
 
-			@.body.on 'click', '.drm-blackout .thumbnail-list a', @.changeImage			
+			@.body.on 'click', 'div.drm-blackout ul.thumbnail-list a', @.changeImage
 
-			@.body.on 'click', '.drm-blackout', @.removeLightbox
+			@.body.on 'click', 'div.drm-blackout', @.removeLightbox
 
 		createThumbnails: ->
 			links = @.images.find 'a'
@@ -52,7 +52,7 @@
 			return lightboxHtml
 
 		addLightbox: (e) ->
-			lightbox = $ '.drm-blackout'
+			lightbox = $ 'div.drm-blackout'
 			lightboxHtml = drmLightbox.createLightbox.call $ @
 
 			# if the lightbox isn't already showing, append it to body and fade it into view
@@ -63,7 +63,7 @@
 
 		changeImage: (e) ->
 			img = $(@).attr 'href'
-			oldImg = $ '.drm-blackout .img-visible'
+			oldImg = $ 'div.drm-blackout img.img-visible'
 			oldImgSrc = oldImg.attr 'src'
 			speed = drmLightbox.config.speed
 
@@ -76,7 +76,7 @@
 			e.stopPropagation()	
 
 		removeLightbox: ->
-			$('.drm-blackout').fadeOut drmLightbox.config.speed, ->
+			$('div.drm-blackout').fadeOut drmLightbox.config.speed, ->
 				$(@).remove()
 	}
 
