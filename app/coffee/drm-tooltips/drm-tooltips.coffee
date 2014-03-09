@@ -37,7 +37,7 @@
             that = $ @
             positionTop = that.offset().top + parseInt(that.css('padding-top'), 10)
             positionLeft = that.offset().left + parseInt(that.css('padding-left'), 10)
-            height = parseInt(newTooltipouterHeight()
+            height = parseInt(newTooltip.outerHeight()
             width = parseInt(newTooltip.outerWidth()
             elWidth = parseInt(that.outerWidth()
             elHeight = parseInt(that.outerHeight()
