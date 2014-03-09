@@ -58,7 +58,8 @@
             that = $ @
             value = $.trim that.val()
             length = value.length
-            lengthNotice = $ ".form-length-notice"
+            lengthNotice = that.nextUntil(':input', '.form-length-notice')
+            
             createMessage = (length) ->
                 message = if length == 1 then "#{length} character" else "#{length} characters"
                 return message
