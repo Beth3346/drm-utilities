@@ -37,10 +37,10 @@
             that = $ @
             positionTop = that.offset().top + parseInt(that.css('padding-top'), 10)
             positionLeft = that.offset().left + parseInt(that.css('padding-left'), 10)
-            height = parseInt(newTooltip.outerHeight()
-            width = parseInt(newTooltip.outerWidth()
-            elWidth = parseInt(that.outerWidth()
-            elHeight = parseInt(that.outerHeight()
+            height = parseInt(newTooltip.outerHeight(), 10)
+            width = parseInt(newTooltip.outerWidth(), 10)
+            elWidth = parseInt(that.outerWidth(), 10)
+            elHeight = parseInt(that.outerHeight(), 10)
 
             if position == 'left'
                 tooltipTop = positionTop - (elHeight / 2)
@@ -57,7 +57,10 @@
 
             console.log "Top: #{tooltipTop} #{positionTop}, Left: #{tooltipLeft} #{positionLeft}"
             console.log "Height: #{height} #{elHeight}, Width: #{width} #{elWidth}"
-            tooltipCSS = {'top': "#{tooltipTop}px", 'left': "#{tooltipLeft}px"}
+            tooltipCSS = {
+                'top': "#{tooltipTop}px"
+                'left': "#{tooltipLeft}px"
+            }
 
             return tooltipCSS            
 
