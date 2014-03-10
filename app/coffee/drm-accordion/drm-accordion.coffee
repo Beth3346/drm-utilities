@@ -3,48 +3,35 @@
 ###############################################################################
 
 ( ($) ->
+	class @DrmAccordion
+		constructor: (@speed, @state, @container) ->
+			@label = ".#{@container.children().first().attr 'class'}"
+			@contentHolder = ".#{$(@label).next().attr 'class'}"
+			@content = @container.find @contentHolder
+			@showButton = @addButton('showButton', 'Show All', 'drm-show-all drm-button-inline')
+			@hideButton = @addButton('hideButton', 'Hide All', 'drm-hide-all drm-button-inline')
 
-	drmAccordion = {
-		container: $ '.drm-accordion'
-		content: $ '.drm-accordion-inner'		
-
-		config: {
-			speed: 200,
-			state: $('.drm-accordion').data 'state'
-		}
-
-		init: (config) ->
-			$.extend @.config, config
 			# if no defaultState value is supplied, hide content
-			if drmAccordion.config.state == 'expanded' then @.content.show() else @.content.hide()
+			if @state == 'expanded' then @content.show() else @content.hide()
 
-			$('<button></button>', {
-				text: 'Show All',
-				class: 'drm-show-all drm-button-inline'
-			}).prependTo(@.container).on 'click', @.showAll
+		addButton: (button, message, className) ->
+			button = $('<button></button>', {
+				text: message,
+				class: className
+			}).prependTo @container
 
-			$('<button></button>', {
-				text: 'Hide All',
-				class: 'drm-hide-all drm-button-inline'
-			}).prependTo(@.container).on 'click', @.hideAll
+			return button
 
-			@.container.on 'click', '.drm-accordion-label', @.toggle
+		toggle: (speed, content) ->
+			nextContent = $(@).next()
+			if nextContent.is(':hidden') then nextContent.slideDown(speed).siblings(content).slideUp speed else nextContent.slideUp speed
 
-		toggle: ->
-			content = $(@).next()
-			speed = drmAccordion.config.speed
-			if ( content.is(':hidden') )
-				content.slideDown(speed).siblings('.drm-accordion-inner').slideUp speed
-			else
-				content.slideUp speed
+		showAll: =>
+			@content.slideDown @speed
 
-		showAll: ->		
-			drmAccordion.content.slideDown drmAccordion.config.speed
+		hideAll: =>
+			@content.slideUp @speed
 
-		hideAll: ->
-			drmAccordion.content.slideUp drmAccordion.config.speed
-	}
+	return
 
-	drmAccordion.init()
-		
-) jQuery							
+) jQuery

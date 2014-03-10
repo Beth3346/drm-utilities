@@ -438,7 +438,12 @@
 	}
 
 	.drm-accordion-label {
-		color: $label-color;
+		h1, h2, h3, p {
+			@extend %drm-reset-box;
+			color: $label-color;
+			font-weight: normal;
+			@include drm-em-font(18);
+		}
 
 		&:hover {
 			cursor: pointer;

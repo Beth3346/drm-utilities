@@ -101,7 +101,7 @@ module.exports = function(grunt) {
         },
 
         jshint: {
-            files: ['<%= distFolder %>js/dist/*.js'],
+            files: ['<%= distFolder %>js/coffee-compiled/*.js'],
             options: {
 
             }
