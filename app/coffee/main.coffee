@@ -4,7 +4,10 @@
 
 ( ($) -> 
     drmAccordion = new DrmAccordion 300, 'collapsed', $('.drm-accordion')
-    drmAccordion.container.on 'click', drmAccordion.label, drmAccordion.toggleContent
+    toggleContent = -> 
+        that = drmAccordion
+        that.toggle.call @, that.speed, that.contentHolder
+    drmAccordion.container.on 'click', drmAccordion.label, toggleContent
     drmAccordion.showButton.on 'click', drmAccordion.showAll
     drmAccordion.hideButton.on 'click', drmAccordion.hideAll
 

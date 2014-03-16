@@ -11,10 +11,6 @@
             @showButton = @addButton 'showButton', 'Show All', 'drm-show-all drm-button-inline'
             @hideButton = @addButton 'hideButton', 'Hide All', 'drm-hide-all drm-button-inline'
 
-            toggleContent = -> 
-                that = drmAccordion
-                that.toggle.call @, that.speed, that.contentHolder
-
             # if no defaultState value is supplied, hide content
             if @state == 'expanded' then @content.show() else @content.hide()
 
