@@ -3,8 +3,26 @@
 ###############################################################################
 
 ( ($) ->
+    class @DrmAlert
+        constructor: (@alertClass, @speed) ->
+            @alert = $ ".#{alertClass}"
 
-	$('.drm-dismissable-alert').on 'click', 'button.close', ->
-		$(@).parent().fadeOut 300
-		
+        showAlert: (type, message, holder) ->
+            className = "#{type}-alert #{@alertClass}"
+            newAlert = $('<div></div>', {
+                text: message,
+                class: className
+            }).prependTo holder
+
+            close = $('<button></button>', {
+                text: 'x'
+                class: 'close'
+            }).prependTo newAlert
+
+            return newAlert
+
+        clearAlert: ->
+            $(@).parent().fadeOut @speed, ->
+                $(@).remove()
+    return
 ) jQuery	

@@ -93,7 +93,7 @@
         removeNotice: (status, message) ->
             notice = $ "p.form-#{status}-notice:contains(#{message})"
             notice.slideUp drmForms.config.speed, -> 
-                $(@).remove()  
+                $(@).remove()
 
         removeAllNotices: ->
             that = $ @
