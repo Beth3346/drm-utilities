@@ -5,7 +5,7 @@
 ( ($) ->
     class @DrmAlert
         constructor: (@alertClass, @speed) ->
-            @alert = $ ".#{alertClass}"
+            $('html').on 'click', "div.#{alertClass} button.close", @clearAlert
 
         showAlert: (type, message, holder) ->
             className = "#{type}-alert #{@alertClass}"
@@ -22,7 +22,9 @@
             return newAlert
 
         clearAlert: ->
+            console.log 'removing'
             $(@).parent().fadeOut @speed, ->
                 $(@).remove()
     return
+
 ) jQuery	
