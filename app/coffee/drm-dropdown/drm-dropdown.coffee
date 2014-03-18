@@ -1,29 +1,24 @@
+###############################################################################
+# Dropdown menu
+###############################################################################
+
 ( ($) ->
+    class @DrmDropdownMenu
+        constructor: (@menu, @speed) ->
+            @listItem = @menu.find 'li:has(ul)'
 
-    drmDropdownMenu = {
-        menu: $ 'ul.drm-dropdown-nav'
+            @listItem.on 'mouseenter', @showMenu
+            @listItem.on 'mouseleave', @hideMenu       
 
-        config: {
-            speed: 1000
-        }
-
-        init: (config) ->
-            $.extend @.config, config
-            listItem = @.menu.find 'li:has(ul)'
-
-            listItem.on 'mouseenter', @.showMenu
-            listItem.on 'mouseleave', @.hideMenu       
-
-            listItem.children('a').on 'click', (e) ->
+            @listItem.children('a').on 'click', (e) ->
                 e.preventDefault()
 
         showMenu: ->
             $(@).children('ul').fadeIn 300
         
         hideMenu: ->
-            $(@).children('ul').fadeOut drmDropdownMenu.config.speed
-    }
+            $(@).children('ul').fadeOut @speed
 
-    drmDropdownMenu.init()
+    return
 
 ) jQuery

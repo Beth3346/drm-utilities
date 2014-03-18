@@ -15,13 +15,13 @@
 .drm-dropdown-solid-btn-holder {
     margin: 20px 10px 20px 10px;
     float: left;
-    @include drm-dropdown-button-solid($drm-blue, white, 200px, $drm-blue);
+    @include drm-dropdown-button-solid($drm-blue, white, 200px, $drm-blue, 3px);
 }
 
 .drm-dropdown-split-btn-holder {
     margin: 20px 10px 20px 10px;
     float: left;
-    @include drm-dropdown-button-split($drm-blue, white, 0, $drm-blue, $light-grey);
+    @include drm-dropdown-button-split($drm-blue, white, 3px, $drm-blue, $light-grey);
 }
 
 .drm-lightbox-thumbnails {

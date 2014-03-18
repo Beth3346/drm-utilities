@@ -3,47 +3,31 @@
 ###############################################################################
 
 ( ($) ->
+    class @DrmDropdownButton
+        constructor: (@container, @speed, @button) ->
+            self = @
+            self.container.on 'click', self.button, (e) ->
+                that = $ @
+                menu = that.next 'ul'
 
-    drmDropdownButton = {
-        solidContainer: $ 'div.drm-dropdown-solid-btn-holder'
-        splitContainer: $ 'div.drm-dropdown-split-btn-holder'
+                # close any open menus
+                openButtons = self.container.find('ul').not(':hidden').prev 'button'
 
-        config: {
-            speed: 300
-        }
+                if openButtons.length > 0
+                    self.hideMenu.call openButtons, self.speed
 
-        init: (config) ->
-            $.extend @.config, config
-            @.solidContainer.on 'click', 'button', @.toggleMenu
-            @.splitContainer.on 'click', 'button:last()', @.toggleMenu
-            $('html').on 'click', @.hideOpenMenus
+                if menu.is ':hidden'
+                    self.showMenu.call that, self.speed
+                else
+                    self.hideMenu.call that, self.speed
 
-        toggleMenu: (e) ->
-            that = $ @
-            menu = that.next 'ul'
-            drmDropdownButton.hideOpenMenus.call that
+                e.stopPropagation()
 
-            if menu.is ':hidden'
-                drmDropdownButton.showMenu.call that       
-            else
-                drmDropdownButton.hideMenu.call that
+        showMenu: (speed) ->
+            $(@).next('ul').addClass('clicked').slideDown speed
 
-            e.stopPropagation()
-
-        showMenu: ->
-            $(@).addClass('clicked').next('ul').slideDown drmDropdownButton.config.speed
-
-        hideMenu: ->
-            $(@).removeClass('clicked').next('ul').slideUp drmDropdownButton.config.speed
-
-        hideOpenMenus: ->
-            openSolidButtons = drmDropdownButton.solidContainer.find('ul').not(':hidden').prev 'button'
-            openSplitButtons = drmDropdownButton.splitContainer.find('ul').not(':hidden').prev 'button'
-
-            drmDropdownButton.hideMenu.call openSolidButtons
-            drmDropdownButton.hideMenu.call openSplitButtons
-    }
-
-    drmDropdownButton.init()
+        hideMenu: (speed) ->
+            $(@).next('ul').removeClass('clicked').slideUp speed
+    return      
 
 ) jQuery

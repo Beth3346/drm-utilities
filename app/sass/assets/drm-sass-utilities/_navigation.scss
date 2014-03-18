@@ -556,11 +556,18 @@
 		padding: 5px 0 5px 0;
 		display: none;
 		z-index: 100;
-		border-radius: $border-radius;
+
+		@if $border-radius > 5px {
+			border-radius: 5px;
+		} @else if $border-radius {
+			border-radius: $border-radius
+		}
+
 		@if $border != none {
 			border: 1px solid $divider-color;
 			box-sizing: border-box;
 		}
+
 		@include drm-nav-bar-solid-stacked($bk-color, $color, left, $divider-color);
 	}
 }	
@@ -597,11 +604,18 @@
 		top: 100%;
 		display: none;
 		z-index: 100;
-		border-radius: $border-radius;
+		
+		@if $border-radius > 5px {
+			border-radius: 5px;
+		} @else if $border-radius {
+			border-radius: $border-radius
+		}
+
 		@if $border != none {
 			border: 1px solid $divider-color;
 			box-sizing: border-box;
 		}
+		
 		@include drm-nav-bar-solid-stacked($bk-color, $color, left, $divider-color);
 	}
 }
