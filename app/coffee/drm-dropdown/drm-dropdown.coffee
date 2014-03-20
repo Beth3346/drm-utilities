@@ -1,9 +1,10 @@
 ###############################################################################
 # Dropdown menu
 ###############################################################################
+"use strict"
 
 ( ($) ->
-    class @DrmDropdownMenu
+    class window.DrmDropdownMenu
         constructor: (@menu, @speed) ->
             @listItem = @menu.find 'li:has(ul)'
 

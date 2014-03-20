@@ -1,9 +1,10 @@
 ###############################################################################
 # Allows a button to display a dropdown when clicked
 ###############################################################################
+"use strict"
 
 ( ($) ->
-    class @DrmDropdownButton
+    class window.DrmDropdownButton
         constructor: (@container, @speed, @button) ->
             self = @
             self.container.on 'click', self.button, (e) ->
@@ -28,6 +29,6 @@
 
         hideMenu: (speed) ->
             $(@).next('ul').removeClass('clicked').slideUp speed
-    return      
+    return
 
 ) jQuery

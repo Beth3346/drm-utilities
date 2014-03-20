@@ -1,16 +1,14 @@
 ###############################################################################
 # Enables dynamic tabbed content
 ###############################################################################
+"use strict"
 
-( ($) ->
-	
-    drmTabs = {
-
-        config: {
+( ($) ->	
+    drmTabs =
+        config:
             holder: $ 'div.drm-tabs'
             activeClass: 'active'
             speed: 300
-        }
 
         init: (config) ->
             $.extend @config, config
@@ -46,7 +44,6 @@
             nav.find("a[href^='##{currentId}']").removeClass drmTabs.config.activeClass
             window.location.hash = target   
             nav.find("a[href='#{target}']").addClass drmTabs.config.activeClass
-    }
 
     drmTabs.init()
 

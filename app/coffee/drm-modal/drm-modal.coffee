@@ -1,27 +1,25 @@
 ###############################################################################
 # Displays a modal window
 ###############################################################################
+"use strict"
 
 ( ($) ->
-
-    drmModal = {
+    drmModal =
         modalButtons: $ 'button.drm-modal-open'
         lightbox: $ 'div.drm-modal-lightbox'
-
-        config: {
+        config:
             speed: 300
-        }
 
         init: (config) ->
-            $.extend @.config, config
-            modals = @.lightbox.find 'div.drm-modal'
+            $.extend @config, config
+            modals = @lightbox.find 'div.drm-modal'
             close = modals.find 'button.drm-modal-close'
 
-            @.modalButtons.on 'click', @.showModal
+            @modalButtons.on 'click', @showModal
             
-            close.on 'click', @.hideModal
+            close.on 'click', @hideModal
             
-            @.lightbox.on 'click', @.hideModal
+            @lightbox.on 'click', @hideModal
             
             modals.on 'click', (e) ->
                 e.stopPropagation()
@@ -33,7 +31,6 @@
         hideModal: (e) ->
             drmModal.lightbox.fadeOut drmModal.config.speed 
             e.preventDefault()
-    }
 
     drmModal.init()
 

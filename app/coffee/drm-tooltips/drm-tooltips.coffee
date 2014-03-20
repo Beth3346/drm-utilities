@@ -1,14 +1,13 @@
 ###############################################################################
 # Displays tooltips on click
 ###############################################################################
+"use strict"
 
-( ($) ->
-	
-    drmTooltips = {
-        config: {
+( ($) ->	
+    drmTooltips =
+        config:
             tooltip: $ '.drm-has-tooltip'
             speed: 300
-        }
 
         init: (config) ->
             $.extend @config, config
@@ -62,7 +61,7 @@
                 'left': "#{tooltipLeft}px"
             }
 
-            return tooltipCSS            
+            tooltipCSS            
 
         removeTooltip: ->
             that = $ @
@@ -73,7 +72,6 @@
             if oldTooltip.length > 0
                 oldTooltip.fadeOut drmTooltips.config.speed, ->
                     $(@).remove()
-    }
 
     drmTooltips.init()
 

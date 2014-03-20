@@ -1,19 +1,17 @@
 ###############################################################################
 # Creates a navigation bar that stays put when the user scrolls
 ###############################################################################
+"use strict"
 
 ( ($) ->
-
-    drmStickyNav = {
-
-        config: {
+    drmStickyNav =
+        config:
             nav: $ 'nav.drm-sticky-nav'
             activeClass: 'active'
             content: $ 'div.sticky-nav-content'
-        }
 
         init: (config) ->
-            $.extend @.config, config
+            $.extend @config, config
             links = drmStickyNav.config.nav.find 'a[href^="#"]'
             hash = window.location.hash
             content = drmStickyNav.config.content
@@ -28,7 +26,7 @@
 
             if drmStickyNav.config.nav.length > 0
                 navPosition = drmStickyNav.config.nav.position().top
-                positions = @.findPositions(content)
+                positions = @findPositions content
                 spy = -> drmStickyNav.scrollSpy positions
                 affix = -> drmStickyNav.affixNav navPosition
                 $(window).on 'scroll', affix
@@ -100,10 +98,9 @@
 
                 # correct for any elements that may have a negative position value  
                 if position < 0 then positions.push 0 else positions.push position
-                return positions           
+                positions           
 
-            return positions        
-    }
+            positions
 
     drmStickyNav.init()
 

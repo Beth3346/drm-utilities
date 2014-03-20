@@ -1,71 +1,67 @@
 ###############################################################################
 # Displays an offscreen menu that slides into view
 ###############################################################################
+"use strict"
 
 ( ($) ->
+    drmOffscreen =    
+        menu: $ 'nav.drm-offscreen-menu'
+        button: $ 'button.drm-menu-button'
+        content: $ 'div.drm-offscreen-content'
+        holder: $ 'div.drm-content-holder'
+        config:
+            state: 'hide'
 
-	drmOffscreen = {
-	
-		menu: $ 'nav.drm-offscreen-menu'
-		button: $ 'button.drm-menu-button'
-		content: $ 'div.drm-offscreen-content'
-		holder: $ 'div.drm-content-holder'
+        init: (config) ->
+            $.extend @config, config
+            menuWidth = @getDimensions()
 
-		config: {
-			state: 'hide'
-		}
+            # set menu and content positions            
+            if drmOffscreen.config.state == 'hide'
+                drmOffscreen.hideMenu(menuWidth)
 
-		init: (config) ->
-			$.extend @config, config
-			menuWidth = @.getDimensions()
+            @button.on 'click', @toggleMenu
 
-			# set menu and content positions			
-			if drmOffscreen.config.state == 'hide'
-				drmOffscreen.hideMenu(menuWidth)
+        toggleMenu: ->
+            menuPos = drmOffscreen.menu.css 'left'
+            menuWidth = drmOffscreen.getDimensions()
 
-			@.button.on 'click', @toggleMenu
+            if menuPos == '0px'
+                drmOffscreen.hideMenu(menuWidth)    
+            else
+                drmOffscreen.showMenu(menuWidth)
 
-		toggleMenu: ->
-			menuPos = drmOffscreen.menu.css 'left'
-			menuWidth = drmOffscreen.getDimensions()
+        showMenu: (menuWidth) ->
+            contentWidth = 100 - menuWidth
 
-			if menuPos == '0px'
-				drmOffscreen.hideMenu(menuWidth)	
-			else
-				drmOffscreen.showMenu(menuWidth)
+            drmOffscreen.menu.animate {
+                'left': '0'}
+            drmOffscreen.content.animate {
+                'left': "#{menuWidth}%", 'width': "#{contentWidth}%"}
 
-		showMenu: (menuWidth) ->
-			contentWidth = 100 - menuWidth
+        hideMenu: (menuWidth) ->
+            drmOffscreen.menu.animate {
+                'left': "-#{menuWidth}%"}
+            drmOffscreen.content.animate {
+                'left': '0', 'width': '100%'}
 
-			drmOffscreen.menu.animate {
-				'left': '0'}
-			drmOffscreen.content.animate {
-				'left': "#{menuWidth}%", 'width': "#{contentWidth}%"}
+            drmOffscreen.addScroll()
 
-		hideMenu: (menuWidth) ->
-			drmOffscreen.menu.animate {
-				'left': "-#{menuWidth}%"}
-			drmOffscreen.content.animate {
-				'left': '0', 'width': '100%'}
+        getDimensions: ->   
+            menuWidth = parseInt(drmOffscreen.menu.css('width'), 10)
+            holderWidth = parseInt(drmOffscreen.holder.css('width'), 10)
 
-			drmOffscreen.addScroll()
+            # calculate menuWidth as a percentage of container
+            menuWidth = (menuWidth / holderWidth) * 100
+            menuWidth
 
-		getDimensions: ->	
-			menuWidth = parseInt(drmOffscreen.menu.css('width'), 10)
-			holderWidth = parseInt(drmOffscreen.holder.css('width'), 10)
+        addScroll: ->
+            menuHeight = parseInt((drmOffscreen.menu.find('ul').css 'height'), 10)
+            contentHeight = parseInt((drmOffscreen.content.css 'height'), 10)
 
-			# calculate menuWidth as a percentage of container
-			menuWidth = (menuWidth / holderWidth) * 100
-			return menuWidth
+            if menuHeight > contentHeight
+                drmOffscreen.menu.css {'overflow-y': 'scroll'}
 
-		addScroll: ->
-			menuHeight = parseInt((drmOffscreen.menu.find('ul').css 'height'), 10)
-			contentHeight = parseInt((drmOffscreen.content.css 'height'), 10)
-
-			if menuHeight > contentHeight
-				drmOffscreen.menu.css {'overflow-y': 'scroll'}	
-	}
-
-	drmOffscreen.init()	
+    drmOffscreen.init() 
 
 ) jQuery

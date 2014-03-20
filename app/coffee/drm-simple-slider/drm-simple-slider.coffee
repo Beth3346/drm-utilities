@@ -1,23 +1,22 @@
 ###############################################################################
 # A simple jQuery slider
 ###############################################################################
+"use strict"
 
 ( ($) ->
-
-    drmSimpleSlider = {
+    drmSimpleSlider =
         slider: $ 'div.drm-simple-slider'
         slideHolder: $ 'div.drm-simple-slide-holder'
         slideList: $ 'ul.drm-simple-slider-list'        
 
-        config: {
+        config:
             play: 10000
             speed: 300
             animate: 'yes'
-        }
 
         init: (config) ->
-            $.extend @.config, config
-            slides = @.slideHolder.find 'div.drm-simple-slide'
+            $.extend @config, config
+            slides = @slideHolder.find 'div.drm-simple-slide'
             current = 0
             sliderControls = $('div.drm-simple-slider-nav').find 'button'
 
@@ -25,30 +24,30 @@
             
             if slides.length > 1
                 sliderControls.show()
-                @.slideList.show()
-                @.slideList.find('button').first().addClass 'active'
+                @slideList.show()
+                @slideList.find('button').first().addClass 'active'
                 slides.hide()
                 slides.first().show()
             else
                 sliderControls.hide()
-                @.slideList.hide()
+                @slideList.hide()
                 slides.first().show()
 
             if drmSimpleSlider.config.animate == 'yes'
-                begin = @.startShow()
+                begin = @startShow()
                 pause = -> drmSimpleSlider.pauseShow begin
                 $(window).on 'load', $.proxy begin
-                @.slideHolder.on 'mouseenter', pause
+                @slideHolder.on 'mouseenter', pause
 
-            sliderControls.on 'click', @.advanceImage
-            @.slideList.on 'click', 'button', @.goToImage
+            sliderControls.on 'click', @advanceImage
+            @slideList.on 'click', 'button', @goToImage
 
         getCurrent: ->            
             slides = drmSimpleSlider.slideHolder.find '.drm-simple-slide'
             currentSlide = slides.not ':hidden'
             current = slides.index currentSlide
 
-            return current
+            current
 
         advanceImage: ->
             slides = drmSimpleSlider.slideHolder.find '.drm-simple-slide'
@@ -61,14 +60,14 @@
                     next = 0
                 else    
                     next = current + 1
-                return next
+                next
 
             prevImage = (current) ->
                 if current == 0
                     next = last
                 else
                     next = current - 1
-                return next
+                next
 
             next = if dir == 'prev' then prevImage(current) else nextImage(current)
 
@@ -97,11 +96,10 @@
                 start = setInterval ->
                     nextControl.trigger 'click'
                 , drmSimpleSlider.config.play
-            return start
+            start
 
         pauseShow: (start) ->
             clearInterval start
-    }
 
     drmSimpleSlider.init()
 

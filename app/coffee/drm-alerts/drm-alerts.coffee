@@ -1,29 +1,36 @@
 ###############################################################################
 # Displays removable alerts for web apps
 ###############################################################################
+"use strict"
 
 ( ($) ->
-    class @DrmAlert
-        constructor: (@alertClass, @speed) ->
-            $('html').on 'click', "div.#{alertClass} button.close", @clearAlert
+    class window.DrmAlert
+        constructor: (options = {}) ->
+            @alertClass = options.alertClass ? "drm-dismissable-alert"
+            @speed = options.speed ? 300
+            self = @
+            clearAlert = ->
+                self.clearAlert.call @, self.speed
+
+            $('html').on 'click', "div.#{@alertClass} button.close", clearAlert
 
         showAlert: (type, message, holder) ->
             className = "#{type}-alert #{@alertClass}"
-            newAlert = $('<div></div>', {
+            newAlert = $ '<div></div>',
                 text: message,
                 class: className
-            }).prependTo holder
 
-            close = $('<button></button>', {
+            close = $ '<button></button>',
                 text: 'x'
                 class: 'close'
-            }).prependTo newAlert
 
-            return newAlert
+            newAlert.prependTo holder
+            close.prependTo newAlert
 
-        clearAlert: ->
-            console.log 'removing'
-            $(@).parent().fadeOut @speed, ->
+            newAlert
+
+        clearAlert: (speed) -> 
+            $(@).parent().fadeOut speed, ->
                 $(@).remove()
     return
 

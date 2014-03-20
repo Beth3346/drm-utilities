@@ -1,3 +1,5 @@
+"use strict"
+
 $ = jQuery
 
 images = $('.post-normal').find 'img'
