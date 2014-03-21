@@ -78,7 +78,7 @@
             # lightboxHtml = @::createLightbox.call $ @
 
             # if the lightbox isn't already showing, append it to body and fade it into view
-            if lightbox.length == 0
+            if lightbox.length is 0
                 imgVisible = $ '<img></img>',
                     class: 'img-visible'
                     src: img
@@ -110,7 +110,7 @@
 
             e.preventDefault()
 
-            if oldImgSrc != img             
+            if oldImgSrc isnt img             
                 oldImg.fadeOut speed, ->
                     $(@).attr('src', img).fadeIn speed
 

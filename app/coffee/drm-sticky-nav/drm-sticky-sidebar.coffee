@@ -24,7 +24,7 @@
             else    
                 links.first().addClass drmStickyNav.config.activeClass
 
-            if drmStickyNav.config.nav.length > 0
+            unless drmStickyNav.config.nav.length is 0
                 navPosition = drmStickyNav.config.nav.position().top
                 positions = @findPositions content
                 spy = -> drmStickyNav.scrollSpy positions
@@ -64,7 +64,7 @@
             links = drmStickyNav.config.nav.find 'a[href^="#"]'
 
             $.each positions, (index, value) ->
-                if scroll == 0
+                if scroll is 0
                     $('a.active').removeClass drmStickyNav.config.activeClass  
                     links.eq(0).addClass drmStickyNav.config.activeClass
                 # if value is less than scroll add activeClass to link with the same index
@@ -81,17 +81,21 @@
                 that = $ @
                 length = sections.length
 
-                # the first element's position should always be 0
-                if index == 0
-                    position = 0
-                # subtract the bottom container's full height so final scroll value is equivalent 
-                # to last container's position  
-                else if index == length - 1
-                    if that.height() > 200
+                getPosition = (height) ->
+                    if height > 200
                         position = that.position().top - (that.height() / 2)
                     else    
                         position = that.position().top - that.height()
-                # for all other elements correct position by only subtracting half of its height 
+                    position
+
+                # the first element's position should always be 0
+                if index is 0
+                    position = 0
+                # subtract the bottom container's full height so final scroll value is equivalent 
+                # to last container's position  
+                else if index is length - 1
+                    position = getPosition that.height()
+                # for all other elements correct position by only subtracting half of its height
                 # from its top position
                 else
                     position = that.position().top - (that.height() / 2)

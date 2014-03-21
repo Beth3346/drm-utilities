@@ -5,21 +5,24 @@
 
 ( ($) ->
     class window.DrmAccordion
-        constructor: (@speed, @state, @container, @buttons) ->
+        constructor: (options = {}) ->
+            @speed = options.speed ? 300
+            @state = options.state ? 'collapsed'
+            @container = options.container ? $('.drm-accordion')
+            @buttons = options.buttons ? yes
             @label = ".#{@container.children().first().attr 'class'}"
             @contentHolder = ".#{$(@label).next().attr 'class'}"
             @content = @container.find @contentHolder
             self = @
 
-            if @buttons?
+            if @buttons
                 @showButton = @addButton 'showButton', 'Show All', 'drm-show-all drm-button-inline'
                 @hideButton = @addButton 'hideButton', 'Hide All', 'drm-hide-all drm-button-inline'
 
                 @showButton.on 'click', @showAll
                 @hideButton.on 'click', @hideAll
 
-            # if no defaultState value is supplied, hide content
-            if @state == 'expanded' then @content.show() else @content.hide()
+            if @state is 'expanded' then @content.show() else @content.hide()
 
             toggleContent = ->
                 self.toggle.call @, self.speed, self.contentHolder

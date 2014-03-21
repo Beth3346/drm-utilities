@@ -28,7 +28,7 @@
         loc = imgWidth
         currentButton = $('button#button' + current)
 
-        if direction == 'next'  
+        if direction is 'next'  
             ++current
             imgButtons.css('background-color', buttonBack)
             currentButton = $('button#button' + current)
@@ -41,14 +41,14 @@
             currentButton.css('background-color', buttonCurrentBack)
             clearInterval start
 
-        if current == 0
+        if current is 0
             current = imgsLen
             loc = totalImgsWidth - imgWidth
             direction = 'next'  
             currentButton = $('button#button' + current)
             currentButton.css('background-color', buttonCurrentBack)
             clearInterval start
-        else if (current - 1) == imgsLen
+        else if (current - 1) is imgsLen
             current = 1
             loc = 0
             currentButton = $('button#button' + current)    
@@ -69,7 +69,7 @@
             imgButtons.css('background-color', buttonBack)
             currentButton = $('button#button' + current)
             currentButton.css('background-color', buttonCurrentBack)
-        else if current == imgsLen      
+        else if current is imgsLen      
             current = 1
             loc = 0
             imgButtons.css('background-color', buttonBack)
@@ -80,7 +80,7 @@
 
         return current
 
-    if animate == 'yes'
+    if animate is 'yes'
         start = setInterval( startShow, 5000 )
 
     imgButtons.on 'click', (loc) ->
@@ -112,7 +112,7 @@
     transition = (container, loc, direction) ->
 
         if direction && loc != 0
-            unit = if direction == 'next' then '-=' else '+='
+            unit = if direction is 'next' then '-=' else '+='
 
         container.animate
             'margin-left': if unit then unit + loc else loc

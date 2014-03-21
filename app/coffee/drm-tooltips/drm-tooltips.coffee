@@ -21,7 +21,7 @@
             oldTooltip = $ "div.drm-tooltip-#{position}:contains(#{content})"
             position = that.data 'position'
 
-            if oldTooltip.length == 0
+            unless oldTooltip.length isnt 0
                 newTooltip = $ '<div></div>', {
                     text: content,
                     class: "drm-tooltip-#{position}"
@@ -41,18 +41,19 @@
             elWidth = parseInt(that.outerWidth(), 10)
             elHeight = parseInt(that.outerHeight(), 10)
 
-            if position == 'left'
-                tooltipTop = positionTop - (elHeight / 2)
-                tooltipLeft = positionLeft - width + 10
-            else if position == 'right'
-                tooltipTop = positionTop - (elHeight / 2)
-                tooltipLeft = positionLeft + elWidth + 15
-            else if position == 'bottom'
-                tooltipTop = positionTop
-                tooltipLeft = positionLeft
-            else
-                tooltipTop = positionTop - ((elHeight + height) / 2) - 10
-                tooltipLeft = positionLeft + ((elWidth + width) / 2)
+            switch position
+                when 'left'
+                    tooltipTop = positionTop - (elHeight / 2)
+                    tooltipLeft = positionLeft - width + 10
+                when 'right'
+                    tooltipTop = positionTop - (elHeight / 2) 
+                    tooltipLeft = positionLeft + elWidth + 15
+                when 'bottom'
+                    tooltipTop = positionTop 
+                    tooltipLeft = positionLeft
+                else # default to top
+                    tooltipTop = positionTop - ((elHeight + height) / 2) - 10 
+                    tooltipLeft = positionLeft + ((elWidth + width) / 2)
 
             console.log "Top: #{tooltipTop} #{positionTop}, Left: #{tooltipLeft} #{positionLeft}"
             console.log "Height: #{height} #{elHeight}, Width: #{width} #{elWidth}"
@@ -69,7 +70,7 @@
             position = that.data 'position'
             oldTooltip = $ "div.drm-tooltip-#{position}:contains(#{content})"
 
-            if oldTooltip.length > 0
+            unless oldTooltip.length is 0
                 oldTooltip.fadeOut drmTooltips.config.speed, ->
                     $(@).remove()
 

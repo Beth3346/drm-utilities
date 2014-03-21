@@ -5,11 +5,17 @@
 
 ( ($) ->
     class window.DrmDropdownMenu
-        constructor: (@menu, @speed) ->
+        constructor: (options = {}) ->
+            @menu = options.menu ? $('ul.drm-dropdown-nav')
+            @speed = options.speed ? 1000
+            self = @
             @listItem = @menu.find 'li:has(ul)'
 
+            hideMenu = ->
+                self.hideMenu.call @, self.speed
+
             @listItem.on 'mouseenter', @showMenu
-            @listItem.on 'mouseleave', @hideMenu       
+            @listItem.on 'mouseleave', hideMenu       
 
             @listItem.children('a').on 'click', (e) ->
                 e.preventDefault()
@@ -17,8 +23,8 @@
         showMenu: ->
             $(@).children('ul').fadeIn 300
         
-        hideMenu: ->
-            $(@).children('ul').fadeOut @speed
+        hideMenu: (speed) ->
+            $(@).children('ul').fadeOut speed
 
     return
 

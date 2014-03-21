@@ -12,7 +12,7 @@
         config:
             play: 10000
             speed: 300
-            animate: 'yes'
+            animate: yes
 
         init: (config) ->
             $.extend @config, config
@@ -33,7 +33,7 @@
                 @slideList.hide()
                 slides.first().show()
 
-            if drmSimpleSlider.config.animate == 'yes'
+            unless drmSimpleSlider.config.animate is no
                 begin = @startShow()
                 pause = -> drmSimpleSlider.pauseShow begin
                 $(window).on 'load', $.proxy begin
@@ -56,20 +56,14 @@
             dir = $(@).data 'dir'
 
             nextImage = (current) ->
-                if current == last
-                    next = 0
-                else    
-                    next = current + 1
+                if current is last then next = 0 else next = current + 1
                 next
 
             prevImage = (current) ->
-                if current == 0
-                    next = last
-                else
-                    next = current - 1
+                if current is 0 then next = last else next = current - 1
                 next
 
-            next = if dir == 'prev' then prevImage(current) else nextImage(current)
+            next = if dir is 'prev' then prevImage(current) else nextImage(current)
 
             drmSimpleSlider.replaceImage(current, next)       
 
@@ -92,7 +86,7 @@
             slides = drmSimpleSlider.slideHolder.find '.drm-simple-slide'
             nextControl = $('.drm-simple-slider-nav').find "button[data-dir='next']"
 
-            if slides.length > 1              
+            unless slides.length is 0            
                 start = setInterval ->
                     nextControl.trigger 'click'
                 , drmSimpleSlider.config.play

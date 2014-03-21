@@ -4,11 +4,14 @@
 "use strict"
 
 ( ($) ->
-    new DrmAccordion 300, 'collapsed', $('.drm-accordion'), true
+    new DrmAccordion()
     drmAlert = new DrmAlert()
-    new DrmDropdownMenu $('ul.drm-dropdown-nav'), 1000
-    new DrmDropdownButton $('div.drm-dropdown-solid-btn-holder'), 300, 'button'
-    new DrmDropdownButton $('div.drm-dropdown-split-btn-holder'), 300, 'button:last()'
+    new DrmDropdownMenu()
+    new DrmDropdownButton()
+    new DrmDropdownButton
+        container: $ 'div.drm-dropdown-split-btn-holder'
+        speed: 300
+        button: 'button:last()'
     lightbox = new DrmLightbox $('ul.drm-lightbox-thumbnails'), 300
 
     # console.log lightbox

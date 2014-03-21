@@ -5,24 +5,28 @@
 
 ( ($) ->
     class window.DrmDropdownButton
-        constructor: (@container, @speed, @button) ->
+        constructor: (options = {}) ->
+            @container = options.container ? $('div.drm-dropdown-solid-btn-holder')
+            @speed = options.speed ? 300
+            @button = options.button ? 'button'
             self = @
+
             self.container.on 'click', self.button, (e) ->
                 that = $ @
                 menu = that.next 'ul'
+                menuStatus = menu.is ':hidden'
 
                 # close any open menus
                 openButtons = self.container.find('ul').not(':hidden').prev 'button'
 
-                if openButtons.length > 0
+                unless openButtons.length is 0
                     self.hideMenu.call openButtons, self.speed
 
-                if menu.is ':hidden'
+                if menuStatus
                     self.showMenu.call that, self.speed
                 else
                     self.hideMenu.call that, self.speed
-
-                e.stopPropagation()
+                e.preventDefault()
 
         showMenu: (speed) ->
             $(@).next('ul').addClass('clicked').slideDown speed

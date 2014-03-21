@@ -17,7 +17,7 @@
             menuWidth = @getDimensions()
 
             # set menu and content positions            
-            if drmOffscreen.config.state == 'hide'
+            if drmOffscreen.config.state is 'hide'
                 drmOffscreen.hideMenu(menuWidth)
 
             @button.on 'click', @toggleMenu
@@ -26,10 +26,7 @@
             menuPos = drmOffscreen.menu.css 'left'
             menuWidth = drmOffscreen.getDimensions()
 
-            if menuPos == '0px'
-                drmOffscreen.hideMenu(menuWidth)    
-            else
-                drmOffscreen.showMenu(menuWidth)
+            if menuPos is '0px' then drmOffscreen.hideMenu(menuWidth) else drmOffscreen.showMenu(menuWidth)
 
         showMenu: (menuWidth) ->
             contentWidth = 100 - menuWidth

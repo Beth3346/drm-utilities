@@ -37,21 +37,6 @@
             body.on 'keyup', ':input', @trackLength
             body.on 'blur', ':input:not([required])', @validateEmpty
 
-        success: ->
-            that = $ @
-            drmForms.removeValidationClass.call that
-            that.addClass 'drm-form-success'
-
-        warning: ->
-            that = $ @
-            drmForms.removeValidationClass.call that
-            that.addClass 'drm-form-warning'
-
-        danger: ->
-            that = $ @
-            drmForms.removeValidationClass.call that
-            that.addClass 'drm-form-danger'
-
         trackLength: ->
             that = $ @
             value = $.trim that.val()
@@ -59,17 +44,17 @@
             lengthNotice = that.nextUntil ':input', '.form-length-notice'
             
             createMessage = (length) ->
-                message = if length == 1 then "#{length} character" else "#{length} characters"
+                message = if length is 1 then "#{length} character" else "#{length} characters"
                 message
 
-            if lengthNotice.length == 0
+            if lengthNotice.length is 0
                 message = createMessage length
                 lengthNotice = $ '<p></p>',
                     text: message
                     class: 'form-length-notice'
                 
                 lengthNotice.hide().insertAfter(that).show()
-            else if length == 0
+            else if length is 0
                 lengthNotice.remove()
             else
                 message = createMessage length
@@ -79,7 +64,7 @@
             that = $ @
             notice = $ "p.form-#{status}-notice:contains(#{message})"
             
-            if notice.length == 0
+            if notice.length is 0
                 notice = $ '<p></p>',
                     text: message,
                     class: "form-#{status}-notice"
@@ -95,26 +80,48 @@
             that = $ @
             notices = that.nextUntil ':input','p.form-success-notice, p.form-warning-notice, p.form-danger-notice'
             notices.slideUp drmForms.config.speed, -> 
-                $(@).remove()          
+                $(@).remove()
+
+        success: ->
+            $(@).addClass 'drm-form-success'
+
+        warning: ->
+            $(@).addClass 'drm-form-warning'
+
+        danger: ->
+            $(@).addClass 'drm-form-danger'   
 
         applyValidationClass: (status) ->
             that = $ @
+            drmForms.removeValidationClass.call that
             switch status
-                when 'danger' then drmForms.danger.call that
-                when 'warning' then drmForms.warning.call that
-                when 'success' then drmForms.success.call that
+                when 'danger' then drmForms.danger.call that, status
+                when 'warning' then drmForms.warning.call that, status
+                when 'success' then drmForms.success.call that, status
 
-        removeValidationClass: ->
+        removeValidationClass: (status) ->
             that = $ @
-            that.removeClass 'drm-form-danger'
-            that.removeClass 'drm-form-warning'
-            that.removeClass 'drm-form-success'
+
+            switch status
+                when 'danger'
+                    that.removeClass 'drm-form-warning'
+                    that.removeClass 'drm-form-success'
+                when 'warning'
+                    that.removeClass 'drm-form-danger'
+                    that.removeClass 'drm-form-success'
+                when 'success'
+                    that.removeClass 'drm-form-danger'
+                    that.removeClass 'drm-form-warning'
+                else
+                    that.removeClass 'drm-form-danger'
+                    that.removeClass 'drm-form-warning'
+                    that.removeClass 'drm-form-success'
 
         validateEmpty: ->
             that = $ @
             value = $.trim that.val()
 
-            if !value
+            if not value
                 drmForms.removeValidationClass.call that
                 drmForms.removeAllNotices.call that
 
@@ -124,7 +131,7 @@
             value = $.trim that.val()
             message = 'this field is required'
 
-            if value.length == 0
+            if value.length is 0
                 status = 'danger'
                 drmForms.issueNotice.call that, status, message
             else
@@ -141,7 +148,7 @@
 
             evaluate = (result, value) ->
                 message = 'please enter a valid integer'
-                if result and value == result
+                if result and value is result
                     status = 'success'
                     drmForms.removeNotice 'danger', message
                 else
@@ -163,7 +170,7 @@
 
             evaluate = (result, value) ->
                 message = 'please enter a valid number'
-                if result and value == result
+                if result and value is result
                     status = 'success'
                     drmForms.removeNotice 'danger', message
                 else
@@ -185,7 +192,7 @@
 
             evaluate = (result, value) ->
                 message = 'please enter a valid url'
-                if result and value == result
+                if result and value is result
                     status = 'success'
                     drmForms.removeNotice 'danger', message
                 else
@@ -207,7 +214,7 @@
 
             evaluate = (result, value) ->
                 message = 'please enter a valid email address'
-                if result and value == result
+                if result and value is result
                     status = 'success'
                     drmForms.removeNotice 'danger', message
                 else
@@ -229,7 +236,7 @@
 
             evaluate = (result, value) ->
                 message = 'please enter a valid phone number'
-                if result and value == result
+                if result and value is result
                     status = 'success'
                     drmForms.removeNotice 'danger', message
                 else
@@ -251,7 +258,7 @@
 
             evaluate = (result, value) ->
                 message = 'please enter your first and last name'
-                if result and value == result
+                if result and value is result
                     status = 'success'
                     drmForms.removeNotice 'danger', message
                 else
@@ -273,7 +280,7 @@
 
             evaluate = (result, value) ->
                 message = 'please use alpha characters only'
-                if result and value == result
+                if result and value is result
                     status = 'success'
                     drmForms.removeNotice 'danger', message
                 else
@@ -295,7 +302,7 @@
 
             evaluate = (result, value) ->
                 message = 'please use alphanumeric characters only'
-                if result and value == result
+                if result and value is result
                     status = 'success'
                     drmForms.removeNotice 'danger', message
                 else
@@ -317,7 +324,7 @@
 
             evaluate = (result, value) ->
                 message = 'no spaces'
-                if result and value == result
+                if result and value is result
                     status = 'success'
                     drmForms.removeNotice 'danger', message
                 else
@@ -339,7 +346,7 @@
 
             evaluate = (result, value) ->
                 message = 'please use alphanumeric and dashes only'
-                if result and value == result
+                if result and value is result
                     status = 'success'
                     drmForms.removeNotice 'danger', message
                 else
@@ -362,7 +369,7 @@
 
             evaluate = (result, value) ->
                 message = 'please use alphanumeric and underscores only. no spaces'
-                if result and value == result
+                if result and value is result
                     status = 'success'
                     drmForms.removeNotice 'danger', message
                 else
