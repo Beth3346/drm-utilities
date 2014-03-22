@@ -5,11 +5,7 @@
 
 ( ($) ->
     class window.DrmAccordion
-        constructor: (options = {}) ->
-            @speed = options.speed ? 300
-            @state = options.state ? 'collapsed'
-            @container = options.container ? $('.drm-accordion')
-            @buttons = options.buttons ? yes
+        constructor: (@speed = 300, @state = 'collapsed', @container = $('.drm-accordion'), @buttons = yes) ->
             @label = ".#{@container.children().first().attr 'class'}"
             @contentHolder = ".#{$(@label).next().attr 'class'}"
             @content = @container.find @contentHolder

@@ -8,11 +8,8 @@
     drmAlert = new DrmAlert()
     new DrmDropdownMenu()
     new DrmDropdownButton()
-    new DrmDropdownButton
-        container: $ 'div.drm-dropdown-split-btn-holder'
-        speed: 300
-        button: 'button:last()'
-    lightbox = new DrmLightbox $('ul.drm-lightbox-thumbnails'), 300
+    new DrmDropdownButton $('div.drm-dropdown-split-btn-holder'), 300, 'button:last()'
+    lightbox = new DrmLightbox()
 
     # console.log lightbox
 

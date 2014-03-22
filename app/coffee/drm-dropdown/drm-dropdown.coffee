@@ -5,9 +5,7 @@
 
 ( ($) ->
     class window.DrmDropdownMenu
-        constructor: (options = {}) ->
-            @menu = options.menu ? $('ul.drm-dropdown-nav')
-            @speed = options.speed ? 1000
+        constructor: (@menu = $('ul.drm-dropdown-nav'), @speed = 1000) ->
             self = @
             @listItem = @menu.find 'li:has(ul)'
 

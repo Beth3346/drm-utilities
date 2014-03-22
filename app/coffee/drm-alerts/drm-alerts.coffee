@@ -5,9 +5,7 @@
 
 ( ($) ->
     class window.DrmAlert
-        constructor: (options = {}) ->
-            @alertClass = options.alertClass ? "drm-dismissable-alert"
-            @speed = options.speed ? 300
+        constructor: (@alertClass = "drm-dismissable-alert", @speed = 300) ->
             self = @
             clearAlert = ->
                 self.clearAlert.call @, self.speed

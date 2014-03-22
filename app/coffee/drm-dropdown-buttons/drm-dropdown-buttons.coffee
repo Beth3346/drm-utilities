@@ -5,10 +5,7 @@
 
 ( ($) ->
     class window.DrmDropdownButton
-        constructor: (options = {}) ->
-            @container = options.container ? $('div.drm-dropdown-solid-btn-holder')
-            @speed = options.speed ? 300
-            @button = options.button ? 'button'
+        constructor: (@container = $('div.drm-dropdown-solid-btn-holder'), @speed = 300, @button = 'button') ->
             self = @
 
             self.container.on 'click', self.button, (e) ->
