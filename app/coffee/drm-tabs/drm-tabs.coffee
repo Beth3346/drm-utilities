@@ -19,7 +19,7 @@
 
             tabs.hide()
 
-            if hash?
+            if hash
                 holder.find("section#{hash}").show()
                 nav.find("a[href='#{hash}']").addClass drmTabs.config.activeClass
             else

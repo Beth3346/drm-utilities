@@ -8,12 +8,9 @@
         constructor: (@menu = $('ul.drm-dropdown-nav'), @speed = 1000) ->
             self = @
             @listItem = @menu.find 'li:has(ul)'
-
-            hideMenu = ->
-                self.hideMenu.call @, self.speed
-
+            
             @listItem.on 'mouseenter', @showMenu
-            @listItem.on 'mouseleave', hideMenu       
+            @listItem.on 'mouseleave', -> self.hideMenu.call @, self.speed       
 
             @listItem.children('a').on 'click', (e) ->
                 e.preventDefault()

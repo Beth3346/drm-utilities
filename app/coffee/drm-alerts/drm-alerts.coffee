@@ -6,11 +6,9 @@
 ( ($) ->
     class window.DrmAlert
         constructor: (@alertClass = "drm-dismissable-alert", @speed = 300) ->
-            self = @
-            clearAlert = ->
-                self.clearAlert.call @, self.speed
+            self = @                
 
-            $('html').on 'click', "div.#{@alertClass} button.close", clearAlert
+            $('html').on 'click', "div.#{@alertClass} button.close", -> self.clearAlert.call @, self.speed
 
         showAlert: (type, message, holder) ->
             className = "#{type}-alert #{@alertClass}"

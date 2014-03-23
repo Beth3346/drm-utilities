@@ -10,17 +10,12 @@
             self = @
             self.body = $ 'body'
             thumbnails = self.createThumbnails()
-            addLightbox = -> self.createLightbox.call @, thumbnails
 
             self.body.on 'click', 'div.drm-blackout img.img-visible', (e) ->
                 e.stopPropagation()
-
-            self.images.on 'click', 'a', addLightbox
-
+            self.images.on 'click', 'a', -> self.createLightbox.call @, thumbnails
             self.body.on 'click', 'div.drm-blackout button.close', self.removeLightbox
-
             self.body.on 'click', 'div.drm-blackout ul.thumbnail-list a', self.changeImage
-
             self.body.on 'click', 'div.drm-blackout', self.removeLightbox
 
         createThumbnails: ->

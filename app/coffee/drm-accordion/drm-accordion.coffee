@@ -21,9 +21,9 @@
             if @state is 'expanded' then @content.show() else @content.hide()
 
             toggleContent = ->
-                self.toggle.call @, self.speed, self.contentHolder
+                
 
-            @container.on 'click', @label, toggleContent
+            @container.on 'click', @label, -> self.toggle.call @, self.speed, self.contentHolder
 
         addButton: (button, message, className) ->
             button = $ '<button></button>',

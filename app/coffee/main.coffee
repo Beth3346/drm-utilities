@@ -9,7 +9,13 @@
     new DrmDropdownMenu()
     new DrmDropdownButton()
     new DrmDropdownButton $('div.drm-dropdown-split-btn-holder'), 300, 'button:last()'
-    lightbox = new DrmLightbox()
+    new DrmLightbox()
+    new DrmModal()
+    new DrmOffscreen()
+    new DrmPopover()
+    new DrmSimpleSlider()
+    new DrmStickyNav()
+    new DrmStickyNav $('nav.drm-sticky-sidebar'), null, $('div.sticky-sidebar-content')
 
     # console.log lightbox
 
