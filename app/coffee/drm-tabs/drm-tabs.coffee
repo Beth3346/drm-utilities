@@ -3,48 +3,44 @@
 ###############################################################################
 "use strict"
 
-( ($) ->	
-    drmTabs =
-        config:
-            holder: $ 'div.drm-tabs'
-            activeClass: 'active'
-            speed: 300
-
-        init: (config) ->
-            $.extend @config, config
-            holder = drmTabs.config.holder
-            nav = holder.find 'nav'
-            tabs = holder.find 'section'
+( ($) ->
+    class window.DrmTabs
+        constructor: (@holder = $('div.drm-tabs'), @activeClass = 'active', @speed = 300) ->
+            self = @
+            @nav = self.holder.find 'nav'
+            @tabs = self.holder.find 'section'
             hash = window.location.hash
 
-            tabs.hide()
+            self.tabs.hide()
 
             if hash
-                holder.find("section#{hash}").show()
-                nav.find("a[href='#{hash}']").addClass drmTabs.config.activeClass
+                self.holder.find("section#{hash}").show()
+                self.nav.find("a[href='#{hash}']").addClass self.activeClass
             else
-                nav.find('a[href^="#"]').first().addClass drmTabs.config.activeClass
-                tabs.first().show()
+                self.nav.find('a[href^="#"]').first().addClass self.activeClass
+                self.tabs.first().show()
 
-            nav.on 'click', 'a[href^="#"]', @.changeTab
+            self.nav.on 'click', 'a[href^="#"]', ->                
+                target = self.getTarget.call @
+                self.changeTab target
 
-        changeTab: (e) ->
-            holder = drmTabs.config.holder
-            nav = holder.find 'nav'
+        getTarget: ->
             target = $(@).attr 'href'
-            tab = holder.find "section#{target}"
-            speed = drmTabs.config.speed
-            currentTab = holder.find('section').not ':hidden'
+            target
+
+        changeTab: (target) =>
+            tab = @holder.find "section#{target}"
+            currentTab = @holder.find('section').not ':hidden'
             currentId = currentTab.attr 'id'
 
-            e.preventDefault()
-
-            currentTab.fadeOut speed, ->
-                tab.fadeIn speed
-            nav.find("a[href^='##{currentId}']").removeClass drmTabs.config.activeClass
+            currentTab.fadeOut @speed, ->
+                tab.fadeIn @speed
+            @nav.find("a[href^='##{currentId}']").removeClass @activeClass
             window.location.hash = target   
-            nav.find("a[href='#{target}']").addClass drmTabs.config.activeClass
+            @nav.find("a[href='#{target}']").addClass @activeClass
 
-    drmTabs.init()
+            return false
+
+    new DrmTabs()
 
 ) jQuery

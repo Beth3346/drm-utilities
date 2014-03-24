@@ -28,6 +28,7 @@
         clearAlert: (speed) -> 
             $(@).parent().fadeOut speed, ->
                 $(@).remove()
-    return
+
+    new DrmAlert()
 
 ) jQuery	

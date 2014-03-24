@@ -21,6 +21,6 @@
         hideMenu: (speed) ->
             $(@).children('ul').fadeOut speed
 
-    return
+    new DrmDropdownMenu()
 
 ) jQuery

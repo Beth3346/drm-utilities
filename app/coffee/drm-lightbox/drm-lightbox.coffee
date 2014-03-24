@@ -80,6 +80,6 @@
 
             e.preventDefault()
 
-    return
+    new DrmLightbox()
 
 ) jQuery

@@ -30,6 +30,7 @@
 
         hideMenu: (speed) ->
             $(@).next('ul').removeClass('clicked').slideUp speed
-    return
+            
+    new DrmDropdownButton()
 
 ) jQuery

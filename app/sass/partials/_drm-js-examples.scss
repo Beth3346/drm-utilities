@@ -121,6 +121,10 @@
     @include drm-simple-slider;
 }
 
+.drm-simple-slider-2 {
+    @include drm-simple-slider;
+}
+
 .drm-sticky-nav {
     &.sticky-top {
         @include drm-sticky-menu('top');          

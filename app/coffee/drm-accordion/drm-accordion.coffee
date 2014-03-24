@@ -43,7 +43,7 @@
 
         hideAll: =>
             @content.slideUp @speed
-
-    return
+    
+    new DrmAccordion()
 
 ) jQuery

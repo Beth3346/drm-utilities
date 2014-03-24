@@ -99,6 +99,6 @@
 
             positions
 
-    return
+    new DrmStickyNav()
 
 ) jQuery

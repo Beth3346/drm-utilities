@@ -4,21 +4,11 @@
 "use strict"
 
 ( ($) ->
-    new DrmAccordion()
-    drmAlert = new DrmAlert()
-    new DrmDropdownMenu()
-    new DrmDropdownButton()
     new DrmDropdownButton $('div.drm-dropdown-split-btn-holder'), 300, 'button:last()'
-    new DrmLightbox()
-    new DrmModal()
-    new DrmOffscreen()
-    new DrmPopover()
-    new DrmSimpleSlider()
-    new DrmStickyNav()
+    new DrmSimpleSlider $('div.drm-simple-slider-2')
     new DrmStickyNav $('nav.drm-sticky-sidebar'), null, $('div.sticky-sidebar-content')
 
-    # console.log lightbox
-
+    drmAlert = new DrmAlert()
     drmAlert.showAlert 'info', 'This is just an informative alert', $('.drm-alert-holder')
     drmAlert.showAlert 'danger', 'Danger Danger Danger!', $('.drm-alert-holder')
     drmAlert.showAlert 'warning', 'This is just a gentle warning', $('.drm-alert-holder')

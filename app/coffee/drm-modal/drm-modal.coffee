@@ -26,6 +26,7 @@
         hideModal: (e) ->
             @lightbox.fadeOut @speed
             e.preventDefault()
-    return
+            
+    new DrmModal()
 
 ) jQuery

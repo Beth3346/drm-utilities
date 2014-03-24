@@ -51,6 +51,7 @@
             contentHeight = parseInt @content.css('height'), 10
 
             if menuHeight > contentHeight then @menu.css {'overflow-y': 'scroll'}
-    return
+            
+    new DrmOffscreen()
 
 ) jQuery

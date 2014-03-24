@@ -33,6 +33,6 @@
 
             checkPosition.call popover
 
-    return 
+    new DrmPopover()
 
 ) jQuery
