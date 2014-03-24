@@ -38,21 +38,81 @@ jshint -W100
                 validate = self.validateURL value
                 validateField.call @, value, validate
 
-            # body.on 'keyup', ':input.drm-valid-phone', self.validatePhone
-            # body.on 'keyup', ':input.drm-valid-email', self.validateEmail
-            # body.on 'keyup', ':input.drm-valid-full-name', self.validateFullName
-            # body.on 'keyup', ':input.drm-valid-alpha', self.validateAlpha
-            # body.on 'keyup', ':input.drm-valid-alphanum', self.validateAlphaNum
-            # body.on 'keyup', ':input.drm-valid-alphadash', self.validateAlphaNumDash
-            # body.on 'keyup', ':input.drm-valid-alpha-num-underscore', self.validateAlphaNumUnderscore
-            # body.on 'keyup', ':input.drm-valid-no-spaces', self.validateNoSpaces
-            # body.on 'keyup', ':input.drm-valid-no-tags', self.validateNoTags
-            # body.on 'keyup', ':input[data-max-value]:not([data-min-value])', self.validateMaxValue
-            # body.on 'keyup', ':input[data-min-value]:not([data-max-value])', self.validateMinValue
-            # body.on 'keyup', ':input[data-max-length]:not([data-min-length])', self.validateMaxLength
-            # body.on 'keyup', ':input[data-min-length]:not([data-max-length])', self.validateMinLength
-            # body.on 'keyup', ':input[data-min-value][data-max-value]', self.validateBetweenValue
-            # body.on 'keyup', ':input[data-min-length][data-max-length]', self.validateBetweenLength
+            body.on 'keyup', ':input.drm-valid-phone', ->
+                value = self.getValue.call @
+                validate = self.validatePhone value
+                validateField.call @, value, validate            
+            
+            body.on 'keyup', ':input.drm-valid-email', ->
+                value = self.getValue.call @
+                validate = self.validateEmail value
+                validateField.call @, value, validate            
+            
+            body.on 'keyup', ':input.drm-valid-full-name', ->
+                value = self.getValue.call @
+                validate = self.validateFullName value
+                validateField.call @, value, validate            
+            
+            body.on 'keyup', ':input.drm-valid-alpha', ->
+                value = self.getValue.call @
+                validate = self.validateAlpha value
+                validateField.call @, value, validate            
+            
+            body.on 'keyup', ':input.drm-valid-alphanum', ->
+                value = self.getValue.call @
+                validate = self.validateAlphaNum value
+                validateField.call @, value, validate            
+            
+            body.on 'keyup', ':input.drm-valid-alphadash', ->
+                value = self.getValue.call @
+                validate = self.validateAlphaNumDash value
+                validateField.call @, value, validate            
+            
+            body.on 'keyup', ':input.drm-valid-alpha-num-underscore', ->
+                value = self.getValue.call @
+                validate = self.validateAlphaNumUnderscore value
+                validateField.call @, value, validate            
+            
+            body.on 'keyup', ':input.drm-valid-no-spaces', ->
+                value = self.getValue.call @
+                validate = self.validateNoSpaces value
+                validateField.call @, value, validate            
+            
+            body.on 'keyup', ':input.drm-valid-no-tags', ->
+                value = self.getValue.call @
+                validate = self.validateNoTags value
+                validateField.call @, value, validate            
+            
+            body.on 'keyup', ':input[data-max-value]:not([data-min-value])', ->
+                value = self.getValue.call @
+                validate = self.validateMaxValue value
+                validateField.call @, value, validate            
+            
+            body.on 'keyup', ':input[data-min-value]:not([data-max-value])', ->
+                value = self.getValue.call @
+                validate = self.validateMinValue value
+                validateField.call @, value, validate            
+            
+            body.on 'keyup', ':input[data-max-length]:not([data-min-length])', ->
+                value = self.getValue.call @
+                validate = self.validateMaxLength value
+                validateField.call @, value, validate            
+            
+            body.on 'keyup', ':input[data-min-length]:not([data-max-length])', ->
+                value = self.getValue.call @
+                validate = self.validateMinLength value
+                validateField.call @, value, validate            
+            
+            body.on 'keyup', ':input[data-min-value][data-max-value]', ->
+                value = self.getValue.call @
+                validate = self.validateBetweenValue value
+                validateField.call @, value, validate            
+            
+            body.on 'keyup', ':input[data-min-length][data-max-length]', ->
+                value = self.getValue.call @
+                validate = self.validateBetweenLength value
+                validateField.call @, value, validate            
+            
             body.on 'keyup', ':input', self.trackLength
 
             body.on 'keyup', '[required]', -> 
@@ -229,22 +289,20 @@ jshint -W100
             validate =
                 status: null
                 message: null
-                issuer: 'number'
+                issuer: 'email'
             re = new RegExp '^[a-z][a-z\\-\\_\\.\\d]*@[a-z\\-\\_\\.\\d]*\\.[a-z]{2,6}$','gi'
 
             evaluate = (result, value) ->
-                message = 'please enter a valid email address'
                 if result and value is result
-                    status = 'success'
-                    @removeNotice 'danger', message
+                    validate.status = 'success'
                 else
-                    status = 'danger'
-                    @issueNotice.call that, status, message
-                status
+                    validate.status = 'danger'
+                    validate.message = 'please enter a valid email address'
+                validate.status
 
             if value?
                 result = $.trim re.exec value
-                status = evaluate result, value
+                validate.status = evaluate result, value
 
             validate
 
@@ -252,22 +310,21 @@ jshint -W100
             validate =
                 status: null
                 message: null
-                issuer: 'number'
+                issuer: 'phone'
+            # validates United States phone number patterns
             re = new RegExp '^\\(?\\d{3}[\\)\\-\\.]?\\d{3}[\\-\\.]?\\d{4}(?:[xX]\\d+)?$','gi'
 
             evaluate = (result, value) ->
-                message = 'please enter a valid phone number'
                 if result and value is result
-                    status = 'success'
-                    @removeNotice 'danger', message
+                    validate.status = 'success'
                 else
-                    status = 'danger'
-                    @issueNotice.call that, status, message
-                status
+                    validate.status = 'danger'
+                    validate.message = 'please enter a valid phone number'
+                validate.status
 
             if value?
                 result = $.trim re.exec value
-                status = evaluate result, value
+                validate.status = evaluate result, value
 
             validate
 
@@ -275,22 +332,21 @@ jshint -W100
             validate =
                 status: null
                 message: null
-                issuer: 'number'
+                issuer: 'fullName'
+            # allows alpha . - 
             re = new RegExp '^[a-z]+ [a-z\\.\\- ]+$','gi'
 
             evaluate = (result, value) ->
-                message = 'please enter your first and last name'
                 if result and value is result
-                    status = 'success'
-                    @removeNotice 'danger', message
+                    validate.status = 'success'
                 else
-                    status = 'danger'
-                    @issueNotice.call that, status, message
-                status
+                    validate.status = 'danger'
+                    validate.message = 'please enter your first and last name'
+                validate.status
 
             if value?
                 result = $.trim re.exec value
-                status = evaluate result, value
+                validate.status = evaluate result, value
 
             validate
 
@@ -298,22 +354,20 @@ jshint -W100
             validate =
                 status: null
                 message: null
-                issuer: 'number'
+                issuer: 'alpha'
             re = new RegExp '^[a-z ]*','gi'
 
             evaluate = (result, value) ->
-                message = 'please use alpha characters only'
                 if result and value is result
-                    status = 'success'
-                    @removeNotice 'danger', message
+                    validate.status = 'success'
                 else
-                    status = 'danger'
-                    @issueNotice.call that, status, message
-                status
+                    validate.status = 'danger'
+                    validate.message = 'please use alpha characters only'
+                validate.status
 
             if value?
                 result = $.trim re.exec value
-                status = evaluate result, value
+                validate.status = evaluate result, value
 
             validate
 
@@ -321,22 +375,20 @@ jshint -W100
             validate =
                 status: null
                 message: null
-                issuer: 'number'
+                issuer: 'alphanum'
             re = new RegExp '^[a-z\\d ]*$','gi'
 
             evaluate = (result, value) ->
-                message = 'please use alphanumeric characters only'
                 if result and value is result
-                    status = 'success'
-                    @removeNotice 'danger', message
+                    validate.status = 'success'
                 else
-                    status = 'danger'
-                    @issueNotice.call that, status, message
-                status
+                    validate.status = 'danger'
+                    validate.message = 'please use alphanumeric characters only'
+                validate.status
 
             if value?
                 result = $.trim re.exec value
-                status = evaluate result, value
+                validate.status = evaluate result, value
 
             validate
 
@@ -344,22 +396,20 @@ jshint -W100
             validate =
                 status: null
                 message: null
-                issuer: 'number'
+                issuer: 'noSpaces'
             re = new RegExp '^\\S*$','gi'
 
             evaluate = (result, value) ->
-                message = 'no spaces'
                 if result and value is result
-                    status = 'success'
-                    @removeNotice 'danger', message
+                    validate.status = 'success'
                 else
-                    status = 'danger'
-                    @issueNotice.call that, status, message
-                status
+                    validate.status = 'danger'
+                    validate.message = 'no spaces'
+                validate.status
 
             if value?
                 result = $.trim re.exec value
-                status = evaluate result, value
+                validate.status = evaluate result, value
 
             validate
 
@@ -367,22 +417,20 @@ jshint -W100
             validate =
                 status: null
                 message: null
-                issuer: 'number'
+                issuer: 'alphaNumDash'
             re = new RegExp '^[a-z\\d- ]*$','gi'
 
             evaluate = (result, value) ->
-                message = 'please use alphanumeric and dashes only'
                 if result and value is result
-                    status = 'success'
-                    @removeNotice 'danger', message
+                    validate.status = 'success'
                 else
-                    status = 'danger'
-                    @issueNotice.call that, status, message
-                status
+                    validate.status = 'danger'
+                    validate.message = 'please use alphanumeric and dash characters only'
+                validate.status
 
             if value?
                 result = $.trim re.exec value
-                status = evaluate result, value
+                validate.status = evaluate result, value
 
             validate
 
@@ -390,23 +438,21 @@ jshint -W100
             validate =
                 status: null
                 message: null
-                issuer: 'number'
-            # allows alphanumeric characters and underscores; no spaces
+                issuer: 'alphaNumUnderscore'
+            # allows alphanumeric characters and underscores; no spaces; recommended for usernames
             re = new RegExp '^[a-z\\d_]*$','gi'
 
             evaluate = (result, value) ->
-                message = 'please use alphanumeric and underscores only. no spaces'
                 if result and value is result
-                    status = 'success'
-                    @removeNotice 'danger', message
+                    validate.status = 'success'
                 else
-                    status = 'danger'
-                    @issueNotice.call that, status, message
-                status
+                    validate.status = 'danger'
+                    validate.message = 'please use alphanumeric and underscores only. no spaces'                    
+                validate.status
 
             if value?
                 result = $.trim re.exec value
-                status = evaluate result, value
+                validate.status = evaluate result, value
 
             validate
 
@@ -417,19 +463,17 @@ jshint -W100
                 issuer: 'number'
             re = new RegExp '<[a-z]+.*>.*<\/[a-z]+>','i'
 
-            evaluate = (result) ->
-                message = 'no html tags allowed'
+            evaluate = (result) ->                
                 if result
-                    status = 'danger'
-                    @issueNotice.call that, status, message
+                    validate.status = 'danger'
+                    validate.message = 'no html tags allowed'
                 else
-                    status = 'success'
-                    @removeNotice 'danger', message
-                status
+                    validate.status = 'success'
+                validate.status
 
             if value?
                 result = $.trim re.exec value
-                status = evaluate result, value
+                validate.status = evaluate result, value
 
             validate
 
@@ -439,17 +483,15 @@ jshint -W100
             value = $.trim that.val()
 
             evaluate = (max, value) ->
-                message = "please enter a value that is less than #{max + 1}"
                 if value > max
-                    status = 'danger'
-                    @issueNotice.call that, status, message
+                    validate.status = 'danger'
+                    validate.message = "please enter a value that is less than #{max + 1}"                    
                 else
-                    status = 'success'
-                    @removeNotice 'danger', message
-                status
+                    validate.status = 'success'
+                validate.status
 
             if value?
-                status = evaluate max, value
+                validate.status = evaluate max, value
 
             validate
 
@@ -458,18 +500,16 @@ jshint -W100
             min = that.data 'min-value'
             value = $.trim that.val()
 
-            evaluate = (min, value) ->
-                message = "please enter a value of at least #{min}"
+            evaluate = (min, value) ->                
                 if value < min
-                    status = 'danger'
-                    @issueNotice.call that, status, message
+                    validate.status = 'danger'
+                    validate.message = "please enter a value of at least #{min}"
                 else
-                    status = 'success'
-                    @removeNotice 'danger', message
-                status
+                    validate.status = 'success'
+                validate.status
 
             if value?
-                status = evaluate(min, value)
+                validate.status = evaluate(min, value)
 
             validate
 
@@ -479,18 +519,16 @@ jshint -W100
             max = that.data 'max-value'
             value = $.trim that.val()
 
-            evaluate = (min, max, value) ->
-                message = "please enter a value that is between #{min - 1} and #{max + 1}"
+            evaluate = (min, max, value) ->                
                 if (value < min) or (value > max)
-                    status = 'danger'
-                    @issueNotice.call that, status, message
+                    validate.status = 'danger'
+                    validate.message = "please enter a value that is between #{min - 1} and #{max + 1}"
                 else
-                    status = 'success'
-                    @removeNotice 'danger', message
-                status
+                    validate.status = 'success'
+                validate.status
 
             if value?
-                status = evaluate min, max, value
+                validate.status = evaluate min, max, value
 
             validate
 
@@ -500,18 +538,16 @@ jshint -W100
             value = $.trim that.val()
             length = value.length
 
-            evaluate = (max, length) ->
-                message = "please enter less than #{max + 1} characters"
+            evaluate = (max, length) ->                
                 if length > max
-                    status = 'danger'
-                    @issueNotice.call that, status, message
+                    validate.status = 'danger'
+                    validate.message = "please enter less than #{max + 1} characters"
                 else
-                    status = 'success'
-                    @removeNotice 'danger', message
-                status
+                    validate.status = 'success'
+                validate.status
 
             if value?
-                status = evaluate max, length
+                validate.status = evaluate max, length
 
             validate
 
@@ -521,18 +557,16 @@ jshint -W100
             value = $.trim that.val()
             length = value.length
 
-            evaluate = (min, length) ->
-                message = "please enter at least #{min} characters"
+            evaluate = (min, length) ->                
                 if length < min
-                    status = 'danger'
-                    @issueNotice.call that, status, message
+                    validate.status = 'danger'
+                    validate.message = "please enter at least #{min} characters"
                 else
-                    status = 'success'
-                    @removeNotice 'danger', message
-                status
+                    validate.status = 'success'
+                validate.status
 
             if value?
-                status = evaluate min, length
+                validate.status = evaluate min, length
 
             validate
 
@@ -543,18 +577,16 @@ jshint -W100
             value = $.trim that.val()
             length = value.length
 
-            evaluate = (min, max, length) ->
-                message = "please enter a value that is between #{min - 1} and #{max + 1} characters"
+            evaluate = (min, max, length) ->                
                 if (length < min) or (length > max)
-                    status = 'danger'
-                    @issueNotice.call that, status, message
+                    validate.status = 'danger'
+                    validate.message = "please enter a value that is between #{min - 1} and #{max + 1} characters"
                 else
-                    status = 'success'
-                    @removeNotice 'danger', message
-                status
+                    validate.status = 'success'
+                validate.status
 
             if value?
-                status = evaluate min, max, length
+                validate.status = evaluate min, max, length
 
             validate
 
