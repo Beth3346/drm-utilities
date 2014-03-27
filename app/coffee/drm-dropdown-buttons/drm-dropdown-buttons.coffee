@@ -32,5 +32,6 @@
             $(@).next('ul').removeClass('clicked').slideUp speed
             
     new DrmDropdownButton()
+    new DrmDropdownButton $('div.drm-dropdown-split-btn-holder'), 300, 'button:last()'
 
 ) jQuery

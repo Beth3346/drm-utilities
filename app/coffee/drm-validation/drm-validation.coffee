@@ -29,6 +29,9 @@ jshint -W100
                 # allows alphanumeric characters and underscores; no spaces; recommended for usernames
                 alphaNumUnderscore: new RegExp '^[a-z\\d_]*$','gi'
                 noTags: new RegExp '<[a-z]+.*>.*<\/[a-z]+>','i'
+                date: new RegExp ''
+                creditCard: new RegExp ''
+                cvv: new RegExp ''
 
             validateField = (value, validate) ->
                 if validate.message?
@@ -506,6 +509,189 @@ jshint -W100
 
             validate
 
+        validateDate: (value, pattern) ->
+            validate =
+                status: null
+                message: null
+                issuer: 'date'
+
+            evaluate = (result) ->                
+                if result
+                    validate.status = 'danger'
+                    validate.message = 'please provide a valid date'
+                else
+                    validate.message = null
+                    validate.status = 'success'
+                validate
+
+            if value?
+                pattern = new RegExp pattern
+                result = $.trim pattern.exec value
+                validate = evaluate result, value
+
+            validate
+
+        validateCreditCard: (value, pattern) ->
+            validate =
+                status: null
+                message: null
+                issuer: 'creditCard'
+
+            evaluate = (result) ->                
+                if result
+                    validate.status = 'danger'
+                    validate.message = 'please provide a valid credit card number'
+                else
+                    validate.message = null
+                    validate.status = 'success'
+                validate
+
+            if value?
+                pattern = new RegExp pattern
+                result = $.trim pattern.exec value
+                validate = evaluate result, value
+
+            validate
+
+        validateCvv: (value, pattern) ->
+            validate =
+                status: null
+                message: null
+                issuer: 'cvv'
+
+            evaluate = (result) ->                
+                if result
+                    validate.status = 'danger'
+                    validate.message = 'please provide a valid cvv'
+                else
+                    validate.message = null
+                    validate.status = 'success'
+                validate
+
+            if value?
+                pattern = new RegExp pattern
+                result = $.trim pattern.exec value
+                validate = evaluate result, value
+
+            validate
+
+        validateEqual: (value) ->
+            that = $ @
+            equal = that.data 'equal'
+            validate =
+                status: null
+                message: null
+                issuer: 'equal'
+
+            evaluate = (equal, value) ->
+                if value == equal  
+                    validate.message = null
+                    validate.status = 'success'                
+                else
+                    validate.status = 'danger'
+                    validate.message = "this field should be #{equal}"
+                validate
+
+            if value?
+                validate = evaluate equal, value
+
+            validate
+
+        validateNotEqual: (value) ->
+            that = $ @
+            notEqual = that.data 'not-equal'
+            validate =
+                status: null
+                message: null
+                issuer: 'notEqual'
+
+            evaluate = (notEqual, value) ->
+                if value == notEqual
+                    validate.status = 'danger'
+                    validate.message = "this field cannot be #{notEqual}"                   
+                else
+                    validate.message = null
+                    validate.status = 'success'
+                validate
+
+            if value?
+                validate = evaluate notEqual, value
+
+            validate
+
+        validateCheckbox: () ->
+
+        validateRadio: () ->
+
+        validateInList: (value) ->
+            that = $ @
+            list = that.data 'in-list'
+            validate =
+                status: null
+                message: null
+                issuer: 'inList'
+
+            parseList = () ->
+                # doSomething
+
+            evaluate = (list, value) ->
+                if value == list
+                    validate.status = 'danger'
+                    validate.message = "this field cannot be #{list}"                   
+                else
+                    validate.message = null
+                    validate.status = 'success'
+                validate
+
+            if value?
+                validate = evaluate list, value
+
+            validate
+
+        validateNotList: (value) ->
+            that = $ @
+            notEqual = that.data 'not-equal'
+            validate =
+                status: null
+                message: null
+                issuer: 'not-equal'
+
+            evaluate = (notEqual, value) ->
+                if value == notEqual
+                    validate.status = 'danger'
+                    validate.message = "this field cannot be #{notEqual}"                   
+                else
+                    validate.message = null
+                    validate.status = 'success'
+                validate
+
+            if value?
+                validate = evaluate notEqual, value
+
+            validate
+
+        validateRequiredWith: (value) ->
+            that = $ @
+            requiredWith = that.data 'required-with'
+            validate =
+                status: null
+                message: null
+                issuer: 'not-equal'
+
+            evaluate = (requiredWith, value) ->
+                if value == requiredWith
+                    validate.status = 'danger'
+                    validate.message = "this field is required with #{requiredWith}"                   
+                else
+                    validate.message = null
+                    validate.status = 'success'
+                validate
+
+            if value?
+                validate = evaluate requiredWith, value
+
+            validate
+
         validateMaxValue: (value) ->
             that = $ @
             max = that.data 'max-value'
@@ -626,7 +812,7 @@ jshint -W100
             validate =
                 status: null
                 message: null
-                issuer: 'bewteenLength'
+                issuer: 'betweenLength'
 
             evaluate = (min, max, length) ->                
                 if (length < min) or (length > max)
