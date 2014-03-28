@@ -11,8 +11,13 @@
 // Creates a slightly transparent background with a hex color backup
 
 @mixin drm-background-transparent($color, $opacity: 0.7) {
-	background-color: $color;
-	background-color: rgba($color, $opacity);
+	@if $opacity == 1 {
+		background-color: $color;
+	} @else {
+		background-color: $color;
+		background-color: rgba($color, $opacity);
+	}
+
 }
 
 // Creates a slightly transparent border with a hex color backup

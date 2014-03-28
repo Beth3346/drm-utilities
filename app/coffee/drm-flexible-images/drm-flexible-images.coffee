@@ -5,7 +5,7 @@
 
 ( ($) ->
     class window.DrmFlexibleImages
-        constructor: () ->
+        constructor: (@images = $('.flexible-image')) ->
     
     new DrmFlexibleImages()
 

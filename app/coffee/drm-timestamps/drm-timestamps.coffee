@@ -5,7 +5,7 @@
 
 ( ($) ->
     class window.DrmTimeStamps
-        constructor: () ->
+        constructor: (@timestamps = $('.drm-timestamp')) ->
     
     new DrmTimeStamps()
 

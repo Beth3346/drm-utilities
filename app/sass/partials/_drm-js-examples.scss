@@ -7,6 +7,15 @@
     @include drm-accordion($drm-blue, 5px);
 }
 
+.back-to-top {
+    @include drm-back-to-top();
+}
+
+.drm-back-to-top-content {
+    padding: 0;
+    margin: 0;
+}
+
 .drm-dropdown-nav {
     margin-bottom: 200px;
     @include drm-dropdown-nav(white, $drm-blue, white);

@@ -5,7 +5,7 @@
 
 ( ($) ->
     class window.DrmFileUploads
-        constructor: () ->
+        constructor: (@uploader = $('.file-upload')) ->
     
     new DrmFileUploads()
 

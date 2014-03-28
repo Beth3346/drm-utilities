@@ -16,7 +16,7 @@
                 hashLink.addClass self.activeClass
                 self.nav.on 'click', "a[href='#{hash}']", self.goToSection
                 hashLink.trigger 'click'
-            else    
+            else
                 links.first().addClass self.activeClass
 
             unless self.nav.length is 0

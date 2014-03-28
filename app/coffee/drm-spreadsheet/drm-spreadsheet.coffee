@@ -5,7 +5,7 @@
 
 ( ($) ->
     class window.DrmSpreadsheet
-        constructor: () ->
+        constructor: (@spreadsheet = $('.drm-spreadsheet')) ->
     
     new DrmSpreadsheet()
 

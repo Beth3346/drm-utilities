@@ -5,7 +5,7 @@
 
 ( ($) ->
     class window.DrmPasswords
-        constructor: (@password) ->
+        constructor: (@password = $(':input[type="password"]')) ->
     
     new DrmPasswords()
 

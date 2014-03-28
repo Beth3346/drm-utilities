@@ -5,7 +5,7 @@
 
 ( ($) ->
     class window.DrmFlexibleGrid
-        constructor: () ->
+        constructor: (@grid = $('.drm-grid')) ->
     
     new DrmFlexibleGrid()
 

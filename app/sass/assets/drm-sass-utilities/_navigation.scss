@@ -665,3 +665,26 @@
         }
 	}
 }
+
+@mixin drm-back-to-top($color: $link-color) {
+	color: white;
+	position: fixed;
+	bottom: 5%;
+	right: 5%;
+	border: none;
+	cursor: pointer;
+	padding: 0 0 5px 0;
+	line-height: 0;
+	box-sizing: border-box;
+	@include drm-background-transparent($color);
+	@include drm-square(50px, none, 3px);
+	@include drm-em-font(48);
+
+	@include drm-breakpoint(trenta) {
+		right: 10%;
+	}
+
+	&:hover {
+		@include drm-background-transparent($color, 1);
+	}
+}

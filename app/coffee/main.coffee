@@ -7,7 +7,7 @@
     new DrmSimpleSlider $('div.drm-simple-slider-2')
     new DrmStickyNav $('nav.drm-sticky-sidebar'), null, $('div.sticky-sidebar-content')
 
-    drmAlert = new DrmAlert()
+    drmAlert = new DrmDismissableAlert()
     drmAlert.showAlert 'info', 'This is just an informative alert', $('.drm-alert-holder')
     drmAlert.showAlert 'danger', 'Danger Danger Danger!', $('.drm-alert-holder')
     drmAlert.showAlert 'warning', 'This is just a gentle warning', $('.drm-alert-holder')
