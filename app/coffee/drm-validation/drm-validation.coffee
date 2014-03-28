@@ -139,7 +139,7 @@ jshint -W100
             
             body.on 'blur', '[required]', -> 
                 value = self.getValue.call @
-                validate = self.validateRequired value
+                validate = self.validateRequired.call @, value
                 validateField.call @, value, validate
 
             body.on 'blur', ':input:not([required])', ->
@@ -239,7 +239,7 @@ jshint -W100
                 message: null
                 issuer: 'required'
 
-            if value.length is 0
+            if !value
                 validate.message = 'this field is required'
                 validate.status = 'danger'
             

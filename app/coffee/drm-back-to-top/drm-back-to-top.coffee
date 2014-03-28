@@ -5,19 +5,28 @@
 
 ( ($) ->
     class window.DrmBackToTop
-        constructor: (@button = $('button.back-to-top'), @content = $('body'), @speed = 300, @scrollSpeed = 900) ->
-            @button.hide()
+        constructor: (@content = $('body'), @speed = 300, @scrollSpeed = 900) ->
+            @backToTop = @addButton()
             $(window).on 'scroll', @showButton
-            @button.on 'click', @toTop
+            @backToTop.on 'click', @toTop
+
+        addButton: =>
+            backToTop = $ '<button></button>',
+                class: 'back-to-top'
+                html: '&#9652;'
+
+            backToTop.appendTo('body').hide()
+
+            backToTop
             
         showButton: =>
             scroll = $('body').scrollTop()
             height = $(window).height()
 
             if scroll > height
-                @button.fadeIn @speed
+                @backToTop.fadeIn @speed
             else if scroll < height
-                @button.fadeOut @speed 
+                @backToTop.fadeOut @speed 
 
         toTop: =>
             @content.stop().animate {
