@@ -29,9 +29,11 @@ jshint -W100
                 # allows alphanumeric characters and underscores; no spaces; recommended for usernames
                 alphaNumUnderscore: new RegExp '^[a-z\\d_]*$','gi'
                 noTags: new RegExp '<[a-z]+.*>.*<\/[a-z]+>','i'
-                date: new RegExp ''
-                creditCard: new RegExp ''
-                cvv: new RegExp ''
+                # mm/dd/yyyy
+                monthDayYear: new RegExp '(0[1-9]|1[012])[- \/.](0[1-9]|[12][0-9]|3[01])[- \/.](19|20)\\d\\d'
+                # matched all major cc
+                creditCard: new RegExp '^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\\d{3})\\d{11})$'
+                cvv: new RegExp '^[0-9]{3,4}$'
 
             validateField = (value, validate) ->
                 if validate.message?
@@ -61,77 +63,92 @@ jshint -W100
             body.on 'keyup', ':input.drm-valid-phone', ->
                 value = self.getValue.call @
                 validate = self.validatePhone value, patterns.phone
-                validateField.call @, value, validate            
+                validateField.call @, value, validate
             
             body.on 'keyup', ':input.drm-valid-email', ->
                 value = self.getValue.call @
                 validate = self.validateEmail value, patterns.email
-                validateField.call @, value, validate            
+                validateField.call @, value, validate
             
             body.on 'keyup', ':input.drm-valid-full-name', ->
                 value = self.getValue.call @
                 validate = self.validateFullName value, patterns.fullName
-                validateField.call @, value, validate            
+                validateField.call @, value, validate
             
             body.on 'keyup', ':input.drm-valid-alpha', ->
                 value = self.getValue.call @
                 validate = self.validateAlpha value, patterns.alpha
-                validateField.call @, value, validate            
+                validateField.call @, value, validate
             
             body.on 'keyup', ':input.drm-valid-alphanum', ->
                 value = self.getValue.call @
                 validate = self.validateAlphaNum value, patterns.alphaNum
-                validateField.call @, value, validate            
+                validateField.call @, value, validate
             
             body.on 'keyup', ':input.drm-valid-alphadash', ->
                 value = self.getValue.call @
                 validate = self.validateAlphaNumDash value, patterns.alphaNumDash
-                validateField.call @, value, validate            
+                validateField.call @, value, validate
             
             body.on 'keyup', ':input.drm-valid-alpha-num-underscore', ->
                 value = self.getValue.call @
                 validate = self.validateAlphaNumUnderscore value, patterns.alphaNumUnderscore
-                validateField.call @, value, validate            
+                validateField.call @, value, validate
             
             body.on 'keyup', ':input.drm-valid-no-spaces', ->
                 value = self.getValue.call @
                 validate = self.validateNoSpaces value, patterns.noSpaces
-                validateField.call @, value, validate            
+                validateField.call @, value, validate
             
             body.on 'keyup', ':input.drm-valid-no-tags', ->
                 value = self.getValue.call @
                 validate = self.validateNoTags value, patterns.noTags
-                validateField.call @, value, validate            
+                validateField.call @, value, validate
+            
+            body.on 'keyup', ':input.drm-valid-credit-card', ->
+                value = self.getValue.call @
+                validate = self.validateCreditCard value, patterns.creditCard
+                validateField.call @, value, validate
+            
+            body.on 'keyup', ':input.drm-valid-cvv', ->
+                value = self.getValue.call @
+                validate = self.validateCvv value, patterns.cvv
+                validateField.call @, value, validate
+            
+            body.on 'keyup', ':input.drm-valid-month-day-year', ->
+                value = self.getValue.call @
+                validate = self.validateMonthDayYear value, patterns.monthDayYear
+                validateField.call @, value, validate
             
             body.on 'keyup', ':input[data-max-value]:not([data-min-value])', ->
                 value = self.getValue.call @
                 validate = self.validateMaxValue.call @, value
-                validateField.call @, value, validate            
+                validateField.call @, value, validate
             
             body.on 'keyup', ':input[data-min-value]:not([data-max-value])', ->
                 value = self.getValue.call @
                 validate = self.validateMinValue.call @, value
-                validateField.call @, value, validate            
+                validateField.call @, value, validate
             
             body.on 'keyup', ':input[data-max-length]:not([data-min-length])', ->
                 value = self.getValue.call @
                 validate = self.validateMaxLength.call @, value
-                validateField.call @, value, validate            
+                validateField.call @, value, validate
             
             body.on 'keyup', ':input[data-min-length]:not([data-max-length])', ->
                 value = self.getValue.call @
                 validate = self.validateMinLength.call @, value
-                validateField.call @, value, validate            
+                validateField.call @, value, validate
             
             body.on 'keyup', ':input[data-min-value][data-max-value]', ->
                 value = self.getValue.call @
                 validate = self.validateBetweenValue.call @, value
-                validateField.call @, value, validate            
+                validateField.call @, value, validate
             
             body.on 'keyup', ':input[data-min-length][data-max-length]', ->
                 value = self.getValue.call @
                 validate = self.validateBetweenLength.call @, value
-                validateField.call @, value, validate            
+                validateField.call @, value, validate
             
             body.on 'keyup', ':input', self.trackLength
 
@@ -509,7 +526,7 @@ jshint -W100
 
             validate
 
-        validateDate: (value, pattern) ->
+        validateMonthDayYear: (value, pattern) ->
             validate =
                 status: null
                 message: null
@@ -517,17 +534,18 @@ jshint -W100
 
             evaluate = (result) ->                
                 if result
-                    validate.status = 'danger'
-                    validate.message = 'please provide a valid date'
-                else
                     validate.message = null
                     validate.status = 'success'
+                else
+                    validate.status = 'danger'
+                    validate.message = 'please provide a valid date'
                 validate
 
             if value?
                 pattern = new RegExp pattern
                 result = $.trim pattern.exec value
                 validate = evaluate result, value
+                console.log "value: #{value}, result: #{result}"
 
             validate
 
@@ -539,17 +557,18 @@ jshint -W100
 
             evaluate = (result) ->                
                 if result
-                    validate.status = 'danger'
-                    validate.message = 'please provide a valid credit card number'
-                else
                     validate.message = null
                     validate.status = 'success'
+                else
+                    validate.status = 'danger'
+                    validate.message = 'please provide a valid credit card number'
                 validate
 
             if value?
                 pattern = new RegExp pattern
                 result = $.trim pattern.exec value
                 validate = evaluate result, value
+                console.log "value: #{value}, result: #{result}"
 
             validate
 
@@ -561,17 +580,18 @@ jshint -W100
 
             evaluate = (result) ->                
                 if result
-                    validate.status = 'danger'
-                    validate.message = 'please provide a valid cvv'
-                else
                     validate.message = null
                     validate.status = 'success'
+                else
+                    validate.status = 'danger'
+                    validate.message = 'please provide a valid cvv'
                 validate
 
             if value?
                 pattern = new RegExp pattern
                 result = $.trim pattern.exec value
                 validate = evaluate result, value
+                console.log "value: #{value}, result: #{result}"
 
             validate
 
