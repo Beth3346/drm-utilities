@@ -53,6 +53,12 @@ h2 Form Validation Demo
 
         label(for="zip") Zip Code:
         input.drm-valid-zip#zip(type="text" name="zip" placeholder="90210-0202")
+
+        label(for="fav-animal") Favorite Animal:
+        input.drm-valid-alpha#fav-animal(type="text" name="fav_animal" placeholder="Penguin" data-equal="Penguin")
+
+        label(for="least-fav-animal") Least Favorite Animal:
+        input.drm-valid-alpha#least-fav-animal(type="text" name="least_fav_animal" placeholder="Lizard" data-not-equal="Penguin")
         
         label(for="notes") Notes:
         textarea.drm-valid-no-tags#notes(name="notes" cols="30" rows="10" placeholder="These are some notes" data-min-length="50" data-max-length="250") 

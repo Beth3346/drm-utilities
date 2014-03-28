@@ -157,6 +157,16 @@ jshint -W100
                 validate = self.validateBetweenLength.call @, value
                 validateField.call @, value, validate
             
+            body.on 'keyup', ':input[data-equal]', ->
+                value = self.getValue.call @
+                validate = self.validateEqual.call @, value
+                validateField.call @, value, validate
+            
+            body.on 'keyup', ':input[data-not-equal]', ->
+                value = self.getValue.call @
+                validate = self.validateNotEqual.call @, value
+                validateField.call @, value, validate
+            
             body.on 'keyup', ':input', self.trackLength
 
             # validate empty fields
