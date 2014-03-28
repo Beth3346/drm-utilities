@@ -18,6 +18,8 @@ jshint -W100
                 number: new RegExp "^\\-?\\d*\\.?\\d*"
                 url: new RegExp '^https?:\\/\\/[\\da-z\\.\\-]+[\\.a-z]{2,6}[\\/\\w/.\\-]*\\/?$','gi'
                 email: new RegExp '^[a-z][a-z\\-\\_\\.\\d]*@[a-z\\-\\_\\.\\d]*\\.[a-z]{2,6}$','gi'
+                # validates 77494 and 77494-3232
+                zip: new RegExp '^[0-9]{5}-[0-9]{4}$|^[0-9]{5}$'
                 # validates United States phone number patterns
                 phone: new RegExp '^\\(?\\d{3}[\\)\\-\\.]?\\d{3}[\\-\\.]?\\d{4}(?:[xX]\\d+)?$','gi'
                 # allows alpha . - and ensures that the user enters both a first and last name
@@ -113,6 +115,11 @@ jshint -W100
             body.on 'keyup', ':input.drm-valid-cvv', ->
                 value = self.getValue.call @
                 validate = self.validateCvv value, patterns.cvv
+                validateField.call @, value, validate
+            
+            body.on 'keyup', ':input.drm-valid-zip', ->
+                value = self.getValue.call @
+                validate = self.validateZip value, patterns.zip
                 validateField.call @, value, validate
             
             body.on 'keyup', ':input.drm-valid-month-day-year', ->
@@ -585,6 +592,29 @@ jshint -W100
                 else
                     validate.status = 'danger'
                     validate.message = 'please provide a valid cvv'
+                validate
+
+            if value?
+                pattern = new RegExp pattern
+                result = $.trim pattern.exec value
+                validate = evaluate result, value
+                console.log "value: #{value}, result: #{result}"
+
+            validate
+
+        validateZip: (value, pattern) ->
+            validate =
+                status: null
+                message: null
+                issuer: 'zip'
+
+            evaluate = (result) ->                
+                if result
+                    validate.message = null
+                    validate.status = 'success'
+                else
+                    validate.status = 'danger'
+                    validate.message = 'please provide a valid zip code'
                 validate
 
             if value?
