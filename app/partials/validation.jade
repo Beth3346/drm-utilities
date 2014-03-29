@@ -59,6 +59,37 @@ h2 Form Validation Demo
 
         label(for="least-fav-animal") Least Favorite Animal:
         input.drm-valid-alpha#least-fav-animal(type="text" name="least_fav_animal" placeholder="Lizard" data-not-equal="Penguin")
+
+        label(for="fav-programming-lang") Favorite Programming Language:
+        input.drm-valid-no-tags#fav-programming-lang(type="text" name="fav-programming-lang" placeholder="JavaScript" data-in-list="JavaScript,Ruby,PHP,Python,C#")
+
+        label(for="fav-tv-show") Favorite Television Show:
+        input.drm-valid-no-tags#fav-tv-show(type="text" name="fav-tv-show" placeholder="Seinfeld" data-not-list="American Idol,The Bachelor,Big Brother")
+
+        label(for="fav-movie") Favorite Movie:
+        select#fav-movie
+            option(value=" ") Pick a Movie
+            option(value="1") Casablanca
+            option(value="2") Star Wars
+            option(value="3") Breakfast at Tiffany's
+            option(value="4") Clueless
+            option(value="5") Ferris Bueller's Day Off
+
+        label(for="other-fav-movie") What Do You Like Best About Your Favorite Movie?:
+        input#other-fav-movie(type="text" name="other_fav_movie" placeholder="Back to the Future" data-required-with="fav-movie")
+
+        label(for="fav-movie") Favorite Color:
+        select#fav-color(data-activate-field="other-fav-color:other")
+            option(value=" ") Pick a Color
+            option(value="1") Red
+            option(value="2") Orange
+            option(value="3") Yellow
+            option(value="4") Green
+            option(value="5") Blue
+            option(value="other") Other Color
+
+        label(for="other-fav-color") Other Favorite Color:
+        input#other-fav-color(type="text" name="other_fav_color" placeholder="Purple" disabled data-allowed-with="fav-color:other")
         
         label(for="notes") Notes:
         textarea.drm-valid-no-tags#notes(name="notes" cols="30" rows="10" placeholder="These are some notes" data-min-length="50" data-max-length="250") 

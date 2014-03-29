@@ -167,6 +167,16 @@ jshint -W100
                 validate = self.validateNotEqual.call @, value
                 validateField.call @, value, validate
             
+            body.on 'keyup', ':input[data-in-list]', ->
+                value = self.getValue.call @
+                validate = self.validateInList.call @, value
+                validateField.call @, value, validate
+            
+            body.on 'keyup', ':input[data-not-list]', ->
+                value = self.getValue.call @
+                validate = self.validateNotList.call @, value
+                validateField.call @, value, validate
+
             body.on 'keyup', ':input', self.trackLength
 
             # validate empty fields
@@ -176,11 +186,16 @@ jshint -W100
                 validate = self.validateRequired.call @, value
                 validateField.call @, value, validate
 
-            body.on 'blur', ':input:not([required])', ->
+            # body.on 'blur', ':input:not([required])', ->
+            #     value = self.getValue.call @
+            #     if not value
+            #         self.removeValidationClass.call @
+            #         self.removeAllNotices.call @, self.speed
+            
+            body.on 'blur', ':input[data-required-with]', ->
                 value = self.getValue.call @
-                if not value
-                    self.removeValidationClass.call @
-                    self.removeAllNotices.call @, self.speed
+                validate = self.validateRequiredWith.call @, value
+                validateField.call @, value, validate
 
         trackLength: ->
             that = $ @
@@ -683,50 +698,57 @@ jshint -W100
 
         validateRadio: () ->
 
+        validateSelect: () ->
+
         validateInList: (value) ->
             that = $ @
             list = that.data 'in-list'
+            listItems = []
+            listItems = list.split ','
+
             validate =
                 status: null
                 message: null
                 issuer: 'inList'
 
-            parseList = () ->
-                # doSomething
-
-            evaluate = (list, value) ->
-                if value == list
+            evaluate = (listItems, value) ->
+                if $.inArray(value, listItems) is -1
+                    list = listItems.join ', '
                     validate.status = 'danger'
-                    validate.message = "this field cannot be #{list}"                   
+                    validate.message = "this field should be one of these: #{list}"                   
                 else
                     validate.message = null
                     validate.status = 'success'
                 validate
 
             if value?
-                validate = evaluate list, value
+                validate = evaluate listItems, value
 
             validate
 
         validateNotList: (value) ->
             that = $ @
-            notEqual = that.data 'not-equal'
+            list = that.data 'not-list'
+            listItems = []
+            listItems = list.split ','
+
             validate =
                 status: null
                 message: null
-                issuer: 'not-equal'
+                issuer: 'notList'
 
-            evaluate = (notEqual, value) ->
-                if value == notEqual
+            evaluate = (listItems, value) ->
+                if $.inArray(value, listItems) isnt -1
+                    list = listItems.join ', '
                     validate.status = 'danger'
-                    validate.message = "this field cannot be #{notEqual}"                   
+                    validate.message = "this field cannot be one of these: #{list}"                   
                 else
                     validate.message = null
                     validate.status = 'success'
                 validate
 
             if value?
-                validate = evaluate notEqual, value
+                validate = evaluate listItems, value
 
             validate
 
@@ -738,17 +760,37 @@ jshint -W100
                 message: null
                 issuer: 'not-equal'
 
-            evaluate = (requiredWith, value) ->
-                if value == requiredWith
-                    validate.status = 'danger'
-                    validate.message = "this field is required with #{requiredWith}"                   
-                else
+            if requiredWith.search(':') isnt -1
+                requiredWith = requiredWith.split ':'
+                fieldID = requiredWith[0]
+                fieldValue = requiredWith[1]
+            else
+                fieldID = requiredWith
+
+            evaluate = (value, fieldID, fieldValue) ->
+                field = $ "##{fieldID}"
+                requiredFieldValue = $.trim field.val()
+
+                checkValue = ->
+                    if not value
+                        validate.status = 'danger'
+                        validate.message = "this field is required with #{fieldID}"
+                    else
+                        validate.message = null
+                        validate.status = 'success'
+                    validate
+
+                if fieldValue? and (requiredFieldValue is fieldValue)
+                    validate = checkValue()
+                else if requiredFieldValue.length > 0 and (not fieldValue?)
+                    validate = checkValue()
+                else if requiredFieldValue.length == 0
                     validate.message = null
                     validate.status = 'success'
+                
                 validate
 
-            if value?
-                validate = evaluate requiredWith, value
+            validate = evaluate value, fieldID, fieldValue
 
             validate
 
