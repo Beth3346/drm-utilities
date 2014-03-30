@@ -5,7 +5,7 @@ section
 
     h2 Live Demo 
 
-    .drm-accordion(data-state="collapsed")
+    .drm-accordion
         
         .drm-accordion-label: h3 Item One
         .drm-accordion-inner(data-state="expanded")
@@ -62,43 +62,43 @@ section
                 inventore laudantium officiis? Saepe, perspiciatis, illum neque distinctio 
                 natus aperiam ratione optio ullam magnam illo amet expedita!
 
-    nav.accordion-nav(data-state="collapsed")
+    nav.drm-accordion-nav
         ul.nav-bar-solid-stacked
             li
-                a.active(href="#") Bears
-                ul
+                a.drm-accordion-nav-label(href="#") Bears
+                ul.drm-accordion-nav-inner(data-state="expanded")
                     li: a(href="#") Grizzly
                     li: a(href="#") Polar
                     li: a(href="#") Giant Panda
                     li: a(href="#") Black
                     li: a(href="#") Brown
             li
-                a(href="#") Dogs
-                ul
+                a.drm-accordion-nav-label(href="#") Dogs
+                ul.drm-accordion-nav-inner
                     li: a(href="#") Doberman
                     li: a(href="#") Shetland Sheepdog
                     li: a(href="#") Siberian Husky
                     li: a(href="#") Poodle
                     li: a(href="#") Scottish Terrier
             li
-                a(href="#") Big Cats
-                ul
+                a.drm-accordion-nav-label(href="#") Big Cats
+                ul.drm-accordion-nav-inner
                     li: a(href="#") Lion
                     li: a(href="#") Tiger
                     li: a(href="#") Jaguar
                     li: a(href="#") Leopard
                     li: a(href="#") Panther
             li
-                a(href="#") Fish
-                ul
+                a.drm-accordion-nav-label(href="#") Fish
+                ul.drm-accordion-nav-inner
                     li: a(href="#") Clown Fish
                     li: a(href="#") Swordfish
                     li: a(href="#") Angel Fish
                     li: a(href="#") Barracuda
                     li: a(href="#") Cod
             li
-                a(href="#") Birds  
-                ul
+                a.drm-accordion-nav-label(href="#") Birds  
+                ul.drm-accordion-nav-inner
                     li: a(href="#") Parrot
                     li: a(href="#") Bald Eagle
                     li: a(href="#") Hawk

@@ -64,6 +64,14 @@
 
 	li {
 		float: none;
+
+		> ul {
+			padding: 0;
+
+			a {
+				padding-left: 20px;
+			}
+		}
 	}	
 }
 
@@ -73,7 +81,7 @@
 @mixin drm-nav-bar-solid($text-color: white, $background-color: $link-color, $align: center, $active-color: $hover-color) {
 	@include drm-nav-bar($text-color, $background-color, $align);
 
-	li>ul {
+	li > ul {
 		padding: 0;
 	}
 
@@ -103,7 +111,7 @@
 	background-color: $background-color;
 	@include drm-nav-bar-stacked($text-color, $background-color, $align);
 
-	li>ul {
+	li > ul {
 		padding: 0;
 	}
 
@@ -178,7 +186,11 @@
 
 		&:last-child {
 			margin-bottom: 0;
-		}	
+		}
+
+		> ul a {
+				padding-left: 20px;
+		}
 	}
 
 	a {
