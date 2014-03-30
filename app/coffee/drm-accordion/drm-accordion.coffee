@@ -5,25 +5,27 @@
 
 ( ($) ->
     class window.DrmAccordion
-        constructor: (@speed = 300, @state = 'collapsed', @container = $('.drm-accordion'), @buttons = yes) ->
-            @label = ".#{@container.children().first().attr 'class'}"
-            @contentHolder = ".#{$(@label).next().attr 'class'}"
-            @content = @container.find @contentHolder
+        constructor: (@speed = 300, @container = $('.drm-accordion'), @buttons = yes) ->
             self = @
+            self.label = ".#{self.container.children().first().attr 'class'}"
+            self.contentHolder = ".#{$(self.label).next().attr 'class'}"
+            self.content = self.container.find self.contentHolder
+            state = self.container.data 'state'
+            expandedContent = $ "#{self.contentHolder}[data-state=expanded]"
 
-            if @buttons
-                @showButton = @addButton 'showButton', 'Show All', 'drm-show-all drm-button-inline'
-                @hideButton = @addButton 'hideButton', 'Hide All', 'drm-hide-all drm-button-inline'
+            if self.buttons
+                self.showButton = self.addButton 'showButton', 'Show All', 'drm-show-all drm-button-inline'
+                self.hideButton = self.addButton 'hideButton', 'Hide All', 'drm-hide-all drm-button-inline'
 
-                @showButton.on 'click', @showAll
-                @hideButton.on 'click', @hideAll
+                self.showButton.on 'click', self.showAll
+                self.hideButton.on 'click', self.hideAll
 
-            if @state is 'expanded' then @content.show() else @content.hide()
+            if self.state is 'expanded' then self.content.show() else self.content.hide()
 
-            toggleContent = ->
-                
+            if expandedContent.length > 0
+                expandedContent.show()              
 
-            @container.on 'click', @label, -> self.toggle.call @, self.speed, self.contentHolder
+            self.container.on 'click', self.label, -> self.toggle.call @, self.speed, self.contentHolder
 
         addButton: (button, message, className) ->
             button = $ '<button></button>',

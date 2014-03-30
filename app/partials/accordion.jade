@@ -1,90 +1,122 @@
 section
-	h1 Accordion
+    h1 Accordion
 
-	p Show or hide content on click with optional show all and hide all buttons.
+    p Show or hide content on click with optional show all and hide all buttons.
 
-	h2 Live Demo 
+    h2 Live Demo 
 
-	.drm-accordion(data-state="collapsed")
-		
-		.drm-accordion-label: h3 Item One
-		.drm-accordion-inner
-			p.
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-				Nostrum, dolorum esse tenetur eius consectetur modi ad et quod ab eaque! 
-				Cupiditate, voluptates, sunt, modi, repellendus nemo saepe illum delectus 
-				aut ex corporis at deserunt id repellat quaerat ratione sed ipsam provident 
-				quod magnam quidem molestiae a aliquam in debitis ullam excepturi dicta 
-				inventore laudantium officiis? Saepe, perspiciatis, illum neque distinctio 
-				natus aperiam ratione optio ullam magnam illo amet expedita!
-		
-		.drm-accordion-label: h3 Item Two
-		.drm-accordion-inner
-			p.
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-				Nostrum, dolorum esse tenetur eius consectetur modi ad et quod ab eaque! 
-				Cupiditate, voluptates, sunt, modi, repellendus nemo saepe illum delectus 
-				aut ex corporis at deserunt id repellat quaerat ratione sed ipsam provident 
-				quod magnam quidem molestiae a aliquam in debitis ullam excepturi dicta 
-				inventore laudantium officiis? Saepe, perspiciatis, illum neque distinctio 
-				natus aperiam ratione optio ullam magnam illo amet expedita!
-		
-		.drm-accordion-label: h3 Item Three
-		.drm-accordion-inner
-			p.
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-				Nostrum, dolorum esse tenetur eius consectetur modi ad et quod ab eaque! 
-				Cupiditate, voluptates, sunt, modi, repellendus nemo saepe illum delectus 
-				aut ex corporis at deserunt id repellat quaerat ratione sed ipsam provident 
-				quod magnam quidem molestiae a aliquam in debitis ullam excepturi dicta 
-				inventore laudantium officiis? Saepe, perspiciatis, illum neque distinctio 
-				natus aperiam ratione optio ullam magnam illo amet expedita!
-		
-		.drm-accordion-label: h3 Item Four
-		.drm-accordion-inner
-			p.
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-				Nostrum, dolorum esse tenetur eius consectetur modi ad et quod ab eaque! 
-				Cupiditate, voluptates, sunt, modi, repellendus nemo saepe illum delectus 
-				aut ex corporis at deserunt id repellat quaerat ratione sed ipsam provident 
-				quod magnam quidem molestiae a aliquam in debitis ullam excepturi dicta 
-				inventore laudantium officiis? Saepe, perspiciatis, illum neque distinctio 
-				natus aperiam ratione optio ullam magnam illo amet expedita!
-		
-		.drm-accordion-label: h3 Item Five
-		.drm-accordion-inner
-			p.
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-				Nostrum, dolorum esse tenetur eius consectetur modi ad et quod ab eaque! 
-				Cupiditate, voluptates, sunt, modi, repellendus nemo saepe illum delectus 
-				aut ex corporis at deserunt id repellat quaerat ratione sed ipsam provident 
-				quod magnam quidem molestiae a aliquam in debitis ullam excepturi dicta 
-				inventore laudantium officiis? Saepe, perspiciatis, illum neque distinctio 
-				natus aperiam ratione optio ullam magnam illo amet expedita!
-		
-	h2 Usage
+    .drm-accordion(data-state="collapsed")
+        
+        .drm-accordion-label: h3 Item One
+        .drm-accordion-inner(data-state="expanded")
+            p.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                Nostrum, dolorum esse tenetur eius consectetur modi ad et quod ab eaque! 
+                Cupiditate, voluptates, sunt, modi, repellendus nemo saepe illum delectus 
+                aut ex corporis at deserunt id repellat quaerat ratione sed ipsam provident 
+                quod magnam quidem molestiae a aliquam in debitis ullam excepturi dicta 
+                inventore laudantium officiis? Saepe, perspiciatis, illum neque distinctio 
+                natus aperiam ratione optio ullam magnam illo amet expedita!
+        
+        .drm-accordion-label: h3 Item Two
+        .drm-accordion-inner
+            p.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                Nostrum, dolorum esse tenetur eius consectetur modi ad et quod ab eaque! 
+                Cupiditate, voluptates, sunt, modi, repellendus nemo saepe illum delectus 
+                aut ex corporis at deserunt id repellat quaerat ratione sed ipsam provident 
+                quod magnam quidem molestiae a aliquam in debitis ullam excepturi dicta 
+                inventore laudantium officiis? Saepe, perspiciatis, illum neque distinctio 
+                natus aperiam ratione optio ullam magnam illo amet expedita!
+        
+        .drm-accordion-label: h3 Item Three
+        .drm-accordion-inner
+            p.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                Nostrum, dolorum esse tenetur eius consectetur modi ad et quod ab eaque! 
+                Cupiditate, voluptates, sunt, modi, repellendus nemo saepe illum delectus 
+                aut ex corporis at deserunt id repellat quaerat ratione sed ipsam provident 
+                quod magnam quidem molestiae a aliquam in debitis ullam excepturi dicta 
+                inventore laudantium officiis? Saepe, perspiciatis, illum neque distinctio 
+                natus aperiam ratione optio ullam magnam illo amet expedita!
+        
+        .drm-accordion-label: h3 Item Four
+        .drm-accordion-inner
+            p.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                Nostrum, dolorum esse tenetur eius consectetur modi ad et quod ab eaque! 
+                Cupiditate, voluptates, sunt, modi, repellendus nemo saepe illum delectus 
+                aut ex corporis at deserunt id repellat quaerat ratione sed ipsam provident 
+                quod magnam quidem molestiae a aliquam in debitis ullam excepturi dicta 
+                inventore laudantium officiis? Saepe, perspiciatis, illum neque distinctio 
+                natus aperiam ratione optio ullam magnam illo amet expedita!
+        
+        .drm-accordion-label: h3 Item Five
+        .drm-accordion-inner
+            p.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                Nostrum, dolorum esse tenetur eius consectetur modi ad et quod ab eaque! 
+                Cupiditate, voluptates, sunt, modi, repellendus nemo saepe illum delectus 
+                aut ex corporis at deserunt id repellat quaerat ratione sed ipsam provident 
+                quod magnam quidem molestiae a aliquam in debitis ullam excepturi dicta 
+                inventore laudantium officiis? Saepe, perspiciatis, illum neque distinctio 
+                natus aperiam ratione optio ullam magnam illo amet expedita!
 
-	pre.prettyprint.
-		&lt;div class=".drm-accordion" data-state="collapsed"&gt;
-		&lt;button class="drm-hide-all drm-button-inline"&gt;Hide All&lt;/button&gt;
-		&lt;button class="drm-show-all drm-button-inline"&gt;Show All&lt;/button&gt;
+    nav.accordion-nav(data-state="collapsed")
+        ul.nav-bar-solid-stacked
+            li
+                a.active(href="#") Bears
+                ul
+                    li: a(href="#") Grizzly
+                    li: a(href="#") Polar
+                    li: a(href="#") Giant Panda
+                    li: a(href="#") Black
+                    li: a(href="#") Brown
+            li
+                a(href="#") Dogs
+                ul
+                    li: a(href="#") Doberman
+                    li: a(href="#") Shetland Sheepdog
+                    li: a(href="#") Siberian Husky
+                    li: a(href="#") Poodle
+                    li: a(href="#") Scottish Terrier
+            li
+                a(href="#") Big Cats
+                ul
+                    li: a(href="#") Lion
+                    li: a(href="#") Tiger
+                    li: a(href="#") Jaguar
+                    li: a(href="#") Leopard
+                    li: a(href="#") Panther
+            li
+                a(href="#") Fish
+                ul
+                    li: a(href="#") Clown Fish
+                    li: a(href="#") Swordfish
+                    li: a(href="#") Angel Fish
+                    li: a(href="#") Barracuda
+                    li: a(href="#") Cod
+            li
+                a(href="#") Birds  
+                ul
+                    li: a(href="#") Parrot
+                    li: a(href="#") Bald Eagle
+                    li: a(href="#") Hawk
+                    li: a(href="#") Macaw
+                    li: a(href="#") Finch
+        
+    h2 Usage
 
-		&lt;div class="drm-accordion-label"&gt;Item One&lt;/div&gt;
-		&lt;div class="drm-accordion-inner"&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum, dolorum esse tenetur eius consectetur modi ad et quod ab eaque! Cupiditate, voluptates, sunt, modi, repellendus nemo saepe illum delectus aut ex corporis at deserunt id repellat quaerat ratione sed ipsam provident quod magnam quidem molestiae a aliquam in debitis ullam excepturi dicta inventore laudantium officiis? Saepe, perspiciatis, illum neque distinctio natus aperiam ratione optio ullam magnam illo amet expedita!
-		&lt;/div&gt;
+    pre.prettyprint.
+        &lt;div class=".drm-accordion" data-state="collapsed"&gt;
+        &lt;button class="drm-hide-all drm-button-inline"&gt;Hide All&lt;/button&gt;
+        &lt;button class="drm-show-all drm-button-inline"&gt;Show All&lt;/button&gt;
 
-		&lt;div class="drm-accordion-label"&gt;Item Two&lt;/div&gt;
-		&lt;div class="drm-accordion-inner"&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum, dolorum esse tenetur eius consectetur modi ad et quod ab eaque! Cupiditate, voluptates, sunt, modi, repellendus nemo saepe illum delectus aut ex corporis at deserunt id repellat quaerat ratione sed ipsam provident quod magnam quidem molestiae a aliquam in debitis ullam excepturi dicta inventore laudantium officiis? Saepe, perspiciatis, illum neque distinctio natus aperiam ratione optio ullam magnam illo amet expedita!
-		&lt;/div&gt;
-		&lt;/div&gt;
+        &lt;div class="drm-accordion-label"&gt;Item One&lt;/div&gt;
+        &lt;div class="drm-accordion-inner"&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum, dolorum esse tenetur eius consectetur modi ad et quod ab eaque! Cupiditate, voluptates, sunt, modi, repellendus nemo saepe illum delectus aut ex corporis at deserunt id repellat quaerat ratione sed ipsam provident quod magnam quidem molestiae a aliquam in debitis ullam excepturi dicta inventore laudantium officiis? Saepe, perspiciatis, illum neque distinctio natus aperiam ratione optio ullam magnam illo amet expedita!
+        &lt;/div&gt;
 
-	p To set default toggle state use data-state attribute
-
-	pre.prettyprint.
-		&lt;div class=".drm-accordion" data-state="collapsed"&gt;
-		&lt;div class=".drm-accordion" data-state="expanded"&gt;
-
-	p Optional config options for speed and state if you choose not to use the data attribute
-
-	pre.prettyprint.
-		drmAccordion.init({speed: 300, state: 'expanded'})
+        &lt;div class="drm-accordion-label"&gt;Item Two&lt;/div&gt;
+        &lt;div class="drm-accordion-inner"&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum, dolorum esse tenetur eius consectetur modi ad et quod ab eaque! Cupiditate, voluptates, sunt, modi, repellendus nemo saepe illum delectus aut ex corporis at deserunt id repellat quaerat ratione sed ipsam provident quod magnam quidem molestiae a aliquam in debitis ullam excepturi dicta inventore laudantium officiis? Saepe, perspiciatis, illum neque distinctio natus aperiam ratione optio ullam magnam illo amet expedita!
+        &lt;/div&gt;
+        &lt;/div&gt;

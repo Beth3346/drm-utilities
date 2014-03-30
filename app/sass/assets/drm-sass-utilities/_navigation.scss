@@ -4,7 +4,7 @@
 
 // creates a nav-bar with a transparent background
 
-@mixin drm-nav-bar($text-color: $text-color, $hover-color: $link-color, $align: left) {
+@mixin drm-nav-bar($text-color: $text-color, $hover-color: $link-color, $align: left, $divider-color: $light-grey) {
 	@extend %drm-reset-box;
 	@include drm-clearfix();
 
@@ -14,60 +14,78 @@
 		display: block;
 		float: left;
 
-		a {
-			padding: 5px 10px 5px 10px;
-			width: 100%;
-			text-align: $align;
+		> ul {
 			color: $text-color;
-			text-decoration: none;
-			box-sizing: border-box;
-			transition: all, .3s;
-			@include drm-em-font(14);
+			padding-left: 0;
+			padding-right: 20px;
 
-			&.active {
-				color: $hover-color
+			li {
+				float: none;
+
+				&.divider {
+					@include drm-list-divider($divider-color);
+				}	
 			}
 
-			&.text-disabled {
-				color: $light-grey;
-				cursor: not-allowed;
+			a {
+				@include drm-em-font(12);
 			}
-
-			&:hover, &:focus {
-				color: $hover-color;
-				transition: all, .3s;
-			}	
 		}	
+	}
+
+	a {
+		padding: 5px 10px 5px 10px;
+		width: 100%;
+		text-align: $align;
+		color: $text-color;
+		text-decoration: none;
+		box-sizing: border-box;
+		transition: all, .3s;
+		@include drm-em-font(14);
+
+		&.active {
+			color: $hover-color
+		}
+
+		&.text-disabled {
+			color: $light-grey;
+			cursor: not-allowed;
+		}
+
+		&:hover, &:focus {
+			color: $hover-color;
+			transition: all, .3s;
+		}
 	}
 }
 
-@mixin drm-nav-bar-stacked($text-color: $text-color, $hover-color: $link-color, $align: left, $divider-color: $light-grey) {
+@mixin drm-nav-bar-stacked($text-color: $text-color, $hover-color: $link-color, $align: left) {
 	@include drm-nav-bar($text-color, $hover-color, $align);
 
 	li {
 		float: none;
-
-		&.divider {
-			@include drm-list-divider($divider-color);
-		}	
 	}	
 }
 
 // creates a nav bar with a solid color background
 // hover state will invert text color and background color
 
-@mixin drm-nav-bar-solid($text-color: white, $background-color: $link-color, $align: center) {
-	background-color: $background-color;
+@mixin drm-nav-bar-solid($text-color: white, $background-color: $link-color, $align: center, $active-color: $hover-color) {
 	@include drm-nav-bar($text-color, $background-color, $align);
+
+	li>ul {
+		padding: 0;
+	}
 
 	a {
 		display: block;
 		margin: 0;
 		background-color: $background-color;
+		color: $text-color;
 
 		&.active {
-			background-color: $text-color;
-			color: $link-color;
+			background-color: $active-color;
+			color: $text-color;
 		}
 
 		&:visited {
@@ -75,34 +93,38 @@
 		}
 
 		&:hover, &:focus {
-			background-color: $text-color;
-			color: $link-color;
+			background-color: $active-color;
+			color: $text-color;
 		}	
 	}
 }
 
-@mixin drm-nav-bar-solid-stacked($text-color: white, $background-color: $link-color, $align: left, $divider-color: $light-grey) {
+@mixin drm-nav-bar-solid-stacked($text-color: white, $background-color: $link-color, $align: left, $active-color: $hover-color) {
 	background-color: $background-color;
-	@include drm-nav-bar-stacked($text-color, $background-color, $align, $divider-color);
+	@include drm-nav-bar-stacked($text-color, $background-color, $align);
+
+	li>ul {
+		padding: 0;
+	}
 
 	a {
 		display: block;
 		background-color: $background-color;
+		color: $text-color;
 
 		&.active {
-			color: $background-color;
-			background-color: $text-color;
+			background-color: $active-color;
+			color: $text-color;
 		}
 
 		&:visited {
 			color: $text-color;
-			background-color: $background-color;
 		}
 
 		&:hover, &:focus {
-			color: $background-color;
-			background-color: $text-color;
-		}	
+			background-color: $active-color;
+			color: $text-color;
+		}
 	}
 }
 
@@ -122,6 +144,7 @@
 	a {
 		color: $text-color;
 		border-radius: 5px;
+		width: 100%;
 
 		@if $border != none {
 			border: 1px solid $border;		
@@ -165,8 +188,8 @@
 
 // creates a nav-bar with pill shaped buttons
 
-@mixin drm-nav-bar-pills-solid($text-color: white, $background-color: $link-color, $align: left, $border: none) {
-	@include drm-nav-bar-pills($text-color, $background-color, $align, $border);
+@mixin drm-nav-bar-pills-solid($text-color: white, $background-color: $link-color, $align: left, $border: none, $active-color: $hover-color) {
+	@include drm-nav-bar-pills($text-color, $active-color, $align, $border);
 
 	li {
 		margin-left: 5px;
@@ -176,12 +199,26 @@
 		}	
 	}
 
+	ul>li {
+		margin: 5px 0 10px 0;
+	}
+
 	a {
 		background-color: $background-color;
+
+		&.active {
+			color: $text-color;
+			background-color: $active-color;
+		}
+		
+		&:hover, &:focus {
+			color: $text-color;
+			background-color: $active-color;
+		}
 	}
 }
 
-@mixin drm-nav-bar-pills-solid-stacked($text-color: white, $background-color: $link-color, $align: left, $border: none) {
+@mixin drm-nav-bar-pills-solid-stacked($text-color: white, $background-color: $link-color, $align: left, $border: none, $active-color: $hover-color) {
 	@include drm-nav-bar-pills-stacked($text-color, $background-color, $align, $border);
 
 	li {
@@ -194,6 +231,16 @@
 
 	a {
 		background-color: $background-color;
+
+		&.active {
+			color: $text-color;
+			background-color: $active-color;
+		}
+		
+		&:hover, &:focus {
+			color: $text-color;
+			background-color: $active-color;
+		}
 	}
 }
 
@@ -214,7 +261,7 @@
 			width: 120%;
 			display: none;
 			z-index: 100;
-			@include drm-nav-bar-solid-stacked($text-color, $background-color, left, $divider-color);
+			@include drm-nav-bar-solid-stacked($text-color, $background-color, left);
 
 			> li ul {
 				display: none;
