@@ -139,8 +139,11 @@
 	border-bottom: 1px solid $color;	
 }
 
-@mixin drm-unstyled-list($align: left) {
+@mixin drm-unstyled-list($align: left, $padding: yes) {
 	list-style: none;
+	@if $padding == no {
+		padding: 5px 0 5px 0;
+	}
 
 	li {
 		text-align: $align;

@@ -298,3 +298,68 @@ span.drm-has-tooltip {
 .drm-tooltip-bottom {
     @include drm-tooltip(bottom, $dark-grey, white, 100px);
 }
+
+.drm-calendar {
+    $date-width: (100% / 7);
+    width: 100%;
+
+    table {
+        width: 100%;
+
+        th, td {
+            background-color: $lightest-grey;
+            border: 1px solid $dark-grey;
+            border-collapse: collapse;
+            padding: 10px;
+            box-sizing: border-box;
+            width: $date-width;
+            color: $dark-grey;
+        }
+
+        th {
+            height: auto;
+            text-align: center;    
+        }
+
+        td {
+            height: 100px;
+            overflow: hidden;
+            @include drm-em-font(14);
+
+            &:hover {
+                background-color: $dark-grey;
+                color: white;
+                cursor: pointer;
+            }
+
+            .events {
+                @include drm-unstyled-list(left, no);
+                @include drm-em-font(12);
+
+                li {
+                    padding: 0;
+                }
+            }
+        }
+
+        .muted-cell {
+            background-color: $lighter-grey;
+
+            &:hover {
+                cursor: not-allowed;
+                background-color: $lighter-grey;
+                color: $dark-grey;
+            }
+        }
+
+        .today {
+            background-color: $drm-blue;
+            color: white;
+        }
+
+        .holiday {
+            background-color: #FF3659;
+            color: white;
+        }
+    }
+}
