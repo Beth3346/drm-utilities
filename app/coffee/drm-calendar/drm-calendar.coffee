@@ -5,11 +5,15 @@
 
 ( ($) ->
     class window.DrmCalendar
-        constructor: (@calendar = $('.drm-calendar')) ->
-            @today = new Date()
-            @currentMonth = @today.getMonth()
-            @currentYear = @today.getFullYear()
-            @months = [             
+        constructor: (@calendarClass = 'drm-calendar') ->
+            self = @
+            self.today = new Date()
+            self.currentMonth = self.today.getMonth()
+            self.currentYear = self.today.getFullYear()
+            self.calendarInnerClass = 'drm-calendar-inner'
+            self.calendar = $ ".#{self.calendarClass}"
+            self.calendarNav = $ '.drm-calendar-nav'
+            self.months = [             
                 'January'
                 'February'
                 'March'
@@ -23,7 +27,7 @@
                 'November' 
                 'December']
 
-            @days = [
+            self.days = [
                 'Sunday'
                 'Monday'
                 'Tuesday'
@@ -32,7 +36,7 @@
                 'Friday'
                 'Saturday']
 
-            @holidays =
+            self.holidays =
                 newYears:
                     name: "New Year's Day"
                     date: '1-1'
@@ -46,7 +50,11 @@
                     name: "Independence Day"
                     date: '7-4'
 
-            @createCalendar 2, 2014
+            self.createCalendar self.currentMonth, self.currentYear
+
+            self.calendarNav.on 'click', 'button', ->
+                direction = $(@).data('dir')
+                self.advanceMonth.call @, direction
 
         getDaysInMonth: (month, year) ->
             return new Date(year, month, 0).getDate()
@@ -62,17 +70,39 @@
                 numberDays.push self.getDaysInMonth (key + 1), self.currentYear
             numberDays
 
+        getDayShift = (firstDay) ->
+            if firstDay isnt 0 then shift = daysPerWeek - (firstDay - 1) else shift = 0
+            shift
+
+        advanceMonth: (direction) =>
+            calendarInner = @calendar.find "div.#{@calendarInnerClass}"
+            
+            if direction is 'prev'
+                month = if calendarInner.data('month') - 1 >= 0 then calendarInner.data('month') - 1 else 11
+                year = if calendarInner.data('month') - 1 >= 0 then calendarInner.data('year') else calendarInner.data('year') - 1
+            else if direction is 'next'
+                month = if calendarInner.data('month') + 1 < 12 then calendarInner.data('month') + 1 else 0
+                year = if calendarInner.data('month') + 1 < 12 then calendarInner.data('year') else calendarInner.data('year') + 1
+
+            @changeCalendar month, year
+
+        changeCalendar: (month, year) =>
+            self = @
+            calendarInner = @calendar.find "div.#{@calendarInnerClass}"
+            calendarInner.fadeOut 300, ->
+                @remove()
+                self.createCalendar month, year
+
         createCalendar: (month, year) =>
             self = @
-            containerClass = 'drm-calendar'
             daysPerWeek = 7
             numberDays = self.getDaysInMonth (month + 1), year
             prevMonthNumberDays = self.getDaysInMonth month, year
-            firstDay = self.getDayOfWeek (month + 1), year, 1
-            dayShift = daysPerWeek - (firstDay - 1)
+            firstDay = self.getDayOfWeek month, year, 0
+            dayShift = if firstDay is 6 then 0 else daysPerWeek + ((firstDay + 1) - daysPerWeek)
             numberWeeks = Math.ceil (numberDays + dayShift) / 7
 
-            weekdays = "<thead><tr>"
+            weekdays = "<table><thead><tr>"
             $.each @days, (key, value) ->
                 weekdays += "<th>#{value}</th>"
             weekdays += "</tr></thead>"
@@ -88,7 +118,7 @@
                 j = 1
                 weeks += "<tr>"
                 # if we are in week 1 we need to shift to the correct day of the week
-                if i is 1
+                if i is 1 and firstDay isnt 0
                     while l <= dayShift
                         weeks += "<td class='muted-cell'>#{prevDays}</td>"
                         prevDays += 1
@@ -115,16 +145,19 @@
                         date += 1
                 weeks += "</tr>"
                 i += 1
-            weeks += "</tbody>"
+            weeks += "</tbody></table>"
 
-            calendar = $ '<table></table>',
+            calendar = $ '<div></div>',
+                class: self.calendarInnerClass
                 html: weekdays + weeks
+                'data-month': month
+                'data-year': year
 
             heading = $ '<h1></h1>',
                 text: "#{@months[month]} #{year}"
             
-            heading.prependTo ".#{containerClass}" 
-            calendar.appendTo ".#{containerClass}"
+            calendar.appendTo ".#{self.calendarClass}"
+            heading.prependTo ".#{self.calendarInnerClass}" 
 
     new DrmCalendar()
 
