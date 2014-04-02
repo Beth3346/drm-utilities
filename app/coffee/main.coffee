@@ -15,5 +15,5 @@
     drmAlert.showAlert 'muted', 'A muted alert that will probably be ignored', $('.drm-alert-holder')
     drmAlert.showAlert 'custom', 'This is a custom alert', $('.drm-alert-holder')
     
-    prettyPrint()
+    # prettyPrint()
 ) jQuery
