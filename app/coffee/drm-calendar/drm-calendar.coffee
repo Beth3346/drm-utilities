@@ -133,7 +133,7 @@
             numberDays = self.getDaysInMonth (month + 1), year
             prevMonthNumberDays = self.getDaysInMonth month, year
             firstDay = self.getDayOfWeek month, year, 1
-            dayShift = if firstDay is 7 then 0 else daysPerWeek + (firstDay - daysPerWeek)
+            dayShift = if firstDay is 7 then 0 else firstDay
             numberWeeks = Math.ceil (numberDays + dayShift) / 7
 
             # console.log "Days Per Week: #{daysPerWeek}"
