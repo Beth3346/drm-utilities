@@ -13,6 +13,8 @@
             self.calendarInnerClass = 'drm-calendar-inner'
             self.calendar = $ ".#{self.calendarClass}"
             self.calendarNav = $ '.drm-calendar-nav'
+            self.calendarSelect = $ '.drm-calendar-select'
+            self.calendarSelectButton = self.calendarSelect.find 'button[type=submit]'
             self.months = [             
                 'January'
                 'February'
@@ -39,25 +41,57 @@
             self.holidays =
                 newYears:
                     name: "New Year's Day"
-                    date: '1-1'
+                    month: 1
+                    date: 1
                 valentines:
                     name: "Valentine's Day"
-                    date: '2-14'
+                    month: 2
+                    date: 14
                 stpatricks:
                     name: "St. Patrick's Day"
-                    date: '3-17'
+                    month: 3
+                    date: 17
                 independenceDay:
                     name: "Independence Day"
-                    date: '7-4'
+                    month: 7
+                    date: 4
+                halloween:
+                    name: "Halloween"
+                    month: 10
+                    date: 31
+                christmasEve:
+                    name: "Christmas Eve"
+                    month: 12
+                    date: 24
+                christmas:
+                    name: "Christmas"
+                    month: 12
+                    date: 25
 
             self.createCalendar self.currentMonth, self.currentYear
 
-            self.calendarNav.on 'click', 'button', ->
+            self.calendarNav.on 'click', '.drm-calendar-prev, .drm-calendar-next', ->
                 direction = $(@).data('dir')
                 self.advanceMonth.call @, direction
 
+            self.calendarNav.on 'click', '.drm-calendar-current', ->
+                self.changeCalendar.call @, self.currentMonth, self.currentYear
+
+            self.calendarSelectButton.on 'click', (e) ->
+                that = $ @
+                month = that.parent().find('#month').val()
+                year = that.parent().find('#year').val()
+
+                month = parseInt month, 10
+                year = parseInt year, 10
+
+                e.preventDefault()
+
+                self.changeCalendar.call self, month, year
+
         getDaysInMonth: (month, year) ->
-            return new Date(year, month, 0).getDate()
+            days = new Date(year, month, 0).getDate()
+            days
 
         getDayOfWeek: (month, year, day) ->
             day = new Date(year, month, day)
@@ -98,9 +132,16 @@
             daysPerWeek = 7
             numberDays = self.getDaysInMonth (month + 1), year
             prevMonthNumberDays = self.getDaysInMonth month, year
-            firstDay = self.getDayOfWeek month, year, 0
-            dayShift = if firstDay is 6 then 0 else daysPerWeek + ((firstDay + 1) - daysPerWeek)
+            firstDay = self.getDayOfWeek month, year, 1
+            dayShift = if firstDay is 7 then 0 else daysPerWeek + (firstDay - daysPerWeek)
             numberWeeks = Math.ceil (numberDays + dayShift) / 7
+
+            # console.log "Days Per Week: #{daysPerWeek}"
+            # console.log "Number of Days: #{numberDays}"
+            # console.log "Prev Month Number Days: #{prevMonthNumberDays}"
+            # console.log "First Day: #{firstDay}"
+            # console.log "Day Shift: #{dayShift}"
+            # console.log "Number Weeks: #{numberWeeks}"
 
             weekdays = "<table><thead><tr>"
             $.each @days, (key, value) ->
