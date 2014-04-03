@@ -307,23 +307,24 @@ span.drm-has-tooltip {
         width: 100%;
 
         th, td {
-            background-color: $lightest-grey;
-            border: 1px solid $dark-grey;
-            border-collapse: collapse;
+            background-color: white;
             padding: 10px;
             box-sizing: border-box;
             width: $date-width;
-            color: $dark-grey;
         }
 
         th {
             height: auto;
-            text-align: center;    
+            text-align: center; 
+            color: $grey;   
         }
 
         td {
             height: 100px;
             overflow: hidden;
+            border: 1px solid $grey;
+            border-collapse: collapse;
+            color: $dark-grey;
             @include drm-em-font(14);
 
             &:hover {
@@ -342,22 +343,28 @@ span.drm-has-tooltip {
             }
         }
 
-        .muted-cell {
+        .drm-cal-muted {
             background-color: $lighter-grey;
+            color: white;
 
             &:hover {
                 cursor: not-allowed;
                 background-color: $lighter-grey;
-                color: $dark-grey;
+                color: white;
             }
         }
 
-        .today {
+        .drm-cal-today {
             background-color: $drm-blue;
             color: white;
         }
 
-        .holiday {
+        .drm-cal-weekend {
+            background-color: $lightest-grey;
+            color: $dark-grey;
+        }
+
+        .drm-cal-holiday {
             background-color: #FF3659;
             color: white;
         }

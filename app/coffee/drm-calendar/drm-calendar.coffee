@@ -10,11 +10,18 @@
             self.today = new Date()
             self.currentMonth = self.today.getMonth()
             self.currentYear = self.today.getFullYear()
+            self.currentDay = @today.getDate()
             self.calendarInnerClass = 'drm-calendar-inner'
             self.calendar = $ ".#{self.calendarClass}"
             self.calendarNav = $ '.drm-calendar-nav'
             self.calendarSelect = $ '.drm-calendar-select'
             self.calendarSelectButton = self.calendarSelect.find 'button[type=submit]'
+            self.classes =
+                weekend: 'drm-cal-weekend'
+                muted: 'drm-cal-muted'
+                holiday: 'drm-cal-holiday'
+                today: 'drm-cal-today'
+
             self.months = [             
                 'January'
                 'February'
@@ -34,44 +41,30 @@
                 'Monday'
                 'Tuesday'
                 'Wednesday'
-                'Thursdays'
+                'Thursday'
                 'Friday'
                 'Saturday']
 
+            self.weekend = [
+                $.inArray('Sunday', self.days)
+                $.inArray('Saturday', self.days)
+            ]
+
             self.holidays =
-                newYears:
-                    name: "New Year's Day"
-                    month: 1
-                    date: 1
-                valentines:
-                    name: "Valentine's Day"
-                    month: 2
-                    date: 14
-                stpatricks:
-                    name: "St. Patrick's Day"
-                    month: 3
-                    date: 17
-                independenceDay:
-                    name: "Independence Day"
-                    month: 7
-                    date: 4
-                halloween:
-                    name: "Halloween"
-                    month: 10
-                    date: 31
-                christmasEve:
-                    name: "Christmas Eve"
-                    month: 12
-                    date: 24
-                christmas:
-                    name: "Christmas"
-                    month: 12
-                    date: 25
+                january_1: "New Year's Day"
+                february_14: "Valentine's Day"
+                march_17: "St. Patrick's Day"
+                april_01: "April Fool's Day"
+                july_4: "Independence Day"
+                october_31: "Halloween"
+                december_24: "Christmas Eve"
+                december_25: "Christmas"
+                december_31: "New Year's Eve"
 
             self.createCalendar self.currentMonth, self.currentYear
 
             self.calendarNav.on 'click', '.drm-calendar-prev, .drm-calendar-next', ->
-                direction = $(@).data('dir')
+                direction = $(@).data 'dir'
                 self.advanceMonth.call @, direction
 
             self.calendarNav.on 'click', '.drm-calendar-current', ->
@@ -94,8 +87,12 @@
             days
 
         getDayOfWeek: (month, year, day) ->
-            day = new Date(year, month, day)
-            return day.getDay()
+            day = new Date year, month, day
+            day.getDay()
+
+        toTitleCase: (str) ->
+            str.replace /\w\S*/g, (txt) ->
+                txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
 
         createDaysInMonth: =>
             self = @
@@ -104,9 +101,40 @@
                 numberDays.push self.getDaysInMonth (key + 1), self.currentYear
             numberDays
 
-        getDayShift = (firstDay) ->
-            if firstDay isnt 0 then shift = daysPerWeek - (firstDay - 1) else shift = 0
-            shift
+        highlightCurrentDay: =>
+            calendarInner = @calendar.find "div.#{@calendarInnerClass}"
+            month = calendarInner.data 'month'
+            year = calendarInner.data 'year'
+
+            if month is @currentMonth and year is @currentYear
+                calendarInner.find("[data-date=#{@currentDay}]").addClass @classes.today
+
+        highlightHolidays: =>
+            self = @
+            calendarInner = self.calendar.find "div.#{@calendarInnerClass}"
+            currentMonth = calendarInner.data 'month'
+
+            $.each @holidays, (key, value) ->
+                dateArr = key.split '_'
+                month = $.inArray self.toTitleCase(dateArr[0]), self.months
+                date = parseInt dateArr[1], 10
+
+                if currentMonth is month
+                    holiday = calendarInner.find("[data-date=#{date}]").addClass self.classes.holiday
+                    eventList = $ '<ul></ul>',
+                        class: 'events'
+                        html: "<li>#{value}</li>"
+
+                    eventList.appendTo holiday
+
+        highlightWeekends: =>
+            self = @
+            weeks = @calendar.find("div.#{@calendarInnerClass}").find 'tr'
+
+            $.each weeks, ->
+                dates = $(@).find "td"
+                $.each self.weekend, (key, value) ->
+                    dates.eq(value).not(".#{self.classes.muted}, .#{self.classes.today}, .#{self.classes.holiday}").addClass self.classes.weekend
 
         advanceMonth: (direction) =>
             calendarInner = @calendar.find "div.#{@calendarInnerClass}"
@@ -143,12 +171,12 @@
             # console.log "Day Shift: #{dayShift}"
             # console.log "Number Weeks: #{numberWeeks}"
 
-            weekdays = "<table><thead><tr>"
+            weekdays = '<table><thead><tr>'
             $.each @days, (key, value) ->
                 weekdays += "<th>#{value}</th>"
-            weekdays += "</tr></thead>"
+            weekdays += '</tr></thead>'
 
-            weeks = "<tbody>"
+            weeks = '<tbody>'
             i = 1
             date = 1
             l = 1
@@ -157,36 +185,41 @@
 
             while i <= numberWeeks
                 j = 1
-                weeks += "<tr>"
+                weeks += '<tr>'
                 # if we are in week 1 we need to shift to the correct day of the week
                 if i is 1 and firstDay isnt 0
+                    # add cells for the previous month until we get to the first day
                     while l <= dayShift
-                        weeks += "<td class='muted-cell'>#{prevDays}</td>"
+                        weeks += "<td class='#{self.classes.muted}'>#{prevDays}</td>"
                         prevDays += 1
                         l += 1
                         j += 1
+                    # start adding cells for the current month
                     while j < 8
-                        weeks += "<td>#{date}</td>"
+                        weeks += "<td data-month='#{month}' data-date='#{date}' data-year'#{year}'>#{date}</td>"
                         j += 1
                         date += 1
                 # if we are in the last week of the month we need to add blank cells for next month
                 else if i is numberWeeks
                     while j < 8
+                        # finish adding cells for the current month
                         if date <= numberDays
-                            weeks += "<td>#{date}</td>"
+                            weeks += "<td data-date=#{date}>#{date}</td>"
+                        # start adding cells for next month
                         else
-                            weeks += "<td class='muted-cell'>#{nextDates}</td>"
+                            weeks += "<td class='#{self.classes.muted}'>#{nextDates}</td>"
                             nextDates += 1
                         j += 1
                         date += 1
                 else
+                    # if we are in the middle of the month add cells for the current month
                     while j < 8
-                        weeks += "<td>#{date}</td>"
+                        weeks += "<td data-month='#{month}' data-date='#{date}' data-year'#{year}'>#{date}</td>"
                         j += 1
                         date += 1
-                weeks += "</tr>"
+                weeks += '</tr>'
                 i += 1
-            weeks += "</tbody></table>"
+            weeks += '</tbody></table>'
 
             calendar = $ '<div></div>',
                 class: self.calendarInnerClass
@@ -198,7 +231,11 @@
                 text: "#{@months[month]} #{year}"
             
             calendar.appendTo ".#{self.calendarClass}"
-            heading.prependTo ".#{self.calendarInnerClass}" 
+            heading.prependTo ".#{self.calendarInnerClass}"
+
+            self.highlightCurrentDay()
+            self.highlightWeekends()
+            self.highlightHolidays()
 
     new DrmCalendar()
 
