@@ -5,7 +5,7 @@
 
 ( ($) ->
     class window.DrmCalendar
-        constructor: (@calendarClass = 'drm-calendar') ->
+        constructor: (@calendarClass = 'drm-calendar', @daysPerWeek = 7) ->
             self = @
             self.today = new Date()
             self.currentMonth = self.today.getMonth()
@@ -50,16 +50,36 @@
                 $.inArray('Saturday', self.days)
             ]
 
-            self.holidays =
+            self.staticHolidays =
                 january_1: "New Year's Day"
+                february_2: "Groudhog Day"
                 february_14: "Valentine's Day"
                 march_17: "St. Patrick's Day"
                 april_01: "April Fool's Day"
+                april_22: "Earth Day"
+                may_1: "May Day"
+                may_5: "Cinco De Mayo"
+                june_14: "Flag Day"
                 july_4: "Independence Day"
+                september_11: "Patroit Day"
                 october_31: "Halloween"
+                november_11: "Veteran's Day"
+                december_7: "Pearl Harbor Day"
+                december_23: "Festivus"
                 december_24: "Christmas Eve"
                 december_25: "Christmas"
                 december_31: "New Year's Eve"
+
+            self.variableHolidays =
+                january_monday_3: "Martin Luther King's Birthday"
+                february_monday_3: "President's Day"
+                april_friday_last: "Arbor Day"
+                may_sunday_2: "Mother's Day"
+                may_monday_last: "Memorial Day"
+                june_sunday_3: "Father's Day"
+                september_monday_1: "Labor Day"
+                october_monday_2: "Columbus Day"
+                november_thursday_4: "Thanksgiving"
 
             self.createCalendar self.currentMonth, self.currentYear
 
@@ -90,6 +110,9 @@
             day = new Date year, month, day
             day.getDay()
 
+        getWeeksInMonth: (numberDays, dayShift) =>
+            Math.ceil (numberDays + dayShift) / @daysPerWeek
+
         toTitleCase: (str) ->
             str.replace /\w\S*/g, (txt) ->
                 txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
@@ -114,13 +137,44 @@
             calendarInner = self.calendar.find "div.#{@calendarInnerClass}"
             currentMonth = calendarInner.data 'month'
 
-            $.each @holidays, (key, value) ->
+            $.each self.staticHolidays, (key, value) ->
                 dateArr = key.split '_'
                 month = $.inArray self.toTitleCase(dateArr[0]), self.months
                 date = parseInt dateArr[1], 10
 
                 if currentMonth is month
                     holiday = calendarInner.find("[data-date=#{date}]").addClass self.classes.holiday
+                    eventList = $ '<ul></ul>',
+                        class: 'events'
+                        html: "<li>#{value}</li>"
+
+                    eventList.appendTo holiday
+
+        getVariableHolidays: (numberDays, dayShift) =>
+            self = @
+            calendarInner = self.calendar.find "div.#{@calendarInnerClass}"
+            currentMonth = calendarInner.data 'month'
+            weeks = calendarInner.find 'tr'
+
+            $.each self.variableHolidays, (key, value) ->
+                dateArr = key.split '_'
+                month = $.inArray self.toTitleCase(dateArr[0]), self.months
+                day = $.inArray self.toTitleCase(dateArr[1]), self.days
+                numberWeeks = self.getWeeksInMonth(numberDays, dayShift)
+                lastWeekLength = weeks.eq(numberWeeks).length
+
+                if dateArr[2] is 'last' and dayShift <= day
+                    dayNum = if lastWeekLength < day then (numberWeeks - 1) else numberWeeks
+                else if dateArr[2] is 'last' and dayShift > day
+                    dayNum = (numberWeeks - 1)
+                else
+                    dayNum = parseInt dateArr[2], 10
+
+                if currentMonth is month
+                    holidayWeek = if dayShift <= day then holidayWeek = weeks.eq dayNum else holidayWeek = weeks.eq dayNum + 1
+                    holidayDate = holidayWeek.find('td').eq(day).data 'date'
+
+                    holiday = calendarInner.find("[data-date=#{holidayDate}]").addClass self.classes.holiday
                     eventList = $ '<ul></ul>',
                         class: 'events'
                         html: "<li>#{value}</li>"
@@ -157,12 +211,11 @@
 
         createCalendar: (month, year) =>
             self = @
-            daysPerWeek = 7
             numberDays = self.getDaysInMonth (month + 1), year
             prevMonthNumberDays = self.getDaysInMonth month, year
             firstDay = self.getDayOfWeek month, year, 1
-            dayShift = if firstDay is 7 then 0 else firstDay
-            numberWeeks = Math.ceil (numberDays + dayShift) / 7
+            dayShift = if firstDay is self.daysPerWeek then 0 else firstDay
+            numberWeeks = self.getWeeksInMonth numberDays, dayShift
 
             # console.log "Days Per Week: #{daysPerWeek}"
             # console.log "Number of Days: #{numberDays}"
@@ -195,13 +248,13 @@
                         l += 1
                         j += 1
                     # start adding cells for the current month
-                    while j < 8
+                    while j <= self.daysPerWeek
                         weeks += "<td data-month='#{month}' data-date='#{date}' data-year'#{year}'>#{date}</td>"
                         j += 1
                         date += 1
                 # if we are in the last week of the month we need to add blank cells for next month
                 else if i is numberWeeks
-                    while j < 8
+                    while j <= self.daysPerWeek
                         # finish adding cells for the current month
                         if date <= numberDays
                             weeks += "<td data-date=#{date}>#{date}</td>"
@@ -213,7 +266,7 @@
                         date += 1
                 else
                     # if we are in the middle of the month add cells for the current month
-                    while j < 8
+                    while j <= self.daysPerWeek
                         weeks += "<td data-month='#{month}' data-date='#{date}' data-year'#{year}'>#{date}</td>"
                         j += 1
                         date += 1
@@ -236,6 +289,7 @@
             self.highlightCurrentDay()
             self.highlightWeekends()
             self.highlightHolidays()
+            self.getVariableHolidays numberDays, dayShift
 
     new DrmCalendar()
 
