@@ -1,6 +1,7 @@
 ###############################################################################
 # Interactive JS Calendar
 ###############################################################################
+
 "use strict"
 
 ( ($) ->
@@ -50,36 +51,128 @@
                 $.inArray('Saturday', self.days)
             ]
 
-            self.staticHolidays =
-                january_1: "New Year's Day"
-                february_2: "Groudhog Day"
-                february_14: "Valentine's Day"
-                march_17: "St. Patrick's Day"
-                april_01: "April Fool's Day"
-                april_22: "Earth Day"
-                may_1: "May Day"
-                may_5: "Cinco De Mayo"
-                june_14: "Flag Day"
-                july_4: "Independence Day"
-                september_11: "Patroit Day"
-                october_31: "Halloween"
-                november_11: "Veteran's Day"
-                december_7: "Pearl Harbor Day"
-                december_23: "Festivus"
-                december_24: "Christmas Eve"
-                december_25: "Christmas"
-                december_31: "New Year's Eve"
-
-            self.variableHolidays =
-                january_monday_3: "Martin Luther King's Birthday"
-                february_monday_3: "President's Day"
-                april_friday_last: "Arbor Day"
-                may_sunday_2: "Mother's Day"
-                may_monday_last: "Memorial Day"
-                june_sunday_3: "Father's Day"
-                september_monday_1: "Labor Day"
-                october_monday_2: "Columbus Day"
-                november_thursday_4: "Thanksgiving"
+            self.holidays =
+                newYearsDay:
+                    name: "New Year's Day"
+                    month: "January"
+                    holidayDate: 1
+                mlkBirthday:
+                    name: "Martin Luther King's Birthday"
+                    month: "January"
+                    day: "Monday"
+                    dayNum: 3
+                groundhogDay:
+                    name: "Groundhog Day"
+                    month: "February"
+                    holidayDate: 2
+                valentinesDay:
+                    name: "Valentine's Day"
+                    month: "February"
+                    holidayDate: 14
+                presidentsDay:
+                    name: "President's Day"
+                    month: "February"
+                    day: "Monday"
+                    dayNum: 3
+                stPatricksDay:
+                    name: "St. Patrick's Day"
+                    month: "March"
+                    holidayDate: 17
+                aprilFools:
+                    name: "April Fool's Day"
+                    month: "April"
+                    holidayDate: 1
+                earthDay:
+                    name: "Earth Day"
+                    month: "April"
+                    holidayDate: 22
+                arborDay:
+                    name: "Arbor Day"
+                    month: "April"
+                    day: "Friday"
+                    dayNum: "last"
+                mayDay:
+                    name: "May Day"
+                    month: "May"
+                    holidayDate: 1
+                cincoDeMayo:
+                    name: "Cinco De Mayo"
+                    month: "May"
+                    holidayDate: 5
+                mothersDay:
+                    name: "Mother's Day"
+                    month: "May"
+                    day: "Sunday"
+                    dayNum: 2
+                memorialDay:
+                    name: "Memorial Day"
+                    month: "May"
+                    day: "Monday"
+                    dayNum: "last"
+                flagDay:
+                    name: "Flag Day"
+                    month: "June"
+                    holidayDate: 14
+                fathersDay:
+                    name: "Father's Day"
+                    month: "June"
+                    day: "Sunday"
+                    dayNum: 3
+                independenceDay:
+                    name: "Independence Day"
+                    month: "July"
+                    holidayDate: 4
+                laborDay:
+                    name: "Labor Day"
+                    month: "September"
+                    day: "Monday"
+                    dayNum: 1
+                patroitDay:
+                    name: "Patroit Day"
+                    month: "September"
+                    holidayDate: 11
+                columbusDay:
+                    name: "Columbus Day"
+                    month: "October"
+                    day: "Monday"
+                    dayNum: 2
+                halloween:
+                    name: "Halloween"
+                    month: "October"
+                    holidayDate: 31
+                veteransDay:
+                    name: "Veteran's Day"
+                    month: "November"
+                    holidayDate: 11
+                thanksgiving:
+                    name: "Thanksgiving"
+                    month: "November"
+                    day: "Thursday"
+                    dayNum: 4
+                pearlHarborDay:
+                    name: "Pearl Harbor Day"
+                    month: "December"
+                    holidayDate: 7
+                festivus:
+                    name: "Festivus"
+                    month: "December"
+                    holidayDate: 23
+                christmasEve:
+                    name: "Christmas Eve"
+                    month: "December"
+                    holidayDate: 24
+                christmas:
+                    name: "Christmas"
+                    month: "December"
+                    holidayDate: 25
+                boxingDay:
+                    name: "Boxing Day"
+                    month: "December"
+                    holidayDate: 26
+                newYearsEve:
+                    name: "New Year's Eve"
+                    month: "December"
+                    holidayDate: 31
 
             self.createCalendar self.currentMonth, self.currentYear
 
@@ -132,58 +225,58 @@
             if month is @currentMonth and year is @currentYear
                 calendarInner.find("[data-date=#{@currentDay}]").addClass @classes.today
 
-        highlightHolidays: =>
-            self = @
-            calendarInner = self.calendar.find "div.#{@calendarInnerClass}"
-            currentMonth = calendarInner.data 'month'
+        addNewCalendarEvent: (eventName, calendarItem) ->
+            eventClass = 'events'
+            eventList = calendarItem.find "ul.#{eventClass}"
+            length = eventList.length
 
-            $.each self.staticHolidays, (key, value) ->
-                dateArr = key.split '_'
-                month = $.inArray self.toTitleCase(dateArr[0]), self.months
-                date = parseInt dateArr[1], 10
+            if length > 0
+                item = $ '<li></li>',
+                    text: eventName
 
-                if currentMonth is month
-                    holiday = calendarInner.find("[data-date=#{date}]").addClass self.classes.holiday
-                    eventList = $ '<ul></ul>',
-                        class: 'events'
-                        html: "<li>#{value}</li>"
+                item.appendTo eventList
 
-                    eventList.appendTo holiday
+            else if length is 0
+                eventList = $ '<ul></ul>',
+                    class: eventClass
+                    html: "<li>#{eventName}</li>"
 
-        getVariableHolidays: (numberDays, dayShift) =>
+                eventList.appendTo calendarItem
+
+        addHolidays: (numberDays, dayShift) =>
             self = @
             calendarInner = self.calendar.find "div.#{@calendarInnerClass}"
             currentMonth = calendarInner.data 'month'
             weeks = calendarInner.find 'tr'
 
-            $.each self.variableHolidays, (key, value) ->
-                dateArr = key.split '_'
-                month = $.inArray self.toTitleCase(dateArr[0]), self.months
-                day = $.inArray self.toTitleCase(dateArr[1]), self.days
+            $.each self.holidays, (key, value) ->
+                month = $.inArray value.month, self.months
                 numberWeeks = self.getWeeksInMonth(numberDays, dayShift)
                 lastWeekLength = weeks.eq(numberWeeks).length
 
-                if dateArr[2] is 'last' and dayShift <= day
-                    dayNum = if lastWeekLength < day then (numberWeeks - 1) else numberWeeks
-                else if dateArr[2] is 'last' and dayShift > day
-                    dayNum = (numberWeeks - 1)
+                if value.day
+                    day = $.inArray value.day, self.days
+
+                    if value.dayNum is 'last' and dayShift <= day
+                        weekNum = if lastWeekLength < day then (numberWeeks - 1) else numberWeeks
+                    else if value.dayNum is 'last' and dayShift > day
+                        weekNum = (numberWeeks - 1)
+                    else
+                        weekNum = parseInt value.dayNum, 10
+
+                    if currentMonth is month
+                        holidayWeek = if dayShift <= day then holidayWeek = weeks.eq weekNum else holidayWeek = weeks.eq weekNum + 1
+                        holidayDate = holidayWeek.find('td').eq(day).data 'date'
                 else
-                    dayNum = parseInt dateArr[2], 10
+                    holidayDate = value.holidayDate
 
                 if currentMonth is month
-                    holidayWeek = if dayShift <= day then holidayWeek = weeks.eq dayNum else holidayWeek = weeks.eq dayNum + 1
-                    holidayDate = holidayWeek.find('td').eq(day).data 'date'
-
                     holiday = calendarInner.find("[data-date=#{holidayDate}]").addClass self.classes.holiday
-                    eventList = $ '<ul></ul>',
-                        class: 'events'
-                        html: "<li>#{value}</li>"
-
-                    eventList.appendTo holiday
+                    self.addNewCalendarEvent value.name, holiday
 
         highlightWeekends: =>
             self = @
-            weeks = @calendar.find("div.#{@calendarInnerClass}").find 'tr'
+            weeks = self.calendar.find("div.#{@calendarInnerClass}").find 'tr'
 
             $.each weeks, ->
                 dates = $(@).find "td"
@@ -216,13 +309,6 @@
             firstDay = self.getDayOfWeek month, year, 1
             dayShift = if firstDay is self.daysPerWeek then 0 else firstDay
             numberWeeks = self.getWeeksInMonth numberDays, dayShift
-
-            # console.log "Days Per Week: #{daysPerWeek}"
-            # console.log "Number of Days: #{numberDays}"
-            # console.log "Prev Month Number Days: #{prevMonthNumberDays}"
-            # console.log "First Day: #{firstDay}"
-            # console.log "Day Shift: #{dayShift}"
-            # console.log "Number Weeks: #{numberWeeks}"
 
             weekdays = '<table><thead><tr>'
             $.each @days, (key, value) ->
@@ -288,8 +374,7 @@
 
             self.highlightCurrentDay()
             self.highlightWeekends()
-            self.highlightHolidays()
-            self.getVariableHolidays numberDays, dayShift
+            self.addHolidays numberDays, dayShift
 
     new DrmCalendar()
 

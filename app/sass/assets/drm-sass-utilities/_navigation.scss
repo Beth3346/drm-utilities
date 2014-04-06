@@ -440,8 +440,6 @@
 
 // glass button
 
-// pill button
-
 @mixin drm-pill-button-link($height: 50px, $color: white, $bk-color: $link-color, $width: 40%, $center: center, $border-color: none, $display: block) {
 	width: $width;
 	height: $height;
@@ -556,6 +554,7 @@
  			border: none;
 		} @else {
 			border: 1px solid $border;
+			border-collapse: collapse;
 		}
 
 		&:visited {

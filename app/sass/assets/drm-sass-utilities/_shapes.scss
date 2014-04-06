@@ -42,7 +42,7 @@
 
 // Creates a triangle element
 
-@mixin drm-triangle($direction: top, $base: 50px, $height: half, $color: #ccc)
+@mixin drm-triangle($direction: top, $base: 50px, $height: half, $color: $light-grey)
 {
         @if ($direction == top or $direction == right or $direction == bottom or $direction == left)
         {
