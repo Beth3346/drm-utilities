@@ -1,0 +1,12 @@
+/*-----------------------------------------------------------------------------
+    Tables
+-----------------------------------------------------------------------------*/
+
+@mixin drm-table($padding, $bk-color, $color, $border-color, $stripes) {
+    background-color: $bk-color;
+    color: $color;
+
+    @if $border-color {
+        border: 1px solid $border-color;
+    }   
+}
