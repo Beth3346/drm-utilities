@@ -849,21 +849,34 @@ breakpoint deminsions can be customized in variables file
 
 + **drm-offscreen-menu**
 
-        @include drm();
+        @include drm-offscreen-menu($bk-color, $width);
 
+    + styles a menu that can be hidden offscreen
+    + offscreen menu is not hidden using css and must be hidden using javascript
+    + this allows users with javascript turned off to see the menu
     + **Arguments:**
+        * $bk-color: color of the menu (optional - defaults to $link-color)
+        * $width: width of the menu (optional - defaults to 15%)
 
 + **drm-sticky-menu**
 
-        @include drm();
+        @include drm-sticky-menu($position);
 
+    + styles a 'sticky' menu that remains in a fixed position in the browser window
     + **Arguments:**
+        * $position: position of the menu
+            - acceptable values
+                + top (default)
+                + left
 
 + **drm-back-to-top**
 
-        @include drm();
+        @include drm-back-to-to($bk-color, $color);
 
+    + styles a small, semi-transparent button that appears in the lower right corner of the browser window
     + **Arguments:**
+        * $bk-color: background color of button (optional - defaults to $link-color)
+        * $color: text color (optional - defaults to white)
 
 ### Effects Utilities
 
@@ -974,120 +987,279 @@ breakpoint deminsions can be customized in variables file
     + **Arguments:**
         + $shadow-color: color of text-shadow (optional - defaults to $shadow-color)
 
++ **drm-thumbnail**
+
+        @include drm-thumbnail($border-color, $width, $height, $border-radius)
+
+    + creates a thumbnail image with a thick border
+    + **Arguments:**
+        + $border-color: optional - defaults to white
+        + $width: optional - defaults to 150px
+        + $height: optional - defaults to 125px
+        + $border-radius: optional - defaults to 0 for 90 degree corners
+            * enter 'round' for a circular image
+
 ### Forms
 
 + **drm-form-state**
 
-        @include drm-form-state($glow, $background, $border)
+        @include drm-form-state($glow, $bk-color, $border)
 
     + adds form state styles for form controls
     + glow effect when a user mouses over and element
     + darker outline and lighter background on focus state
     + smooth transition effects when changing form states
+    + includes success, warning, danger, and disabled states
     + **Arguments:**
         + $glow: color of glow effect (optional - defaults to aqua)
-        + $background: color of form element background (optional - defaults to light grey)
+        + $bk-color: color of form element background (optional - defaults to light grey)
         + $border: color of form element border (optional - defaults to grey)   
+
++ **drm-form**
+
+        @include drm-form($glow, $bk-color, $border);
+
+    + provides basic styles for all form elements
+    + **Arguments:**
+        * $glow: optional - defaults to $drm-blue
+        * $bk-color: background color of form input elements (optional - defaults to light grey)
+        * $border: border color for form input elements (optional - defaults to grey)
+
++ **drm-tabular-form**
+
+        @include drm-tabular-form($glow, $bk-color, $border);
+
+    + styles a tabular form
+    + **Arguments:**
+        * $glow: optional - defaults to $drm-blue
+        * $bk-color: background color of form input elements (optional - defaults to light grey)
+        * $border: border color for form input elements (optional - defaults to grey)
+
++ **drm-inline-form**
+
+        @include drm($glow, $bk-color, $border);
+
+    + styles a form with all elements on the same row
+    + **Arguments:**
+        * $glow: optional - defaults to $drm-blue
+        * $bk-color: background color of form input elements (optional - defaults to light grey)
+        * $border: border color for form input elements (optional - defaults to grey)
+
++ **drm-form-notice**
+
+        @include drm-form-notice($type);
+
+    + styles a form notice
+    + **Arguments:**
+        * $type
+            - accepable values
+                + success
+                + warning
+                + danger
+                + info - default
+            - if an unlisted value is entered the info type is used
+
 
 ## Helper Methods
 
 ### General
 
 + body
+    * sets default styles for line-height, font-size, font-family, color, and background color
+    * based on default-config.scss
+    * override these base styles by creating a file called _drm-sass-utilities-config.scss and placing it outside the drm-sass-utilities folder
 
 + .wrapper
+    * a wrapper with a margin of auto
+
+### Visibility
+
++ .hide
+    * hides an element using 
+            
+            display: none
 
 ### Clear and Alignment
 
 + .pull-left
+    * floats an item to the left
 
 + .pull-right
+    * floats an item to the right
 
 + .clear
+    * clearfix class
 
 ### Typography
 
 + .bold
+    * bold text
 
 + .italic
+    * italicize text
 
 + .underline
+    * underline text
 
 + .uppercase
+    * uppercase text
+
++ .capitalize
+    * capitalize text
 
 + .smaller-text
+    * sets font equal to 10px
 
-+ .left
++ .text-left
+    * align text to the left
 
-+ .right
++ .text-right
+    * align text to the right
 
-+ .center
++ .text-center
+    * center text within it's container
 
-+ .muted
++ .text-justified
+    * justified text
 
-+ .danger
++ .text-muted
+    * applies the muted color to text
 
-+ .error
++ .text-disabled
+    * applies a light grey color to text
 
-+ .info
++ .text-danger
+    * applies the danger color to text
 
-+ .warning
++ .text-error
+    * applies the error color to text and makes text bold
 
-+ .success
++ .text-info
+    * applies the info color to text
+
++ .text-warning
+    * applies the warning color to text
+
++ .text-success
+    * applies the success color to text
 
 + mark
+    * sets text background of $link-color
+    * changes color to white
+    * applies a small amount of left and right padding
 
 + .highlight
+    * sets text color of $link-color
 
 + p
+    * sets margin to 0
+    * applies 10px top and bottom padding
 
 + small
+    * applies a font size of 10px
 
 + blockquote
+    * sets margin to 0
+    * applies 10px of padding on all sides
+    * sets font style to italics
 
 + cite
+    * removes italics and sets font style to normal
+
++ pre
+    * styles pre text with a border and very light grey background
 
 ### Headings
 
 remove default bold from all heading elements
 
 + h1
+    * capitalizes the first letter of all words
+    * sets font size of 26px
+    * sets a small amount of top and bottom padding
 
 + h2
+    * capitalizes the first letter of all words
+    * sets font size of 24px
+    * sets a small amount of top and bottom padding
 
 + h3
+    * capitalizes the first letter of all words
+    * sets font size of 18px
+    * sets a small amount of top and bottom padding
 
 + h4
+    * sets font size of 16px
 
 + h5
+    * sets font size of 14px
 
 + h6
+    * sets font size of 12px
 
 ### Lists
 
 + ul
+    * sets style to disc
+    * adds padding
 
 + ol
+    * sets style to decimal
+    * adds padding
 
 + li
+    * sets margin to 0
+    * adds slight top and bottom padding
 
 + dl
+    * removes margin and padding
 
 + dd
+    * remove margin
+    * adds slight top and bottom padding
 
 + dt
+    * remove margin
+    * adds slight top and bottom padding
+    * styles bold
 
 + .unstyled-list
+    * removes list-style
 
 + .inline-list
+    * creates an inline list
 
 + .triangle-list
+    * creates a list with triangle bullets
 
 + .checked-list
+    * creates a checked list
 
 ### Links
 
 + a
+    * adds an underline that disappears on hover
+    * changes color to $link-color
+    * adds visted, hover, and focus states
+
+### Alerts
++ .drm-info-alert
+    * creates a context box with a slight colored background and darker colored text based on alert context
++ .drm-danger-alert
+    * creates a context box with a slight colored background and darker colored text based on alert context
++ .drm-warning-alert
+    * creates a context box with a slight colored background and darker colored text based on alert context
++ .drm-success-alert
+    * creates a context box with a slight colored background and darker colored text based on alert context
++ .drm-muted-alert
+    * creates a context box with a slight colored background and darker colored text based on alert context
++ .drm-custom-alert
+    * creates a context box with a slight colored background and darker colored text based on alert context
+
+### Images
+
++ .drm-thumbnail
+    * styles a thumbnail image with a thick white inner border and thin grey outer border
 
 ### Tables
 

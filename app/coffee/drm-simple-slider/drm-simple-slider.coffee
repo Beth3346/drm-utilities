@@ -5,7 +5,7 @@
 
 ( ($) ->
     class window.DrmSimpleSlider
-        constructor: (@slider = $('div.drm-simple-slider'), @play = 10000, @speed = 300, @animate = yes) ->
+        constructor: (@slider = $('div.drm-simple-slider'), @play = 10000, @speed = 300, @animate = no) ->
             self = @
             @slideHolder = self.slider.find('div').first()
             @slides = self.slideHolder.find 'div.drm-simple-slide'
@@ -57,16 +57,13 @@
             li = ''
             $.each @slides, (index) ->
                 li += "<li><button data-item-num='#{index}'></button></li>"
-            slideList = $ '<ul></ul>',
+            $ '<ul></ul>',
                 class: 'drm-simple-slider-list'
                 html: li
-            slideList
 
         getCurrent: ->
             currentSlide = @slides.not ':hidden'
-            current = @slides.index currentSlide
-
-            current
+            @slides.index currentSlide
 
         replaceImage: (current, next) ->
             links = @slideList.find 'button'

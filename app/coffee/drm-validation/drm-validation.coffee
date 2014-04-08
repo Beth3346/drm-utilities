@@ -186,11 +186,11 @@ jshint -W100
                 validate = self.validateRequired.call @, value
                 validateField.call @, value, validate
 
-            # body.on 'blur', ':input:not([required])', ->
-            #     value = self.getValue.call @
-            #     if not value
-            #         self.removeValidationClass.call @
-            #         self.removeAllNotices.call @, self.speed
+            body.on 'blur', ':input:not([required])', ->
+                value = self.getValue.call @
+                if not value
+                    self.removeValidationClass.call @
+                    self.removeAllNotices.call @, self.speed
             
             body.on 'blur', ':input[data-required-with]', ->
                 value = self.getValue.call @
@@ -204,8 +204,7 @@ jshint -W100
             lengthNotice = that.nextUntil ':input', '.form-length-notice'
             
             createMessage = (length) ->
-                message = if length is 1 then "#{length} character" else "#{length} characters"
-                message
+                if length is 1 then "#{length} character" else "#{length} characters"
 
             if lengthNotice.length is 0
                 message = createMessage length
@@ -224,10 +223,9 @@ jshint -W100
             value = $.trim $(@).val()
 
             if value.length > 0
-                return value
-            else
-                value = null
                 value
+            else
+                null
 
         issueNotice: (status, message, issuer, speed) ->
             that = $ @
@@ -312,9 +310,7 @@ jshint -W100
             if value?
                 pattern = new RegExp pattern
                 result = $.trim pattern.exec value
-                validate = evaluate result, value
-
-            validate
+                evaluate result, value
 
         validateNumber: (value, pattern) ->
             validate =
@@ -334,9 +330,7 @@ jshint -W100
             if value?
                 pattern = new RegExp pattern
                 result = $.trim pattern.exec value
-                validate = evaluate result, value      
-
-            validate
+                evaluate result, value
 
         validateURL: (value, pattern) ->
             validate =
@@ -356,9 +350,7 @@ jshint -W100
             if value?
                 pattern = new RegExp pattern
                 result = $.trim pattern.exec value
-                validate = evaluate result, value       
-
-            validate
+                evaluate result, value
 
         validateEmail: (value, pattern) ->
             validate =
@@ -378,9 +370,7 @@ jshint -W100
             if value?
                 pattern = new RegExp pattern
                 result = $.trim pattern.exec value
-                validate = evaluate result, value
-
-            validate
+                evaluate result, value
 
         validatePhone: (value, pattern) ->
             validate =
@@ -400,9 +390,7 @@ jshint -W100
             if value?
                 pattern = new RegExp pattern
                 result = $.trim pattern.exec value
-                validate = evaluate result, value
-
-            validate
+                evaluate result, value
 
         validateFullName: (value, pattern) ->
             validate =
@@ -422,9 +410,7 @@ jshint -W100
             if value?
                 pattern = new RegExp pattern
                 result = $.trim pattern.exec value
-                validate = evaluate result, value
-
-            validate
+                evaluate result, value
 
         validateAlpha: (value, pattern) ->
             validate =
@@ -444,9 +430,7 @@ jshint -W100
             if value?
                 pattern = new RegExp pattern
                 result = $.trim pattern.exec value
-                validate = evaluate result, value
-
-            validate
+                evaluate result, value
 
         validateAlphaNum: (value, pattern) ->
             validate =
@@ -466,9 +450,7 @@ jshint -W100
             if value?
                 pattern = new RegExp pattern
                 result = $.trim pattern.exec value
-                validate = evaluate result, value
-
-            validate
+                evaluate result, value
 
         validateNoSpaces: (value, pattern) ->
             validate =
@@ -488,9 +470,7 @@ jshint -W100
             if value?
                 pattern = new RegExp pattern
                 result = $.trim pattern.exec value
-                validate = evaluate result, value
-
-            validate
+                evaluate result, value
 
         validateAlphaNumDash: (value, pattern) ->
             validate =
@@ -510,9 +490,7 @@ jshint -W100
             if value?
                 pattern = new RegExp pattern
                 result = $.trim pattern.exec value
-                validate = evaluate result, value
-
-            validate
+                evaluate result, value
 
         validateAlphaNumUnderscore: (value, pattern) ->
             validate =
@@ -532,9 +510,7 @@ jshint -W100
             if value?
                 pattern = new RegExp pattern
                 result = $.trim pattern.exec value
-                validate = evaluate result, value
-
-            validate
+                evaluate result, value
 
         validateNoTags: (value, pattern) ->
             validate =
@@ -554,9 +530,7 @@ jshint -W100
             if value?
                 pattern = new RegExp pattern
                 result = $.trim pattern.exec value
-                validate = evaluate result, value
-
-            validate
+                evaluate result, value
 
         validateMonthDayYear: (value, pattern) ->
             validate =
@@ -576,10 +550,7 @@ jshint -W100
             if value?
                 pattern = new RegExp pattern
                 result = $.trim pattern.exec value
-                validate = evaluate result, value
-                console.log "value: #{value}, result: #{result}"
-
-            validate
+                evaluate result, value
 
         validateCreditCard: (value, pattern) ->
             validate =
@@ -599,10 +570,7 @@ jshint -W100
             if value?
                 pattern = new RegExp pattern
                 result = $.trim pattern.exec value
-                validate = evaluate result, value
-                console.log "value: #{value}, result: #{result}"
-
-            validate
+                evaluate result, value
 
         validateCvv: (value, pattern) ->
             validate =
@@ -622,10 +590,7 @@ jshint -W100
             if value?
                 pattern = new RegExp pattern
                 result = $.trim pattern.exec value
-                validate = evaluate result, value
-                console.log "value: #{value}, result: #{result}"
-
-            validate
+                evaluate result, value
 
         validateZip: (value, pattern) ->
             validate =
@@ -645,10 +610,7 @@ jshint -W100
             if value?
                 pattern = new RegExp pattern
                 result = $.trim pattern.exec value
-                validate = evaluate result, value
-                console.log "value: #{value}, result: #{result}"
-
-            validate
+                evaluate result, value
 
         validateEqual: (value) ->
             that = $ @
@@ -668,9 +630,7 @@ jshint -W100
                 validate
 
             if value?
-                validate = evaluate equal, value
-
-            validate
+                evaluate equal, value
 
         validateNotEqual: (value) ->
             that = $ @
@@ -690,9 +650,7 @@ jshint -W100
                 validate
 
             if value?
-                validate = evaluate notEqual, value
-
-            validate
+                evaluate notEqual, value
 
         validateCheckbox: () ->
 
@@ -722,9 +680,7 @@ jshint -W100
                 validate
 
             if value?
-                validate = evaluate listItems, value
-
-            validate
+                evaluate listItems, value
 
         validateNotList: (value) ->
             that = $ @
@@ -748,9 +704,7 @@ jshint -W100
                 validate
 
             if value?
-                validate = evaluate listItems, value
-
-            validate
+                evaluate listItems, value
 
         validateRequiredWith: (value) ->
             that = $ @
@@ -790,9 +744,7 @@ jshint -W100
                 
                 validate
 
-            validate = evaluate value, fieldID, fieldValue
-
-            validate
+            evaluate value, fieldID, fieldValue
 
         validateMaxValue: (value) ->
             that = $ @
@@ -812,9 +764,7 @@ jshint -W100
                 validate
 
             if value?
-                validate = evaluate max, value
-
-            validate
+                evaluate max, value
 
         validateMinValue: (value) ->
             that = $ @
@@ -834,9 +784,7 @@ jshint -W100
                 validate
 
             if value?
-                validate = evaluate(min, value)
-
-            validate
+                evaluate min, value
 
         validateBetweenValue: (value) ->
             that = $ @
@@ -857,9 +805,7 @@ jshint -W100
                 validate
 
             if value?
-                validate = evaluate min, max, value
-
-            validate
+                evaluate min, max, value
 
         validateMaxLength: (value) ->
             that = $ @
@@ -880,9 +826,7 @@ jshint -W100
 
             if value?
                 length = value.length
-                validate = evaluate max, length
-
-            validate
+                evaluate max, length
 
         validateMinLength: (value) ->
             that = $ @
@@ -903,9 +847,7 @@ jshint -W100
 
             if value?
                 length = value.length
-                validate = evaluate min, length
-
-            validate
+                evaluate min, length
 
         validateBetweenLength: (value) ->
             that = $ @
@@ -927,9 +869,7 @@ jshint -W100
 
             if value?
                 length = value.length
-                validate = evaluate min, max, length
-
-            validate
+                evaluate min, max, length
 
     new DrmForms()
 		

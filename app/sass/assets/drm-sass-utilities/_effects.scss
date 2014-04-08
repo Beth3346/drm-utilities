@@ -173,8 +173,15 @@
 	box-shadow: $dark-grey 0 65px 46px -60px;
 }
 
-@mixin drm-thumbnail($border-color: white, $width: 150px, $height: 125px) {
+@mixin drm-thumbnail($border-color: white, $width: 150px, $height: 125px, $border-radius: 0) {
 	border: 5px solid $border-color;
 	box-shadow: $grey 0 0 0 1px;
+
+	@if $border-radius == 'round' {
+		$border-radius: ($width / 2);
+	} @else if $border-radius > 0 {
+		$border-radius: $border-radius;
+	} 
+
 	@include drm-rectangle($width, $height);
 }

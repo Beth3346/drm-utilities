@@ -11,13 +11,9 @@
             @backToTop.on 'click', @toTop
 
         addButton: =>
-            backToTop = $ '<button></button>',
+            $('<button></button>',
                 class: 'back-to-top'
-                html: '&#9652;'
-
-            backToTop.appendTo('body').hide()
-
-            backToTop
+                html: '&#9652;').appendTo('body').hide()
             
         showButton: =>
             scroll = $('body').scrollTop()

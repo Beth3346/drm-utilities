@@ -697,7 +697,7 @@
 	}	
 }
 
-@mixin drm-sticky-menu($position) {
+@mixin drm-sticky-menu($position: 'top') {
 	@if $position == 'top' {
         position: fixed;
         left: 0;
@@ -724,7 +724,7 @@
 	}
 }
 
-@mixin drm-back-to-top($color: $link-color) {
+@mixin drm-back-to-top($bk-color: $link-color, $color: white) {
 	color: white;
 	position: fixed;
 	bottom: 5%;
@@ -733,8 +733,7 @@
 	cursor: pointer;
 	padding: 0 0 5px 0;
 	line-height: 0;
-	box-sizing: border-box;
-	@include drm-background-transparent($color);
+	@include drm-background-transparent($bk-color, 0.7);
 	@include drm-square(50px, none, 3px);
 	@include drm-em-font(48);
 
@@ -743,6 +742,6 @@
 	}
 
 	&:hover {
-		@include drm-background-transparent($color, 1);
+		@include drm-background-transparent($bk-color, 1);
 	}
 }

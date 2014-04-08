@@ -43,8 +43,7 @@
             holderWidth = parseInt @holder.css('width'), 10
 
             # calculate menuWidth as a percentage of container
-            menuWidth = (menuWidth / holderWidth) * 100
-            menuWidth
+            (menuWidth / holderWidth) * 100
 
         addScroll: ->
             menuHeight = parseInt @menu.find('ul').css('height'), 10

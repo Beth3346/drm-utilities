@@ -49,7 +49,7 @@
                 window.location.hash = target
                 return
 
-            return false
+            false
 
         scrollSpy: =>
             scroll = $('body').scrollTop()
@@ -76,10 +76,9 @@
 
                 getPosition = (height) ->
                     if height > 200
-                        position = that.position().top - (that.height() / 2)
+                        that.position().top - (that.height() / 2)
                     else    
-                        position = that.position().top - that.height()
-                    position
+                        that.position().top - that.height()
 
                 # the first element's position should always be 0
                 if index is 0
@@ -95,7 +94,6 @@
 
                 # correct for any elements that may have a negative position value  
                 if position < 0 then positions.push 0 else positions.push position
-                positions           
 
             positions
 

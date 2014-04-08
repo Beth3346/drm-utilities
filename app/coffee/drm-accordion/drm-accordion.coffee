@@ -34,7 +34,7 @@
                 nextContent.slideDown speed
             else nextContent.slideUp speed
 
-            return false
+            false
 
     class window.DrmAccordionContent extends DrmAccordion
         constructor: (@speed = 300, @container = $('.drm-accordion'), @showButtons = yes) ->
@@ -65,13 +65,9 @@
             buttons
 
         createButton: (button, message, className) =>
-            button = $ '<button></button>',
+            $('<button></button>',
                 text: message
-                class: className
-
-            button.prependTo @container
-
-            button
+                class: className).prependTo @container
 
         showAll: =>
             @content.slideDown @speed

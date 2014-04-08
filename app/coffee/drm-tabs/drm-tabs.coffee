@@ -25,8 +25,7 @@
                 self.changeTab target
 
         getTarget: ->
-            target = $(@).attr 'href'
-            target
+            $(@).attr 'href'
 
         changeTab: (target) =>
             tab = @holder.find "section#{target}"
@@ -39,7 +38,7 @@
             window.location.hash = target   
             @nav.find("a[href='#{target}']").addClass @activeClass
 
-            return false
+            false
 
     new DrmTabs()
 

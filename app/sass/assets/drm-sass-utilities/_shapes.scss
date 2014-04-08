@@ -28,6 +28,7 @@
     display: $display;
     width: $width;
     height: $height;
+    box-sizing: border-box;
 
     @if $border-radius != 0 {
         border-radius: $border-radius;

@@ -3,13 +3,6 @@
 -----------------------------------------------------------------------------*/
 
 .wrapper {
-	@extend %drm-container;
-	margin-top: 20px;
-}
-
-h3 {
-	margin: 20px 0 20px 0;
-	font-weight: bold;
 }
 
 .drm-button {
@@ -20,10 +13,6 @@ h3 {
 .drm-button-inline {
 	margin: 5px;	
 	@include drm-button-solid($drm-blue, white, 200px, null, 3px, $drm-blue, inline-block);
-}
-
-pre {
-	max-width: 800px;
 }
 
 .options-list {

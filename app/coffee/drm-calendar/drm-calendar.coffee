@@ -196,8 +196,7 @@
                 self.changeCalendar.call self, month, year
 
         getDaysInMonth: (month, year) ->
-            days = new Date(year, month, 0).getDate()
-            days
+            new Date(year, month, 0).getDate()
 
         getDayOfWeek: (month, year, day) ->
             day = new Date year, month, day
@@ -206,16 +205,11 @@
         getWeeksInMonth: (numberDays, dayShift) =>
             Math.ceil (numberDays + dayShift) / @daysPerWeek
 
-        toTitleCase: (str) ->
-            str.replace /\w\S*/g, (txt) ->
-                txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
-
         createDaysInMonth: =>
             self = @
             numberDays = []
             $.each @months, (key, value) ->
                 numberDays.push self.getDaysInMonth (key + 1), self.currentYear
-            numberDays
 
         highlightCurrentDay: =>
             calendarInner = @calendar.find "div.#{@calendarInnerClass}"
@@ -249,20 +243,23 @@
             currentMonth = calendarInner.data 'month'
             weeks = calendarInner.find 'tr'
 
-            $.each self.holidays, (key, value) ->
-                month = $.inArray value.month, self.months
+            getWeekNum = (dayNum, day, numberDays, dayShift) ->
                 numberWeeks = self.getWeeksInMonth(numberDays, dayShift)
                 lastWeekLength = weeks.eq(numberWeeks).length
 
+                if dayNum is 'last' and dayShift <= day
+                    if lastWeekLength < day then (numberWeeks - 1) else numberWeeks
+                else if dayNum is 'last' and dayShift > day
+                    numberWeeks - 1
+                else
+                    parseInt dayNum, 10
+
+            $.each self.holidays, (key, value) ->
+                month = $.inArray value.month, self.months
+
                 if value.day
                     day = $.inArray value.day, self.days
-
-                    if value.dayNum is 'last' and dayShift <= day
-                        weekNum = if lastWeekLength < day then (numberWeeks - 1) else numberWeeks
-                    else if value.dayNum is 'last' and dayShift > day
-                        weekNum = (numberWeeks - 1)
-                    else
-                        weekNum = parseInt value.dayNum, 10
+                    weekNum = getWeekNum value.dayNum, day, numberDays, dayShift
 
                     if currentMonth is month
                         holidayWeek = if dayShift <= day then holidayWeek = weeks.eq weekNum else holidayWeek = weeks.eq weekNum + 1

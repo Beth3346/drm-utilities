@@ -2,8 +2,8 @@
 	Forms
 -----------------------------------------------------------------------------*/
 
-@mixin drm-form-state($glow: $drm-blue, $background: $lightest-grey, $border: $grey) {
-	background-color: $background;
+@mixin drm-form-state($glow: $drm-blue, $bk-color: $lightest-grey, $border: $grey) {
+	background-color: $bk-color;
 	border: 1px solid $border;
 	transition: border .5s ease-out, box-shadow .5s ease-out;
 
@@ -16,7 +16,7 @@
 	&:focus {
 		outline: none;
 		border: 1px solid darken($border, 20%);
-		background-color: lighten($background, 20%);
+		background-color: lighten($bk-color, 20%);
 		transition: border .5s ease-in, background .5s ease-in;
 	}
 
@@ -75,7 +75,7 @@
 	}
 
 	&[disabled] {
-		background-color: darken($background, 10%);
+		background-color: darken($bk-color, 10%);
 		border: 1px solid darken($border, 10%);	
 		transition: none;
 
@@ -89,13 +89,13 @@
 		&:focus {
 			outline: none;
 			border:  1px solid darken($border, 10%);
-			background-color: darken($background, 10%);
+			background-color: darken($bk-color, 10%);
 			transition: none;
 		}
 	}
 }
 
-@mixin drm-form($glow: $drm-blue, $background: $lightest-grey, $border: $grey) {
+@mixin drm-form($glow: $drm-blue, $bk-color: $lightest-grey, $border: $grey) {
 	padding: 10px;
 	width: 100%;
 	box-sizing: border-box;
@@ -136,7 +136,7 @@
 		padding: 5px 10px 5px 10px;
 		border-radius: 3px;
 		box-sizing: border-box;
-		@include drm-form-state($glow, $background, $border);
+		@include drm-form-state($glow, $bk-color, $border);
 	}
 
 	input[type="checkbox"], input[type="radio"] {
@@ -203,8 +203,8 @@
 	}
 }
 
-@mixin drm-tabular-form() {
-	@include drm-form();
+@mixin drm-tabular-form($glow: $drm-blue, $bk-color: $lightest-grey, $border: $grey) {
+	@include drm-form($glow, $bk-color, $border);
 
 	label, input, select {
 		display: block;
@@ -223,9 +223,9 @@
 	}
 }
 
-@mixin drm-inline-form() {
+@mixin drm-inline-form($glow: $drm-blue, $bk-color: $lightest-grey, $border: $grey) {
 	@include drm-clearfix();
-	@include drm-form();
+	@include drm-form($glow, $bk-color, $border);
 
 	padding-left: 0;
 
@@ -259,7 +259,7 @@
 	}
 }
 
-@mixin drm-form-notice($type) {
+@mixin drm-form-notice($type: 'info') {
 	margin: 0 0 5px 5px;
 	padding: 0;
 	@include drm-em-font(12);
@@ -270,7 +270,7 @@
 		color: $warning-color;
 	} @elseif $type == 'danger' {
 		color: $danger-color;
-	} @elseif $type == 'info' {
+	} @else {
 		color: $info-color;
 	}
 }

@@ -11,7 +11,7 @@
             $('html').on 'click', "div.#{@alertClass} button.close", -> self.clearAlert.call @, self.speed
 
         showAlert: (type, message, holder) ->
-            className = "#{type}-alert #{@alertClass}"
+            className = "drm-#{type}-alert #{@alertClass}"
             newAlert = $ '<div></div>',
                 text: message,
                 class: className
@@ -22,8 +22,6 @@
 
             newAlert.prependTo holder
             close.prependTo newAlert
-
-            newAlert
 
         clearAlert: (speed) -> 
             $(@).parent().fadeOut speed, ->
@@ -41,7 +39,7 @@
             $('html').on 'click', "div.#{@alertClass} button.close", -> self.clearAlert.call @, self.speed
 
         showAlert: (type, message, holder) ->
-            className = "#{type}-alert #{@alertClass}"
+            className = "drm-#{type}-alert #{@alertClass}"
             newAlert = $ '<div></div>',
                 text: message,
                 class: className
@@ -52,8 +50,6 @@
 
             newAlert.prependTo holder
             close.prependTo newAlert
-
-            newAlert
 
         clearAlert: (speed) -> 
             $(@).parent().fadeOut speed, ->

@@ -2,6 +2,20 @@
     Tables
 -----------------------------------------------------------------------------*/
 
+table { 
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+td {
+    text-align: left;
+    font-weight: normal;
+}
+
+thead {
+    font-weight: bold;
+}
+
 @mixin drm-table($padding, $bk-color, $color, $border-color, $stripes) {
     background-color: $bk-color;
     color: $color;

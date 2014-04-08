@@ -58,7 +58,7 @@
                 imgVisible.appendTo lightboxHtml
                 thumbnailHtml.appendTo lightboxHtml
 
-            return false
+            false
 
         changeImage: (e) ->
             img = $(@).attr 'href'
