@@ -15,11 +15,11 @@ body {
 
 	@include drm-breakpoint(tall) {		
 		font-size: ($default-font-size + 2)#{px};
-		line-height: $default-line-height + .2;
+		line-height: $default-line-height + 2;
 	}
 }
 
-.wrapper {
+.drm-wrapper {
 	@extend %drm-container;
 	margin-top: 20px;
 }	
@@ -28,7 +28,7 @@ body {
 	Visibility
 -----------------------------------------------------------------------------*/	
 
-.hide {
+.drm-hide {
 	display: none;
 }
 
@@ -36,15 +36,15 @@ body {
 	Clear and Alignment
 -----------------------------------------------------------------------------*/
 
-.pull-left {
+.drm-pull-left {
 	float: left;
 }
 
-.pull-right {
+.drm-pull-right {
 	float: right;
 }
 
-.clear {
+.drm-clear {
 	@include drm-clearfix();
 }
 
@@ -52,72 +52,72 @@ body {
 	Typography
 -----------------------------------------------------------------------------*/
 
-.bold {
+.drm-bold {
 	font-weight: bold;
 }	
 
-.italic {
+.drm-italic {
 	font-style: italic;
 }	
 
-.underline {
+.drm-underline {
 	text-decoration: underline;
 }	
 
-.uppercase {
+.drm-uppercase {
 	text-transform: uppercase;
 }
 
-.capitalize {
+.drm-capitalize {
 	text-transform: capitalize;
 }
 
-.smaller-text {
+.drm-smaller-text {
 	@include drm-em-font(10);
 }
 
-.text-left {
+.drm-text-left {
 	text-align: left;
 }
 
-.text-right {
+.drm-text-right {
 	text-align: right;
 }
 
-.text-center {
+.drm-text-center {
 	text-align: center;
 }
 
-.text-justified {
+.drm-text-justified {
 	text-align: justify;
 }
 
-.text-muted {
+.drm-text-muted {
 	color: $muted-color;
 }
 
-.text-disabled {
+.drm-text-disabled {
 	color: $light-grey;
 }
 
-.text-danger {
+.drm-text-danger {
 	color: $danger-color;	
 }
 
-.text-error {
+.drm-text-error {
 	color: $danger-color;
 	font-weight: bold;
 }
 
-.text-info {
+.drm-text-info {
 	color: $info-color;
 }
 
-.text-warning {
+.drm-text-warning {
 	color: $warning-color;
 }
 
-.text-success {
+.drm-text-success {
 	color: $success-color;
 }
 
@@ -128,7 +128,7 @@ mark {
 	padding-right: 3px;
 }
 
-.highlight {
+.drm-highlight {
 	color: $link-color;
 }
 

@@ -7,9 +7,10 @@
     class window.DrmAccordion
         constructor: (@speed = 300, @container = $('.drm-accordion')) ->
             @label = '.' + @container.children().first().attr 'class'
-            @contentHolder = '.' + $("#{@label}").next().attr 'class'
+            @containerClass = '.' + @container.attr 'class'
+            @contentHolder = @containerClass + ' .' + $("#{@label}").next().attr 'class'
             @state = @container.data 'state'
-            @content = @container.find @contentHolder
+            @content = $ @contentHolder
 
             @showDefaultContent()
             @addEvents()
@@ -38,10 +39,11 @@
 
     class window.DrmAccordionContent extends DrmAccordion
         constructor: (@speed = 300, @container = $('.drm-accordion'), @showButtons = yes) ->
-            @label = '.' + @container.children().first().attr 'class'
-            @contentHolder = '.' + $("#{@label}").next().attr 'class'
             @state = @container.data 'state'
-            @content = @container.find @contentHolder
+            @containerClass = '.' + @container.attr 'class'
+            @label = '.' + @container.children().first().attr 'class'
+            @contentHolder = @containerClass + ' .' + $("#{@label}").next().attr 'class'
+            @content = $ @contentHolder
 
             if @showButtons
                 @buttons = @addButtons()
@@ -78,9 +80,10 @@
     class window.DrmAccordionNav extends DrmAccordion
         constructor: (@speed = 300, @container = $('.drm-accordion-nav')) ->
             @state = @container.data 'state'
+            @containerClass = '.' + @container.attr 'class'
             @label = '.' + @container.children('ul').children('li').children('a').attr 'class'
-            @contentHolder = '.' + $("#{@label}").next('ul').attr 'class'
-            @content = @container.find @contentHolder
+            @contentHolder = @containerClass + ' .' + $("#{@label}").next('ul').attr 'class'
+            @content = $ @contentHolder
 
             @showDefaultContent()
             @addEvents()

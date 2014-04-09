@@ -5,7 +5,7 @@
 
 ( ($) ->
     class window.DrmStickyNav
-        constructor: (@nav = $('nav.drm-sticky-nav'), @activeClass = 'active', @content = $('div.sticky-nav-content')) ->
+        constructor: (@nav = $('nav.drm-sticky-nav'), @activeClass = 'active', @content = $('div.sticky-nav-content'), @spy = yes) ->
             self = @
             links = self.nav.find 'a[href^="#"]'
             hash = window.location.hash
@@ -22,7 +22,9 @@
             unless self.nav.length is 0
                 navPosition = self.nav.position().top
                 $(window).on 'scroll', -> self.affixNav navPosition
-                $(window).on 'scroll', self.scrollSpy
+                
+                if self.spy
+                    $(window).on 'scroll', self.scrollSpy
 
             self.nav.on 'click', 'a[href^="#"]', -> self.goToSection.call @, self.activeClass
 

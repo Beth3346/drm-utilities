@@ -4,8 +4,10 @@
 "use strict"
 
 ( ($) ->
+    new DrmAccordionNav 300, $('aside.sidebar')
     new DrmSimpleSlider $('div.drm-simple-slider-2')
     new DrmStickyNav $('nav.drm-sticky-sidebar'), null, $('div.sticky-sidebar-content')
+    new DrmStickyNav $('aside.sidebar'), null, $('div.main-content'), no
 
     drmAlert = new DrmDismissableAlert()
     drmAlert.showAlert 'info', 'This is just an informative alert', $('.drm-alert-holder')

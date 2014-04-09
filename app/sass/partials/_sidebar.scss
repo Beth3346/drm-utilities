@@ -8,6 +8,12 @@
     padding-left: 40px;
     box-sizing: border-box;
 
+    &.sticky-right {
+        position: fixed;
+        right: 4%;
+        top: 50px;
+    }
+
     h1 {
         padding: 10px;
     }
