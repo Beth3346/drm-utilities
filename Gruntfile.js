@@ -94,7 +94,7 @@ module.exports = function(grunt) {
 
             dist: {
                 // the files to concatenate
-                src: ['<%= distFolder %>js/coffee-compiled/*.js'],
+                src: ['<%= distFolder %>assets/*.js','<%= distFolder %>js/coffee-compiled/*.js'],
                 // the location of the resulting JS file
                 dest: '<%= distFolder %>js/dist/<%= pkg.name %>.<%= pkg.version %>.js'
             }

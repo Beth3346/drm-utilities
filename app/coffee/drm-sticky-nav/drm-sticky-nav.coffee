@@ -20,22 +20,36 @@
                 links.first().addClass self.activeClass
 
             unless self.nav.length is 0
-                navPosition = self.nav.position().top
-                $(window).on 'scroll', -> self.affixNav navPosition
+                win = $(window)
+                navPositionTop = self.nav.position().top
+                win.on 'scroll', -> self.affixNav navPositionTop
+                # win.on 'resize', -> self.positionRight
                 
                 if self.spy
-                    $(window).on 'scroll', self.scrollSpy
+                    win.on 'scroll', self.scrollSpy
 
             self.nav.on 'click', 'a[href^="#"]', -> self.goToSection.call @, self.activeClass
 
-        affixNav: (navPosition) =>
+        affixNav: (top) =>
             scroll = $('body').scrollTop()
             position = @nav.data 'position'
+            navPositionLeft = @nav.position().left
+            winHeight = $(window).height()
+            navHeight = @nav.height()
 
-            if scroll > (navPosition - 100)
+            if scroll > (top - 100) and navHeight < winHeight
                 @nav.addClass "sticky-#{position}"
+                @positionRight(navPositionLeft)
             else
                 @nav.removeClass "sticky-#{position}"
+
+        positionRight: (navPositionLeft) =>
+            position = @nav.data 'position'
+
+            if position isnt 'top'
+                @nav.css 'left': navPositionLeft
+            else
+                @nav.css 'left': 0
 
         goToSection: (activeClass) ->
             that = $ @
