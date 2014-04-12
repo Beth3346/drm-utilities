@@ -50,132 +50,158 @@ jshint -W100
             body.on 'keyup', ':input.drm-valid-integer', ->
                 value = self.getValue.call @
                 validate = self.validateInteger value, patterns.integer
-                validateField.call @, value, validate
+                if validate?
+                    validateField.call @, value, validate
 
             body.on 'keyup', ':input.drm-valid-number', ->
                 value = self.getValue.call @
                 validate = self.validateNumber value, patterns.number
-                validateField.call @, value, validate
+                if validate?
+                    validateField.call @, value, validate
 
             body.on 'keyup', ':input.drm-valid-url', ->
                 value = self.getValue.call @
                 validate = self.validateURL value, patterns.url
-                validateField.call @, value, validate
+                if validate?
+                    validateField.call @, value, validate
 
             body.on 'keyup', ':input.drm-valid-phone', ->
                 value = self.getValue.call @
                 validate = self.validatePhone value, patterns.phone
-                validateField.call @, value, validate
+                if validate?
+                    validateField.call @, value, validate
             
             body.on 'keyup', ':input.drm-valid-email', ->
                 value = self.getValue.call @
                 validate = self.validateEmail value, patterns.email
-                validateField.call @, value, validate
+                if validate?
+                    validateField.call @, value, validate
             
             body.on 'keyup', ':input.drm-valid-full-name', ->
                 value = self.getValue.call @
                 validate = self.validateFullName value, patterns.fullName
-                validateField.call @, value, validate
+                if validate?
+                    validateField.call @, value, validate
             
             body.on 'keyup', ':input.drm-valid-alpha', ->
                 value = self.getValue.call @
                 validate = self.validateAlpha value, patterns.alpha
-                validateField.call @, value, validate
+                if validate?
+                    validateField.call @, value, validate
             
             body.on 'keyup', ':input.drm-valid-alphanum', ->
                 value = self.getValue.call @
                 validate = self.validateAlphaNum value, patterns.alphaNum
-                validateField.call @, value, validate
+                if validate?
+                    validateField.call @, value, validate
             
             body.on 'keyup', ':input.drm-valid-alphadash', ->
                 value = self.getValue.call @
                 validate = self.validateAlphaNumDash value, patterns.alphaNumDash
-                validateField.call @, value, validate
+                if validate?
+                    validateField.call @, value, validate
             
             body.on 'keyup', ':input.drm-valid-alpha-num-underscore', ->
                 value = self.getValue.call @
                 validate = self.validateAlphaNumUnderscore value, patterns.alphaNumUnderscore
-                validateField.call @, value, validate
+                if validate?
+                    validateField.call @, value, validate
             
             body.on 'keyup', ':input.drm-valid-no-spaces', ->
                 value = self.getValue.call @
                 validate = self.validateNoSpaces value, patterns.noSpaces
-                validateField.call @, value, validate
+                if validate?
+                    validateField.call @, value, validate
             
             body.on 'keyup', ':input.drm-valid-no-tags', ->
                 value = self.getValue.call @
                 validate = self.validateNoTags value, patterns.noTags
-                validateField.call @, value, validate
+                if validate?
+                    validateField.call @, value, validate
             
             body.on 'keyup', ':input.drm-valid-credit-card', ->
                 value = self.getValue.call @
                 validate = self.validateCreditCard value, patterns.creditCard
-                validateField.call @, value, validate
+                if validate?
+                    validateField.call @, value, validate
             
             body.on 'keyup', ':input.drm-valid-cvv', ->
                 value = self.getValue.call @
                 validate = self.validateCvv value, patterns.cvv
-                validateField.call @, value, validate
+                if validate?
+                    validateField.call @, value, validate
             
             body.on 'keyup', ':input.drm-valid-zip', ->
                 value = self.getValue.call @
                 validate = self.validateZip value, patterns.zip
-                validateField.call @, value, validate
+                if validate?
+                    validateField.call @, value, validate
             
             body.on 'keyup', ':input.drm-valid-month-day-year', ->
                 value = self.getValue.call @
                 validate = self.validateMonthDayYear value, patterns.monthDayYear
-                validateField.call @, value, validate
+                if validate?
+                    validateField.call @, value, validate
             
             body.on 'keyup', ':input[data-max-value]:not([data-min-value])', ->
                 value = self.getValue.call @
                 validate = self.validateMaxValue.call @, value
-                validateField.call @, value, validate
+                if validate?
+                    validateField.call @, value, validate
             
             body.on 'keyup', ':input[data-min-value]:not([data-max-value])', ->
                 value = self.getValue.call @
                 validate = self.validateMinValue.call @, value
-                validateField.call @, value, validate
+                if validate?
+                    validateField.call @, value, validate
             
             body.on 'keyup', ':input[data-max-length]:not([data-min-length])', ->
                 value = self.getValue.call @
                 validate = self.validateMaxLength.call @, value
-                validateField.call @, value, validate
+                if validate?
+                    validateField.call @, value, validate
             
             body.on 'keyup', ':input[data-min-length]:not([data-max-length])', ->
                 value = self.getValue.call @
                 validate = self.validateMinLength.call @, value
-                validateField.call @, value, validate
+                if validate?
+                    validateField.call @, value, validate
             
             body.on 'keyup', ':input[data-min-value][data-max-value]', ->
                 value = self.getValue.call @
                 validate = self.validateBetweenValue.call @, value
-                validateField.call @, value, validate
+                if validate?
+                    validateField.call @, value, validate
             
             body.on 'keyup', ':input[data-min-length][data-max-length]', ->
                 value = self.getValue.call @
                 validate = self.validateBetweenLength.call @, value
-                validateField.call @, value, validate
+                if validate?
+                    validateField.call @, value, validate
             
             body.on 'keyup', ':input[data-equal]', ->
                 value = self.getValue.call @
                 validate = self.validateEqual.call @, value
-                validateField.call @, value, validate
+                if validate?
+                    validateField.call @, value, validate
             
             body.on 'keyup', ':input[data-not-equal]', ->
                 value = self.getValue.call @
                 validate = self.validateNotEqual.call @, value
-                validateField.call @, value, validate
+                if validate?
+                    validateField.call @, value, validate
             
             body.on 'keyup', ':input[data-in-list]', ->
                 value = self.getValue.call @
                 validate = self.validateInList.call @, value
-                validateField.call @, value, validate
+                if validate?
+                    validateField.call @, value, validate
             
             body.on 'keyup', ':input[data-not-list]', ->
                 value = self.getValue.call @
                 validate = self.validateNotList.call @, value
-                validateField.call @, value, validate
+                if validate?
+                    validateField.call @, value, validate
 
             body.on 'keyup', ':input', self.trackLength
 
@@ -184,7 +210,8 @@ jshint -W100
             body.on 'blur', '[required]', -> 
                 value = self.getValue.call @
                 validate = self.validateRequired.call @, value
-                validateField.call @, value, validate
+                if validate?
+                    validateField.call @, value, validate
 
             body.on 'blur', ':input:not([required])', ->
                 value = self.getValue.call @
@@ -195,7 +222,8 @@ jshint -W100
             body.on 'blur', ':input[data-required-with]', ->
                 value = self.getValue.call @
                 validate = self.validateRequiredWith.call @, value
-                validateField.call @, value, validate
+                if validate?
+                    validateField.call @, value, validate
 
         trackLength: ->
             that = $ @

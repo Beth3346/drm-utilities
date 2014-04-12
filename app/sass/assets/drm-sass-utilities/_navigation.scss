@@ -333,8 +333,10 @@
 	transition: all, .3s ease-out;
 
 	@if $center == center {
-		margin-left: auto;
-		margin-right: auto;
+		margin: 10px auto 10px auto;
+	} @else {
+		margin-top: 10px;
+		margin-bottom: 10px;
 	}
 
 	&:visited {
@@ -383,8 +385,10 @@
 	}
 
 	@if $center == center {
-		margin-left: auto;
-		margin-right: auto;
+		margin: 10px auto 10px auto;
+	} @else {
+		margin-top: 10px;
+		margin-bottom: 10px;
 	}
 
 	&:visited {
@@ -459,9 +463,12 @@
 	transition: all, .3s ease-out;
 
 	@if $center == center {
-		margin-left: auto;
-		margin-right: auto;
+		margin: 10px auto 10px auto;		
+	} @else {
+		margin-top: 10px;
+		margin-bottom: 10px;
 	}
+
 
 	&:visited {
 		color: $color;
@@ -532,6 +539,7 @@
 }
 
 @mixin drm-button-group($bk-color: $link-color, $color: white, $border-radius: 0, $border: none) {
+	border-collapse: collapse;
 	@include drm-clearfix();
 
 	button {
@@ -554,7 +562,7 @@
  			border: none;
 		} @else {
 			border: 1px solid $border;
-			border-collapse: collapse;
+			border-left: none;
 		}
 
 		&:visited {
@@ -573,6 +581,7 @@
 		@if $border-radius != 0 {
 			&:first-of-type {
 				border-radius: $border-radius 0 0 $border-radius;
+				border-left: 1px solid $border;
 			}
 
 			&:last-of-type {
@@ -587,7 +596,6 @@
 	position: relative;
 
 	button {
-		margin: 0 0 5px 0;
 		position: relative;
 		@if $border == none {			
 			@include drm-button-solid($bk-color, $color, 100%);
@@ -635,7 +643,7 @@
 
     .drm-dropdown-button-group {
 		margin: 0 0 5px 0;
-        @include drm-button-group($drm-blue, white, $border-radius, $border);
+        @include drm-button-group(white, $drm-blue, $border-radius, $border);
     }
 
 	button {
@@ -643,7 +651,6 @@
 		margin: 0;
 
 		&:last-of-type {
-			border-left: 1px solid darken($bk-color, 5%);
 			padding-left: 10px;
 			padding-right: 10px;
 		}

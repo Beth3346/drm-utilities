@@ -2,19 +2,19 @@
     General Styles
 -----------------------------------------------------------------------------*/
 
-.wrapper {
-}
-
-.drm-button {
-	margin: 5px;	
+.drm-button {	
 	@include drm-button-solid($drm-blue, white, 200px);
 }
 
 .drm-button-inline {
-	margin: 5px;	
 	@include drm-button-solid($drm-blue, white, 200px, null, 3px, $drm-blue, inline-block);
 }
 
 .options-list {
 	@include drm-em-font(14);
+}
+
+.copyright {
+    text-align: center;
+    @include drm-em-font(12);
 }

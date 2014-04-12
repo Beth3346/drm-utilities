@@ -25,10 +25,7 @@ nav
     p A modern clearfix alternative to overflow: hidden
 
     pre.center-block.
-        .clearfix {
-            @include drm-clearfix();
-        }
-
+        @include drm-clearfix();
 
     h3.drm-bold#container Container
 
@@ -41,9 +38,7 @@ nav
     p Centers an element on the page. Includes built in breakpoints for responsiveness
 
     pre.center-block.
-        .container {
-            @extend %drm-container;
-        }
+        @extend %drm-container;
 
     pre.center-block &lt;div class="container"&gt;Some Text&lt;/div&gt;
 
@@ -58,9 +53,7 @@ nav
     p Forces an element to take the entire width of its container. Provides padding to center content and built in breakpoints for responsiveness
 
     pre.center-block.
-        .container-full-width {
-            @extend %drm-container-full-width;
-        }
+        @extend %drm-container-full-width;
 
     pre.center-block &lt;div class="container-full-width"&gt;Some Text&lt;/div&gt;
 
@@ -69,9 +62,7 @@ nav
     p removes all padding and margin from an element
 
     pre.center-block.
-        .reset-box {
-            @extend %drm-reset-box;
-        }
+        @extend %drm-reset-box;
 
     h3.drm-bold#row Row
 
@@ -90,9 +81,7 @@ nav
                 quia nam illo obcaecati molestias expedita eveniet aut exercitationem placeat minus possimus aliquam minima. Nemo, nihil.
 
     pre.center-block.
-        .row {
-            @extend %drm-row;
-        }
+        @extend %drm-row;
 
     pre.center-block.
         &lt;div class="container"&gt;
@@ -113,9 +102,7 @@ nav
     p horizontally centers an element within its container using margin auto. container must have a width rule.
 
     pre.center-block.
-        .center-block {
-            @extend %drm-center-block;
-        }
+        @extend %drm-center-block;
 
     h3.drm-bold#feature-boxes Feature Boxes
 
@@ -137,9 +124,7 @@ nav
         li $margin-bottom: bottom margin - defaults to 0
 
     pre.center-block.
-        .feature-box {
-            @include drm-feature-box(3, 1%, 1%);
-        }
+        @include drm-feature-box(3, 1%, 1%);
 
     pre.center-block.
         &lt;div class="container-full-width"&gt;
@@ -175,9 +160,7 @@ nav
         li $margin-bottom: bottom margin - defaults to $margin for equal margins on all sides of the feature box
 
     pre.center-block.
-        .feature-box-margin {
-            @include drm-feature-box(3, 1%, 1%, 1%);
-        }
+        @include drm-feature-box(3, 1%, 1%, 1%);
 
     pre.center-block.
         &lt;div class="container-full-width"&gt;

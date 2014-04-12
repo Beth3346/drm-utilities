@@ -94,6 +94,12 @@
 	}
 }
 
+.inset-box-holder {
+	background-color: $light-grey;
+    margin: 20px auto 20px auto;
+    @include drm-clearfix();
+}
+
 .inset-box {
 	margin: 20px;
 	padding: 20px;
@@ -110,6 +116,20 @@
 	@include drm-boxy-drop-shadow();
 }
 
-.drm-softer-thick-box-shadow {
+.softer-thick-box-shadow {
+	margin: 20px;
+	padding: 20px;
+	background-color: $drm-blue;
+	border: 1px solid $dark-grey;
 	@include drm-softer-thick-box-shadow();
+}
+
+.rounded-thumbnail {
+	margin: 10px;
+	@include drm-thumbnail(white, 150px, 125px, 5px);
+}
+
+.round-thumbnail {
+	margin: 10px;
+	@include drm-thumbnail(white, 150px, null, round);
 }

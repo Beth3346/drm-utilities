@@ -45,7 +45,39 @@
 	@include drm-nav-bar-pills-solid-stacked;
 }
 
+.button-link {
+	@include drm-button-link($drm-blue, white, 25%, left, 0, white, block);
+}
+
+.button-link-radius {
+	@include drm-button-link($drm-blue, white, 25%, left, 3px, white, block);
+}
+
+.button-solid {
+	@include drm-button-solid($drm-blue, white, 25%, left, 0, $drm-blue, block);
+}
+
+.button-solid-radius {
+	@include drm-button-solid($drm-blue, white, 25%, left, 3px, $drm-blue, block);
+}
+
+.button-rectangle {
+	@include drm-rectangle-button($drm-blue, white, 0, 25%, left, block);
+}
+
+.button-rectangle-radius {
+	@include drm-rectangle-button($drm-blue, white, 3px, 25%, left, block);
+}
+
+.pill-button-link {
+	@include drm-pill-button-link(50px, $drm-blue, white, 25%, left, $drm-blue, block);
+}
+
+.pill-button-solid {
+	@include drm-pill-button-solid(50px, $drm-blue, white, 25%, left, $drm-blue, block);
+}
+
 .button-group {
 	margin: 10px;
-	@include drm-button-group($drm-blue, white, 3px);
+	@include drm-button-group(white, $drm-blue, 3px, $drm-blue);
 }
