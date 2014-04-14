@@ -9,7 +9,27 @@
             self = @
             self.button = 'button.show-password'
 
-            @blacklist = [
+            $('form').on 'click', self.button, self.showPassword
+            @password.on 'keyup', self.createMeter
+
+        showPassword: (e) =>
+            fieldType = @password.attr 'type'
+            button = $ @button
+
+            if fieldType is 'password'
+                @password.attr 'type', 'text'
+                button.text 'Hide Password'
+            else
+                @password.attr 'type', 'password'
+                button.text 'Show Password'
+
+            e.preventDefault()
+
+        getPassword: =>
+            $.trim @password.val()
+
+        checkBlacklist: (password) ->
+            blacklist = [
                 'password',
                 'pass',
                 '1234',
@@ -38,51 +58,73 @@
                 'default'
             ]
 
-            $('form').on 'click', self.button, self.showPassword
-            @password.on 'keyup', self.evaluatePassword
+            $.inArray password.toLowerCase(), blacklist
 
-        showPassword: (e) =>
-            fieldType = @password.attr 'type'
-            button = $ @button
+        checkLength: (password, length) ->
+            passwordLength = password.length
 
-            if fieldType is 'password'
-                @password.attr 'type', 'text'
-                button.text 'Hide Password'
+            if passwordLength < length
+                true
             else
-                @password.attr 'type', 'password'
-                button.text 'Show Password'
+                false
 
-            e.preventDefault()
-
-        evaluatePassword: =>
-            password = $.trim @password.val()
-            blacklist = $.inArray password.toLowerCase(), @blacklist
-            strength = null
-            length = password.length
-
+        checkStrength: (password) ->
             patterns =
                 number: new RegExp '^\\d*$','g'
                 alphaLower: new RegExp '^[a-z]*$','g'
+                alphaUpper: new RegExp '^[A-Z]*$','g'
+
+            if patterns.number.test password
+                true
+            else if patterns.alphaLower.test password
+                true
+            else if patterns.alphaUpper.test password
+                true
+            else
+                false
+
+        evaluatePassword: =>
+            password = @getPassword()
+            blacklist = @checkBlacklist password
+            complexity = @checkStrength password
+            length = @checkLength password, 7
+            results =
+                message: null
+                strength: null
 
             if blacklist isnt -1
-                strength = 0
-                console.log 'please do not use a common password'
-            else if patterns.number.test password
-                strength = 0
-                console.log 'add some letters or special characters'
-            else if patterns.alphaLower.test password
-                strength = 0
-                console.log 'add some uppercase letters, numbers and special characters'
-            else if length < 6
-                strength = 0
-                console.log 'not enough characters'
+                results.strength = 'weak'
+                results.message = 'please do not use a common password'
+            else if complexity
+                results.strength = 'weak'
+                results.message = 'use a combination of uppercase and lowercase letters, numbers, and special characters'
+            else if length
+                results.strength = 'weak'
+                results.message = 'not enough characters'
             else
-                if (length - 6) < 10
-                    strength = length - 6
-                else
-                    strength = 10
+                results.strength = 'strong'
+                results.message = 'great password'
 
-            console.log "Strength: #{strength}"
+            results
+
+        createMeter: =>
+            password = @getPassword()
+            length = password.length
+            results = @evaluatePassword()
+            resultsHolder = $ 'small.password-meter'
+
+            if resultsHolder.length is 0 and results.message isnt null
+
+                resultsHolder = $ '<small></small>',
+                    text: results.message + results.message
+                    class: 'password-meter'
+
+                resultsHolder.hide().insertAfter(@password).show()
+
+            else if results.message is null or length is 0
+                resultsHolder.remove()
+            else
+                resultsHolder.text results.message
 
     new DrmPasswords()
 

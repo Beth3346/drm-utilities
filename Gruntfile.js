@@ -217,12 +217,12 @@ module.exports = function(grunt) {
 
             scripts: {
                 // We watch and compile sass files as normal but don't live reload here
-                files: ['<%= appFolder %>assets/*.js', '<%= appFolder %>coffee/**/*.coffee'],
+                files: ['<%= appFolder %>assets/**/*.js', '<%= appFolder %>coffee/**/*.coffee'],
                 tasks: [ 'coffee', 'concat', 'uglify' ],
             },
 
             copy: {
-                files: [ '<%= appFolder %>**', '!<%= appFolder %>**/*.scss', '!<%= appFolder %>**/*.coffee', '!<%= appFolder %>**/*.{png,jpg,jpeg}' ],
+                files: [ '<%= appFolder %>**/*', '!<%= appFolder %>**/*.scss', '!<%= appFolder %>**/*.coffee', '!<%= appFolder %>**/*.{png,jpg,jpeg}' ],
                 tasks: [ 'copy' ]
             },
 
@@ -255,7 +255,7 @@ module.exports = function(grunt) {
     grunt.registerTask('cssstuff', ['clean:stylesheets', 'copy', 'compass:dev', 'autoprefixer', 'csslint', 'clean:postbuild']);
     grunt.registerTask('jsstuff', ['clean:scripts', 'copy', 'coffee', 'concat', 'jshint', 'uglify', 'clean:postbuild']);
     grunt.registerTask('imgstuff', ['clean:images', 'copy', 'imagemin', 'clean:postbuild']);
-    grunt.registerTask('default', ['clean:build', 'copy', 'jade:dev', 'imagemin', 'coffee', 'concat', 'uglify', 'compass:dev', 'autoprefixer', 'csslint', 'clean:postbuild', 'watch']);
+    grunt.registerTask('default', ['clean:build', 'copy', 'jade:dev', 'imagemin', 'coffee', 'concat', 'uglify', 'compass:dev', 'autoprefixer', 'csslint', 'watch']);
     grunt.registerTask('build', ['clean:build', 'copy', 'jade:dist', 'imagemin', 'coffee', 'concat', 'uglify', 'compass:dist', 'autoprefixer', 'csslint', 'clean:postbuild'])
 
 };
