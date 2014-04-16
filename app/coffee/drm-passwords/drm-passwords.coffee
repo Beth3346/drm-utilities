@@ -92,26 +92,28 @@
                 status: null
                 passwordLength: password.length
             blacklist = @checkBlacklist password
-            complexity = @checkStrength password
             length = @checkLength results.passwordLength, 7
+            complexity = @checkStrength password
 
             if blacklist isnt -1
                 results.strength = 'weak'
                 results.message = 'please do not use a common password'
+                results.status = 'danger'
             else if length
                 results.strength = 'weak'
                 results.message = 'not enough characters'
+                results.status = 'danger'
             else if complexity
                 results.strength = complexity
                 results.message = 'use a combination of uppercase and lowercase letters, numbers, and special characters'
+                results.status = switch
+                    when complexity == 'weak' then 'danger'
+                    when complexity == 'medium' then 'warning'
+                    when complexity == 'strong' then 'success'
             else
                 results.strength = 'strong'
                 results.message = 'great password'
-
-            results.status = switch
-                when results.strength == 'weak' then 'danger'
-                when results.strength == 'medium' then 'warning'
-                when results.strength == 'strong' then 'success'
+                results.strength = 'success'
 
             @createMessage results
             @createMeter results

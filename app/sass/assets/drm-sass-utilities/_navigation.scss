@@ -558,7 +558,7 @@
 		transition: all, .3s ease-out;
 		box-shadow: none;
 
-		@if $border == 'none' {
+		@if $border == none {
  			border: none;
 		} @else {
 			border: 1px solid $border;
@@ -581,7 +581,12 @@
 		@if $border-radius != 0 {
 			&:first-of-type {
 				border-radius: $border-radius 0 0 $border-radius;
-				border-left: 1px solid $border;
+
+				@if $border == none {
+		 			border-left: none;
+				} @else {
+					border-left: 1px solid $border;
+				}
 			}
 
 			&:last-of-type {

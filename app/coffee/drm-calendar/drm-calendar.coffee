@@ -176,9 +176,13 @@
 
             self.createCalendar self.currentMonth, self.currentYear
 
-            self.calendarNav.on 'click', '.drm-calendar-prev, .drm-calendar-next', ->
+            self.calendarNav.on 'click', '.drm-calendar-month-prev, .drm-calendar-month-next', ->
                 direction = $(@).data 'dir'
                 self.advanceMonth.call @, direction
+
+            self.calendarNav.on 'click', '.drm-calendar-year-prev, .drm-calendar-year-next', ->
+                direction = $(@).data 'dir'
+                self.advanceYear.call @, direction
 
             self.calendarNav.on 'click', '.drm-calendar-current', ->
                 self.changeCalendar.call @, self.currentMonth, self.currentYear
@@ -282,14 +286,25 @@
 
         advanceMonth: (direction) =>
             calendarInner = @calendar.find "div.#{@calendarInnerClass}"
+            month = calendarInner.data 'month'
+            year = calendarInner.data 'year'
             
             if direction is 'prev'
-                month = if calendarInner.data('month') - 1 >= 0 then calendarInner.data('month') - 1 else 11
-                year = if calendarInner.data('month') - 1 >= 0 then calendarInner.data('year') else calendarInner.data('year') - 1
+                month = if month - 1 >= 0 then month - 1 else 11
+                year = if month - 1 >= 0 then year else year - 1
             else if direction is 'next'
-                month = if calendarInner.data('month') + 1 < 12 then calendarInner.data('month') + 1 else 0
-                year = if calendarInner.data('month') + 1 < 12 then calendarInner.data('year') else calendarInner.data('year') + 1
+                month = if month + 1 < 12 then month + 1 else 0
+                year = if month + 1 < 12 then year else year + 1
 
+            @changeCalendar month, year
+
+        advanceYear: (direction) =>
+            calendarInner = @calendar.find "div.#{@calendarInnerClass}"
+            month = calendarInner.data 'month'
+            year = calendarInner.data 'year'
+            
+            if direction is 'prev' then year = year - 1 else year = year + 1
+            
             @changeCalendar month, year
 
         changeCalendar: (month, year) =>

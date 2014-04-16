@@ -7,9 +7,11 @@ section
 
     .drm-calendar
         .drm-calendar-nav
-            button.drm-calendar-prev(data-dir='prev') Previous Month
-            button.drm-calendar-next(data-dir='next') Next Month
+            button.drm-calendar-year-prev(data-dir='prev') Previous Year
+            button.drm-calendar-month-prev(data-dir='prev') Previous Month
             button.drm-calendar-current Today
+            button.drm-calendar-month-next(data-dir='next') Next Month
+            button.drm-calendar-year-next(data-dir='next') Next Year
         form.drm-calendar-select(action="" role="form")
             label(for="month") Month:
             select#month(name="month")
