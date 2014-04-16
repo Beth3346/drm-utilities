@@ -10,7 +10,7 @@
             self.button = 'button.show-password'
 
             $('form').on 'click', self.button, self.showPassword
-            @password.on 'keyup', self.createMeter
+            @password.on 'keyup', self.evaluatePassword
 
         showPassword: (e) =>
             fieldType = @password.attr 'type'
@@ -60,10 +60,8 @@
 
             $.inArray password.toLowerCase(), blacklist
 
-        checkLength: (password, length) ->
-            passwordLength = password.length
-
-            if passwordLength < length
+        checkLength: (length, reqLength) ->
+            if length < reqLength
                 true
             else
                 false
@@ -73,58 +71,90 @@
                 number: new RegExp '^\\d*$','g'
                 alphaLower: new RegExp '^[a-z]*$','g'
                 alphaUpper: new RegExp '^[A-Z]*$','g'
+                alphaNum: new RegExp '^[\\da-z]*$','ig'
 
             if patterns.number.test password
-                true
+                return 'weak'
             else if patterns.alphaLower.test password
-                true
+                return 'weak'
             else if patterns.alphaUpper.test password
-                true
+                return 'weak'
+            else if patterns.alphaNum.test password
+                return 'medium'
             else
-                false
+                return null
 
         evaluatePassword: =>
             password = @getPassword()
-            blacklist = @checkBlacklist password
-            complexity = @checkStrength password
-            length = @checkLength password, 7
             results =
                 message: null
                 strength: null
+                status: null
+                passwordLength: password.length
+            blacklist = @checkBlacklist password
+            complexity = @checkStrength password
+            length = @checkLength results.passwordLength, 7
 
             if blacklist isnt -1
                 results.strength = 'weak'
                 results.message = 'please do not use a common password'
-            else if complexity
-                results.strength = 'weak'
-                results.message = 'use a combination of uppercase and lowercase letters, numbers, and special characters'
             else if length
                 results.strength = 'weak'
                 results.message = 'not enough characters'
+            else if complexity
+                results.strength = complexity
+                results.message = 'use a combination of uppercase and lowercase letters, numbers, and special characters'
             else
                 results.strength = 'strong'
                 results.message = 'great password'
 
-            results
+            results.status = switch
+                when results.strength == 'weak' then 'danger'
+                when results.strength == 'medium' then 'warning'
+                when results.strength == 'strong' then 'success'
 
-        createMeter: =>
-            password = @getPassword()
-            length = password.length
-            results = @evaluatePassword()
-            resultsHolder = $ 'small.password-meter'
+            @createMessage results
+            @createMeter results
 
-            if resultsHolder.length is 0 and results.message isnt null
+        createMessage: (results) =>
+            passwordMessage = $ 'small.password-message'
+            messageClass = 'password-message'
 
-                resultsHolder = $ '<small></small>',
-                    text: results.message + results.message
-                    class: 'password-meter'
+            if results.passwordLength is 0
+                passwordMessage.remove()
+            else if passwordMessage.length is 0 and results.message isnt null
+                passwordMessage = $ '<small></small>',
+                    text: "#{results.message}"
+                    class: "password-message-#{results.status} password-message"
 
-                resultsHolder.hide().insertAfter(@password).show()
-
-            else if results.message is null or length is 0
-                resultsHolder.remove()
+                passwordMessage.hide().insertAfter(@password).show()
             else
-                resultsHolder.text results.message
+                @removeStatusClass messageClass
+                passwordMessage.text "#{results.message}"
+                passwordMessage.addClass "password-message-#{results.status}"
+
+        createMeter: (results) =>
+            passwordMeter = $ 'p.password-meter'
+            meterClass = 'password-meter'
+
+            if results.passwordLength is 0
+                passwordMeter.remove()
+            else if passwordMeter.length is 0
+                passwordMeter = $ '<p></p>',
+                    text: "#{results.strength}",
+                    class: "password-meter-#{results.status} password-meter"
+
+                passwordMeter.hide().insertAfter(@password).show()
+            else
+                @removeStatusClass meterClass
+                passwordMeter.text "#{results.strength}"
+                passwordMeter.addClass "password-meter-#{results.status}"
+
+        removeStatusClass: (elementClass) ->
+            element = $ ".#{elementClass}"
+            element.removeClass "#{elementClass}-danger"
+            element.removeClass "#{elementClass}-warning"
+            element.removeClass "#{elementClass}-success"
 
     new DrmPasswords()
 

@@ -107,7 +107,7 @@
 		padding: 0;
 	}
 
-	p{
+	p {
 		&.form-success-notice {
 			@include drm-form-notice(success);
 		}
@@ -122,6 +122,32 @@
 
 		&.form-length-notice {
 			@include drm-form-notice(info);	
+		}
+
+		&.password-meter-danger {
+			@include drm-password-meter(danger);
+		}
+
+		&.password-meter-warning {
+			@include drm-password-meter(warning);
+		}
+
+		&.password-meter-success {
+			@include drm-password-meter(success);
+		}
+	}
+
+	small {
+		&.password-message-danger {
+			@include drm-form-notice(danger);
+		}
+
+		&.password-message-warning {
+			@include drm-form-notice(warning);
+		}
+
+		&.password-message-success {
+			@include drm-form-notice(success);
 		}
 	}
 
@@ -264,7 +290,7 @@
 	padding: 0;
 	@include drm-em-font(12);
 
-	@if $type == 'sucess' {
+	@if $type == 'success' {
 		color: $success-color;
 	} @elseif $type == 'warning' {
 		color: $warning-color;
@@ -272,5 +298,26 @@
 		color: $danger-color;
 	} @else {
 		color: $info-color;
+	}
+}
+
+@mixin drm-password-meter($type: 'success') {
+	font-weight: bold;
+	margin: 5px 0 5px 0;
+	padding: 5px 10px 5px 10px;
+	@include drm-em-font(16);
+
+	@if $type == 'danger' {		
+        background-color: lighten($danger-color, 20%);
+        border: 1px solid $danger-color;
+        color: darken($danger-color, 20%);
+	} @elseif $type == 'warning' {
+        background-color: lighten($warning-color, 20%);
+        border: 1px solid $warning-color;
+        color: darken($warning-color, 20%);
+	} @elseif $type == 'success' {
+        background-color: lighten($success-color, 20%);
+        border: 1px solid $success-color;
+        color: darken($success-color, 20%);
 	}
 }

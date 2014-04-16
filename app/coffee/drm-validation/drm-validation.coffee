@@ -233,16 +233,16 @@ jshint -W100
             
             createMessage = (length) ->
                 if length is 1 then "#{length} character" else "#{length} characters"
-
-            if lengthNotice.length is 0
+            
+            if length is 0
+                lengthNotice.remove()
+            else if lengthNotice.length is 0
                 message = createMessage length
                 lengthNotice = $ '<p></p>',
                     text: message
                     class: 'form-length-notice'
                 
                 lengthNotice.hide().insertAfter(that).show()
-            else if length is 0
-                lengthNotice.remove()
             else
                 message = createMessage length
                 lengthNotice.text message
