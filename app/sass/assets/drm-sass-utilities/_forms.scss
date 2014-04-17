@@ -201,6 +201,18 @@
 	.drm-inline-control-group {
 		@include drm-clearfix();
 
+		label {
+			float: left;
+			width: auto;
+			margin: 6px 15px 0 0;
+		}
+
+		input[type="text"], input[type="tel"], input[type="email"], input[type="password"], input[type="url"], textarea, select {
+			float: left;
+			width: auto;
+			margin: 5px 15px 0 0;
+		}
+
 		.drm-control-group {
 			margin-left: -10px;
 			margin-right: 15px;
@@ -269,10 +281,10 @@
 		float: left;
 	}
 
-	input[type="submit"], button {		
-		margin: 5px;
+	input[type="submit"], button {
 		@include drm-button-solid($drm-blue, white, 100px, null, 3px, $drm-blue, block);
 		@include drm-em-font(12);
+		margin: 0;
 	}
 
 	.drm-control-group {		

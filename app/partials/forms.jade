@@ -18,6 +18,13 @@ h2 Forms Examples
 
             label(for="phone") Phone:
             input(type="tel" id="phone" name="phone" placeholder="212-867-5309" disabled)
+            
+            .drm-inline-control-group 
+                label(for="fav-animal2") Favorite Animal:
+                input(type="text" id="fav-animal2" name="fav-animal2" placeholder="Penguin")
+
+                label(for="fav-city") Favorite City:
+                input(type="text" id="fav-city" name="fav-city" placeholder="New York City")
 
             .drm-tabular-control-group
                 .drm-control-group
@@ -89,23 +96,39 @@ h2 Forms Examples
                 .drm-control-group
                     label
                         input(type="radio" name="radio-colors" value="blue") 
-                        | Blue   
-                    
+                        | Blue
+            
+            label(for="fav-num") Favorite Number:
             select
+                option Favorite Number
                 option 1
                 option 2
                 option 3
                 option 4
                 option 5
-            
+                        
+            label(for="fav-color") Favorite Color:
             select(disabled)
+                option Favorite Color
                 option Red
                 option Yellow
                 option Green
                 option Blue
-                option Orange           
+                option Orange
+            
+            .drm-inline-control-group 
+                label(for="fav-animal") Favorite Animal:
+                select
+                    option Favorite Animal
+                    option Pengiun
+                    option Owl
+                    option Dog
+                    option Cat
+                    option Panda Bear
 
+            label(for="fav-num-2") Favorite Number:
             select(multiple)
+                option Favorite Number
                 option 1
                 option 2
                 option 3

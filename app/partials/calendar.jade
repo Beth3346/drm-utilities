@@ -13,23 +13,24 @@ section
             button.drm-calendar-month-next(data-dir='next') Next Month
             button.drm-calendar-year-next(data-dir='next') Next Year
         form.drm-calendar-select(action="" role="form")
-            label(for="month") Month:
-            select#month(name="month")
-                option Select Month
-                option(value=0) January
-                option(value=1) February
-                option(value=2) March
-                option(value=3) April
-                option(value=4) May
-                option(value=5) June
-                option(value=6) July
-                option(value=7) August
-                option(value=8) September
-                option(value=9) October
-                option(value=10) November
-                option(value=11) December
-            label(for="year") Year:
-            input.drm-valid-integer#year(name="year" data-min-value="1" data-min-length="4" data-max-length="4")
-            button#submit(type="submit") Select
+            .drm-inline-control-group 
+                label(for="month") Month:
+                select#month(name="month")
+                    option Select Month
+                    option(value=0) January
+                    option(value=1) February
+                    option(value=2) March
+                    option(value=3) April
+                    option(value=4) May
+                    option(value=5) June
+                    option(value=6) July
+                    option(value=7) August
+                    option(value=8) September
+                    option(value=9) October
+                    option(value=10) November
+                    option(value=11) December
+                label(for="year") Year:
+                input.drm-valid-integer#year(type="text" name="year" data-min-value="1" data-min-length="4" data-max-length="4")
+                button#submit(type="submit") Select
 
     h2 Usage
