@@ -39,7 +39,7 @@ jshint -W100
 
             validateField = (value, validate) ->
                 if validate.message?
-                    self.issueNotice.call @, validate.status, validate.message, validate.issuer, self.speed
+                    self.issueNotice.call @, validate, self.speed
                 else
                     self.removeNotice.call @, validate.issuer, self.speed
                 self.removeValidationClass.call @, validate.status
@@ -203,7 +203,13 @@ jshint -W100
                 if validate?
                     validateField.call @, value, validate
 
-            body.on 'keyup', ':input', self.trackLength
+            body.on 'keyup', ':input', ->
+                value = self.getValue.call @
+                validate = self.trackLength.call @, value
+                if validate.message?
+                    self.issueNotice.call @, validate, self.speed
+                else
+                    self.removeNotice.call @, validate.issuer, self.speed
 
             # validate empty fields
             
@@ -225,34 +231,16 @@ jshint -W100
                 if validate?
                     validateField.call @, value, validate
 
-        trackLength: ->
+        trackLength: (value) ->
             that = $ @
-            value = $.trim that.val()
-            length = value.length
-            lengthNotice = that.nextUntil ':input', '.form-length-notice'
-            notices = $ "p.form-notice"
-            noticesLength = notices.length
-            console.log noticesLength
-            
-            createMessage = (length) ->
-                if length is 1 then "#{length} character" else "#{length} characters"
-            
-            if length is 0
-                lengthNotice.remove()
-            else if lengthNotice.length is 0
-                message = createMessage length
-                lengthNotice = $ '<p></p>',
-                    text: message
-                    class: 'form-length-notice form-notice'
-                
-                lengthNotice.hide().insertAfter(that).show()
-
-                # if that.css('float') isnt 'none'
-
-                    # lengthNotice.css styles
-            else
-                message = createMessage length
-                lengthNotice.text message
+            validate =
+                status: 'length'
+                message: null
+                issuer: 'length-notice'
+            if value?
+                length = value.length
+                validate.message = if length is 1 then "#{length} character" else "#{length} characters"
+            validate
 
         getValue: ->
             value = $.trim $(@).val()
@@ -262,49 +250,62 @@ jshint -W100
             else
                 null
 
-        issueNotice: (status, message, issuer, speed) ->
+        issueNotice: (validate, speed) ->
             that = $ @
-            notices = $ "p.form-notice"
-            notice = $ "p.form-#{status}-notice:contains(#{message})"
-            noticesLength = notices.length
-            console.log noticesLength
+            lengthNotice = that.nextUntil ':input', "p.form-length-notice"
+            notice = that.nextUntil ':input', "p.form-#{validate.status}-notice:contains(#{validate.message})"
+
+            addNotice = (item) ->
+                item.hide().insertAfter(that).slideDown speed
+
+                if that.css('float') isnt 'none'
+                    notices = that.nextUntil ':input', "p.form-notice"
+                    noticesLength = notices.length
+                    console.log noticesLength
+                    that.parent().css 'position', 'relative'
+                    elemLeft = parseInt that.position().left, 10
+                    elemTop = parseInt that.position().top, 10
+                    elemHeight = parseInt that.css('height'), 10
+
+                    if noticesLength is 1
+                        that.css 'margin-bottom': '40px'
+                        styles =
+                            'position': 'absolute'
+                            'left': elemLeft + 'px'
+                            'top': elemTop + elemHeight + 15 + 'px'
+                    else
+                        that.css 'margin-bottom': 40 + (15 * noticesLength) + 'px'
+                        lastNotice = notices.last()
+                        noticeTop = parseInt lastNotice.position().top, 10
+                        noticeHeight = parseInt lastNotice.css('height'), 10
+                        styles =
+                            'position': 'absolute'
+                            'left': elemLeft + 'px'
+                            'top': noticeTop + noticeHeight + 15 + 'px'
+
+                    notice.css styles
             
-            if notice.length is 0
+            if validate.status is 'length' and lengthNotice.length is 0
                 notice = $ '<p></p>',
-                    text: message,
-                    class: "form-#{status}-notice form-notice"
-                    'data-issuer': issuer
+                    text: validate.message,
+                    class: "form-#{validate.status}-notice form-notice"
+                    'data-issuer': validate.issuer
                 
-                notice.hide().insertAfter(that).slideDown speed
+                addNotice notice
 
-                # if that.css('float') isnt 'none'
+            else if validate.status is 'length'
+                lengthNotice.text validate.message
 
-                    # notice.css styles
-
-        positionNotice: (notice) ->
-            that.parent().css 'position', 'relative'
-            elemLeft = parseInt that.position().left, 10
-            elemTop = parseInt that.position().top, 10
-            elemHeight = parseInt that.css('height'), 10
-
-            if noticesLength is 0
-                that.css 'margin-bottom': '40px'
-                return styles =
-                    'position': 'absolute'
-                    'left': elemLeft + 'px'
-                    'top': elemTop + elemHeight + 10 + 'px'
-            else
-                that.css 'margin-bottom': 40 + (15 * noticesLength) + 'px'
-                lastNotice = notices.last()
-                noticeTop = parseInt lastNotice.position().top, 10
-                noticeHeight = parseInt lastNotice.css('height'), 10
-                return styles =
-                    'position': 'absolute'
-                    'left': elemLeft + 'px'
-                    'top': noticeTop + noticeHeight + 10 + 'px'
+            else if notice.length is 0
+                notice = $ '<p></p>',
+                    text: validate.message,
+                    class: "form-#{validate.status}-notice form-notice"
+                    'data-issuer': validate.issuer
+                
+                addNotice notice
 
         removeNotice: (issuer, speed) ->
-            notice = $ "p[data-issuer='#{issuer}']"
+            notice = $(@).nextUntil ':input', "p[data-issuer='#{issuer}']"
 
             if notice.length isnt 0
                 notice.slideUp speed, ->
