@@ -230,6 +230,9 @@ jshint -W100
             value = $.trim that.val()
             length = value.length
             lengthNotice = that.nextUntil ':input', '.form-length-notice'
+            notices = $ "p.form-notice"
+            noticesLength = notices.length
+            console.log noticesLength
             
             createMessage = (length) ->
                 if length is 1 then "#{length} character" else "#{length} characters"
@@ -240,9 +243,13 @@ jshint -W100
                 message = createMessage length
                 lengthNotice = $ '<p></p>',
                     text: message
-                    class: 'form-length-notice'
+                    class: 'form-length-notice form-notice'
                 
                 lengthNotice.hide().insertAfter(that).show()
+
+                # if that.css('float') isnt 'none'
+
+                    # lengthNotice.css styles
             else
                 message = createMessage length
                 lengthNotice.text message
@@ -257,15 +264,44 @@ jshint -W100
 
         issueNotice: (status, message, issuer, speed) ->
             that = $ @
+            notices = $ "p.form-notice"
             notice = $ "p.form-#{status}-notice:contains(#{message})"
+            noticesLength = notices.length
+            console.log noticesLength
             
             if notice.length is 0
                 notice = $ '<p></p>',
                     text: message,
-                    class: "form-#{status}-notice"
+                    class: "form-#{status}-notice form-notice"
                     'data-issuer': issuer
                 
                 notice.hide().insertAfter(that).slideDown speed
+
+                # if that.css('float') isnt 'none'
+
+                    # notice.css styles
+
+        positionNotice: (notice) ->
+            that.parent().css 'position', 'relative'
+            elemLeft = parseInt that.position().left, 10
+            elemTop = parseInt that.position().top, 10
+            elemHeight = parseInt that.css('height'), 10
+
+            if noticesLength is 0
+                that.css 'margin-bottom': '40px'
+                return styles =
+                    'position': 'absolute'
+                    'left': elemLeft + 'px'
+                    'top': elemTop + elemHeight + 10 + 'px'
+            else
+                that.css 'margin-bottom': 40 + (15 * noticesLength) + 'px'
+                lastNotice = notices.last()
+                noticeTop = parseInt lastNotice.position().top, 10
+                noticeHeight = parseInt lastNotice.css('height'), 10
+                return styles =
+                    'position': 'absolute'
+                    'left': elemLeft + 'px'
+                    'top': noticeTop + noticeHeight + 10 + 'px'
 
         removeNotice: (issuer, speed) ->
             notice = $ "p[data-issuer='#{issuer}']"

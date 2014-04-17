@@ -120,7 +120,7 @@
 			@include drm-form-notice(danger);
 		}
 
-		&.form-length-notice {
+		&.form-info-notice, &.form-length-notice {
 			@include drm-form-notice(info);	
 		}
 
