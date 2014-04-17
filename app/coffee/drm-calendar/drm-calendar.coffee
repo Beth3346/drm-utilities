@@ -51,128 +51,239 @@
                 $.inArray('Saturday', self.days)
             ]
 
-            self.holidays =
+            self.events =
                 newYearsDay:
                     name: "New Year's Day"
                     month: "January"
-                    holidayDate: 1
+                    eventDate: 1
+                    day: null
+                    dayNum: null
+                    type: 'holiday'
+                    notes: null
                 mlkBirthday:
                     name: "Martin Luther King's Birthday"
                     month: "January"
+                    eventDate: null
                     day: "Monday"
                     dayNum: 3
+                    type: 'holiday'
+                    notes: null
                 groundhogDay:
                     name: "Groundhog Day"
                     month: "February"
-                    holidayDate: 2
+                    eventDate: 2
+                    day: null
+                    dayNum: null
+                    type: 'holiday'
+                    notes: null
                 valentinesDay:
                     name: "Valentine's Day"
                     month: "February"
-                    holidayDate: 14
+                    eventDate: 14
+                    day: null
+                    dayNum: null
+                    type: 'holiday'
+                    notes: null
                 presidentsDay:
                     name: "President's Day"
                     month: "February"
+                    eventDate: null
                     day: "Monday"
                     dayNum: 3
+                    type: 'holiday'
+                    notes: null
                 stPatricksDay:
                     name: "St. Patrick's Day"
                     month: "March"
-                    holidayDate: 17
+                    eventDate: 17
+                    day: null
+                    dayNum: null
+                    type: 'holiday'
+                    notes: null
                 aprilFools:
                     name: "April Fool's Day"
                     month: "April"
-                    holidayDate: 1
+                    eventDate: 1
+                    day: null
+                    dayNum: null
+                    type: 'holiday'
+                    notes: null
                 earthDay:
                     name: "Earth Day"
                     month: "April"
-                    holidayDate: 22
+                    eventDate: 22
+                    day: null
+                    dayNum: null
+                    type: 'holiday'
+                    notes: null
                 arborDay:
                     name: "Arbor Day"
                     month: "April"
+                    eventDate: null
                     day: "Friday"
                     dayNum: "last"
+                    type: 'holiday'
+                    notes: null
                 mayDay:
                     name: "May Day"
                     month: "May"
-                    holidayDate: 1
+                    eventDate: 1
+                    day: null
+                    dayNum: null
+                    type: 'holiday'
+                    notes: null
                 cincoDeMayo:
                     name: "Cinco De Mayo"
                     month: "May"
-                    holidayDate: 5
+                    eventDate: 5
+                    day: null
+                    dayNum: null
+                    type: 'holiday'
+                    notes: null
                 mothersDay:
                     name: "Mother's Day"
                     month: "May"
+                    eventDate: null
                     day: "Sunday"
                     dayNum: 2
+                    type: 'holiday'
+                    notes: null
                 memorialDay:
                     name: "Memorial Day"
                     month: "May"
+                    eventDate: null
                     day: "Monday"
                     dayNum: "last"
+                    type: 'holiday'
+                    notes: null
                 flagDay:
                     name: "Flag Day"
                     month: "June"
-                    holidayDate: 14
+                    eventDate: 14
+                    day: null
+                    dayNum: null
+                    type: 'holiday'
+                    notes: null
                 fathersDay:
                     name: "Father's Day"
                     month: "June"
+                    eventDate: null
                     day: "Sunday"
+                    type: 'holiday'
+                    notes: null
                     dayNum: 3
                 independenceDay:
                     name: "Independence Day"
                     month: "July"
-                    holidayDate: 4
+                    eventDate: 4
+                    day: null
+                    dayNum: null
+                    type: 'holiday'
+                    notes: null
                 laborDay:
                     name: "Labor Day"
                     month: "September"
+                    eventDate: null
                     day: "Monday"
                     dayNum: 1
+                    type: 'holiday'
+                    notes: null
                 patroitDay:
                     name: "Patroit Day"
                     month: "September"
-                    holidayDate: 11
+                    eventDate: 11
+                    day: null
+                    dayNum: null
+                    type: 'holiday'
+                    notes: null
                 columbusDay:
                     name: "Columbus Day"
                     month: "October"
+                    eventDate: null
                     day: "Monday"
                     dayNum: 2
+                    type: 'holiday'
+                    notes: null
                 halloween:
                     name: "Halloween"
                     month: "October"
-                    holidayDate: 31
+                    eventDate: 31
+                    day: null
+                    dayNum: null
+                    type: 'holiday'
+                    notes: null
                 veteransDay:
                     name: "Veteran's Day"
                     month: "November"
-                    holidayDate: 11
+                    eventDate: 11
+                    day: null
+                    dayNum: null
+                    type: 'holiday'
+                    notes: null
                 thanksgiving:
                     name: "Thanksgiving"
                     month: "November"
+                    eventDate: null
                     day: "Thursday"
                     dayNum: 4
+                    type: 'holiday'
+                    notes: null
                 pearlHarborDay:
                     name: "Pearl Harbor Day"
                     month: "December"
-                    holidayDate: 7
+                    eventDate: 7
+                    day: null
+                    dayNum: null
+                    type: 'holiday'
+                    notes: null
                 festivus:
                     name: "Festivus"
                     month: "December"
-                    holidayDate: 23
+                    eventDate: 23
+                    day: null
+                    dayNum: null
+                    type: 'holiday'
+                    notes: null
                 christmasEve:
                     name: "Christmas Eve"
                     month: "December"
-                    holidayDate: 24
+                    eventDate: 24
+                    day: null
+                    dayNum: null
+                    type: 'holiday'
+                    notes: null
                 christmas:
                     name: "Christmas"
                     month: "December"
-                    holidayDate: 25
+                    eventDate: 25
+                    day: null
+                    dayNum: null
+                    type: 'holiday'
+                    notes: null
                 boxingDay:
                     name: "Boxing Day"
                     month: "December"
-                    holidayDate: 26
+                    eventDate: 26
+                    day: null
+                    dayNum: null
+                    type: 'holiday'
+                    notes: null
                 newYearsEve:
                     name: "New Year's Eve"
                     month: "December"
-                    holidayDate: 31
+                    eventDate: 31
+                    day: null
+                    dayNum: null
+                    type: 'holiday'
+                    notes: null
+                event1:
+                    name: "My Birthday"
+                    month: "March"
+                    eventDate: 24
+                    day: null
+                    dayNum: null
+                    type: 'birthday'
+                    notes: "Here are some notes"
 
             self.createCalendar self.currentMonth, self.currentYear
 
@@ -223,6 +334,25 @@
             if month is @currentMonth and year is @currentYear
                 calendarInner.find("[data-date=#{@currentDay}]").addClass @classes.today
 
+        createEvent: (name, month, eventDate, day, dayNum, type, notes) =>
+            obj = @events
+            eventCount = $.map(@events, (n, i) ->
+                i ).length
+
+            eventName = do ->
+                key = $.trim(name).toLowerCase()
+                key.replace /\W+/g, ''
+            obj[eventName] =
+                name: name
+                month: month
+                eventDate: eventDate
+                day: day
+                dayNum: dayNum
+                type: type
+                notes: notes
+
+            $(@events).add obj[eventName]
+
         addNewCalendarEvent: (eventName, calendarItem) ->
             eventClass = 'events'
             eventList = calendarItem.find "ul.#{eventClass}"
@@ -241,7 +371,7 @@
 
                 eventList.appendTo calendarItem
 
-        addHolidays: (numberDays, dayShift) =>
+        addEvents: (numberDays, dayShift) =>
             self = @
             calendarInner = self.calendar.find "div.#{@calendarInnerClass}"
             currentMonth = calendarInner.data 'month'
@@ -258,7 +388,7 @@
                 else
                     parseInt dayNum, 10
 
-            $.each self.holidays, (key, value) ->
+            $.each self.events, (key, value) ->
                 month = $.inArray value.month, self.months
 
                 if value.day
@@ -266,14 +396,15 @@
                     weekNum = getWeekNum value.dayNum, day, numberDays, dayShift
 
                     if currentMonth is month
-                        holidayWeek = if dayShift <= day then holidayWeek = weeks.eq weekNum else holidayWeek = weeks.eq weekNum + 1
-                        holidayDate = holidayWeek.find('td').eq(day).data 'date'
+                        eventWeek = if dayShift <= day then eventWeek = weeks.eq weekNum else eventWeek = weeks.eq weekNum + 1
+                        eventDate = eventWeek.find('td').eq(day).data 'date'
                 else
-                    holidayDate = value.holidayDate
+                    eventDate = value.eventDate
 
                 if currentMonth is month
-                    holiday = calendarInner.find("[data-date=#{holidayDate}]").addClass self.classes.holiday
-                    self.addNewCalendarEvent value.name, holiday
+                    eventDay = calendarInner.find "[data-date=#{eventDate}]"
+                    if value.type is 'holiday' then eventDay.addClass self.classes.holiday
+                    self.addNewCalendarEvent value.name, eventDay
 
         highlightWeekends: =>
             self = @
@@ -386,8 +517,10 @@
 
             self.highlightCurrentDay()
             self.highlightWeekends()
-            self.addHolidays numberDays, dayShift
+            self.createEvent "Dad's Birthday", "April", 9, null, null, "birthday", "some notes"
+            self.createEvent "Foby's Birthday", "November", 23, null, null, "birthday", "some notes"
+            self.addEvents numberDays, dayShift
 
-    new DrmCalendar()
+    drmCalendar = new DrmCalendar()
 
 ) jQuery
