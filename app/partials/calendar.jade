@@ -12,7 +12,7 @@ section
             button.drm-calendar-current Today
             button.drm-calendar-month-next(data-dir='next') Next Month
             button.drm-calendar-year-next(data-dir='next') Next Year
-        form.drm-calendar-select(action="" role="form")
+        form.drm-calendar-select#drm-calendar-select(action="" role="form")
             .drm-inline-control-group 
                 label(for="month") Month:
                 select#month(name="month")
@@ -32,5 +32,54 @@ section
                 label(for="year") Year:
                 input.drm-valid-integer#year(type="text" name="year" data-min-value="1" data-min-length="4" data-max-length="4")
                 button#submit(type="submit") Select
+        h2 Add an Event
+        form.drm-calendar-new-event#drm-calendar-new-event(action="" role="form")
+            label(for="event_name") Event Name:
+            input#event-name(type="text" name="event_name" required data-min-length="3" data-max-length="50")
+            .drm-inline-control-group
+                label(for="month") Month:
+                select#month(name="month")
+                    option Select Month
+                    option(value=0) January
+                    option(value=1) February
+                    option(value=2) March
+                    option(value=3) April
+                    option(value=4) May
+                    option(value=5) June
+                    option(value=6) July
+                    option(value=7) August
+                    option(value=8) September
+                    option(value=9) October
+                    option(value=10) November
+                    option(value=11) December
+                label(for="event_date") Date:
+                input.drm-valid-integer#event-date(type="text" name="event_date" data-min-value="1" data-max-value="31" data-min-length="1" data-max-length="2")
+                label(for="year") Year:
+                input.drm-valid-integer#year(type="text" name="year" data-min-value="1" data-min-length="4" data-max-length="4")
+            .drm-inline-control-group
+                label(for="day") Day of Week:
+                select#day(name="day")
+                    option Select Day
+                    option(value=0) Sunday
+                    option(value=1) Monday
+                    option(value=2) Tuesday
+                    option(value=3) Wednesday
+                    option(value=4) Thursday
+                    option(value=5) Friday
+                    option(value=6) Saturday
+                label(for="dayNum") Day Number
+                select#dayNum(name="dayNum")
+                    option Select Week
+                    option(value="1") First
+                    option(value="2") Second
+                    option(value="3") Third
+                    option(value="4") Fourth
+                    option(value="last") Last
+            label(for="event_type") Event Type:
+            input#event-type(type="text" name="event_type" placeholder="holiday")
+            label(for="event_notes") Event Type:
+            textarea#event-notes(name="event_notes" cols="30" rows="2" placeholder="These are some notes") 
+
+            button.addEvent#submit(type="submit") Select
 
     h2 Usage

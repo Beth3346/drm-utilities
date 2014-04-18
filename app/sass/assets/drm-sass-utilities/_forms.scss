@@ -107,6 +107,11 @@
 		padding: 0;
 	}
 
+	.form-notice-holder {
+		float: left;
+		@include drm-clearfix();
+	}
+
 	p {
 		&.form-success-notice {
 			@include drm-form-notice(success);
@@ -199,6 +204,8 @@
 	}
 
 	.drm-inline-control-group {
+		width: 100%;
+		margin: 5px 0 5px 0;
 		@include drm-clearfix();
 
 		label {
@@ -226,11 +233,11 @@
 
 	input[type="submit"], button {		
 		margin: 5px 0 5px 0;
-		@include drm-button-solid($drm-blue, white, 180px, null, 3px, $drm-blue, inline-block);
+		@include drm-button-solid($drm-blue, white, 180px, null, 3px, $drm-blue, block);
 	}
 
 	input[type="submit"][disabled], button[disabled] {		
-		@include drm-button-solid(#6ebbbe, white, 180px, null, 3px, #6ebbbe, inline-block);
+		@include drm-button-solid(#6ebbbe, white, 180px, null, 3px, #6ebbbe, block);
 
 		&:hover {
 			cursor: not-allowed;
@@ -259,6 +266,11 @@
 	textarea {
 		width: 100%;
 	}
+
+	input[type="submit"], button {		
+		margin: 5px 0 5px 0;
+		@include drm-button-solid($drm-blue, white, 180px, null, 3px, $drm-blue, block);
+	}
 }
 
 @mixin drm-inline-form($glow: $drm-blue, $bk-color: $lightest-grey, $border: $grey) {
@@ -282,7 +294,7 @@
 	}
 
 	input[type="submit"], button {
-		@include drm-button-solid($drm-blue, white, 100px, null, 3px, $drm-blue, block);
+		@include drm-button-solid($drm-blue, white, 100px, null, 3px, $drm-blue, inline-block);
 		@include drm-em-font(12);
 		margin: 0;
 	}
@@ -295,10 +307,23 @@
 			margin-top: 4px;
 		}
 	}
+
+	input[type="submit"][disabled], button[disabled] {		
+		@include drm-button-solid(#6ebbbe, white, 180px, null, 3px, #6ebbbe, inline-block);
+		@include drm-em-font(12);
+		margin: 0;
+
+		&:hover {
+			cursor: not-allowed;
+			background-color: #6ebbbe;
+			color: white;
+			transition: none;
+		}
+	}
 }
 
 @mixin drm-form-notice($type: 'info') {
-	margin: 0 0 5px 5px;
+	margin: 5px 0 5px 0;
 	padding: 0;
 	@include drm-em-font(12);
 

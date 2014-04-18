@@ -15,6 +15,10 @@
         @include drm-inline-form();        
     }
 
+    .drm-calendar-new-event {
+        @include drm-tabular-form();        
+    }
+
     table {
         width: 100%;
         border-collapse: separate;

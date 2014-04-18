@@ -203,7 +203,7 @@ jshint -W100
                 if validate?
                     validateField.call @, value, validate
 
-            body.on 'keyup', ':input', ->
+            body.on 'keyup', ":input[type='text'], :input[type='url'], :input[type='email'], :input[type='password'], :input[type='tel'], textarea", ->
                 value = self.getValue.call @
                 validate = self.trackLength.call @, value
                 if validate.message?
@@ -256,34 +256,17 @@ jshint -W100
             notice = that.nextUntil ':input', "p.form-#{validate.status}-notice:contains(#{validate.message})"
 
             addNotice = (item) ->
-                item.hide().insertAfter(that).slideDown speed
-
                 if that.css('float') isnt 'none'
-                    notices = that.nextUntil ':input', "p.form-notice"
-                    noticesLength = notices.length
-                    console.log noticesLength
-                    that.parent().css 'position', 'relative'
-                    elemLeft = parseInt that.position().left, 10
-                    elemTop = parseInt that.position().top, 10
-                    elemHeight = parseInt that.css('height'), 10
-
-                    if noticesLength is 1
-                        that.css 'margin-bottom': '40px'
-                        styles =
-                            'position': 'absolute'
-                            'left': elemLeft + 'px'
-                            'top': elemTop + elemHeight + 15 + 'px'
+                    noticeHolder = that.parent 'div.form-notice-holder'
+                    if noticeHolder.length is 0
+                        that.wrap('<div class="form-notice-holder"></div>').focus()
+                        noticeHolder = that.parent 'div.form-notice-holder'
+                        item.hide().appendTo(noticeHolder).slideDown speed
                     else
-                        that.css 'margin-bottom': 40 + (15 * noticesLength) + 'px'
-                        lastNotice = notices.last()
-                        noticeTop = parseInt lastNotice.position().top, 10
-                        noticeHeight = parseInt lastNotice.css('height'), 10
-                        styles =
-                            'position': 'absolute'
-                            'left': elemLeft + 'px'
-                            'top': noticeTop + noticeHeight + 15 + 'px'
-
-                    notice.css styles
+                        item.hide().appendTo(noticeHolder).slideDown speed
+                    noticeHolder.children().css 'float', 'none'
+                else
+                    item.hide().insertAfter(that).slideDown speed
             
             if validate.status is 'length' and lengthNotice.length is 0
                 notice = $ '<p></p>',
@@ -305,15 +288,17 @@ jshint -W100
                 addNotice notice
 
         removeNotice: (issuer, speed) ->
-            notice = $(@).nextUntil ':input', "p[data-issuer='#{issuer}']"
+            self = $ @
+            notice = self.nextUntil ':input', "p[data-issuer='#{issuer}']"
 
             if notice.length isnt 0
                 notice.slideUp speed, ->
-                    $(@).remove()
+                    that = $ @
+                    that.remove()
 
         removeAllNotices: (speed) ->
             that = $ @
-            notices = that.nextUntil ':input','p.form-success-notice, p.form-warning-notice, p.form-danger-notice'
+            notices = that.nextUntil ':input','p.form-notice'
 
             if notices.length isnt 0
                 notices.slideUp speed, -> 

@@ -17,6 +17,7 @@
             self.calendarNav = $ '.drm-calendar-nav'
             self.calendarSelect = $ '.drm-calendar-select'
             self.calendarSelectButton = self.calendarSelect.find 'button[type=submit]'
+            self.addEventForm = self.calendar.find 'form.drm-calendar-new-event'
             self.classes =
                 weekend: 'drm-cal-weekend'
                 muted: 'drm-cal-muted'
@@ -55,6 +56,7 @@
                 newYearsDay:
                     name: "New Year's Day"
                     month: "January"
+                    year: null
                     eventDate: 1
                     day: null
                     dayNum: null
@@ -63,6 +65,7 @@
                 mlkBirthday:
                     name: "Martin Luther King's Birthday"
                     month: "January"
+                    year: null
                     eventDate: null
                     day: "Monday"
                     dayNum: 3
@@ -71,6 +74,7 @@
                 groundhogDay:
                     name: "Groundhog Day"
                     month: "February"
+                    year: null
                     eventDate: 2
                     day: null
                     dayNum: null
@@ -79,6 +83,7 @@
                 valentinesDay:
                     name: "Valentine's Day"
                     month: "February"
+                    year: null
                     eventDate: 14
                     day: null
                     dayNum: null
@@ -87,6 +92,7 @@
                 presidentsDay:
                     name: "President's Day"
                     month: "February"
+                    year: null
                     eventDate: null
                     day: "Monday"
                     dayNum: 3
@@ -95,6 +101,7 @@
                 stPatricksDay:
                     name: "St. Patrick's Day"
                     month: "March"
+                    year: null
                     eventDate: 17
                     day: null
                     dayNum: null
@@ -103,6 +110,7 @@
                 aprilFools:
                     name: "April Fool's Day"
                     month: "April"
+                    year: null
                     eventDate: 1
                     day: null
                     dayNum: null
@@ -111,6 +119,7 @@
                 earthDay:
                     name: "Earth Day"
                     month: "April"
+                    year: null
                     eventDate: 22
                     day: null
                     dayNum: null
@@ -119,6 +128,7 @@
                 arborDay:
                     name: "Arbor Day"
                     month: "April"
+                    year: null
                     eventDate: null
                     day: "Friday"
                     dayNum: "last"
@@ -127,6 +137,7 @@
                 mayDay:
                     name: "May Day"
                     month: "May"
+                    year: null
                     eventDate: 1
                     day: null
                     dayNum: null
@@ -135,6 +146,7 @@
                 cincoDeMayo:
                     name: "Cinco De Mayo"
                     month: "May"
+                    year: null
                     eventDate: 5
                     day: null
                     dayNum: null
@@ -143,6 +155,7 @@
                 mothersDay:
                     name: "Mother's Day"
                     month: "May"
+                    year: null
                     eventDate: null
                     day: "Sunday"
                     dayNum: 2
@@ -151,6 +164,7 @@
                 memorialDay:
                     name: "Memorial Day"
                     month: "May"
+                    year: null
                     eventDate: null
                     day: "Monday"
                     dayNum: "last"
@@ -159,6 +173,7 @@
                 flagDay:
                     name: "Flag Day"
                     month: "June"
+                    year: null
                     eventDate: 14
                     day: null
                     dayNum: null
@@ -167,6 +182,7 @@
                 fathersDay:
                     name: "Father's Day"
                     month: "June"
+                    year: null
                     eventDate: null
                     day: "Sunday"
                     type: 'holiday'
@@ -175,6 +191,7 @@
                 independenceDay:
                     name: "Independence Day"
                     month: "July"
+                    year: null
                     eventDate: 4
                     day: null
                     dayNum: null
@@ -183,6 +200,7 @@
                 laborDay:
                     name: "Labor Day"
                     month: "September"
+                    year: null
                     eventDate: null
                     day: "Monday"
                     dayNum: 1
@@ -191,6 +209,7 @@
                 patroitDay:
                     name: "Patroit Day"
                     month: "September"
+                    year: null
                     eventDate: 11
                     day: null
                     dayNum: null
@@ -199,6 +218,7 @@
                 columbusDay:
                     name: "Columbus Day"
                     month: "October"
+                    year: null
                     eventDate: null
                     day: "Monday"
                     dayNum: 2
@@ -207,6 +227,7 @@
                 halloween:
                     name: "Halloween"
                     month: "October"
+                    year: null
                     eventDate: 31
                     day: null
                     dayNum: null
@@ -215,6 +236,7 @@
                 veteransDay:
                     name: "Veteran's Day"
                     month: "November"
+                    year: null
                     eventDate: 11
                     day: null
                     dayNum: null
@@ -223,6 +245,7 @@
                 thanksgiving:
                     name: "Thanksgiving"
                     month: "November"
+                    year: null
                     eventDate: null
                     day: "Thursday"
                     dayNum: 4
@@ -231,6 +254,7 @@
                 pearlHarborDay:
                     name: "Pearl Harbor Day"
                     month: "December"
+                    year: null
                     eventDate: 7
                     day: null
                     dayNum: null
@@ -239,6 +263,7 @@
                 festivus:
                     name: "Festivus"
                     month: "December"
+                    year: null
                     eventDate: 23
                     day: null
                     dayNum: null
@@ -247,6 +272,7 @@
                 christmasEve:
                     name: "Christmas Eve"
                     month: "December"
+                    year: null
                     eventDate: 24
                     day: null
                     dayNum: null
@@ -255,6 +281,7 @@
                 christmas:
                     name: "Christmas"
                     month: "December"
+                    year: null
                     eventDate: 25
                     day: null
                     dayNum: null
@@ -263,6 +290,7 @@
                 boxingDay:
                     name: "Boxing Day"
                     month: "December"
+                    year: null
                     eventDate: 26
                     day: null
                     dayNum: null
@@ -271,6 +299,7 @@
                 newYearsEve:
                     name: "New Year's Eve"
                     month: "December"
+                    year: null
                     eventDate: 31
                     day: null
                     dayNum: null
@@ -279,6 +308,7 @@
                 event1:
                     name: "My Birthday"
                     month: "March"
+                    year: null
                     eventDate: 24
                     day: null
                     dayNum: null
@@ -310,6 +340,10 @@
 
                 self.changeCalendar.call self, month, year
 
+            self.addEventForm.on 'click', 'button.addEvent', (e) ->
+                console.log self.addEventForm.serialize()
+                e.preventDefault()
+
         getDaysInMonth: (month, year) ->
             new Date(year, month, 0).getDate()
 
@@ -334,7 +368,7 @@
             if month is @currentMonth and year is @currentYear
                 calendarInner.find("[data-date=#{@currentDay}]").addClass @classes.today
 
-        createEvent: (name, month, eventDate, day, dayNum, type, notes) =>
+        createEvent: (name, month, year, eventDate, day, dayNum, type, notes) =>
             obj = @events
             eventCount = $.map(@events, (n, i) ->
                 i ).length
@@ -345,10 +379,11 @@
             obj[eventName] =
                 name: name
                 month: month
+                year: year
                 eventDate: eventDate
                 day: day
                 dayNum: dayNum
-                type: type
+                type: type.toLowerCase()
                 notes: notes
 
             $(@events).add obj[eventName]
@@ -517,8 +552,8 @@
 
             self.highlightCurrentDay()
             self.highlightWeekends()
-            self.createEvent "Dad's Birthday", "April", 9, null, null, "birthday", "some notes"
-            self.createEvent "Foby's Birthday", "November", 23, null, null, "birthday", "some notes"
+            self.createEvent "Dad's Birthday", "April", null, 9, null, null, "birthday", "some notes"
+            self.createEvent "Foby's Birthday", "November", null, 23, null, null, "birthday", "some notes"
             self.addEvents numberDays, dayShift
 
     drmCalendar = new DrmCalendar()
