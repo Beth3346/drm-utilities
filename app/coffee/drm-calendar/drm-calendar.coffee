@@ -305,7 +305,7 @@
                     dayNum: null
                     type: 'holiday'
                     notes: null
-                event1:
+                mybirthday:
                     name: "My Birthday"
                     month: "March"
                     year: null
@@ -340,9 +340,20 @@
 
                 self.changeCalendar.call self, month, year
 
-            self.addEventForm.on 'click', 'button.addEvent', (e) ->
-                console.log self.addEventForm.serialize()
+            self.addEventForm.on 'click', 'button.addEvent', (e) ->                
                 e.preventDefault()
+                newEvent =
+                    name: self.addEventForm.find('#event-name').val()
+                    month: self.addEventForm.find('#month').val()
+                    year: self.addEventForm.find('#year').val()
+                    eventDate: self.addEventForm.find('#event-date').val()
+                    day: self.addEventForm.find('#day').val()
+                    dayNum: self.addEventForm.find('#day-num').val()
+                    type: self.addEventForm.find('#event-type').val().toLowerCase()
+                    notes: self.addEventForm.find('#event-notes').val()
+                self.createEvent newEvent.name, newEvent.month, newEvent.year, newEvent.eventDate, newEvent.day, newEvent.dayNum, newEvent.type, newEvent.notes
+                newMonth = $.inArray newEvent.month, self.months
+                self.changeCalendar.call @, newMonth, self.currentYear
 
         getDaysInMonth: (month, year) ->
             new Date(year, month, 0).getDate()
@@ -370,8 +381,8 @@
 
         createEvent: (name, month, year, eventDate, day, dayNum, type, notes) =>
             obj = @events
-            eventCount = $.map(@events, (n, i) ->
-                i ).length
+            # eventCount = $.map(@events, (n, i) ->
+            #     i ).length
 
             eventName = do ->
                 key = $.trim(name).toLowerCase()
@@ -385,8 +396,9 @@
                 dayNum: dayNum
                 type: type.toLowerCase()
                 notes: notes
-
+            console.log obj[eventName]
             $(@events).add obj[eventName]
+            console.log @events
 
         addNewCalendarEvent: (eventName, calendarItem) ->
             eventClass = 'events'
@@ -487,6 +499,10 @@
             firstDay = self.getDayOfWeek month, year, 1
             dayShift = if firstDay is self.daysPerWeek then 0 else firstDay
             numberWeeks = self.getWeeksInMonth numberDays, dayShift
+            nextYear = year + 1
+            lastYear = year - 1
+            nextMonth = if @months[month] is 11 then @months[0] else @months[month + 1]
+            lastMonth = if @months[month] is 0 then @months[11] else @months[month - 1]
 
             weekdays = '<table><thead><tr>'
             $.each @days, (key, value) ->
@@ -545,6 +561,7 @@
                 'data-year': year
 
             heading = $ '<h1></h1>',
+                class: 'drm-calendar-header'
                 text: "#{@months[month]} #{year}"
             
             calendar.appendTo ".#{self.calendarClass}"
@@ -555,6 +572,11 @@
             self.createEvent "Dad's Birthday", "April", null, 9, null, null, "birthday", "some notes"
             self.createEvent "Foby's Birthday", "November", null, 23, null, null, "birthday", "some notes"
             self.addEvents numberDays, dayShift
+            $('.drm-calendar-year-prev').text lastYear
+            $('.drm-calendar-year-next').text nextYear
+
+            $('.drm-calendar-month-prev').text lastMonth
+            $('.drm-calendar-month-next').text nextMonth
 
     drmCalendar = new DrmCalendar()
 
