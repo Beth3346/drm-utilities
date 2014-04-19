@@ -17,7 +17,8 @@
             self.calendarNav = $ '.drm-calendar-nav'
             self.calendarSelect = $ '.drm-calendar-select'
             self.calendarSelectButton = self.calendarSelect.find 'button[type=submit]'
-            self.addEventForm = self.calendar.find 'form.drm-calendar-new-event'
+            self.addEventForm = self.calendar.find('form.drm-calendar-new-event').hide()
+            self.showEventFormButton = self.calendar.find 'button.drm-show-event-form'
             self.classes =
                 weekend: 'drm-cal-weekend'
                 muted: 'drm-cal-muted'
@@ -317,33 +318,45 @@
 
             self.createCalendar self.currentMonth, self.currentYear
 
-            self.calendarNav.on 'click', '.drm-calendar-month-prev, .drm-calendar-month-next', ->
+            self.calendar.on 'click', '.drm-calendar-month-prev, .drm-calendar-month-next', ->
                 direction = $(@).data 'dir'
                 self.advanceMonth.call @, direction
 
-            self.calendarNav.on 'click', '.drm-calendar-year-prev, .drm-calendar-year-next', ->
+            self.calendar.on 'click', '.drm-calendar-year-prev, .drm-calendar-year-next', ->
                 direction = $(@).data 'dir'
                 self.advanceYear.call @, direction
 
-            self.calendarNav.on 'click', '.drm-calendar-current', ->
+            self.calendar.on 'click', '.drm-calendar-current', ->
                 self.changeCalendar.call @, self.currentMonth, self.currentYear
 
-            self.calendarSelectButton.on 'click', (e) ->
+            self.calendar.on 'click', '.drm-calendar-select button[type=submit]', (e) ->
+                e.preventDefault()
                 that = $ @
                 month = that.parent().find('#month').val()
                 year = that.parent().find('#year').val()
 
+                that.parent().find('#month').val ''
+                that.parent().find('#year').val ''
+
                 month = parseInt month, 10
                 year = parseInt year, 10
 
-                e.preventDefault()
-
                 self.changeCalendar.call self, month, year
 
-            self.addEventForm.on 'click', 'button.addEvent', (e) ->                
+            self.calendar.on 'click', 'button.drm-show-event-form', ->
+                that = $ @
+                if self.addEventForm.is(':hidden')
+                    self.addEventForm.slideDown()
+                    that.text 'Hide Form'
+                else
+                    self.addEventForm.slideUp()
+                    that.text 'Add New Event'
+
+            self.calendar.on 'click', 'form.drm-calendar-new-event button.addEvent', (e) ->                
                 e.preventDefault()
                 newEvent =
                     name: self.addEventForm.find('#event-name').val()
+                    recurrance: self.addEventForm.find('#recurrance').val()
                     month: self.addEventForm.find('#month').val()
                     year: self.addEventForm.find('#year').val()
                     eventDate: self.addEventForm.find('#event-date').val()
@@ -351,9 +364,26 @@
                     dayNum: self.addEventForm.find('#day-num').val()
                     type: self.addEventForm.find('#event-type').val().toLowerCase()
                     notes: self.addEventForm.find('#event-notes').val()
-                self.createEvent newEvent.name, newEvent.month, newEvent.year, newEvent.eventDate, newEvent.day, newEvent.dayNum, newEvent.type, newEvent.notes
+                self.createEvent newEvent
                 newMonth = $.inArray newEvent.month, self.months
                 self.changeCalendar.call @, newMonth, self.currentYear
+                self.addEventForm.find(':input').val ''
+
+            self.calendar.on 'click', "td:not(.#{self.classes.muted})", ->
+                that = $ @
+                month = self.months[that.data('month')]
+                date = that.data 'date'
+                year = that.data 'year'
+
+                if self.addEventForm.is ':hidden'
+                    self.addEventForm.slideDown()
+                    self.showEventFormButton.text 'Hide Form'
+
+                month: self.addEventForm.find('#month').val month
+                year: self.addEventForm.find('#year').val year
+                eventDate: self.addEventForm.find('#event-date').val date
+
+                console.log "#{month} #{date}, #{year}"
 
         getDaysInMonth: (month, year) ->
             new Date(year, month, 0).getDate()
@@ -379,26 +409,22 @@
             if month is @currentMonth and year is @currentYear
                 calendarInner.find("[data-date=#{@currentDay}]").addClass @classes.today
 
-        createEvent: (name, month, year, eventDate, day, dayNum, type, notes) =>
+        createEvent: (newEvent) =>
             obj = @events
-            # eventCount = $.map(@events, (n, i) ->
-            #     i ).length
 
             eventName = do ->
-                key = $.trim(name).toLowerCase()
+                key = $.trim(newEvent.name).toLowerCase()
                 key.replace /\W+/g, ''
             obj[eventName] =
-                name: name
-                month: month
-                year: year
-                eventDate: eventDate
-                day: day
-                dayNum: dayNum
-                type: type.toLowerCase()
-                notes: notes
-            console.log obj[eventName]
+                name: $.trim newEvent.name
+                month: $.trim newEvent.month
+                year: $.trim newEvent.year
+                eventDate: $.trim newEvent.eventDate
+                day: $.trim newEvent.day
+                dayNum: $.trim newEvent.dayNum
+                type: $.trim newEvent.type
+                notes: $.trim newEvent.notes
             $(@events).add obj[eventName]
-            console.log @events
 
         addNewCalendarEvent: (eventName, calendarItem) ->
             eventClass = 'events'
@@ -529,7 +555,7 @@
                         j += 1
                     # start adding cells for the current month
                     while j <= self.daysPerWeek
-                        weeks += "<td data-month='#{month}' data-date='#{date}' data-year'#{year}'>#{date}</td>"
+                        weeks += "<td data-month='#{month}' data-date='#{date}' data-year='#{year}'>#{date}</td>"
                         j += 1
                         date += 1
                 # if we are in the last week of the month we need to add blank cells for next month
@@ -547,7 +573,7 @@
                 else
                     # if we are in the middle of the month add cells for the current month
                     while j <= self.daysPerWeek
-                        weeks += "<td data-month='#{month}' data-date='#{date}' data-year'#{year}'>#{date}</td>"
+                        weeks += "<td data-month='#{month}' data-date='#{date}' data-year='#{year}'>#{date}</td>"
                         j += 1
                         date += 1
                 weeks += '</tr>'
