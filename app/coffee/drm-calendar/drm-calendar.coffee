@@ -726,12 +726,11 @@
             year = calendarInner.data 'year'
             
             if direction is 'prev'
-                month = if month - 1 >= 0 then month - 1 else 11
-                year = if month - 1 >= 0 then year else year - 1
+                month = if month is 0 then 11 else month - 1
+                year = if month is 11 then year - 1 else year
             else if direction is 'next'
-                month = if month + 1 < 12 then month + 1 else 0
-                year = if month + 1 < 12 then year else year + 1
-
+                month = if month is 11 then 0 else month + 1
+                year = if month is 0 then year + 1 else year
             @changeCalendar month, year
 
         advanceYear: (direction) =>
@@ -759,8 +758,8 @@
             numberWeeks = self.getWeeksInMonth numberDays, dayShift
             nextYear = year + 1
             lastYear = year - 1
-            nextMonth = if @months[month] is 11 then @months[0] else @months[month + 1]
-            lastMonth = if @months[month] is 0 then @months[11] else @months[month - 1]
+            nextMonth = if month is 11 then @months[0] else @months[month + 1]
+            lastMonth = if month is 0 then @months[11] else @months[month - 1]
 
             weekdays = '<table><thead><tr>'
             $.each @days, (key, value) ->
