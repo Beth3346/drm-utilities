@@ -63,6 +63,7 @@
                     dayNum: null
                     type: "holiday"
                     recurrance: "yearly"
+                    endRecurrance: "never"
                     notes: null
                 mlkBirthday:
                     name: "Martin Luther King's Birthday"
@@ -73,6 +74,7 @@
                     dayNum: 3
                     type: "holiday"
                     recurrance: "yearly"
+                    endRecurrance: "never"
                     notes: null
                 groundhogDay:
                     name: "Groundhog Day"
@@ -83,6 +85,7 @@
                     dayNum: null
                     type: "holiday"
                     recurrance: "yearly"
+                    endRecurrance: "never"
                     notes: null
                 valentinesDay:
                     name: "Valentine's Day"
@@ -93,6 +96,7 @@
                     dayNum: null
                     type: "holiday"
                     recurrance: "yearly"
+                    endRecurrance: "never"
                     notes: null
                 presidentsDay:
                     name: "President's Day"
@@ -103,6 +107,7 @@
                     dayNum: 3
                     type: "holiday"
                     recurrance: "yearly"
+                    endRecurrance: "never"
                     notes: null
                 stPatricksDay:
                     name: "St. Patrick's Day"
@@ -113,6 +118,7 @@
                     dayNum: null
                     type: "holiday"
                     recurrance: "yearly"
+                    endRecurrance: "never"
                     notes: null
                 aprilFools:
                     name: "April Fool's Day"
@@ -123,6 +129,7 @@
                     dayNum: null
                     type: "holiday"
                     recurrance: "yearly"
+                    endRecurrance: "never"
                     notes: null
                 earthDay:
                     name: "Earth Day"
@@ -133,6 +140,7 @@
                     dayNum: null
                     type: "holiday"
                     recurrance: "yearly"
+                    endRecurrance: "never"
                     notes: null
                 arborDay:
                     name: "Arbor Day"
@@ -143,6 +151,7 @@
                     dayNum: "last"
                     type: "holiday"
                     recurrance: "yearly"
+                    endRecurrance: "never"
                     notes: null
                 mayDay:
                     name: "May Day"
@@ -153,6 +162,7 @@
                     dayNum: null
                     type: "holiday"
                     recurrance: "yearly"
+                    endRecurrance: "never"
                     notes: null
                 cincoDeMayo:
                     name: "Cinco De Mayo"
@@ -163,6 +173,7 @@
                     dayNum: null
                     type: "holiday"
                     recurrance: "yearly"
+                    endRecurrance: "never"
                     notes: null
                 mothersDay:
                     name: "Mother's Day"
@@ -173,6 +184,7 @@
                     dayNum: 2
                     type: "holiday"
                     recurrance: "yearly"
+                    endRecurrance: "never"
                     notes: null
                 memorialDay:
                     name: "Memorial Day"
@@ -183,6 +195,7 @@
                     dayNum: "last"
                     type: "holiday"
                     recurrance: "yearly"
+                    endRecurrance: "never"
                     notes: null
                 flagDay:
                     name: "Flag Day"
@@ -193,6 +206,7 @@
                     dayNum: null
                     type: "holiday"
                     recurrance: "yearly"
+                    endRecurrance: "never"
                     notes: null
                 fathersDay:
                     name: "Father's Day"
@@ -202,6 +216,7 @@
                     day: "Sunday"
                     type: "holiday"
                     recurrance: "yearly"
+                    endRecurrance: "never"
                     notes: null
                     dayNum: 3
                 independenceDay:
@@ -213,6 +228,7 @@
                     dayNum: null
                     type: "holiday"
                     recurrance: "yearly"
+                    endRecurrance: "never"
                     notes: null
                 laborDay:
                     name: "Labor Day"
@@ -223,6 +239,7 @@
                     dayNum: 1
                     type: "holiday"
                     recurrance: "yearly"
+                    endRecurrance: "never"
                     notes: null
                 patroitDay:
                     name: "Patroit Day"
@@ -233,6 +250,7 @@
                     dayNum: null
                     type: "holiday"
                     recurrance: "yearly"
+                    endRecurrance: "never"
                     notes: null
                 columbusDay:
                     name: "Columbus Day"
@@ -243,6 +261,7 @@
                     dayNum: 2
                     type: "holiday"
                     recurrance: "yearly"
+                    endRecurrance: "never"
                     notes: null
                 halloween:
                     name: "Halloween"
@@ -253,6 +272,7 @@
                     dayNum: null
                     type: "holiday"
                     recurrance: "yearly"
+                    endRecurrance: "never"
                     notes: null
                 veteransDay:
                     name: "Veteran's Day"
@@ -263,6 +283,7 @@
                     dayNum: null
                     type: "holiday"
                     recurrance: "yearly"
+                    endRecurrance: "never"
                     notes: null
                 thanksgiving:
                     name: "Thanksgiving"
@@ -273,6 +294,7 @@
                     dayNum: 4
                     type: "holiday"
                     recurrance: "yearly"
+                    endRecurrance: "never"
                     notes: null
                 pearlHarborDay:
                     name: "Pearl Harbor Day"
@@ -283,6 +305,7 @@
                     dayNum: null
                     type: "holiday"
                     recurrance: "yearly"
+                    endRecurrance: "never"
                     notes: null
                 festivus:
                     name: "Festivus"
@@ -293,6 +316,7 @@
                     dayNum: null
                     type: "holiday"
                     recurrance: "yearly"
+                    endRecurrance: "never"
                     notes: null
                 christmasEve:
                     name: "Christmas Eve"
@@ -303,6 +327,7 @@
                     dayNum: null
                     type: "holiday"
                     recurrance: "yearly"
+                    endRecurrance: "never"
                     notes: null
                 christmas:
                     name: "Christmas"
@@ -313,6 +338,7 @@
                     dayNum: null
                     type: "holiday"
                     recurrance: "yearly"
+                    endRecurrance: "never"
                     notes: null
                 boxingDay:
                     name: "Boxing Day"
@@ -323,6 +349,7 @@
                     dayNum: null
                     type: "holiday"
                     recurrance: "yearly"
+                    endRecurrance: "never"
                     notes: null
                 newYearsEve:
                     name: "New Year's Eve"
@@ -333,6 +360,7 @@
                     dayNum: null
                     type: "holiday"
                     recurrance: "yearly"
+                    endRecurrance: "never"
                     notes: null
                 mybirthday:
                     name: "My Birthday"
@@ -343,6 +371,7 @@
                     dayNum: null
                     type: "birthday"
                     recurrance: "yearly"
+                    endRecurrance: "never"
                     notes: "Here are some notes"
                 rabbitRabbitDay:
                     name: "Rabbit Rabbit Day"
@@ -353,6 +382,7 @@
                     dayNum: null
                     type: "fun day"
                     recurrance: "monthly"
+                    endRecurrance: "never"
                     notes: "Say Rabbit Rabbit for good luck this month"
                 firstMonday:
                     name: "First Monday"
@@ -363,17 +393,30 @@
                     dayNum : 1
                     type: "test"
                     recurrance: "monthly"
+                    endRecurrance: "never"
                     notes: "This is the first Monday of the month"
-                # lawnDay:
-                #     name: "Lawn Day"
-                #     month: "April"
-                #     year: null
-                #     eventDate: 17
-                #     day: "Thursday"
-                #     dayNum: null
-                #     type: "test"
-                #     recurrance: "biweekly"
-                #     notes: "Every other Thursday"
+                lawnDay:
+                    name: "Lawn Day"
+                    month: "April"
+                    year: null
+                    eventDate: 24
+                    day: "Thursday"
+                    dayNum: null
+                    type: "test"
+                    recurrance: "biweekly"
+                    endRecurrance: "never"
+                    notes: "Every other Thursday"
+                notLawnDay:
+                    name: "Not Lawn Day"
+                    month: "April"
+                    year: null
+                    eventDate: 17
+                    day: "Thursday"
+                    dayNum: null
+                    type: "test"
+                    recurrance: "biweekly"
+                    endRecurrance: "never"
+                    notes: "Every other Thursday"
                 wednesdays:
                     name: "Wednesdays"
                     month: null
@@ -383,6 +426,7 @@
                     dayNum: null
                     type: "test"
                     recurrance: "weekly"
+                    endRecurrance: "never"
                     notes: "Every single Wednesday"
                 wakeup:
                     name: "Wake Up"
@@ -393,6 +437,7 @@
                     dayNum: null
                     type: "test"
                     recurrance: "daily"
+                    endRecurrance: "never"
                     note: "Wake Up Every Day"
                 oneTimeEvent:
                     name: "One Time Event"
@@ -403,6 +448,7 @@
                     dayNum: null
                     type: "test"
                     recurrance: "none"
+                    endRecurrance: null
                     note: "do this once"
 
             self.createCalendar self.currentMonth, self.currentYear
@@ -538,8 +584,8 @@
             currentYear = calendarInner.data 'year'
             weeks = calendarInner.find('tbody').find 'tr'
 
-            getWeekNum = (dayNum, day, numberDays, dayShift) ->
-                numberWeeks = self.getWeeksInMonth(numberDays, dayShift)
+            getEventWeekNum = (dayNum, day, numberDays, dayShift) ->
+                numberWeeks = self.getWeeksInMonth numberDays, dayShift
                 lastWeekLength = weeks.eq(numberWeeks).length
 
                 if dayNum is 'last' and dayShift <= day
@@ -551,38 +597,54 @@
 
             $.each self.events, (key, value) ->                
                 eventDays = []
-                # add yearly events
-                if value.recurrance is 'yearly'
-                    month = $.inArray value.month, self.months
+                month = $.inArray value.month, self.months
+                if value.recurrance is 'yearly' and currentMonth is month     
+                    # add yearly events
 
                     if value.day
                         day = $.inArray value.day, self.days
-                        weekNum = getWeekNum value.dayNum, day, numberDays, dayShift
+                        eventWeekNum = getEventWeekNum value.dayNum, day, numberDays, dayShift
 
                         if currentMonth is month
-                            eventWeek = if dayShift <= day then eventWeek = weeks.eq weekNum else eventWeek = weeks.eq weekNum + 1
+                            eventWeek = if dayShift <= day then eventWeek = weeks.eq eventWeekNum else eventWeek = weeks.eq eventWeekNum + 1
                             eventDate = eventWeek.find('td').eq(day).data 'date'
                     else
                         eventDate = value.eventDate
-
-                    if currentMonth is month
-                        eventDays.push calendarInner.find "[data-date=#{eventDate}]"
-                # add monthly events
+                    
+                    eventDays.push calendarInner.find "[data-date=#{eventDate}]"
+                
                 else if value.recurrance is 'monthly'
-
+                    # add monthly events
                     if value.day
                         day = $.inArray value.day, self.days
-                        weekNum = getWeekNum value.dayNum, day, numberDays, dayShift
-                        eventWeek = if dayShift <= day then eventWeek = weeks.eq weekNum else eventWeek = weeks.eq weekNum + 1
+                        eventWeekNum = getEventWeekNum value.dayNum, day, numberDays, dayShift
+                        eventWeek = if dayShift <= day then eventWeek = weeks.eq eventWeekNum else eventWeek = weeks.eq eventWeekNum + 1
                         eventDate = eventWeek.find('td').eq(day).data 'date'
                     else
                         eventDate = value.eventDate
 
                     eventDays.push calendarInner.find "[data-date=#{eventDate}]"
-                # else if value.recurrance is 'biweekly'
-                #     # events that occur every 2 weeks
+
+                else if value.recurrance is 'biweekly'
+                    # events that occur every 2 weeks
+                    if value.day
+                        day = $.inArray value.day, self.days
+                        eventDate = []
+                        length = weeks.length
+                        startWeekNum = weeks.has("td[data-date=#{value.eventDate}]").data 'week'
+                        weekPattern = if startWeekNum % 2 is 0 then 'even' else 'odd'
+                        eventWeeks = calendarInner.find('tbody').find "tr.#{weekPattern}-week"
+
+                        $.each eventWeeks, (key, value) ->
+                            that = $ value
+                            weekLength = that.find("td:not(.#{self.classes.muted})").length
+                            eventDate.push that.find('td').eq(day).data('date')
+
+                    $.each eventDate, (key, value) ->
+                        eventDays.push calendarInner.find "[data-date=#{value}]"
+
                 else if value.recurrance is 'weekly'
-                    # weekly events               
+                    # weekly events
                     if value.day
                         day = $.inArray value.day, self.days
                         eventDate = []
@@ -605,13 +667,11 @@
                     days.each ->
                         eventDays.push $(@)
 
-                else if value.recurrance is 'none'
-                    month = $.inArray value.month, self.months
+                else if value.recurrance is 'none' and currentMonth is month and currentYear is value.year
+                
+                    eventDate = value.eventDate
 
-                    if currentMonth is month and currentYear is value.year
-                        eventDate = value.eventDate
-
-                        eventDays.push calendarInner.find "[data-date=#{eventDate}]"                                           
+                    eventDays.push calendarInner.find "[data-date=#{eventDate}]"                                           
                 
                 if eventDays.length > 0
                     $.each eventDays, (key, day) ->
@@ -621,12 +681,44 @@
 
         highlightWeekends: =>
             self = @
-            weeks = self.calendar.find("div.#{@calendarInnerClass}").find 'tr'
+            weeks = self.calendar.find("div.#{@calendarInnerClass} tbody").find 'tr'
 
             $.each weeks, ->
                 dates = $(@).find "td"
                 $.each self.weekend, (key, value) ->
                     dates.eq(value).not(".#{self.classes.muted}, .#{self.classes.today}, .#{self.classes.holiday}").addClass self.classes.weekend
+
+        addWeekNumbers: =>
+            self = @
+            calendarInner = self.calendar.find "div.#{@calendarInnerClass}"
+            month = calendarInner.data 'month'
+            year = calendarInner.data 'year'
+            weekNum = 1
+            weeks = self.calendar.find("div.#{@calendarInnerClass} tbody").find 'tr'
+            weekNums = []
+
+            $.each self.months, (key, value) ->
+                numberDays = self.getDaysInMonth (key + 1), year
+                firstDay = self.getDayOfWeek key, year, 1
+                dayShift = if firstDay is self.daysPerWeek then 0 else firstDay
+                numberWeeks = self.getWeeksInMonth numberDays, dayShift
+                week = 1
+                
+                until week > numberWeeks                    
+                    if week is 1 and firstDay isnt 0
+                        weekNum = weekNum
+                    else
+                        weekNum = weekNum + 1
+
+                    if month is key
+                        weekNums.push weekNum
+                    week = week + 1
+                weekNums
+
+            $.each weekNums, (key, value) ->
+                week = weeks.eq key
+                if value % 2 is 0 then week.addClass('even-week') else week.addClass('odd-week')
+                week.attr 'data-week', value
 
         advanceMonth: (direction) =>
             calendarInner = @calendar.find "div.#{@calendarInnerClass}"
@@ -735,6 +827,7 @@
 
             self.highlightCurrentDay()
             self.highlightWeekends()
+            self.addWeekNumbers()
             self.createEvent "Dad's Birthday", "April", null, 9, null, null, "birthday", "some notes"
             self.createEvent "Foby's Birthday", "November", null, 23, null, null, "birthday", "some notes"
             self.addEventsToCalendar numberDays, dayShift
