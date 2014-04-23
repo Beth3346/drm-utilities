@@ -14,8 +14,8 @@ section
             .drm-inline-control-group
                 label(for="recurrance") Recurrance
                 select#recurrance(name="recurrance")
-                    option(value="") None
-                    option(value="") Daily
+                    option(value="none") None
+                    option(value="daily") Daily
                     option(value="weekly") Weekly
                     option(value="biweekly") Bi-Weekly
                     option(value="monthly") Monthly
@@ -40,18 +40,33 @@ section
                 input.drm-valid-integer#event-date(type="text" name="event_date" data-min-value="1" data-max-value="31" data-min-length="1" data-max-length="2")
                 label(for="year") Year:
                 input.drm-valid-integer#year(type="text" name="year" data-min-value="1" data-min-length="4" data-max-length="4")
+
             .drm-inline-control-group
-                label(for="day") Day of Week:
-                select#day(name="day")
-                    option(value="") Select Day
-                    option(value="Sunday") Sunday
-                    option(value="Monday") Monday
-                    option(value="Tuesday") Tuesday
-                    option(value="Wednesday") Wednesday
-                    option(value="Thursday") Thursday
-                    option(value="Friday") Friday
-                    option(value="Saturday") Saturday
-                label(for="day_num") Day Number
+                .drm-control-group
+                    label
+                        input.day-checkbox#day-sunday(type="checkbox" name="day_sunday" value="Sunday")
+                        | Sunday
+                    label
+                        input.day-checkbox#day-monday(type="checkbox" name="day_monday" value="Monday")
+                        | Monday
+                    label
+                        input.day-checkbox#day-tuesday(type="checkbox" name="day_tuesday" value="Tuesday")
+                        | Tuesday
+                    label
+                        input.day-checkbox#day-wednesday(type="checkbox" name="day_wednesday" value="Wednesday")
+                        | Wednesday
+                    label
+                        input.day-checkbox#day-thursday(type="checkbox" name="day_thursday" value="Thursday")
+                        | Thursday
+                    label
+                        input.day-checkbox#day-friday(type="checkbox" name="day_friday" value="Friday")
+                        | Friday
+                    label
+                        input.day-checkbox#day-saturday(type="checkbox" name="day_saturday" value="Saturday")
+                        | Saturday
+
+            .drm-inline-control-group
+                label(for="day_num") Week Number
                 select#day-num(name="day_num")
                     option(value="") Select Week
                     option(value="1") First
