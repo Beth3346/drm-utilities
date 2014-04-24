@@ -128,3 +128,35 @@
         }
     }
 }
+
+.drm-calendar-day-view {
+    margin: 20px auto 20px auto;
+    padding: 10px 20px 10px 20px;
+    width: 80%;
+    border: 1px solid $light-grey;
+    border-radius: 10px;
+    box-sizing: border-box;
+
+    .drm-calendar-header {
+        color: $darker-grey;
+        font-weight: bold;
+        border-bottom: 1px solid $light-grey;
+        text-align: center;
+        @include drm-em-font(32);
+    }
+
+    .hours {
+        @include drm-unstyled-list(left, no);
+
+        .hour {
+            color: $grey;
+            font-weight: bold;
+            @include drm-em-font(12);
+        }
+
+        li {
+            padding: 10px 5px 0 5px;
+            border-bottom: 1px solid $light-grey;
+        }
+    }
+}
