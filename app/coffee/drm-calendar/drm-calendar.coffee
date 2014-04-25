@@ -491,21 +491,34 @@
                     endRecurrance: "never"
                     allDayEvent: true
                     notes: "Every other Thursday"
-                wednesdays:
-                    name: "Wednesdays"
+                wakeup:
+                    name: "Wake Up"
                     month: null
                     year: null
                     eventDate: null
-                    day: ["Wednesday"]
+                    day: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
                     time: null
                     dayNum: null
                     type: "test"
                     recurrance: "weekly"
                     endRecurrance: "never"
                     allDayEvent: true
-                    notes: "Every single Wednesday"
-                wakeup:
-                    name: "Wake Up"
+                    note: "Wake Up Every Day"
+                sleepIn:
+                    name: "Sleep In!"
+                    month: null
+                    year: null
+                    eventDate: null
+                    day: ["Saturday", "Sunday"]
+                    time: null
+                    dayNum: null
+                    type: "test"
+                    recurrance: "weekly"
+                    endRecurrance: "never"
+                    allDayEvent: true
+                    note: null
+                dailyEvent:
+                    name: "Every Day Event"
                     month: null
                     year: null
                     eventDate: null
@@ -516,20 +529,7 @@
                     recurrance: "daily"
                     endRecurrance: "never"
                     allDayEvent: true
-                    note: "Wake Up Every Day"
-                mondayWednesdayFridayEvent:
-                    name: "MWF"
-                    month: null
-                    year: null
-                    eventDate: null
-                    day: ["Monday", "Wednesday", "Friday"]
-                    time: null
-                    dayNum: null
-                    type: "test"
-                    recurrance: "weekly"
-                    endRecurrance: "never"
-                    allDayEvent: true
-                    note: "Monday Wednesday Friday"
+                    note: null
                 oneTimeEvent:
                     name: "One Time Event"
                     month: "April"
@@ -582,9 +582,10 @@
 
             self.calendar.on 'click', 'form.drm-calendar-new-event button.addEvent', (e) ->                
                 e.preventDefault()
+                currentMonth = $(".#{self.calendarInnerClass}").data 'month'
                 newEvent =
                     name: if self.addEventForm.find('#event-name').val() is '' then null else self.addEventForm.find('#event-name').val()
-                    recurrance: if self.addEventForm.find('#recurrance').val() is '' then null else self.addEventForm.find('#recurrance').val()
+                    recurrance: if self.addEventForm.find('#recurrance').val() is '' then 'none' else self.addEventForm.find('#recurrance').val()
                     month: if self.addEventForm.find('#month').val() is '' then null else self.addEventForm.find('#month').val()
                     year: if self.addEventForm.find('#year').val() is '' then null else parseInt(self.addEventForm.find('#year').val(), 10)
                     eventDate: if self.addEventForm.find('#event-date').val() is '' then null else parseInt(self.addEventForm.find('#event-date').val(), 10)
@@ -600,7 +601,7 @@
 
                 self.createEvent newEvent
                 newMonth = if newEvent.month? then $.inArray newEvent.month, self.months else self.currentMonth
-                self.changeCalendar.call @, newMonth, self.currentYear
+                if newMonth isnt currentMonth then self.changeCalendar.call @, newMonth, self.currentYear
                 # reset form
                 self.addEventForm.find(':input').val ''
                 self.addEventForm.find('input.day-checkbox:checked').prop 'checked', false
@@ -660,6 +661,7 @@
                 type: if newEvent.type? then newEvent.type.toLowerCase() else null
                 notes: if newEvent.notes? then newEvent.notes else null
             $(@events).add obj[eventName]
+            @addEventsToCalendar @events[eventName]
 
         addNewCalendarEvent: (eventName, calendarItem, type) =>
             eventClass = 'events'
@@ -679,112 +681,161 @@
 
                 eventList.appendTo calendarItem
 
-            if type is 'holiday' then eventList.find('a').addClass @classes.holiday
+            if type is 'holiday' then eventList.find("a:contains(#{eventName})").addClass @classes.holiday
 
-        addEventsToCalendar: (numberDays, dayShift) =>
+        getEventWeekNum: (dayNum, day, numberDays, dayShift) =>
+            self = @
+            calendarInner = self.calendar.find "div.#{@calendarInnerClass}"
+            weeks = calendarInner.find('tbody').find 'tr'
+            numberWeeks = self.getWeeksInMonth numberDays, dayShift
+            lastWeekLength = weeks.eq(numberWeeks).length
+
+            if dayNum is 'last' and dayShift <= day
+                if lastWeekLength < day then (numberWeeks - 2) else numberWeeks - 1
+            else if dayNum is 'last' and dayShift > day
+                numberWeeks - 2
+            else
+                parseInt(dayNum, 10) - 1
+
+        addYearlyEvents: (events, eventDays) =>
             self = @
             calendarInner = self.calendar.find "div.#{@calendarInnerClass}"
             currentMonth = calendarInner.data 'month'
             currentYear = calendarInner.data 'year'
             weeks = calendarInner.find('tbody').find 'tr'
+            firstDay = self.getDayOfWeek currentMonth, currentYear, 1
+            numberDays = self.getDaysInMonth (currentMonth + 1), currentYear
+            dayShift = if firstDay is self.daysPerWeek then 0 else firstDay
+            month = $.inArray events.month, self.months
+            eventDate = []
 
-            getEventWeekNum = (dayNum, day, numberDays, dayShift) ->
-                numberWeeks = self.getWeeksInMonth numberDays, dayShift
-                lastWeekLength = weeks.eq(numberWeeks).length
+            if events.day
+                $.each events.day, (key, value) ->
+                    day = $.inArray value, self.days
+                    eventWeekNum = self.getEventWeekNum events.dayNum, day, numberDays, dayShift
 
-                if dayNum is 'last' and dayShift <= day
-                    if lastWeekLength < day then (numberWeeks - 2) else numberWeeks - 1
-                else if dayNum is 'last' and dayShift > day
-                    numberWeeks - 2
-                else
-                    parseInt(dayNum, 10) - 1
-
-            $.each self.events, (key, events) ->                
-                eventDays = []
-                month = $.inArray events.month, self.months
-                eventDate = []
-                # add yearly events
-                if events.recurrance is 'yearly' and currentMonth is month
-                    if events.day
-                        $.each events.day, (key, value) ->
-                            day = $.inArray value, self.days
-                            eventWeekNum = getEventWeekNum events.dayNum, day, numberDays, dayShift
-
-                            if currentMonth is month
-                                eventWeek = if dayShift <= day then eventWeek = weeks.eq eventWeekNum else eventWeek = weeks.eq eventWeekNum + 1
-                                eventDate.push eventWeek.find('td').eq(day).data 'date'
-                    else
-                        eventDate.push parseInt(events.eventDate, 10)
-                    
-                    $.each eventDate, (key, value) ->
-                        eventDays.push calendarInner.find "[data-date=#{value}]"
+                    if currentMonth is month
+                        eventWeek = if dayShift <= day then eventWeek = weeks.eq eventWeekNum else eventWeek = weeks.eq eventWeekNum + 1
+                        eventDate.push eventWeek.find('td').eq(day).data 'date'
+            else
+                eventDate.push parseInt(events.eventDate, 10)
+            
+            $.each eventDate, (key, value) ->
+                eventDays.push calendarInner.find "[data-date=#{value}]"
                 
-                else if events.recurrance is 'monthly'
-                    # add monthly events
-                    if events.day
-                        $.each events.day, (key, value) ->
-                            day = $.inArray value, self.days
-                            eventWeekNum = getEventWeekNum events.dayNum, day, numberDays, dayShift
-                            eventWeek = if dayShift <= day then eventWeek = weeks.eq eventWeekNum else eventWeek = weeks.eq eventWeekNum + 1
-                            eventDate.push eventWeek.find('td').eq(day).data 'date'
-                    else
-                        eventDate.push parseInt(events.eventDate, 10)
+        addMonthlyEvents: (events, eventDays) =>
+            self = @
+            calendarInner = self.calendar.find "div.#{@calendarInnerClass}"
+            currentMonth = calendarInner.data 'month'
+            currentYear = calendarInner.data 'year'
+            weeks = calendarInner.find('tbody').find 'tr'
+            firstDay = self.getDayOfWeek currentMonth, currentYear, 1
+            numberDays = self.getDaysInMonth (currentMonth + 1), currentYear
+            dayShift = if firstDay is self.daysPerWeek then 0 else firstDay
+            eventDate = []
 
-                    $.each eventDate, (key, value) ->
-                        eventDays.push calendarInner.find "[data-date=#{value}]"
+            # add monthly events
+            if events.day
+                $.each events.day, (key, value) ->
+                    day = $.inArray value, self.days
+                    eventWeekNum = self.getEventWeekNum events.dayNum, day, numberDays, dayShift
+                    eventWeek = if dayShift <= day then eventWeek = weeks.eq eventWeekNum else eventWeek = weeks.eq eventWeekNum + 1
+                    eventDate.push eventWeek.find('td').eq(day).data 'date'
+            else
+                eventDate.push parseInt(events.eventDate, 10)
 
-                else if events.recurrance is 'biweekly'
-                    # events that occur every 2 weeks
-                    if events.day
-                        $.each events.day, (key, value) ->
-                            day = $.inArray value, self.days
-                            length = weeks.length
-                            startWeekNum = weeks.has("td[data-date=#{events.eventDate}]").data 'week'
-                            weekPattern = if startWeekNum % 2 is 0 then 'even' else 'odd'
-                            eventWeeks = calendarInner.find('tbody').find "tr.#{weekPattern}-week"
+            $.each eventDate, (key, value) ->
+                eventDays.push calendarInner.find "[data-date=#{value}]"
 
-                            $.each eventWeeks, (key, value) ->
-                                that = $ value
-                                weekLength = that.find("td:not(.#{self.classes.muted})").length
-                                eventDate.push that.find('td').eq(day).data('date')
+        addBiWeeklyEvents: (events, eventDays) =>
+            self = @
+            calendarInner = self.calendar.find "div.#{@calendarInnerClass}"
+            currentMonth = calendarInner.data 'month'
+            currentYear = calendarInner.data 'year'
+            weeks = calendarInner.find('tbody').find 'tr'
+            eventDate = []
+            # events that occur every 2 weeks
+            if events.day
+                $.each events.day, (key, value) ->
+                    day = $.inArray value, self.days
+                    length = weeks.length
+                    startWeekNum = weeks.has("td[data-date=#{events.eventDate}]").data 'week'
+                    weekPattern = if startWeekNum % 2 is 0 then 'even' else 'odd'
+                    eventWeeks = calendarInner.find('tbody').find "tr.#{weekPattern}-week"
 
-                    $.each eventDate, (key, value) ->
-                        eventDays.push calendarInner.find "[data-date=#{value}]"
+                    $.each eventWeeks, (key, value) ->
+                        that = $ value
+                        weekLength = that.find("td:not(.#{self.classes.muted})").length
+                        eventDate.push that.find('td').eq(day).data('date')
 
-                else if events.recurrance is 'weekly'
-                    # weekly events
-                    if events.day
-                        $.each events.day, (key, value) ->
-                            day = $.inArray value, self.days
-                            length = weeks.length
-                            $.each weeks, (key, value) ->
-                                that = $ value
-                                weekLength = that.find("td:not(.#{self.classes.muted})").length
-                                if key is 0
-                                    if dayShift <= day then eventDate.push that.find('td').eq(day).data('date')
-                                else if key is (length - 1)
-                                    if day < weekLength then eventDate.push that.find('td').eq(day).data('date')
-                                else
-                                    eventDate.push that.find('td').eq(day).data('date')
+            $.each eventDate, (key, value) ->
+                eventDays.push calendarInner.find "[data-date=#{value}]"
 
-                    $.each eventDate, (key, value) ->
-                        eventDays.push calendarInner.find "[data-date=#{value}]"
+        addWeeklyEvents: (events, eventDays) =>
+            self = @
+            calendarInner = self.calendar.find "div.#{@calendarInnerClass}"
+            currentMonth = calendarInner.data 'month'
+            currentYear = calendarInner.data 'year'
+            weeks = calendarInner.find('tbody').find 'tr'
+            firstDay = self.getDayOfWeek currentMonth, currentYear, 1
+            numberDays = self.getDaysInMonth (currentMonth + 1), currentYear
+            dayShift = if firstDay is self.daysPerWeek then 0 else firstDay
+            eventDate = []
+            # weekly events
+            if events.day
+                $.each events.day, (key, value) ->
+                    day = $.inArray value, self.days
+                    length = weeks.length
+                    $.each weeks, (key, value) ->
+                        that = $ value
+                        weekLength = that.find("td:not(.#{self.classes.muted})").length
+                        if key is 0
+                            if dayShift <= day then eventDate.push that.find('td').eq(day).data('date')
+                        else if key is (length - 1)
+                            if day < weekLength then eventDate.push that.find('td').eq(day).data('date')
+                        else
+                            eventDate.push that.find('td').eq(day).data('date')
 
-                else if events.recurrance is 'daily'
-                    days = calendarInner.find('tbody').find "td:not(.#{self.classes.muted})"
-                    days.each ->
-                        eventDays.push $(@)
+            $.each eventDate, (key, value) ->
+                eventDays.push calendarInner.find "[data-date=#{value}]"
 
-                else if events.recurrance is 'none' and currentMonth is month and currentYear is parseInt(events.year, 10)
-                
-                    eventDate = parseInt(events.eventDate, 10)
+        addDailyEvents: (events, eventDays) =>
+            self = @
+            calendarInner = self.calendar.find "div.#{@calendarInnerClass}"
+            days = calendarInner.find('tbody').find "td:not(.#{self.classes.muted})"
+            days.each ->
+                eventDays.push $(@)
 
-                    eventDays.push calendarInner.find "[data-date=#{eventDate}]"                                           
-                
-                if eventDays.length > 0
-                    $.each eventDays, (key, day) ->
-                        # add css classes here
-                        self.addNewCalendarEvent events.name, day, events.type
+        addOneTimeEvents: (events, eventDays) =>
+            self = @
+            calendarInner = self.calendar.find "div.#{@calendarInnerClass}"     
+            eventDate = parseInt(events.eventDate, 10)
+            eventDays.push calendarInner.find "[data-date=#{eventDate}]"
+
+        addEventsToCalendar: (events) =>
+            self = @
+            calendarInner = self.calendar.find "div.#{@calendarInnerClass}"
+            currentMonth = calendarInner.data 'month'
+            currentYear = calendarInner.data 'year'
+            month = $.inArray events.month, self.months
+            eventDays = []
+            # add yearly events
+            if events.recurrance is 'yearly' and currentMonth is month
+                self.addYearlyEvents events, eventDays
+            else if events.recurrance is 'monthly'
+                self.addMonthlyEvents events, eventDays
+            else if events.recurrance is 'biweekly'
+                self.addBiWeeklyEvents events, eventDays
+            else if events.recurrance is 'weekly'
+                self.addWeeklyEvents events, eventDays
+            else if events.recurrance is 'daily'
+                self.addDailyEvents events, eventDays
+            else if events.recurrance is 'none' and currentMonth is month and currentYear is parseInt(events.year, 10)                                         
+                self.addOneTimeEvents events, eventDays            
+            if eventDays.length > 0
+                $.each eventDays, (key, day) ->
+                    # add css classes here
+                    self.addNewCalendarEvent events.name, day, events.type
 
         highlightWeekends: =>
             self = @
@@ -937,28 +988,10 @@
 
             self.highlightCurrentDay()
             self.highlightWeekends()
-            self.addWeekNumbers()
-            self.createEvent
-                name : "Dad's Birthday"
-                recurrance: "yearly"
-                month: "April"
-                year: null
-                eventDate: 9
-                day: null
-                dayNum: null
-                type: "birthday"
-                notes: "some notes"
-            self.createEvent
-                name : "Foby's Birthday"
-                recurrance: "yearly"
-                month: "November"
-                year: null
-                eventDate: 23
-                day: null
-                dayNum: null
-                type: "birthday"
-                notes: "some notes"
-            self.addEventsToCalendar numberDays, dayShift
+            self.addWeekNumbers()            
+
+            $.each self.events, (key, events) ->
+                self.addEventsToCalendar events
             $('.drm-calendar-year-prev').text lastYear
             $('.drm-calendar-year-next').text nextYear
 
@@ -966,5 +999,25 @@
             $('.drm-calendar-month-next').text nextMonth
 
     drmCalendar = new DrmCalendar()
+    drmCalendar.createEvent
+        name : "Dad's Birthday"
+        recurrance: "yearly"
+        month: "April"
+        year: null
+        eventDate: 9
+        day: null
+        dayNum: null
+        type: "birthday"
+        notes: "some notes"
+    drmCalendar.createEvent
+        name : "Foby's Birthday"
+        recurrance: "yearly"
+        month: "November"
+        year: null
+        eventDate: 23
+        day: null
+        dayNum: null
+        type: "birthday"
+        notes: "some notes"
 
 ) jQuery
