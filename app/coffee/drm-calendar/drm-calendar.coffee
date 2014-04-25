@@ -11,8 +11,8 @@
             self.today = new Date()
             self.currentMonth = self.today.getMonth()
             self.currentYear = self.today.getFullYear()
-            self.currentDay = @today.getDate()
-            self.calendarInnerClass = 'drm-calendar-inner'
+            self.currentDay = self.today.getDate()
+            self.calendarInnerClass = "drm-calendar-#{self.view}-view"
             self.calendar = $ ".#{self.calendarClass}"
             self.calendarNav = $ '.drm-calendar-nav'
             self.calendarSelect = $ '.drm-calendar-select'
@@ -661,23 +661,25 @@
                 notes: if newEvent.notes? then newEvent.notes else null
             $(@events).add obj[eventName]
 
-        addNewCalendarEvent: (eventName, calendarItem) ->
+        addNewCalendarEvent: (eventName, calendarItem, type) =>
             eventClass = 'events'
             eventList = calendarItem.find "ul.#{eventClass}"
             length = eventList.length
 
             if length > 0
                 item = $ '<li></li>',
-                    text: eventName
+                    html: "<a href='#'>#{eventName}</a>"
 
                 item.appendTo eventList
 
             else if length is 0
                 eventList = $ '<ul></ul>',
                     class: eventClass
-                    html: "<li>#{eventName}</li>"
+                    html: "<li><a href='#'>#{eventName}</a></li>"
 
                 eventList.appendTo calendarItem
+
+            if type is 'holiday' then eventList.find('a').addClass @classes.holiday
 
         addEventsToCalendar: (numberDays, dayShift) =>
             self = @
@@ -782,8 +784,7 @@
                 if eventDays.length > 0
                     $.each eventDays, (key, day) ->
                         # add css classes here
-                        if events.type is 'holiday' then day.addClass self.classes.holiday
-                        self.addNewCalendarEvent events.name, day
+                        self.addNewCalendarEvent events.name, day, events.type
 
         highlightWeekends: =>
             self = @

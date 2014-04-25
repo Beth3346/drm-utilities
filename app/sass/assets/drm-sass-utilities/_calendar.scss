@@ -34,7 +34,9 @@ button {
     .drm-calendar-new-event {
         @include drm-tabular-form();        
     }
+}
 
+.drm-calendar-month-view {
     table {
         width: 100%;
         border-collapse: separate;
@@ -96,14 +98,28 @@ button {
             background-color: $dark-grey;
             color: white;
             cursor: pointer;
+
+            .events a {
+                color: white;
+            }
         }
 
         .events {
             @include drm-unstyled-list(left, no);
-            @include drm-em-font(12);
 
             li {
                 padding: 0;
+
+                a {
+                    @extend %drm-reset-box; 
+                    color: $dark-grey;
+                    display: block;
+                    @include drm-em-font(12);
+
+                    &.drm-cal-holiday {
+                        color: #FF3659;
+                    }
+                }
             }
         }
     }
@@ -115,22 +131,29 @@ button {
         &:hover {
             cursor: not-allowed;
             background-color: $lighter-grey;
-            color: white;
+
+            .events a {
+                color: white;
+            }
         }
     }
 
     .drm-cal-today {
         background-color: $drm-blue;
         color: white;
+            
+        .events a {
+            color: white;
+        }
     }
 
     .drm-cal-weekend {
         background-color: $lightest-grey;
         color: $dark-grey;
-    }
-
-    .drm-cal-holiday {
-        color: #FF3659;
+            
+        .events a {
+            color: $dark-grey;
+        }
     }
 }
 
