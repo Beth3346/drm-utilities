@@ -660,13 +660,11 @@
                 type: if newEvent.type? then newEvent.type.toLowerCase() else null
                 notes: if newEvent.notes? then newEvent.notes else null
             $(@events).add obj[eventName]
-            console.log @events
 
         addNewCalendarEvent: (eventName, calendarItem) ->
             eventClass = 'events'
             eventList = calendarItem.find "ul.#{eventClass}"
             length = eventList.length
-            console.log eventName
 
             if length > 0
                 item = $ '<li></li>',

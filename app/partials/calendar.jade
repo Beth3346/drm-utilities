@@ -110,33 +110,339 @@ section
             button.drm-calendar-month-next(data-dir='next') Next Month
             button.drm-calendar-year-next(data-dir='next') Next Year
 
+        .drm-calendar-view-nav
+            button.drm-calendar-view(data-view='month') Month
+            button.drm-calendar-view(data-view='week') Week
+            button.drm-calendar-view(data-view='day') Day
+
+    .drm-calendar-week-view
+        h1.drm-calendar-header Week 17 of 2014
+        table.drm-weeks
+            thead
+                tr
+                    th
+                    th Sunday April 20
+                    th Monday April 21
+                    th Tuesday April 22
+                    th Wednesday April 23
+                    th Thursday April 24
+                    th Friday April 25
+                    th Saturday April 26
+            tbody
+                tr
+                    td: span.hour All Day Events
+                    td
+                        ul.events
+                            li: a.event(href="#") All Day Event
+                            li: a.event(href="#") Another All Day Event
+                    td
+                        ul.events
+                            li: a.event(href="#") All Day Event
+                            li: a.event(href="#") Another All Day Event
+                    td
+                        ul.events
+                            li: a.event(href="#") All Day Event
+                            li: a.event(href="#") Another All Day Event
+                    td
+                        ul.events
+                            li: a.event(href="#") All Day Event
+                            li: a.event(href="#") Another All Day Event
+                    td
+                        ul.events
+                            li: a.event(href="#") All Day Event
+                            li: a.event(href="#") Another All Day Event
+                            li: a.event(href="#") Yet Another All Day Event
+                    td
+                        ul.events
+                            li: a.event(href="#") All Day Event
+                            li: a.event(href="#") Another All Day Event
+                    td
+                        ul.events
+                            li: a.event(href="#") All Day Event
+                            li: a.event(href="#") Another All Day Event
+                tr
+                    td: span.hour 12am
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                tr
+                    td: span.hour 1am
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                tr
+                    td: span.hour 2am
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                tr
+                    td: span.hour 3am
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                tr
+                    td: span.hour 4am
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                tr
+                    td: span.hour 5am
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                tr
+                    td: span.hour 6am
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                tr
+                    td: span.hour 7am
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                tr
+                    td: span.hour 8am
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                tr
+                    td: span.hour 9am
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                tr
+                    td: span.hour 10am
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                tr
+                    td: span.hour 11am
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                tr
+                    td: span.hour 12pm
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                tr
+                    td: span.hour 1pm
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                tr
+                    td: span.hour 2pm
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                tr
+                    td: span.hour 3pm
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                tr
+                    td: span.hour 4pm
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                tr
+                    td: span.hour 5pm
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                tr
+                    td: span.hour 6pm
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                tr
+                    td: span.hour 7pm
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                tr
+                    td: span.hour 8pm
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                tr
+                    td: span.hour 9pm
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                tr
+                    td: span.hour 10pm
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                tr
+                    td: span.hour 11pm
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+
     .drm-calendar-day-view
         h1.drm-calendar-header April 24 2014
+        ul.drm-day-event-list
+            li.drm-all-day-event: a.event(href="#") All Day Event
+            li.drm-all-day-event: a.event(href="#") Another All Day Event
+            li: span.hour 12am
+            li: span.hour 1am
+            li: span.hour 2am
+            li: span.hour 3am
+            li: span.hour 4am
+            li: span.hour 5am
+            li
+                span.hour 6am
+                ul.event-list
+                    li 
+                        span.time 6:10 
+                        a.event(href="#") Wake Up
+            li: span.hour 7am
+            li: span.hour 8am
+            li: span.hour 9am
+            li
+                span.hour 10am
+                ul.event-list
+                    li 
+                        span.time 10:00 
+                        a.event(href="#") Appointment One
+                    li 
+                        span.time 10:30 
+                        a.event(href="#") Appointment Two
+            li: span.hour 11am
+            li: span.hour 12pm
+            li: span.hour 1pm
+            li: span.hour 2pm
+            li: span.hour 3pm
+            li: span.hour 4pm
+            li: span.hour 5pm
+            li: span.hour 6pm
+            li: span.hour 7pm
+            li: span.hour 8pm
+            li: span.hour 9pm
+            li: span.hour 10pm
+            li: span.hour 11pm
 
-        ul.hours
-            li: span.hour 12:00 am
-            li: span.hour 1:00 am
-            li: span.hour 2:00 am
-            li: span.hour 3:00 am
-            li: span.hour 4:00 am
-            li: span.hour 5:00 am
-            li: span.hour 6:00 am
-            li: span.hour 7:00 am
-            li: span.hour 8:00 am
-            li: span.hour 9:00 am
-            li: span.hour 10:00 am
-            li: span.hour 11:00 am
-            li: span.hour 12:00 pm
-            li: span.hour 1:00 pm
-            li: span.hour 2:00 pm
-            li: span.hour 3:00 pm
-            li: span.hour 4:00 pm
-            li: span.hour 5:00 pm
-            li: span.hour 6:00 pm
-            li: span.hour 7:00 pm
-            li: span.hour 8:00 pm
-            li: span.hour 9:00 pm
-            li: span.hour 10:00 pm
-            li: span.hour 11:00 pm
+    .drm-calendar-event-details
+        h1.drm-calendar-header Important Meeting
+        ul.drm-event-detail-list
+            li 
+                span.drm-bold Date: 
+                span.event-detail April 24, 2014
+            li 
+                span.drm-bold Time: 
+                span.event-detail 10:10 am
+            li 
+                span.drm-bold Place: 
+                span.event-detail The Office
+            li 
+                span.drm-bold Recurrance: 
+                span.event-detail None
+            li 
+                span.drm-bold Type: 
+                span.event-detail Meeting
+            li 
+                span.drm-bold Notes: 
+                span.event-detail Here are some notes about the meeting
+
+        button.drm-event-edit(type="button") Edit
+        button.drm-event-delete(type="button") Delete
 
     h2 Usage

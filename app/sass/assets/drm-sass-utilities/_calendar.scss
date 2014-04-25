@@ -2,18 +2,27 @@
     Calendar
 -----------------------------------------------------------------------------*/
 
-.drm-calendar {
-    $date-width: (100% / 7);
-    width: 100%;
+.drm-calendar-header {
+    color: $darker-grey;
+    font-weight: bold;
+    border-bottom: 1px solid $light-grey;
+    @include drm-em-font(32);
+}
 
-    .drm-calendar-header {
-        color: $darker-grey;
-        font-weight: bold;
-        border-bottom: 1px solid $light-grey;
-        @include drm-em-font(32);
+button {
+    &.drm-event-edit {
+        @include drm-button-solid($drm-blue, white, 120px, center, 3px, $drm-blue, inline-block);
     }
 
-    .drm-calendar-nav {
+    &.drm-event-delete {
+        @include drm-button-solid($danger-color, white, 120px, center, 3px, $danger-color, inline-block);
+    }
+}
+
+.drm-calendar {
+    width: 100%;
+
+    .drm-calendar-nav, .drm-calendar-view-nav {
         margin: 10px 0 10px 0;
         @include drm-button-group($drm-blue, white, 3px, $drm-blue);
     }
@@ -30,102 +39,207 @@
         width: 100%;
         border-collapse: separate;
         border-spacing: 0;
+    }
 
-        th, td {
-            background-color: white;
-            padding: 10px;
-            box-sizing: border-box;
-            width: $date-width;
+    th, td {
+        background-color: white;
+        padding: 10px;
+        box-sizing: border-box;
+        width: (100% / 7);
+    }
+
+    th {
+        height: auto;
+        text-align: center; 
+        color: $grey;
+    }
+
+    tbody {
+        tr:first-child {
+            td:first-child {
+                border-radius: 5px 0 0 0;
+            }
+
+            td:last-child {
+                border-radius: 0 5px 0 0;
+            }   
         }
 
-        th {
-            height: auto;
-            text-align: center; 
-            color: $grey;
+        tr:last-child {
+            td {
+                border-bottom: 1px solid $lighter-grey;
+
+                &:first-child {
+                    border-radius: 0 0 0 5px;
+                }
+
+                &:last-child {
+                    border-radius: 0 0 5px 0;
+                }
+            }
+        }
+    } 
+
+    td {
+        height: 100px;
+        overflow: hidden;
+        border-top: 1px solid $lighter-grey;
+        border-left: 1px solid $lighter-grey;
+        color: $dark-grey;
+        @include drm-em-font(14);
+
+        &:last-child {
+            border-right: 1px solid $lighter-grey;
         }
 
-        tbody {
-            tr:first-child {
-                border-radius: 5px 5px 0 0;
+        &:hover {
+            background-color: $dark-grey;
+            color: white;
+            cursor: pointer;
+        }
 
-                td:first-child {
+        .events {
+            @include drm-unstyled-list(left, no);
+            @include drm-em-font(12);
+
+            li {
+                padding: 0;
+            }
+        }
+    }
+
+    .drm-cal-muted {
+        background-color: $lighter-grey;
+        color: white;
+
+        &:hover {
+            cursor: not-allowed;
+            background-color: $lighter-grey;
+            color: white;
+        }
+    }
+
+    .drm-cal-today {
+        background-color: $drm-blue;
+        color: white;
+    }
+
+    .drm-cal-weekend {
+        background-color: $lightest-grey;
+        color: $dark-grey;
+    }
+
+    .drm-cal-holiday {
+        color: #FF3659;
+    }
+}
+
+.drm-calendar-week-view {
+    margin: 20px 0 20px 0;
+    width: 100%;
+
+    .drm-calendar-header {
+        text-align: center;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+    th, td {
+        background-color: white;
+        padding: 5px 10px 5px 10px;
+        box-sizing: border-box;
+        width: (100% / 8);
+    }
+
+    th {
+        height: auto;
+        text-align: center; 
+        color: $grey;
+    }
+
+    tbody {
+        border: 1px solid $lighter-grey;
+        tr:first-child {
+            td {
+                border-top: 1px solid $lighter-grey;
+
+                &:first-child {
                     border-radius: 5px 0 0 0;
                 }
 
-                td:last-child {
+                &:last-child {
                     border-radius: 0 5px 0 0;
-                }   
-            }
-
-            tr:last-child {
-                border-radius: 0 0 5px 5px;
-
-                td {                    
-                    border-bottom: 1px solid $lighter-grey;
-
-                    &:first-child {
-                        border-radius: 0 0 0 5px;
-                    }
-
-                    &:last-child {
-                        border-radius: 0 0 5px 0;
-                    }
                 }
-            }
-        }    
+            } 
+        }
 
-        td {
-            height: 100px;
-            overflow: hidden;
-            border-top: 1px solid $lighter-grey;
-            border-left: 1px solid $lighter-grey;
-            color: $dark-grey;
-            @include drm-em-font(14);
+        tr:last-child {
+            td {
+                border-bottom: 1px solid $lighter-grey;
 
-            &:last-child {
-                border-right: 1px solid $lighter-grey;
-            }
+                &:first-child {
+                    border-radius: 0 0 0 5px;
+                }
 
-            &:hover {
-                background-color: $dark-grey;
-                color: white;
-                cursor: pointer;
-            }
-
-            .events {
-                @include drm-unstyled-list(left, no);
-                @include drm-em-font(12);
-
-                li {
-                    padding: 0;
+                &:last-child {
+                    border-radius: 0 0 5px 0;
                 }
             }
         }
+    } 
 
-        .drm-cal-muted {
+    td {
+        border-left: 1px solid $lighter-grey;
+        color: $dark-grey;
+        @include drm-em-font(14);
+
+        &:last-child {
+            border-right: 1px solid $lighter-grey;
+        }
+
+        &:hover {
+            background-color: $dark-grey;
+            color: white;
+            cursor: pointer;
+        }
+
+        .events {
+            @include drm-unstyled-list(left, no);
+            @include drm-em-font(12);
+
+            li {
+                padding: 0;
+            }
+        }
+    }
+
+    .drm-cal-muted {
+        background-color: $lighter-grey;
+        color: white;
+
+        &:hover {
+            cursor: not-allowed;
             background-color: $lighter-grey;
             color: white;
-
-            &:hover {
-                cursor: not-allowed;
-                background-color: $lighter-grey;
-                color: white;
-            }
         }
+    }
 
-        .drm-cal-today {
-            background-color: $drm-blue;
-            color: white;
-        }
+    .drm-cal-today {
+        background-color: $drm-blue;
+        color: white;
+    }
 
-        .drm-cal-weekend {
-            background-color: $lightest-grey;
-            color: $dark-grey;
-        }
+    .drm-cal-weekend {
+        background-color: $lightest-grey;
+        color: $dark-grey;
+    }
 
-        .drm-cal-holiday {
-            color: #FF3659;
-        }
+    .drm-cal-holiday {
+        color: #FF3659;
     }
 }
 
@@ -138,25 +252,67 @@
     box-sizing: border-box;
 
     .drm-calendar-header {
-        color: $darker-grey;
-        font-weight: bold;
-        border-bottom: 1px solid $light-grey;
         text-align: center;
-        @include drm-em-font(32);
     }
 
-    .hours {
+    .drm-day-event-list {
         @include drm-unstyled-list(left, no);
 
-        .hour {
+        .drm-all-day-event {
+            padding: 0;
+            margin: 0;
+            text-align: center;
+            border-bottom: none;
+        }
+
+        .hour, .time {
             color: $grey;
             font-weight: bold;
             @include drm-em-font(12);
         }
 
+        .event {
+            @include drm-em-font(14);
+        }
+
         li {
             padding: 10px 5px 0 5px;
             border-bottom: 1px solid $light-grey;
+        }
+    }
+
+    .event-list {
+        padding: 5px 0 5px 20px;
+        font-weight: normal;
+
+        .time {
+            padding-right: 5px;
+        }
+
+        li {
+            padding: 0;
+            border-bottom: none;
+        }
+    }
+}
+
+.drm-calendar-event-details {
+    margin: 20px auto 20px auto;
+    padding: 10px 20px 10px 20px;
+    width: 60%;
+    border: 1px solid $light-grey;
+    border-radius: 10px;
+    box-sizing: border-box;
+
+    .drm-calendar-header {
+        text-align: center;
+    }
+
+    .drm-event-detail-list {
+        @include drm-unstyled-list(left, no);
+
+        li {
+            padding: 10px 5px 0 5px;
         }
     }
 }
