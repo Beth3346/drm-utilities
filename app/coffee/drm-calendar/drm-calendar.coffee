@@ -921,6 +921,7 @@
 
         createMonthView: (month, year) =>
             self = @
+            self.calendarInnerClass = "drm-calendar-#{self.view}-view"
             numberDays = self.getDaysInMonth (month + 1), year
             prevMonthNumberDays = self.getDaysInMonth month, year
             firstDay = self.getDayOfWeek month, year, 1
@@ -1010,13 +1011,21 @@
             $('.drm-calendar-month-prev').text lastMonth
             $('.drm-calendar-month-next').text nextMonth
 
+        createWeekView: (month, date, year) =>
+            self.calendarInnerClass = "drm-calendar-#{self.view}-view"
+            console.log "#{month} #{date}, #{year}"
+
+        createDateView: (month, date, year) =>
+            self.calendarInnerClass = "drm-calendar-#{self.view}-view"
+            console.log "#{month} #{date}, #{year}"
+
         createCalendar: (month, year) =>
             self = @
 
             switch self.view
                 when 'month' then self.createMonthView month, year
-                when 'week' then console.log 'week view'
-                when 'day' then console.log 'day view'
+                when 'week' then self.createWeekView month, 1, year
+                when 'day' then self.createDateView month, 1, year
 
     drmCalendar = new DrmCalendar()
     drmCalendar.createEvent
