@@ -544,7 +544,8 @@
                     allDayEvent: true
                     note: "do this once"
 
-            self.createCalendar self.currentMonth, self.currentYear
+            if self.calendar.length > 0                
+                self.createCalendar self.currentMonth, self.currentYear
 
             self.calendar.on 'click', '.drm-calendar-month-prev, .drm-calendar-month-next', ->
                 direction = $(@).data 'dir'
@@ -861,17 +862,16 @@
                 dayShift = if firstDay is self.daysPerWeek then 0 else firstDay
                 numberWeeks = self.getWeeksInMonth numberDays, dayShift
                 week = 1
-                
-                until week > numberWeeks                    
-                    if week is 1 and firstDay isnt 0
-                        weekNum = weekNum
-                    else
-                        weekNum = weekNum + 1
+                if $.isNumeric(numberWeeks)
+                    until week > numberWeeks
+                        if week is 1 and firstDay isnt 0
+                            weekNum = weekNum
+                        else
+                            weekNum = weekNum + 1
+                        week = week + 1
 
-                    if month is key
-                        weekNums.push weekNum
-                    week = week + 1
-                weekNums
+                        if month is key
+                            weekNums.push weekNum
 
             $.each weekNums, (key, value) ->
                 week = weeks.eq key
@@ -923,80 +923,81 @@
             weekdays = null
             weeks = null
 
-            weekdays = '<table><thead><tr>'
-            $.each @days, (key, value) ->
-                weekdays += "<th>#{value}</th>"
-            weekdays += '</tr></thead>'
+            if self.view is 'month'
+                weekdays = '<table><thead><tr>'
+                $.each @days, (key, value) ->
+                    weekdays += "<th>#{value}</th>"
+                weekdays += '</tr></thead>'
 
-            weeks = '<tbody>'
-            i = 1
-            date = 1
-            l = 1
-            prevDays = (prevMonthNumberDays - dayShift) + 1
-            nextDates = 1
+                weeks = '<tbody>'
+                i = 1
+                date = 1
+                l = 1
+                prevDays = (prevMonthNumberDays - dayShift) + 1
+                nextDates = 1
 
-            while i <= numberWeeks
-                j = 1
-                weeks += '<tr>'
-                # if we are in week 1 we need to shift to the correct day of the week
-                if i is 1 and firstDay isnt 0
-                    # add cells for the previous month until we get to the first day
-                    while l <= dayShift
-                        weeks += "<td class='#{self.classes.muted}'>#{prevDays}</td>"
-                        prevDays += 1
-                        l += 1
-                        j += 1
-                    # start adding cells for the current month
-                    while j <= self.daysPerWeek
-                        weeks += "<td data-month='#{month}' data-date='#{date}' data-year='#{year}'>#{date}</td>"
-                        j += 1
-                        date += 1
-                # if we are in the last week of the month we need to add blank cells for next month
-                else if i is numberWeeks
-                    while j <= self.daysPerWeek
-                        # finish adding cells for the current month
-                        if date <= numberDays
-                            weeks += "<td data-date=#{date}>#{date}</td>"
-                        # start adding cells for next month
-                        else
-                            weeks += "<td class='#{self.classes.muted}'>#{nextDates}</td>"
-                            nextDates += 1
-                        j += 1
-                        date += 1
-                else
-                    # if we are in the middle of the month add cells for the current month
-                    while j <= self.daysPerWeek
-                        weeks += "<td data-month='#{month}' data-date='#{date}' data-year='#{year}'>#{date}</td>"
-                        j += 1
-                        date += 1
-                weeks += '</tr>'
-                i += 1
-            weeks += '</tbody></table>'
+                while i <= numberWeeks
+                    j = 1
+                    weeks += '<tr>'
+                    # if we are in week 1 we need to shift to the correct day of the week
+                    if i is 1 and firstDay isnt 0
+                        # add cells for the previous month until we get to the first day
+                        while l <= dayShift
+                            weeks += "<td class='#{self.classes.muted}'>#{prevDays}</td>"
+                            prevDays += 1
+                            l += 1
+                            j += 1
+                        # start adding cells for the current month
+                        while j <= self.daysPerWeek
+                            weeks += "<td data-month='#{month}' data-date='#{date}' data-year='#{year}'>#{date}</td>"
+                            j += 1
+                            date += 1
+                    # if we are in the last week of the month we need to add blank cells for next month
+                    else if i is numberWeeks
+                        while j <= self.daysPerWeek
+                            # finish adding cells for the current month
+                            if date <= numberDays
+                                weeks += "<td data-date=#{date}>#{date}</td>"
+                            # start adding cells for next month
+                            else
+                                weeks += "<td class='#{self.classes.muted}'>#{nextDates}</td>"
+                                nextDates += 1
+                            j += 1
+                            date += 1
+                    else
+                        # if we are in the middle of the month add cells for the current month
+                        while j <= self.daysPerWeek
+                            weeks += "<td data-month='#{month}' data-date='#{date}' data-year='#{year}'>#{date}</td>"
+                            j += 1
+                            date += 1
+                    weeks += '</tr>'
+                    i += 1
+                weeks += '</tbody></table>'
 
-            calendar = $ '<div></div>',
-                class: self.calendarInnerClass
-                html: weekdays + weeks
-                'data-month': month
-                'data-year': year
+                calendar = $ '<div></div>',
+                    class: self.calendarInnerClass
+                    html: weekdays + weeks
+                    'data-month': month
+                    'data-year': year
 
-            heading = $ '<h1></h1>',
-                class: 'drm-calendar-header'
-                text: "#{@months[month]} #{year}"
-            
-            calendar.appendTo ".#{self.calendarClass}"
-            heading.prependTo ".#{self.calendarInnerClass}"
+                heading = $ '<h1></h1>',
+                    class: 'drm-calendar-header'
+                    text: "#{@months[month]} #{year}"
+                
+                calendar.appendTo ".#{self.calendarClass}"
+                heading.prependTo ".#{self.calendarInnerClass}"
 
-            self.highlightCurrentDay()
-            self.highlightWeekends()
-            self.addWeekNumbers()            
+                self.highlightCurrentDay()
+                self.highlightWeekends()
+                self.addWeekNumbers()
 
-            $.each self.events, (key, events) ->
-                self.addEventsToCalendar events
-            $('.drm-calendar-year-prev').text lastYear
-            $('.drm-calendar-year-next').text nextYear
+                $.each self.events, (key, events) ->
+                    self.addEventsToCalendar events
+                $('.drm-calendar-year-prev').text lastYear
+                $('.drm-calendar-year-next').text nextYear
 
-            $('.drm-calendar-month-prev').text lastMonth
-            $('.drm-calendar-month-next').text nextMonth
+                $('.drm-calendar-month-prev').text lastMonth
+                $('.drm-calendar-month-next').text nextMonth
 
     drmCalendar = new DrmCalendar()
     drmCalendar.createEvent

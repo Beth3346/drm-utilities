@@ -74,15 +74,15 @@
                 alphaNum: new RegExp '^[\\da-z]*$','ig'
 
             if patterns.number.test password
-                return 'weak'
+                'weak'
             else if patterns.alphaLower.test password
-                return 'weak'
+                'weak'
             else if patterns.alphaUpper.test password
-                return 'weak'
+                'weak'
             else if patterns.alphaNum.test password
-                return 'medium'
+                'medium'
             else
-                return null
+                null
 
         evaluatePassword: =>
             password = @getPassword()
@@ -113,7 +113,7 @@
             else
                 results.strength = 'strong'
                 results.message = 'great password'
-                results.strength = 'success'
+                results.status = 'success'
 
             @createMessage results
             @createMeter results
