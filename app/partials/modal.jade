@@ -6,6 +6,7 @@ h2 Modal Demo
     button.drm-modal-open(data-modal="drm-modal-video") See Video   
 
 .drm-modal-lightbox#drm-modal-info
+    button.close x
     .drm-modal
         .header
             h1 Modal Window with some info          
@@ -17,6 +18,7 @@ h2 Modal Demo
             button.drm-modal-close Close
     
 .drm-modal-lightbox#drm-modal-form
+    button.close x
     .drm-modal
         .header
             h1 Modal Form
@@ -30,13 +32,13 @@ h2 Modal Demo
 
                 label(for="notes") Notes:
                 textarea(name="notes" id="notes" cols="30" rows="10" placeholder="These are some notes")
-                small This is some instructional text
-
-                input(type="submit" id="submit" name="submit" value="Submit")
-                button.drm-modal-close Cancel           
+                small This is some instructional text          
         .footer
+            button(type="submit" id="submit") Submit
+            button.drm-modal-close Cancel 
                 
 .drm-modal-lightbox#drm-modal-video
+    button.close x
     .drm-modal
         .header
             h1 Modal Video          

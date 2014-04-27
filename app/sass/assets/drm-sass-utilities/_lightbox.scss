@@ -95,6 +95,7 @@
 
         .footer {
             @extend %drm-container-full-width;
+            text-align: center;
             padding-top: 10px;
             padding-bottom: 10px;
         }
@@ -104,7 +105,7 @@
         }
 
         button {        
-            @include drm-button-solid($button-color, white, 180px, left, 3px, $button-color);
+            @include drm-button-solid($button-color, white, 180px, left, 3px, $button-color, inline-block);
         }
 
         .video-holder {
