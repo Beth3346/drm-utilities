@@ -72,7 +72,7 @@
                 oldImg.fadeOut speed, ->
                     $(@).attr('src', img).fadeIn speed
 
-            e.stopPropagation() 
+            e.stopPropagation()
 
         removeLightbox: (e) ->
             $('div.drm-blackout').fadeOut @speed, ->
