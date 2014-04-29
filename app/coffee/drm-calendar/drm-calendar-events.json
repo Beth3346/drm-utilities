@@ -1,6 +1,6 @@
 {
-     "holidays": {
-           "newYearsDay": {
+     "holidays": [
+           {
                "name": "New Year's Day",
                "month": "January",
                "year": null,
@@ -14,7 +14,7 @@
                "allDayEvent": true,
                "notes": null
           },
-          "mlkBirthday": {
+          {
                "name": "Martin Luther King's Birthday",
                "month": "January",
                "year": null,
@@ -28,7 +28,7 @@
                "allDayEvent": true,
                "notes": null
           },
-          "groundhogDay": {
+          {
                "name": "Groundhog Day",
                "month": "February",
                "year": null,
@@ -42,7 +42,7 @@
                "allDayEvent": true,
                "notes": null
           },
-          "valentinesDay": {
+          {
                "name": "Valentine's Day",
                "month": "February",
                "year": null,
@@ -56,7 +56,7 @@
                "allDayEvent": true,
                "notes": null
           },
-          "presidentsDay": {
+          {
                "name": "President's Day",
                "month": "February",
                "year": null,
@@ -70,7 +70,7 @@
                "allDayEvent": true,
                "notes": null
           },
-          "stPatricksDay": {
+          {
                "name": "St. Patrick's Day",
                "month": "March",
                "year": null,
@@ -84,7 +84,7 @@
                "allDayEvent": true,
                "notes": null
           },
-          "aprilFools": {
+          {
                "name": "April Fool's Day",
                "month": "April",
                "year": null,
@@ -98,7 +98,7 @@
                "allDayEvent": true,
                "notes": null
           },
-          "earthDay": {
+          {
                "name": "Earth Day",
                "month": "April",
                "year": null,
@@ -112,7 +112,7 @@
                "allDayEvent": true,
                "notes": null
           },
-          "arborDay": {
+          {
                "name": "Arbor Day",
                "month": "April",
                "year": null,
@@ -126,7 +126,7 @@
                "allDayEvent": true,
                "notes": null
           },
-          "mayDay": {
+          {
                "name": "May Day",
                "month": "May",
                "year": null,
@@ -140,7 +140,7 @@
                "allDayEvent": true,
                "notes": null
           },
-          "cincoDeMayo": {
+          {
                "name": "Cinco De Mayo",
                "month": "May",
                "year": null,
@@ -154,7 +154,7 @@
                "allDayEvent": true,
                "notes": null
           },
-          "mothersDay": {
+          {
                "name": "Mother's Day",
                "month": "May",
                "year": null,
@@ -168,7 +168,7 @@
                "allDayEvent": true,
                "notes": null
           },
-          "memorialDay": {
+          {
                "name": "Memorial Day",
                "month": "May",
                "year": null,
@@ -182,7 +182,7 @@
                "allDayEvent": true,
                "notes": null
           },
-          "flagDay": {
+          {
                "name": "Flag Day",
                "month": "June",
                "year": null,
@@ -196,7 +196,7 @@
                "allDayEvent": true,
                "notes": null
           },
-          "fathersDay": {
+          {
                "name": "Father's Day",
                "month": "June",
                "year": null,
@@ -210,7 +210,7 @@
                "allDayEvent": true,
                "notes": null,
           },
-          "independenceDay": {
+          {
                "name": "Independence Day",
                "month": "July",
                "year": null,
@@ -224,7 +224,7 @@
                "allDayEvent": true,
                "notes": null
           },
-          "laborDay": {
+          {
                "name": "Labor Day",
                "month": "September",
                "year": null,
@@ -238,7 +238,7 @@
                "allDayEvent": true,
                "notes": null
           },
-          "patroitDay": {
+          {
                "name": "Patroit Day",
                "month": "September",
                "year": null,
@@ -252,7 +252,7 @@
                "allDayEvent": true,
                "notes": null
           },
-          "columbusDay": {
+          {
                "name": "Columbus Day",
                "month": "October",
                "year": null,
@@ -266,7 +266,7 @@
                "allDayEvent": true,
                "notes": null
           },
-          "halloween": {
+          {
                "name": "Halloween",
                "month": "October",
                "year": null,
@@ -280,7 +280,7 @@
                "allDayEvent": true,
                "notes": null
           },
-          "veteransDay": {
+          {
                "name": "Veteran's Day",
                "month": "November",
                "year": null,
@@ -294,7 +294,7 @@
                "allDayEvent": true,
                "notes": null
           },
-          "thanksgiving": {
+          {
                "name": "Thanksgiving",
                "month": "November",
                "year": null,
@@ -308,7 +308,7 @@
                "allDayEvent": true,
                "notes": null
           },
-          "pearlHarborDay": {
+          {
                "name": "Pearl Harbor Day",
                "month": "December",
                "year": null,
@@ -322,7 +322,7 @@
                "allDayEvent": true,
                "notes": null
           },
-          "festivus": {
+          {
                "name": "Festivus",
                "month": "December",
                "year": null,
@@ -336,7 +336,7 @@
                "allDayEvent": true,
                "notes": null
           },
-          "christmasEve": {
+          {
                "name": "Christmas Eve",
                "month": "December",
                "year": null,
@@ -350,7 +350,7 @@
                "allDayEvent": true,
                "notes": null
           },
-          "christmas": {
+          {
                "name": "Christmas",
                "month": "December",
                "year": null,
@@ -364,7 +364,7 @@
                "allDayEvent": true,
                "notes": null
           },
-          "boxingDay": {
+          {
                "name": "Boxing Day",
                "month": "December",
                "year": null,
@@ -378,7 +378,7 @@
                "allDayEvent": true,
                "notes": null
           },
-          "newYearsEve": {
+          {
                "name": "New Year's Eve",
                "month": "December",
                "year": null,
@@ -392,5 +392,5 @@
                "allDayEvent": true,
                "notes": null
           }
-     }
+     ]
 }

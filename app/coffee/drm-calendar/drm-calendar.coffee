@@ -8,7 +8,7 @@
     class window.DrmCalendar
         constructor: (@calendarClass = 'drm-calendar', @daysPerWeek = 7, @view = 'month', @addHolidays = yes) ->
             self = @
-            self.events = {}
+            self.events = []
             self.today = new Date()
             self.currentMonth = self.today.getMonth()
             self.currentYear = self.today.getFullYear()
@@ -64,287 +64,217 @@
                 $.inArray('Saturday', self.days)
             ]
 
-            self.holidays =
-                newyearsday:
+            self.holidays = [
+                {
                     name: "New Year's Day"
                     month: "January"
-                    year: null
                     eventDate: 1
-                    day: null
-                    dayNum: null
                     type: "holiday"
                     recurrance: "yearly"
-                    notes: null
-                mlkbirthday:
+                },
+                {
                     name: "Martin Luther King's Birthday"
                     month: "January"
-                    year: null
-                    eventDate: null
                     day: ["Monday"]
                     dayNum: 3
                     type: "holiday"
                     recurrance: "yearly"
-                    notes: null
-                groundhogday:
+                },
+                {
                     name: "Groundhog Day"
                     month: "February"
-                    year: null
                     eventDate: 2
-                    day: null
-                    dayNum: null
                     type: "holiday"
                     recurrance: "yearly"
-                    notes: null
-                valentinesday:
+                },
+                {
                     name: "Valentine's Day"
                     month: "February"
-                    year: null
                     eventDate: 14
-                    day: null
-                    dayNum: null
                     type: "holiday"
                     recurrance: "yearly"
-                    notes: null
-                presidentsday:
+                },
+                {
                     name: "President's Day"
                     month: "February"
-                    year: null
-                    eventDate: null
                     day: ["Monday"]
                     dayNum: 3
                     type: "holiday"
                     recurrance: "yearly"
-                    notes: null
-                stpatricksday:
+                },
+                {
                     name: "St. Patrick's Day"
                     month: "March"
-                    year: null
                     eventDate: 17
-                    day: null
-                    dayNum: null
                     type: "holiday"
                     recurrance: "yearly"
-                    notes: null
-                aprilfools:
+                },
+                {
                     name: "April Fool's Day"
                     month: "April"
-                    year: null
                     eventDate: 1
-                    day: null
-                    dayNum: null
                     type: "holiday"
                     recurrance: "yearly"
-                    notes: null
-                earthday:
+                },
+                {
                     name: "Earth Day"
                     month: "April"
-                    year: null
                     eventDate: 22
-                    day: null
-                    dayNum: null
                     type: "holiday"
                     recurrance: "yearly"
-                    notes: null
-                arborday:
+                },
+                {
                     name: "Arbor Day"
                     month: "April"
-                    year: null
-                    eventDate: null
                     day: ["Friday"]
                     dayNum: "last"
                     type: "holiday"
                     recurrance: "yearly"
-                    notes: null
-                mayday:
+                },
+                {
                     name: "May Day"
                     month: "May"
-                    year: null
                     eventDate: 1
-                    day: null
-                    dayNum: null
                     type: "holiday"
                     recurrance: "yearly"
-                    notes: null
-                cincodemayo:
+                },
+                {
                     name: "Cinco De Mayo"
                     month: "May"
-                    year: null
                     eventDate: 5
-                    day: null
-                    dayNum: null
                     type: "holiday"
                     recurrance: "yearly"
-                    notes: null
-                mothersday:
+                },
+                {
                     name: "Mother's Day"
                     month: "May"
-                    year: null
-                    eventDate: null
                     day: ["Sunday"]
                     dayNum: 2
                     type: "holiday"
                     recurrance: "yearly"
-                    notes: null
-                memorialday:
+                },
+                {
                     name: "Memorial Day"
                     month: "May"
-                    year: null
-                    eventDate: null
                     day: ["Monday"]
                     dayNum: "last"
                     type: "holiday"
                     recurrance: "yearly"
-                    notes: null
-                flagday:
+                },
+                {
                     name: "Flag Day"
                     month: "June"
-                    year: null
                     eventDate: 14
-                    day: null
-                    dayNum: null
                     type: "holiday"
                     recurrance: "yearly"
-                    notes: null
-                fathersday:
+                },
+                {
                     name: "Father's Day"
                     month: "June"
-                    year: null
-                    eventDate: null
                     day: ["Sunday"]
                     type: "holiday"
                     recurrance: "yearly"
-                    notes: null
                     dayNum: 3
-                independenceday:
+                },
+                {
                     name: "Independence Day"
                     month: "July"
-                    year: null
                     eventDate: 4
-                    day: null
-                    dayNum: null
                     type: "holiday"
                     recurrance: "yearly"
-                    notes: null
-                laborday:
+                },
+                {
                     name: "Labor Day"
                     month: "September"
-                    year: null
-                    eventDate: null
                     day: ["Monday"]
                     dayNum: 1
                     type: "holiday"
                     recurrance: "yearly"
-                    notes: null
-                patroitday:
+                },
+                {
                     name: "Patroit Day"
                     month: "September"
-                    year: null
                     eventDate: 11
-                    day: null
-                    dayNum: null
                     type: "holiday"
                     recurrance: "yearly"
-                    notes: null
-                columbusday:
+                },
+                {
                     name: "Columbus Day"
                     month: "October"
-                    year: null
-                    eventDate: null
                     day: ["Monday"]
                     dayNum: 2
                     type: "holiday"
                     recurrance: "yearly"
-                    notes: null
-                halloween:
+                },
+                {
                     name: "Halloween"
                     month: "October"
-                    year: null
                     eventDate: 31
-                    day: null
-                    dayNum: null
                     type: "holiday"
                     recurrance: "yearly"
-                    notes: null
-                veteransday:
+                },
+                {
                     name: "Veteran's Day"
                     month: "November"
-                    year: null
                     eventDate: 11
-                    day: null
-                    dayNum: null
                     type: "holiday"
                     recurrance: "yearly"
-                    notes: null
-                thanksgiving:
+                },
+                {
                     name: "Thanksgiving"
                     month: "November"
-                    year: null
-                    eventDate: null
                     day: ["Thursday"]
                     dayNum: 4
                     type: "holiday"
                     recurrance: "yearly"
-                    notes: null
-                pearlharborday:
+                },
+                {
                     name: "Pearl Harbor Day"
                     month: "December"
-                    year: null
                     eventDate: 7
-                    day: null
-                    dayNum: null
                     type: "holiday"
                     recurrance: "yearly"
-                    notes: null
-                festivus:
+                },
+                {
                     name: "Festivus"
                     month: "December"
-                    year: null
                     eventDate: 23
-                    day: null
-                    dayNum: null
                     type: "holiday"
                     recurrance: "yearly"
-                    notes: null
-                christmaseve:
+                },
+                {
                     name: "Christmas Eve"
                     month: "December"
-                    year: null
                     eventDate: 24
-                    day: null
-                    dayNum: null
                     type: "holiday"
                     recurrance: "yearly"
-                    notes: null
-                christmas:
+                },
+                {
                     name: "Christmas"
                     month: "December"
-                    year: null
                     eventDate: 25
-                    day: null
-                    dayNum: null
                     type: "holiday"
                     recurrance: "yearly"
-                    notes: null
-                boxingday:
+                },
+                {
                     name: "Boxing Day"
                     month: "December"
-                    year: null
                     eventDate: 26
-                    day: null
-                    dayNum: null
                     type: "holiday"
                     recurrance: "yearly"
-                    notes: null
-                newyearseve:
+                },
+                {
                     name: "New Year's Eve"
                     month: "December"
-                    year: null
                     eventDate: 31
-                    day: null
-                    dayNum: null
                     type: "holiday"
                     recurrance: "yearly"
-                    notes: null
+                }
+            ]
+
+            if self.addHolidays
+                $.each self.holidays, (key, value) ->
+                    self.createEvent value
 
             if self.calendar.length > 0
                 self.createCalendar self.currentMonth, self.currentYear
@@ -431,17 +361,18 @@
                 year: self.addEventForm.find('#year').val year
                 eventDate: self.addEventForm.find('#event-date').val date
 
+            # show event details
             self.calendar.on 'click', "ul.#{self.eventClass} a", (e) ->
                 that = $ @
                 day = that.closest('td')
+                eventId = that.data 'event'
                 fullDate =
                     month: self.months[day.data('month')]
                     date: day.data 'date'
                     year: day.data 'year'
                 e.preventDefault()
                 e.stopPropagation()
-                eventName = that.text()
-                self.showEventDetails eventName, fullDate
+                self.showEventDetails eventId, fullDate
 
         getDaysInMonth: (month, year) ->
             new Date(year, month, 0).getDate()
@@ -468,12 +399,9 @@
                 calendarInner.find("[data-date=#{@currentDay}]").addClass @classes.today
 
         createEvent: (newEvent) =>
-            obj = @events
-
-            eventName = do ->
-                key = $.trim(newEvent.name).toLowerCase()
-                key.replace /\W+/g, ''
-            obj[eventName] =
+            id = @events.length
+            obj =
+                id: id
                 name: if newEvent.name? then newEvent.name else null
                 recurrance: if newEvent.recurrance? then newEvent.recurrance.toLowerCase() else null
                 month: if newEvent.month? then newEvent.month else null
@@ -483,8 +411,8 @@
                 dayNum: if newEvent.dayNum? then newEvent.dayNum else null
                 type: if newEvent.type? then newEvent.type.toLowerCase() else null
                 notes: if newEvent.notes? then newEvent.notes else null
-            $(@events).add obj[eventName]
-            @addEventsToCalendar @events[eventName]
+            @events.push obj
+            @addEventsToCalendar @events[obj.id]
 
         addNewCalendarEvent: (events, calendarItem) =>
             eventList = calendarItem.find "ul.#{@eventClass}"
@@ -503,27 +431,68 @@
 
             if events.type is 'holiday' then eventList.find("a:contains(#{events.name})").addClass @classes.holiday
 
-        showEventDetails: (eventName, fullDate) =>
-            key = do ->
-                ename = $.trim(eventName).toLowerCase()
-                ename.replace /\W+/g, ''
-            events = @events[key]
+        showEventDetails: (eventId, fullDate) =>
+            events = @events[eventId]
             eventDate = "#{fullDate.month} #{fullDate.date}, #{fullDate.year}"
+            eventFrequency = do ->
+                if events.recurrance is 'yearly' and events.dayNum?
+                    "Every #{events.dayNum} #{events.day} of #{events.month}"
+                else if events.recurrance is 'monthly'
+                    "Every #{events.dayNum} #{events.day} of the month"
+                else if events.recurrance is 'biweekly'
+                    "Every other #{events.day}"
+                else if events.recurrance is 'weekly'
+                    "Every #{events.day}"
+                else if events.recurrance is 'daily'
+                    "Every Day"
+                else if events.recurrance is 'none'
+                    "One Time Event"
 
             eventHolder = $ '<div></div>',
                 class: 'drm-calendar-event-details'
                 html: "<h1 class='drm-calendar-header'>#{events.name}</h1>"
+            date = $ '<li></li>',
+                html: "<span class='drm-bold'>Date: </span><span class='drm-event-detail'>#{eventDate}</span>"
+            type = $ '<li></li>',
+                html: "<span class='drm-bold'>Type: </span><span class='drm-event-detail'>#{events.type}</span>"
+            frequency = $ '<li></li>',
+                html: "<span class='drm-bold'>Frequency: </span><span class='drm-event-detail'>#{eventFrequency}</span>"
+            recurrance = $ '<li></li>',
+                html: "<span class='drm-bold'>Repeat: </span><span class='drm-event-detail'>#{events.recurrance}</span>"
+            notes = $ '<li></li>',
+                html: "<span class='drm-bold'>Notes: </span><span class='drm-event-detail'>#{events.notes}</span>"
+            closeButton = $ '<button></button>',
+                class: 'drm-event-close'
+                text: 'Close'
+                type: 'button'
+            editButton = $ '<button></button>',
+                class: 'drm-event-edit'
+                text: 'Edit'
+                type: 'button'
+            deleteButton = $ '<button></button>',
+                class: 'drm-event-delete'
+                text: 'Delete'
+                type: 'button'
             eventDetails = $ '<ul></ul>',
                 class: 'drm-event-detail-list'
-                html: "<li><span class='drm-bold'>Date: </span><span class='drm-event-detail'>#{eventDate}</span></li>"
-            lightboxHtml = $ '<div></div>',
-                class: 'drm-blackout'
             close = $ '<button></button>',
                 class: 'close'
                 text: 'x'
+            lightboxHtml = $ '<div></div>',
+                class: 'drm-blackout'
+                html: close
 
-            @calendar.append eventHolder
+            $('body').append lightboxHtml
+            lightboxHtml.append eventHolder
             eventHolder.append eventDetails
+            eventDetails.append date
+            if eventFrequency? then eventDetails.append frequency
+            if events.recurrance? then eventDetails.append recurrance
+            if events.type? then eventDetails.append type
+            if events.notes? then eventDetails.append notes
+            eventDetails.append closeButton
+            eventDetails.append editButton
+            eventDetails.append deleteButton
 
         getEventWeekNum: (dayNum, day, numberDays, dayShift) =>
             self = @
@@ -835,12 +804,9 @@
             self.highlightWeekends()
             self.addWeekNumbers()
 
-            if self.addHolidays
-                $.each self.holidays, (key, value) ->
-                    self.addEventsToCalendar value
+            $.each self.events, (key, value) ->
+                self.addEventsToCalendar value
 
-            $.each self.events, (key, events) ->
-                self.addEventsToCalendar events
             $('.drm-calendar-year-prev').text lastYear
             $('.drm-calendar-year-next').text nextYear
 
@@ -866,19 +832,12 @@
     drmCalendar = new DrmCalendar()
     drmCalendar.createEvent
         name: "Rabbit Rabbit Day"
-        month: null
-        year: null
         eventDate: 1
-        day: null
-        dayNum: null
         type: "fun day"
         recurrance: "monthly"
         notes: "Say Rabbit Rabbit for good luck this month"
     drmCalendar.createEvent
         name: "First Monday"
-        month: null
-        year: null
-        eventDate: null
         day: ["Monday"]
         dayNum : 1
         type: "test"
@@ -887,60 +846,39 @@
     drmCalendar.createEvent
         name: "Lawn Day"
         month: "April"
-        year: null
         eventDate: 24
         day: ["Thursday"]
-        dayNum: null
         type: "test"
         recurrance: "biweekly"
         notes: "Every other Thursday"
     drmCalendar.createEvent
         name: "Not Lawn Day"
         month: "April"
-        year: null
         eventDate: 17
         day: ["Thursday"]
-        dayNum: null
         type: "test"
         recurrance: "biweekly"
         notes: "Every other Thursday"
     drmCalendar.createEvent
         name: "Wake Up"
-        month: null
-        year: null
-        eventDate: null
         day: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
-        dayNum: null
         type: "test"
         recurrance: "weekly"
         note: "Wake Up Every Day"
     drmCalendar.createEvent
         name: "Sleep In!"
-        month: null
-        year: null
-        eventDate: null
         day: ["Saturday", "Sunday"]
-        dayNum: null
         type: "test"
         recurrance: "weekly"
-        note: null
     drmCalendar.createEvent
         name: "Every Day Event"
-        month: null
-        year: null
-        eventDate: null
-        day: null
-        dayNum: null
         type: "test"
         recurrance: "daily"
-        note: null
     drmCalendar.createEvent
         name: "One Time Event"
         month: "April"
         year: 2014
         eventDate: 21
-        day: null
-        dayNum: null
         type: "test"
         recurrance: "none"
         note: "do this once"

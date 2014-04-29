@@ -10,12 +10,14 @@
 }
 
 button {
-    &.drm-event-edit {
+    &.drm-event-close, &.drm-event-edit {
         @include drm-button-solid($drm-blue, white, 120px, center, 3px, $drm-blue, inline-block);
+        margin-right: 5px;
     }
 
     &.drm-event-delete {
         @include drm-button-solid($danger-color, white, 120px, center, 3px, $danger-color, inline-block);
+        margin-right: 5px;
     }
 }
 
