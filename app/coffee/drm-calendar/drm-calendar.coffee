@@ -8,6 +8,7 @@
     class window.DrmCalendar
         constructor: (@calendarClass = 'drm-calendar', @daysPerWeek = 7, @view = 'month', @addHolidays = yes) ->
             self = @
+            self.body = $ 'body'
             self.events = []
             self.today = new Date()
             self.currentMonth = self.today.getMonth()
@@ -71,6 +72,7 @@
                     eventDate: 1
                     type: "holiday"
                     recurrance: "yearly"
+                    allDayEvent: yes
                 },
                 {
                     name: "Martin Luther King's Birthday"
@@ -79,6 +81,7 @@
                     dayNum: 3
                     type: "holiday"
                     recurrance: "yearly"
+                    allDayEvent: yes
                 },
                 {
                     name: "Groundhog Day"
@@ -86,6 +89,7 @@
                     eventDate: 2
                     type: "holiday"
                     recurrance: "yearly"
+                    allDayEvent: yes
                 },
                 {
                     name: "Valentine's Day"
@@ -93,6 +97,7 @@
                     eventDate: 14
                     type: "holiday"
                     recurrance: "yearly"
+                    allDayEvent: yes
                 },
                 {
                     name: "President's Day"
@@ -101,6 +106,7 @@
                     dayNum: 3
                     type: "holiday"
                     recurrance: "yearly"
+                    allDayEvent: yes
                 },
                 {
                     name: "St. Patrick's Day"
@@ -108,6 +114,7 @@
                     eventDate: 17
                     type: "holiday"
                     recurrance: "yearly"
+                    allDayEvent: yes
                 },
                 {
                     name: "April Fool's Day"
@@ -115,6 +122,7 @@
                     eventDate: 1
                     type: "holiday"
                     recurrance: "yearly"
+                    allDayEvent: yes
                 },
                 {
                     name: "Earth Day"
@@ -122,6 +130,7 @@
                     eventDate: 22
                     type: "holiday"
                     recurrance: "yearly"
+                    allDayEvent: yes
                 },
                 {
                     name: "Arbor Day"
@@ -130,6 +139,7 @@
                     dayNum: "last"
                     type: "holiday"
                     recurrance: "yearly"
+                    allDayEvent: yes
                 },
                 {
                     name: "May Day"
@@ -137,6 +147,7 @@
                     eventDate: 1
                     type: "holiday"
                     recurrance: "yearly"
+                    allDayEvent: yes
                 },
                 {
                     name: "Cinco De Mayo"
@@ -144,6 +155,7 @@
                     eventDate: 5
                     type: "holiday"
                     recurrance: "yearly"
+                    allDayEvent: yes
                 },
                 {
                     name: "Mother's Day"
@@ -152,6 +164,7 @@
                     dayNum: 2
                     type: "holiday"
                     recurrance: "yearly"
+                    allDayEvent: yes
                 },
                 {
                     name: "Memorial Day"
@@ -160,6 +173,7 @@
                     dayNum: "last"
                     type: "holiday"
                     recurrance: "yearly"
+                    allDayEvent: yes
                 },
                 {
                     name: "Flag Day"
@@ -167,6 +181,7 @@
                     eventDate: 14
                     type: "holiday"
                     recurrance: "yearly"
+                    allDayEvent: yes
                 },
                 {
                     name: "Father's Day"
@@ -174,6 +189,7 @@
                     day: ["Sunday"]
                     type: "holiday"
                     recurrance: "yearly"
+                    allDayEvent: yes
                     dayNum: 3
                 },
                 {
@@ -182,6 +198,7 @@
                     eventDate: 4
                     type: "holiday"
                     recurrance: "yearly"
+                    allDayEvent: yes
                 },
                 {
                     name: "Labor Day"
@@ -190,6 +207,7 @@
                     dayNum: 1
                     type: "holiday"
                     recurrance: "yearly"
+                    allDayEvent: yes
                 },
                 {
                     name: "Patroit Day"
@@ -197,6 +215,7 @@
                     eventDate: 11
                     type: "holiday"
                     recurrance: "yearly"
+                    allDayEvent: yes
                 },
                 {
                     name: "Columbus Day"
@@ -205,6 +224,7 @@
                     dayNum: 2
                     type: "holiday"
                     recurrance: "yearly"
+                    allDayEvent: yes
                 },
                 {
                     name: "Halloween"
@@ -212,6 +232,7 @@
                     eventDate: 31
                     type: "holiday"
                     recurrance: "yearly"
+                    allDayEvent: yes
                 },
                 {
                     name: "Veteran's Day"
@@ -219,6 +240,7 @@
                     eventDate: 11
                     type: "holiday"
                     recurrance: "yearly"
+                    allDayEvent: yes
                 },
                 {
                     name: "Thanksgiving"
@@ -227,6 +249,7 @@
                     dayNum: 4
                     type: "holiday"
                     recurrance: "yearly"
+                    allDayEvent: yes
                 },
                 {
                     name: "Pearl Harbor Day"
@@ -234,6 +257,7 @@
                     eventDate: 7
                     type: "holiday"
                     recurrance: "yearly"
+                    allDayEvent: yes
                 },
                 {
                     name: "Festivus"
@@ -241,6 +265,7 @@
                     eventDate: 23
                     type: "holiday"
                     recurrance: "yearly"
+                    allDayEvent: yes
                 },
                 {
                     name: "Christmas Eve"
@@ -248,6 +273,7 @@
                     eventDate: 24
                     type: "holiday"
                     recurrance: "yearly"
+                    allDayEvent: yes
                 },
                 {
                     name: "Christmas"
@@ -255,6 +281,7 @@
                     eventDate: 25
                     type: "holiday"
                     recurrance: "yearly"
+                    allDayEvent: yes
                 },
                 {
                     name: "Boxing Day"
@@ -262,6 +289,7 @@
                     eventDate: 26
                     type: "holiday"
                     recurrance: "yearly"
+                    allDayEvent: yes
                 },
                 {
                     name: "New Year's Eve"
@@ -269,6 +297,7 @@
                     eventDate: 31
                     type: "holiday"
                     recurrance: "yearly"
+                    allDayEvent: yes
                 }
             ]
 
@@ -374,6 +403,16 @@
                 e.stopPropagation()
                 self.showEventDetails eventId, fullDate
 
+            self.body.on 'click', 'div.drm-calendar-event-details', (e) ->
+                e.stopPropagation()
+
+            self.body.on 'click', 'div.drm-calendar-event-details button.drm-event-delete', (e) ->
+                e.preventDefault()
+                eventId = $(@).data 'event'
+                self.removeCalendarEvent eventId
+
+            self.body.on 'click', 'div.drm-calendar-event-details button.drm-event-close', self.removeEventDetails
+
         getDaysInMonth: (month, year) ->
             new Date(year, month, 0).getDate()
 
@@ -431,10 +470,15 @@
 
             if events.type is 'holiday' then eventList.find("a:contains(#{events.name})").addClass @classes.holiday
 
+        removeCalendarEvent: (eventId) =>
+            events = @calendar.find "ul.#{@eventClass} a[data-event=#{eventId}]"
+            events.remove()
+            @events.splice eventId, 1
+
         showEventDetails: (eventId, fullDate) =>
             events = @events[eventId]
             eventDate = "#{fullDate.month} #{fullDate.date}, #{fullDate.year}"
-            eventFrequency = do ->
+            eventFrequency =
                 if events.recurrance is 'yearly' and events.dayNum?
                     "Every #{events.dayNum} #{events.day} of #{events.month}"
                 else if events.recurrance is 'monthly'
@@ -465,12 +509,14 @@
                 class: 'drm-event-close'
                 text: 'Close'
                 type: 'button'
-            editButton = $ '<button></button>',
+            editButton = $ "<button></button>",
                 class: 'drm-event-edit'
+                'data-event': events.id
                 text: 'Edit'
                 type: 'button'
-            deleteButton = $ '<button></button>',
+            deleteButton = $ "<button></button>",
                 class: 'drm-event-delete'
+                'data-event': events.id
                 text: 'Delete'
                 type: 'button'
             eventDetails = $ '<ul></ul>',
@@ -482,17 +528,23 @@
                 class: 'drm-blackout'
                 html: close
 
-            $('body').append lightboxHtml
-            lightboxHtml.append eventHolder
-            eventHolder.append eventDetails
-            eventDetails.append date
-            if eventFrequency? then eventDetails.append frequency
-            if events.recurrance? then eventDetails.append recurrance
-            if events.type? then eventDetails.append type
-            if events.notes? then eventDetails.append notes
-            eventDetails.append closeButton
-            eventDetails.append editButton
-            eventDetails.append deleteButton
+            lightboxHtml.hide().appendTo('body').fadeIn 300, ->
+                eventHolder.appendTo lightboxHtml
+                eventDetails.appendTo eventHolder
+                date.appendTo eventDetails
+                if eventFrequency? then frequency.appendTo eventDetails
+                if events.recurrance? then recurrance.appendTo eventDetails
+                if events.type? then type.appendTo eventDetails
+                if events.notes? then notes.appendTo eventDetails
+                closeButton.appendTo eventDetails
+                editButton.appendTo eventDetails
+                deleteButton.appendTo eventDetails
+
+        removeEventDetails: (e) ->
+            $('div.drm-blackout').fadeOut 300, ->
+                $(@).remove()
+
+            e.preventDefault()
 
         getEventWeekNum: (dayNum, day, numberDays, dayShift) =>
             self = @
@@ -843,6 +895,7 @@
         type: "test"
         recurrance: "monthly"
         notes: "This is the first Monday of the month"
+        allDayEvent: yes
     drmCalendar.createEvent
         name: "Lawn Day"
         month: "April"
@@ -851,6 +904,7 @@
         type: "test"
         recurrance: "biweekly"
         notes: "Every other Thursday"
+        allDayEvent: yes
     drmCalendar.createEvent
         name: "Not Lawn Day"
         month: "April"
@@ -859,25 +913,30 @@
         type: "test"
         recurrance: "biweekly"
         notes: "Every other Thursday"
+        allDayEvent: yes
     drmCalendar.createEvent
         name: "Wake Up"
         day: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
         type: "test"
         recurrance: "weekly"
         note: "Wake Up Every Day"
+        allDayEvent: yes
     drmCalendar.createEvent
         name: "Sleep In!"
         day: ["Saturday", "Sunday"]
         type: "test"
         recurrance: "weekly"
+        allDayEvent: yes
     drmCalendar.createEvent
         name: "Every Day Event"
         type: "test"
         recurrance: "daily"
+        allDayEvent: yes
     drmCalendar.createEvent
         name: "One Time Event"
         month: "April"
         year: 2014
+        time: '1:00'
         eventDate: 21
         type: "test"
         recurrance: "none"
