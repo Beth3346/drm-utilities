@@ -408,8 +408,11 @@
 
             self.body.on 'click', 'div.drm-calendar-event-details button.drm-event-delete', (e) ->
                 e.preventDefault()
-                eventId = $(@).data 'event'
-                self.removeCalendarEvent eventId
+                that = $ @
+                eventId = that.data 'event'
+                index = self.getEventIndex eventId
+                self.removeCalendarEvent eventId, index
+                self.removeEventDetails(e)
 
             self.body.on 'click', 'div.drm-calendar-event-details button.drm-event-close', self.removeEventDetails
 
@@ -470,13 +473,21 @@
 
             if events.type is 'holiday' then eventList.find("a:contains(#{events.name})").addClass @classes.holiday
 
-        removeCalendarEvent: (eventId) =>
+        removeCalendarEvent: (eventId, index) =>
             events = @calendar.find "ul.#{@eventClass} a[data-event=#{eventId}]"
             events.remove()
-            @events.splice eventId, 1
+            @events.splice index, 1
+
+        getEventIndex: (eventId) =>
+            index = null
+            $.each @events, (key, value) ->
+                if value.id is eventId
+                    index = key
+            index
 
         showEventDetails: (eventId, fullDate) =>
-            events = @events[eventId]
+            index = @getEventIndex eventId
+            events = @events[index]
             eventDate = "#{fullDate.month} #{fullDate.date}, #{fullDate.year}"
             eventFrequency =
                 if events.recurrance is 'yearly' and events.dayNum?
