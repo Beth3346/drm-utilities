@@ -13,7 +13,7 @@
             self.today = new Date()
             self.currentMonth = self.today.getMonth()
             self.currentYear = self.today.getFullYear()
-            self.currentDay = self.today.getDate()
+            self.currentDate = self.today.getDate()
             self.calendarInnerClass = "drm-calendar-#{self.view}-view"
             self.calendar = $ ".#{self.calendarClass}"
             self.calendarNav = $ '.drm-calendar-nav'
@@ -306,7 +306,7 @@
                     self.createEvent value
 
             if self.calendar.length > 0
-                self.createCalendar self.currentMonth, self.currentYear
+                self.createCalendar self.currentMonth, self.currentDate, self.currentYear
 
             self.calendar.on 'click', '.drm-calendar-month-prev, .drm-calendar-month-next', ->
                 direction = $(@).data 'dir'
@@ -317,12 +317,13 @@
                 self.advanceYear.call @, direction
 
             self.calendar.on 'click', '.drm-calendar-current', ->
-                self.changeCalendar.call @, self.currentMonth, self.currentYear
+                self.changeCalendar.call @, self.currentMonth, self.currentDate, self.currentYear
 
             self.calendar.on 'click', '.drm-calendar-select button[type=submit]', (e) ->
                 e.preventDefault()
                 that = $ @
                 month = that.parent().find('#month').val()
+                date = self.currentDate
                 year = that.parent().find('#year').val()
 
                 that.parent().find('#month').val ''
@@ -331,7 +332,7 @@
                 month = parseInt month, 10
                 year = parseInt year, 10
 
-                self.changeCalendar.call self, month, year
+                self.changeCalendar.call self, month, date, year
 
             self.calendar.on 'click', 'button.drm-show-event-form', ->
                 that = $ @
@@ -345,10 +346,19 @@
             self.calendar.on 'click', '.drm-calendar-view-nav button', (e) ->
                 e.preventDefault()
                 that = $ @
+                if self.view is 'month'
+                    calendar = $ ".#{self.calendarInnerClass}"
+                    currentMonth = calendar.data 'month'
+                    currentYear = calendar.data 'year'
+                    currentDate = if currentMonth is self.currentMonth then self.currentDate else 1
+                else
+                    currentMonth = self.currentMonth
+                    currentDate = self.currentDate
+                    currentYear = self.currentYear
                 self.view = that.data 'view'
                 self.calendar.find(".drm-calendar-view-nav button.active").removeClass 'active'
                 that.addClass 'active'
-                self.changeCalendar self.currentMonth, self.currentYear
+                self.changeCalendar currentMonth, currentDate, currentYear
 
             self.calendar.on 'click', 'form.drm-calendar-new-event button.addEvent', (e) ->                
                 e.preventDefault()
@@ -371,7 +381,7 @@
 
                 self.createEvent newEvent
                 newMonth = if newEvent.month? then $.inArray newEvent.month, self.months else self.currentMonth
-                if newMonth isnt currentMonth then self.changeCalendar.call @, newMonth, self.currentYear
+                if newMonth isnt currentMonth then self.changeCalendar.call @, newMonth, newEvent.eventDate, self.currentYear
                 # reset form
                 self.addEventForm.find(':input').val ''
                 self.addEventForm.find('input.day-checkbox:checked').prop 'checked', false
@@ -438,7 +448,7 @@
             year = calendarInner.data 'year'
 
             if month is @currentMonth and year is @currentYear
-                calendarInner.find("[data-date=#{@currentDay}]").addClass @classes.today
+                calendarInner.find("[data-date=#{@currentDate}]").addClass @classes.today
 
         createEvent: (newEvent) =>
             id = @events.length
@@ -537,7 +547,7 @@
                 text: 'x'
             lightboxHtml = $ '<div></div>',
                 class: 'drm-blackout'
-                html: close
+                html: close + eventHolder
 
             lightboxHtml.hide().appendTo('body').fadeIn 300, ->
                 eventHolder.appendTo lightboxHtml
@@ -753,35 +763,37 @@
 
         advanceMonth: (direction) =>
             calendarInner = @calendar.find "div.#{@calendarInnerClass}"
-            month = calendarInner.data 'month'
-            year = calendarInner.data 'year'
+            currentMonth = calendarInner.data 'month'
+            currentYear = calendarInner.data 'year'
+            currentDate = if currentMonth is self.currentMonth then self.currentDate else 1
             
             if direction is 'prev'
-                month = if month is 0 then 11 else month - 1
-                year = if month is 11 then year - 1 else year
+                currentMonth = if currentMonth is 0 then 11 else currentMonth - 1
+                currentYear = if currentMonth is 11 then currentYear - 1 else currentYear
             else if direction is 'next'
-                month = if month is 11 then 0 else month + 1
-                year = if month is 0 then year + 1 else year
-            @changeCalendar month, year
+                currentMonth = if currentMonth is 11 then 0 else currentMonth + 1
+                currentYear = if currentMonth is 0 then currentYear + 1 else currentYear
+            @changeCalendar currentMonth, currentDate, currentYear
 
         advanceYear: (direction) =>
             calendarInner = @calendar.find "div.#{@calendarInnerClass}"
-            month = calendarInner.data 'month'
-            year = calendarInner.data 'year'
+            currentMonth = calendarInner.data 'month'
+            currentYear = calendarInner.data 'year'
+            currentDate = if currentMonth is self.currentMonth then self.currentDate else 1
             
-            if direction is 'prev' then year = year - 1 else year = year + 1
+            if direction is 'prev' then currentYear = currentYear - 1 else currentYear = currentYear + 1
             
-            @changeCalendar month, year
+            @changeCalendar currentMonth, currentDate, currentYear
 
-        changeCalendar: (month, year) =>
+        changeCalendar: (month, date, year) =>
             self = @
             calendarInner = self.calendar.find "div.#{@calendarInnerClass}"
             if calendarInner.length > 0
                 calendarInner.fadeOut 300, ->
                     @remove()
-                    self.createCalendar month, year
+                    self.createCalendar month, date, year
             else
-                self.createCalendar month, year
+                self.createCalendar month, date, year
 
         createMonthView: (month, year) =>
             self = @
@@ -801,7 +813,7 @@
             weeks = null
 
             weekdays = '<table><thead><tr>'
-            $.each @days, (key, value) ->
+            $.each self.days, (key, value) ->
                 weekdays += "<th>#{value}</th>"
             weekdays += '</tr></thead>'
 
@@ -877,14 +889,46 @@
             $('.drm-calendar-month-next').text nextMonth
 
         createWeekView: (month, date, year) =>
+            self = @
             self.calendarInnerClass = "drm-calendar-#{self.view}-view"
+            numberDays = self.getDaysInMonth (month + 1), year
+            prevMonthNumberDays = self.getDaysInMonth month, year
+            firstDay = self.getDayOfWeek month, year, 1
+            dayShift = if firstDay is self.daysPerWeek then 0 else firstDay
+            numberWeeks = self.getWeeksInMonth numberDays, dayShift
+            nextYear = year + 1
+            lastYear = year - 1
+            nextMonth = if month is 11 then @months[0] else @months[month + 1]
+            lastMonth = if month is 0 then @months[11] else @months[month - 1]
+            calendar = null
+            heading = null
+            weekdays = null
+
             console.log "#{month} #{date}, #{year}"
+
+            weekdays = '<table><thead><tr>'
+            $.each self.days, (key, value) ->
+                weekdays += "<th>#{value}</th>"
+            weekdays += '</tr></thead>'
+
+            calendar = $ '<div></div>',
+                class: self.calendarInnerClass
+                html: weekdays
+                'data-month': month
+                'data-year': year
+
+            heading = $ '<h1></h1>',
+                class: 'drm-calendar-header'
+                text: "#{@months[month]} #{year}"
+            
+            calendar.appendTo ".#{self.calendarClass}"
+            heading.prependTo ".#{self.calendarInnerClass}"
 
         createDateView: (month, date, year) =>
             self.calendarInnerClass = "drm-calendar-#{self.view}-view"
             console.log "#{month} #{date}, #{year}"
 
-        createCalendar: (month, year) =>
+        createCalendar: (month, date, year) =>
             self = @
 
             switch self.view

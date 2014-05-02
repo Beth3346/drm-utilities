@@ -321,7 +321,6 @@
 	color: $color;
 	font-weight: bold;
 	text-align: center;
-	display: $display;
 	padding: 10px 0 10px 0;
 	text-decoration: none;
 	cursor: pointer;
@@ -334,9 +333,12 @@
 
 	@if $center == center {
 		margin: 10px auto 10px auto;
+		display: block;
 	} @else {
 		margin-top: 10px;
 		margin-bottom: 10px;
+        margin-right: 5px;
+		display: $display;
 	}
 
 	&:visited {
@@ -369,7 +371,6 @@
 	color: $color;
 	font-weight: bold;
 	text-align: center;
-	display: $display;
 	padding: 10px 0 10px 0;
 	text-decoration: none;
 	cursor: pointer;
@@ -386,9 +387,12 @@
 
 	@if $center == center {
 		margin: 10px auto 10px auto;
+		display: block;
 	} @else {
 		margin-top: 10px;
 		margin-bottom: 10px;
+        margin-right: 5px;
+		display: $display;
 	}
 
 	&:visited {
@@ -416,18 +420,20 @@
 	cursor: pointer;
 	width: $width;
 	text-decoration: none;
-	display: $display;
 	text-align: center;
 	transition: all, .3s ease-out;
 	box-sizing: border-box;
 	border-radius: $border-radius;
-	@include drm-solid-drop-shadow(darken($color, 10%));	
+	@include drm-solid-drop-shadow(darken($color, 10%));
 
 	@if $center == center {
-		margin: 10px auto 10px auto;		
+		margin: 10px auto 10px auto;
+		display: block;
 	} @else {
 		margin-top: 10px;
 		margin-bottom: 10px;
+        margin-right: 5px;
+		display: $display;
 	}
 
 	&:visited {
@@ -451,7 +457,6 @@
 	color: $color;
 	font-weight: bold;
 	text-align: center;
-	display: $display;
 	padding: 10px 0 10px 0;
 	text-decoration: none;
 	cursor: pointer;
@@ -463,12 +468,14 @@
 	transition: all, .3s ease-out;
 
 	@if $center == center {
-		margin: 10px auto 10px auto;		
+		margin: 10px auto 10px auto;
+		display: block;
 	} @else {
 		margin-top: 10px;
 		margin-bottom: 10px;
+        margin-right: 5px;
+		display: $display;
 	}
-
 
 	&:visited {
 		color: $color;
@@ -501,7 +508,6 @@
 	color: $color;
 	font-weight: bold;
 	text-align: center;
-	display: $display;
 	padding: 10px 0 10px 0;
 	text-decoration: none;
 	cursor: pointer;
@@ -518,10 +524,12 @@
 	}
 
 	@if $center == center {
-		margin: 10px auto 10px auto;		
+		margin: 10px auto 10px auto;
+		display: block;
 	} @else {
 		margin-top: 10px;
 		margin-bottom: 10px;
+		display: $display;
 	}
 
 	&:visited {
