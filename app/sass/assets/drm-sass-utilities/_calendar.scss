@@ -24,9 +24,54 @@
     .drm-calendar-new-event {
         @include drm-tabular-form();        
     }
-}
 
-.drm-calendar-month-view {
+    .drm-cal-muted {
+        background-color: $lighter-grey;
+        color: white;
+
+        &:hover {
+            cursor: not-allowed;
+            background-color: $lighter-grey;
+            color: white;
+        }
+    }
+
+    .drm-cal-today {
+        background-color: $drm-blue;
+        color: white;
+            
+        .events a {
+            color: white;
+        }
+    }
+
+    .drm-cal-weekend {
+        background-color: $lightest-grey;
+        color: $dark-grey;
+            
+        .events a {
+            color: $dark-grey;
+        }
+    }
+
+    .drm-cal-holiday {
+        color: #FF3659;
+    }
+
+    .drm-cal-muted {
+        background-color: $lighter-grey;
+        color: white;
+
+        &:hover {
+            cursor: not-allowed;
+            background-color: $lighter-grey;
+
+            .events a {
+                color: white;
+            }
+        }
+    }
+
     table {
         width: 100%;
         border-collapse: separate;
@@ -73,8 +118,6 @@
     } 
 
     td {
-        height: 100px;
-        overflow: hidden;
         border-top: 1px solid $lighter-grey;
         border-left: 1px solid $lighter-grey;
         color: $dark-grey;
@@ -85,65 +128,39 @@
         }
 
         &:hover {
-            background-color: $dark-grey;
             color: white;
             cursor: pointer;
+            @include drm-background-transparent($drm-blue);
 
             .events a {
                 color: white;
             }
         }
+    }
 
-        .events {
-            @include drm-unstyled-list(left, no);
+    .events {
+        @include drm-unstyled-list(left, no);
 
-            li {
-                padding: 0;
+        li {
+            padding: 0;
 
-                a {
-                    @extend %drm-reset-box; 
-                    color: $dark-grey;
-                    display: block;
-                    @include drm-em-font(12);
+            a {
+                @extend %drm-reset-box; 
+                color: $dark-grey;
+                display: block;
+                @include drm-em-font(12);
 
-                    &.drm-cal-holiday {
-                        color: #FF3659;
-                    }
+                &.drm-cal-holiday {
+                    color: #FF3659;
                 }
             }
         }
     }
+}
 
-    .drm-cal-muted {
-        background-color: $lighter-grey;
-        color: white;
-
-        &:hover {
-            cursor: not-allowed;
-            background-color: $lighter-grey;
-
-            .events a {
-                color: white;
-            }
-        }
-    }
-
-    .drm-cal-today {
-        background-color: $drm-blue;
-        color: white;
-            
-        .events a {
-            color: white;
-        }
-    }
-
-    .drm-cal-weekend {
-        background-color: $lightest-grey;
-        color: $dark-grey;
-            
-        .events a {
-            color: $dark-grey;
-        }
+.drm-calendar-month-view {
+    td {
+        min-height: 100px;
     }
 }
 
@@ -153,12 +170,6 @@
 
     .drm-calendar-header {
         text-align: center;
-    }
-
-    table {
-        width: 100%;
-        border-collapse: separate;
-        border-spacing: 0;
     }
 
     th, td {
@@ -176,83 +187,27 @@
 
     tbody {
         border: 1px solid $lighter-grey;
+
         tr:first-child {
             td {
                 border-top: 1px solid $lighter-grey;
-
-                &:first-child {
-                    border-radius: 5px 0 0 0;
-                }
-
-                &:last-child {
-                    border-radius: 0 5px 0 0;
-                }
-            } 
-        }
-
-        tr:last-child {
-            td {
-                border-bottom: 1px solid $lighter-grey;
-
-                &:first-child {
-                    border-radius: 0 0 0 5px;
-                }
-
-                &:last-child {
-                    border-radius: 0 0 5px 0;
-                }
             }
         }
     } 
 
     td {
         border-left: 1px solid $lighter-grey;
-        color: $dark-grey;
+        border-bottom: none;
         @include drm-em-font(14);
 
         &:last-child {
             border-right: 1px solid $lighter-grey;
         }
-
-        &:hover {
-            background-color: $dark-grey;
-            color: white;
-            cursor: pointer;
-        }
-
-        .events {
-            @include drm-unstyled-list(left, no);
-            @include drm-em-font(12);
-
-            li {
-                padding: 0;
-            }
-        }
     }
 
-    .drm-cal-muted {
-        background-color: $lighter-grey;
-        color: white;
-
-        &:hover {
-            cursor: not-allowed;
-            background-color: $lighter-grey;
-            color: white;
-        }
-    }
-
-    .drm-cal-today {
-        background-color: $drm-blue;
-        color: white;
-    }
-
-    .drm-cal-weekend {
-        background-color: $lightest-grey;
-        color: $dark-grey;
-    }
-
-    .drm-cal-holiday {
-        color: #FF3659;
+    .hour {
+        color: $grey;
+        @include drm-em-font(12);
     }
 }
 
