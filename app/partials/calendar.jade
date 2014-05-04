@@ -74,6 +74,12 @@ section
                     option(value="3") Third
                     option(value="4") Fourth
                     option(value="last") Last
+
+            .drm-inline-control-group
+                .drm-control-group
+                    label
+                        input.day-checkbox#all-day-event(type="checkbox" name="all_day_event" value=true)
+                        | All Day Event
             h3.drm-bold Event Details:
             label(for="event_type") Event Type:
             input#event-type(type="text" name="event_type" placeholder="holiday")

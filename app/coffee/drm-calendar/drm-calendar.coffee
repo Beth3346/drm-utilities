@@ -6,7 +6,7 @@
 
 ( ($) ->
     class window.DrmCalendar
-        constructor: (@calendarClass = 'drm-calendar', @daysPerWeek = 7, @view = 'week', @addHolidays = no) ->
+        constructor: (@calendarClass = 'drm-calendar', @daysPerWeek = 7, @view = 'week', @addHolidays = yes) ->
             self = @
             self.body = $ 'body'
             self.events = []
@@ -171,7 +171,7 @@
                     eventDate: 1
                     type: "holiday"
                     recurrance: "yearly"
-                    allDayEvent: yes
+                    allDayEvent: true
                 }
                 {
                     name: "Martin Luther King's Birthday"
@@ -180,7 +180,7 @@
                     dayNum: 3
                     type: "holiday"
                     recurrance: "yearly"
-                    allDayEvent: yes
+                    allDayEvent: true
                 }
                 {
                     name: "Groundhog Day"
@@ -188,7 +188,7 @@
                     eventDate: 2
                     type: "holiday"
                     recurrance: "yearly"
-                    allDayEvent: yes
+                    allDayEvent: true
                 }
                 {
                     name: "Valentine's Day"
@@ -196,7 +196,7 @@
                     eventDate: 14
                     type: "holiday"
                     recurrance: "yearly"
-                    allDayEvent: yes
+                    allDayEvent: true
                 }
                 {
                     name: "President's Day"
@@ -205,7 +205,7 @@
                     dayNum: 3
                     type: "holiday"
                     recurrance: "yearly"
-                    allDayEvent: yes
+                    allDayEvent: true
                 }
                 {
                     name: "St. Patrick's Day"
@@ -213,7 +213,7 @@
                     eventDate: 17
                     type: "holiday"
                     recurrance: "yearly"
-                    allDayEvent: yes
+                    allDayEvent: true
                 }
                 {
                     name: "April Fool's Day"
@@ -221,7 +221,7 @@
                     eventDate: 1
                     type: "holiday"
                     recurrance: "yearly"
-                    allDayEvent: yes
+                    allDayEvent: true
                 }
                 {
                     name: "Earth Day"
@@ -229,7 +229,7 @@
                     eventDate: 22
                     type: "holiday"
                     recurrance: "yearly"
-                    allDayEvent: yes
+                    allDayEvent: true
                 }
                 {
                     name: "Arbor Day"
@@ -238,7 +238,7 @@
                     dayNum: "last"
                     type: "holiday"
                     recurrance: "yearly"
-                    allDayEvent: yes
+                    allDayEvent: true
                 }
                 {
                     name: "May Day"
@@ -246,7 +246,7 @@
                     eventDate: 1
                     type: "holiday"
                     recurrance: "yearly"
-                    allDayEvent: yes
+                    allDayEvent: true
                 }
                 {
                     name: "Cinco De Mayo"
@@ -254,7 +254,7 @@
                     eventDate: 5
                     type: "holiday"
                     recurrance: "yearly"
-                    allDayEvent: yes
+                    allDayEvent: true
                 }
                 {
                     name: "Mother's Day"
@@ -263,7 +263,7 @@
                     dayNum: 2
                     type: "holiday"
                     recurrance: "yearly"
-                    allDayEvent: yes
+                    allDayEvent: true
                 }
                 {
                     name: "Memorial Day"
@@ -272,7 +272,7 @@
                     dayNum: "last"
                     type: "holiday"
                     recurrance: "yearly"
-                    allDayEvent: yes
+                    allDayEvent: true
                 }
                 {
                     name: "Flag Day"
@@ -280,7 +280,7 @@
                     eventDate: 14
                     type: "holiday"
                     recurrance: "yearly"
-                    allDayEvent: yes
+                    allDayEvent: true
                 }
                 {
                     name: "Father's Day"
@@ -288,7 +288,7 @@
                     day: ["Sunday"]
                     type: "holiday"
                     recurrance: "yearly"
-                    allDayEvent: yes
+                    allDayEvent: true
                     dayNum: 3
                 }
                 {
@@ -297,7 +297,7 @@
                     eventDate: 4
                     type: "holiday"
                     recurrance: "yearly"
-                    allDayEvent: yes
+                    allDayEvent: true
                 }
                 {
                     name: "Labor Day"
@@ -306,7 +306,7 @@
                     dayNum: 1
                     type: "holiday"
                     recurrance: "yearly"
-                    allDayEvent: yes
+                    allDayEvent: true
                 }
                 {
                     name: "Patroit Day"
@@ -314,7 +314,7 @@
                     eventDate: 11
                     type: "holiday"
                     recurrance: "yearly"
-                    allDayEvent: yes
+                    allDayEvent: true
                 }
                 {
                     name: "Columbus Day"
@@ -323,7 +323,7 @@
                     dayNum: 2
                     type: "holiday"
                     recurrance: "yearly"
-                    allDayEvent: yes
+                    allDayEvent: true
                 }
                 {
                     name: "Halloween"
@@ -331,7 +331,7 @@
                     eventDate: 31
                     type: "holiday"
                     recurrance: "yearly"
-                    allDayEvent: yes
+                    allDayEvent: true
                 }
                 {
                     name: "Veteran's Day"
@@ -339,7 +339,7 @@
                     eventDate: 11
                     type: "holiday"
                     recurrance: "yearly"
-                    allDayEvent: yes
+                    allDayEvent: true
                 }
                 {
                     name: "Thanksgiving"
@@ -348,7 +348,7 @@
                     dayNum: 4
                     type: "holiday"
                     recurrance: "yearly"
-                    allDayEvent: yes
+                    allDayEvent: true
                 }
                 {
                     name: "Pearl Harbor Day"
@@ -356,7 +356,7 @@
                     eventDate: 7
                     type: "holiday"
                     recurrance: "yearly"
-                    allDayEvent: yes
+                    allDayEvent: true
                 }
                 {
                     name: "Festivus"
@@ -364,7 +364,7 @@
                     eventDate: 23
                     type: "holiday"
                     recurrance: "yearly"
-                    allDayEvent: yes
+                    allDayEvent: true
                 }
                 {
                     name: "Christmas Eve"
@@ -372,7 +372,7 @@
                     eventDate: 24
                     type: "holiday"
                     recurrance: "yearly"
-                    allDayEvent: yes
+                    allDayEvent: true
                 }
                 {
                     name: "Christmas"
@@ -380,7 +380,7 @@
                     eventDate: 25
                     type: "holiday"
                     recurrance: "yearly"
-                    allDayEvent: yes
+                    allDayEvent: true
                 }
                 {
                     name: "Boxing Day"
@@ -388,7 +388,7 @@
                     eventDate: 26
                     type: "holiday"
                     recurrance: "yearly"
-                    allDayEvent: yes
+                    allDayEvent: true
                 }
                 {
                     name: "New Year's Eve"
@@ -396,7 +396,7 @@
                     eventDate: 31
                     type: "holiday"
                     recurrance: "yearly"
-                    allDayEvent: yes
+                    allDayEvent: true
                 }
             ]
 
@@ -467,9 +467,10 @@
                     eventDate: if self.addEventForm.find('#event-date').val() is '' then null else parseInt(self.addEventForm.find('#event-date').val(), 10)
                     day: []
                     dayNum: if self.addEventForm.find('#day-num').val() is '' then null else self.addEventForm.find('#day-num').val()
+                    allDayEvent: if self.addEventForm.find('#all-day-event').prop('checked') then true else false
                     type: if self.addEventForm.find('#event-type').val() is '' then null else self.addEventForm.find('#event-type').val()
                     notes: if self.addEventForm.find('#event-notes').val() is '' then null else self.addEventForm.find('#event-notes').val()
-                
+
                 self.addEventForm.find('input.day-checkbox:checked').each ->
                     newEvent.day.push $.trim($(@).val())
                 if newEvent.day.length is 0
@@ -480,7 +481,7 @@
                 if newMonth isnt currentMonth then self.changeCalendar.call @, newMonth, newEvent.eventDate, self.currentYear
                 # reset form
                 self.addEventForm.find(':input').val ''
-                self.addEventForm.find('input.day-checkbox:checked').prop 'checked', false
+                self.addEventForm.find('input:checked').prop 'checked', false
 
             self.calendar.on 'click', "td:not(.#{self.classes.muted})", ->
                 that = $ @
@@ -545,12 +546,13 @@
             obj =
                 id: id
                 name: if newEvent.name? then newEvent.name else null
-                recurrance: if newEvent.recurrance? then newEvent.recurrance.toLowerCase() else null
+                recurrance: if newEvent.recurrance? then newEvent.recurrance.toLowerCase() else 'none'
                 month: if newEvent.month? then newEvent.month else null
                 year: if newEvent.year? then newEvent.year else null
                 eventDate: if newEvent.eventDate? then newEvent.eventDate else null
                 day: if newEvent.day? then newEvent.day else null
                 dayNum: if newEvent.dayNum? then newEvent.dayNum else null
+                allDayEvent: if newEvent.allDayEvent? then newEvent.allDayEvent else false
                 type: if newEvent.type? then newEvent.type.toLowerCase() else null
                 notes: if newEvent.notes? then newEvent.notes else null
             @events.push obj
@@ -701,7 +703,7 @@
         getEventWeekNum: (dayNum, day, numberDays, dayShift) =>
             self = @
             calendarInner = self.calendar.find "div.#{@calendarInnerClass}"
-            weeks = calendarInner.find('tbody').find 'tr'
+            weeks = calendarInner.find('tbody').find 'tr.drm-week'
             numberWeeks = self.getWeeksInMonth numberDays, dayShift
             lastWeekLength = weeks.eq(numberWeeks).length
 
@@ -717,7 +719,7 @@
             calendarInner = self.calendar.find "div.#{@calendarInnerClass}"
             currentMonth = calendarInner.data 'month'
             currentYear = calendarInner.data 'year'
-            weeks = calendarInner.find('tbody').find 'tr'
+            weeks = calendarInner.find('tbody').find 'tr.drm-week'
             firstDay = self.getDayOfWeek currentMonth, currentYear, 1
             numberDays = self.getDaysInMonth (currentMonth + 1), currentYear
             dayShift = if firstDay is self.daysPerWeek then 0 else firstDay
@@ -731,19 +733,18 @@
 
                     if currentMonth is month
                         eventWeek = if dayShift <= day then eventWeek = weeks.eq eventWeekNum else eventWeek = weeks.eq eventWeekNum + 1
-                        eventDate.push eventWeek.find('td').eq(day).data 'date'
+                        eventDate.push eventWeek.find("td.drm-date[data-day=#{day}]").data 'date'
             else
                 eventDate.push parseInt(events.eventDate, 10)
-            
             $.each eventDate, (key, value) ->
-                eventDays.push calendarInner.find "[data-date=#{value}]"
+                eventDays.push calendarInner.find "td.drm-date[data-date=#{value}]"
                 
         addMonthlyEvents: (events, eventDays) =>
             self = @
             calendarInner = self.calendar.find "div.#{@calendarInnerClass}"
             currentMonth = calendarInner.data 'month'
             currentYear = calendarInner.data 'year'
-            weeks = calendarInner.find('tbody').find 'tr'
+            weeks = calendarInner.find('tbody').find 'tr.drm-week'
             firstDay = self.getDayOfWeek currentMonth, currentYear, 1
             numberDays = self.getDaysInMonth (currentMonth + 1), currentYear
             dayShift = if firstDay is self.daysPerWeek then 0 else firstDay
@@ -755,19 +756,19 @@
                     day = $.inArray value, self.days
                     eventWeekNum = self.getEventWeekNum events.dayNum, day, numberDays, dayShift
                     eventWeek = if dayShift <= day then eventWeek = weeks.eq eventWeekNum else eventWeek = weeks.eq eventWeekNum + 1
-                    eventDate.push eventWeek.find('td').eq(day).data 'date'
+                    eventDate.push eventWeek.find("td.drm-date[data-day=#{day}]").data 'date'
             else
                 eventDate.push parseInt(events.eventDate, 10)
 
             $.each eventDate, (key, value) ->
-                eventDays.push calendarInner.find "[data-date=#{value}]"
+                eventDays.push calendarInner.find "td.drm-date[data-date=#{value}]"
 
         addBiWeeklyEvents: (events, eventDays) =>
             self = @
             calendarInner = self.calendar.find "div.#{@calendarInnerClass}"
             currentMonth = calendarInner.data 'month'
             currentYear = calendarInner.data 'year'
-            weeks = calendarInner.find('tbody').find 'tr'
+            weeks = calendarInner.find('tbody').find 'tr.drm-week'
             eventDate = []
             # events that occur every 2 weeks
             if events.day
@@ -781,21 +782,25 @@
                     $.each eventWeeks, (key, value) ->
                         that = $ value
                         weekLength = that.find("td:not(.#{self.classes.muted})").length
-                        eventDate.push that.find('td').eq(day).data('date')
+                        eventDate.push that.find("td.drm-date[data-day=#{day}]").data('date')
 
             $.each eventDate, (key, value) ->
-                eventDays.push calendarInner.find "[data-date=#{value}]"
+                eventDays.push calendarInner.find "td.drm-date[data-date=#{value}]"
 
         addWeeklyEvents: (events, eventDays) =>
             self = @
             calendarInner = self.calendar.find "div.#{@calendarInnerClass}"
             currentMonth = calendarInner.data 'month'
             currentYear = calendarInner.data 'year'
-            weeks = calendarInner.find('tbody').find 'tr'
             firstDay = self.getDayOfWeek currentMonth, currentYear, 1
             numberDays = self.getDaysInMonth (currentMonth + 1), currentYear
             dayShift = if firstDay is self.daysPerWeek then 0 else firstDay
             eventDate = []
+
+            if self.view is 'month'
+                weeks = calendarInner.find('tbody').find 'tr.drm-week'
+            else if self.view is 'week'
+                weeks = calendarInner.find 'tbody.drm-week'
             # weekly events
             if events.day
                 $.each events.day, (key, value) ->
@@ -805,19 +810,19 @@
                         that = $ value
                         weekLength = that.find("td:not(.#{self.classes.muted})").length
                         if key is 0
-                            if dayShift <= day then eventDate.push that.find('td').eq(day).data('date')
+                            if dayShift <= day then eventDate.push that.find("td.drm-date[data-day=#{day}]").data('date')
                         else if key is (length - 1)
-                            if day < weekLength then eventDate.push that.find('td').eq(day).data('date')
+                            if day < weekLength then eventDate.push that.find("td.drm-date[data-day=#{day}]").data('date')
                         else
-                            eventDate.push that.find('td').eq(day).data('date')
+                            eventDate.push that.find("td.drm-date[data-day=#{day}]").data('date')
 
             $.each eventDate, (key, value) ->
-                eventDays.push calendarInner.find "[data-date=#{value}]"
+                eventDays.push calendarInner.find "td.drm-date[data-date=#{value}]"
 
         addDailyEvents: (events, eventDays) =>
             self = @
             calendarInner = self.calendar.find "div.#{@calendarInnerClass}"
-            days = calendarInner.find('tbody').find "td:not(.#{self.classes.muted})"
+            days = calendarInner.find('tbody').find "td.drm-date"
             days.each ->
                 eventDays.push $(@)
 
@@ -825,7 +830,7 @@
             self = @
             calendarInner = self.calendar.find "div.#{@calendarInnerClass}"     
             eventDate = parseInt(events.eventDate, 10)
-            eventDays.push calendarInner.find "[data-date=#{eventDate}]"
+            eventDays.push calendarInner.find "td.drm-date[data-date=#{eventDate}]"
 
         addEventsToCalendar: (events) =>
             self = @
@@ -846,15 +851,16 @@
             else if events.recurrance is 'daily'
                 self.addDailyEvents events, eventDays
             else if events.recurrance is 'none' and currentMonth is month and currentYear is parseInt(events.year, 10)                                         
-                self.addOneTimeEvents events, eventDays            
+                self.addOneTimeEvents events, eventDays
             if eventDays.length > 0
-                $.each eventDays, (key, day) ->
+                console.log eventDays
+                $.each eventDays, (key, calendarItem) ->
                     # add css classes here
-                    self.addNewCalendarEvent events, day
+                    self.addNewCalendarEvent events, calendarItem
 
         highlightWeekends: =>
             self = @
-            weeks = self.calendar.find("div.#{@calendarInnerClass} tbody").find 'tr'
+            weeks = self.calendar.find("div.#{@calendarInnerClass} tbody").find 'tr.drm-week'
 
             $.each weeks, ->
                 that = $ @
@@ -868,7 +874,7 @@
             month = calendarInner.data 'month'
             year = calendarInner.data 'year'
             weekNum = 1
-            weeks = self.calendar.find("div.#{@calendarInnerClass} tbody").find 'tr'
+            weeks = self.calendar.find("div.#{@calendarInnerClass} tbody").find 'tr.drm-week'
             weekNums = []
 
             $.each self.months, (key, value) ->
@@ -937,8 +943,8 @@
             numberWeeks = self.getWeeksInMonth numberDays, dayShift
             nextYear = currentYear + 1
             lastYear = currentYear - 1
-            nextMonth = if currentMonth is 11 then @months[0] else @months[currentMonth + 1]
-            lastMonth = if currentMonth is 0 then @months[11] else @months[currentMonth - 1]
+            nextMonth = if currentMonth is 11 then 0 else currentMonth + 1
+            lastMonth = if currentMonth is 0 then 11 else currentMonth - 1
             calendar = null
             heading = null
             weekdays = null
@@ -949,7 +955,7 @@
                 weekdays += "<th>#{value}</th>"
             weekdays += '</tr></thead>'
 
-            weeks = '<tbody>'
+            weeks = "<tbody class='drm-month'>"
             i = 1
             currentDate = 1
             l = 1
@@ -958,7 +964,7 @@
 
             while i <= numberWeeks
                 j = 1
-                weeks += '<tr>'
+                weeks += "<tr class='drm-week'>"
                 # if we are in week 1 we need to shift to the correct day of the week
                 if i is 1 and firstDay isnt 0
                     # add cells for the previous month until we get to the first day
@@ -969,7 +975,7 @@
                         j += 1
                     # start adding cells for the current month
                     while j <= self.daysPerWeek
-                        weeks += "<td data-month='#{currentMonth}' data-date='#{currentDate}' data-year='#{currentYear}' data-day='#{j - 1}'>#{currentDate}</td>"
+                        weeks += "<td class='drm-date' data-month='#{currentMonth}' data-date='#{currentDate}' data-year='#{currentYear}' data-day='#{j - 1}'>#{currentDate}</td>"
                         j += 1
                         currentDate += 1
                 # if we are in the last week of the month we need to add blank cells for next month
@@ -977,7 +983,7 @@
                     while j <= self.daysPerWeek
                         # finish adding cells for the current month
                         if currentDate <= numberDays
-                            weeks += "<td data-month='#{currentMonth}' data-date='#{currentDate}' data-year='#{currentYear}' data-day='#{j - 1}'>#{currentDate}</td>"
+                            weeks += "<td class='drm-date' data-month='#{currentMonth}' data-date='#{currentDate}' data-year='#{currentYear}' data-day='#{j - 1}'>#{currentDate}</td>"
                         # start adding cells for next month
                         else
                             weeks += "<td class='#{self.classes.muted}' data-day='#{j}'>#{nextDates}</td>"
@@ -987,7 +993,7 @@
                 else
                     # if we are in the middle of the month add cells for the current month
                     while j <= self.daysPerWeek
-                        weeks += "<td data-month='#{currentMonth}' data-date='#{currentDate}' data-year='#{currentYear}' data-day='#{j - 1}'>#{currentDate}</td>"
+                        weeks += "<td class='drm-date' data-month='#{currentMonth}' data-date='#{currentDate}' data-year='#{currentYear}' data-day='#{j - 1}'>#{currentDate}</td>"
                         j += 1
                         currentDate += 1
                 weeks += '</tr>'
@@ -1017,8 +1023,8 @@
             $('.drm-calendar-year-prev').text lastYear
             $('.drm-calendar-year-next').text nextYear
 
-            $('.drm-calendar-month-prev').text lastMonth
-            $('.drm-calendar-month-next').text nextMonth
+            $('.drm-calendar-month-prev').text self.months[lastMonth]
+            $('.drm-calendar-month-next').text self.months[nextMonth]
 
         createWeekView: (currentMonth, currentDate, currentYear) =>
             self = @
@@ -1030,8 +1036,8 @@
             numberWeeks = self.getWeeksInMonth numberDays, dayShift
             nextYear = currentYear + 1
             lastYear = currentYear - 1
-            nextMonth = if currentMonth is 11 then self.months[0] else self.months[currentMonth + 1]
-            lastMonth = if currentMonth is 0 then self.months[11] else self.months[currentMonth - 1]
+            nextMonth = if currentMonth is 11 then 0 else currentMonth + 1
+            lastMonth = if currentMonth is 0 then 11 else currentMonth - 1
             calendar = null
             heading = null
             weekdays = null
@@ -1043,21 +1049,21 @@
                 if datesInWeek.length < self.daysPerWeek and datesInWeek[0] is 1
                     if key is firstDay
                         dates.date = 1
-                        dates.month = self.months[currentMonth]
+                        dates.month = currentMonth
                     else if key > firstDay
                         dates.date = (key - firstDay) + 1
-                        dates.month = self.months[currentMonth]
+                        dates.month = currentMonth
                     else
                         dates.date = prevMonthNumberDays - (firstDay - (key + 1))
                         dates.month = lastMonth
                 else if datesInWeek.length is self.daysPerWeek
                     dates.date = datesInWeek[key]
-                    dates.month = self.months[currentMonth]
+                    dates.month = currentMonth
                 # if its the last week of the month
                 else if datesInWeek.length < self.daysPerWeek and datesInWeek[0] isnt 1
                     if key < datesInWeek.length
                         dates.date = datesInWeek[key]
-                        dates.month = self.months[currentMonth]
+                        dates.month = currentMonth
                     else
                         dates.date = Math.abs (datesInWeek.length - (key + 1))
                         dates.month = nextMonth
@@ -1067,15 +1073,15 @@
             weekdays += "<th></th>"
             $.each self.days, (key, value) ->
                 dates = getDates datesInWeek, key
-                weekdays += "<th>#{value}<br>#{dates.month} #{dates.date}</th>"
+                weekdays += "<th>#{value}<br>#{self.months[dates.month]} #{dates.date}</th>"
             weekdays += '</tr></thead>'
 
-            week = '<tbody>'
+            week = "<tbody class='drm-week'>"
             week += "<tr><td><span class='hour'>All Day Events</span></td>"
 
             $.each self.days, (key, value) ->
                 dates = getDates datesInWeek, key
-                week += "<td data-currentMonth='#{dates.month}' data-date='#{dates.date}' data-year='#{currentYear}' data-day='#{key}'></td>"
+                week += "<td class='drm-date' data-month='#{dates.month}' data-date='#{dates.date}' data-year='#{currentYear}' data-day='#{key}'></td>"
             week += "</tr>"
 
             $.each self.hours, (key, value) ->
@@ -1083,7 +1089,7 @@
                 week += "<td><span class='hour'>#{value.name}</span></td>"
                 $.each self.days, (key, value) ->
                     dates = getDates datesInWeek, key
-                    week += "<td data-currentMonth='#{dates.month}' data-date='#{dates.date}' data-year='#{currentYear}' data-day='#{key}'></td>"
+                    week += "<td data-month='#{dates.month}' data-date='#{dates.date}' data-year='#{currentYear}' data-day='#{key}'></td>"
                 week += '</tr>'
             week += '</tbody></table>'
 
@@ -1098,20 +1104,22 @@
                 text: "#{@months[currentMonth]} #{currentYear}"
             
             calendar.appendTo ".#{self.calendarClass}"
-            heading.prependTo ".#{self.calendarInnerClass}"
+            heading.prependTo "div.#{self.calendarInnerClass}"
 
+            $("div.#{self.calendarInnerClass}").find("tbody td[data-month=#{lastMonth}]").addClass(self.classes.muted).removeClass 'drm-date'
+            $("div.#{self.calendarInnerClass}").find("tbody td[data-month=#{nextMonth}]").addClass(self.classes.muted).removeClass 'drm-date'
             self.highlightCurrentDay()
             self.highlightWeekends()
             # self.addWeekNumbers()
 
-            # $.each self.events, (key, value) ->
-            #     self.addEventsToCalendar value
+            $.each self.events, (key, value) ->
+                self.addEventsToCalendar value
 
             $('.drm-calendar-year-prev').text lastYear
             $('.drm-calendar-year-next').text nextYear
 
-            $('.drm-calendar-month-prev').text lastMonth
-            $('.drm-calendar-month-next').text nextMonth
+            $('.drm-calendar-month-prev').text self.months[lastMonth]
+            $('.drm-calendar-month-next').text self.months[nextMonth]
 
         createDateView: (currentMonth, currentDate, currentYear) =>
             self = @
@@ -1141,64 +1149,65 @@
                 when 'day' then self.createDateView month, date, year
 
     drmCalendar = new DrmCalendar()
-    # drmCalendar.createEvent
-    #     name: "Rabbit Rabbit Day"
-    #     eventDate: 1
-    #     type: "fun day"
-    #     recurrance: "monthly"
-    #     notes: "Say Rabbit Rabbit for good luck this month"
-    # drmCalendar.createEvent
-    #     name: "First Monday"
-    #     day: ["Monday"]
-    #     dayNum : 1
-    #     type: "test"
-    #     recurrance: "monthly"
-    #     notes: "This is the first Monday of the month"
-    #     allDayEvent: yes
-    # drmCalendar.createEvent
-    #     name: "Lawn Day"
-    #     month: "April"
-    #     eventDate: 24
-    #     day: ["Thursday"]
-    #     type: "test"
-    #     recurrance: "biweekly"
-    #     notes: "Every other Thursday"
-    #     allDayEvent: yes
-    # drmCalendar.createEvent
-    #     name: "Not Lawn Day"
-    #     month: "April"
-    #     eventDate: 17
-    #     day: ["Thursday"]
-    #     type: "test"
-    #     recurrance: "biweekly"
-    #     notes: "Every other Thursday"
-    #     allDayEvent: yes
-    # drmCalendar.createEvent
-    #     name: "Wake Up"
-    #     day: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
-    #     type: "test"
-    #     recurrance: "weekly"
-    #     note: "Wake Up Every Day"
-    #     allDayEvent: yes
-    # drmCalendar.createEvent
-    #     name: "Sleep In!"
-    #     day: ["Saturday", "Sunday"]
-    #     type: "test"
-    #     recurrance: "weekly"
-    #     allDayEvent: yes
-    # drmCalendar.createEvent
-    #     name: "Every Day Event"
-    #     type: "test"
-    #     recurrance: "daily"
-    #     allDayEvent: yes
-    # drmCalendar.createEvent
-    #     name: "One Time Event"
-    #     month: "April"
-    #     year: 2014
-    #     time: '1:00'
-    #     eventDate: 21
-    #     type: "test"
-    #     recurrance: "none"
-    #     note: "do this once"
+    drmCalendar.createEvent
+        name: "Rabbit Rabbit Day"
+        eventDate: 1
+        type: "fun day"
+        recurrance: "monthly"
+        notes: "Say Rabbit Rabbit for good luck this month"
+    drmCalendar.createEvent
+        name: "First Monday"
+        day: ["Monday"]
+        dayNum : 1
+        type: "test"
+        recurrance: "monthly"
+        notes: "This is the first Monday of the month"
+        allDayEvent: true
+    drmCalendar.createEvent
+        name: "Lawn Day"
+        month: "April"
+        eventDate: 24
+        day: ["Thursday"]
+        type: "test"
+        recurrance: "biweekly"
+        notes: "Every other Thursday"
+        allDayEvent: true
+    drmCalendar.createEvent
+        name: "Not Lawn Day"
+        month: "April"
+        eventDate: 17
+        day: ["Thursday"]
+        type: "test"
+        recurrance: "biweekly"
+        notes: "Every other Thursday"
+        allDayEvent: true
+    drmCalendar.createEvent
+        name: "Wake Up"
+        day: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+        type: "test"
+        recurrance: "weekly"
+        note: "Wake Up Every Day"
+        allDayEvent: true
+    drmCalendar.createEvent
+        name: "Sleep In!"
+        day: ["Saturday", "Sunday"]
+        type: "test"
+        recurrance: "weekly"
+        allDayEvent: true
+    drmCalendar.createEvent
+        name: "Every Day Event"
+        type: "test"
+        recurrance: "daily"
+        allDayEvent: true
+    drmCalendar.createEvent
+        name: "One Time Event"
+        month: "May"
+        year: 2014
+        time: '1:00'
+        eventDate: 2
+        type: "test"
+        recurrance: "none"
+        allDayEvent: false
+        note: "do this once"
 
 ) jQuery
