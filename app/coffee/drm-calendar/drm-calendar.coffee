@@ -407,6 +407,10 @@
             if self.calendar.length > 0
                 self.createCalendar self.currentMonth, self.currentDate, self.currentYear
 
+            self.calendar.on 'click', '.drm-calendar-week-prev, .drm-calendar-week-next', ->
+                direction = $(@).data 'dir'
+                self.advanceWeek.call @, direction
+
             self.calendar.on 'click', '.drm-calendar-month-prev, .drm-calendar-month-next', ->
                 direction = $(@).data 'dir'
                 self.advanceMonth.call @, direction
@@ -929,14 +933,37 @@
             calendarInner = @calendar.find "div.#{@calendarInnerClass}"
             currentMonth = calendarInner.data 'month'
             currentYear = calendarInner.data 'year'
-            currentDate = if currentMonth is self.currentMonth then self.currentDate else 1
+            nextYear = currentYear + 1
+            lastYear = currentYear - 1
+            nextMonth = if currentMonth is 11 then 0 else currentMonth + 1
+            lastMonth = if currentMonth is 0 then 11 else currentMonth - 1
             
             if direction is 'prev'
-                currentMonth = if currentMonth is 0 then 11 else currentMonth - 1
+                firstDay = calendarInner.find('td.drm-date').first().data 'date'
                 currentYear = if currentMonth is 11 then currentYear - 1 else currentYear
+                lastDayOfPrevMonth = @getDaysInMonth lastMonth + 1, currentYear
+                console.log lastDayOfPrevMonth
+
+                if firstDay is 1
+                    currentDate = lastDayOfPrevMonth
+                    currentMonth = lastMonth
+                else
+                    currentDate = firstDay - 1
+
             else if direction is 'next'
-                currentMonth = if currentMonth is 11 then 0 else currentMonth + 1
+                lastDay = calendarInner.find('td.drm-date').last().data 'date'
                 currentYear = if currentMonth is 0 then currentYear + 1 else currentYear
+                lastDayOfMonth = @getDaysInMonth currentMonth + 1, currentYear
+                console.log lastDayOfMonth
+
+                if lastDay is lastDayOfMonth
+                    currentDate = 1
+                    currentMonth = nextMonth
+                else
+                    currentDate = lastDay + 1
+
+            console.log currentDate
+
             @changeCalendar currentMonth, currentDate, currentYear
 
         advanceMonth: (direction) =>
