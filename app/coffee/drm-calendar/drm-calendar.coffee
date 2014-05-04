@@ -902,6 +902,43 @@
                 if weekNum % 2 is 0 then weeks.addClass('even-week') else weeks.addClass('odd-week')
                 weeks.attr 'data-week', weekNum
 
+        getWeekNumber: (currentMonth, currentDate, currentYear) =>
+            self = @
+            weekNum = 1
+            weekNums = []
+            weekInfo = self.getDatesInWeek currentMonth, currentDate, currentYear
+
+            $.each self.months, (key, value) ->
+                numberDays = self.getDaysInMonth (key + 1), currentYear
+                firstDay = self.getDayOfWeek key, currentYear, 1
+                dayShift = if firstDay is self.daysPerWeek then 0 else firstDay
+                numberWeeks = self.getWeeksInMonth numberDays, dayShift
+                week = 1
+                if $.isNumeric numberWeeks
+                    until week > numberWeeks
+                        if week is 1 and firstDay isnt 0
+                            weekNum = weekNum
+                        else
+                            weekNum = weekNum + 1
+                        week = week + 1
+                        if currentMonth is key
+                            weekNums.push weekNum
+            weekNumber = weekNums[weekInfo.weekNum]
+
+        advanceWeek: (direction) =>
+            calendarInner = @calendar.find "div.#{@calendarInnerClass}"
+            currentMonth = calendarInner.data 'month'
+            currentYear = calendarInner.data 'year'
+            currentDate = if currentMonth is self.currentMonth then self.currentDate else 1
+            
+            if direction is 'prev'
+                currentMonth = if currentMonth is 0 then 11 else currentMonth - 1
+                currentYear = if currentMonth is 11 then currentYear - 1 else currentYear
+            else if direction is 'next'
+                currentMonth = if currentMonth is 11 then 0 else currentMonth + 1
+                currentYear = if currentMonth is 0 then currentYear + 1 else currentYear
+            @changeCalendar currentMonth, currentDate, currentYear
+
         advanceMonth: (direction) =>
             calendarInner = @calendar.find "div.#{@calendarInnerClass}"
             currentMonth = calendarInner.data 'month'
@@ -1046,6 +1083,7 @@
             weekdays = null
             weekInfo = self.getDatesInWeek currentMonth, currentDate, currentYear
             datesInWeek = weekInfo.datesInWeek
+            weekNumber = self.getWeekNumber currentMonth, currentDate, currentYear
 
             getDates = (datesInWeek, key) ->
                 dates = {}
@@ -1080,7 +1118,7 @@
                 weekdays += "<th>#{value}<br>#{self.months[dates.month]} #{dates.date}</th>"
             weekdays += '</tr></thead>'
 
-            week = "<tbody class='drm-week' data-month-week-num='#{weekInfo.weekNum}'>"
+            week = "<tbody class='drm-week' data-week-num='#{weekNumber}'>"
             week += "<tr><td><span class='hour'>All Day Events</span></td>"
 
             $.each self.days, (key, value) ->
@@ -1105,7 +1143,7 @@
 
             heading = $ '<h1></h1>',
                 class: 'drm-calendar-header'
-                text: "#{@months[currentMonth]} #{currentYear}"
+                text: "#{@months[currentMonth]} #{datesInWeek[0]} - #{datesInWeek[datesInWeek.length - 1]} Week #{weekNumber} of #{currentYear}"
             
             calendar.appendTo ".#{self.calendarClass}"
             heading.prependTo "div.#{self.calendarInnerClass}"
