@@ -469,6 +469,7 @@
                     month: if self.addEventForm.find('#month').val() is '' then null else self.addEventForm.find('#month').val()
                     year: if self.addEventForm.find('#year').val() is '' then null else parseInt(self.addEventForm.find('#year').val(), 10)
                     eventDate: if self.addEventForm.find('#event-date').val() is '' then null else parseInt(self.addEventForm.find('#event-date').val(), 10)
+                    time: if self.addEventForm.find('#time').val() is '' then null else self.addEventForm.find('#time').val()
                     day: []
                     dayNum: if self.addEventForm.find('#day-num').val() is '' then null else self.addEventForm.find('#day-num').val()
                     allDayEvent: if self.addEventForm.find('#all-day-event').prop('checked') then true else false
@@ -554,6 +555,7 @@
                 month: if newEvent.month? then newEvent.month else null
                 year: if newEvent.year? then newEvent.year else null
                 eventDate: if newEvent.eventDate? then newEvent.eventDate else null
+                time: if newEvent.time? then newEvent.time else null
                 day: if newEvent.day? then newEvent.day else null
                 dayNum: if newEvent.dayNum? then newEvent.dayNum else null
                 allDayEvent: if newEvent.allDayEvent? then newEvent.allDayEvent else false
@@ -1161,9 +1163,11 @@
                 'data-month': currentMonth
                 'data-year': currentYear
 
+            weekDates = if datesInWeek.length > 1 then "#{datesInWeek[0]} - #{datesInWeek[datesInWeek.length - 1]}" else "#{datesInWeek[0]}"
+
             heading = $ '<h1></h1>',
                 class: 'drm-calendar-header'
-                text: "#{@months[currentMonth]} #{datesInWeek[0]} - #{datesInWeek[datesInWeek.length - 1]} Week #{weekNumber} of #{currentYear}"
+                text: "#{@months[currentMonth]} #{weekDates}: Week #{weekNumber} of #{currentYear}"
             
             calendar.appendTo ".#{self.calendarClass}"
             heading.prependTo "div.#{self.calendarInnerClass}"
