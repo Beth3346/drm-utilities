@@ -940,29 +940,25 @@
             
             if direction is 'prev'
                 firstDay = calendarInner.find('td.drm-date').first().data 'date'
-                currentYear = if currentMonth is 11 then currentYear - 1 else currentYear
                 lastDayOfPrevMonth = @getDaysInMonth lastMonth + 1, currentYear
-                console.log lastDayOfPrevMonth
 
                 if firstDay is 1
                     currentDate = lastDayOfPrevMonth
+                    currentYear = if currentMonth is 0 then lastYear else currentYear
                     currentMonth = lastMonth
                 else
                     currentDate = firstDay - 1
 
             else if direction is 'next'
                 lastDay = calendarInner.find('td.drm-date').last().data 'date'
-                currentYear = if currentMonth is 0 then currentYear + 1 else currentYear
                 lastDayOfMonth = @getDaysInMonth currentMonth + 1, currentYear
-                console.log lastDayOfMonth
 
                 if lastDay is lastDayOfMonth
                     currentDate = 1
+                    currentYear = if currentMonth is 11 then nextYear else currentYear
                     currentMonth = nextMonth
                 else
                     currentDate = lastDay + 1
-
-            console.log currentDate
 
             @changeCalendar currentMonth, currentDate, currentYear
 
@@ -993,12 +989,9 @@
         changeCalendar: (month, date, year) =>
             self = @
             calendarInner = self.calendar.find "div.#{@calendarInnerClass}"
-            if calendarInner.length > 0
-                calendarInner.fadeOut 300, ->
-                    @remove()
-                    self.createCalendar month, date, year
-            else
-                self.createCalendar month, date, year
+            calendarInner.fadeOut(300).queue (next) ->
+                $.when(calendarInner.remove()).then(self.createCalendar(month, date, year))
+                next()
 
         createMonthView: (currentMonth, currentYear) =>
             self = @
