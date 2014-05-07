@@ -33,6 +33,8 @@ jshint -W100
                 noTags: new RegExp '<[a-z]+.*>.*<\/[a-z]+>','i'
                 # mm/dd/yyyy
                 monthDayYear: new RegExp '(0[1-9]|1[012])[- \/.](0[1-9]|[12][0-9]|3[01])[- \/.](19|20)\\d\\d'
+                # 00:00pm
+                time: new RegExp '(0[012]|1[0-9]):(1[012345]|1[0-9])(am|pm)', 'i'
                 # matched all major cc
                 creditCard: new RegExp '^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\\d{3})\\d{11})$'
                 cvv: new RegExp '^[0-9]{3,4}$'
@@ -140,6 +142,12 @@ jshint -W100
             body.on 'keyup', ':input.drm-valid-month-day-year', ->
                 value = self.getValue.call @
                 validate = self.validateMonthDayYear value, patterns.monthDayYear
+                if validate?
+                    validateField.call @, value, validate
+            
+            body.on 'keyup', ':input.drm-valid-time', ->
+                value = self.getValue.call @
+                validate = self.validateTime value, patterns.time
                 if validate?
                     validateField.call @, value, validate
             
@@ -595,6 +603,26 @@ jshint -W100
                 else
                     validate.status = 'danger'
                     validate.message = 'please provide a valid date'
+                validate
+
+            if value?
+                pattern = new RegExp pattern
+                result = $.trim pattern.exec value
+                evaluate result, value
+
+        validateTime: (value, pattern) ->
+            validate =
+                status: null
+                message: null
+                issuer: 'time'
+
+            evaluate = (result) ->                
+                if result
+                    validate.message = null
+                    validate.status = 'success'
+                else
+                    validate.status = 'danger'
+                    validate.message = 'please provide a valid time'
                 validate
 
             if value?

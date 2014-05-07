@@ -112,6 +112,11 @@ section
                 input.drm-valid-integer#year(type="text" name="year" data-min-value="1" data-min-length="4" data-max-length="4")
                 button#submit(type="submit") Select
 
+        .drm-calendar-view-nav
+            button.drm-calendar-view(data-view='month') Month
+            button.drm-calendar-view(data-view='week') Week
+            button.drm-calendar-view(data-view='day') Day
+
         .drm-calendar-nav
             button.drm-calendar-year-prev(data-dir='prev') Previous Year
             button.drm-calendar-month-prev(data-dir='prev') Previous Month
@@ -120,12 +125,6 @@ section
             button.drm-calendar-week-next(data-dir='next') Next Week
             button.drm-calendar-month-next(data-dir='next') Next Month
             button.drm-calendar-year-next(data-dir='next') Next Year
-
-        .drm-calendar-view-nav
-            button.drm-calendar-view(data-view='month') Month
-            button.drm-calendar-view(data-view='week') Week
-            button.drm-calendar-view(data-view='day') Day
-
 
     //- .drm-calendar-day-view
     //-     h1.drm-calendar-header April 24 2014

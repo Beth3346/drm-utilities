@@ -733,6 +733,7 @@
             month = $.inArray events.month, self.months
             eventDate = []
 
+            # add yearly events
             if events.day
                 $.each events.day, (key, value) ->
                     day = $.inArray value, self.days
@@ -777,6 +778,7 @@
             currentYear = calendarInner.data 'year'
             weeks = if self.view is 'month' then calendarInner.find('tbody').find "tr.drm-week" else calendarInner.find "tbody.drm-week"
             eventDate = []
+
             # events that occur every 2 weeks
             if events.day
                 weekInfo = self.getDatesInWeek currentMonth, events.eventDate, currentYear
@@ -843,6 +845,7 @@
             currentYear = calendarInner.data 'year'
             month = $.inArray events.month, self.months
             eventDays = []
+
             # add yearly events
             if events.recurrance is 'yearly' and currentMonth is month
                 self.addYearlyEvents events, eventDays
@@ -1190,8 +1193,6 @@
         createDateView: (currentMonth, currentDate, currentYear) =>
             self = @
             self.calendarInnerClass = "drm-calendar-#{self.view}-view"
-
-            console.log "#{currentMonth} #{currentDate}, #{currentYear}"
 
             calendar = $ '<div></div>',
                 class: self.calendarInnerClass
