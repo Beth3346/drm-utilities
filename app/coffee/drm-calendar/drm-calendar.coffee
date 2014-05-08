@@ -572,8 +572,15 @@
             calendarInner = @calendar.find "div.#{@calendarInnerClass}"
             if @view is 'month'
                 calendarItem = calendarInner.find "td[data-date=#{dates}]"
-            else if @view is 'week'
+            else if @view is 'week' and (events.allDayEvent is true or !events.time?)
                 calendarItem = calendarInner.find "td[data-date=#{dates}][data-hour='All Day Event']"
+            else if @view is 'week' and events.allDayEvent is false
+                # find hour td element
+                console.log events.time
+                re = new RegExp '[0:]','gi'
+                hour = events.time.replace(re, '')
+                console.log hour
+                calendarItem = calendarInner.find "td[data-date=#{dates}][data-hour=#{hour}]"
             eventList = calendarItem.find "ul.#{@eventClass}"
             length = eventList.length
 
@@ -1262,8 +1269,8 @@
         name: "One Time Event"
         month: "May"
         year: 2014
-        time: '1:00'
-        eventDate: 2
+        time: '1:00pm'
+        eventDate: 4
         type: "test"
         recurrance: "none"
         allDayEvent: false
