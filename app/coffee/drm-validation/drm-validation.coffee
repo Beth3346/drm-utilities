@@ -3,6 +3,7 @@
 ###############################################################################
 ###
 jshint -W100
+Note: All validation is for United States based dates, times, phone, zip etc.
 ###
 "use strict"
 
@@ -34,7 +35,7 @@ jshint -W100
                 # mm/dd/yyyy
                 monthDayYear: new RegExp '(0[1-9]|1[012])[- \/.](0[1-9]|[12][0-9]|3[01])[- \/.](19|20)\\d\\d'
                 # 00:00pm
-                time: new RegExp '(0[012]|1[0-9]):(1[012345]|1[0-9])(am|pm)', 'i'
+                time: new RegExp '^(?:[12][012]|[0]?[0-9]):[012345][0-9](?:am|pm)$', 'i'
                 # matched all major cc
                 creditCard: new RegExp '^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\\d{3})\\d{11})$'
                 cvv: new RegExp '^[0-9]{3,4}$'
