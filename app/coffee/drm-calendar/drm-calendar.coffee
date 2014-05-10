@@ -6,7 +6,7 @@
 
 ( ($) ->
     class window.DrmCalendar
-        constructor: (@calendarClass = 'drm-calendar', @daysPerWeek = 7, @view = 'week', @addHolidays = yes) ->
+        constructor: (@calendarClass = 'drm-calendar', @daysPerWeek = 7, @view = 'month', @addHolidays = yes) ->
             self = @
             self.body = $ 'body'
             self.events = []
@@ -28,6 +28,9 @@
                 muted: 'drm-cal-muted'
                 holiday: 'drm-cal-holiday'
                 today: 'drm-cal-today'
+                month: 'drm-month'
+                week: 'drm-week'
+                date: 'drm-date'
 
             self.months = [             
                 'January'
@@ -570,19 +573,22 @@
 
         addNewCalendarEvent: (events, dates) =>
             calendarInner = @calendar.find "div.#{@calendarInnerClass}"
+
             if @view is 'month'
                 calendarItem = calendarInner.find "td[data-date=#{dates}]"
-            else if @view is 'week' and (events.allDayEvent is true or !events.time?)
+            else if @view is 'week' and (events.allDayEvent or !events.time?)
                 calendarItem = calendarInner.find "td[data-date=#{dates}][data-hour='All Day Event']"
-            else if @view is 'week' and events.allDayEvent is false
+            else if @view is 'week' and !events.allDayEvent
                 # find hour td element
-                console.log events.time
-                re = new RegExp '[0:]','gi'
-                hour = events.time.replace(re, '')
-                console.log hour
+                re = new RegExp '^0?','gi'
+                re2 = new RegExp ':[0-9]{2}', 'gi'
+                hour = events.time.replace re, ''
+                hour = hour.replace re2, ''
                 calendarItem = calendarInner.find "td[data-date=#{dates}][data-hour=#{hour}]"
+
             eventList = calendarItem.find "ul.#{@eventClass}"
             length = eventList.length
+            eventHtml = if events.time? then "<a href='#' data-event='#{events.id}'>#{events.time}:<br>#{events.name}</a>" else "<a href='#' data-event='#{events.id}'>#{events.name}</a>"
 
             if length is 0
                 eventList = $ '<ul></ul>',
@@ -591,7 +597,7 @@
                 eventList.appendTo calendarItem
             
             item = $ '<li></li>',
-                html: "<a href='#' data-event='#{events.id}'>#{events.name}</a>"
+                html: eventHtml
             
             item.appendTo eventList
 
@@ -1024,7 +1030,7 @@
                 weekdays += "<th>#{value}</th>"
             weekdays += '</tr></thead>'
 
-            weeks = "<tbody class='drm-month'>"
+            weeks = "<tbody class='#{self.classes.month}'>"
             i = 1
             currentDate = 1
             l = 1
@@ -1033,7 +1039,7 @@
 
             while i <= numberWeeks
                 j = 1
-                weeks += "<tr class='drm-week'>"
+                weeks += "<tr class='#{self.classes.week}'>"
                 # if we are in week 1 we need to shift to the correct day of the week
                 if i is 1 and firstDay isnt 0
                     # add cells for the previous month until we get to the first day
@@ -1044,7 +1050,7 @@
                         j += 1
                     # start adding cells for the current month
                     while j <= self.daysPerWeek
-                        weeks += "<td class='drm-date' data-month='#{currentMonth}' data-date='#{currentDate}' data-year='#{currentYear}' data-day='#{j - 1}'>#{currentDate}</td>"
+                        weeks += "<td class='#{self.classes.date}' data-month='#{currentMonth}' data-date='#{currentDate}' data-year='#{currentYear}' data-day='#{j - 1}'>#{currentDate}</td>"
                         j += 1
                         currentDate += 1
                 # if we are in the last week of the month we need to add blank cells for next month
@@ -1052,7 +1058,7 @@
                     while j <= self.daysPerWeek
                         # finish adding cells for the current month
                         if currentDate <= numberDays
-                            weeks += "<td class='drm-date' data-month='#{currentMonth}' data-date='#{currentDate}' data-year='#{currentYear}' data-day='#{j - 1}'>#{currentDate}</td>"
+                            weeks += "<td class='#{self.classes.date}' data-month='#{currentMonth}' data-date='#{currentDate}' data-year='#{currentYear}' data-day='#{j - 1}'>#{currentDate}</td>"
                         # start adding cells for next month
                         else
                             weeks += "<td class='#{self.classes.muted}' data-day='#{j}'>#{nextDates}</td>"
@@ -1062,7 +1068,7 @@
                 else
                     # if we are in the middle of the month add cells for the current month
                     while j <= self.daysPerWeek
-                        weeks += "<td class='drm-date' data-month='#{currentMonth}' data-date='#{currentDate}' data-year='#{currentYear}' data-day='#{j - 1}'>#{currentDate}</td>"
+                        weeks += "<td class='#{self.classes.date}' data-month='#{currentMonth}' data-date='#{currentDate}' data-year='#{currentYear}' data-day='#{j - 1}'>#{currentDate}</td>"
                         j += 1
                         currentDate += 1
                 weeks += '</tr>'
@@ -1141,28 +1147,28 @@
                         dates.month = nextMonth
                 dates
 
-            weekdays = "<table><thead><tr>"
-            weekdays += "<th></th>"
+            weekdaysHtml = "<thead><tr><th></th>"
             $.each self.days, (key, value) ->
                 dates = getDates datesInWeek, key
-                weekdays += "<th>#{value}<br>#{self.months[dates.month]} #{dates.date}</th>"
-            weekdays += '</tr></thead>'
+                weekdaysHtml += "<th>#{value}<br>#{self.months[dates.month]} #{dates.date}</th>"
+            weekdaysHtml += '</tr></thead>'
 
-            week = "<tbody class='drm-week #{weekClass}' data-week='#{weekNumber}'>"
-
+            weekHtml = "<tbody class='#{self.classes.week} #{weekClass}' data-week='#{weekNumber}'>"
             $.each self.hours, (key, value) ->
                 hour = value.name
-                week += '<tr>'
-                week += "<td><span class='hour'>#{hour}</span></td>"
+                weekHtml += "<tr><td><span class='hour'>#{hour}</span></td>"
                 $.each self.days, (key, value) ->
                     dates = getDates datesInWeek, key
-                    week += "<td class='drm-date' data-month='#{dates.month}' data-date='#{dates.date}' data-year='#{currentYear}' data-day='#{key}' data-hour='#{hour}'></td>"
-                week += '</tr>'
-            week += '</tbody></table>'
+                    weekHtml += "<td class='#{self.classes.date}' data-month='#{dates.month}' data-date='#{dates.date}' data-year='#{currentYear}' data-day='#{key}' data-hour='#{hour}'></td>"
+                weekHtml += '</tr>'
+            weekHtml += '</tbody>'
+
+            weekView = $ '<table></table>',
+                html: weekdaysHtml + weekHtml
 
             calendar = $ '<div></div>',
                 class: self.calendarInnerClass
-                html: weekdays + week
+                html: weekView
                 'data-month': currentMonth
                 'data-year': currentYear
 
@@ -1270,6 +1276,26 @@
         month: "May"
         year: 2014
         time: '1:00pm'
+        eventDate: 4
+        type: "test"
+        recurrance: "none"
+        allDayEvent: false
+        note: "do this once"
+    drmCalendar.createEvent
+        name: "Later That Day"
+        month: "May"
+        year: 2014
+        time: '1:30pm'
+        eventDate: 4
+        type: "test"
+        recurrance: "none"
+        allDayEvent: false
+        note: "do this once"
+    drmCalendar.createEvent
+        name: "Another One Time Event"
+        month: "May"
+        year: 2014
+        time: '2:30pm'
         eventDate: 4
         type: "test"
         recurrance: "none"
