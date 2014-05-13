@@ -1199,11 +1199,17 @@
             self = @
             self.calendarInnerClass = "drm-calendar-#{self.view}-view"
 
+            dayListHtml = "<ul class='drm-day-event-list'>"
+            $.each self.hours, (key, value) ->
+                hour = value.name
+                dayListHtml += "<li><span class='hour'>#{hour}</span></li>"
+            dayListHtml += '</ul>'
+
             calendar = $ '<div></div>',
                 class: self.calendarInnerClass
-                text: 'Day View'
                 'data-month': currentMonth
                 'data-year': currentYear
+                html: dayListHtml
 
             heading = $ '<h1></h1>',
                 class: 'drm-calendar-header'
