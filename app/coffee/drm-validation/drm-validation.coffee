@@ -33,7 +33,7 @@ Note: All validation is for United States based dates, times, phone, zip etc.
                 alphaNumUnderscore: new RegExp '^[a-z\\d_]*$','gi'
                 noTags: new RegExp '<[a-z]+.*>.*<\/[a-z]+>','i'
                 # mm/dd/yyyy
-                monthDayYear: new RegExp '(0[1-9]|1[012])[- \/.](0[1-9]|[12][0-9]|3[01])[- \/.](19|20)\\d\\d'
+                monthDayYear: new RegExp '^(?:[0]?[1-9]|[1][012]|[1-9])[-\/.](?:[0]?[1-9]|[12][0-9]|[3][01])[-\/.][0-9]{4}$'
                 # 00:00pm
                 time: new RegExp '^(?:[12][012]|[0]?[0-9]):[012345][0-9](?:am|pm)$', 'i'
                 # matched all major cc

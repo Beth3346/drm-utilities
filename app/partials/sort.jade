@@ -6,9 +6,9 @@ section
     h2 Live Demo
 
     .button-group
-        button.drm-sort-asc Ascending
-        button.drm-sort-dsc Descending
-    ul.drm-unstyled-list
+        button.drm-sort-list(data-sort="ascending" data-list="numbers") Ascending
+        button.drm-sort-list(data-sort="descending" data-list="numbers") Descending
+    ul.drm-unstyled-list.drm-sortable#numbers
         li 1
         li 2
         li 3
@@ -17,32 +17,44 @@ section
         li 6
 
     .button-group
-        button.drm-sort-asc Ascending
-        button.drm-sort-dsc Descending
-    ul.drm-unstyled-list
+        button.drm-sort-list(data-sort="ascending" data-list="decimals") Ascending
+        button.drm-sort-list(data-sort="descending" data-list="decimals") Descending
+    ul.drm-unstyled-list.drm-sortable#decimals
         li 3.64
         li 7.293
         li 2.472
         li 3.67
 
     .button-group
-        button.drm-sort-asc Ascending
-        button.drm-sort-dsc Descending
-    ul.drm-unstyled-list
+        button.drm-sort-list(data-sort="ascending" data-list="animals") Ascending
+        button.drm-sort-list(data-sort="descending" data-list="animals") Descending
+    ul.drm-unstyled-list.drm-sortable#animals
         li Cat
         li Dog
         li Bird
         li Rabbit
+        li Guinea Pig
         li Fish
+        li Snake
 
     .button-group
-        button.drm-sort-asc Ascending
-        button.drm-sort-dsc Descending
-    ul.drm-unstyled-list
+        button.drm-sort-list(data-sort="ascending" data-list="history") Ascending
+        button.drm-sort-list(data-sort="descending" data-list="history") Descending
+    ul.drm-unstyled-list.drm-sortable#history
         li 3/7/1945
-        li 7/3/1776
+        li 7/4/1776
         li 7/14/1789
         li 6/28/1914
         li 11/7/1917
+
+    .button-group
+        button.drm-sort-list(data-sort="ascending" data-list="hours") Ascending
+        button.drm-sort-list(data-sort="descending" data-list="hours") Descending
+    ul.drm-unstyled-list.drm-sortable#hours
+        li 3:00pm
+        li 3:00am
+        li 6:00pm
+        li 9:45am
+        li 11:59pm
 
     h2 Usage
