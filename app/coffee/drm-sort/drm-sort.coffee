@@ -10,14 +10,15 @@
             self = @
 
             $('.drm-sort-list').on 'click', ->
-                values = self.getValues.call @
+                that = $ @
+                listId = that.data 'list'
+                list = $ "ul##{listId}"
+                values = self.getValues.call @, list
                 direction = $(@).data 'sort'
-                self.sortValues values, direction
+                self.renderSort values, direction, list
 
-        getValues: ->
+        getValues: (list) ->
             that = $ @
-            listId = that.data 'list'
-            list = $ "ul##{listId}"
             listItems = list.find 'li'
             values = []
 
@@ -101,29 +102,26 @@
                         0
 
                 values = if direction is 'ascending' then values.sort _sortAsc else values.sort _sortDesc
-                console.log values
 
             else if type is 'integer'
 
                 _sortAsc = (a, b) ->
-                    parseInt a, 10 - parseInt b, 10
+                    parseInt(a, 10) - parseInt(b, 10)
 
                 _sortDesc = (a, b) ->
-                    parseInt b, 10 - parseInt a, 10
+                    parseInt(b, 10) - parseInt(a, 10)
 
                 values = if direction is 'ascending' then values.sort _sortAsc else values.sort _sortDesc
-                console.log values
 
             else if type is 'number'
 
                 _sortAsc = (a, b) ->
-                    parseFloat a - parseFloat b
+                    parseFloat(a) - parseFloat(b)
 
                 _sortDesc = (a, b) ->
-                    parseFloat b - parseFloat a
+                    parseFloat(b) - parseFloat(a)
 
                 values = if direction is 'ascending' then values.sort _sortAsc else values.sort _sortDesc
-                console.log values
 
             else if type is 'date'
 
@@ -138,7 +136,6 @@
                     b - a
 
                 values = if direction is 'ascending' then values.sort _sortAsc else values.sort _sortDesc
-                console.log values
 
             else if type is 'time'
                 _parseTime = (time) ->
@@ -160,21 +157,25 @@
                         time24 = "#{hour + 12}:#{minutes}"
 
                 _sortAsc = (a, b) ->
-                    a = _parseTime a
-                    b = _parseTime b
-                    a = new Date "04-22-2014 #{a}"
-                    b = new Date "04-22-2014 #{b}"
-                    a - b
+                    a = _parseTime(a)
+                    b = _parseTime(b)
+                    new Date("04-22-2014 #{a}") - new Date("04-22-2014 #{b}")
 
                 _sortDesc = (a, b) ->
-                    a = _parseTime a
-                    b = _parseTime b
-                    a = new Date "04-22-2014 #{a}"
-                    b = new Date "04-22-2014 #{b}"
-                    b - a
+                    a = _parseTime(a)
+                    b = _parseTime(b)
+                    new Date("04-22-2014 #{b}") - new Date("04-22-2014 #{a}")
 
                 values = if direction is 'ascending' then values.sort _sortAsc else values.sort _sortDesc
-                console.log values
+
+        renderSort: (values, direction, list) =>
+            values = @sortValues values, direction
+            listHtml = ''
+
+            $.each values, (key, value) ->
+                listHtml += "<li>#{value}</li>"
+
+            list.html listHtml
 
     new DrmSort()
 
