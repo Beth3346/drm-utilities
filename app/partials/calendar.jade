@@ -7,7 +7,7 @@ section
 
     .drm-calendar
         button.drm-show-event-form.button-solid-radius(type="button") Add New Event
-        form.drm-calendar-new-event#drm-calendar-new-event(action="" role="form")
+        form.drm-calendar-new-event#drm-calendar-new-event(method="Get" action="" role="form")
             label(for="event_name") Event Name:
             input#event-name(type="text" name="event_name" required data-min-length="3" data-max-length="50")
             h3.drm-bold Event Recurrance:
@@ -91,7 +91,7 @@ section
 
             button.addEvent#submit(type="submit") Add Event
 
-        form.drm-calendar-select#drm-calendar-select(action="" role="form")
+        form.drm-calendar-select#drm-calendar-select(method="Get" action="" role="form")
             .drm-inline-control-group 
                 label(for="month") Month:
                 select#month(name="month")

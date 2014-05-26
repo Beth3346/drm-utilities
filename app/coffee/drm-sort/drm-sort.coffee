@@ -80,7 +80,6 @@
                 values = null
 
             else if type is 'date'
-
                 _sortAsc = (a, b) ->
                     a = new Date self.patterns.monthDayYear.exec(a)
                     b = new Date self.patterns.monthDayYear.exec(b)
@@ -94,7 +93,6 @@
                 values = if direction is 'ascending' then values.sort _sortAsc else values.sort _sortDesc        
 
             else if type is 'time'
-
                 _parseTime = (time) ->
                     hour = parseInt(/^(\d+)/.exec(time)[1], 10)
                     minutes = /:(\d+)/.exec(time)[1]
@@ -126,7 +124,6 @@
                 values = if direction is 'ascending' then values.sort _sortAsc else values.sort _sortDesc
 
             else if type is 'alpha'
-
                 _sortAsc = (a, b) ->
                     a = a.toLowerCase()
                     b = b.toLowerCase()
@@ -150,7 +147,6 @@
                 values = if direction is 'ascending' then values.sort _sortAsc else values.sort _sortDesc
 
             else if type is 'number'
-
                 _sortAsc = (a, b) ->
                     parseFloat(a) - parseFloat(b)
 

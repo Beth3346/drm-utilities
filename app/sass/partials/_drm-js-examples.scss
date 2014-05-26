@@ -213,3 +213,7 @@ span.drm-has-tooltip {
 .drm-tooltip-bottom {
     @include drm-tooltip(bottom, $dark-grey, white, 100px);
 }
+
+.drm-sortable-table {
+    @include drm-table(white, $dark-grey, $link-color, $light-grey, $lightest-grey);
+}

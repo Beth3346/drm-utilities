@@ -16,11 +16,61 @@ thead {
     font-weight: bold;
 }
 
-@mixin drm-table($padding, $bk-color, $color, $border-color, $stripes) {
+@mixin drm-table($bk-color: white, $color: $dark-grey, $hover-bk: $link-color, $border-color: 'none', $stripes: 'none') {
     background-color: $bk-color;
     color: $color;
+    width: 100%;
 
-    @if $border-color {
-        border: 1px solid $border-color;
-    }   
+    tbody tr {
+        @if $stripes != 'none' {
+            &:nth-child(even) {
+                background-color: $stripes;                
+            }
+        }
+
+        &:hover {
+            background-color: $hover-bk;
+            color: white;
+        }
+    }
+
+    th, td {
+        padding: 5px 10px 5px 10px;
+
+        @if $border-color != 'none' {
+            border: 1px solid $border-color;
+        }
+    }
+
+    th {
+        background-color: $hover-bk;
+        color: white;
+        @include drm-em-font(16);
+    }
+
+    form {
+        @extend %drm-reset-box;
+    }
+
+    input {
+        display: block;
+        width: 90%;
+        margin: 5px auto 5px auto;
+        padding: 5px 10px 5px 10px;
+        border-radius: 5px;
+        box-sizing: border-box;
+        border: 1px solid darken($hover-bk, 10%);
+        background-color: $lightest-grey;
+        transition: background .5s ease-out;
+
+        &:focus {
+            outline: none;
+            background-color: white;
+            transition: background .5s ease-in;
+        }
+    }
+
+    td {
+        @include drm-em-font(14);
+    }
 }
