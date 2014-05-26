@@ -2,50 +2,43 @@
     Tables
 -----------------------------------------------------------------------------*/
 
-table { 
-    border-spacing: 0;
-    border-collapse: collapse;
-}
-
-td {
-    text-align: left;
-    font-weight: normal;
-}
-
-thead {
-    font-weight: bold;
-}
-
-@mixin drm-table($bk-color: white, $color: $dark-grey, $hover-bk: $link-color, $border-color: 'none', $stripes: 'none') {
+@mixin drm-table-base($bk-color: white, $color: $dark-grey) {
     background-color: $bk-color;
     color: $color;
-    width: 100%;
+    border-spacing: 0;
+    text-align: left;
+    margin: 10px auto 10px auto;
 
-    tbody tr {
-        @if $stripes != 'none' {
-            &:nth-child(even) {
-                background-color: $stripes;                
-            }
-        }
+    @include drm-breakpoint(trenta) {
+        width: 100%;
+    }
 
-        &:hover {
-            background-color: $hover-bk;
-            color: white;
-        }
+    @include drm-breakpoint(venti) {
+        width: 90%;
+    }
+
+    @include drm-breakpoint(grande) {
+        width: 600px;
+        overflow-x: scroll;
+    }
+
+    @include drm-breakpoint(tall) {
+        width: 400px;
     }
 
     th, td {
         padding: 5px 10px 5px 10px;
-
-        @if $border-color != 'none' {
-            border: 1px solid $border-color;
-        }
     }
 
     th {
-        background-color: $hover-bk;
-        color: white;
+        font-weight: bold;
+        color: lighten($color, 20%);
         @include drm-em-font(16);
+    }
+
+    td {
+        font-weight: normal;
+        @include drm-em-font(14);
     }
 
     form {
@@ -59,7 +52,7 @@ thead {
         padding: 5px 10px 5px 10px;
         border-radius: 5px;
         box-sizing: border-box;
-        border: 1px solid darken($hover-bk, 10%);
+        border: 1px solid darken($lightest-grey, 10%);
         background-color: $lightest-grey;
         transition: background .5s ease-out;
 
@@ -69,8 +62,89 @@ thead {
             transition: background .5s ease-in;
         }
     }
+}
+
+@mixin drm-table($bk-color: white, $color: $dark-grey, $hover-bk: $link-color, $border-color: 'none', $stripes: 'none') {
+    border-collapse: collapse;
+    @include drm-table-base($bk-color, $color);
+
+    tbody tr {
+        @if $stripes != 'none' {
+            &:nth-child(even) {
+                background-color: $stripes;
+            }
+        }
+
+        &:hover {
+            background-color: $hover-bk;
+            color: white;
+        }
+    }
 
     td {
-        @include drm-em-font(14);
+        @if $border-color != 'none' {
+            border: 1px solid $border-color;
+        }
+    }
+}
+
+@mixin drm-table-rounded($bk-color: white, $color: $dark-grey, $hover-bk: $link-color, $border-color: 'none', $stripes: 'none') {
+    border-collapse: separate;
+    @include drm-table-base($bk-color, $color);
+
+    tbody {
+        background-color: $bk-color;
+
+        tr {
+            @if $stripes != 'none' {
+                &:nth-child(even) {
+                    background-color: $stripes;
+                }
+            }
+
+            &:hover {
+                background-color: $hover-bk;
+                color: white;
+            }
+
+            &:first-child {
+                td:first-child {
+                    border-radius: 5px 0 0 0;
+                }
+
+                td:last-child {
+                    border-radius: 0 5px 0 0;
+                }   
+            }
+
+            &:last-child {
+                td {
+                    @if $border-color != 'none' {
+                        border-bottom: 1px solid $border-color;
+                    }
+
+                    &:first-child {
+                        border-radius: 0 0 0 5px;
+                    }
+
+                    &:last-child {
+                        border-radius: 0 0 5px 0;
+                    }
+                }
+            }
+        }
+    }
+
+    td {       
+        @if $border-color != 'none' {
+            border-top: 1px solid $border-color;
+            border-left: 1px solid $border-color;
+        }
+
+        @if $border-color != 'none' {
+            &:last-child {
+                border-right: 1px solid $border-color;
+            }
+        }
     }
 }

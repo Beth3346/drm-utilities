@@ -215,5 +215,5 @@ span.drm-has-tooltip {
 }
 
 .drm-sortable-table {
-    @include drm-table(white, $dark-grey, $link-color, $light-grey, $lightest-grey);
+    @include drm-table-rounded(white, $dark-grey, $link-color, $light-grey, $lightest-grey);
 }

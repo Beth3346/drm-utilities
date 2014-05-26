@@ -1,0 +1,15 @@
+/*-----------------------------------------------------------------------------
+    Tables Examples
+-----------------------------------------------------------------------------*/
+
+.drm-table {
+    @include drm-table-base();
+}
+
+.drm-table-bordered {    
+    @include drm-table(white, $dark-grey, $link-color, $light-grey, $lightest-grey);
+}
+
+.drm-table-rounded {    
+    @include drm-table-rounded(white, $dark-grey, $link-color, $light-grey, $lightest-grey);
+}
