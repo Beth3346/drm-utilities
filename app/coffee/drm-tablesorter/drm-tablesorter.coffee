@@ -24,14 +24,15 @@
                 time: new RegExp '^(?:[12][012]|[0]?[0-9]):[012345][0-9](?:am|pm)', 'i'
 
             self.table.on 'click', ".#{@buttonClass}", ->
-                values = self.getData $(@).parent().index()
+                that = $ @
+                columnNum = that.closest('th').index()
+                values = self.getData columnNum
                 self.addActiveClass.call @
-                self.renderTable values, $(@).data('dir')
+                self.renderTable values, that.data('dir'), columnNum
 
         addActiveClass: ->
             that = $ @
-            container = that.parent()
-            row = container.parent()
+            row = that.closest 'tr'
             row.find('.drm-sortable-table-button.active').removeClass 'active'
             that.addClass 'active'
 
@@ -41,7 +42,7 @@
 
             $.each rows, (key, value) ->
                 text = $.trim $(value).find('td').eq(columnNum).text()
-                if text.length > 0 then values.push $(value).find('td').eq(columnNum).text()
+                if text.length > 0 then values.push text
 
             values
 
@@ -74,25 +75,26 @@
                     type = null
             type
 
-        sortValues: (values, direction) =>
+        sortRows: (values, direction, columnNum) =>
             self = @
             type = self.getDataType values
+            rows = self.table.find 'tbody tr'
 
             if !type
                 values = null
 
             else if type is 'date'
                 _sortAsc = (a, b) ->
-                    a = new Date self.patterns.monthDayYear.exec(a)
-                    b = new Date self.patterns.monthDayYear.exec(b)
+                    a = new Date self.patterns.monthDayYear.exec($.trim($(a).find('td').eq(columnNum).text()))
+                    b = new Date self.patterns.monthDayYear.exec($.trim($(b).find('td').eq(columnNum).text()))
                     a - b
 
                 _sortDesc = (a, b) ->
-                    a = new Date self.patterns.monthDayYear.exec(a)
-                    b = new Date self.patterns.monthDayYear.exec(b)
+                    a = new Date self.patterns.monthDayYear.exec($.trim($(a).find('td').eq(columnNum).text()))
+                    b = new Date self.patterns.monthDayYear.exec($.trim($(b).find('td').eq(columnNum).text()))
                     b - a
 
-                values = if direction is 'ascending' then values.sort _sortAsc else values.sort _sortDesc        
+                rows = if direction is 'ascending' then rows.sort _sortAsc else rows.sort _sortDesc
 
             else if type is 'time'
                 _parseTime = (time) ->
@@ -114,21 +116,21 @@
                         time24 = "#{hour + 12}:#{minutes}"
 
                 _sortAsc = (a, b) ->
-                    a = _parseTime self.patterns.time.exec(a)
-                    b = _parseTime self.patterns.time.exec(b)
+                    a = _parseTime self.patterns.time.exec($.trim($(a).find('td').eq(columnNum).text()))
+                    b = _parseTime self.patterns.time.exec($.trim($(b).find('td').eq(columnNum).text()))
                     new Date("04-22-2014 #{a}") - new Date("04-22-2014 #{b}")
 
                 _sortDesc = (a, b) ->
-                    a = _parseTime self.patterns.time.exec(a)
-                    b = _parseTime self.patterns.time.exec(b)
+                    a = _parseTime self.patterns.time.exec($.trim($(a).find('td').eq(columnNum).text()))
+                    b = _parseTime self.patterns.time.exec($.trim($(b).find('td').eq(columnNum).text()))
                     new Date("04-22-2014 #{b}") - new Date("04-22-2014 #{a}")
 
-                values = if direction is 'ascending' then values.sort _sortAsc else values.sort _sortDesc
+                rows = if direction is 'ascending' then rows.sort _sortAsc else rows.sort _sortDesc
 
             else if type is 'alpha'
                 _sortAsc = (a, b) ->
-                    a = a.toLowerCase()
-                    b = b.toLowerCase()
+                    a = $.trim($(a).find('td').eq(columnNum).text()).toLowerCase()
+                    b = $.trim($(b).find('td').eq(columnNum).text()).toLowerCase()
                     if a < b
                         -1
                     else if a > b
@@ -137,8 +139,8 @@
                         0
 
                 _sortDesc = (a, b) ->
-                    a = a.toLowerCase()
-                    b = b.toLowerCase()
+                    a = $.trim($(a).find('td').eq(columnNum).text()).toLowerCase()
+                    b = $.trim($(b).find('td').eq(columnNum).text()).toLowerCase()
                     if a < b
                         1
                     else if a > b
@@ -146,21 +148,23 @@
                     else if a is b
                         0
 
-                values = if direction is 'ascending' then values.sort _sortAsc else values.sort _sortDesc
+                rows = if direction is 'ascending' then rows.sort _sortAsc else rows.sort _sortDesc
 
             else if type is 'number'
                 _sortAsc = (a, b) ->
-                    parseFloat(a) - parseFloat(b)
+                    parseFloat($.trim($(a).find('td').eq(columnNum).text())) - parseFloat($.trim($(b).find('td').eq(columnNum).text()))
 
                 _sortDesc = (a, b) ->
-                    parseFloat(b) - parseFloat(a)
+                    parseFloat($.trim($(b).find('td').eq(columnNum).text())) - parseFloat($.trim($(a).find('td').eq(columnNum).text()))
 
-                values = if direction is 'ascending' then values.sort _sortAsc else values.sort _sortDesc
+                rows = if direction is 'ascending' then rows.sort _sortAsc else rows.sort _sortDesc
     
-        renderTable: (values, direction) =>
-            sortedValues = @.sortValues values, direction
-            rows = @table.find 'tr'
-            console.log sortedValues
+        renderTable: (values, direction, columnNum) =>
+            sortedRows = @sortRows values, direction, columnNum
+            tableBody = @table.find('tbody').empty()
+
+            $.each sortedRows, (key, value) ->
+                tableBody.append value
 
     new DrmTableSorter()
 

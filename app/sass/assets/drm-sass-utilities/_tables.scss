@@ -13,7 +13,7 @@
     }
 
     @include drm-breakpoint(venti) {
-        width: 90%;
+        width: 100%;
     }
 
     @include drm-breakpoint(grande) {
