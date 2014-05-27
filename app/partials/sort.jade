@@ -50,6 +50,16 @@ section
         li 12.3252 gallons
 
     .button-group
+        button.drm-sort-list(data-sort="ascending" data-list="movies") &#9650;
+        button.drm-sort-list(data-sort="descending" data-list="movies") &#9660;
+    ul.drm-unstyled-list.drm-sortable#movies
+        li Casablanca
+        li Star Wars
+        li Clueless
+        li A Beautiful Mind
+        li The Graduate
+
+    .button-group
         button.drm-sort-list(data-sort="ascending" data-list="animals") &#9650;
         button.drm-sort-list(data-sort="descending" data-list="animals") &#9660;
     ul.drm-unstyled-list.drm-sortable#animals

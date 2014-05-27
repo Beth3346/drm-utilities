@@ -9,14 +9,9 @@
         constructor: (@lists = $('.drm-sortable')) ->
             self = @
 
-            self.ignore = [
-                'the'
-                'a'
-            ]
-
             self.patterns =
-                number: new RegExp "^(?:\\-?\\d+|\\d*)(?:\\.?\\d+|\\d)$"
-                alpha: new RegExp '[a-z ,.\\-]*','i'
+                number: new RegExp "^(?:\\-?\\d+|\\d*)(?:\\.?\\d+|\\d)"
+                alpha: new RegExp '^[a-z ,.\\-]*','i'
                 # mm/dd/yyyy
                 monthDayYear: new RegExp '^(?:[0]?[1-9]|[1][012]|[1-9])[-\/.](?:[0]?[1-9]|[12][0-9]|[3][01])(?:[-\/.][0-9]{4})'
                 # 00:00pm
@@ -42,7 +37,7 @@
             values
 
         getDataType: (values) =>
-            type = null
+            types = []
             self = @
 
             _isDate = (value) ->
@@ -69,7 +64,9 @@
                 else
                     type = null
 
-            type
+                types.push type
+
+            type = if $.inArray 'alpha', types isnt -1 then 'alpha' else types[0]
 
         sortValues: (values, direction) =>
             self = @
@@ -123,9 +120,16 @@
                 values = if direction is 'ascending' then values.sort _sortAsc else values.sort _sortDesc
 
             else if type is 'alpha'
+                cleanAlpha = (value) ->
+                    value = value.replace(/^the /i, '')
+                    value = value.replace(/^a /i, '')
+
+                    value
+
                 _sortAsc = (a, b) ->
-                    a = a.toLowerCase()
-                    b = b.toLowerCase()
+                    a = cleanAlpha(a).toLowerCase()
+                    b = cleanAlpha(b).toLowerCase()
+
                     if a < b
                         -1
                     else if a > b
@@ -134,8 +138,9 @@
                         0
 
                 _sortDesc = (a, b) ->
-                    a = a.toLowerCase()
-                    b = b.toLowerCase()
+                    a = cleanAlpha(a).toLowerCase()
+                    b = cleanAlpha(b).toLowerCase()
+
                     if a < b
                         1
                     else if a > b

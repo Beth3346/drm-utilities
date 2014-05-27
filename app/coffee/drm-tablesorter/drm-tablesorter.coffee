@@ -9,15 +9,10 @@
             self = @
             self.table = $ ".#{@tableClass}"
             self.buttonClass = 'drm-sortable-table-button'
-            
-            self.ignore = [
-                'the'
-                'a'
-            ]
 
             self.patterns =
-                number: new RegExp "^(?:\\-?\\d+|\\d*)(?:\\.?\\d+|\\d)$"
-                alpha: new RegExp '[a-z ,.\\-]*','i'
+                number: new RegExp "^(?:\\-?\\d+|\\d*)(?:\\.?\\d+|\\d)"
+                alpha: new RegExp '^[a-z ,.\\-]*','i'
                 # mm/dd/yyyy
                 monthDayYear: new RegExp '^(?:[0]?[1-9]|[1][012]|[1-9])[-\/.](?:[0]?[1-9]|[12][0-9]|[3][01])(?:[-\/.][0-9]{4})'
                 # 00:00pm
@@ -26,9 +21,8 @@
             self.table.on 'click', ".#{@buttonClass}", ->
                 that = $ @
                 columnNum = that.closest('th').index()
-                values = self.getData columnNum
                 self.addActiveClass.call @
-                self.renderTable values, that.data('dir'), columnNum
+                self.renderTable that.data('dir'), columnNum
 
         addActiveClass: ->
             that = $ @
@@ -46,9 +40,10 @@
 
             values
 
-        getDataType: (values) =>
-            type = null
+        getDataType: (columnNum) =>
+            types = []
             self = @
+            values = self.getData columnNum
 
             _isDate = (value) ->
                 if @patterns.monthDayYear.test(value) then true else false
@@ -73,11 +68,14 @@
                     type = 'alpha'
                 else
                     type = null
-            type
 
-        sortRows: (values, direction, columnNum) =>
+                types.push type
+
+            type = if $.inArray 'alpha', types isnt -1 then 'alpha' else types[0]
+
+        sortRows: (direction, columnNum) =>
             self = @
-            type = self.getDataType values
+            type = self.getDataType columnNum
             rows = self.table.find 'tbody tr'
 
             if !type
@@ -128,9 +126,17 @@
                 rows = if direction is 'ascending' then rows.sort _sortAsc else rows.sort _sortDesc
 
             else if type is 'alpha'
+                cleanAlpha = (value) ->
+                    value = value.replace(/^the /i, '')
+                    value = value.replace(/^a /i, '')
+
+                    value
+
                 _sortAsc = (a, b) ->
-                    a = $.trim($(a).find('td').eq(columnNum).text()).toLowerCase()
-                    b = $.trim($(b).find('td').eq(columnNum).text()).toLowerCase()
+                    a = $.trim($(a).find('td').eq(columnNum).text())
+                    a = cleanAlpha(a).toLowerCase()
+                    b = $.trim($(b).find('td').eq(columnNum).text())
+                    b = cleanAlpha(b).toLowerCase()
                     if a < b
                         -1
                     else if a > b
@@ -139,8 +145,10 @@
                         0
 
                 _sortDesc = (a, b) ->
-                    a = $.trim($(a).find('td').eq(columnNum).text()).toLowerCase()
-                    b = $.trim($(b).find('td').eq(columnNum).text()).toLowerCase()
+                    a = $.trim($(a).find('td').eq(columnNum).text())
+                    a = cleanAlpha(a).toLowerCase()
+                    b = $.trim($(b).find('td').eq(columnNum).text())
+                    b = cleanAlpha(b).toLowerCase()
                     if a < b
                         1
                     else if a > b
@@ -159,8 +167,8 @@
 
                 rows = if direction is 'ascending' then rows.sort _sortAsc else rows.sort _sortDesc
     
-        renderTable: (values, direction, columnNum) =>
-            sortedRows = @sortRows values, direction, columnNum
+        renderTable: (direction, columnNum) =>
+            sortedRows = @sortRows direction, columnNum
             tableBody = @table.find('tbody').empty()
 
             $.each sortedRows, (key, value) ->
