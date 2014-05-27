@@ -13,3 +13,7 @@
 .drm-table-rounded {    
     @include drm-table-rounded(white, $dark-grey, $link-color, $light-grey, $lightest-grey);
 }
+
+.drm-table-dark {    
+    @include drm-table-rounded(#222, white, $link-color, #111, #333);
+}

@@ -8,16 +8,15 @@
     class window.DrmSort
         constructor: (@lists = $('.drm-sortable')) ->
             self = @
+
             self.ignore = [
                 'the'
                 'a'
             ]
 
             self.patterns =
-                # an integer can be negative or positive and can include one comma separator followed by exactly 3 numbers
-                integer: new RegExp "^\\-?\\d*"
-                number: new RegExp "^(?:\\-?\\d+|\\d*)(?:\\.?\\d+|\\d)"
-                alpha: new RegExp '^[a-z \\-]*','i'
+                number: new RegExp "^(?:\\-?\\d+|\\d*)(?:\\.?\\d+|\\d)$"
+                alpha: new RegExp '[a-z ,.\\-]*','i'
                 # mm/dd/yyyy
                 monthDayYear: new RegExp '^(?:[0]?[1-9]|[1][012]|[1-9])[-\/.](?:[0]?[1-9]|[12][0-9]|[3][01])(?:[-\/.][0-9]{4})'
                 # 00:00pm
