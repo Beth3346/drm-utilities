@@ -3,6 +3,13 @@
 ###############################################################################
 "use strict"
 
+# adds case insensitive contains to jQuery
+
+$.extend $.expr[":"], {
+    "containsNC": (elem, i, match, array) ->
+        (elem.textContent || elem.innerText || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0
+}
+
 ( ($) ->
     class window.DrmTableFilter
         constructor: (@tableClass = 'drm-searchable-table') ->
@@ -14,16 +21,16 @@
 
             self.table.on 'keyup', "input.#{@searchInput}", ->
                 that = $ @
-                input = $.trim(that.val())
+                input = $.trim(that.val()).toLowerCase()
                 columnNum = that.closest('th').index()
                 self.renderTable columnNum, input
 
         filterRows: (columnNum, input) =>
-            rows = if input.length is 0 then @fullRows else @fullRows.has "td:eq(#{columnNum}):contains(#{input})"
+            rows = if input.length is 0 then @fullRows else @fullRows.has "td:eq(#{columnNum}):containsNC(#{input})"
     
         renderTable: (columnNum, input) =>
-            filteredRows = @filterRows columnNum, input
             tableBody = @table.find('tbody').empty()
+            filteredRows = @filterRows columnNum, input
 
             $.each filteredRows, (key, value) ->
                 tableBody.append value
