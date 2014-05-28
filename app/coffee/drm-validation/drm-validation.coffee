@@ -254,10 +254,7 @@ Note: All validation is for United States based dates, times, phone, zip etc.
         getValue: ->
             value = $.trim $(@).val()
 
-            if value.length > 0
-                value
-            else
-                null
+            if value.length > 0 then value else null
 
         issueNotice: (validate, speed) ->
             that = $ @

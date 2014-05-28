@@ -5,25 +5,25 @@ section
 
     h2 Live Demo
     h3 Academy Award Best Picture Winners
-    table.drm-sortable-table#best-picture
+    table.drm-sortable-table.drm-searchable-table#best-picture
         thead
             tr
                 th Title
                     button.drm-sortable-table-button(data-dir="ascending") &#9650;
                     button.drm-sortable-table-button(data-dir="descending") &#9660;
-                    form(role="form" method="Get" action=""): input(type="text" placeholder="Filter Title")
+                    form(role="form" method="Get" action=""): input.drm-search-table(type="text" placeholder="Filter Title")
                 th Year
                     button.drm-sortable-table-button(data-dir="ascending") &#9650;
                     button.drm-sortable-table-button(data-dir="descending") &#9660;
-                    form(role="form" method="Get" action=""): input(type="text" placeholder="Filter Year")
+                    form(role="form" method="Get" action=""): input.drm-search-table(type="text" placeholder="Filter Year")
                 th Lead Actor
                     button.drm-sortable-table-button(data-dir="ascending") &#9650;
                     button.drm-sortable-table-button(data-dir="descending") &#9660;
-                    form(role="form" method="Get" action=""): input(type="text" placeholder="Filter Actor")
+                    form(role="form" method="Get" action=""): input.drm-search-table(type="text" placeholder="Filter Actor")
                 th Lead Actress
                     button.drm-sortable-table-button(data-dir="ascending") &#9650;
                     button.drm-sortable-table-button(data-dir="descending") &#9660;
-                    form(role="form" method="Get" action=""): input(type="text" placeholder="Filter Actress")
+                    form(role="form" method="Get" action=""): input.drm-search-table(type="text" placeholder="Filter Actress")
         tbody
             tr
                 td Wings

@@ -1,5 +1,5 @@
 ###############################################################################
-# Toggles hiding and showing content with an accordion efffect
+# Sort Tabular Data
 ###############################################################################
 "use strict"
 
@@ -127,16 +127,15 @@
 
             else if type is 'alpha'
                 cleanAlpha = (value) ->
-                    value = value.replace(/^the /i, '')
-                    value = value.replace(/^a /i, '')
-
-                    value
+                    # removes leading 'the' or 'a'
+                    value = value.replace /^the /i, ''
+                    value = value.replace /^a /i, ''
 
                 _sortAsc = (a, b) ->
-                    a = $.trim($(a).find('td').eq(columnNum).text())
-                    a = cleanAlpha(a).toLowerCase()
-                    b = $.trim($(b).find('td').eq(columnNum).text())
-                    b = cleanAlpha(b).toLowerCase()
+                    # use clean alpha to remove leading 'the' or 'a' then convert to lowercase for case insensitive sort
+                    a = cleanAlpha($.trim($(a).find('td').eq(columnNum).text())).toLowerCase()
+                    b = cleanAlpha($.trim($(b).find('td').eq(columnNum).text())).toLowerCase()
+
                     if a < b
                         -1
                     else if a > b
@@ -145,10 +144,10 @@
                         0
 
                 _sortDesc = (a, b) ->
-                    a = $.trim($(a).find('td').eq(columnNum).text())
-                    a = cleanAlpha(a).toLowerCase()
-                    b = $.trim($(b).find('td').eq(columnNum).text())
-                    b = cleanAlpha(b).toLowerCase()
+                    # use clean alpha to remove leading 'the' or 'a' then convert to lowercase for case insensitive sort
+                    a = cleanAlpha($.trim($(a).find('td').eq(columnNum).text())).toLowerCase()
+                    b = cleanAlpha($.trim($(b).find('td').eq(columnNum).text())).toLowerCase()
+
                     if a < b
                         1
                     else if a > b

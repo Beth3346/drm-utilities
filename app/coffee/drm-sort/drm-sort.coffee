@@ -121,12 +121,12 @@
 
             else if type is 'alpha'
                 cleanAlpha = (value) ->
-                    value = value.replace(/^the /i, '')
-                    value = value.replace(/^a /i, '')
-
-                    value
+                    # removes leading 'the' or 'a'
+                    value = value.replace /^the /i, ''
+                    value = value.replace /^a /i, ''
 
                 _sortAsc = (a, b) ->
+                    # use clean alpha to remove leading 'the' or 'a' then convert to lowercase for case insensitive sort
                     a = cleanAlpha(a).toLowerCase()
                     b = cleanAlpha(b).toLowerCase()
 
@@ -138,6 +138,7 @@
                         0
 
                 _sortDesc = (a, b) ->
+                    # use clean alpha to remove leading 'the' or 'a' then convert to lowercase for case insensitive sort
                     a = cleanAlpha(a).toLowerCase()
                     b = cleanAlpha(b).toLowerCase()
 
