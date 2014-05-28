@@ -19,18 +19,41 @@ $.extend $.expr[":"], {
             # cache full table
             self.fullRows = @table.find 'tbody tr'
 
-            self.table.on 'keyup', "input.#{@searchInput}", ->
-                that = $ @
-                input = $.trim(that.val()).toLowerCase()
-                columnNum = that.closest('th').index()
-                self.renderTable columnNum, input
+            self.table.on 'keyup', "input.#{@searchInput}", self.renderTable
 
-        filterRows: (columnNum, input) =>
-            rows = if input.length is 0 then @fullRows else @fullRows.has "td:eq(#{columnNum}):containsNC(#{input})"
+        filterRows: =>
+            self = @
+            # check other inputs
+            inputs = self.table.find('th').find ".#{self.searchInput}"
+            filterValues = []
+
+            $.each inputs, (key, value) ->
+                that = $ value
+                if $.trim(that.val()).length isnt 0 then filterValues.push value
+                filterValues
+
+            filterValuesLength = filterValues.length
+            
+            if filterValuesLength is 0
+                rows = self.fullRows
+            else
+                $.each filterValues, (key, value) ->
+                    that = $ value
+                    input = $.trim(that.val()).toLowerCase()
+                    columnNum = that.closest('th').index()
+
+                    if filterValuesLength is 1
+                        rows = self.fullRows.has "td:eq(#{columnNum}):containsNC(#{input})"
+                    else if key is 0
+                        rows = self.fullRows.has "td:eq(#{columnNum}):containsNC(#{input})"
+                    else
+                        rows = rows.has "td:eq(#{columnNum}):containsNC(#{input})"
+                    rows
+            rows
     
-        renderTable: (columnNum, input) =>
+        renderTable: =>
+            filteredRows = @filterRows()
             tableBody = @table.find('tbody').empty()
-            filteredRows = @filterRows columnNum, input
 
             $.each filteredRows, (key, value) ->
                 tableBody.append value
