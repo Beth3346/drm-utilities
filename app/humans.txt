@@ -11,6 +11,6 @@
 
 # TECHNOLOGY COLOPHON
 
-    HTML5, CSS3
+    HTML5, CSS3, Jade
     Normalize.css, jQuery, Modernizr
     Sass, Compass

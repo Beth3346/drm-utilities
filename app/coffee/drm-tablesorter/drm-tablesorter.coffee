@@ -71,7 +71,7 @@
 
                 types.push type
 
-            type = if $.inArray 'alpha', types isnt -1 then 'alpha' else types[0]
+            type = if $.inArray('alpha', types) isnt -1 then 'alpha' else types[0]
 
         sortRows: (direction, columnNum) =>
             self = @

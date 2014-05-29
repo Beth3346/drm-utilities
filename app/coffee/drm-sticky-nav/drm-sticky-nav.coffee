@@ -9,7 +9,6 @@
             self = @
             links = self.nav.find 'a[href^="#"]'
             hash = window.location.hash
-            content = self.content
             
             if hash
                 hashLink = self.nav.find "a[href='#{hash}']"
@@ -36,10 +35,13 @@
             navPositionLeft = @nav.position().left
             winHeight = $(window).height()
             navHeight = @nav.height()
+            contentHeight = @content.height()
 
-            if scroll > (top - 100) and navHeight < winHeight
+            if scroll > (top + contentHeight)
+                @nav.removeClass "sticky-#{position}"
+            else if scroll > (top - 100) and navHeight < winHeight
                 @nav.addClass "sticky-#{position}"
-                @positionRight(navPositionLeft)
+                @positionRight navPositionLeft
             else
                 @nav.removeClass "sticky-#{position}"
 
