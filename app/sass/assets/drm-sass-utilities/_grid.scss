@@ -51,6 +51,12 @@
             @include drm-em-font(16);
         }
 
+        h2 {
+            margin: 0;
+            padding: 0;
+            @include drm-em-font(14);            
+        }
+
         p {
             margin: 0;
             padding: 0;
