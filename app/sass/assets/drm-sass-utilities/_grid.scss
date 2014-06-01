@@ -15,7 +15,7 @@
     
     @include drm-clearfix;
 
-    li {
+    .drm-grid-item {
         @if $flex == true {
             margin: 10px .5% 10px .5%;
             width: (100% / $images-per-row) - 1;
@@ -35,15 +35,15 @@
         box-shadow: $lightest-grey 1px 1px 1px;
         position: relative;
         display: none;
-    }
 
-    img {
-        margin: 0;
-        width: 100%;
-        border-radius: 5px 5px 0 0;
+        img {
+            margin: 0;
+            width: 100%;
+            border-radius: 5px 5px 0 0;
 
-        @if $fixed-height != 'no' {
-            height: $fixed-height;
+            @if $fixed-height != 'no' {
+                height: $fixed-height;
+            }
         }
     }
 
@@ -76,6 +76,22 @@
             margin: 0;
             padding: 0;
             @include drm-em-font(14);
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            @include drm-clearfix;
+        }
+
+        li {
+            margin: 5px 0 5px 0;
+            padding: 2px 10px 2px 10px;
+            color: white;
+            background-color: $drm-blue;
+            border-radius: 3px;
+            list-style: none;
+            display: inline-block;
         }
     }
 }
