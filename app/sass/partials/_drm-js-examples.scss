@@ -219,5 +219,5 @@ span.drm-has-tooltip {
 }
 
 .drm-flexible-grid {
-    @include drm-flexible-grid();
+    @include drm-flexible-grid(4, true);
 }
