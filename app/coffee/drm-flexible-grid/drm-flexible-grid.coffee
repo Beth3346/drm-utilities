@@ -72,6 +72,28 @@ $.extend $.expr[":"], {
 
                 that.height(imageHeight).hide()
 
+        resizeGrid: (items) =>
+            self = @
+            tallestColumn = 0
+            columnHeights = []
+
+            i = 0
+            until i is self.imagesPerRow 
+                columnHeights.push 0
+                i = i + 1
+            
+            $.each items, (key, value) ->
+                that = $ value
+                columnNum = that.data 'column'
+                height = that.outerHeight true
+
+                columnHeights[columnNum] += height
+
+            $.each columnHeights, (key, value) ->
+                if value > tallestColumn then tallestColumn = value
+
+            self.grid.css 'height': tallestColumn + 40
+
         positionListItems: =>
             self = @
             items = self.grid.find '.drm-grid-item'
@@ -104,9 +126,9 @@ $.extend $.expr[":"], {
                         'left': 0
                         'position': 'relative'                    
 
-                that.fadeIn 1000
+                that.fadeIn 1000            
 
-            @grid.css 'height': (items.last().outerHeight(true) + items.last().position().top) + 500
+            self.resizeGrid items
 
         filterListItems: (filter) =>
             self = @
