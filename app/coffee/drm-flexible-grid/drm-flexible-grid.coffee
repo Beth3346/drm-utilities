@@ -18,7 +18,9 @@ $.extend $.expr[":"], {
             self.gridNav = $ '.drm-grid-nav'
             self.items = self.grid.find '.drm-grid-item'
 
-            $(window).load self.positionListItems
+            $(window).load ->
+                self.positionListItems()
+                self.addFilterButtons()
 
             if self.flex then $(window).resize self.positionListItems
 
@@ -31,8 +33,34 @@ $.extend $.expr[":"], {
                 $(@).find('.curtain').stop().fadeOut 'fast'
 
             self.gridNav.on 'click', 'button.drm-grid-filter', ->
-                filter = $(@).data('filter').toLowerCase()
+                that = $ @
+                filter = that.data('filter').toLowerCase()
                 self.filterListItems filter
+                that.siblings('button').removeClass 'active'
+                that.addClass 'active'
+
+        addFilterButtons: =>
+            self = @
+            tags = []
+            tagListItems = self.grid.find 'ul.caption-tags li'
+
+            capitalize = (str) ->
+                str.toLowerCase().replace /^.|\s\S/g, (a) ->
+                    a.toUpperCase()
+
+            $.each tagListItems, (key, value) ->
+                tag = $(value).text()
+                tags.push capitalize tag
+                tags = $.unique tags
+
+            $.each tags, (key, value) ->
+                tagButton = $ '<button></button>',
+                    class: 'drm-grid-filter'
+                    text: value
+                    'data-filter': value.toLowerCase()
+                tagButton.appendTo self.gridNav
+
+            self.gridNav.find('.drm-grid-filter').first().addClass 'active'
 
         resizeCurtain: =>
             curtain = @grid.find '.curtain'
