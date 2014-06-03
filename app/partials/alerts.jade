@@ -1,9 +1,7 @@
 section
-    h1 Dismissable Alerts
+    h1 Drm Alerts
 
     p Show or hide content on click with optional show all and hide all buttons.
-
-    h2 Live Demo
 
     .drm-alert-holder
 
@@ -24,8 +22,16 @@ section
         li Custom "custom-alert"
             p You can create custom alerts using the @mixin drm-context-box
 
-    pre.prettyprint.
+    pre.
         &lt;div class="info-alert drm-dismissable-alert"&gt;
         &lt;button class="close"&gt;x&lt;/button&gt;
         This is just an informative alert
         &lt;/div&gt;
+
+        drmAlert = new DrmDismissableAlert();
+        drmAlert.showAlert('info', 'This is just an informative alert', $('.drm-alert-holder'));
+        drmAlert.showAlert('danger', 'Danger Danger Danger!', $('.drm-alert-holder'));
+        drmAlert.showAlert('warning', 'This is just a gentle warning', $('.drm-alert-holder'));
+        drmAlert.showAlert('success', 'your request was successful', $('.drm-alert-holder'));
+        drmAlert.showAlert('muted', 'A muted alert that will probably be ignored', $('.drm-alert-holder'));
+        drmAlert.showAlert('custom', 'This is a custom alert', $('.drm-alert-holder'));
