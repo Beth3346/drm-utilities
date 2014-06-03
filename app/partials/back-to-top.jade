@@ -1,9 +1,8 @@
 section
-    h1 Back to Top
+    h1 Drm Back to Top
 
     p Back to top button click to scroll to the top of page
 
-    h2 Live Demo
     .drm-back-to-top-content
             h1 Section One
             p.
@@ -242,5 +241,18 @@ section
                 George: She's got a little Marissa Tomei thing goin' on. Jerry: Ah, too bad you've got a little George Costanza thing goin' on.
 
     h2 Usage
-    
+
     a(href="https://github.com/dynamicresponsemedia/drm-back-to-top" target="_blank") Visit GitHub Repo
+
+    p Just add compiled drm-back-to-top.coffee to your pages and you're ready to go.
+
+    h3.drm-bold Initialize new instance of DrmBackToTop
+
+    p new DrmBackToTop(content, speed, scrollSpeed);
+
+    h4.drm-bold Options
+
+    ul
+        li content: content to monitor - default: $('body')
+        li speed: button fade in speed - default: 300
+        li scrollSpeed: speed to scroll back to the top of the page - default: 900

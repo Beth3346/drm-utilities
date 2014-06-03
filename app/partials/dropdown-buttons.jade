@@ -1,81 +1,83 @@
 section
-	h1 Dropdown Buttons
+    h1 Drm Dropdown Buttons
 
-	p Show or hide a menu when a button is clicked. Available in solid or split buttons.
+    p Show or hide a menu when a button is clicked. Available in solid or split buttons.
 
-	h2 Live Demo 
+    h2 Live Demo 
 
-	.example-holder
-		.drm-dropdown-solid-btn-holder
-			button Info
-			ul
-				li: a(href="#") Info 1
-				li: a(href="#") Info 2
-				li: a(href="#") Info 3
-				li.divider
-				li: a(href="#") Info 4
-				
-		.drm-dropdown-solid-btn-holder
-			button More Info
-			ul
-				li: a.text-disabled(href="#") Info 1
-				li: a(href="#") Info 2
-				li: a(href="#") Info 3
-				li: a(href="#") Info 4
+    .example-holder
+        .drm-dropdown-solid-btn-holder
+            button Info
+            ul
+                li: a(href="#") Info 1
+                li: a(href="#") Info 2
+                li: a(href="#") Info 3
+                li.divider
+                li: a(href="#") Info 4
+                
+        .drm-dropdown-solid-btn-holder
+            button More Info
+            ul
+                li: a.text-disabled(href="#") Info 1
+                li: a(href="#") Info 2
+                li: a(href="#") Info 3
+                li: a(href="#") Info 4
 
-		.drm-dropdown-solid-btn-holder
-			button Click Me!
-			ul
-				li: a(href="#") Info 1
-				li: a(href="#") Info 2
-				li: a(href="#") Info 3
-				li: a(href="#") Info 4 
+        .drm-dropdown-solid-btn-holder
+            button Click Me!
+            ul
+                li: a(href="#") Info 1
+                li: a(href="#") Info 2
+                li: a(href="#") Info 3
+                li: a(href="#") Info 4 
 
-	.example-holder
-		.drm-dropdown-split-btn-holder
-			.drm-dropdown-button-group
-				button Alert
-				button &#9662;
-				ul
-					li: a(href="#") Info 1
-					li: a(href="#") Info 2
-					li: a(href="#") Info 3
-					li: a(href="#") Info 4
-				
-		.drm-dropdown-split-btn-holder
-			.drm-dropdown-button-group
-				button This Is Another Alert
-				button &#9662;
-				ul
-					li: a(href="#") Info 1
-					li: a(href="#") Info 2
-					li: a(href="#") Info 3
-					li: a(href="#") Info 4
+    .example-holder
+        .drm-dropdown-split-btn-holder
+            .drm-dropdown-button-group
+                button Alert
+                button &#9662;
+                ul
+                    li: a(href="#") Info 1
+                    li: a(href="#") Info 2
+                    li: a(href="#") Info 3
+                    li: a(href="#") Info 4
+                
+        .drm-dropdown-split-btn-holder
+            .drm-dropdown-button-group
+                button This Is Another Alert
+                button &#9662;
+                ul
+                    li: a(href="#") Info 1
+                    li: a(href="#") Info 2
+                    li: a(href="#") Info 3
+                    li: a(href="#") Info 4
 
-	h3 Usage
+    h3 Usage
 
-	p For a solid button place button and ul elements in a div with class "drm-dropdown-solid-btn-holder"
+    a(href="https://github.com/dynamicresponsemedia/drm-dropdown-buttons" target="_blank") Visit GitHub Repo
 
-	pre.prettyprint.
-		&lt;div class="drm-dropdown-solid-btn-holder"&gt;
-		&lt;button&gt;Info&lt;/button&gt;
-		&lt;ul&gt;
-		&lt;li&gt;&lt;a&gt;Info 1&lt;/a&gt;&lt;/li&gt;
-		&lt;li&gt;&lt;a&gt;Info 2&lt;/a&gt;&lt;/li&gt;
-		&lt;li&gt;&lt;a&gt;Info 3&lt;/a&gt;&lt;/li&gt;
-		&lt;li&gt;&lt;a&gt;Info 4&lt;/a&gt;&lt;/li&gt;
-		&lt;/ul&gt;
+    p For a solid button place button and ul elements in a div with class "drm-dropdown-solid-btn-holder"
 
-	p For a split button wrap buttons and ul elements in a .button-group and place in a div with a class "drm-dropdown-split-btn-holder"
+    pre.prettyprint.
+        &lt;div class="drm-dropdown-solid-btn-holder"&gt;
+        &lt;button&gt;Info&lt;/button&gt;
+        &lt;ul&gt;
+        &lt;li&gt;&lt;a&gt;Info 1&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a&gt;Info 2&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a&gt;Info 3&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a&gt;Info 4&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
 
-	pre.prettyprint.
-		&lt;div class="drm-dropdown-split-btn-holder"&gt;
-		&lt;div class="button-group"&gt;
-		&lt;button&gt;This Is Another Alert&lt;/button&gt;
-		&lt;button&gt;&#9662;&lt;/button&gt;
-		&lt;ul&gt;
-		&lt;li&gt;&lt;a&gt;Info 1&lt;/a&gt;&lt;/li&gt;
-		&lt;li&gt;&lt;a&gt;Info 2&lt;/a&gt;&lt;/li&gt;
-		&lt;li&gt;&lt;a&gt;Info 3&lt;/a&gt;&lt;/li&gt;
-		&lt;li&gt;&lt;a&gt;Info 4&lt;/a&gt;&lt;/li&gt;
-		&lt;/ul&gt;
+    p For a split button wrap buttons and ul elements in a .button-group and place in a div with a class "drm-dropdown-split-btn-holder"
+
+    pre.prettyprint.
+        &lt;div class="drm-dropdown-split-btn-holder"&gt;
+        &lt;div class="button-group"&gt;
+        &lt;button&gt;This Is Another Alert&lt;/button&gt;
+        &lt;button&gt;&#9662;&lt;/button&gt;
+        &lt;ul&gt;
+        &lt;li&gt;&lt;a&gt;Info 1&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a&gt;Info 2&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a&gt;Info 3&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a&gt;Info 4&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
