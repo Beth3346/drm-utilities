@@ -30,9 +30,9 @@
 
         checkBlacklist: (password) ->
             blacklist = [
-                'password',
-                'pass',
-                '1234',
+                'password'
+                'pass'
+                '1234'
                 'shadow'
                 '12345'
                 '123456'
@@ -92,7 +92,7 @@
                 status: null
                 passwordLength: password.length
             blacklist = @checkBlacklist password
-            length = @checkLength results.passwordLength, 7
+            length = @checkLength results.passwordLength, 8
             complexity = @checkStrength password
 
             if blacklist isnt -1
