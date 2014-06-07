@@ -237,7 +237,7 @@ dt {
 }
 
 .drm-unstyled-list {
-	@include drm-unstyled-list();
+	@include drm-unstyled-list(left, no);
 }
 
 .drm-inline-list {

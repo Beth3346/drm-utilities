@@ -32,8 +32,6 @@ Add the "close" class to the element you want the user to click on to dismiss th
 
 ## Example Usage:
 
-### Sample HTML
-
         <div class="info-alert drm-dismissable-alert">
             <button class="close">x</button>
             This is just an informative alert

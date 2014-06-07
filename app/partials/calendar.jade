@@ -131,3 +131,111 @@ section
     h2 Usage
     
     a(href="https://github.com/dynamicresponsemedia/drm-calendar" target="_blank") Visit GitHub Repo
+    p at the moment only US style dates and times are used
+
+    h3.drm-bold Add events dynamically using the createEvent method
+    p createEvent takes an object as its only argument
+
+    pre drmCalendar = new DrmCalendar(newEvent);
+
+    h4.drm-bold Options:
+    ul.drm-unstyled-list
+        li
+            span.drm-bold id: 
+            | the event id number (DrmCalendar will add this for you - don't add this yourself)
+        li
+            span.drm-bold name: 
+            | name of your event
+        li
+            span.drm-bold recurrance: 
+            | how often the event will occur
+            ul
+                li
+                    span.drm-bold yearly: 
+                    | once per year
+                li
+                    span.drm-bold monthly: 
+                    | once per month
+                li
+                    span.drm-bold biweekly: 
+                    | every other week
+                li
+                    span.drm-bold weekly: 
+                    | once per week
+                li
+                    span.drm-bold daily: 
+                    | every single day
+                li
+                    span.drm-bold none: 
+                    | exactly once
+        li
+            span.drm-bold month: 
+            | month of your event - full name of month not abbreviations or month number
+        li
+            span.drm-bold year: 
+            | year of your event - for non-recurring events only
+        li
+            span.drm-bold eventDate: 
+            | date of event
+        li
+            span.drm-bold time: 
+            | time of event ex. 2:30pm - omit for all day events
+        li
+            span.drm-bold day: 
+            | day of the week - array of days of the week - full name of day not abbreviations or day number - can be an array ex. ['Saturday', 'Sunday']
+        li
+            span.drm-bold dayNum: 
+            | day number - ex. 1 for first occurance of day in month - use 'last' for the last occurance in the month
+        li
+            span.drm-bold type: 
+            | event type - so far holiday is the only type that has any effect
+        li
+            span.drm-bold notes: 
+            | event notes - show up in the event view
+
+    h4.drm-bold Examples:
+
+    h5.drm-bold Yearly Event:
+    
+    pre.
+        drmCalendar.createEvent({
+            name: 'Thanksgiving',
+            month: 'November',
+            dayNum: 'last',
+            day: ['Thursday'],
+            type: 'holiday',
+            recurrance: 'yearly',
+            notes: 'Thanksgiving occurs on the last Thursday in November'
+        });
+
+    h5.drm-bold Monthly Event:
+
+    pre.
+        drmCalendar.createEvent({
+            name: 'Rabbit Rabbit Day',
+            eventDate: 1,
+            type: 'fun day',
+            recurrance: 'monthly',
+            notes: 'Say Rabbit Rabbit for good luck this month'
+        });
+
+    h5.drm-bold Weekly Event:
+    
+    pre.
+        drmCalendar.createEvent({
+            name: 'Sleep In!',
+            day: ['Sunday', 'Saturday']
+            time: '9:00am'
+            recurrance: 'weekly',
+            notes: 'Thanksgiving occurs on the last Thursday in November'
+        });
+
+    h5.drm-bold Daily Event:
+    
+    pre.
+        drmCalendar.createEvent({
+            name: 'Eat Lunch',
+            time: '12:00am'
+            recurrance: 'daily',
+            notes: 'Eat a healthy lunch'
+        });

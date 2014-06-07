@@ -25,33 +25,20 @@
         @include drm-tabular-form();        
     }
 
-    .drm-cal-muted {
-        background-color: $lighter-grey;
-        color: white;
-
-        &:hover {
-            cursor: not-allowed;
-            background-color: $lighter-grey;
-            color: white;
-        }
-    }
-
     .drm-cal-today {
         background-color: $drm-blue;
         color: white;
             
-        .drm-events a {
-            color: white;
+        .drm-events {
+            a, .drm-hour, .drm-time {
+                color: white;
+            }
         }
     }
 
     .drm-cal-weekend {
         background-color: $lightest-grey;
         color: $dark-grey;
-            
-        .drm-events a {
-            color: $dark-grey;
-        }
     }
 
     .drm-cal-holiday {
@@ -132,19 +119,21 @@
             cursor: pointer;
             @include drm-background-transparent($drm-blue);
 
-            .drm-events a {
-                color: white;
+            .drm-events {
+                a, .drm-hour, .drm-time {
+                    color: white;
+                }
             }
         }
     }
 
     .drm-events {
+        line-height: 1.3;
         @include drm-unstyled-list(left, no);
 
         .drm-hour, .drm-time {
             color: $grey;
             font-weight: bold;
-            display: block;
             @include drm-em-font(12);
         }
 

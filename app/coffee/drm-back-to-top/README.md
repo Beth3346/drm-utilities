@@ -10,12 +10,14 @@ Smooth scrolling effect when the back to top button is clicked and the user is t
 
 Just add compiled drm-back-to-top.coffee to your pages and you're ready to go.
 
-### Initialize new instance of DrmBackToTop
+## Initialize:
 
     new DrmBackToTop(content, speed, scrollSpeed);
 
-### Options
+## Options:
 
-    + content: content to monitor - default: $('body')
-    + speed: button fade in speed - default: 300
-    + scrollSpeed: speed to scroll back to the top of the page - default: 900
+    new DrmBackToTop($('body'), 300, 900);
+
++ content: content to monitor - default: $('body')
++ speed: button fade in speed - default: 300
++ scrollSpeed: speed to scroll back to the top of the page - default: 900
