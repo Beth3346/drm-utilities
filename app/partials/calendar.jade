@@ -133,10 +133,32 @@ section
     a(href="https://github.com/dynamicresponsemedia/drm-calendar" target="_blank") Visit GitHub Repo
     p at the moment only US style dates and times are used
 
+    h3.drm-bold Initialize:
+
+    pre new DrmCalendar(calendarClass = 'drm-calendar', @view = 'month', @addHolidays = yes);
+
+    h4.drm-bold Options:
+    ul.drm-unstyled-list
+        li
+            span.drm-bold calendarClass: 
+            | classname of the calendar holder - default: drm-calendar
+        li
+            span.drm-bold view: 
+            | first view when the calendar loads - default: month
+            ul
+                li month
+                li week
+                li date
+        li
+            span.drm-bold addHolidays: 
+            | add holidays to calendar (US only for now) - default: yes
+
     h3.drm-bold Add events dynamically using the createEvent method
     p createEvent takes an object as its only argument
 
-    pre drmCalendar = new DrmCalendar(newEvent);
+    pre.
+        drmCalendar = new DrmCalendar();
+        drmCalendar.createEvent(newEvent);
 
     h4.drm-bold Options:
     ul.drm-unstyled-list
@@ -235,7 +257,7 @@ section
     pre.
         drmCalendar.createEvent({
             name: 'Eat Lunch',
-            time: '12:00am'
+            time: '12:00pm'
             recurrance: 'daily',
             notes: 'Eat a healthy lunch'
         });

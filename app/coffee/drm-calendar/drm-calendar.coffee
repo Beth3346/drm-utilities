@@ -6,9 +6,10 @@
 
 ( ($) ->
     class window.DrmCalendar
-        constructor: (@calendarClass = 'drm-calendar', @daysPerWeek = 7, @view = 'week', @addHolidays = yes) ->
+        constructor: (@calendarClass = 'drm-calendar', @view = 'month', @addHolidays = yes) ->
             self = @
             self.body = $ 'body'
+            self.daysPerWeek = 7
             self.events = []
             self.today = new Date()
             self.currentMonth = self.today.getMonth()
@@ -1303,24 +1304,9 @@
         recurrance: "monthly"
         notes: "This is the first Monday of the month"
     drmCalendar.createEvent
-        name: "Second Monday"
-        day: ["Monday"]
-        dayNum : 2
-        type: "test"
-        recurrance: "monthly"
-        notes: "This is the second Monday of the month"
-    drmCalendar.createEvent
         name: "Lawn Day"
         month: "April"
         eventDate: 24
-        day: ["Thursday"]
-        type: "test"
-        recurrance: "biweekly"
-        notes: "Every other Thursday"
-    drmCalendar.createEvent
-        name: "Not Lawn Day"
-        month: "April"
-        eventDate: 17
         day: ["Thursday"]
         type: "test"
         recurrance: "biweekly"
