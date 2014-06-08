@@ -108,6 +108,8 @@ section
                     option(value=9) October
                     option(value=10) November
                     option(value=11) December
+                label(for="date") Date:
+                input.drm-valid-integer#date(type="text" name="date" data-min-value="1" data-max-value="31" data-min-length="1" data-max-length="2")
                 label(for="year") Year:
                 input.drm-valid-integer#year(type="text" name="year" data-min-value="1" data-min-length="4" data-max-length="4")
                 button#submit(type="submit") Select

@@ -1,6 +1,11 @@
 {
   "name": "drm-utilities",
   "version": "0.1.0",
+  "description": "a demonstration of what drm-utilities can do",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dynamicresponsemedia/drm-utilities.git"
+  },
   "devDependencies": {
     "grunt": "~0.4.4",
     "grunt-contrib-concat": "~0.3.0",
