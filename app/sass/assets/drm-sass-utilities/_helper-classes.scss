@@ -163,6 +163,10 @@ pre {
 	word-wrap: break-word;
 	max-width: 800px;
 	@include drm-em-font(14);
+
+	@include drm-breakpoint(tall) {
+		width: 100%;
+	}
 }
 
 /*-----------------------------------------------------------------------------

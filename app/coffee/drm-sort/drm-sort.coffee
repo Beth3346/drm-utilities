@@ -6,7 +6,7 @@
 # all items should be the same data type
 ( ($) ->
     class window.DrmSort
-        constructor: (@lists = $('.drm-sortable'), @autoSort = no) ->
+        constructor: (@lists = $('.drm-sortable'), @autoSort = yes) ->
             self = @
 
             self.patterns =

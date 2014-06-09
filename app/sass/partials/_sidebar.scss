@@ -8,6 +8,13 @@
     padding-left: 60px;
     box-sizing: border-box;
 
+    @include drm-breakpoint(grande) {
+        // padding: 0 20px 0 20px;
+        // width: 100%;
+        // float: none;
+        display: none;
+    }
+
     &.sticky-right {
         @include drm-sticky-menu('left');
     }

@@ -12,7 +12,17 @@ header {
             float: right;
             margin: 10px;
             @include drm-nav-bar-pills;
-        }        
+
+            @include drm-breakpoint(tall) {
+                float: none;
+                text-align: center;
+
+                li {
+                    float: none;
+                    display: inline-block;
+                }
+            }
+        }
     }
 }
 

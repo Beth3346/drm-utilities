@@ -32,6 +32,7 @@
     img {
         @extend %drm-center-block;
         position: relative;
+        height: 60%;
     }
 
     .thumbnail-list {
@@ -61,6 +62,10 @@
         img {
             @extend %drm-reset-box;
             @include drm-square($image-size);
+
+            @include drm-breakpoint(tall) {
+                @include drm-square(($image-size / 2));
+            }
         }   
     }
 }
@@ -73,17 +78,40 @@
         background-color: $modal-color;
         border: 1px solid $grey;
         padding: 0;
-        width: 30%;
-        top: 100px;
-        left: 35%;
+        width: 60%;
+        top: 20px;
+        left: 20%;
         position: absolute;
         border-radius: 5px;
+
+        @include drm-breakpoint(trenta) {
+            width: 30%;
+            left: 35%;
+            top: 100px;
+        }
+
+        @include drm-breakpoint(venti) {
+            width: 60%;
+            left: 20%;
+            top: 20px;
+        }
+
+        @include drm-breakpoint(tall) {
+            width: 80%;
+            left: 10%;
+            top: 20px;
+        }
 
         .header {
             @extend %drm-container-full-width;
             padding-top: 10px;
             padding-bottom: 10px;
             border-bottom: 1px solid $light-grey;
+
+            @include drm-breakpoint(grande) {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
         }
 
         .body {
@@ -91,6 +119,11 @@
             padding-top: 10px;
             padding-bottom: 10px;
             border-bottom: 1px solid $light-grey;
+
+            @include drm-breakpoint(grande) {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
         }
 
         .footer {
@@ -98,6 +131,11 @@
             text-align: center;
             padding-top: 10px;
             padding-bottom: 10px;
+
+            @include drm-breakpoint(grande) {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
         }
 
         form {
@@ -111,9 +149,10 @@
         .video-holder {
             @extend %drm-center-block;
             width: 90%;
+            text-align: center;
 
             iframe {
-                width: 100%;
+                display: inline-block;
             }
         }
     }

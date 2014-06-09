@@ -6,6 +6,12 @@ main {
     width: (100% / 4) * 3;
     float: left;
     box-sizing: border-box;
+
+    @include drm-breakpoint(grande) {
+        padding: 0 20px 0 20px;
+        width: 100%;
+        float: none;
+    }
 }
 
 .example-holder {
