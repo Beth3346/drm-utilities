@@ -22,7 +22,10 @@ $.extend $.expr[":"], {
                 self.positionListItems()
                 self.addFilterButtons()
 
-            if self.flex then $(window).resize self.positionListItems
+            if self.flex 
+                $(window).resize ->
+                    self.positionListItems()
+                    self.resizeCurtain()
 
             $(window).load self.resizeCurtain
 
