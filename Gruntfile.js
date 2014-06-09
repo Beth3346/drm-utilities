@@ -103,9 +103,11 @@ module.exports = function(grunt) {
         jshint: {
             files: ['<%= distFolder %>js/coffee-compiled/*.js'],
             options: {
-                unused: true,
-                strict: true,
-                eqnull: true
+                maxerr: 10,
+                // unused: true,
+                eqnull: true,
+                eqeqeq: true,
+                jquery: true
             }
         },
 
@@ -191,7 +193,8 @@ module.exports = function(grunt) {
                     "ids": false,
                     "text-indent": false,
                     "box-model": false,
-                    "adjoining-classes": false
+                    "adjoining-classes": false,
+                    "compatible-vendor-prefixes": false
                 },
                 src: ['<%= distFolder %>*.css']
             }
@@ -218,7 +221,7 @@ module.exports = function(grunt) {
             scripts: {
                 // We watch and compile sass files as normal but don't live reload here
                 files: ['<%= appFolder %>assets/**/*.js', '<%= appFolder %>coffee/**/*.coffee'],
-                tasks: [ 'coffee', 'concat' ],
+                tasks: [ 'coffee', 'concat', 'jshint' ],
             },
 
             copy: {
@@ -255,7 +258,7 @@ module.exports = function(grunt) {
     grunt.registerTask('cssstuff', ['clean:stylesheets', 'copy', 'compass:dev', 'autoprefixer', 'csslint', 'clean:postbuild']);
     grunt.registerTask('jsstuff', ['clean:scripts', 'copy', 'coffee', 'concat', 'jshint', 'uglify', 'clean:postbuild']);
     grunt.registerTask('imgstuff', ['clean:images', 'copy', 'imagemin', 'clean:postbuild']);
-    grunt.registerTask('default', ['clean:build', 'copy', 'jade:dev', 'imagemin', 'coffee', 'concat', 'compass:dev', 'autoprefixer', 'csslint', 'watch']);
+    grunt.registerTask('default', ['clean:build', 'copy', 'jade:dev', 'imagemin', 'coffee', 'concat', 'compass:dev', 'autoprefixer', 'csslint', 'jshint', 'watch']);
     grunt.registerTask('build', ['clean:build', 'copy', 'jade:dist', 'imagemin', 'coffee', 'concat', 'uglify', 'compass:dist', 'autoprefixer', 'csslint', 'clean:postbuild'])
 
 };

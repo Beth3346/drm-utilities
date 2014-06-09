@@ -59,19 +59,17 @@
 
             $.each values, (key, value) ->
                 if _isDate.call self, value
-                    type = 'date'
+                    types.push 'date'
                 else if _isTime.call self, value
-                    type = 'time'
+                    types.push 'time'
                 else if _isNumber.call self, value
-                    type = 'number'
+                    types.push 'number'
                 else if _isAlpha.call self, value
-                    type = 'alpha'
+                    types.push 'alpha'
                 else
-                    type = null
+                    types.push null
 
-                types.push type
-
-            type = if $.inArray('alpha', types) isnt -1 then 'alpha' else types[0]
+            if $.inArray('alpha', types) isnt -1 then 'alpha' else types[0]
 
         sortRows: (direction, columnNum) =>
             self = @
@@ -79,7 +77,7 @@
             rows = self.table.find 'tbody tr'
 
             if !type
-                values = null
+                null
 
             else if type is 'date'
                 _sortAsc = (a, b) ->
@@ -92,7 +90,7 @@
                     b = new Date self.patterns.monthDayYear.exec($.trim($(b).find('td').eq(columnNum).text()))
                     b - a
 
-                rows = if direction is 'ascending' then rows.sort _sortAsc else rows.sort _sortDesc
+                if direction is 'ascending' then rows.sort _sortAsc else rows.sort _sortDesc
 
             else if type is 'time'
                 _parseTime = (time) ->
@@ -108,10 +106,10 @@
                         else if hour.length is 1
                             hour = "0#{hour}"
                             
-                        time24 = "#{hour}:#{minutes}"
+                        "#{hour}:#{minutes}"
 
                     else if ampm is 'pm'
-                        time24 = "#{hour + 12}:#{minutes}"
+                        "#{hour + 12}:#{minutes}"
 
                 _sortAsc = (a, b) ->
                     a = _parseTime self.patterns.time.exec($.trim($(a).find('td').eq(columnNum).text()))
@@ -123,13 +121,12 @@
                     b = _parseTime self.patterns.time.exec($.trim($(b).find('td').eq(columnNum).text()))
                     new Date("04-22-2014 #{b}") - new Date("04-22-2014 #{a}")
 
-                rows = if direction is 'ascending' then rows.sort _sortAsc else rows.sort _sortDesc
+                if direction is 'ascending' then rows.sort _sortAsc else rows.sort _sortDesc
 
             else if type is 'alpha'
                 cleanAlpha = (value) ->
                     # removes leading 'the' or 'a'
-                    value = value.replace /^the /i, ''
-                    value = value.replace /^a /i, ''
+                    value.replace(/^the /i, '').replace /^a /i, ''
 
                 _sortAsc = (a, b) ->
                     # use clean alpha to remove leading 'the' or 'a' then convert to lowercase for case insensitive sort
@@ -155,7 +152,7 @@
                     else if a is b
                         0
 
-                rows = if direction is 'ascending' then rows.sort _sortAsc else rows.sort _sortDesc
+                if direction is 'ascending' then rows.sort _sortAsc else rows.sort _sortDesc
 
             else if type is 'number'
                 _sortAsc = (a, b) ->
@@ -164,7 +161,7 @@
                 _sortDesc = (a, b) ->
                     parseFloat($.trim($(b).find('td').eq(columnNum).text())) - parseFloat($.trim($(a).find('td').eq(columnNum).text()))
 
-                rows = if direction is 'ascending' then rows.sort _sortAsc else rows.sort _sortDesc
+                if direction is 'ascending' then rows.sort _sortAsc else rows.sort _sortDesc
     
         renderTable: (direction, columnNum) =>
             sortedRows = @sortRows direction, columnNum

@@ -51,7 +51,7 @@ $.extend $.expr[":"], {
             $.each tagListItems, (key, value) ->
                 tag = $(value).text()
                 tags.push capitalize tag
-                tags = $.unique tags
+                $.unique tags
 
             $.each tags, (key, value) ->
                 tagButton = $ '<button></button>',
@@ -90,7 +90,9 @@ $.extend $.expr[":"], {
                 columnHeights[columnNum] += height
 
             $.each columnHeights, (key, value) ->
-                if value > tallestColumn then tallestColumn = value
+                if value > tallestColumn
+                    tallestColumn = value
+                    tallestColumn
 
             self.grid.css 'height': tallestColumn + 40
 
@@ -105,11 +107,6 @@ $.extend $.expr[":"], {
                 that.attr 'data-column', columnNum
                 that.attr 'data-num', index
                 prevImage = if index > self.imagesPerRow then self.grid.find('.drm-grid-item').eq(index - (self.imagesPerRow + 1)) else null
-                # captionTitle = that.find '.caption h1'
-                # subTitle = that.find('.caption-sub-title').remove()
-                # subTitle = $('<h2></h2>',
-                #     class: 'caption-sub-title'
-                #     text: "Image: #{index}").insertAfter captionTitle
                 
                 if prevImage?
                     margin = prevImage.outerWidth(true) - prevImage.outerWidth(false)

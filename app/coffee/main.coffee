@@ -16,6 +16,10 @@
     drmAlert.showAlert 'success', 'your request was successful', $('.drm-alert-holder')
     drmAlert.showAlert 'muted', 'A muted alert that will probably be ignored', $('.drm-alert-holder')
     drmAlert.showAlert 'custom', 'This is a custom alert', $('.drm-alert-holder')
+
+    calendarSort = new DrmSort $('.drm-events'), no
+
+    return
     
     # prettyPrint()
 ) jQuery

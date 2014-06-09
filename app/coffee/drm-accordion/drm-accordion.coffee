@@ -1,7 +1,6 @@
 ###############################################################################
 # Toggles hiding and showing content with an accordion efffect
 ###############################################################################
-"use strict"
 
 ( ($) ->
     class window.DrmAccordion

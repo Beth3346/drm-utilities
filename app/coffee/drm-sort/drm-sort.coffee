@@ -6,7 +6,7 @@
 # all items should be the same data type
 ( ($) ->
     class window.DrmSort
-        constructor: (@lists = $('.drm-sortable')) ->
+        constructor: (@lists = $('.drm-sortable'), @autoSort = no) ->
             self = @
 
             self.patterns =
@@ -17,7 +17,13 @@
                 # 00:00pm
                 time: new RegExp '^(?:[12][012]|[0]?[0-9]):[012345][0-9](?:am|pm)', 'i'
 
-            $('.drm-sort-list').on 'click', ->
+            if self.autoSort
+                $.each self.lists, (key, value) ->
+                    that = $ value
+                    values = self.getValues that
+                    self.renderSort values, 'ascending', that
+
+            $('body').on 'click', '.drm-sort-list', ->
                 that = $ @
                 listId = that.data 'list'
                 list = $ "ul##{listId}"
@@ -54,26 +60,24 @@
 
             $.each values, (key, value) ->
                 if _isDate.call self, value
-                    type = 'date'
+                    types.push 'date'
                 else if _isTime.call self, value
-                    type = 'time'
+                    types.push 'time'
                 else if _isNumber.call self, value
-                    type = 'number'
+                    types.push 'number'
                 else if _isAlpha.call self, value
-                    type = 'alpha'
+                    types.push 'alpha'
                 else
-                    type = null
+                    types.push null
 
-                types.push type
-
-            type = if $.inArray('alpha', types) isnt -1 then 'alpha' else types[0]
+            if $.inArray('alpha', types) isnt -1 then 'alpha' else types[0]
 
         sortValues: (values, direction) =>
             self = @
             type = self.getDataType values
 
             if !type
-                values = null
+                null
 
             else if type is 'date'
                 _sortAsc = (a, b) ->
@@ -86,7 +90,7 @@
                     b = new Date self.patterns.monthDayYear.exec(b)
                     b - a
 
-                values = if direction is 'ascending' then values.sort _sortAsc else values.sort _sortDesc        
+                if direction is 'ascending' then values.sort _sortAsc else values.sort _sortDesc    
 
             else if type is 'time'
                 _parseTime = (time) ->
@@ -102,10 +106,10 @@
                         else if hour.length is 1
                             hour = "0#{hour}"
                             
-                        time24 = "#{hour}:#{minutes}"
+                        "#{hour}:#{minutes}"
 
                     else if ampm is 'pm'
-                        time24 = "#{hour + 12}:#{minutes}"
+                        "#{hour + 12}:#{minutes}"
 
                 _sortAsc = (a, b) ->
                     a = _parseTime self.patterns.time.exec(a)
@@ -117,13 +121,12 @@
                     b = _parseTime self.patterns.time.exec(b)
                     new Date("04-22-2014 #{b}") - new Date("04-22-2014 #{a}")
 
-                values = if direction is 'ascending' then values.sort _sortAsc else values.sort _sortDesc
+                if direction is 'ascending' then values.sort _sortAsc else values.sort _sortDesc
 
             else if type is 'alpha'
                 cleanAlpha = (value) ->
                     # removes leading 'the' or 'a'
-                    value = value.replace /^the /i, ''
-                    value = value.replace /^a /i, ''
+                    value.replace(/^the /i, '').replace /^a /i, ''
 
                 _sortAsc = (a, b) ->
                     # use clean alpha to remove leading 'the' or 'a' then convert to lowercase for case insensitive sort
@@ -149,7 +152,7 @@
                     else if a is b
                         0
 
-                values = if direction is 'ascending' then values.sort _sortAsc else values.sort _sortDesc
+                if direction is 'ascending' then values.sort _sortAsc else values.sort _sortDesc
 
             else if type is 'number'
                 _sortAsc = (a, b) ->
@@ -158,7 +161,7 @@
                 _sortDesc = (a, b) ->
                     parseFloat(b) - parseFloat(a)
 
-                values = if direction is 'ascending' then values.sort _sortAsc else values.sort _sortDesc
+                if direction is 'ascending' then values.sort _sortAsc else values.sort _sortDesc
 
         renderSort: (values, direction, list) =>
             values = @sortValues values, direction
