@@ -701,10 +701,11 @@
                 eventHolder.appendTo lightboxHtml
                 eventDetailList.appendTo eventHolder
                 $.each eventDetails, (key, value) ->
-                    title = self.capitalize key
-                    listItem = $ '<li></li>',
-                        html: "<span class='drm-bold'>#{title}: </span><span class='drm-event-detail'>#{value}</span>"
-                    listItem.appendTo eventDetailList
+                    if value?
+                        title = self.capitalize key
+                        listItem = $ '<li></li>',
+                            html: "<span class='drm-bold'>#{title}: </span><span class='drm-event-detail'>#{value}</span>"
+                        listItem.appendTo eventDetailList
 
                 closeButton.appendTo eventDetailList
                 editButton.appendTo eventDetailList
