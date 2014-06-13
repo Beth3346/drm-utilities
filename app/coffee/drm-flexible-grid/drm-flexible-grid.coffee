@@ -3,6 +3,7 @@
 ###############################################################################
 "use strict"
 
+$ = jQuery
 # adds case insensitive contains to jQuery
 
 $.extend $.expr[":"], {
@@ -15,15 +16,24 @@ class @DrmFlexibleGrid
         self = @
         self.grid = $ ".#{self.gridClass}"
         self.gridNav = $ '.drm-grid-nav'
-        self.items = self.grid.find '.drm-grid-item'
+        self.items = self.grid.find('.drm-grid-item').hide()
+        hash = window.location.hash
 
         $(window).load ->
-            self.positionListItems()
-            self.addFilterButtons()
+            self.tags = self.getTags()
+            filter = if hash then hash.replace /^#/, '' else null
+            self.addFilterButtons self.tags
+            self.filterListItems filter
 
-        if self.flex 
+            if filter
+                activeButton = $("button.drm-grid-filter[data-filter=#{filter}]")
+                activeButton.siblings('button').removeClass 'active'
+                activeButton.addClass 'active'
+
+        if self.flex
             $(window).resize ->
-                self.positionListItems()
+                items = self.grid.find '.drm-grid-item'
+                self.positionListItems items
                 self.resizeCurtain()
 
         $(window).load self.resizeCurtain
@@ -41,25 +51,30 @@ class @DrmFlexibleGrid
             that.siblings('button').removeClass 'active'
             that.addClass 'active'
 
-    capitalize: (str) ->
-        str.toLowerCase().replace /^.|\s\S/g, (a) ->
-            a.toUpperCase()
-
-    addFilterButtons: =>
+    getTags: =>
         self = @
         tags = []
         tagListItems = self.grid.find 'ul.caption-tags li'
 
         $.each tagListItems, (key, value) ->
             tag = $(value).text()
-            tags.push self.capitalize tag
+            tags.push tag
             $.unique tags
+
+        tags
+
+    addFilterButtons: (tags) =>
+        self = @
+
+        _capitalize = (str) ->
+            str.toLowerCase().replace /^.|\s\S/g, (a) ->
+                a.toUpperCase()
 
         $.each tags, (key, value) ->
             tagButton = $ '<button></button>',
                 class: 'drm-grid-filter'
-                text: value
-                'data-filter': value.toLowerCase()
+                text: _capitalize value
+                'data-filter': value
             tagButton.appendTo self.gridNav
 
         self.gridNav.find('.drm-grid-filter').first().addClass 'active'
@@ -74,33 +89,40 @@ class @DrmFlexibleGrid
 
             that.height(imageHeight).hide()
 
-    resizeGrid: (items) =>
+    addListItems: (items) =>
         self = @
-        tallestColumn = 0
-        columnHeights = []
+        @grid.empty()
+        items.appendTo(@grid).hide 0, ->
+            self.positionListItems items
 
-        i = 0
-        until i is self.imagesPerRow 
-            columnHeights.push 0
-            i = i + 1
-        
-        $.each items, (key, value) ->
-            that = $ value
-            columnNum = that.data 'column'
-            height = that.outerHeight true
-
-            columnHeights[columnNum] += height
-
-        $.each columnHeights, (key, value) ->
-            if value > tallestColumn
-                tallestColumn = value
-                tallestColumn
-
-        self.grid.css 'height': tallestColumn + 40
-
-    positionListItems: =>
+    positionListItems: (items) =>
         self = @
-        items = self.grid.find '.drm-grid-item'
+
+        # add height to grid holder to accomodate images
+        _resizeHolder = (items) ->
+            tallestColumn = 0
+            columnHeights = []
+
+            i = 0
+            until i is self.imagesPerRow 
+                columnHeights.push 0
+                i = i + 1
+            
+            $.each items, (key, value) ->
+                that = $ value
+                columnNum = that.data 'column'
+                height = that.outerHeight true
+
+                columnHeights[columnNum] += height
+
+            $.each columnHeights, (key, value) ->
+                if value > tallestColumn
+                    tallestColumn = value
+                    tallestColumn
+
+            self.grid.css 'height': tallestColumn + 40
+
+        # need to keep track of column length so that any one column doesn't get too long
 
         $.each items, (key, value) ->
             that = $ value
@@ -123,29 +145,23 @@ class @DrmFlexibleGrid
                 that.css
                     'top': 0
                     'left': 0
-                    'position': 'relative'                    
+                    'position': 'relative'
 
-            that.fadeIn 1000            
+            that.show()
 
-        self.resizeGrid items
+        _resizeHolder items
 
     filterListItems: (filter) =>
-        self = @
-        self.grid.empty()
+        # filter images by tag
+        filter = if window.location.hash then filter else 'all'
+        window.location.hash = filter
 
-        if filter is 'all'
-            $.each self.items, (key, value) ->
-                that = $ value
-                that.appendTo(self.grid).hide()
+        if filter in @tags or filter is 'all'
+            filteredItems = if filter is 'all' then @items else @items.has "ul.caption-tags li:containsNC(#{filter})"
+            @addListItems filteredItems
         else
-            $.each self.items, (key, value) ->
-                that = $ value
-                tagList = that.find 'ul.caption-tags'
-
-                hasTag = if tagList.has("li:containsNC(#{filter})").length isnt 0 then true else false
-
-                if hasTag then that.appendTo(self.grid).hide()
-
-        self.positionListItems()
+            $('<p></p>',
+                text: 'no items match').appendTo @grid
+        
 
 new DrmFlexibleGrid()
