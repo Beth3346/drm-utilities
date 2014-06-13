@@ -3,11 +3,12 @@
 ###############################################################################
 "use strict"
 
+$ = jQuery
 class @DrmTabs
     constructor: (@holder = $('div.drm-tabs'), @activeClass = 'active', @speed = 300) ->
         self = @
-        @nav = self.holder.find 'nav'
-        @tabs = self.holder.find 'section'
+        self.nav = self.holder.find 'nav'
+        self.tabs = self.holder.find 'section'
         hash = window.location.hash
 
         self.tabs.hide()
@@ -35,7 +36,7 @@ class @DrmTabs
         currentTab.fadeOut @speed, ->
             tab.fadeIn @speed
         @nav.find("a[href^='##{currentId}']").removeClass @activeClass
-        window.location.hash = target   
+        window.location.hash = target
         @nav.find("a[href='#{target}']").addClass @activeClass
 
 new DrmTabs()

@@ -3,6 +3,7 @@
 ###############################################################################
 "use strict"
 
+$ = jQuery
 class @DrmModalAlert
     constructor: (@alertClass = "drm-modal-alert", @speed = 300) ->
         self = @

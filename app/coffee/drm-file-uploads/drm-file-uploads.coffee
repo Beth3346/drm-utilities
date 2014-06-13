@@ -3,6 +3,7 @@
 ###############################################################################
 "use strict"
 
+$ = jQuery
 class @DrmFileUploads
     constructor: (@uploader = $('.file-upload')) ->
 

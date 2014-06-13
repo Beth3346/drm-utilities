@@ -3,6 +3,7 @@
 ###############################################################################
 "use strict"
 
+$ = jQuery
 class @DrmSpreadsheet
     constructor: (@spreadsheet = $('.drm-spreadsheet')) ->
 

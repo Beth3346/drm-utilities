@@ -3,6 +3,7 @@
 ###############################################################################
 "use strict"
 
+$ = jQuery
 class @DrmTableSorter
     constructor: (@tableClass = 'drm-sortable-table') ->
         self = @

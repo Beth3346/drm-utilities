@@ -3,6 +3,7 @@
 ###############################################################################
 "use strict"
 
+$ = jQuery
 class @DrmOffscreen
     constructor: (@menu = $('nav.drm-offscreen-menu'), @button = $('button.drm-menu-button'), @content = $('div.drm-offscreen-content'), @holder = $('div.drm-content-holder'), @state = 'hide') ->
         self = @

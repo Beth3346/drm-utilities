@@ -4,6 +4,7 @@
 
 "use strict"
 
+$ = jQuery
 class @DrmCalendar
     constructor: (@calendarClass = 'drm-calendar', @view = 'month', @addHolidays = yes) ->
         self = @
@@ -584,7 +585,7 @@ class @DrmCalendar
                     date = date + 1
                     dates.push date
 
-            if $.inArray(currentDate, dates) isnt -1
+            if currentDate in dates
                 weekInfo.weekNum = i - 1
                 weekInfo.datesInWeek = dates
 
@@ -1238,72 +1239,3 @@ class @DrmCalendar
             when 'month' then _createMonthView currentMonth, currentYear
             when 'week' then _createWeekView currentMonth, currentDate, currentYear
             when 'date' then _createDateView currentMonth, currentDate, currentYear
-
-drmCalendar = new DrmCalendar()
-drmCalendar.createEvent
-    name: "Rabbit Rabbit Day"
-    eventDate: 1
-    type: "fun day"
-    recurrance: "monthly"
-    notes: "Say Rabbit Rabbit for good luck this month"
-drmCalendar.createEvent
-    name: "First Monday"
-    day: ["Monday"]
-    dayNum : 1
-    type: "test"
-    recurrance: "monthly"
-    notes: "This is the first Monday of the month"
-drmCalendar.createEvent
-    name: "Lawn Day"
-    month: "April"
-    eventDate: 24
-    day: ["Thursday"]
-    type: "test"
-    recurrance: "biweekly"
-    notes: "Every other Thursday"
-drmCalendar.createEvent
-    name: "Wake Up"
-    day: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
-    type: "test"
-    time: "6:00am"
-    recurrance: "weekly"
-    note: "Wake Up Every Day"
-drmCalendar.createEvent
-    name: "Sleep In!"
-    day: ["Saturday", "Sunday"]
-    type: "test"
-    time: "9:00am"
-    recurrance: "weekly"
-drmCalendar.createEvent
-    name: "Eat Lunch"
-    type: "test"
-    time: "12:00pm"
-    notes: "eat a healthy lunch"
-    recurrance: "daily"
-drmCalendar.createEvent
-    name: "One Time Event"
-    month: "May"
-    year: 2014
-    time: '1:00pm'
-    eventDate: 4
-    type: "test"
-    recurrance: "none"
-    note: "do this once"
-drmCalendar.createEvent
-    name: "Later That Day"
-    month: "May"
-    year: 2014
-    time: '1:30pm'
-    eventDate: 4
-    type: "test"
-    recurrance: "none"
-    note: "do this once"
-drmCalendar.createEvent
-    name: "Another One Time Event"
-    month: "May"
-    year: 2014
-    time: '2:30pm'
-    eventDate: 4
-    type: "test"
-    recurrance: "none"
-    note: "do this once"

@@ -3,6 +3,7 @@
 ###############################################################################
 "use strict"
 
+$ = jQuery
 # all items should be the same data type
 
 class @DrmReorder

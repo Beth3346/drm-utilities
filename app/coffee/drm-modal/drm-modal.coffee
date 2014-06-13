@@ -3,6 +3,7 @@
 ###############################################################################
 "use strict"
 
+$ = jQuery
 class @DrmModal
     constructor: (@buttons = $('button.drm-modal-open'), @lightbox = $('div.drm-modal-lightbox'), @speed = 300) ->
         self = @

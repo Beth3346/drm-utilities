@@ -4,6 +4,7 @@
 ###############################################################################
 "use strict"
 
+$ = jQuery
 class @DrmLightbox
     constructor: (@images = $('ul.drm-lightbox-thumbnails'), @speed = 300) ->
         self = @

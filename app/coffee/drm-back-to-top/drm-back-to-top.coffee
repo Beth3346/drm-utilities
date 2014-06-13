@@ -3,6 +3,7 @@
 ###############################################################################
 "use strict"
 
+$ = jQuery
 class @DrmBackToTop
     constructor: (@content = $('body'), @speed = 300, @scrollSpeed = 900) ->
         @backToTop = @addButton()

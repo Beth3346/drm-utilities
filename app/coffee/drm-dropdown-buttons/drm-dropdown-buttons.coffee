@@ -3,6 +3,7 @@
 ###############################################################################
 "use strict"
 
+$ = jQuery
 class @DrmDropdownButton
     constructor: (@container = $('div.drm-dropdown-solid-btn-holder'), @speed = 300, @button = 'button') ->
         self = @

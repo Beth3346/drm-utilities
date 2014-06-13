@@ -3,6 +3,7 @@
 ###############################################################################
 "use strict"
 
+$ = jQuery
 class @DrmTimeStamps
     constructor: (@timestamps = $('.drm-timestamp')) ->
 

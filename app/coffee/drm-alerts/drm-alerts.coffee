@@ -3,6 +3,7 @@
 ###############################################################################
 "use strict"
 
+$ = jQuery
 class @DrmDismissableAlert
     constructor: (@alertClass = "drm-dismissable-alert", @speed = 300) ->
         self = @

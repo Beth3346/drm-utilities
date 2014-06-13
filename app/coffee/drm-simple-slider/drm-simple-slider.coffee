@@ -3,6 +3,7 @@
 ###############################################################################
 "use strict"
 
+$ = jQuery
 class @DrmSimpleSlider
     constructor: (@slider = $('div.drm-simple-slider'), @play = 10000, @speed = 300, @animate = no) ->
         self = @

@@ -2,6 +2,7 @@
 # Toggles hiding and showing content with an accordion efffect
 ###############################################################################
 
+$ = jQuery
 class @DrmAccordion
     constructor: (@speed = 300, @container = $('.drm-accordion')) ->
         @label = '.' + @container.children().first().attr 'class'

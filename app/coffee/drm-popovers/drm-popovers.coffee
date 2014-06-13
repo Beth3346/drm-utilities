@@ -3,6 +3,7 @@
 ###############################################################################
 "use strict"
 
+$ = jQuery
 class @DrmPopover
     constructor: (@holder = $('div.popover-holder')) ->
         buttons = @holder.find 'button'

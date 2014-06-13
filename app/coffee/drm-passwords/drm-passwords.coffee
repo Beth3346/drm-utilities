@@ -3,6 +3,7 @@
 ###############################################################################
 "use strict"
 
+$ = jQuery
 class @DrmPasswords
     constructor: (@password = $(':input.drm-password')) ->
         self = @

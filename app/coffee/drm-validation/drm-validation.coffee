@@ -9,6 +9,7 @@ Need to add custom messages
 ###
 "use strict"
 
+$ = jQuery
 class @DrmValidation
     constructor: (@speed = 300) ->
         self = @

@@ -3,6 +3,7 @@
 ###############################################################################
 "use strict"
 
+$ = jQuery
 class @DrmDropdownMenu
     constructor: (@menu = $('ul.drm-dropdown-nav'), @speed = 1000) ->
         self = @
