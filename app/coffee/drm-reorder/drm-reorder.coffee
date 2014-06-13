@@ -4,10 +4,8 @@
 "use strict"
 
 # all items should be the same data type
-( ($) ->
-    class window.DrmReorder
-        constructor: () ->
 
-    new DrmReorder()
+class @DrmReorder
+    constructor: () ->
 
-) jQuery
+new DrmReorder()

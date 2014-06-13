@@ -3,10 +3,7 @@
 ###############################################################################
 "use strict"
 
-( ($) ->
-    class window.DrmFlexibleImages
-        constructor: (@images = $('.flexible-image')) ->
-    
-    new DrmFlexibleImages()
+class @DrmFlexibleImages
+    constructor: (@images = $('.flexible-image')) ->
 
-) jQuery
+new DrmFlexibleImages()

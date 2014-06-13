@@ -1,10 +1,10 @@
 ###############################################################################
-# Displays removable alerts for web apps
+# Displays removable modal style alerts for web apps
 ###############################################################################
 "use strict"
 
-class @DrmDismissableAlert
-    constructor: (@alertClass = "drm-dismissable-alert", @speed = 300) ->
+class @DrmModalAlert
+    constructor: (@alertClass = "drm-modal-alert", @speed = 300) ->
         self = @
 
         $('html').on 'click', "div.#{@alertClass} button.close", -> self.clearAlert.call @, self.speed
@@ -26,4 +26,4 @@ class @DrmDismissableAlert
         $(@).parent().fadeOut speed, ->
             $(@).remove()
 
-new DrmDismissableAlert()
+new DrmModalAlert()

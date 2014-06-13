@@ -1,13 +1,13 @@
-# DRM Popovers
+# DRM Dropdown
 
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
-Popover content appears on click
+A jQuery dropdown navigation menu
 Requires jQuery
 
-## Features:
+## Features
 
-## Usage:
+## Usage
 
 ### Initialize:
 

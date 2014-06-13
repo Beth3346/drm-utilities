@@ -1,6 +1,9 @@
 # DRM Accordion
 
+[![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+
 A jQuery component for creating accordions
+Requires jQuery
 
 ## Accordion Content
 

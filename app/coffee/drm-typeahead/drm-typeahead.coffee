@@ -3,10 +3,7 @@
 ###############################################################################
 "use strict"
 
-( ($) ->
-    class window.DrmTypeahead
-        constructor: () ->
+class @DrmTypeahead
+    constructor: () ->
 
-    new DrmTypeahead()
-
-) jQuery
+new DrmTypeahead()

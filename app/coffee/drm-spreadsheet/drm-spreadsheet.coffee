@@ -3,10 +3,7 @@
 ###############################################################################
 "use strict"
 
-( ($) ->
-    class window.DrmSpreadsheet
-        constructor: (@spreadsheet = $('.drm-spreadsheet')) ->
-    
-    new DrmSpreadsheet()
+class @DrmSpreadsheet
+    constructor: (@spreadsheet = $('.drm-spreadsheet')) ->
 
-) jQuery
+new DrmSpreadsheet()

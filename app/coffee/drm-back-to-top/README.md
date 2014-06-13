@@ -1,6 +1,9 @@
 # DRM Back to Top
 
+[![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+
 Click back to top button to scroll to the top of page
+Requires jQuery
 
 ## Features:
 

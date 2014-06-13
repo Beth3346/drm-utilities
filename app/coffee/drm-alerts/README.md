@@ -1,6 +1,9 @@
 # DRM Alerts
 
+[![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+
 A jQuery component for dismissable alerts
+Requires jQuery
 
 ## Features:
 
