@@ -1,510 +1,513 @@
 ###############################################################################
 # Interactive JS Calendar
 ###############################################################################
-
+# needs support for events with start and end dates and times
+# needs support for events that recur a limited number of times
+# needs edit view
 "use strict"
 
 $ = jQuery
 class @DrmCalendar
     constructor: (@calendarClass = 'drm-calendar', @view = 'month', @addHolidays = yes) ->
         self = @
-        self.body = $ 'body'
-        self.daysPerWeek = 7
-        self.events = []
-        self.today = new Date()
-        self.currentMonth = self.today.getMonth()
-        self.currentYear = self.today.getFullYear()
-        self.currentDate = self.today.getDate()
-        self.calendarInnerClass = "drm-calendar-#{self.view}-view"
         self.calendar = $ ".#{self.calendarClass}"
-        self.calendarNav = $ '.drm-calendar-nav'
-        self.calendarSelect = $ '.drm-calendar-select'
-        self.calendarSelectButton = self.calendarSelect.find 'button[type=submit]'
-        self.addEventForm = self.calendar.find('form.drm-calendar-new-event').hide()
-        self.showEventFormButton = self.calendar.find 'button.drm-show-event-form'
-        self.calendarViewActiveButton = self.calendar.find(".drm-calendar-view-nav button[data-view=#{self.view}]").addClass 'active'
-        self.eventClass = 'drm-events'
-        self.classes =
-            weekend: 'drm-cal-weekend'
-            muted: 'drm-cal-muted'
-            holiday: 'drm-cal-holiday'
-            today: 'drm-cal-today'
-            month: 'drm-month'
-            week: 'drm-week'
-            date: 'drm-date'
 
-        self.months = [
-            'January'
-            'February'
-            'March'
-            'April'
-            'May'
-            'June'
-            'July'
-            'August'
-            'September'
-            'October' 
-            'November' 
-            'December']
+        if self.calendar isnt 0
+            self.body = $ 'body'
+            self.daysPerWeek = 7
+            self.events = []
+            self.today = new Date()
+            self.currentMonth = self.today.getMonth()
+            self.currentYear = self.today.getFullYear()
+            self.currentDate = self.today.getDate()
+            self.calendarInnerClass = "drm-calendar-#{self.view}-view"
+            self.calendarNav = $ '.drm-calendar-nav'
+            self.calendarSelect = $ '.drm-calendar-select'
+            self.calendarSelectButton = self.calendarSelect.find 'button[type=submit]'
+            self.addEventForm = self.calendar.find('form.drm-calendar-new-event').hide()
+            self.showEventFormButton = self.calendar.find 'button.drm-show-event-form'
+            self.calendarViewActiveButton = self.calendar.find(".drm-calendar-view-nav button[data-view=#{self.view}]").addClass 'active'
+            self.eventClass = 'drm-events'
+            self.classes =
+                weekend: 'drm-cal-weekend'
+                muted: 'drm-cal-muted'
+                holiday: 'drm-cal-holiday'
+                today: 'drm-cal-today'
+                month: 'drm-month'
+                week: 'drm-week'
+                date: 'drm-date'
 
-        self.days = [
-            'Sunday'
-            'Monday'
-            'Tuesday'
-            'Wednesday'
-            'Thursday'
-            'Friday'
-            'Saturday']
+            self.months = [
+                'January'
+                'February'
+                'March'
+                'April'
+                'May'
+                'June'
+                'July'
+                'August'
+                'September'
+                'October' 
+                'November' 
+                'December']
 
-        self.hours = [
-            {
-                name: 'All Day Event'
-                time: null
-            }
-            {
-                name: '12am'
-                time: 0
-            }
-            {
-                name: '1am'
-                time: 1
-            }
-            {
-                name: '2am'
-                time: 2
-            }
-            {
-                name: '3am'
-                time: 3
-            }
-            {
-                name: '4am'
-                time: 4
-            }
-            {
-                name: '5am'
-                time: 5
-            }
-            {
-                name: '6am'
-                time: 6
-            }
-            {
-                name: '7am'
-                time: 7
-            }
-            {
-                name: '8am'
-                time: 8
-            }
-            {
-                name: '9am'
-                time: 9
-            }
-            {
-                name: '10am'
-                time: 10
-            }
-            {
-                name: '11am'
-                time: 11
-            }
-            {
-                name: '12pm'
-                time: 12
-            }
-            {
-                name: '1pm'
-                time: 13
-            }
-            {
-                name: '2pm'
-                time: 14
-            }
-            {
-                name: '3pm'
-                time: 15
-            }
-            {
-                name: '4pm'
-                time: 16
-            }
-            {
-                name: '5pm'
-                time: 17
-            }
-            {
-                name: '6pm'
-                time: 18
-            }
-            {
-                name: '7pm'
-                time: 19
-            }
-            {
-                name: '8pm'
-                time: 20
-            }
-            {
-                name: '9pm'
-                time: 21
-            }
-            {
-                name: '10pm'
-                time: 22
-            }
-            {
-                name: '11pm'
-                time: 23
-            }
-        ]
+            self.days = [
+                'Sunday'
+                'Monday'
+                'Tuesday'
+                'Wednesday'
+                'Thursday'
+                'Friday'
+                'Saturday']
 
-        self.holidays = [
-            {
-                name: "New Year's Day"
-                month: "January"
-                eventDate: 1
-                type: "holiday"
-                recurrance: "yearly"
-            }
-            {
-                name: "Martin Luther King's Birthday"
-                month: "January"
-                day: ["Monday"]
-                dayNum: 3
-                type: "holiday"
-                recurrance: "yearly"
-            }
-            {
-                name: "Groundhog Day"
-                month: "February"
-                eventDate: 2
-                type: "holiday"
-                recurrance: "yearly"
-            }
-            {
-                name: "Valentine's Day"
-                month: "February"
-                eventDate: 14
-                type: "holiday"
-                recurrance: "yearly"
-            }
-            {
-                name: "President's Day"
-                month: "February"
-                day: ["Monday"]
-                dayNum: 3
-                type: "holiday"
-                recurrance: "yearly"
-            }
-            {
-                name: "St. Patrick's Day"
-                month: "March"
-                eventDate: 17
-                type: "holiday"
-                recurrance: "yearly"
-            }
-            {
-                name: "April Fool's Day"
-                month: "April"
-                eventDate: 1
-                type: "holiday"
-                recurrance: "yearly"
-            }
-            {
-                name: "Earth Day"
-                month: "April"
-                eventDate: 22
-                type: "holiday"
-                recurrance: "yearly"
-            }
-            {
-                name: "Arbor Day"
-                month: "April"
-                day: ["Friday"]
-                dayNum: "last"
-                type: "holiday"
-                recurrance: "yearly"
-            }
-            {
-                name: "May Day"
-                month: "May"
-                eventDate: 1
-                type: "holiday"
-                recurrance: "yearly"
-            }
-            {
-                name: "Cinco De Mayo"
-                month: "May"
-                eventDate: 5
-                type: "holiday"
-                recurrance: "yearly"
-            }
-            {
-                name: "Mother's Day"
-                month: "May"
-                day: ["Sunday"]
-                dayNum: 2
-                type: "holiday"
-                recurrance: "yearly"
-            }
-            {
-                name: "Memorial Day"
-                month: "May"
-                day: ["Monday"]
-                dayNum: "last"
-                type: "holiday"
-                recurrance: "yearly"
-            }
-            {
-                name: "Flag Day"
-                month: "June"
-                eventDate: 14
-                type: "holiday"
-                recurrance: "yearly"
-            }
-            {
-                name: "Father's Day"
-                month: "June"
-                day: ["Sunday"]
-                type: "holiday"
-                recurrance: "yearly"
-                dayNum: 3
-            }
-            {
-                name: "Independence Day"
-                month: "July"
-                eventDate: 4
-                type: "holiday"
-                recurrance: "yearly"
-            }
-            {
-                name: "Labor Day"
-                month: "September"
-                day: ["Monday"]
-                dayNum: 1
-                type: "holiday"
-                recurrance: "yearly"
-            }
-            {
-                name: "Patroit Day"
-                month: "September"
-                eventDate: 11
-                type: "holiday"
-                recurrance: "yearly"
-            }
-            {
-                name: "Columbus Day"
-                month: "October"
-                day: ["Monday"]
-                dayNum: 2
-                type: "holiday"
-                recurrance: "yearly"
-            }
-            {
-                name: "Halloween"
-                month: "October"
-                eventDate: 31
-                type: "holiday"
-                recurrance: "yearly"
-            }
-            {
-                name: "Veteran's Day"
-                month: "November"
-                eventDate: 11
-                type: "holiday"
-                recurrance: "yearly"
-            }
-            {
-                name: "Thanksgiving"
-                month: "November"
-                day: ["Thursday"]
-                dayNum: 4
-                type: "holiday"
-                recurrance: "yearly"
-            }
-            {
-                name: "Pearl Harbor Day"
-                month: "December"
-                eventDate: 7
-                type: "holiday"
-                recurrance: "yearly"
-            }
-            {
-                name: "Festivus"
-                month: "December"
-                eventDate: 23
-                type: "holiday"
-                recurrance: "yearly"
-            }
-            {
-                name: "Christmas Eve"
-                month: "December"
-                eventDate: 24
-                type: "holiday"
-                recurrance: "yearly"
-            }
-            {
-                name: "Christmas"
-                month: "December"
-                eventDate: 25
-                type: "holiday"
-                recurrance: "yearly"
-            }
-            {
-                name: "Boxing Day"
-                month: "December"
-                eventDate: 26
-                type: "holiday"
-                recurrance: "yearly"
-            }
-            {
-                name: "New Year's Eve"
-                month: "December"
-                eventDate: 31
-                type: "holiday"
-                recurrance: "yearly"
-            }
-        ]
+            self.hours = [
+                {
+                    name: 'All Day Event'
+                    time: null
+                }
+                {
+                    name: '12am'
+                    time: 0
+                }
+                {
+                    name: '1am'
+                    time: 1
+                }
+                {
+                    name: '2am'
+                    time: 2
+                }
+                {
+                    name: '3am'
+                    time: 3
+                }
+                {
+                    name: '4am'
+                    time: 4
+                }
+                {
+                    name: '5am'
+                    time: 5
+                }
+                {
+                    name: '6am'
+                    time: 6
+                }
+                {
+                    name: '7am'
+                    time: 7
+                }
+                {
+                    name: '8am'
+                    time: 8
+                }
+                {
+                    name: '9am'
+                    time: 9
+                }
+                {
+                    name: '10am'
+                    time: 10
+                }
+                {
+                    name: '11am'
+                    time: 11
+                }
+                {
+                    name: '12pm'
+                    time: 12
+                }
+                {
+                    name: '1pm'
+                    time: 13
+                }
+                {
+                    name: '2pm'
+                    time: 14
+                }
+                {
+                    name: '3pm'
+                    time: 15
+                }
+                {
+                    name: '4pm'
+                    time: 16
+                }
+                {
+                    name: '5pm'
+                    time: 17
+                }
+                {
+                    name: '6pm'
+                    time: 18
+                }
+                {
+                    name: '7pm'
+                    time: 19
+                }
+                {
+                    name: '8pm'
+                    time: 20
+                }
+                {
+                    name: '9pm'
+                    time: 21
+                }
+                {
+                    name: '10pm'
+                    time: 22
+                }
+                {
+                    name: '11pm'
+                    time: 23
+                }
+            ]
 
-        if self.addHolidays
-            $.each self.holidays, (key, value) ->
-                self.createEvent value
+            self.holidays = [
+                {
+                    name: "New Year's Day"
+                    month: "January"
+                    eventDate: 1
+                    type: "holiday"
+                    recurrance: "yearly"
+                }
+                {
+                    name: "Martin Luther King's Birthday"
+                    month: "January"
+                    day: ["Monday"]
+                    dayNum: 3
+                    type: "holiday"
+                    recurrance: "yearly"
+                }
+                {
+                    name: "Groundhog Day"
+                    month: "February"
+                    eventDate: 2
+                    type: "holiday"
+                    recurrance: "yearly"
+                }
+                {
+                    name: "Valentine's Day"
+                    month: "February"
+                    eventDate: 14
+                    type: "holiday"
+                    recurrance: "yearly"
+                }
+                {
+                    name: "President's Day"
+                    month: "February"
+                    day: ["Monday"]
+                    dayNum: 3
+                    type: "holiday"
+                    recurrance: "yearly"
+                }
+                {
+                    name: "St. Patrick's Day"
+                    month: "March"
+                    eventDate: 17
+                    type: "holiday"
+                    recurrance: "yearly"
+                }
+                {
+                    name: "April Fool's Day"
+                    month: "April"
+                    eventDate: 1
+                    type: "holiday"
+                    recurrance: "yearly"
+                }
+                {
+                    name: "Earth Day"
+                    month: "April"
+                    eventDate: 22
+                    type: "holiday"
+                    recurrance: "yearly"
+                }
+                {
+                    name: "Arbor Day"
+                    month: "April"
+                    day: ["Friday"]
+                    dayNum: "last"
+                    type: "holiday"
+                    recurrance: "yearly"
+                }
+                {
+                    name: "May Day"
+                    month: "May"
+                    eventDate: 1
+                    type: "holiday"
+                    recurrance: "yearly"
+                }
+                {
+                    name: "Cinco De Mayo"
+                    month: "May"
+                    eventDate: 5
+                    type: "holiday"
+                    recurrance: "yearly"
+                }
+                {
+                    name: "Mother's Day"
+                    month: "May"
+                    day: ["Sunday"]
+                    dayNum: 2
+                    type: "holiday"
+                    recurrance: "yearly"
+                }
+                {
+                    name: "Memorial Day"
+                    month: "May"
+                    day: ["Monday"]
+                    dayNum: "last"
+                    type: "holiday"
+                    recurrance: "yearly"
+                }
+                {
+                    name: "Flag Day"
+                    month: "June"
+                    eventDate: 14
+                    type: "holiday"
+                    recurrance: "yearly"
+                }
+                {
+                    name: "Father's Day"
+                    month: "June"
+                    day: ["Sunday"]
+                    type: "holiday"
+                    recurrance: "yearly"
+                    dayNum: 3
+                }
+                {
+                    name: "Independence Day"
+                    month: "July"
+                    eventDate: 4
+                    type: "holiday"
+                    recurrance: "yearly"
+                }
+                {
+                    name: "Labor Day"
+                    month: "September"
+                    day: ["Monday"]
+                    dayNum: 1
+                    type: "holiday"
+                    recurrance: "yearly"
+                }
+                {
+                    name: "Patroit Day"
+                    month: "September"
+                    eventDate: 11
+                    type: "holiday"
+                    recurrance: "yearly"
+                }
+                {
+                    name: "Columbus Day"
+                    month: "October"
+                    day: ["Monday"]
+                    dayNum: 2
+                    type: "holiday"
+                    recurrance: "yearly"
+                }
+                {
+                    name: "Halloween"
+                    month: "October"
+                    eventDate: 31
+                    type: "holiday"
+                    recurrance: "yearly"
+                }
+                {
+                    name: "Veteran's Day"
+                    month: "November"
+                    eventDate: 11
+                    type: "holiday"
+                    recurrance: "yearly"
+                }
+                {
+                    name: "Thanksgiving"
+                    month: "November"
+                    day: ["Thursday"]
+                    dayNum: 4
+                    type: "holiday"
+                    recurrance: "yearly"
+                }
+                {
+                    name: "Pearl Harbor Day"
+                    month: "December"
+                    eventDate: 7
+                    type: "holiday"
+                    recurrance: "yearly"
+                }
+                {
+                    name: "Festivus"
+                    month: "December"
+                    eventDate: 23
+                    type: "holiday"
+                    recurrance: "yearly"
+                }
+                {
+                    name: "Christmas Eve"
+                    month: "December"
+                    eventDate: 24
+                    type: "holiday"
+                    recurrance: "yearly"
+                }
+                {
+                    name: "Christmas"
+                    month: "December"
+                    eventDate: 25
+                    type: "holiday"
+                    recurrance: "yearly"
+                }
+                {
+                    name: "Boxing Day"
+                    month: "December"
+                    eventDate: 26
+                    type: "holiday"
+                    recurrance: "yearly"
+                }
+                {
+                    name: "New Year's Eve"
+                    month: "December"
+                    eventDate: 31
+                    type: "holiday"
+                    recurrance: "yearly"
+                }
+            ]
 
-        if self.calendar.length > 0
-            self.createCalendar self.currentMonth, self.currentDate, self.currentYear
+            if self.addHolidays
+                $.each self.holidays, (key, value) ->
+                    self.createEvent value
 
-        self.calendar.on 'click', '.drm-calendar-date-prev, .drm-calendar-date-next', ->
-            # skip date forward or backward
-            direction = $(@).data 'dir'
-            self.advanceDate.call @, direction
+            if self.calendar.length > 0
+                self.createCalendar self.currentMonth, self.currentDate, self.currentYear
 
-        self.calendar.on 'click', '.drm-calendar-week-prev, .drm-calendar-week-next', ->
-            # skip week forward or backward
-            direction = $(@).data 'dir'
-            self.advanceWeek.call @, direction
+            self.calendar.on 'click', '.drm-calendar-date-prev, .drm-calendar-date-next', ->
+                # skip date forward or backward
+                direction = $(@).data 'dir'
+                self.advanceDate.call @, direction
 
-        self.calendar.on 'click', '.drm-calendar-month-prev, .drm-calendar-month-next', ->
-            # skip month forward or backward
-            direction = $(@).data 'dir'
-            self.advanceMonth.call @, direction
+            self.calendar.on 'click', '.drm-calendar-week-prev, .drm-calendar-week-next', ->
+                # skip week forward or backward
+                direction = $(@).data 'dir'
+                self.advanceWeek.call @, direction
 
-        self.calendar.on 'click', '.drm-calendar-year-prev, .drm-calendar-year-next', ->
-            # skip year forward or backward
-            direction = $(@).data 'dir'
-            self.advanceYear.call @, direction
+            self.calendar.on 'click', '.drm-calendar-month-prev, .drm-calendar-month-next', ->
+                # skip month forward or backward
+                direction = $(@).data 'dir'
+                self.advanceMonth.call @, direction
 
-        self.calendar.on 'click', '.drm-calendar-current', ->
-            # go to today's date
-            self.changeCalendar.call @, self.currentMonth, self.currentDate, self.currentYear
+            self.calendar.on 'click', '.drm-calendar-year-prev, .drm-calendar-year-next', ->
+                # skip year forward or backward
+                direction = $(@).data 'dir'
+                self.advanceYear.call @, direction
 
-        self.calendar.on 'click', '.drm-calendar-select button[type=submit]', (e) ->
-            # go to a specific date
-            e.preventDefault()
-            that = $ @
-            fields = that.parent().find(':input').not 'button[type=submit]'
-            currentDate =
-                month: that.parent().find('#month').val()
-                date: that.parent().find('#date').val()
-                year: that.parent().find('#year').val()
+            self.calendar.on 'click', '.drm-calendar-current', ->
+                # go to today's date
+                self.changeCalendar.call @, self.currentMonth, self.currentDate, self.currentYear
 
-            # clear form
-            self.clearForm fields
+            self.calendar.on 'click', '.drm-calendar-select button[type=submit]', (e) ->
+                # go to a specific date
+                e.preventDefault()
+                that = $ @
+                fields = that.parent().find(':input').not 'button[type=submit]'
+                currentDate =
+                    month: that.parent().find('#month').val()
+                    date: that.parent().find('#date').val()
+                    year: that.parent().find('#year').val()
 
-            # parse form data
-            $.each currentDate, (key, value) ->
-                value = parseInt value, 10
-                value
+                # clear form
+                self.clearForm fields
 
-            # change calendar view
-            self.changeCalendar.call self, currentDate.month, currentDate.date, currentDate.year
+                # parse form data
+                $.each currentDate, (key, value) ->
+                    parseInt value, 10
 
-        self.calendar.on 'click', 'button.drm-show-event-form', ->
-            # show add event form
-            that = $ @
-            if self.addEventForm.is(':hidden')
-                self.addEventForm.slideDown()
-                that.text 'Hide Form'
-            else
-                self.addEventForm.slideUp()
-                that.text 'Add New Event'
+                # change calendar view
+                self.changeCalendar.call self, currentDate.month, currentDate.date, currentDate.year
 
-        self.calendar.on 'click', '.drm-calendar-view-nav button', (e) ->
-            # change calendar view
-            e.preventDefault()
-            that = $ @
-            that.addClass 'active'
-            self.calendar.find(".drm-calendar-view-nav button.active").removeClass 'active'
-            view = that.data 'view'
+            self.calendar.on 'click', 'button.drm-show-event-form', ->
+                # show add event form
+                that = $ @
+                if self.addEventForm.is(':hidden')
+                    self.addEventForm.slideDown()
+                    that.text 'Hide Form'
+                else
+                    self.addEventForm.slideUp()
+                    that.text 'Add New Event'
 
-            self.changeCalendarView view
+            self.calendar.on 'click', '.drm-calendar-view-nav button', (e) ->
+                # change calendar view
+                e.preventDefault()
+                that = $ @
+                that.addClass 'active'
+                self.calendar.find(".drm-calendar-view-nav button.active").removeClass 'active'
+                view = that.data 'view'
 
-        self.calendar.on 'click', 'form.drm-calendar-new-event button.addEvent', (e) ->
-            # add an new event to the events object
-            e.preventDefault()
-            currentMonth = $(".#{self.calendarInnerClass}").data 'month'
-            newEvent =
-                name: if self.addEventForm.find('#event-name').val() is '' then null else self.addEventForm.find('#event-name').val()
-                recurrance: if self.addEventForm.find('#recurrance').val() is '' then 'none' else self.addEventForm.find('#recurrance').val()
-                month: if self.addEventForm.find('#month').val() is '' then null else self.addEventForm.find('#month').val()
-                year: if self.addEventForm.find('#year').val() is '' then null else parseInt(self.addEventForm.find('#year').val(), 10)
-                eventDate: if self.addEventForm.find('#event-date').val() is '' then null else parseInt(self.addEventForm.find('#event-date').val(), 10)
-                time: if self.addEventForm.find('#time').val() is '' then null else self.addEventForm.find('#time').val()
-                day: []
-                dayNum: if self.addEventForm.find('#day-num').val() is '' then null else self.addEventForm.find('#day-num').val()
-                type: if self.addEventForm.find('#event-type').val() is '' then null else self.addEventForm.find('#event-type').val()
-                notes: if self.addEventForm.find('#event-notes').val() is '' then null else self.addEventForm.find('#event-notes').val()
+                self.changeCalendarView view
 
-            self.addEventForm.find('input.day-checkbox:checked').each ->
-                newEvent.day.push $.trim($(@).val())
-            if newEvent.day.length is 0
-                newEvent.day = null
+            self.calendar.on 'click', 'form.drm-calendar-new-event button.addEvent', (e) ->
+                # add an new event to the events object
+                e.preventDefault()
+                currentMonth = $(".#{self.calendarInnerClass}").data 'month'
+                newEvent =
+                    name: if self.addEventForm.find('#event-name').val() is '' then null else self.addEventForm.find('#event-name').val()
+                    recurrance: if self.addEventForm.find('#recurrance').val() is '' then 'none' else self.addEventForm.find('#recurrance').val()
+                    month: if self.addEventForm.find('#month').val() is '' then null else self.addEventForm.find('#month').val()
+                    year: if self.addEventForm.find('#year').val() is '' then null else parseInt(self.addEventForm.find('#year').val(), 10)
+                    eventDate: if self.addEventForm.find('#event-date').val() is '' then null else parseInt(self.addEventForm.find('#event-date').val(), 10)
+                    time: if self.addEventForm.find('#time').val() is '' then null else self.addEventForm.find('#time').val()
+                    day: []
+                    dayNum: if self.addEventForm.find('#day-num').val() is '' then null else self.addEventForm.find('#day-num').val()
+                    type: if self.addEventForm.find('#event-type').val() is '' then null else self.addEventForm.find('#event-type').val()
+                    notes: if self.addEventForm.find('#event-notes').val() is '' then null else self.addEventForm.find('#event-notes').val()
 
-            self.createEvent newEvent
-            newMonth = if newEvent.month? then $.inArray newEvent.month, self.months else self.currentMonth
-            if newMonth isnt currentMonth then self.changeCalendar.call @, newMonth, newEvent.eventDate, self.currentYear
-            # reset form
-            self.addEventForm.find(':input').not('button[type=submit]').val ''
-            self.addEventForm.find('input:checked').prop 'checked', false
+                self.addEventForm.find('input.day-checkbox:checked').each ->
+                    newEvent.day.push $.trim($(@).val())
+                if newEvent.day.length is 0
+                    newEvent.day = null
 
-        self.calendar.on 'click', ".drm-date", ->
-            # show event form and fill out date infomation when a date is clicked
-            that = $ @
+                self.createEvent newEvent
+                newMonth = if newEvent.month? then $.inArray newEvent.month, self.months else self.currentMonth
+                if newMonth isnt currentMonth then self.changeCalendar.call @, newMonth, newEvent.eventDate, self.currentYear
+                # reset form
+                self.addEventForm.find(':input').not('button[type=submit]').val ''
+                self.addEventForm.find('input:checked').prop 'checked', false
 
-            if self.addEventForm.is ':hidden'
-                self.addEventForm.slideDown()
-                self.showEventFormButton.text 'Hide Form'
+            self.calendar.on 'click', ".drm-date", ->
+                # show event form and fill out date infomation when a date is clicked
+                that = $ @
 
-            month: self.addEventForm.find('#month').val self.months[that.data('month')]
-            year: self.addEventForm.find('#year').val that.data('year')
-            eventDate: self.addEventForm.find('#event-date').val that.data('date')
-            time: self.addEventForm.find('#time').val that.data('hour')
+                if self.addEventForm.is ':hidden'
+                    self.addEventForm.slideDown()
+                    self.showEventFormButton.text 'Hide Form'
 
-        self.calendar.on 'click', "ul.#{self.eventClass} a", (e) ->
-            # show event details
-            that = $ @
-            day = that.closest '.drm-date'
-            eventId = that.data 'event'
-            fullDate =
-                month: self.months[day.data('month')]
-                date: day.data 'date'
-                year: day.data 'year'
-            e.preventDefault()
-            e.stopPropagation()
-            self.showEventDetails eventId, fullDate
+                month: self.addEventForm.find('#month').val self.months[that.data('month')]
+                year: self.addEventForm.find('#year').val that.data('year')
+                eventDate: self.addEventForm.find('#event-date').val that.data('date')
+                time: self.addEventForm.find('#time').val that.data('hour')
 
-        self.body.on 'click', 'div.drm-calendar-event-details', (e) ->
-            e.stopPropagation()
+            self.calendar.on 'click', "ul.#{self.eventClass} a", (e) ->
+                # show event details
+                that = $ @
+                day = that.closest '.drm-date'
+                eventId = that.data 'event'
+                fullDate =
+                    month: self.months[day.data('month')]
+                    date: day.data 'date'
+                    year: day.data 'year'
+                e.preventDefault()
+                e.stopPropagation()
+                self.showEventDetails eventId, fullDate
 
-        self.body.on 'click', 'div.drm-calendar-event-details button.drm-event-delete', (e) ->
-            e.preventDefault()
-            that = $ @
-            eventId = that.data 'event'
-            index = self.getEventIndex eventId
-            self.removeCalendarEvent eventId, index
-            self.removeEventDetails e
+            self.body.on 'click', 'div.drm-calendar-event-details', (e) ->
+                e.stopPropagation()
 
-        self.body.on 'click', 'div.drm-calendar-event-details button.drm-event-close', self.removeEventDetails
+            self.body.on 'click', 'div.drm-calendar-event-details button.drm-event-delete', (e) ->
+                e.preventDefault()
+                that = $ @
+                eventId = that.data 'event'
+                index = self.getEventIndex eventId
+                self.removeCalendarEvent eventId, index
+                self.removeEventDetails e
+
+            self.body.on 'click', 'div.drm-calendar-event-details button.drm-event-close', self.removeEventDetails
 
     capitalize: (str) ->
         str.toLowerCase().replace /^.|\s\S/g, (a) ->
@@ -531,12 +534,11 @@ class @DrmCalendar
 
     getWeekNum: (dayNum, day, currentMonth, currentYear) =>
         # gets the week of the month which an event occurs
-        self = @
-        calendarInner = self.calendar.find "div.#{@calendarInnerClass}"
+        calendarInner = @calendar.find "div.#{@calendarInnerClass}"
         weeks = calendarInner.find '.drm-week'
-        firstDay = self.getDayOfWeek currentMonth, 1, currentYear
-        dayShift = if firstDay is self.daysPerWeek then 0 else firstDay
-        numberWeeks = self.getWeeksInMonth currentMonth, currentYear
+        firstDay = @getDayOfWeek currentMonth, 1, currentYear
+        dayShift = if firstDay is @daysPerWeek then 0 else firstDay
+        numberWeeks = @getWeeksInMonth currentMonth, currentYear
         lastWeekLength = weeks.eq(numberWeeks).length
 
         if dayNum is 'last' and dayShift <= day
@@ -546,8 +548,7 @@ class @DrmCalendar
         else
             eventWeekNum = parseInt(dayNum, 10) - 1
 
-        eventWeekNum = if dayShift <= day then eventWeekNum else eventWeekNum + 1
-        eventWeekNum
+        return if dayShift <= day then eventWeekNum else eventWeekNum + 1
 
     getDatesInWeek: (currentMonth, currentDate, currentYear) =>
         firstDay = @getDayOfWeek currentMonth, 1, currentYear
@@ -617,9 +618,9 @@ class @DrmCalendar
         weekNumber
 
     createEvent: (newEvent) =>
-        id = @events.length
+        _id = @events.length
         obj =
-            id: id
+            _id: _id
             name: if newEvent.name? then newEvent.name else null
             recurrance: if newEvent.recurrance? then newEvent.recurrance.toLowerCase() else 'none'
             month: if newEvent.month? then newEvent.month else null
@@ -631,7 +632,7 @@ class @DrmCalendar
             type: if newEvent.type? then newEvent.type.toLowerCase() else null
             notes: if newEvent.notes? then newEvent.notes else null
         @events.push obj
-        @addEventsToCalendar @events[obj.id]
+        @addEventsToCalendar @events[obj._id]
 
     removeCalendarEvent: (eventId, index) =>
         events = @calendar.find "ul.#{@eventClass} a[data-event=#{eventId}]"
@@ -641,8 +642,7 @@ class @DrmCalendar
     getEventIndex: (eventId) =>
         index = null
         $.each @events, (key, value) ->
-            if value.id is eventId
-                index = key
+            if value._id is eventId then index = key
             index
         index
 
@@ -653,18 +653,19 @@ class @DrmCalendar
         eventDate = "#{fullDate.month} #{fullDate.date}, #{fullDate.year}"
 
         eventFrequency = do ->
-            recurrance = events.recurrance
-            if recurrance is 'yearly' and events.dayNum?
+            if events.recurrance is 'yearly' and events.dayNum?
                 "Every #{events.dayNum} #{events.day} of #{events.month}"
-            else if recurrance is 'yearly'
+            else if events.recurrance is 'yearly'
                 "Every #{events.eventDate} of #{events.month}"
-            else if recurrance is 'monthly'
+            else if events.recurrance is 'monthly' and events.dayNum?
                 "Every #{events.dayNum} #{events.day} of the month"
-            else if recurrance is 'biweekly'
+            else if events.recurrance is 'monthly'
+                "Every #{events.eventDate} of the month"
+            else if events.recurrance is 'biweekly'
                 "Every other #{events.day}"
-            else if recurrance is 'weekly'
+            else if events.recurrance is 'weekly'
                 "Every #{events.day}"
-            else if recurrance is 'daily'
+            else if events.recurrance is 'daily'
                 "Every Day"
             else
                 "One Time Event"
@@ -686,12 +687,12 @@ class @DrmCalendar
             type: 'button'
         editButton = $ "<button></button>",
             class: 'drm-event-edit'
-            'data-event': events.id
+            'data-event': events._id
             text: 'Edit'
             type: 'button'
         deleteButton = $ "<button></button>",
             class: 'drm-event-delete'
-            'data-event': events.id
+            'data-event': events._id
             text: 'Delete'
             type: 'button'
         eventDetailList = $ '<ul></ul>',
@@ -835,7 +836,7 @@ class @DrmCalendar
 
             eventHtml = $ '<a></a>',
                 href: '#'
-                'data-event': events.id
+                'data-event': events._id
                 html: eventContent
 
             if length is 0
