@@ -15,41 +15,43 @@ class @DrmFlexibleGrid
     constructor: (@gridClass = 'drm-flexible-grid', @imagesPerRow = 4, @flex = true) ->
         self = @
         self.grid = $ ".#{self.gridClass}"
-        self.gridNav = $ '.drm-grid-nav'
-        self.items = self.grid.find('.drm-grid-item').hide()
-        hash = window.location.hash
 
-        $(window).load ->
-            self.tags = self.getTags()
-            filter = if hash then hash.replace /^#/, '' else null
-            self.addFilterButtons self.tags
-            self.filterListItems filter
+        if self.grid.length isnt 0
+            self.gridNav = $ '.drm-grid-nav'
+            self.items = self.grid.find('.drm-grid-item').hide()
+            hash = window.location.hash
 
-            if filter
-                activeButton = $("button.drm-grid-filter[data-filter=#{filter}]")
-                activeButton.siblings('button').removeClass 'active'
-                activeButton.addClass 'active'
+            $(window).load ->
+                self.tags = self.getTags()
+                filter = if hash then hash.replace /^#/, '' else null
+                self.addFilterButtons self.tags
+                self.filterListItems filter
 
-        if self.flex
-            $(window).resize ->
-                items = self.grid.find '.drm-grid-item'
-                self.positionListItems items
-                self.resizeCurtain()
+                if filter
+                    activeButton = $("button.drm-grid-filter[data-filter=#{filter}]")
+                    activeButton.siblings('button').removeClass 'active'
+                    activeButton.addClass 'active'
 
-        $(window).load self.resizeCurtain
+            if self.flex
+                $(window).resize ->
+                    items = self.grid.find '.drm-grid-item'
+                    self.positionListItems items
+                    self.resizeCurtain()
 
-        self.grid.on 'mouseenter', '.drm-grid-item', ->
-            $(@).find('.curtain').stop().fadeIn 'fast'
+            $(window).load self.resizeCurtain
 
-        self.grid.on 'mouseleave', '.drm-grid-item', ->
-            $(@).find('.curtain').stop().fadeOut 'fast'
+            self.grid.on 'mouseenter', '.drm-grid-item', ->
+                $(@).find('.curtain').stop().fadeIn 'fast'
 
-        self.gridNav.on 'click', 'button.drm-grid-filter', ->
-            that = $ @
-            filter = that.data('filter').toLowerCase()
-            self.filterListItems filter
-            that.siblings('button').removeClass 'active'
-            that.addClass 'active'
+            self.grid.on 'mouseleave', '.drm-grid-item', ->
+                $(@).find('.curtain').stop().fadeOut 'fast'
+
+            self.gridNav.on 'click', 'button.drm-grid-filter', ->
+                that = $ @
+                filter = that.data('filter').toLowerCase()
+                self.filterListItems filter
+                that.siblings('button').removeClass 'active'
+                that.addClass 'active'
 
     getTags: =>
         self = @
