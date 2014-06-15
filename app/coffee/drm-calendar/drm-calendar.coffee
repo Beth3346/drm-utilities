@@ -444,31 +444,31 @@ class @DrmCalendar
 
             self.calendar.on 'click', 'form.drm-calendar-new-event button.addEvent', (e) ->
                 # add an new event to the events object
+                # this code should be moved to its own method
+                # write a method to get the form data and send the object to the createEvent method
                 e.preventDefault()
-                currentMonth = $(".#{self.calendarInnerClass}").data 'month'
-                newEvent =
-                    name: if self.addEventForm.find('#event-name').val() is '' then null else self.addEventForm.find('#event-name').val()
-                    recurrance: if self.addEventForm.find('#recurrance').val() is '' then 'none' else self.addEventForm.find('#recurrance').val()
-                    month: if self.addEventForm.find('#month').val() is '' then null else self.addEventForm.find('#month').val()
-                    year: if self.addEventForm.find('#year').val() is '' then null else parseInt(self.addEventForm.find('#year').val(), 10)
-                    eventDate: if self.addEventForm.find('#event-date').val() is '' then null else parseInt(self.addEventForm.find('#event-date').val(), 10)
-                    time: if self.addEventForm.find('#time').val() is '' then null else self.addEventForm.find('#time').val()
-                    day: []
-                    dayNum: if self.addEventForm.find('#day-num').val() is '' then null else self.addEventForm.find('#day-num').val()
-                    type: if self.addEventForm.find('#event-type').val() is '' then null else self.addEventForm.find('#event-type').val()
-                    notes: if self.addEventForm.find('#event-notes').val() is '' then null else self.addEventForm.find('#event-notes').val()
+                newEvent = self.getFormData self.addEventForm
+                console.log newEvent
+                
+                # currentMonth = $(".#{self.calendarInnerClass}").data 'month'
+                # newEvent =
+                #     name: if self.addEventForm.find('#event-name').val() is '' then null else self.addEventForm.find('#event-name').val()
+                #     recurrance: if self.addEventForm.find('#recurrance').val() is '' then 'none' else self.addEventForm.find('#recurrance').val()
+                #     month: if self.addEventForm.find('#month').val() is '' then null else self.addEventForm.find('#month').val()
+                #     year: if self.addEventForm.find('#year').val() is '' then null else parseInt(self.addEventForm.find('#year').val(), 10)
+                #     eventDate: if self.addEventForm.find('#event-date').val() is '' then null else parseInt(self.addEventForm.find('#event-date').val(), 10)
+                #     time: if self.addEventForm.find('#time').val() is '' then null else self.addEventForm.find('#time').val()
+                #     day: []
+                #     dayNum: if self.addEventForm.find('#day-num').val() is '' then null else self.addEventForm.find('#day-num').val()
+                #     type: if self.addEventForm.find('#event-type').val() is '' then null else self.addEventForm.find('#event-type').val()
+                #     notes: if self.addEventForm.find('#event-notes').val() is '' then null else self.addEventForm.find('#event-notes').val()
 
-                self.addEventForm.find('input.day-checkbox:checked').each ->
-                    newEvent.day.push $.trim($(@).val())
-                if newEvent.day.length is 0
-                    newEvent.day = null
-
-                self.createEvent newEvent
-                newMonth = if newEvent.month? then $.inArray newEvent.month, self.months else self.currentMonth
-                if newMonth isnt currentMonth then self.changeCalendar.call @, newMonth, newEvent.eventDate, self.currentYear
-                # reset form
-                self.addEventForm.find(':input').not('button[type=submit]').val ''
-                self.addEventForm.find('input:checked').prop 'checked', false
+                # self.createEvent newEvent
+                # newMonth = if newEvent.month? then $.inArray newEvent.month, self.months else self.currentMonth
+                # if newMonth isnt currentMonth then self.changeCalendar.call @, newMonth, newEvent.eventDate, self.currentYear
+                # # reset form
+                # self.addEventForm.find(':input').not('button[type=submit]').val ''
+                # self.addEventForm.find('input:checked').prop 'checked', false
 
             self.calendar.on 'click', ".drm-date", ->
                 # show event form and fill out date infomation when a date is clicked
@@ -499,6 +499,13 @@ class @DrmCalendar
             self.body.on 'click', 'div.drm-calendar-event-details', (e) ->
                 e.stopPropagation()
 
+            self.body.on 'click', 'div.drm-calendar-event-details button.drm-event-edit', (e) ->
+                e.preventDefault()
+                that = $ @
+                eventId = that.data 'event'
+                index = self.getEventIndex eventId
+                console.log "editing event #{index}"
+
             self.body.on 'click', 'div.drm-calendar-event-details button.drm-event-delete', (e) ->
                 e.preventDefault()
                 that = $ @
@@ -512,6 +519,29 @@ class @DrmCalendar
     capitalize: (str) ->
         str.toLowerCase().replace /^.|\s\S/g, (a) ->
             a.toUpperCase()
+
+    getFormData: (form) ->
+        # get form data and return an object
+        formInput = {}
+        fields = form.find(':input').not 'button'
+
+        # self.addEventForm.find('input.day-checkbox:checked').each ->
+        #     newEvent.day.push $.trim($(@).val())
+        # if newEvent.day.length is 0
+        #     newEvent.day = null
+
+        $.each fields, (key, value) ->
+            that = $ value
+            id = that.attr 'id'
+
+            if that.attr('type') is 'checkbox'
+                input = if that.is(':checked') then $.trim(that.val()) else null
+            else
+                input = if $.trim(that.val()) is '' then null else $.trim(that.val())
+
+            formInput["#{id}"] = input
+            return
+        formInput
 
     clearForm: (fields) ->
         $.each fields, (key, value) ->
