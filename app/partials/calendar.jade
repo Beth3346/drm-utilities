@@ -9,7 +9,7 @@ section
         button.drm-show-event-form.button-solid-radius(type="button") Add New Event
         form.drm-calendar-new-event#drm-calendar-new-event(method="Get" action="" role="form")
             label(for="event_name") Event Name:
-            input#event-name(type="text" name="event_name" required data-min-length="3" data-max-length="50")
+            input#name(type="text" name="event_name" required data-min-length="3" data-max-length="50")
             h3.drm-bold Event Recurrance:
             .drm-inline-control-group
                 label(for="recurrance") Recurrance
@@ -37,17 +37,11 @@ section
                     option(value="November") November
                     option(value="December") December
                 label(for="event_date") Date:
-                input.drm-valid-integer#event-date(type="text" name="event_date" data-min-value="1" data-max-value="31" data-min-length="1" data-max-length="2")
+                input.drm-valid-integer#eventDate(type="text" name="event_date" data-min-value="1" data-max-value="31" data-min-length="1" data-max-length="2")
                 label(for="year") Year:
                 input.drm-valid-integer#year(type="text" name="year" data-min-value="1" data-min-length="4" data-max-length="4")
                 label(for="time") Time:
                 input.drm-valid-time#time(type="text" name="time" placeholder="12:00pm")
-
-            .drm-inline-control-group
-                .drm-control-group
-                    label
-                        input.day-checkbox#all-day-event(type="checkbox" name="all_day_event" value=true)
-                        | All Day Event
 
             .drm-inline-control-group
                 .drm-control-group
@@ -75,7 +69,7 @@ section
 
             .drm-inline-control-group
                 label(for="day_num") Week Number
-                select#day-num(name="day_num")
+                select#dayNum(name="day_num")
                     option(value="") Select Week
                     option(value="1") First
                     option(value="2") Second
@@ -85,9 +79,9 @@ section
 
             h3.drm-bold Event Details:
             label(for="event_type") Event Type:
-            input#event-type(type="text" name="event_type" placeholder="holiday")
+            input#type(type="text" name="event_type" placeholder="holiday")
             label(for="event_notes") Event Type:
-            textarea#event-notes(name="event_notes" cols="30" rows="2" placeholder="These are some notes") 
+            textarea#notes(name="event_notes" cols="30" rows="2" placeholder="These are some notes") 
 
             button.addEvent#submit(type="submit") Add Event
 

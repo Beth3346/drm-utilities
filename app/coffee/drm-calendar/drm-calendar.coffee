@@ -448,27 +448,15 @@ class @DrmCalendar
                 # write a method to get the form data and send the object to the createEvent method
                 e.preventDefault()
                 newEvent = self.getFormData self.addEventForm
-                console.log newEvent
-                
-                # currentMonth = $(".#{self.calendarInnerClass}").data 'month'
-                # newEvent =
-                #     name: if self.addEventForm.find('#event-name').val() is '' then null else self.addEventForm.find('#event-name').val()
-                #     recurrance: if self.addEventForm.find('#recurrance').val() is '' then 'none' else self.addEventForm.find('#recurrance').val()
-                #     month: if self.addEventForm.find('#month').val() is '' then null else self.addEventForm.find('#month').val()
-                #     year: if self.addEventForm.find('#year').val() is '' then null else parseInt(self.addEventForm.find('#year').val(), 10)
-                #     eventDate: if self.addEventForm.find('#event-date').val() is '' then null else parseInt(self.addEventForm.find('#event-date').val(), 10)
-                #     time: if self.addEventForm.find('#time').val() is '' then null else self.addEventForm.find('#time').val()
-                #     day: []
-                #     dayNum: if self.addEventForm.find('#day-num').val() is '' then null else self.addEventForm.find('#day-num').val()
-                #     type: if self.addEventForm.find('#event-type').val() is '' then null else self.addEventForm.find('#event-type').val()
-                #     notes: if self.addEventForm.find('#event-notes').val() is '' then null else self.addEventForm.find('#event-notes').val()
+                currentMonth = $(".#{self.calendarInnerClass}").data 'month'
 
-                # self.createEvent newEvent
-                # newMonth = if newEvent.month? then $.inArray newEvent.month, self.months else self.currentMonth
-                # if newMonth isnt currentMonth then self.changeCalendar.call @, newMonth, newEvent.eventDate, self.currentYear
-                # # reset form
-                # self.addEventForm.find(':input').not('button[type=submit]').val ''
-                # self.addEventForm.find('input:checked').prop 'checked', false
+                self.createEvent newEvent
+
+                newMonth = if newEvent.month? then $.inArray newEvent.month, self.months else self.currentMonth
+                if newMonth isnt currentMonth then self.changeCalendar.call @, newMonth, newEvent.eventDate, self.currentYear
+                # reset form
+                fields = self.addEventForm.find(':input').not('button[type=submit]').val ''
+                self.clearForm fields                
 
             self.calendar.on 'click', ".drm-date", ->
                 # show event form and fill out date infomation when a date is clicked
@@ -480,7 +468,7 @@ class @DrmCalendar
 
                 month: self.addEventForm.find('#month').val self.months[that.data('month')]
                 year: self.addEventForm.find('#year').val that.data('year')
-                eventDate: self.addEventForm.find('#event-date').val that.data('date')
+                eventDate: self.addEventForm.find('#eventDate').val that.data('date')
                 time: self.addEventForm.find('#time').val that.data('hour')
 
             self.calendar.on 'click', "ul.#{self.eventClass} a", (e) ->
@@ -522,30 +510,44 @@ class @DrmCalendar
 
     getFormData: (form) ->
         # get form data and return an object
+        # need to remove dashes from ids
         formInput = {}
-        fields = form.find(':input').not 'button'
+        fields = form.find(':input').not('button').not ':checkbox'
+        checkboxes = form.find 'input:checked'
 
-        # self.addEventForm.find('input.day-checkbox:checked').each ->
-        #     newEvent.day.push $.trim($(@).val())
-        # if newEvent.day.length is 0
-        #     newEvent.day = null
+        if checkboxes.length isnt 0
+            boxIds = []
+
+            checkboxes.each ->
+                boxIds.push $(@).attr 'id'
+
+            boxIds = $.unique boxIds
+
+            $.each boxIds, (key, value) ->
+                checkboxValues = []
+                boxes = form.find "input:checked##{value}"
+
+                boxes.each ->
+                    checkboxValues.push $.trim($(@).val())
+
+                formInput["#{value}"] = checkboxValues
+                return
 
         $.each fields, (key, value) ->
             that = $ value
             id = that.attr 'id'
 
-            if that.attr('type') is 'checkbox'
-                input = if that.is(':checked') then $.trim(that.val()) else null
-            else
-                input = if $.trim(that.val()) is '' then null else $.trim(that.val())
+            input = if $.trim(that.val()) is '' then null else $.trim(that.val())
 
-            formInput["#{id}"] = input
+            if input? then formInput["#{id}"] = input
             return
+
         formInput
 
     clearForm: (fields) ->
-        $.each fields, (key, value) ->
-            $(@).val ''
+        fields.each ->
+            that = $ @
+            if that.attr('type') is 'checkbox' then that.prop 'checked', false else that.val ''
 
     getDaysInMonth: (month, year) ->
         month = month + 1
@@ -654,13 +656,14 @@ class @DrmCalendar
             name: if newEvent.name? then newEvent.name else null
             recurrance: if newEvent.recurrance? then newEvent.recurrance.toLowerCase() else 'none'
             month: if newEvent.month? then newEvent.month else null
-            year: if newEvent.year? then newEvent.year else null
-            eventDate: if newEvent.eventDate? then newEvent.eventDate else null
+            year: if newEvent.year? then parseInt(newEvent.year, 10) else null
+            eventDate: if newEvent.eventDate? then parseInt(newEvent.eventDate, 10) else null
             time: if newEvent.time? then newEvent.time else null
             day: if newEvent.day? then newEvent.day else null
             dayNum: if newEvent.dayNum? then newEvent.dayNum else null
             type: if newEvent.type? then newEvent.type.toLowerCase() else null
             notes: if newEvent.notes? then newEvent.notes else null
+
         @events.push obj
         @addEventsToCalendar @events[obj._id]
 
