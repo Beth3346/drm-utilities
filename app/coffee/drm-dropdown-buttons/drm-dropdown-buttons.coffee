@@ -30,6 +30,7 @@ class @DrmDropdownButton
 
             unless openButtons.length is 0
                 self.changeMenu.call openButtons, 'showing', self.speed, self.activeClass
+            e.stopPropagation()
 
     changeMenu: (status, speed, activeClass) ->
         if status is 'hidden' then $(@).next('ul').addClass(activeClass).slideDown speed else $(@).next('ul').removeClass(activeClass).slideUp speed

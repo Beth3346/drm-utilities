@@ -11,8 +11,8 @@ class @DrmSort
         self = @
 
         if self.autoSort
-            $.each self.lists, (key, value) ->
-                that = $ value
+            $.each self.lists,  ->
+                that = $ @
                 values = self.getValues that
                 self.renderSort values, 'ascending', that
 
@@ -45,7 +45,7 @@ class @DrmSort
             # 00:00pm
             time: new RegExp '^(?:[12][012]|[0]?[0-9]):[012345][0-9](?:am|pm)', 'i'
 
-        _getDataType = (values) =>
+        _getDataType = (values) ->
             types = []
 
             _isDate = (value) ->
@@ -60,14 +60,14 @@ class @DrmSort
             _isTime = (value) ->
                 if _patterns.time.test(value) then true else false
 
-            $.each values, (key, value) ->
-                if _isDate.call self, value
+            $.each values, ->
+                if _isDate.call self, @
                     types.push 'date'
-                else if _isTime.call self, value
+                else if _isTime.call self, @
                     types.push 'time'
-                else if _isNumber.call self, value
+                else if _isNumber.call self, @
                     types.push 'number'
-                else if _isAlpha.call self, value
+                else if _isAlpha.call self, @
                     types.push 'alpha'
                 else
                     types.push null

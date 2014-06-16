@@ -104,7 +104,7 @@ module.exports = function(grunt) {
             files: ['<%= distFolder %>js/coffee-compiled/*.js'],
             options: {
                 maxerr: 10,
-                // unused: true,
+                unused: true,
                 eqnull: true,
                 eqeqeq: true,
                 jquery: true
