@@ -607,14 +607,17 @@ class @DrmCalendar
         daysInFirstWeek = @daysPerWeek - dayShift
 
         i = 1
+        # get the number of dates in each week
         while i <= numberWeeks
             dates = []
 
             if i is 1
+            # first week of the month
                 j = 0
                 while j < daysInFirstWeek
                     j = j + 1
                     dates.push j
+            # middle weeks
             else if i < numberWeeks
                 if i is 2 then date = daysInFirstWeek
                 j = 0
@@ -623,11 +626,12 @@ class @DrmCalendar
                     date = date + 1
                     dates.push date
             else if i is numberWeeks
-                # last week in month
+            # last week in month
                 while date < numberDays
                     date = date + 1
                     dates.push date
 
+            # get the week number
             if newDate in dates
                 weekInfo.weekNum = i - 1
                 weekInfo.datesInWeek = dates
@@ -662,7 +666,7 @@ class @DrmCalendar
     createEvent: (newEvent) =>
         _id = @events.length
         obj =
-            _id: _id
+            id: _id
             name: if newEvent.name? then newEvent.name else null
             recurrance: if newEvent.recurrance? then newEvent.recurrance.toLowerCase() else 'none'
             month: if newEvent.month? then newEvent.month else null
@@ -675,7 +679,7 @@ class @DrmCalendar
             notes: if newEvent.notes? then newEvent.notes else null
 
         @events.push obj
-        @addEventsToCalendar @events[obj._id]
+        @addEventsToCalendar @events[obj.id]
 
     removeCalendarEvent: (eventId, index) =>
         events = @calendar.find "ul.#{@eventClass} a[data-event=#{eventId}]"
@@ -683,9 +687,10 @@ class @DrmCalendar
         @events.splice index, 1
 
     getEventIndex: (eventId) =>
+        # gets the index of an event so we can keep track after events are removed
         index = null
         $.each @events, (key, value) ->
-            if value._id is eventId then index = key
+            if value.id is eventId then index = key
             index
         index
 
@@ -730,12 +735,12 @@ class @DrmCalendar
             type: 'button'
         editButton = $ "<button></button>",
             class: 'drm-event-edit'
-            'data-event': events._id
+            'data-event': events.id
             text: 'Edit'
             type: 'button'
         deleteButton = $ "<button></button>",
             class: 'drm-event-delete'
-            'data-event': events._id
+            'data-event': events.id
             text: 'Delete'
             type: 'button'
         eventDetailList = $ '<ul></ul>',
@@ -888,7 +893,7 @@ class @DrmCalendar
 
             eventHtml = $ '<a></a>',
                 href: '#'
-                'data-event': events._id
+                'data-event': events.id
                 html: eventContent
 
             if length is 0
