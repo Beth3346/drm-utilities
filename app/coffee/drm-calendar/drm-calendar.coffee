@@ -521,34 +521,34 @@ class @DrmCalendar
         # get form data and return an object
         # need to remove dashes from ids
         formInput = {}
-        fields = form.find(':input').not('button').not ':checkbox'
-        checkboxes = form.find 'input:checked'
+        _fields = form.find(':input').not('button').not ':checkbox'
+        _checkboxes = form.find 'input:checked'
 
-        if checkboxes.length isnt 0
-            boxIds = []
+        if _checkboxes.length isnt 0
+            _boxIds = []
 
-            checkboxes.each ->
-                boxIds.push $(@).attr 'id'
+            _checkboxes.each ->
+                _boxIds.push $(@).attr 'id'
 
-            boxIds = $.unique boxIds
+            _boxIds = $.unique boxIds
 
-            $.each boxIds, ->
-                checkboxValues = []
-                boxes = form.find "input:checked##{@}"
+            $.each _boxIds, ->
+                _checkboxValues = []
+                _boxes = form.find "input:checked##{@}"
 
-                boxes.each ->
+                _boxes.each ->
                     checkboxValues.push $.trim($(@).val())
 
                 formInput["#{@}"] = checkboxValues
                 return
 
-        $.each fields, ->
+        $.each _fields, ->
             that = $ @
-            id = that.attr 'id'
+            _id = that.attr 'id'
 
-            input = if $.trim(that.val()) is '' then null else $.trim(that.val())
+            _input = if $.trim(that.val()) is '' then null else $.trim(that.val())
 
-            if input? then formInput["#{id}"] = input
+            if _input? then formInput["#{id}"] = _input
             return
 
         formInput
@@ -565,71 +565,71 @@ class @DrmCalendar
 
     getDayOfWeek: (month, date, year) ->
         # returns the day of the week for a specific date
-        day = new Date year, month, date
-        day.getDay()
+        _day = new Date year, month, date
+        _day.getDay()
 
     getWeeksInMonth: (month, year) =>
         # gets the number of weeks in a month
-        firstDay = @getDayOfWeek month, 1, year
-        numberDays = @getDaysInMonth month, year
-        dayShift = if firstDay is @daysPerWeek then 0 else firstDay
-        Math.ceil (numberDays + dayShift) / @daysPerWeek
+        _firstDay = @getDayOfWeek month, 1, year
+        _numberDays = @getDaysInMonth month, year
+        _dayShift = if _firstDay is @daysPerWeek then 0 else _firstDay
+        Math.ceil (_numberDays + _dayShift) / @daysPerWeek
 
     getMonthWeekNum: (dayNum, day, month, year) =>
         # gets the week of the month which an event occurs
-        weeks = @calendar.find("div.#{@calendarInnerClass}").find '.drm-week'
-        firstDay = @getDayOfWeek month, 1, year
-        dayShift = if firstDay is @daysPerWeek then 0 else firstDay
-        numberWeeks = @getWeeksInMonth month, year
-        lastWeekLength = weeks.eq(numberWeeks).length
+        _weeks = @calendar.find("div.#{@calendarInnerClass}").find '.drm-week'
+        _firstDay = @getDayOfWeek month, 1, year
+        _dayShift = if _firstDay is @daysPerWeek then 0 else _firstDay
+        _numberWeeks = @getWeeksInMonth month, year
+        _lastWeekLength = weeks.eq(numberWeeks).length
 
-        if dayNum is 'last' and dayShift <= day
-            eventWeekNum = if lastWeekLength < day then (numberWeeks - 2) else numberWeeks - 1
-        else if dayNum is 'last' and dayShift > day
-            eventWeekNum = numberWeeks - 2
+        if dayNum is 'last' and _dayShift <= day
+            eventWeekNum = if _lastWeekLength < day then (_numberWeeks - 2) else _numberWeeks - 1
+        else if dayNum is 'last' and _dayShift > day
+            eventWeekNum = _numberWeeks - 2
         else
             eventWeekNum = parseInt(dayNum, 10) - 1
 
-        return if dayShift <= day then eventWeekNum else eventWeekNum + 1
+        return if _dayShift <= day then eventWeekNum else eventWeekNum + 1
 
     getDatesInWeek: (month, newDate, year) =>
-        firstDay = @getDayOfWeek month, 1, year
-        numberDays = @getDaysInMonth month, year
-        dayShift = if firstDay is @daysPerWeek then 0 else firstDay
-        currentDay = @getDayOfWeek month, newDate, year
-        numberWeeks = @getWeeksInMonth month, year
+        _firstDay = @getDayOfWeek month, 1, year
+        _numberDays = @getDaysInMonth month, year
+        _dayShift = if _firstDay is @daysPerWeek then 0 else _firstDay
+        _currentDay = @getDayOfWeek month, newDate, year
+        _numberWeeks = @getWeeksInMonth month, year
         weekInfo = {}
         weekInfo.datesInWeek = []
 
-        firstWeek = []
-        lastWeek = []
+        _firstWeek = []
+        _lastWeek = []
 
-        daysInFirstWeek = @daysPerWeek - dayShift
+        _daysInFirstWeek = @daysPerWeek - _dayShift
 
         i = 1
         # get the number of dates in each week
-        while i <= numberWeeks
+        while _i <= _numberWeeks
             dates = []
 
-            if i is 1
+            if _i is 1
             # first week of the month
-                j = 0
+                _j = 0
                 while j < daysInFirstWeek
-                    j = j + 1
-                    dates.push j
+                    _j = _j + 1
+                    dates.push _j
             # middle weeks
-            else if i < numberWeeks
-                if i is 2 then date = daysInFirstWeek
-                j = 0
-                while j < @daysPerWeek
-                    j = j + 1
-                    date = date + 1
-                    dates.push date
-            else if i is numberWeeks
+            else if _i < _numberWeeks
+                if _i is 2 then _date = _daysInFirstWeek
+                _j = 0
+                while _j < @daysPerWeek
+                    _j = _j + 1
+                    _date = _date + 1
+                    dates.push _date
+            else if _i is _numberWeeks
             # last week in month
-                while date < numberDays
-                    date = date + 1
-                    dates.push date
+                while _date < _numberDays
+                    _date = _date + 1
+                    dates.push _date
 
             # get the week number
             if newDate in dates
@@ -641,27 +641,27 @@ class @DrmCalendar
 
     getWeekNumber: (month, newDate, year) =>
         self = @
-        weekNum = 1
+        _weekNum = 1
         weekNums = []
-        weekInfo = self.getDatesInWeek month, newDate, year
+        _weekInfo = self.getDatesInWeek month, newDate, year
 
         $.each self.months, (key) ->
-            numberDays = self.getDaysInMonth key, year
-            firstDay = self.getDayOfWeek key, 1, year
-            dayShift = if firstDay is self.daysPerWeek then 0 else firstDay
-            numberWeeks = self.getWeeksInMonth month, year
-            week = 1
-            if $.isNumeric numberWeeks
-                while week <= numberWeeks
-                    if week is 1 and firstDay isnt 0
-                        weekNum = weekNum
+            _numberDays = self.getDaysInMonth key, year
+            _firstDay = self.getDayOfWeek key, 1, year
+            _dayShift = if _firstDay is self.daysPerWeek then 0 else _firstDay
+            _numberWeeks = self.getWeeksInMonth month, year
+            _week = 1
+            if $.isNumeric _numberWeeks
+                while _week <= _numberWeeks
+                    if _week is 1 and _firstDay isnt 0
+                        _weekNum = _weekNum
                     else
-                        weekNum = weekNum + 1
-                    week = week + 1
+                        _weekNum = _weekNum + 1
+                    _week = _week + 1
                     if month is key
-                        weekNums.push weekNum
+                        weekNums.push _weekNum
         
-        weekNums[weekInfo.weekNum]
+        weekNums[_weekInfo.weekNum]
 
     createEvent: (newEvent) =>
         _id = @events.length
