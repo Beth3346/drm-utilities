@@ -8,20 +8,22 @@ class @DrmDismissableAlert
     constructor: (@alertClass = "drm-dismissable-alert", @speed = 300) ->
         self = @
 
-        $('html').on 'click', "div.#{@alertClass} button.close", -> self.clearAlert.call @, self.speed
+        $('body').on 'click', "div.#{@alertClass} button.close", (e) ->
+            e.preventDefault()
+            self.clearAlert.call @, self.speed
 
     showAlert: (type, message, holder) ->
-        className = "drm-#{type}-alert #{@alertClass}"
-        newAlert = $ '<div></div>',
+        _className = "drm-#{type}-alert #{@alertClass}"
+        _newAlert = $ '<div></div>',
             text: message,
-            class: className
+            class: _className
 
-        close = $ '<button></button>',
+        _close = $ '<button></button>',
             text: 'x'
             class: 'close'
 
-        newAlert.prependTo holder
-        close.prependTo newAlert
+        _newAlert.prependTo holder
+        _close.prependTo _newAlert
 
     clearAlert: (speed) -> 
         $(@).parent().fadeOut speed, ->
