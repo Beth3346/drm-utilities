@@ -581,7 +581,7 @@ class @DrmCalendar
         _firstDay = @getDayOfWeek month, 1, year
         _dayShift = if _firstDay is @daysPerWeek then 0 else _firstDay
         _numberWeeks = @getWeeksInMonth month, year
-        _lastWeekLength = weeks.eq(numberWeeks).length
+        _lastWeekLength = _weeks.eq(_numberWeeks).length
 
         if dayNum is 'last' and _dayShift <= day
             eventWeekNum = if _lastWeekLength < day then (_numberWeeks - 2) else _numberWeeks - 1
@@ -606,7 +606,7 @@ class @DrmCalendar
 
         _daysInFirstWeek = @daysPerWeek - _dayShift
 
-        i = 1
+        _i = 1
         # get the number of dates in each week
         while _i <= _numberWeeks
             dates = []
@@ -614,7 +614,7 @@ class @DrmCalendar
             if _i is 1
             # first week of the month
                 _j = 0
-                while j < daysInFirstWeek
+                while _j < _daysInFirstWeek
                     _j = _j + 1
                     dates.push _j
             # middle weeks
@@ -633,10 +633,10 @@ class @DrmCalendar
 
             # get the week number
             if newDate in dates
-                weekInfo.weekNum = i - 1
+                weekInfo.weekNum = _i - 1
                 weekInfo.datesInWeek = dates
 
-            i = i + 1
+            _i = _i + 1
         weekInfo
 
     getWeekNumber: (month, newDate, year) =>
@@ -696,75 +696,77 @@ class @DrmCalendar
 
     showEventDetails: (eventId, fullDate) =>
         self = @
-        index = self.getEventIndex eventId
-        events = self.events[index]
-        eventDate = "#{fullDate.month} #{fullDate.date}, #{fullDate.year}"
+        _index = self.getEventIndex eventId
+        _events = self.events[_index]
+        _eventDate = "#{fullDate.month} #{fullDate.date}, #{fullDate.year}"
 
-        eventFrequency = do ->
-            if events.recurrance is 'yearly' and events.dayNum?
-                "Every #{events.dayNum} #{events.day} of #{events.month}"
-            else if events.recurrance is 'yearly'
-                "Every #{events.eventDate} of #{events.month}"
-            else if events.recurrance is 'monthly' and events.dayNum?
-                "Every #{events.dayNum} #{events.day} of the month"
-            else if events.recurrance is 'monthly'
-                "Every #{events.eventDate} of the month"
-            else if events.recurrance is 'biweekly'
-                "Every other #{events.day}"
-            else if events.recurrance is 'weekly'
-                "Every #{events.day}"
-            else if events.recurrance is 'daily'
+        _eventFrequency = do ->
+            if _events.recurrance is 'yearly' and _events.dayNum?
+                "Every #{_events.dayNum} #{_events.day} of #{_events.month}"
+            else if _events.recurrance is 'yearly'
+                "Every #{_events.eventDate} of #{_events.month}"
+            else if _events.recurrance is 'monthly' and _events.dayNum?
+                "Every #{_events.dayNum} #{_events.day} of the month"
+            else if _events.recurrance is 'monthly'
+                "Every #{_events.eventDate} of the month"
+            else if _events.recurrance is 'biweekly'
+                "Every other #{_events.day}"
+            else if _events.recurrance is 'weekly'
+                "Every #{_events.day}"
+            else if _events.recurrance is 'daily'
                 "Every Day"
             else
                 "One Time Event"
         
-        eventDetails =
-            date: eventDate
-            time: events.time
-            type: events.type
-            frequency: eventFrequency
-            repeat: events.recurrance
-            notes: events.notes
+        _eventDetails =
+            date: _eventDate
+            time: _events.time
+            type: _events.type
+            frequency: _eventFrequency
+            repeat: _events.recurrance
+            notes: _events.notes
 
-        eventHolder = $ '<div></div>',
+        _eventHolder = $ '<div></div>',
             class: 'drm-calendar-event-details'
-            html: "<h1 class='drm-calendar-header'>#{events.name}</h1>"
-        closeButton = $ '<button></button>',
+            html: "<h1 class='drm-calendar-header'>#{_events.name}</h1>"
+        _closeButton = $ '<button></button>',
             class: 'drm-event-close'
             text: 'Close'
             type: 'button'
-        editButton = $ "<button></button>",
+        _editButton = $ "<button></button>",
             class: 'drm-event-edit'
-            'data-event': events.id
+            'data-event': _events.id
             text: 'Edit'
             type: 'button'
-        deleteButton = $ "<button></button>",
+        _deleteButton = $ "<button></button>",
             class: 'drm-event-delete'
-            'data-event': events.id
+            'data-event': _events.id
             text: 'Delete'
             type: 'button'
-        eventDetailList = $ '<ul></ul>',
+        _eventDetailList = $ '<ul></ul>',
             class: 'drm-event-detail-list'
-        close = $ '<button></button>',
+        _close = $ '<button></button>',
             class: 'close'
             text: 'x'
-        lightboxHtml = $ '<div></div>',
+        _lightboxHtml = $ '<div></div>',
             class: 'drm-blackout'
-            html: close + eventHolder
+            html: _close + _eventHolder
 
-        lightboxHtml.hide().appendTo('body').fadeIn 300, ->
-            eventHolder.appendTo lightboxHtml
-            eventDetailList.appendTo eventHolder
-            $.each eventDetails, (key, value) ->
+        _lightboxHtml.hide().appendTo('body').fadeIn 300, ->
+            _eventHolder.appendTo _lightboxHtml
+            _eventDetailList.appendTo _eventHolder
+            $.each _eventDetails, (key, value) ->
                 if value?
-                    title = self.capitalize key
-                    listItem = $ '<li></li>',
-                        html: "<span class='drm-bold'>#{title}: </span><span class='drm-event-detail'>#{value}</span>"
-                    listItem.appendTo eventDetailList
+                    _title = self.capitalize key
+                    _listItem = $ '<li></li>',
+                        html: "<span class='drm-bold'>#{_title}: </span><span class='drm-event-detail'>#{value}</span>"
+                    _listItem.appendTo _eventDetailList
 
-            closeButton.appendTo eventDetailList
-            editButton.appendTo eventDetailList
-            deleteButton.appendTo eventDetailList
+            _closeButton.appendTo _eventDetailList
+            _editButton.appendTo _eventDetailList
+            _deleteButton.appendTo _eventDetailList
+
+        return
 
     removeEventDetails: (e) ->
         $('div.drm-blackout').fadeOut 300, ->
@@ -786,17 +788,19 @@ class @DrmCalendar
             if events.day
                 $.each events.day, ->
                     day = $.inArray @, self.days
-                    eventWeekNum = self.getMonthWeekNum events.dayNum, day, eventMonth, eventYear
+                    _eventWeekNum = self.getMonthWeekNum events.dayNum, day, eventMonth, eventYear
 
                     if eventMonth is month
                         weeks.each ->
                             that = $ @
                             firstDate = that.find(".#{self.classes.date}").first().data 'date'
-                            weekInfo = self.getDatesInWeek eventMonth, firstDate, eventYear
-                            if eventWeekNum is weekInfo.weekNum
+                            _weekInfo = self.getDatesInWeek eventMonth, firstDate, eventYear
+                            if _eventWeekNum is _weekInfo.weekNum
                                 eventDates.push that.find(".#{self.classes.date}[data-day=#{day}]").data 'date'
             else
                 eventDates.push parseInt(events.eventDate, 10)
+
+            return
                 
         _addMonthlyEvents = (events, eventDates) ->
             # add monthly events
