@@ -87,7 +87,7 @@ class @DrmFlexibleGrid
         $.each _curtain, (key, value) ->
             _that = $ value
             _holder = _that.parent '.drm-grid-item'
-            _imageHeight = holder.find('img').height()
+            _imageHeight = _holder.find('img').height()
 
             _that.height(_imageHeight).hide()
 
@@ -115,7 +115,7 @@ class @DrmFlexibleGrid
                 _columnNum = _that.data 'column'
                 _height = _that.outerHeight true
 
-                _columnHeights[columnNum] += height
+                _columnHeights[_columnNum] += _height
 
             $.each _columnHeights, (key, value) ->
                 if value > _tallestColumn

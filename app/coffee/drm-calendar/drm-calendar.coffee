@@ -804,14 +804,14 @@ class @DrmCalendar
             # add monthly events
             if events.day
                 $.each events.day, ->
-                    _day = $.inArray @, self.days
+                    day = $.inArray @, self.days
                     _eventWeekNum = self.getMonthWeekNum events.dayNum, day, eventMonth, eventYear
                     weeks.each ->
                         _that = $ @
                         _firstDate = _that.find(".#{self.classes.date}").first().data 'date'
                         _weekInfo = self.getDatesInWeek eventMonth, _firstDate, eventYear
                         if _eventWeekNum is _weekInfo.weekNum
-                            eventDates.push _that.find(".#{self.classes.date}[data-day=#{_day}]").data 'date'
+                            eventDates.push _that.find(".#{self.classes.date}[data-day=#{day}]").data 'date'
             else
                 eventDates.push parseInt(events.eventDate, 10)
 
