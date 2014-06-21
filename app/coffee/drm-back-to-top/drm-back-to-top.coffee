@@ -16,12 +16,12 @@ class @DrmBackToTop
             html: '&#9652;').appendTo('body').hide()
         
     showButton: =>
-        scroll = $('body').scrollTop()
-        height = $(window).height()
+        _scroll = $('body').scrollTop()
+        _height = $(window).height()
 
-        if scroll > height
+        if _scroll > _height
             @backToTop.fadeIn @speed
-        else if scroll < height
+        else if _scroll < _height
             @backToTop.fadeOut @speed 
 
     toTop: =>

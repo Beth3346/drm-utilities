@@ -2,7 +2,7 @@
 # Interactive JS Calendar
 ###############################################################################
 # needs support for events with start and end dates and times
-# needs support for events that recur a limited number of times
+# needs support for events _that recur a limited number of times
 # needs edit view
 "use strict"
 
@@ -406,12 +406,12 @@ class @DrmCalendar
             self.calendar.on 'click', '.drm-calendar-select button[type=submit]', (e) ->
                 # go to a specific date
                 e.preventDefault()
-                that = $ @
-                fields = that.parent().find(':input').not 'button[type=submit]'
+                _that = $ @
+                fields = _that.parent().find(':input').not 'button[type=submit]'
                 newDate =
-                    month: that.parent().find('#month').val()
-                    date: that.parent().find('#date').val()
-                    year: that.parent().find('#year').val()
+                    month: _that.parent().find('#month').val()
+                    date: _that.parent().find('#date').val()
+                    year: _that.parent().find('#year').val()
 
                 # clear form
                 self.clearForm fields
@@ -425,21 +425,21 @@ class @DrmCalendar
 
             self.calendar.on 'click', 'button.drm-show-event-form', ->
                 # show add event form
-                that = $ @
+                _that = $ @
                 if self.addEventForm.is(':hidden')
                     self.addEventForm.slideDown()
-                    that.text 'Hide Form'
+                    _that.text 'Hide Form'
                 else
                     self.addEventForm.slideUp()
-                    that.text 'Add New Event'
+                    _that.text 'Add New Event'
 
             self.calendar.on 'click', '.drm-calendar-view-nav button', (e) ->
                 # change calendar view
                 e.preventDefault()
-                that = $ @
-                that.addClass 'active'
+                _that = $ @
+                _that.addClass 'active'
                 self.calendar.find(".drm-calendar-view-nav button.active").removeClass 'active'
-                view = that.data 'view'
+                view = _that.data 'view'
 
                 self.changeCalendarView view
 
@@ -469,22 +469,22 @@ class @DrmCalendar
 
             self.calendar.on 'click', ".drm-date", ->
                 # show event form and fill out date infomation when a date is clicked
-                that = $ @
+                _that = $ @
 
                 if self.addEventForm.is ':hidden'
                     self.addEventForm.slideDown()
                     self.showEventFormButton.text 'Hide Form'
 
-                month: self.addEventForm.find('#month').val self.months[that.data('month')]
-                year: self.addEventForm.find('#year').val that.data('year')
-                eventDate: self.addEventForm.find('#eventDate').val that.data('date')
-                time: self.addEventForm.find('#time').val that.data('hour')
+                month: self.addEventForm.find('#month').val self.months[_that.data('month')]
+                year: self.addEventForm.find('#year').val _that.data('year')
+                eventDate: self.addEventForm.find('#eventDate').val _that.data('date')
+                time: self.addEventForm.find('#time').val _that.data('hour')
 
             self.calendar.on 'click', "ul.#{self.eventClass} a", (e) ->
                 # show event details
-                that = $ @
-                day = that.closest '.drm-date'
-                eventId = that.data 'event'
+                _that = $ @
+                day = _that.closest '.drm-date'
+                eventId = _that.data 'event'
                 fullDate =
                     month: self.months[day.data('month')]
                     date: day.data 'date'
@@ -498,15 +498,15 @@ class @DrmCalendar
 
             self.body.on 'click', 'div.drm-calendar-event-details button.drm-event-edit', (e) ->
                 e.preventDefault()
-                that = $ @
-                eventId = that.data 'event'
+                _that = $ @
+                eventId = _that.data 'event'
                 index = self.getEventIndex eventId
                 console.log "editing event #{index}"
 
             self.body.on 'click', 'div.drm-calendar-event-details button.drm-event-delete', (e) ->
                 e.preventDefault()
-                that = $ @
-                eventId = that.data 'event'
+                _that = $ @
+                eventId = _that.data 'event'
                 index = self.getEventIndex eventId
                 self.removeCalendarEvent eventId, index
                 self.removeEventDetails e
@@ -543,10 +543,10 @@ class @DrmCalendar
                 return
 
         $.each _fields, ->
-            that = $ @
-            _id = that.attr 'id'
+            _that = $ @
+            _id = _that.attr 'id'
 
-            _input = if $.trim(that.val()) is '' then null else $.trim(that.val())
+            _input = if $.trim(_that.val()) is '' then null else $.trim(_that.val())
 
             if _input? then formInput["#{id}"] = _input
             return
@@ -555,8 +555,8 @@ class @DrmCalendar
 
     clearForm: (fields) ->
         fields.each ->
-            that = $ @
-            if that.attr('type') is 'checkbox' then that.prop 'checked', false else that.val ''
+            _that = $ @
+            if _that.attr('type') is 'checkbox' then _that.prop 'checked', false else _that.val ''
 
     getDaysInMonth: (month, year) ->
         # returns the number of days in a month
@@ -776,11 +776,11 @@ class @DrmCalendar
 
     addEventsToCalendar: (events) =>
         self = @
-        calendarInner = self.calendar.find "div.#{@calendarInnerClass}"
-        eventMonth = calendarInner.data 'month'
-        eventYear = calendarInner.data 'year'
+        _calendarInner = self.calendar.find "div.#{@_calendarInnerClass}"
+        _eventMonth = _calendarInner.data 'month'
+        _eventYear = _calendarInner.data 'year'
         month = $.inArray events.month, self.months
-        weeks = calendarInner.find '.drm-week'
+        weeks = _calendarInner.find '.drm-week'
         eventDates = []
 
         _addYearlyEvents = (events, eventDates) ->
@@ -788,15 +788,15 @@ class @DrmCalendar
             if events.day
                 $.each events.day, ->
                     day = $.inArray @, self.days
-                    _eventWeekNum = self.getMonthWeekNum events.dayNum, day, eventMonth, eventYear
+                    _eventWeekNum = self.getMonthWeekNum events.dayNum, day, _eventMonth, _eventYear
 
-                    if eventMonth is month
+                    if _eventMonth is month
                         weeks.each ->
-                            that = $ @
-                            firstDate = that.find(".#{self.classes.date}").first().data 'date'
-                            _weekInfo = self.getDatesInWeek eventMonth, firstDate, eventYear
+                            _that = $ @
+                            firstDate = _that.find(".#{self.classes.date}").first().data 'date'
+                            _weekInfo = self.getDatesInWeek _eventMonth, firstDate, _eventYear
                             if _eventWeekNum is _weekInfo.weekNum
-                                eventDates.push that.find(".#{self.classes.date}[data-day=#{day}]").data 'date'
+                                eventDates.push _that.find(".#{self.classes.date}[data-day=#{day}]").data 'date'
             else
                 eventDates.push parseInt(events.eventDate, 10)
 
@@ -807,62 +807,62 @@ class @DrmCalendar
             if events.day
                 $.each events.day, ->
                     day = $.inArray @, self.days
-                    eventWeekNum = self.getMonthWeekNum events.dayNum, day, eventMonth, eventYear
+                    eventWeekNum = self.getMonthWeekNum events.dayNum, day, _eventMonth, _eventYear
                     weeks.each ->
-                        that = $ @
-                        firstDate = that.find(".#{self.classes.date}").first().data 'date'
-                        weekInfo = self.getDatesInWeek eventMonth, firstDate, eventYear
+                        _that = $ @
+                        firstDate = _that.find(".#{self.classes.date}").first().data 'date'
+                        weekInfo = self.getDatesInWeek _eventMonth, firstDate, _eventYear
                         if eventWeekNum is weekInfo.weekNum
-                            eventDates.push that.find(".#{self.classes.date}[data-day=#{day}]").data 'date'
+                            eventDates.push _that.find(".#{self.classes.date}[data-day=#{day}]").data 'date'
             else
                 eventDates.push parseInt(events.eventDate, 10)
 
         _addBiWeeklyEvents = (events, eventDates) ->
-            # events that occur every 2 weeks
+            # events _that occur every 2 weeks
             if events.day
-                weekInfo = self.getDatesInWeek eventMonth, events.eventDate, eventYear
+                weekInfo = self.getDatesInWeek _eventMonth, events.eventDate, _eventYear
                 $.each events.day, ->
                     day = $.inArray @, self.days
                     length = weeks.length
                     weekPattern = if weekInfo.weekNum % 2 is 0 then 'even' else 'odd'
-                    eventWeeks = calendarInner.find ".#{weekPattern}-week"
+                    eventWeeks = _calendarInner.find ".#{weekPattern}-week"
 
                     $.each eventWeeks, ->
-                        that = $ @
-                        weekLength = that.find(".drm-date").length
-                        eventDates.push that.find(".#{self.classes.date}[data-day=#{day}]").data('date')
+                        _that = $ @
+                        weekLength = _that.find(".drm-date").length
+                        eventDates.push _that.find(".#{self.classes.date}[data-day=#{day}]").data('date')
 
         _addWeeklyEvents = (events, eventDates) ->
             # weekly events
-            firstDay = self.getDayOfWeek eventMonth, 1, eventYear
+            firstDay = self.getDayOfWeek _eventMonth, 1, _eventYear
             dayShift = if firstDay is self.daysPerWeek then 0 else firstDay
             if events.day
                 $.each events.day, (key, value) ->
                     day = $.inArray value, self.days
                     length = weeks.length
                     $.each weeks, ->
-                        that = $ @
+                        _that = $ @
                         days = if self.view is 'month'
-                                that.find ".#{self.classes.date}"
+                                _that.find ".#{self.classes.date}"
                             else
-                                that.find ".#{self.classes.date}[data-hour='All Day Event']"
+                                _that.find ".#{self.classes.date}[data-hour='All Day Event']"
 
                         weekLength = days.length
 
                         if key is 0 and length isnt 1
-                            if dayShift <= day then eventDates.push that.find(".#{self.classes.date}[data-day=#{day}]").data('date')
+                            if dayShift <= day then eventDates.push _that.find(".#{self.classes.date}[data-day=#{day}]").data('date')
                         else if key is (length - 1) and length isnt 1
-                            if day < weekLength then eventDates.push that.find(".#{self.classes.date}[data-day=#{day}]").data('date')
+                            if day < weekLength then eventDates.push _that.find(".#{self.classes.date}[data-day=#{day}]").data('date')
                         else
-                            eventDates.push that.find(".#{self.classes.date}[data-day=#{day}]").data('date')
+                            eventDates.push _that.find(".#{self.classes.date}[data-day=#{day}]").data('date')
 
             eventDates
 
         _addDailyEvents = (events, eventDates) ->
             days = if self.view is 'month'
-                    calendarInner.find ".#{self.classes.date}"
+                    _calendarInner.find ".#{self.classes.date}"
                 else
-                    calendarInner.find ".#{self.classes.date}[data-hour='All Day Event']"
+                    _calendarInner.find ".#{self.classes.date}[data-hour='All Day Event']"
 
             days.each ->
                 eventDates.push $(@).data 'date'
@@ -875,16 +875,16 @@ class @DrmCalendar
             # create event html
 
             if self.view is 'month'
-                calendarItem = calendarInner.find ".drm-date[data-date=#{dates}]"
+                calendarItem = _calendarInner.find ".drm-date[data-date=#{dates}]"
             else if !events.time?
-                calendarItem = calendarInner.find ".drm-date[data-date=#{dates}][data-hour='All Day Event']"
+                calendarItem = _calendarInner.find ".drm-date[data-date=#{dates}][data-hour='All Day Event']"
             else
                 # find hour td element
                 re = new RegExp '^0?','gi'
                 re2 = new RegExp ':[0-9]{2}', 'gi'
                 hour = events.time.replace re, ''
                 hour = hour.replace re2, ''
-                calendarItem = calendarInner.find ".drm-date[data-date=#{dates}][data-hour=#{hour}]"
+                calendarItem = _calendarInner.find ".drm-date[data-date=#{dates}][data-hour=#{hour}]"
 
             eventList = calendarItem.find "ul.#{self.eventClass}"
             length = eventList.length
@@ -913,7 +913,7 @@ class @DrmCalendar
 
             if events.type is 'holiday' then eventList.find("a:contains(#{events.name})").addClass self.classes.holiday
 
-        if events.recurrance is 'yearly' and eventMonth is month
+        if events.recurrance is 'yearly' and _eventMonth is month
             _addYearlyEvents events, eventDates
         else if events.recurrance is 'monthly'
             _addMonthlyEvents events, eventDates
@@ -923,7 +923,7 @@ class @DrmCalendar
             _addWeeklyEvents events, eventDates
         else if events.recurrance is 'daily'
             _addDailyEvents events, eventDates
-        else if events.recurrance is 'none' and eventMonth is month and eventYear is parseInt(events.year, 10)                                         
+        else if events.recurrance is 'none' and _eventMonth is month and _eventYear is parseInt(events.year, 10)                                         
             _addOneTimeEvents events, eventDates
         if eventDates.length > 0
             $.each eventDates, (key, date) ->
@@ -1088,9 +1088,9 @@ class @DrmCalendar
             weekends = [0, 6]
 
             $.each weeks, ->
-                that = $ @
+                _that = $ @
                 $.each weekends, ->
-                    weekend = that.find(".#{self.classes.date}[data-day=#{@}]")
+                    weekend = _that.find(".#{self.classes.date}[data-day=#{@}]")
                         .not ".#{self.classes.muted}, .#{self.classes.today}, .#{self.classes.holiday}"
                     weekend.addClass self.classes.weekend
 
@@ -1108,16 +1108,16 @@ class @DrmCalendar
                 weeks = self.calendar.find("div.#{self.calendarInnerClass}").find '.drm-week'
 
                 $.each weeks, ->
-                    that = $ @
-                    firstDateInWeek = that.find('.drm-date').first().data 'date'
+                    _that = $ @
+                    firstDateInWeek = _that.find('.drm-date').first().data 'date'
                     weekNumber = self.getWeekNumber newDate.month, firstDateInWeek, newDate.year
 
                     if weekNumber % 2 is 0
-                        that.addClass 'even-week'
+                        _that.addClass 'even-week'
                     else
-                        that.addClass 'odd-week'
+                        _that.addClass 'odd-week'
 
-                    that.attr 'data-week', weekNumber
+                    _that.attr 'data-week', weekNumber
 
             # create html
             weekdays = '<table><thead><tr>'

@@ -47,20 +47,20 @@ class @DrmFlexibleGrid
                 $(@).find('.curtain').stop().fadeOut 'fast'
 
             self.gridNav.on 'click', 'button.drm-grid-filter', ->
-                that = $ @
-                filter = that.data('filter').toLowerCase()
+                _that = $ @
+                filter = _that.data('filter').toLowerCase()
                 self.filterListItems filter
-                that.siblings('button').removeClass 'active'
-                that.addClass 'active'
+                _that.siblings('button').removeClass 'active'
+                _that.addClass 'active'
 
     getTags: =>
         self = @
         tags = []
-        tagListItems = self.grid.find 'ul.caption-tags li'
+        _tagListItems = self.grid.find 'ul.caption-tags li'
 
-        $.each tagListItems, (key, value) ->
-            tag = $(value).text()
-            tags.push tag
+        $.each _tagListItems, (key, value) ->
+            _tag = $(value).text()
+            tags.push _tag
             $.unique tags
 
         tags
@@ -73,23 +73,23 @@ class @DrmFlexibleGrid
                 a.toUpperCase()
 
         $.each tags, (key, value) ->
-            tagButton = $ '<button></button>',
+            _tagButton = $ '<button></button>',
                 class: 'drm-grid-filter'
                 text: _capitalize value
                 'data-filter': value
-            tagButton.appendTo self.gridNav
+            _tagButton.appendTo self.gridNav
 
         self.gridNav.find('.drm-grid-filter').first().addClass 'active'
 
     resizeCurtain: =>
-        curtain = @grid.find '.curtain'
+        _curtain = @grid.find '.curtain'
 
-        $.each curtain, (key, value) ->
-            that = $ value
-            holder = that.parent '.drm-grid-item'
-            imageHeight = holder.find('img').height()
+        $.each _curtain, (key, value) ->
+            _that = $ value
+            _holder = _that.parent '.drm-grid-item'
+            _imageHeight = holder.find('img').height()
 
-            that.height(imageHeight).hide()
+            _that.height(_imageHeight).hide()
 
     addListItems: (items) =>
         self = @
@@ -102,54 +102,54 @@ class @DrmFlexibleGrid
 
         # add height to grid holder to accomodate images
         _resizeHolder = (items) ->
-            tallestColumn = 0
-            columnHeights = []
+            _tallestColumn = 0
+            _columnHeights = []
 
-            i = 0
-            until i is self.imagesPerRow 
-                columnHeights.push 0
-                i = i + 1
+            _i = 0
+            until _i is self.imagesPerRow 
+                _columnHeights.push 0
+                _i = _i + 1
             
             $.each items, (key, value) ->
-                that = $ value
-                columnNum = that.data 'column'
-                height = that.outerHeight true
+                _that = $ value
+                _columnNum = _that.data 'column'
+                _height = _that.outerHeight true
 
-                columnHeights[columnNum] += height
+                _columnHeights[columnNum] += height
 
-            $.each columnHeights, (key, value) ->
-                if value > tallestColumn
-                    tallestColumn = value
-                    tallestColumn
+            $.each _columnHeights, (key, value) ->
+                if value > _tallestColumn
+                    _tallestColumn = value
+                    _tallestColumn
 
-            self.grid.css 'height': tallestColumn + 40
+            self.grid.css 'height': _tallestColumn + 40
 
-        # need to keep track of column length so that any one column doesn't get too long
+        # need to keep track of column length so _that any one column doesn't get too long
 
         $.each items, (key, value) ->
-            that = $ value
-            index = key + 1
-            columnNum = if index % self.imagesPerRow is 0 then self.imagesPerRow - 1 else (index % self.imagesPerRow) - 1
-            that.attr 'data-column', columnNum
-            that.attr 'data-num', index
-            prevImage = if index > self.imagesPerRow then self.grid.find('.drm-grid-item').eq(index - (self.imagesPerRow + 1)) else null
+            _that = $ value
+            _index = key + 1
+            _columnNum = if _index % self.imagesPerRow is 0 then self.imagesPerRow - 1 else (_index % self.imagesPerRow) - 1
+            _that.attr 'data-column', _columnNum
+            _that.attr 'data-num', _index
+            _prevImage = if _index > self.imagesPerRow then self.grid.find('.drm-grid-item').eq(_index - (self.imagesPerRow + 1)) else null
             
-            if prevImage?
-                margin = prevImage.outerWidth(true) - prevImage.outerWidth(false)
-                top = if index < ((self.imagesPerRow * 2) + 1) then prevImage.outerHeight(false) + margin else prevImage.outerHeight(false) + margin + prevImage.position().top
-                left = (prevImage.outerWidth(false) * columnNum) + (margin * columnNum)
+            if _prevImage?
+                _margin = _prevImage.outerWidth(true) - _prevImage.outerWidth(false)
+                _top = if _index < ((self.imagesPerRow * 2) + 1) then _prevImage.outerHeight(false) + _margin else _prevImage.outerHeight(false) + _margin + _prevImage.position().top
+                _left = (_prevImage.outerWidth(false) * _columnNum) + (_margin * _columnNum)
 
-                that.css
-                    'top': top
-                    'left': left
+                _that.css
+                    'top': _top
+                    'left': _left
                     'position': 'absolute'
             else
-                that.css
+                _that.css
                     'top': 0
                     'left': 0
                     'position': 'relative'
 
-            that.show()
+            _that.show()
 
         _resizeHolder items
 
