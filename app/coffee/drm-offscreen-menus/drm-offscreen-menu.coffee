@@ -15,20 +15,20 @@ class @DrmOffscreen
         self.button.on 'click', $.proxy self.toggleMenu, self
 
     toggleMenu: ->
-        menuPos = @menu.css 'left'
+        _menuPos = @menu.css 'left'
         menuWidth = @getDimensions()
 
-        if menuPos is '0px' then @hideMenu menuWidth else @showMenu menuWidth
+        if _menuPos is '0px' then @hideMenu menuWidth else @showMenu menuWidth
 
     showMenu: (menuWidth) ->
-        contentWidth = 100 - menuWidth
+        _contentWidth = 100 - menuWidth
 
         @menu.animate {
             'left': '0'
         }
 
         @content.animate {
-            'left': "#{menuWidth}%", 'width': "#{contentWidth}%"
+            'left': "#{menuWidth}%", 'width': "#{_contentWidth}%"
         }
 
     hideMenu: (menuWidth) ->
@@ -39,16 +39,16 @@ class @DrmOffscreen
         @addScroll()
 
     getDimensions: ->   
-        menuWidth = parseInt @menu.css('width'), 10
-        holderWidth = parseInt @holder.css('width'), 10
+        _menuWidth = parseInt @menu.css('width'), 10
+        _holderWidth = parseInt @holder.css('width'), 10
 
         # calculate menuWidth as a percentage of container
-        Math.ceil (menuWidth / holderWidth) * 100
+        Math.ceil (_menuWidth / _holderWidth) * 100
 
     addScroll: ->
-        menuHeight = parseInt @menu.find('ul').css('height'), 10
-        contentHeight = parseInt @content.css('height'), 10
+        _menuHeight = parseInt @menu.find('ul').css('height'), 10
+        _contentHeight = parseInt @content.css('height'), 10
 
-        if menuHeight > contentHeight then @menu.css {'overflow-y': 'scroll'}
+        if _menuHeight > _contentHeight then @menu.css {'overflow-y': 'scroll'}
         
 new DrmOffscreen()

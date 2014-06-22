@@ -6,30 +6,30 @@
 $ = jQuery
 class @DrmPopover
     constructor: (@holder = $('div.popover-holder')) ->
-        buttons = @holder.find 'button'
-        popovers = @holder.find 'div.drm-popover'
+        self = @
+        _buttons = self.holder.find 'button'
 
-        buttons.on 'click', @togglePopover
-        $('html').click -> popovers.hide() 
+        _buttons.on 'click', self.togglePopover
+        $('body').click -> self.holder.find('div.drm-popover').hide() 
 
     togglePopover: (e) ->
-        popoverId = $(@).data 'popover'
-        popover = $("div##{popoverId}").fadeToggle()
+        _popoverId = $(@).data 'popover'
+        popover = $("div##{_popoverId}").fadeToggle()
         
         e.stopPropagation()
 
         _checkPosition = ->
-            that = $ @
-            positionLeft = that.position().left
-            offsetLeft = that.offset().left
-            positionTop = that.position().top
-            offsetTop = that.offset().top
-            popoverHeight = that.height()
+            _that = $ @
+            _positionLeft = _that.position().left
+            _offsetLeft = _that.offset().left
+            _positionTop = _that.position().top
+            _offsetTop = _that.offset().top
+            _popoverHeight = _that.height()
 
-            if offsetLeft < 0
-                that.css('left': (Math.abs(offsetLeft) + 10) + positionLeft)
-            else if offsetTop < 0
-                that.css('bottom': (Math.abs(positionTop) - popoverHeight) - Math.abs(offsetTop))
+            if _offsetLeft < 0
+                _that.css('left': (Math.abs(_offsetLeft) + 10) + _positionLeft)
+            else if _offsetTop < 0
+                _that.css('bottom': (Math.abs(_positionTop) - _popoverHeight) - Math.abs(_offsetTop))
 
         _checkPosition.call popover
 

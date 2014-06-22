@@ -49,7 +49,7 @@ section
             input.drm-valid-time#time(type="text" name="time" placeholder="12:00am")
 
             label(for="ccard") Credit Card #:
-            input.drm-valid-credit-card#ccard(type="text" name="ccard" placeholder="0000-0000-0000-0000")
+            input.drm-valid-credit-card#ccard(type="text" name="ccard" placeholder="0000000000000000")
             small no dashes or spaces
 
             label(for="cvv") CVV:
@@ -71,16 +71,20 @@ section
             input.drm-valid-no-tags#fav-tv-show(type="text" name="fav-tv-show" placeholder="Seinfeld" data-not-list="American Idol,The Bachelor,Big Brother")
 
             label(for="fav-movie") Favorite Movie:
-            select#fav-movie
+            select#fav-movie(data-required-with="other-fav-movie")
                 option(value=" ") Pick a Movie
                 option(value="1") Casablanca
                 option(value="2") Star Wars
                 option(value="3") Breakfast at Tiffany's
                 option(value="4") Clueless
                 option(value="5") Ferris Bueller's Day Off
+                option(value="other") Other
 
             label(for="other-fav-movie") What Do You Like Best About Your Favorite Movie?:
-            input#other-fav-movie(type="text" name="other_fav_movie" placeholder="Back to the Future" data-required-with="fav-movie")
+            input#other-fav-movie(type="text" name="other_fav_movie" placeholder="Its the best")
+
+            //- label(for="other-fav-movie") Other Favorite Movie:
+            //- input#other-fav-movie(type="text" name="other_fav_movie" placeholder="Citizen Kane")
 
             label(for="fav-movie") Favorite Color:
             select#fav-color(data-activate-field="other-fav-color:other")

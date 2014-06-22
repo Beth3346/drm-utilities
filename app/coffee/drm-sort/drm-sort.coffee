@@ -12,26 +12,26 @@ class @DrmSort
 
         if self.autoSort
             $.each self.lists,  ->
-                that = $ @
-                values = self.getValues that
-                self.renderSort values, 'ascending', that
+                _that = $ @
+                values = self.getValues _that
+                self.renderSort values, 'ascending', _that
 
         $('body').on 'click', '.drm-sort-list', ->
-            that = $ @
-            listId = that.data 'list'
-            list = $ "ul##{listId}"
+            _that = $ @
+            _listId = _that.data 'list'
+            list = $ "ul##{_listId}"
             values = self.getValues.call @, list
             direction = $(@).data 'sort'
             self.renderSort values, direction, list
 
     getValues: (list) ->
-        that = $ @
-        listItems = list.find 'li'
+        _that = $ @
+        _listItems = list.find 'li'
         values = []
 
-        listItems.each ->
-            that = $ @
-            values.push $.trim(that.text())
+        _listItems.each ->
+            _that = $ @
+            values.push $.trim(_that.text())
 
         values
 
@@ -81,45 +81,45 @@ class @DrmSort
 
         else if type is 'date'
             _sortAsc = (a, b) ->
-                a = new Date _patterns.monthDayYear.exec(a)
-                b = new Date _patterns.monthDayYear.exec(b)
-                a - b
+                _a = new Date _patterns.monthDayYear.exec(a)
+                _b = new Date _patterns.monthDayYear.exec(b)
+                _a - _b
 
             _sortDesc = (a, b) ->
-                a = new Date _patterns.monthDayYear.exec(a)
-                b = new Date _patterns.monthDayYear.exec(b)
-                b - a
+                _a = new Date _patterns.monthDayYear.exec(a)
+                _b = new Date _patterns.monthDayYear.exec(b)
+                _b - _a
 
             if direction is 'ascending' then values.sort _sortAsc else values.sort _sortDesc    
 
         else if type is 'time'
             _parseTime = (time) ->
-                hour = parseInt(/^(\d+)/.exec(time)[1], 10)
-                minutes = /:(\d+)/.exec(time)[1]
-                ampm = /(am|pm|AM|PM)$/.exec(time)[1].toLowerCase()
+                _hour = parseInt(/^(\d+)/.exec(time)[1], 10)
+                _minutes = /:(\d+)/.exec(time)[1]
+                _ampm = /(am|pm|AM|PM)$/.exec(time)[1].toLowerCase()
 
-                if ampm is 'am'
-                    hour = hour.toString()
+                if _ampm is 'am'
+                    _hour = _hour.toString()
                     
-                    if hour is '12'
-                        hour = '0'
-                    else if hour.length is 1
-                        hour = "0#{hour}"
+                    if _hour is '12'
+                        _hour = '0'
+                    else if _hour.length is 1
+                        _hour = "0#{_hour}"
                         
-                    "#{hour}:#{minutes}"
+                    "#{_hour}:#{_minutes}"
 
-                else if ampm is 'pm'
-                    "#{hour + 12}:#{minutes}"
+                else if _ampm is 'pm'
+                    "#{_hour + 12}:#{_minutes}"
 
             _sortAsc = (a, b) ->
-                a = _parseTime _patterns.time.exec(a)
-                b = _parseTime _patterns.time.exec(b)
-                new Date("04-22-2014 #{a}") - new Date("04-22-2014 #{b}")
+                _a = _parseTime _patterns.time.exec(a)
+                _b = _parseTime _patterns.time.exec(b)
+                new Date("04-22-2014 #{_a}") - new Date("04-22-2014 #{_b}")
 
             _sortDesc = (a, b) ->
-                a = _parseTime _patterns.time.exec(a)
-                b = _parseTime _patterns.time.exec(b)
-                new Date("04-22-2014 #{b}") - new Date("04-22-2014 #{a}")
+                _a = _parseTime _patterns.time.exec(a)
+                _b = _parseTime _patterns.time.exec(b)
+                new Date("04-22-2014 #{_b}") - new Date("04-22-2014 #{_a}")
 
             if direction is 'ascending' then values.sort _sortAsc else values.sort _sortDesc
 
@@ -130,26 +130,26 @@ class @DrmSort
 
             _sortAsc = (a, b) ->
                 # use clean alpha to remove leading 'the' or 'a' then convert to lowercase for case insensitive sort
-                a = _cleanAlpha(a).toLowerCase()
-                b = _cleanAlpha(b).toLowerCase()
+                _a = _cleanAlpha(a).toLowerCase()
+                _b = _cleanAlpha(b).toLowerCase()
 
-                if a < b
+                if _a < _b
                     -1
-                else if a > b
+                else if _a > _b
                     1
-                else if a is b
+                else if _a is _b
                     0
 
             _sortDesc = (a, b) ->
                 # use clean alpha to remove leading 'the' or 'a' then convert to lowercase for case insensitive sort
-                a = _cleanAlpha(a).toLowerCase()
-                b = _cleanAlpha(b).toLowerCase()
+                _a = _cleanAlpha(a).toLowerCase()
+                _b = _cleanAlpha(b).toLowerCase()
 
-                if a < b
+                if _a < _b
                     1
-                else if a > b
+                else if _a > _b
                     -1
-                else if a is b
+                else if _a is _b
                     0
 
             if direction is 'ascending' then values.sort _sortAsc else values.sort _sortDesc
