@@ -805,9 +805,6 @@ class @DrmValidation
             fieldId = _that.attr 'id'
             requiredField = $ "##{requiredFieldId}"
             requiredFieldValue = $.trim requiredField.val()
-            console.log requiredField
-            console.log requiredFieldValue
-            console.log fieldValue
 
             _checkValue = ->
                 if not requiredFieldValue
