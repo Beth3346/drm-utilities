@@ -237,8 +237,18 @@ class @DrmValidation
                 self.removeAllNotices.call @, self.speed
         
         body.on 'blur', ':input[data-required-with]', ->
+            # need to monitor required field also
             value = self.getValue.call @
-            self.validateRequiredWith.call @, value
+            validate = self.validateRequiredWith.call @, value
+            if validate?
+                validateField.call @, value, validate
+        
+        body.on 'blur', ':input[data-require-with]', ->
+            # need to monitor required field also
+            value = self.getValue.call @
+            validate = self.validateRequiredWith.call @, value
+            if validate?
+                validateField.call @, value, validate
         
         body.on 'blur', ':input[data-allowed-with]', ->
             value = self.getValue.call @
@@ -786,47 +796,88 @@ class @DrmValidation
             _evaluate listItems, value
 
     validateRequiredWith: (value) ->
+        # determine whether or not the field is required-with or require-with
         _that = $ @
         _requiredWith = _that.data 'required-with'
-        validate =
-            status: null
-            message: null
-            issuer: 'requiredWith'
+        _requireWith = _that.data 'require-with'
 
-        if _requiredWith.search(':') isnt -1
-            _requiredWith = _requiredWith.split ':'
-            requiredFieldId = _requiredWith[0]
-            fieldValue = _requiredWith[1]
-        else
-            requiredFieldId = _requiredWith
+        if _requiredWith
+            validate =
+                status: null
+                message: null
+                issuer: 'requiredWith'
 
-        _evaluate = (value, requiredFieldId, fieldValue) ->
-            # if criteria is met then required field must be filled out
-            fieldId = _that.attr 'id'
-            requiredField = $ "##{requiredFieldId}"
-            requiredFieldValue = $.trim requiredField.val()
+            if _requiredWith.search(':') isnt -1
+                _requiredWith = _requiredWith.split ':'
+                requiredFieldId = _requiredWith[0]
+                fieldValue = _requiredWith[1]
+            else
+                requiredFieldId = _requiredWith
 
-            _checkValue = ->
-                if not requiredFieldValue
-                    console.log "this field is required with #{fieldId}"
-                    # validate.status = 'danger'
-                    # validate.message = "this field is required with #{fieldId}"
-                else
-                    console.log 'success'
-                #     validate.message = null
-                #     validate.status = 'success'
-                # validate
+            _evaluate = (value, requiredFieldId, fieldValue) ->
+                # if criteria is met then required field must be filled out
+                fieldId = _that.attr 'id'
+                requiredField = $ "##{requiredFieldId}"
+                requiredFieldValue = $.trim requiredField.val()
 
-            if not value
-                console.log 'do nothing'
-            else if fieldValue? and (value is fieldValue)
-                _checkValue()
-            else if value.length > 0 and (not fieldValue?)
-                _checkValue()
-            
-            # validate
+                _checkValue = ->
+                    if not requiredFieldValue
+                        validate.status = 'danger'
+                        validate.message = "#{requiredFieldId} is required with #{fieldId}"
+                    else
+                        validate.message = null
+                        validate.status = 'success'
+                    validate
 
-        _evaluate value, requiredFieldId, fieldValue
+                if not value
+                    console.log 'do nothing'
+                else if fieldValue? and (value is fieldValue)
+                    _checkValue()
+                else if value.length > 0 and (not fieldValue?)
+                    _checkValue()
+                
+                validate
+
+            _evaluate value, requiredFieldId, fieldValue
+        else if _requireWith
+            validate =
+                status: null
+                message: null
+                issuer: 'requireWith'
+
+            if _requireWith.search(':') isnt -1
+                _requireWith = _requireWith.split ':'
+                requireFieldId = _requireWith[0]
+                fieldValue = _requireWith[1]
+            else
+                requireFieldId = _requireWith
+
+            _evaluate = (value, requireFieldId, fieldValue) ->
+                # if criteria is met then required field must be filled out
+                fieldId = _that.attr 'id'
+                requireField = $ "##{requireFieldId}"
+                requireFieldValue = $.trim requireField.val()
+
+                _checkValue = ->
+                    if not value
+                        validate.status = 'danger'
+                        validate.message = "#{fieldId} is required with #{requireFieldId}"
+                    else
+                        validate.message = null
+                        validate.status = 'success'
+                    validate
+
+                if not requireFieldValue
+                    console.log 'do nothing'
+                else if fieldValue? and (requireFieldValue is fieldValue)
+                    _checkValue()
+                else if requireFieldValue.length > 0 and (not fieldValue?)
+                    _checkValue()
+                
+                validate
+
+            _evaluate value, requireFieldId, fieldValue
+
 
     validateAllowedWith: (value) ->
         _that = $ @

@@ -81,10 +81,10 @@ section
                 option(value="other") Other
 
             label(for="other-fav-movie") What Do You Like Best About Your Favorite Movie?:
-            input#other-fav-movie(type="text" name="other_fav_movie" placeholder="Its the best")
+            input#other-fav-movie(type="text" name="other_fav_movie" placeholder="Its the best" data-require-with="fav-movie")
 
             //- label(for="other-fav-movie") Other Favorite Movie:
-            //- input#other-fav-movie(type="text" name="other_fav_movie" placeholder="Citizen Kane")
+            //- input#other-fav-movie(type="text" name="other_fav_movie" placeholder="Citizen Kane" data-require-with="fav-movie")
 
             label(for="fav-movie") Favorite Color:
             select#fav-color(data-activate-field="other-fav-color:other")
