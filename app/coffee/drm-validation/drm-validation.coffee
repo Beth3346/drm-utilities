@@ -50,6 +50,18 @@ class @DrmValidation
             self.removeValidationClass.call @, validate.status
             self.applyValidationClass.call @, validate.status
 
+        validateFields = (fields, validate) ->
+            if validate.message?
+                self.issueNotice.call @, validate, self.speed
+                self.issueNotice.call requireField, validate, self.speed
+            else
+                self.removeNotice.call @, validate.issuer, self.speed
+                self.removeNotice.call requireField, validate.issuer, self.speed
+            self.removeValidationClass.call @, validate.status
+            self.applyValidationClass.call @, validate.status
+            self.removeValidationClass.call requireField, validate.status
+            self.applyValidationClass.call requireField, validate.status
+
         body.on 'click', ':disabled', (e) -> e.preventDefault()
 
         body.on 'keyup', ':input.drm-valid-integer', ->
@@ -286,11 +298,10 @@ class @DrmValidation
                 self.removeValidationClass.call requiredField, validate.status
                 self.applyValidationClass.call requiredField, validate.status
         
-        body.on 'blur', ':input[data-allowed-with]', ->
+        body.on 'change', ':input[data-allowed-with]', ->
+            # remove disabled attribute on related field
             value = self.getValue.call @
-            validate = self.validateAllowedWith.call @, value
-            if validate?
-                validateField.call @, value, validate
+            self.validateAllowedWith.call @, value
 
     trackLength: (value) ->
         _that = $ @
@@ -878,19 +889,15 @@ class @DrmValidation
                 if !requireFieldValue
                     validate.message = null
                     validate.status = 'success'
-                    console.log "#{requiredFieldId} is blank"
                 else if requireFieldValue? and !fieldValue and !requiredFieldValue
                     validate.message = "#{requiredFieldId} is required"
-                    console.log "#{requiredFieldId} is required"
                     validate.status = 'danger'
                 else if (requireFieldValue is fieldValue) and !requiredFieldValue
                     validate.message = "#{requiredFieldId} is required"
-                    console.log "#{requiredFieldId} is required if you select #{fieldValue}"
                     validate.status = 'danger'
                 else if requireFieldValue? and requiredFieldValue?
                     validate.message = null
                     validate.status = 'success'
-                    console.log 'success'
                 validate
 
             _checkValue()
@@ -902,42 +909,20 @@ class @DrmValidation
     validateAllowedWith: (value) ->
         _that = $ @
         _allowedWith = _that.data 'allowed-with'
-        validate =
-            status: null
-            message: null
-            issuer: 'allowedWith'
 
         if _allowedWith.search(':') isnt -1
             _allowedWith = _allowedWith.split ':'
-            fieldId = _allowedWith[0]
-            fieldValue = _allowedWith[1]
+            _allowedId = _allowedWith[0]
+            _allowedValue = _allowedWith[1]
         else
-            fieldId = _allowedWith
+            _allowedId = _allowedWith
+        
+        _allowedField = $ "##{_allowedId}"
 
-        _evaluate = (value, fieldId, fieldValue) ->
-            field = $ "##{fieldId}"
-            allowedFieldValue = $.trim field.val()
-
-            _checkValue = ->
-                if not value
-                    validate.status = 'danger'
-                    validate.message = "this field is allowed with #{fieldId}"
-                else
-                    validate.message = null
-                    validate.status = 'success'
-                validate
-
-            if fieldValue? and (allowedFieldValue is fieldValue)
-                validate = _checkValue()
-            else if allowedFieldValue.length > 0 and (not fieldValue?)
-                validate = _checkValue()
-            else if allowedFieldValue.length == 0
-                validate.message = null
-                validate.status = 'success'
-            
-            validate
-
-        _evaluate value, fieldId, fieldValue
+        if (value is _allowedValue) or (value? and !_allowedValue)
+            _allowedField.prop "disabled", false
+        else
+            _allowedField.prop("disabled", true).val ''
 
     validateMaxValue: (value) ->
         _that = $ @

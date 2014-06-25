@@ -96,8 +96,20 @@ section
             label(for="other-fav-musician") Who Is Your Favorite Musician?:
             input#other-fav-musician(type="text" name="other_fav_musician" placeholder="Its the best" data-require-with="fav-musician:other")
 
-            label(for="fav-movie") Favorite Color:
-            select#fav-color(data-activate-field="other-fav-color:other")
+            label(for="fav-city") Favorite City:
+            select#fav-city(data-allowed-with="why-fav-city")
+                option(value=" ") Pick a City
+                option(value="1") London
+                option(value="2") Paris
+                option(value="3") New York City
+                option(value="4") San Francisco
+                option(value="5") Tokyo
+
+            label(for="why-fav-city") What Do You Like About Your Favorite City?:
+            input#why-fav-city(type="text" name="why_fav_city" placeholder="So much fun" disabled)
+
+            label(for="fav-color") Favorite Color:
+            select#fav-color(data-allowed-with="other-fav-color:other")
                 option(value=" ") Pick a Color
                 option(value="1") Red
                 option(value="2") Orange
@@ -107,7 +119,7 @@ section
                 option(value="other") Other Color
 
             label(for="other-fav-color") Other Favorite Color:
-            input#other-fav-color(type="text" name="other_fav_color" placeholder="Purple" disabled data-allowed-with="fav-color:other")
+            input#other-fav-color(type="text" name="other_fav_color" placeholder="Purple" disabled)
             
             label(for="notes") Notes:
             textarea.drm-valid-no-tags#notes(name="notes" cols="30" rows="10" placeholder="These are some notes" data-min-length="50" data-max-length="250") 
