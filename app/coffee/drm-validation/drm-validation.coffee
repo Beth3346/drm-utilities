@@ -52,169 +52,169 @@ class @DrmValidation
 
         body.on 'click', ':disabled', (e) -> e.preventDefault()
 
-        body.on 'keyup, change', ':input.drm-valid-integer', ->
+        body.on 'keyup', ':input.drm-valid-integer', ->
             value = self.getValue.call @
             validate = self.validateInteger value, patterns.integer
             if validate?
                 validateField.call @, value, validate
 
-        body.on 'keyup, change', ':input.drm-valid-number', ->
+        body.on 'keyup', ':input.drm-valid-number', ->
             value = self.getValue.call @
             validate = self.validateNumber value, patterns.number
             if validate?
                 validateField.call @, value, validate
 
-        body.on 'keyup, change', ':input.drm-valid-url', ->
+        body.on 'keyup', ':input.drm-valid-url', ->
             value = self.getValue.call @
             validate = self.validateURL value, patterns.url
             if validate?
                 validateField.call @, value, validate
 
-        body.on 'keyup, change', ':input.drm-valid-phone', ->
+        body.on 'keyup', ':input.drm-valid-phone', ->
             value = self.getValue.call @
             validate = self.validatePhone value, patterns.phone
             if validate?
                 validateField.call @, value, validate
         
-        body.on 'keyup, change', ':input.drm-valid-email', ->
+        body.on 'keyup', ':input.drm-valid-email', ->
             value = self.getValue.call @
             validate = self.validateEmail value, patterns.email
             if validate?
                 validateField.call @, value, validate
         
-        body.on 'keyup, change', ':input.drm-valid-full-name', ->
+        body.on 'keyup', ':input.drm-valid-full-name', ->
             value = self.getValue.call @
             validate = self.validateFullName value, patterns.fullName
             if validate?
                 validateField.call @, value, validate
         
-        body.on 'keyup, change', ':input.drm-valid-alpha', ->
+        body.on 'keyup', ':input.drm-valid-alpha', ->
             value = self.getValue.call @
             validate = self.validateAlpha value, patterns.alpha
             if validate?
                 validateField.call @, value, validate
         
-        body.on 'keyup, change', ':input.drm-valid-alphanum', ->
+        body.on 'keyup', ':input.drm-valid-alphanum', ->
             value = self.getValue.call @
             validate = self.validateAlphaNum value, patterns.alphaNum
             if validate?
                 validateField.call @, value, validate
         
-        body.on 'keyup, change', ':input.drm-valid-alphadash', ->
+        body.on 'keyup', ':input.drm-valid-alphadash', ->
             value = self.getValue.call @
             validate = self.validateAlphaNumDash value, patterns.alphaNumDash
             if validate?
                 validateField.call @, value, validate
         
-        body.on 'keyup, change', ':input.drm-valid-alpha-num-underscore', ->
+        body.on 'keyup', ':input.drm-valid-alpha-num-underscore', ->
             value = self.getValue.call @
             validate = self.validateAlphaNumUnderscore value, patterns.alphaNumUnderscore
             if validate?
                 validateField.call @, value, validate
         
-        body.on 'keyup, change', ':input.drm-valid-no-spaces', ->
+        body.on 'keyup', ':input.drm-valid-no-spaces', ->
             value = self.getValue.call @
             validate = self.validateNoSpaces value, patterns.noSpaces
             if validate?
                 validateField.call @, value, validate
         
-        body.on 'keyup, change', ':input.drm-valid-no-tags', ->
+        body.on 'keyup', ':input.drm-valid-no-tags', ->
             value = self.getValue.call @
             validate = self.validateNoTags value, patterns.noTags
             if validate?
                 validateField.call @, value, validate
         
-        body.on 'keyup, change', ':input.drm-valid-credit-card', ->
+        body.on 'keyup', ':input.drm-valid-credit-card', ->
             value = self.getValue.call @
             validate = self.validateCreditCard value, patterns.creditCard
             if validate?
                 validateField.call @, value, validate
         
-        body.on 'keyup, change', ':input.drm-valid-cvv', ->
+        body.on 'keyup', ':input.drm-valid-cvv', ->
             value = self.getValue.call @
             validate = self.validateCvv value, patterns.cvv
             if validate?
                 validateField.call @, value, validate
         
-        body.on 'keyup, change', ':input.drm-valid-zip', ->
+        body.on 'keyup', ':input.drm-valid-zip', ->
             value = self.getValue.call @
             validate = self.validateZip value, patterns.zip
             if validate?
                 validateField.call @, value, validate
         
-        body.on 'keyup, change', ':input.drm-valid-month-day-year', ->
+        body.on 'keyup', ':input.drm-valid-month-day-year', ->
             value = self.getValue.call @
             validate = self.validateMonthDayYear value, patterns.monthDayYear
             if validate?
                 validateField.call @, value, validate
         
-        body.on 'keyup, change', ':input.drm-valid-time', ->
+        body.on 'keyup', ':input.drm-valid-time', ->
             value = self.getValue.call @
             validate = self.validateTime value, patterns.time
             if validate?
                 validateField.call @, value, validate
         
-        body.on 'keyup, change', ':input[data-max-value]:not([data-min-value])', ->
+        body.on 'keyup', ':input[data-max-value]:not([data-min-value])', ->
             value = self.getValue.call @
             validate = self.validateMaxValue.call @, value
             if validate?
                 validateField.call @, value, validate
         
-        body.on 'keyup, change', ':input[data-min-value]:not([data-max-value])', ->
+        body.on 'keyup', ':input[data-min-value]:not([data-max-value])', ->
             value = self.getValue.call @
             validate = self.validateMinValue.call @, value
             if validate?
                 validateField.call @, value, validate
         
-        body.on 'keyup, change', ':input[data-max-length]:not([data-min-length])', ->
+        body.on 'keyup', ':input[data-max-length]:not([data-min-length])', ->
             value = self.getValue.call @
             validate = self.validateMaxLength.call @, value
             if validate?
                 validateField.call @, value, validate
         
-        body.on 'keyup, change', ':input[data-min-length]:not([data-max-length])', ->
+        body.on 'keyup', ':input[data-min-length]:not([data-max-length])', ->
             value = self.getValue.call @
             validate = self.validateMinLength.call @, value
             if validate?
                 validateField.call @, value, validate
         
-        body.on 'keyup, change', ':input[data-min-value][data-max-value]', ->
+        body.on 'keyup', ':input[data-min-value][data-max-value]', ->
             value = self.getValue.call @
             validate = self.validateBetweenValue.call @, value
             if validate?
                 validateField.call @, value, validate
         
-        body.on 'keyup, change', ':input[data-min-length][data-max-length]', ->
+        body.on 'keyup', ':input[data-min-length][data-max-length]', ->
             value = self.getValue.call @
             validate = self.validateBetweenLength.call @, value
             if validate?
                 validateField.call @, value, validate
         
-        body.on 'keyup, change', ':input[data-equal]', ->
+        body.on 'keyup', ':input[data-equal]', ->
             value = self.getValue.call @
             validate = self.validateEqual.call @, value
             if validate?
                 validateField.call @, value, validate
         
-        body.on 'keyup, change', ':input[data-not-equal]', ->
+        body.on 'keyup', ':input[data-not-equal]', ->
             value = self.getValue.call @
             validate = self.validateNotEqual.call @, value
             if validate?
                 validateField.call @, value, validate
         
-        body.on 'keyup, change', ':input[data-in-list]', ->
+        body.on 'keyup', ':input[data-in-list]', ->
             value = self.getValue.call @
             validate = self.validateInList.call @, value
             if validate?
                 validateField.call @, value, validate
         
-        body.on 'keyup, change', ':input[data-not-list]', ->
+        body.on 'keyup', ':input[data-not-list]', ->
             value = self.getValue.call @
             validate = self.validateNotList.call @, value
             if validate?
                 validateField.call @, value, validate
 
-        body.on 'keyup, change', ":input[type='text'], :input[type='url'], :input[type='email'], :input[type='password'], :input[type='tel'], textarea", ->
+        body.on 'keyup', ":input[type='text'], :input[type='url'], :input[type='email'], :input[type='password'], :input[type='tel'], textarea", ->
             value = self.getValue.call @
             validate = self.trackLength.call @, value
             if validate.message?
@@ -224,35 +224,69 @@ class @DrmValidation
 
         # validate empty fields
         
-        body.on 'blur, change', '[required]', -> 
+        body.on 'blur', '[required]', -> 
             value = self.getValue.call @
             validate = self.validateRequired.call @, value
             if validate?
                 validateField.call @, value, validate
 
-        body.on 'blur, change', ':input:not([required])', ->
+        body.on 'blur', ':input:not([required])', ->
             value = self.getValue.call @
             if not value
                 self.removeValidationClass.call @
                 self.removeAllNotices.call @, self.speed
         
-        body.on 'blur, change', ':input[data-required-with], :input[data-require-with]', ->
+        body.on 'change', ':input[data-required-with]', ->
             # need to monitor required field also
-            value = self.getValue.call @
-            self.validateRequiredWith.call @, value
-            # validate = self.validateRequiredWith.call @, value
-            # if validate?
-            #     validateField.call @, value, validate
+            requireFieldId = $(@).data 'required-with'
+
+            if requireFieldId.search(':') isnt -1
+                requireFieldId = requireFieldId.split ':'
+                fieldId = requireFieldId[0]
+            else
+                fieldId = requireFieldId
+            
+            requireField = $ "##{fieldId}"
+            validate = self.validateRequiredWith.call @
+            # issue and remove notices on both fields
+            if validate?
+                if validate.message?
+                    self.issueNotice.call @, validate, self.speed
+                    self.issueNotice.call requireField, validate, self.speed
+                else
+                    self.removeNotice.call @, validate.issuer, self.speed
+                    self.removeNotice.call requireField, validate.issuer, self.speed
+                self.removeValidationClass.call @, validate.status
+                self.applyValidationClass.call @, validate.status
+                self.removeValidationClass.call requireField, validate.status
+                self.applyValidationClass.call requireField, validate.status
         
-        # body.on 'blur', ':input[data-require-with]', ->
-        #     # need to monitor required field also
-        #     value = self.getValue.call @
-        #     self.validateRequiredWith.call @, value
-        #     validate = self.validateRequiredWith.call @, value
-        #     if validate?
-        #         validateField.call @, value, validate
+        body.on 'blur', ':input[data-require-with]', ->
+            # need to monitor required field also            
+            requiredFieldId = $(@).data 'require-with'
+
+            if requiredFieldId.search(':') isnt -1
+                requiredFieldId = requiredFieldId.split ':'
+                fieldId = requiredFieldId[0]
+            else
+                fieldId = requiredFieldId
+
+            requiredField = $ "##{fieldId}"
+            validate = self.validateRequiredWith.call @
+            # issue and remove notices on both fields
+            if validate?
+                if validate.message?
+                    self.issueNotice.call @, validate, self.speed
+                    self.issueNotice.call requiredField, validate, self.speed
+                else
+                    self.removeNotice.call @, validate.issuer, self.speed
+                    self.removeNotice.call requiredField, validate.issuer, self.speed
+                self.removeValidationClass.call @, validate.status
+                self.applyValidationClass.call @, validate.status
+                self.removeValidationClass.call requiredField, validate.status
+                self.applyValidationClass.call requiredField, validate.status
         
-        body.on 'blur, change', ':input[data-allowed-with]', ->
+        body.on 'blur', ':input[data-allowed-with]', ->
             value = self.getValue.call @
             validate = self.validateAllowedWith.call @, value
             if validate?
@@ -797,8 +831,12 @@ class @DrmValidation
         if value?
             _evaluate listItems, value
 
-    validateRequiredWith: (value) ->
+    validateRequiredWith: ->
         # determine whether or not the field is required-with or require-with
+        # if field is required-with check to see that it is filled in
+        # if field is require-with check to see that required field is filled in
+        # if an action takes place on either field remove notices
+
         _that = $ @
         _requiredWith = _that.data 'required-with'
         _requireWith = _that.data 'require-with'
@@ -813,71 +851,53 @@ class @DrmValidation
 
             if _requiredWith.search(':') isnt -1
                 _requiredWith = _requiredWith.split ':'
-                requiredFieldId = _requiredWith[0]
+                fieldId = _requiredWith[0]
                 fieldValue = _requiredWith[1]
             else
-                requiredFieldId = _requiredWith
+                fieldId = _requiredWith
 
         else if _requireWith
 
             if _requireWith.search(':') isnt -1
                 _requireWith = _requireWith.split ':'
-                requireFieldId = _requireWith[0]
+                fieldId = _requireWith[0]
                 fieldValue = _requireWith[1]
             else
-                requireFieldId = _requireWith
+                fieldId = _requireWith
 
-        _evaluate = (value, requiredFieldId, fieldValue) ->
+        _evaluate = (fieldId, fieldValue) ->
             # if criteria is met then required field must be filled out
-            fieldId = _that.attr 'id'
-            requiredField = $ "##{requiredFieldId}"
+            # fieldId = _that.attr 'id'
+            requiredField = if _requiredWith then $("##{fieldId}") else _that
+            requiredFieldId = if _requiredWith then fieldId else _that.attr 'id'
             requiredFieldValue = $.trim requiredField.val()
+            requireField = if _requireWith then $("##{fieldId}") else _that
+            requireFieldValue = $.trim requireField.val()
 
             _checkValue = ->
-                if not requiredFieldValue
-                    validate.status = 'danger'
-                    validate.message = "#{requiredFieldId} is required with #{fieldId}"
-                else
+                if !requireFieldValue
                     validate.message = null
                     validate.status = 'success'
+                    console.log "#{requiredFieldId} is blank"
+                else if requireFieldValue? and !fieldValue and !requiredFieldValue
+                    validate.message = "#{requiredFieldId} is required"
+                    console.log "#{requiredFieldId} is required"
+                    validate.status = 'danger'
+                else if (requireFieldValue is fieldValue) and !requiredFieldValue
+                    validate.message = "#{requiredFieldId} is required"
+                    console.log "#{requiredFieldId} is required if you select #{fieldValue}"
+                    validate.status = 'danger'
+                else if requireFieldValue? and requiredFieldValue?
+                    validate.message = null
+                    validate.status = 'success'
+                    console.log 'success'
                 validate
 
-            if not value
-                console.log 'do nothing'
-            else if fieldValue? and (value is fieldValue)
-                _checkValue()
-            else if value.length > 0 and (not fieldValue?)
-                _checkValue()
-            
+            _checkValue()
+
             validate
 
-        _evaluate value, requiredFieldId, fieldValue
-
-            # _evaluate = (value, requireFieldId, fieldValue) ->
-            #     # if criteria is met then required field must be filled out
-            #     fieldId = _that.attr 'id'
-            #     requireField = $ "##{requireFieldId}"
-            #     requireFieldValue = $.trim requireField.val()
-
-            #     _checkValue = ->
-            #         if not value
-            #             validate.status = 'danger'
-            #             validate.message = "#{fieldId} is required with #{requireFieldId}"
-            #         else
-            #             validate.message = null
-            #             validate.status = 'success'
-            #         validate
-
-            #     if not requireFieldValue
-            #         console.log 'do nothing'
-            #     else if fieldValue? and (requireFieldValue is fieldValue)
-            #         _checkValue()
-            #     else if requireFieldValue.length > 0 and (not fieldValue?)
-            #         _checkValue()
-                
-            #     validate
-
-            # _evaluate value, requireFieldId, fieldValue
+        _evaluate fieldId, fieldValue
             
     validateAllowedWith: (value) ->
         _that = $ @

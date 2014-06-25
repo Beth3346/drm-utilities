@@ -83,8 +83,18 @@ section
             label(for="other-fav-movie") What Do You Like Best About Your Favorite Movie?:
             input#other-fav-movie(type="text" name="other_fav_movie" placeholder="Its the best" data-require-with="fav-movie")
 
-            //- label(for="other-fav-movie") Other Favorite Movie:
-            //- input#other-fav-movie(type="text" name="other_fav_movie" placeholder="Citizen Kane" data-require-with="fav-movie")
+            label(for="fav-musician") Favorite Musician:
+            select#fav-musician(data-required-with="other-fav-musician:other")
+                option(value=" ") Pick a Musician
+                option(value="1") The National
+                option(value="2") Nirvana
+                option(value="3") Velvet Underground
+                option(value="4") Frightened Rabbit
+                option(value="5") Vampire Weekend
+                option(value="other") Other
+
+            label(for="other-fav-musician") Who Is Your Favorite Musician?:
+            input#other-fav-musician(type="text" name="other_fav_musician" placeholder="Its the best" data-require-with="fav-musician:other")
 
             label(for="fav-movie") Favorite Color:
             select#fav-color(data-activate-field="other-fav-color:other")
