@@ -78,14 +78,13 @@ section
                 option(value="3") Breakfast at Tiffany's
                 option(value="4") Clueless
                 option(value="5") Ferris Bueller's Day Off
-                option(value="other") Other
 
             label(for="other-fav-movie") What Do You Like Best About Your Favorite Movie?:
             input#other-fav-movie(type="text" name="other_fav_movie" placeholder="Its the best" data-require-with="fav-movie")
 
-            label(for="fav-musician") Favorite Musician:
-            select#fav-musician(data-required-with="other-fav-musician:other")
-                option(value=" ") Pick a Musician
+            label(for="fav-band") Favorite Band:
+            select#fav-band(data-required-with="other-fav-band:other")
+                option(value=" ") Pick a Band
                 option(value="1") The National
                 option(value="2") Nirvana
                 option(value="3") Velvet Underground
@@ -93,8 +92,8 @@ section
                 option(value="5") Vampire Weekend
                 option(value="other") Other
 
-            label(for="other-fav-musician") Who Is Your Favorite Musician?:
-            input#other-fav-musician(type="text" name="other_fav_musician" placeholder="Its the best" data-require-with="fav-musician:other")
+            label(for="other-fav-band") Who Is Your Favorite Musician?:
+            input#other-fav-band(type="text" name="other_fav_band" placeholder="Its the best" data-require-with="fav-band:other")
 
             label(for="fav-city") Favorite City:
             select#fav-city(data-allowed-with="why-fav-city")
