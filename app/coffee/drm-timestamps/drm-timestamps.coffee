@@ -125,6 +125,13 @@ class @DrmTimeStamps
 
         date = _parseDate item
         time = _parseTime item
+        
         return new Date date.year, date.month, date.date, time.hour, time.minute, time.second
+
+    prettifyDate: (date) ->
+        console.log date
+
+    createTimestamp: (date) ->
+        console.log date
 
 new DrmTimeStamps()
