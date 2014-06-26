@@ -55,66 +55,76 @@ class @DrmTimeStamps
 
         _getDaysInMonth = (month, year) ->
             # returns the number of days in a month
-            month = month + 1
-            new Date(year, month, 0).getDate()
+            _month = month + 1
+            new Date(year, _month, 0).getDate()
 
-        if item.search(/^(yesterday|today|tomorrow)/) isnt -1
-            fullDate = item.match /^(yesterday|today|tomorrow)/i
-            fullDate = fullDate[0]
-            lastMonth = if @today.month is 0 then 11 else @today.month - 1
-            nextMonth = if @today.month is 11 then 0 else @today.month + 1
+        _parseDate = (item) =>
+            date = {}
+            if item.search(/^(yesterday|today|tomorrow)/) isnt -1
+                _fullDate = item.match /^(yesterday|today|tomorrow)/i
+                _fullDate = _fullDate[0]
+                _lastMonth = if @today.month is 0 then 11 else @today.month - 1
+                _nextMonth = if @today.month is 11 then 0 else @today.month + 1
 
-            lastDateInMonth = _getDaysInMonth @today.month, @today.year
-            lastDateInLastMonth = _getDaysInMonth lastMonth, @today.year
+                _lastDateInMonth = _getDaysInMonth @today.month, @today.year
+                _lastDateInLastMonth = _getDaysInMonth _lastMonth, @today.year
 
-            if fullDate is 'yesterday'
-                date = if @today.date is 1 then lastDateInLastMonth else @today.date - 1
-                month = if @today.date is 1 then lastMonth else @today.month
-                year = if (@today.month is 0) and (@today.date is 1) then @today.year - 1 else @today.year
-            else if fullDate is 'today'
-                date = @today.date
-                month = @today.month
-                year = @today.year
-            else if fullDate is 'tomorrow'
-                date = if @today.date is lastDateInMonth then 1 else @today.date + 1
-                month = if @today.date is lastDateInMonth then nextMonth else @today.month
-                year = if (@today.month is 11) and (@today.date is lastDateInMonth) then @today.year + 1 else @today.year
+                if _fullDate is 'yesterday'
+                    date.date = if @today.date is 1 then _lastDateInLastMonth else @today.date - 1
+                    date.month = if @today.date is 1 then _lastMonth else @today.month
+                    date.year = if (@today.month is 0) and (@today.date is 1) then @today.year - 1 else @today.year
+                else if _fullDate is 'today'
+                    date.date = @today.date
+                    date.month = @today.month
+                    date.year = @today.year
+                else if _fullDate is 'tomorrow'
+                    date.date = if @today.date is _lastDateInMonth then 1 else @today.date + 1
+                    date.month = if @today.date is _lastDateInMonth then _nextMonth else @today.month
+                    date.year = if (@today.month is 11) and (@today.date is _lastDateInMonth) then @today.year + 1 else @today.year
 
-        else
-            fullDate = item.match /((?:[0]?[1-9]|[1][012]|[1-9])[-\/.](?:[0]?[1-9]|[12][0-9]|[3][01])[-\/.][0-9]{4})/
-            fullDate = fullDate[0]
+            else
+                _fullDate = item.match /((?:[0]?[1-9]|[1][012]|[1-9])[-\/.](?:[0]?[1-9]|[12][0-9]|[3][01])[-\/.][0-9]{4})/
+                _fullDate = _fullDate[0]
 
-            month = fullDate.match /^([0]?[1-9]|[1][012]|[1-9])/
-            month = parseInt(month[0], 10)
+                date.month = _fullDate.match /^([0]?[1-9]|[1][012]|[1-9])/
+                date.month = parseInt(date.month[0], 10)
 
-            date = fullDate.match /[\.\/\-]([012]?[0-9])[\.\/\-]/
-            date = parseInt(date[1], 10)
+                date.date = _fullDate.match /[\.\/\-]([012]?[0-9])[\.\/\-]/
+                date.date = parseInt(date.date[1], 10)
 
-            year = fullDate.match /([0-9]{4})/
-            year = parseInt(year[0], 10)
+                date.year = _fullDate.match /([0-9]{4})/
+                date.year = parseInt(date.year[0], 10)
 
-        time = item.match /((?:[12][012]:|[0]?[0-9]:)[012345][0-9](?:\:[012345][0-9])?(?:am|pm)?)/i
-   
-        if time?
-            time = time[0]
-            ampm = time.match /(am|pm)/i
-            ampm = ampm[1]
+            date
 
-            hour = time.match /^(?:([12][012]):|([0]?[0-9]):)/
-            hour = if hour[1]? then parseInt(hour[1], 10) else parseInt(hour[2], 10)
+        _parseTime = (item) =>
+            time = {}
+            _fullTime = item.match /((?:[12][012]:|[0]?[0-9]:)[012345][0-9](?:\:[012345][0-9])?(?:am|pm)?)/i
+       
+            if _fullTime?
+                _fullTime = _fullTime[0]
+                _ampm = _fullTime.match /(am|pm)/i
+                _ampm = _ampm[1]
 
-            hour = if ampm is 'pm' then hour + 12 else hour
-            
-            minute = time.match /\:([012345][0-9])/
-            minute = parseInt(minute[1], 10)
-            
-            second = time.match /\:(?:[012345][0-9])\:([012345][0-9])/
-            second = if second? then parseInt(second[1], 10) else @today.second
-        else
-            hour = @today.hour
-            minute = @today.minute            
-            second = @today.second
+                time.hour = _fullTime.match /^(?:([12][012]):|([0]?[0-9]):)/
+                time.hour = if time.hour[1]? then parseInt(time.hour[1], 10) else parseInt(time.hour[2], 10)
 
-        return new Date year, month, date, hour, minute, second
+                time.hour = if _ampm is 'pm' then time.hour + 12 else time.hour
+                
+                time.minute = _fullTime.match /\:([012345][0-9])/
+                time.minute = parseInt(time.minute[1], 10)
+                
+                time.second = _fullTime.match /\:(?:[012345][0-9])\:([012345][0-9])/
+                time.second = if time.second? then parseInt(time.second[1], 10) else @today.second
+            else
+                time.hour = @today.hour
+                time.minute = @today.minute            
+                time.second = @today.second
+
+            time
+
+        date = _parseDate item
+        time = _parseTime item
+        return new Date date.year, date.month, date.date, time.hour, time.minute, time.second
 
 new DrmTimeStamps()
