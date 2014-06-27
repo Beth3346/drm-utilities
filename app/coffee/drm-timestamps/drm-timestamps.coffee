@@ -18,7 +18,7 @@ class @DrmTimeStamps
             second: @now.getSeconds()
         @prettyDate = $ '.drm-pretty-date'
         @patterns =
-            longDate: new RegExp '^(?:[a-z]*[\\.,]?\\s)?[a-z]*\\.?\\s(?:[3][01]\\s|[012][1-9]\\s|[1-9]\\s)[0-9]{4}$', 'i'
+            longDate: new RegExp '^(?:[a-z]*[\\.,]?\\s)?[a-z]*\\.?\\s(?:[3][01],?\\s|[012][1-9],?\\s|[1-9],?\\s)[0-9]{4}$', 'i'
             shortDate: new RegExp '((?:[0]?[1-9]|[1][012]|[1-9])[-\/.](?:[0]?[1-9]|[12][0-9]|[3][01])[-\/.][0-9]{4})'
             longTime: new RegExp '((?:[12][012]:|[0]?[0-9]:)[012345][0-9](?:\\:[012345][0-9])?(?:am|pm)?)', 'i'
 
@@ -72,38 +72,40 @@ class @DrmTimeStamps
             'Sat'
         ]
 
-        $.each @prettyDate, ->
-            item = $(@).text()
-            date = self.parseDate item
-            self.prettifyDate date
-
-        setInterval =>
-            self = @
-            @now = new Date()
-            @today =
-                month: @now.getMonth()
-                day: @now.getDay()
-                date: @now.getDate()
-                year: @now.getFullYear()
-                hour: @now.getHours()
-                minute: @now.getMinutes()
-                second: @now.getSeconds()
+        setInterval ->
+            self.now = new Date()
+            self.today =
+                month: self.now.getMonth()
+                day: self.now.getDay()
+                date: self.now.getDate()
+                year: self.now.getFullYear()
+                hour: self.now.getHours()
+                minute: self.now.getMinutes()
+                second: self.now.getSeconds()
             
-            prettyNow = @prettifyDate @now
+            prettyNow = self.prettifyDate self.now
             $('.drm-now').text prettyNow
-            
-            $.each @timestamps, ->
-                item = $(@).text()
-                date = self.parseDate item
-                return
         , 1000
 
-    capitalize: (str) ->
-        str.toLowerCase().replace /^.|\s\S/g, (a) ->
-            a.toUpperCase()
+        $.each @prettyDate, ->
+            _that = $ @
+            item = _that.text()
 
-    now: ->
-        return new Date()
+            setInterval ->
+                date = self.parseDate item
+                prettyDate = self.prettifyDate date
+                _that.text prettyDate
+            , 1000
+            
+        $.each self.timestamps, ->
+            _that = $ @
+            item = _that.text()
+
+            setInterval ->
+                date = self.parseDate item
+                prettyDate = self.prettifyDate date
+                _that.text prettyDate
+            , 1000
 
     parseDate: (item) =>
         # check for Yesterday, Today, Tomorrow strings and look for time
@@ -142,7 +144,7 @@ class @DrmTimeStamps
                 return date
                 
             # look for month names
-            else if item.search(/^(?:[a-z]*[\.,]?\s)?[a-z]*\.?\s(?:[3][01]\s|[012][1-9]\s|[1-9]\s)[0-9]{4}$/i) isnt -1
+            else if item.search(/^(?:[a-z]*[\.,]?\s)?[a-z]*\.?\s(?:[3][01],?\s|[012][1-9],?\s|[1-9],?\s)[0-9]{4}$/i) isnt -1
                 # month or day of the week
                 _dayMonth = item.match /^(?:[a-z]*[\.,]?\s)?[a-z]*/
                 _dayMonth = $.trim _dayMonth[0]
@@ -161,11 +163,11 @@ class @DrmTimeStamps
                     item.toLowerCase()
 
                 if date.month in _months
-                    date.month = $.inArray(date.month, @months)
+                    date.month = $.inArray(date.month, _months)
                 else if date.month in _shortMonths
-                    date.month = $.inArray(date.month, @shortMonths)
+                    date.month = $.inArray(date.month, _shortMonths)
 
-                date.date = item.match /\s(?:([3][01])\s|([012][1-9])\s|([1-9])\s)/
+                date.date = item.match /\s(?:([3][01]),?\s|([012][1-9]),?\s|([1-9]),?\s)/
                 if date.date[1]?
                     date.date = parseInt(date.date[1], 10)
                 else if date.date[2]?
@@ -175,7 +177,6 @@ class @DrmTimeStamps
 
                 date.year = item.match /([0-9]{4})$/
                 date.year = parseInt(date.year[1], 10)
-
                 return date
 
             else if item.search(/((?:[0]?[1-9]|[1][012]|[1-9])[-\/.](?:[0]?[1-9]|[12][0-9]|[3][01])[-\/.][0-9]{4})/) isnt -1
@@ -202,7 +203,7 @@ class @DrmTimeStamps
             if _fullTime?
                 time = {}
                 _fullTime = _fullTime[0]
-                _ampm = _fullTime.match /(am|pm)/i
+                _ampm = _fullTime.match /(am|pm)$/i
                 _ampm = _ampm[1]
 
                 time.hour = _fullTime.match /^(?:([12][012]):|([0]?[0-9]):)/
@@ -236,16 +237,18 @@ class @DrmTimeStamps
         pretty.day = date.getDay()
         pretty.month = date.getMonth()
         pretty.date = date.getDate().toString()
+        pretty.date = if pretty.date.length is 1 then "0#{pretty.date}" else pretty.date
         pretty.year = date.getFullYear().toString()
         pretty.hour = if date.getHours() > 12 then date.getHours() - 12 else date.getHours()
         pretty.hour = pretty.hour.toString()
+        pretty.hour = if pretty.hour.length is 1 then "0#{pretty.hour}" else pretty.hour
         pretty.minute = date.getMinutes().toString()
         pretty.minute = if pretty.minute.length is 1 then "0#{pretty.minute}" else pretty.minute
         pretty.second = date.getSeconds().toString()
         pretty.second = if pretty.second.length is 1 then "0#{pretty.second}" else pretty.second
         pretty.ampm = if date.getHours() > 12 then 'pm' else 'am'
         
-        return "#{@days[pretty.day]}, #{@months[pretty.month]} #{pretty.date} #{pretty.year}, #{pretty.hour}:#{pretty.minute}:#{pretty.second} #{pretty.ampm}"
+        return "#{@days[pretty.day]}, #{@months[pretty.month]} #{pretty.date}, #{pretty.year}, #{pretty.hour}:#{pretty.minute}:#{pretty.second} #{pretty.ampm}"
 
     elapseTime: (date) ->
         # display a date and time relative to now ex. 2 hours ago
