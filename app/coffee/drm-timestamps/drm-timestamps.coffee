@@ -7,19 +7,20 @@ $ = jQuery
 class @DrmTimeStamps
     constructor: (@timestamps = $('.drm-timestamp')) ->
         self = @
-        @now = @now()
+        @now = new Date()
         @today =
-            month: self.now.getMonth()
-            day: self.now.getDay()
-            date: self.now.getDate()
-            year: self.now.getFullYear()
-            hour: self.now.getHours()
-            minute: self.now.getMinutes()
-            second: self.now.getSeconds()
-
+            month: @now.getMonth()
+            day: @now.getDay()
+            date: @now.getDate()
+            year: @now.getFullYear()
+            hour: @now.getHours()
+            minute: @now.getMinutes()
+            second: @now.getSeconds()
+        @prettyDate = $ '.drm-pretty-date'
         @patterns =
             longDate: new RegExp '^(?:[a-z]*[\\.,]?\\s)?[a-z]*\\.?\\s(?:[3][01]\\s|[012][1-9]\\s|[1-9]\\s)[0-9]{4}$', 'i'
             shortDate: new RegExp '((?:[0]?[1-9]|[1][012]|[1-9])[-\/.](?:[0]?[1-9]|[12][0-9]|[3][01])[-\/.][0-9]{4})'
+            longTime: new RegExp '((?:[12][012]:|[0]?[0-9]:)[012345][0-9](?:\\:[012345][0-9])?(?:am|pm)?)', 'i'
 
         @months = [
             'January'
@@ -71,12 +72,31 @@ class @DrmTimeStamps
             'Sat'
         ]
 
-        $('.drm-now').text "#{@days[@today.day]}, #{@months[@today.month]} #{@today.date} #{@today.year} #{@today.hour}:#{@today.minute}:#{@today.second}"
-
-        $.each @timestamps, ->
+        $.each @prettyDate, ->
             item = $(@).text()
             date = self.parseDate item
-            console.log date
+            self.prettifyDate date
+
+        setInterval =>
+            self = @
+            @now = new Date()
+            @today =
+                month: @now.getMonth()
+                day: @now.getDay()
+                date: @now.getDate()
+                year: @now.getFullYear()
+                hour: @now.getHours()
+                minute: @now.getMinutes()
+                second: @now.getSeconds()
+            
+            prettyNow = @prettifyDate @now
+            $('.drm-now').text prettyNow
+            
+            $.each @timestamps, ->
+                item = $(@).text()
+                date = self.parseDate item
+                return
+        , 1000
 
     capitalize: (str) ->
         str.toLowerCase().replace /^.|\s\S/g, (a) ->
@@ -85,7 +105,7 @@ class @DrmTimeStamps
     now: ->
         return new Date()
 
-    parseDate: (item) ->
+    parseDate: (item) =>
         # check for Yesterday, Today, Tomorrow strings and look for time
         item = item.toLowerCase()
 
@@ -118,6 +138,9 @@ class @DrmTimeStamps
                     date.date = if @today.date is _lastDateInMonth then 1 else @today.date + 1
                     date.month = if @today.date is _lastDateInMonth then _nextMonth else @today.month
                     date.year = if (@today.month is 11) and (@today.date is _lastDateInMonth) then @today.year + 1 else @today.year
+
+                return date
+                
             # look for month names
             else if item.search(/^(?:[a-z]*[\.,]?\s)?[a-z]*\.?\s(?:[3][01]\s|[012][1-9]\s|[1-9]\s)[0-9]{4}$/i) isnt -1
                 # month or day of the week
@@ -152,7 +175,10 @@ class @DrmTimeStamps
 
                 date.year = item.match /([0-9]{4})$/
                 date.year = parseInt(date.year[1], 10)
-            else
+
+                return date
+
+            else if item.search(/((?:[0]?[1-9]|[1][012]|[1-9])[-\/.](?:[0]?[1-9]|[12][0-9]|[3][01])[-\/.][0-9]{4})/) isnt -1
                 _fullDate = item.match /((?:[0]?[1-9]|[1][012]|[1-9])[-\/.](?:[0]?[1-9]|[12][0-9]|[3][01])[-\/.][0-9]{4})/
                 _fullDate = _fullDate[0]
 
@@ -165,7 +191,10 @@ class @DrmTimeStamps
                 date.year = _fullDate.match /([0-9]{4})/
                 date.year = parseInt(date.year[0], 10)
 
-            date
+                return date
+
+            else
+                return
 
         _parseTime = (item) =>
             _fullTime = item.match /((?:[12][012]:|[0]?[0-9]:)[012345][0-9](?:\:[012345][0-9])?(?:am|pm)?)/i
@@ -197,20 +226,32 @@ class @DrmTimeStamps
         if date? and time?
             return new Date date.year, date.month, date.date, time.hour, time.minute, time.second
         else if date? and !time
-            return new Date date.year, date.month, date.date
+            return new Date date.year, date.month, date.date, @today.hour, @today.minute, @today.second
         else if !date and time?
-            return new Date time.hour, time.minute, time.second
+            return new Date @today.year, @today.month, @today.date, time.hour, time.minute, time.second
 
-    prettifyDate: (date) ->
+    prettifyDate: (date, format = 'dddd, mmmm dd yyyy, hh:mm:ss') =>
         # format date and time
+        pretty = {}
+        pretty.day = date.getDay()
+        pretty.month = date.getMonth()
+        pretty.date = date.getDate().toString()
+        pretty.year = date.getFullYear().toString()
+        pretty.hour = if date.getHours() > 12 then date.getHours() - 12 else date.getHours()
+        pretty.hour = pretty.hour.toString()
+        pretty.minute = date.getMinutes().toString()
+        pretty.minute = if pretty.minute.length is 1 then "0#{pretty.minute}" else pretty.minute
+        pretty.second = date.getSeconds().toString()
+        pretty.second = if pretty.second.length is 1 then "0#{pretty.second}" else pretty.second
+        pretty.ampm = if date.getHours() > 12 then 'pm' else 'am'
         
-        console.log date
+        return "#{@days[pretty.day]}, #{@months[pretty.month]} #{pretty.date} #{pretty.year}, #{pretty.hour}:#{pretty.minute}:#{pretty.second} #{pretty.ampm}"
 
     elapseTime: (date) ->
         # display a date and time relative to now ex. 2 hours ago
         console.log date
 
-    countdown: (date) ->
+    countdownTo: (date) ->
         # display a running countdown
         console.log date
 
