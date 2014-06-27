@@ -72,6 +72,22 @@ class @DrmTimeStamps
             'Sat'
         ]
 
+        $.each @prettyDate, ->
+            _that = $ @
+            item = _that.text()
+            date = self.parseDate item
+            prettyDate = self.prettifyDate date
+            
+            _that.text prettyDate
+            
+        $.each self.timestamps, ->
+            _that = $ @
+            item = _that.text()
+            date = self.parseDate item
+            prettyDate = self.prettifyDate date
+            
+            _that.text prettyDate
+
         setInterval ->
             self.now = new Date()
             self.today =
@@ -81,34 +97,48 @@ class @DrmTimeStamps
                 year: self.now.getFullYear()
                 hour: self.now.getHours()
                 minute: self.now.getMinutes()
-                second: self.now.getSeconds()
-            
+                second: self.now.getSeconds()            
             prettyNow = self.prettifyDate self.now
+            
             $('.drm-now').text prettyNow
         , 1000
 
-        $.each @prettyDate, ->
-            _that = $ @
-            item = _that.text()
+        # $.each @prettyDate, ->
+        #     _that = $ @
+        #     item = _that.text()
 
-            setInterval ->
-                date = self.parseDate item
-                prettyDate = self.prettifyDate date
-                _that.text prettyDate
-            , 1000
+        #     setInterval ->
+        #         date = self.parseDate item
+        #         prettyDate = self.prettifyDate date
+        #         _that.text prettyDate
+        #     , 1000
             
-        $.each self.timestamps, ->
-            _that = $ @
-            item = _that.text()
+        # $.each self.timestamps, ->
+        #     _that = $ @
+        #     item = _that.text()
 
-            setInterval ->
-                date = self.parseDate item
-                prettyDate = self.prettifyDate date
-                _that.text prettyDate
-            , 1000
+        #     setInterval ->
+        #         date = self.parseDate item
+        #         prettyDate = self.prettifyDate date
+        #         _that.text prettyDate
+        #     , 1000
 
-        testDate = new Date 2014, 5, 24, 23, 41, 0
-        self.elapseTime testDate
+        # testDate = new Date 2014, 5, 24, 23, 41, 0
+        # testDate2 = new Date 2014, 5, 27, 23, 41, 0
+        # testDate3 = new Date 2014, 3, 27, 23, 41, 0
+        # testDate4 = new Date 2014, 7, 27, 23, 41, 0
+        # testDate5 = new Date 1914, 3, 27, 23, 41, 0
+        # testDate6 = new Date 2016, 7, 27, 23, 41, 0
+        # testDate7 = new Date 2014, 5, 26, 23, 41, 32
+        # testDate8 = new Date 2014, 5, 27, 16, 37, 32
+        # console.log self.elapseTime(testDate)
+        # console.log self.elapseTime(testDate2)
+        # console.log self.elapseTime(testDate3)
+        # console.log self.elapseTime(testDate4)
+        # console.log self.elapseTime(testDate5)
+        # console.log self.elapseTime(testDate6)
+        # console.log self.elapseTime(testDate7)
+        # console.log self.elapseTime(testDate8)
 
     parseDate: (item) =>
         # check for Yesterday, Today, Tomorrow strings and look for time
@@ -211,8 +241,11 @@ class @DrmTimeStamps
 
                 time.hour = _fullTime.match /^(?:([12][012]):|([0]?[0-9]):)/
                 time.hour = if time.hour[1]? then parseInt(time.hour[1], 10) else parseInt(time.hour[2], 10)
-
-                time.hour = if _ampm is 'pm' and time.hour < 12 then time.hour + 12 else time.hour
+                
+                if _ampm is 'am' and time.hour is 12
+                    time.hour = 0
+                else if _ampm is 'pm' and time.hour < 12
+                    time.hour = time.hour + 12
                 
                 time.minute = _fullTime.match /\:([012345][0-9])/
                 time.minute = parseInt(time.minute[1], 10)
@@ -242,37 +275,59 @@ class @DrmTimeStamps
         pretty.date = date.getDate().toString()
         pretty.date = if pretty.date.length is 1 then "0#{pretty.date}" else pretty.date
         pretty.year = date.getFullYear().toString()
-        pretty.hour = if date.getHours() > 12 then date.getHours() - 12 else date.getHours()
+        
+        if date.getHours() is 0
+            pretty.hour = 12
+        else if date.getHours() > 12
+            pretty.hour = date.getHours() - 12 
+        else 
+            pretty.hour = date.getHours()
+        
         pretty.hour = pretty.hour.toString()
         pretty.hour = if pretty.hour.length is 1 then "0#{pretty.hour}" else pretty.hour
         pretty.minute = date.getMinutes().toString()
         pretty.minute = if pretty.minute.length is 1 then "0#{pretty.minute}" else pretty.minute
         pretty.second = date.getSeconds().toString()
         pretty.second = if pretty.second.length is 1 then "0#{pretty.second}" else pretty.second
-        pretty.ampm = if date.getHours() > 12 then 'pm' else 'am'
+        pretty.ampm = if date.getHours() >= 12 then 'pm' else 'am'
         
         return "#{@days[pretty.day]}, #{@months[pretty.month]} #{pretty.date}, #{pretty.year}, #{pretty.hour}:#{pretty.minute}:#{pretty.second} #{pretty.ampm}"
 
     elapseTime: (date) =>
-        # display a date and time relative to now ex. 2 hours ago
-        # 24hrs is 86400 seconds
-        now = new Date 2014, 5, 26, 23, 41, 0
+        # display a date and time relative to now ex. 2 hours ago or 6 months ago
+        now = new Date()
+        # now = new Date 2014, 5, 26, 23, 41, 0
+        # console.log @prettifyDate(now)
+        # console.log @prettifyDate(date)
         nowMs = now.getTime()
         oldMs = date.getTime()
-        # console.log typeof nowMs
-        # console.log typeof oldMs
-
-        # console.log nowMs
-        # console.log oldMs
         diff = nowMs - oldMs
-        seconds = diff/100
-        console.log "#{seconds} seconds"
+        # seconds = diff/100
+        seconds = if (diff/100) >= 0 then Math.floor((diff/100)) else Math.ceil((diff/100))
+        minutes = if (seconds/600) >= 0 then Math.floor((seconds/600)) else Math.ceil((seconds/600))
+        hours = if (minutes/60) >= 0 then Math.floor((minutes/60)) else Math.ceil((minutes/60))
+        days = if (hours/24) >= 0 then Math.floor((hours/24)) else Math.ceil((hours/24))
+        weeks = if (days/7) >= 0 then Math.floor((days/7)) else Math.ceil((days/7))
+        years = if (days/365) >= 0 then Math.floor((days/365)) else Math.ceil((days/365))
 
-        minutes = seconds/600
-        console.log "#{minutes} minutes"
+        months = weeks/(52/12)
+        if Math.abs(months) >= 1
+            months = if months >= 0 then Math.ceil(months) else Math.floor(months)
+        else
+            months = 0
 
-        hours = minutes/60
-        console.log "#{hours} hours"
+        if Math.abs(years) >= 1
+            return if years >= 0 then "#{years} years ago" else "in #{Math.abs(years)} years"
+        else if Math.abs(months) >= 1
+            return if months >= 0 then "#{months} months ago" else "in #{Math.abs(months)} months"
+        else if Math.abs(days) >= 1
+            return if days >= 0 then "#{days} days ago" else "in #{Math.abs(days)} days"
+        else if Math.abs(hours) >= 1
+            return if hours >= 0 then "#{hours} hours ago" else "in #{Math.abs(hours)} hours"
+        else if Math.abs(minutes) >= 1
+            return if minutes >= 0 then "#{minutes} minutes ago" else "in #{Math.abs(minutes)} minutes"
+        else
+            return 'Just Now'
 
     countdownTo: (date) ->
         # display a running countdown
