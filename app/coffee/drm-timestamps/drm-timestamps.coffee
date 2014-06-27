@@ -107,6 +107,9 @@ class @DrmTimeStamps
                 _that.text prettyDate
             , 1000
 
+        testDate = new Date 2014, 5, 24, 23, 41, 0
+        self.elapseTime testDate
+
     parseDate: (item) =>
         # check for Yesterday, Today, Tomorrow strings and look for time
         item = item.toLowerCase()
@@ -197,7 +200,7 @@ class @DrmTimeStamps
             else
                 return
 
-        _parseTime = (item) =>
+        _parseTime = (item) ->
             _fullTime = item.match /((?:[12][012]:|[0]?[0-9]:)[012345][0-9](?:\:[012345][0-9])?(?:am|pm)?)/i
        
             if _fullTime?
@@ -215,7 +218,7 @@ class @DrmTimeStamps
                 time.minute = parseInt(time.minute[1], 10)
                 
                 time.second = _fullTime.match /\:(?:[012345][0-9])\:([012345][0-9])/
-                time.second = if time.second? then parseInt(time.second[1], 10) else @today.second
+                time.second = if time.second? then parseInt(time.second[1], 10) else 0
 
                 return time
             else
@@ -250,9 +253,26 @@ class @DrmTimeStamps
         
         return "#{@days[pretty.day]}, #{@months[pretty.month]} #{pretty.date}, #{pretty.year}, #{pretty.hour}:#{pretty.minute}:#{pretty.second} #{pretty.ampm}"
 
-    elapseTime: (date) ->
+    elapseTime: (date) =>
         # display a date and time relative to now ex. 2 hours ago
-        console.log date
+        # 24hrs is 86400 seconds
+        now = new Date 2014, 5, 26, 23, 41, 0
+        nowMs = now.getTime()
+        oldMs = date.getTime()
+        # console.log typeof nowMs
+        # console.log typeof oldMs
+
+        # console.log nowMs
+        # console.log oldMs
+        diff = nowMs - oldMs
+        seconds = diff/100
+        console.log "#{seconds} seconds"
+
+        minutes = seconds/600
+        console.log "#{minutes} minutes"
+
+        hours = minutes/60
+        console.log "#{hours} hours"
 
     countdownTo: (date) ->
         # display a running countdown
