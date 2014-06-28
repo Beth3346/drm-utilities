@@ -84,9 +84,9 @@ class @DrmTimeStamps
             _that = $ @
             item = _that.text()
             date = self.parseDate item
-            prettyDate = self.prettifyDate date
+            elapse = self.elapseTime date
             
-            _that.text prettyDate
+            _that.text elapse
 
         setInterval ->
             self.now = new Date()
@@ -269,12 +269,31 @@ class @DrmTimeStamps
 
     prettifyDate: (date, format = 'dddd, mmmm dd yyyy, hh:mm:ss') =>
         # format date and time
+        format =
+            dddd: 'long day'
+            ddd: 'short day'
+            MMMM: 'long month'
+            MMM: 'month abbr'
+            MM: if date.getMonth().toString().length is 1 then "0#{date.getMonth().toString()}" else date.getMonth() # two digit month
+            M: date.getMonth() # one digit month
+            DD: if date.getDate().toString().length is 1 then "0#{date.getDate().toString()}" else date.getDate() # two digit date
+            D: date.getDate()
+            yy: 'two digit year'
+            yyyy: date.getFullYear() # four digit year
+            hh: 'two digit hours'
+            h: 'one digit hours'
+            mm: if date.getMinutes().toString().length is 1 then "0#{date.getMinutes().toString()}" else date.getMinutes() # two digit minutes
+            m: date.getMinutes() # one digit minutes
+            ss: if date.getSeconds().toString().length is 1 then "0#{date.getSeconds().toString()}" else date.getSeconds().toString() # two digit seconds
+            s: date.getSeconds() # one digit seconds
+            a: if date.getHours() >= 12 then 'pm' else 'am' # ampm
+            A: if date.getHours() >= 12 then 'PM' else 'AM' # AMPM
+
         pretty = {}
         pretty.day = date.getDay()
         pretty.month = date.getMonth()
-        pretty.date = date.getDate().toString()
-        pretty.date = if pretty.date.length is 1 then "0#{pretty.date}" else pretty.date
-        pretty.year = date.getFullYear().toString()
+        pretty.date = if date.getDate().toString().length is 1 then "0#{date.getDate().toString()}" else date.getDate()
+        pretty.year = date.getFullYear()
         
         if date.getHours() is 0
             pretty.hour = 12
@@ -285,24 +304,24 @@ class @DrmTimeStamps
         
         pretty.hour = pretty.hour.toString()
         pretty.hour = if pretty.hour.length is 1 then "0#{pretty.hour}" else pretty.hour
-        pretty.minute = date.getMinutes().toString()
-        pretty.minute = if pretty.minute.length is 1 then "0#{pretty.minute}" else pretty.minute
-        pretty.second = date.getSeconds().toString()
-        pretty.second = if pretty.second.length is 1 then "0#{pretty.second}" else pretty.second
+        pretty.minute = if date.getMinutes().toString().length is 1 then "0#{date.getMinutes().toString()}" else date.getMinutes()
+        pretty.second = if date.getSeconds().toString().length is 1 then "0#{date.getSeconds().toString()}" else date.getSeconds()
         pretty.ampm = if date.getHours() >= 12 then 'pm' else 'am'
         
         return "#{@days[pretty.day]}, #{@months[pretty.month]} #{pretty.date}, #{pretty.year}, #{pretty.hour}:#{pretty.minute}:#{pretty.second} #{pretty.ampm}"
 
     elapseTime: (date) =>
-        # display a date and time relative to now ex. 2 hours ago or 6 months ago
+        # display an approximate date and time relative to now ex. 2 hours ago or 6 months ago
+        # always rounds to a whole number ex. 1.5 months is 1 months
+        # will return the largest unit of time. ex. 1 week instead of 8 days, 58 minutes instead of 1 hour
+        # months do not account for variations in length
+        # years do not account for leap years
+        
         now = new Date()
         # now = new Date 2014, 5, 26, 23, 41, 0
         # console.log @prettifyDate(now)
         # console.log @prettifyDate(date)
-        nowMs = now.getTime()
-        oldMs = date.getTime()
-        diff = nowMs - oldMs
-        # seconds = diff/100
+        diff = now.getTime() - date.getTime()
         seconds = if (diff/100) >= 0 then Math.floor((diff/100)) else Math.ceil((diff/100))
         minutes = if (seconds/600) >= 0 then Math.floor((seconds/600)) else Math.ceil((seconds/600))
         hours = if (minutes/60) >= 0 then Math.floor((minutes/60)) else Math.ceil((minutes/60))
@@ -310,7 +329,9 @@ class @DrmTimeStamps
         weeks = if (days/7) >= 0 then Math.floor((days/7)) else Math.ceil((days/7))
         years = if (days/365) >= 0 then Math.floor((days/365)) else Math.ceil((days/365))
 
-        months = weeks/(52/12)
+        # 52 weeks / 12 months about 4.33333
+        months = weeks/(13/3)
+        
         if Math.abs(months) >= 1
             months = if months >= 0 then Math.ceil(months) else Math.floor(months)
         else
@@ -320,12 +341,12 @@ class @DrmTimeStamps
             return if years >= 0 then "#{years} years ago" else "in #{Math.abs(years)} years"
         else if Math.abs(months) >= 1
             return if months >= 0 then "#{months} months ago" else "in #{Math.abs(months)} months"
-        else if Math.abs(days) >= 1
+        else if Math.abs(days) >= 2
             return if days >= 0 then "#{days} days ago" else "in #{Math.abs(days)} days"
-        else if Math.abs(hours) >= 1
-            return if hours >= 0 then "#{hours} hours ago" else "in #{Math.abs(hours)} hours"
+        else if Math.abs(hours) >= 2
+            return if hours >= 0 then "#{hours}hr ago" else "in #{Math.abs(hours)}hr"
         else if Math.abs(minutes) >= 1
-            return if minutes >= 0 then "#{minutes} minutes ago" else "in #{Math.abs(minutes)} minutes"
+            return if minutes >= 0 then "#{minutes}m ago" else "in #{Math.abs(minutes)}m"
         else
             return 'Just Now'
 
