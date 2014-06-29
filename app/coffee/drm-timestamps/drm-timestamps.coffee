@@ -226,7 +226,6 @@ class @DrmTimeStamps
                 date.year = parseInt(date.year[0], 10)
 
                 return date
-
             else
                 return
 
@@ -267,44 +266,72 @@ class @DrmTimeStamps
         else if !date and time?
             return new Date @today.year, @today.month, @today.date, time.hour, time.minute, time.second
 
-    prettifyDate: (date, format = 'dddd, MMMM DD yyyy, hh:mm:ss a') =>
+    prettifyDate: (date, dateFormat = 'dddd, MMMM DD yyyy, hh:mm:ss a') =>
         # format date and time
+        
+        _getHours = (date) ->
+            if date.getHours() is 0
+                _hrs = 12
+            else if date.getHours() > 12
+                _hrs = date.getHours() - 12 
+            else 
+                _hrs = date.getHours()
+            
+            return _hrs.toString()
+
         format = {}
         
-        dddd = "#{@days[date.getDay()]}"
-        ddd = "#{@shortDays[date.getDay()]}"
-        
-        MMMM = "#{@months[date.getMonth()]}"
-        MMM = "#{@shortMonths[date.getMonth()]}"
-        MM = if date.getMonth().toString().length is 1 then "0#{date.getMonth().toString()}" else date.getMonth() # two digit month
-        M = date.getMonth() # one digit month
-        
-        DD = if date.getDate().toString().length is 1 then "0#{date.getDate().toString()}" else date.getDate() # two digit date
-        D = date.getDate()
-        
-        yy = date.getFullYear().toString().slice(-2)
-        yyyy = date.getFullYear() # four digit year
-        
-        if date.getHours() is 0
-            hours = 12
-        else if date.getHours() > 12
-            hours = date.getHours() - 12 
-        else 
-            hours = date.getHours()
-        
-        hours = hours.toString()
-        hours = if hours.length is 1 then "0#{hours}" else hours
-        format.hh = hours # two digit hours
-        format.h =  if hours.length is 1 then "0#{hours}" else hours # one digit hours
+        # get day format options
+        if dateFormat.match /dddd/
+            format.dddd = "#{@days[date.getDay()]}" # long day name
+        else if dateFormat.match /ddd/
+            format.ddd = "#{@shortDays[date.getDay()]}" # short day name
 
-        mm = if date.getMinutes().toString().length is 1 then "0#{date.getMinutes().toString()}" else date.getMinutes() # two digit minutes
-        m = date.getMinutes() # one digit minutes
-        
-        ss = if date.getSeconds().toString().length is 1 then "0#{date.getSeconds().toString()}" else date.getSeconds().toString() # two digit seconds
-        s = date.getSeconds() # one digit seconds
-        
-        a = if date.getHours() >= 12 then 'pm' else 'am' # ampm
-        A = if date.getHours() >= 12 then 'PM' else 'AM' # AMPM
+        # get month format options
+        if dateFormat.match /MMMM/
+            format.MMMM = "#{@months[date.getMonth()]}" # long month name
+        else if dateFormat.match /MMM/
+            format.MMM = "#{@shortMonths[date.getMonth()]}" # short month name
+        else if dateFormat.match /MM/
+            format.MM = if date.getMonth().toString().length is 1 then "0#{date.getMonth().toString()}" else date.getMonth() # two digit month
+        else if dateFormat.match /M/
+            format.M = date.getMonth() # one digit month
+
+        # get date format options        
+        if dateFormat.match /DD/    
+            format.DD = if date.getDate().toString().length is 1 then "0#{date.getDate().toString()}" else date.getDate() # two digit date
+        else if dateFormat.match /D/
+            format.D = date.getDate() # one digit date
+
+        # get year format options        
+        if dateFormat.match /yyyy/
+            format.yyyy = date.getFullYear() # four digit year
+        else if dateFormat.match /yy/
+            format.yy = date.getFullYear().toString().slice -2 # two digit year
+
+        # get hour format options        
+        if dateFormat.match /hh/    
+            format.hh =  if _getHours(date).length is 1 then "0#{_getHours(date)}" else _getHours(date) # two digit hours
+        else if dateFormat.match /h/
+            format.h = _getHours(date) # one digit hours
+
+        # get minute format options
+        if dateFormat.match /mm/
+            format.mm = if date.getMinutes().toString().length is 1 then "0#{date.getMinutes().toString()}" else date.getMinutes() # two digit minutes
+        else if dateFormat.match /m/
+            format.m = date.getMinutes() # one digit minutes
+
+        # get second format options        
+        if dateFormat.match /ss/    
+            format.ss = if date.getSeconds().toString().length is 1 then "0#{date.getSeconds().toString()}" else date.getSeconds().toString() # two digit seconds
+        else if dateFormat.match /s/
+            format.s = date.getSeconds() # one digit seconds            
+
+        # get ampm format options        
+        if dateFormat.match /a/    
+            format.a = if date.getHours() >= 12 then 'pm' else 'am' # ampm
+        else if dateFormat.match /A/
+            format.A = if date.getHours() >= 12 then 'PM' else 'AM' # AMPM
         
         return "#{format.dddd}, #{format.MMMM} #{format.DD}, #{format.yyyy}, #{format.hh}:#{format.mm}:#{format.ss} #{format.a}"
 
