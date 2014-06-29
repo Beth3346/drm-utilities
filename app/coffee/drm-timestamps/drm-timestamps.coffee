@@ -358,6 +358,7 @@ class @DrmTimeStamps
         months = weeks/(13/3)
         
         if Math.abs(months) >= 1
+            # round months up to account for number of weeks estimated weirdness
             months = if months >= 0 then Math.ceil(months) else Math.floor(months)
         else
             months = 0
