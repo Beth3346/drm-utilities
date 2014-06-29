@@ -39,7 +39,7 @@ class @DrmStickyNav
 
         if _scroll > (top + _contentHeight)
             @nav.removeClass "sticky-#{_position}"
-        else if _scroll > (top - 100) and _navHeight < _winHeight
+        else if _scroll > (top - 50) and _navHeight < _winHeight
             @nav.addClass "sticky-#{_position}"
             @positionRight navPositionLeft
         else
