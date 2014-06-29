@@ -76,7 +76,7 @@ class @DrmTimeStamps
             _that = $ @
             item = _that.text()
             date = self.parseDate item
-            prettyDate = self.prettifyDate date
+            prettyDate = self.prettifyDate date, 'dddd, MMMM DD, yyyy'
             
             _that.text prettyDate
             
@@ -97,8 +97,8 @@ class @DrmTimeStamps
                 year: self.now.getFullYear()
                 hour: self.now.getHours()
                 minute: self.now.getMinutes()
-                second: self.now.getSeconds()            
-            prettyNow = self.prettifyDate self.now
+                second: self.now.getSeconds()
+            prettyNow = self.prettifyDate self.now, 'dddd, MMMM D, yyyy, h:mm:ss a'
             
             $('.drm-now').text prettyNow
         , 1000
@@ -230,6 +230,7 @@ class @DrmTimeStamps
                 return
 
         _parseTime = (item) ->
+            # add noon and midnight keywords
             _fullTime = item.match /((?:[12][012]:|[0]?[0-9]:)[012345][0-9](?:\:[012345][0-9])?(?:am|pm)?)/i
        
             if _fullTime?
@@ -266,9 +267,9 @@ class @DrmTimeStamps
         else if !date and time?
             return new Date @today.year, @today.month, @today.date, time.hour, time.minute, time.second
 
-    prettifyDate: (date, dateFormat = 'dddd, MMMM DD yyyy, hh:mm:ss a') =>
+    prettifyDate: (date, dateFormat = 'dddd, MMMM DD, yyyy, hh:mm:ss a') =>
         # format date and time
-        
+
         _getHours = (date) ->
             if date.getHours() is 0
                 _hrs = 12
@@ -309,11 +310,15 @@ class @DrmTimeStamps
         else if dateFormat.match /yy/
             format.yy = date.getFullYear().toString().slice -2 # two digit year
 
-        # get hour format options        
-        if dateFormat.match /hh/    
+        # get hour format options       
+        if dateFormat.match /hh/   
             format.hh =  if _getHours(date).length is 1 then "0#{_getHours(date)}" else _getHours(date) # two digit hours
         else if dateFormat.match /h/
             format.h = _getHours(date) # one digit hours
+        else if dateFormat.match /HH/
+            format.HH = if date.getHours().toString().length is 1 then "0#{date.getHours().toString()}" else date.getHours() # two digit 24hr format
+        else if dateFormat.match /H/
+            format.H = date.getHours() # one digit 24hr format
 
         # get minute format options
         if dateFormat.match /mm/
@@ -322,18 +327,31 @@ class @DrmTimeStamps
             format.m = date.getMinutes() # one digit minutes
 
         # get second format options        
-        if dateFormat.match /ss/    
+        if dateFormat.match /ss/
             format.ss = if date.getSeconds().toString().length is 1 then "0#{date.getSeconds().toString()}" else date.getSeconds().toString() # two digit seconds
         else if dateFormat.match /s/
             format.s = date.getSeconds() # one digit seconds            
 
         # get ampm format options        
-        if dateFormat.match /a/    
+        if dateFormat.match /a/
             format.a = if date.getHours() >= 12 then 'pm' else 'am' # ampm
         else if dateFormat.match /A/
             format.A = if date.getHours() >= 12 then 'PM' else 'AM' # AMPM
         
-        return "#{format.dddd}, #{format.MMMM} #{format.DD}, #{format.yyyy}, #{format.hh}:#{format.mm}:#{format.ss} #{format.a}"
+        # parse dateFormat string and replace tokens with date information
+        $.each format, (key) ->
+            tmp = new RegExp "#{key}"
+            dateFormat = dateFormat.replace tmp, "{{#{key}}}"
+            return dateFormat
+
+        # render template
+        prettyDate = dateFormat
+        $.each format, (key, value) ->
+            re = new RegExp "{{#{key}}}"
+            prettyDate = prettyDate.replace re, value
+            return prettyDate
+
+        return prettyDate
 
     elapseTime: (date) =>
         # display an approximate date and time relative to now ex. 2 hours ago or 6 months ago
