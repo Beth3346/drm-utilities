@@ -267,48 +267,46 @@ class @DrmTimeStamps
         else if !date and time?
             return new Date @today.year, @today.month, @today.date, time.hour, time.minute, time.second
 
-    prettifyDate: (date, format = 'dddd, mmmm dd yyyy, hh:mm:ss') =>
+    prettifyDate: (date, format = 'dddd, MMMM DD yyyy, hh:mm:ss a') =>
         # format date and time
-        format =
-            dddd: 'long day'
-            ddd: 'short day'
-            MMMM: 'long month'
-            MMM: 'month abbr'
-            MM: if date.getMonth().toString().length is 1 then "0#{date.getMonth().toString()}" else date.getMonth() # two digit month
-            M: date.getMonth() # one digit month
-            DD: if date.getDate().toString().length is 1 then "0#{date.getDate().toString()}" else date.getDate() # two digit date
-            D: date.getDate()
-            yy: 'two digit year'
-            yyyy: date.getFullYear() # four digit year
-            hh: 'two digit hours'
-            h: 'one digit hours'
-            mm: if date.getMinutes().toString().length is 1 then "0#{date.getMinutes().toString()}" else date.getMinutes() # two digit minutes
-            m: date.getMinutes() # one digit minutes
-            ss: if date.getSeconds().toString().length is 1 then "0#{date.getSeconds().toString()}" else date.getSeconds().toString() # two digit seconds
-            s: date.getSeconds() # one digit seconds
-            a: if date.getHours() >= 12 then 'pm' else 'am' # ampm
-            A: if date.getHours() >= 12 then 'PM' else 'AM' # AMPM
-
-        pretty = {}
-        pretty.day = date.getDay()
-        pretty.month = date.getMonth()
-        pretty.date = if date.getDate().toString().length is 1 then "0#{date.getDate().toString()}" else date.getDate()
-        pretty.year = date.getFullYear()
+        format = {}
+        
+        dddd = "#{@days[date.getDay()]}"
+        ddd = "#{@shortDays[date.getDay()]}"
+        
+        MMMM = "#{@months[date.getMonth()]}"
+        MMM = "#{@shortMonths[date.getMonth()]}"
+        MM = if date.getMonth().toString().length is 1 then "0#{date.getMonth().toString()}" else date.getMonth() # two digit month
+        M = date.getMonth() # one digit month
+        
+        DD = if date.getDate().toString().length is 1 then "0#{date.getDate().toString()}" else date.getDate() # two digit date
+        D = date.getDate()
+        
+        yy = date.getFullYear().toString().slice(-2)
+        yyyy = date.getFullYear() # four digit year
         
         if date.getHours() is 0
-            pretty.hour = 12
+            hours = 12
         else if date.getHours() > 12
-            pretty.hour = date.getHours() - 12 
+            hours = date.getHours() - 12 
         else 
-            pretty.hour = date.getHours()
+            hours = date.getHours()
         
-        pretty.hour = pretty.hour.toString()
-        pretty.hour = if pretty.hour.length is 1 then "0#{pretty.hour}" else pretty.hour
-        pretty.minute = if date.getMinutes().toString().length is 1 then "0#{date.getMinutes().toString()}" else date.getMinutes()
-        pretty.second = if date.getSeconds().toString().length is 1 then "0#{date.getSeconds().toString()}" else date.getSeconds()
-        pretty.ampm = if date.getHours() >= 12 then 'pm' else 'am'
+        hours = hours.toString()
+        hours = if hours.length is 1 then "0#{hours}" else hours
+        format.hh = hours # two digit hours
+        format.h =  if hours.length is 1 then "0#{hours}" else hours # one digit hours
+
+        mm = if date.getMinutes().toString().length is 1 then "0#{date.getMinutes().toString()}" else date.getMinutes() # two digit minutes
+        m = date.getMinutes() # one digit minutes
         
-        return "#{@days[pretty.day]}, #{@months[pretty.month]} #{pretty.date}, #{pretty.year}, #{pretty.hour}:#{pretty.minute}:#{pretty.second} #{pretty.ampm}"
+        ss = if date.getSeconds().toString().length is 1 then "0#{date.getSeconds().toString()}" else date.getSeconds().toString() # two digit seconds
+        s = date.getSeconds() # one digit seconds
+        
+        a = if date.getHours() >= 12 then 'pm' else 'am' # ampm
+        A = if date.getHours() >= 12 then 'PM' else 'AM' # AMPM
+        
+        return "#{format.dddd}, #{format.MMMM} #{format.DD}, #{format.yyyy}, #{format.hh}:#{format.mm}:#{format.ss} #{format.a}"
 
     elapseTime: (date) =>
         # display an approximate date and time relative to now ex. 2 hours ago or 6 months ago
