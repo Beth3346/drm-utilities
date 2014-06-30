@@ -22,6 +22,21 @@ class @DrmTimeStamps
             shortDate: new RegExp '((?:[0]?[1-9]|[1][012]|[1-9])[-\/.](?:[0]?[1-9]|[12][0-9]|[3][01])[-\/.][0-9]{4})'
             longTime: new RegExp '((?:[12][012]:|[0]?[0-9]:)[012345][0-9](?:\\:[012345][0-9])?(?:am|pm)?)', 'i'
 
+        unitTokens = {
+            ms: 'millisecond'
+            s: 'second'
+            m: 'minute'
+            h: 'hour'
+            d: 'day'
+            D: 'date'
+            w: 'week'
+            M: 'month'
+            Q: 'quarter'
+            y: 'year'
+            DDD: 'dayOfYear'
+            a: 'ampm'
+        }
+
         @months = [
             'January'
             'February'
@@ -68,6 +83,16 @@ class @DrmTimeStamps
             'Tues'
             'Wed'
             'Thurs'
+            'Fri'
+            'Sat'
+        ]
+
+        @minDays = [
+            'Sun'
+            'Mon'
+            'Tue'
+            'Wed'
+            'Thu'
             'Fri'
             'Sat'
         ]
@@ -140,14 +165,17 @@ class @DrmTimeStamps
         # console.log self.elapseTime(testDate7)
         # console.log self.elapseTime(testDate8)
 
+    isLeapYear: (year) ->
+        return (year % 4 is 0 and year % 100 isnt 0) or year % 400 is 0
+
+    getDaysInMonth: (month, year) ->
+        # returns the number of days in a month
+        _month = month + 1
+        new Date(year, _month, 0).getDate()
+
     parseDate: (item) =>
         # check for Yesterday, Today, Tomorrow strings and look for time
         item = item.toLowerCase()
-
-        _getDaysInMonth = (month, year) ->
-            # returns the number of days in a month
-            _month = month + 1
-            new Date(year, _month, 0).getDate()
 
         _parseDate = (item) =>
             date = {}
@@ -158,8 +186,8 @@ class @DrmTimeStamps
                 _lastMonth = if @today.month is 0 then 11 else @today.month - 1
                 _nextMonth = if @today.month is 11 then 0 else @today.month + 1
 
-                _lastDateInMonth = _getDaysInMonth @today.month, @today.year
-                _lastDateInLastMonth = _getDaysInMonth _lastMonth, @today.year
+                _lastDateInMonth = @getDaysInMonth @today.month, @today.year
+                _lastDateInLastMonth = @getDaysInMonth _lastMonth, @today.year
 
                 if _fullDate is 'yesterday'
                     date.date = if @today.date is 1 then _lastDateInLastMonth else @today.date - 1
@@ -280,78 +308,83 @@ class @DrmTimeStamps
             
             return _hrs.toString()
 
-        format = {}
-        
-        # get day format options
-        if dateFormat.match /dddd/
-            format.dddd = "#{@days[date.getDay()]}" # long day name
-        else if dateFormat.match /ddd/
-            format.ddd = "#{@shortDays[date.getDay()]}" # short day name
+        if dateFormat?
+            format = {}
+            
+            # get day format options
+            if dateFormat.match /dddd/
+                format.dddd = "#{@days[date.getDay()]}" # long day name
+            else if dateFormat.match /ddd/
+                format.ddd = "#{@shortDays[date.getDay()]}" # short day name
+            else if dateFormat.match /dd/
+                format.dd = "#{@minDays[date.getDay()]}" # three letter day abbr
 
-        # get month format options
-        if dateFormat.match /MMMM/
-            format.MMMM = "#{@months[date.getMonth()]}" # long month name
-        else if dateFormat.match /MMM/
-            format.MMM = "#{@shortMonths[date.getMonth()]}" # short month name
-        else if dateFormat.match /MM/
-            format.MM = if date.getMonth().toString().length is 1 then "0#{date.getMonth().toString()}" else date.getMonth() # two digit month
-        else if dateFormat.match /M/
-            format.M = date.getMonth() # one digit month
+            # get month format options
+            if dateFormat.match /MMMM/
+                format.MMMM = "#{@months[date.getMonth()]}" # long month name
+            else if dateFormat.match /MMM/
+                format.MMM = "#{@shortMonths[date.getMonth()]}" # short month name
+            else if dateFormat.match /MM/
+                format.MM = if date.getMonth().toString().length is 1 then "0#{date.getMonth().toString()}" else date.getMonth() # two digit month
+            else if dateFormat.match /M/
+                format.M = date.getMonth() # one digit month
 
-        # get date format options        
-        if dateFormat.match /DD/    
-            format.DD = if date.getDate().toString().length is 1 then "0#{date.getDate().toString()}" else date.getDate() # two digit date
-        else if dateFormat.match /D/
-            format.D = date.getDate() # one digit date
+            # get date format options        
+            if dateFormat.match /DD/    
+                format.DD = if date.getDate().toString().length is 1 then "0#{date.getDate().toString()}" else date.getDate() # two digit date
+            else if dateFormat.match /D/
+                format.D = date.getDate() # one digit date
 
-        # get year format options        
-        if dateFormat.match /yyyy/
-            format.yyyy = date.getFullYear() # four digit year
-        else if dateFormat.match /yy/
-            format.yy = date.getFullYear().toString().slice -2 # two digit year
+            # get year format options        
+            if dateFormat.match /yyyy/
+                format.yyyy = date.getFullYear() # four digit year
+            else if dateFormat.match /yy/
+                format.yy = date.getFullYear().toString().slice -2 # two digit year
 
-        # get hour format options       
-        if dateFormat.match /hh/   
-            format.hh =  if _getHours(date).length is 1 then "0#{_getHours(date)}" else _getHours(date) # two digit hours
-        else if dateFormat.match /h/
-            format.h = _getHours(date) # one digit hours
-        else if dateFormat.match /HH/
-            format.HH = if date.getHours().toString().length is 1 then "0#{date.getHours().toString()}" else date.getHours() # two digit 24hr format
-        else if dateFormat.match /H/
-            format.H = date.getHours() # one digit 24hr format
+            # get hour format options       
+            if dateFormat.match /hh/   
+                format.hh =  if _getHours(date).length is 1 then "0#{_getHours(date)}" else _getHours(date) # two digit hours
+            else if dateFormat.match /h/
+                format.h = _getHours(date) # one digit hours
+            else if dateFormat.match /HH/
+                format.HH = if date.getHours().toString().length is 1 then "0#{date.getHours().toString()}" else date.getHours() # two digit 24hr format
+            else if dateFormat.match /H/
+                format.H = date.getHours() # one digit 24hr format
 
-        # get minute format options
-        if dateFormat.match /mm/
-            format.mm = if date.getMinutes().toString().length is 1 then "0#{date.getMinutes().toString()}" else date.getMinutes() # two digit minutes
-        else if dateFormat.match /m/
-            format.m = date.getMinutes() # one digit minutes
+            # get minute format options
+            if dateFormat.match /mm/
+                format.mm = if date.getMinutes().toString().length is 1 then "0#{date.getMinutes().toString()}" else date.getMinutes() # two digit minutes
+            else if dateFormat.match /m/
+                format.m = date.getMinutes() # one digit minutes
 
-        # get second format options        
-        if dateFormat.match /ss/
-            format.ss = if date.getSeconds().toString().length is 1 then "0#{date.getSeconds().toString()}" else date.getSeconds().toString() # two digit seconds
-        else if dateFormat.match /s/
-            format.s = date.getSeconds() # one digit seconds            
+            # get second format options        
+            if dateFormat.match /ss/
+                format.ss = if date.getSeconds().toString().length is 1 then "0#{date.getSeconds().toString()}" else date.getSeconds().toString() # two digit seconds
+            else if dateFormat.match /s/
+                format.s = date.getSeconds() # one digit seconds            
 
-        # get ampm format options        
-        if dateFormat.match /a/
-            format.a = if date.getHours() >= 12 then 'pm' else 'am' # ampm
-        else if dateFormat.match /A/
-            format.A = if date.getHours() >= 12 then 'PM' else 'AM' # AMPM
-        
-        # parse dateFormat string and replace tokens with date information
-        $.each format, (key) ->
-            tmp = new RegExp "#{key}"
-            dateFormat = dateFormat.replace tmp, "{{#{key}}}"
-            return dateFormat
+            # get ampm format options        
+            if dateFormat.match /a/
+                format.a = if date.getHours() >= 12 then 'pm' else 'am' # ampm
+            else if dateFormat.match /A/
+                format.A = if date.getHours() >= 12 then 'PM' else 'AM' # AMPM
+            
+            # parse dateFormat string and replace tokens with date information
+            $.each format, (key) ->
+                tmp = new RegExp "#{key}"
+                dateFormat = dateFormat.replace tmp, "{{#{key}}}"
+                return dateFormat
 
-        # render template
-        prettyDate = dateFormat
-        $.each format, (key, value) ->
-            re = new RegExp "{{#{key}}}"
-            prettyDate = prettyDate.replace re, value
+            # render template
+            prettyDate = dateFormat
+            $.each format, (key, value) ->
+                re = new RegExp "{{#{key}}}"
+                prettyDate = prettyDate.replace re, value
+                return prettyDate
+
             return prettyDate
-
-        return prettyDate
+        else
+            return
 
     elapseTime: (date) =>
         # display an approximate date and time relative to now ex. 2 hours ago or 6 months ago
@@ -364,16 +397,27 @@ class @DrmTimeStamps
         # now = new Date 2014, 5, 26, 23, 41, 0
         # console.log @prettifyDate(now)
         # console.log @prettifyDate(date)
-        diff = now.getTime() - date.getTime()
-        seconds = if (diff/100) >= 0 then Math.floor((diff/100)) else Math.ceil((diff/100))
-        minutes = if (seconds/600) >= 0 then Math.floor((seconds/600)) else Math.ceil((seconds/600))
-        hours = if (minutes/60) >= 0 then Math.floor((minutes/60)) else Math.ceil((minutes/60))
-        days = if (hours/24) >= 0 then Math.floor((hours/24)) else Math.ceil((hours/24))
-        weeks = if (days/7) >= 0 then Math.floor((days/7)) else Math.ceil((days/7))
-        years = if (days/365) >= 0 then Math.floor((days/365)) else Math.ceil((days/365))
+        ms = now.getTime() - date.getTime()
+        seconds = if (ms/1e3) >= 0 then Math.floor(ms/1e3) else Math.ceil(ms/1e3)
+        
+        minutes = if (ms/6e4) >= 0 then Math.floor(ms/6e4) else Math.ceil(ms/6e4)
+        remainingSeconds = if ((ms % 6e4)/1e3) >= 0 then Math.floor(((ms % 6e4)/1e3)) else Math.ceil(((ms % 6e4)/1e3))
+        
+        hours = if (ms/36e5) >= 0 then Math.floor(ms/36e5) else Math.ceil(ms/36e5)
+        remainingMinutes = if ((ms % 36e5)/6e4) >= 0 then Math.floor(((ms % 36e5)/6e4)) else Math.ceil(((ms % 36e5)/6e4))
+        
+        days = if (ms/864e5) >= 0 then Math.floor(ms/864e5) else Math.ceil(ms/864e5)
+        remainingHours = if ((ms % 864e5)/36e5) >= 0 then Math.floor(((ms % 864e5)/36e5)) else Math.ceil(((ms % 864e5)/36e5))
+        
+        weeks = if (days/7) >= 0 then Math.floor(days/7) else Math.ceil(days/7)
+        remainingDays = if (days % 7) >= 0 then Math.floor(days % 7) else Math.ceil(days % 7)
+
+        # need to adjust for leap years
+        years = if (ms/31536e6) >= 0 then Math.floor(ms/31536e6) else Math.ceil(ms/31536e6)
+        remainingDaysInYear = if ((ms % 31536e6)/864e5) >= 0 then Math.floor((ms % 31536e6)/864e5) else Math.ceil((ms % 31536e6)/864e5)
 
         # 52 weeks / 12 months about 4.33333
-        months = weeks/(13/3)
+        months = (ms/2592e6)
         
         if Math.abs(months) >= 1
             # round months up to account for number of weeks estimated weirdness
@@ -382,15 +426,18 @@ class @DrmTimeStamps
             months = 0
 
         if Math.abs(years) >= 1
-            return if years >= 0 then "#{years} years ago" else "in #{Math.abs(years)} years"
+            console.log days
+            return if years >= 0 then "#{years} years and #{remainingDaysInYear} days ago" else "in #{Math.abs(years)} years and #{Math.abs(remainingDaysInYear)} days"
         else if Math.abs(months) >= 1
             return if months >= 0 then "#{months} months ago" else "in #{Math.abs(months)} months"
-        else if Math.abs(days) >= 2
-            return if days >= 0 then "#{days} days ago" else "in #{Math.abs(days)} days"
-        else if Math.abs(hours) >= 2
-            return if hours >= 0 then "#{hours}hr ago" else "in #{Math.abs(hours)}hr"
+        else if Math.abs(weeks) >= 1
+            return if weeks >= 0 then "#{weeks} weeks and #{remainingDays} days ago" else "in #{Math.abs(weeks)} weeks and #{Math.abs(remainingDays)} days"
+        else if Math.abs(days) >= 1
+            return if days >= 0 then "#{days} days and #{remainingHours} hours ago" else "in #{Math.abs(days)} days and #{Math.abs(remainingHours)} hours"
+        else if Math.abs(hours) >= 1
+            return if hours >= 0 then "#{hours}hr  and #{remainingMinutes} minutes ago" else "in #{Math.abs(hours)}hr and #{Math.abs(remainingMinutes)} minutes"
         else if Math.abs(minutes) >= 1
-            return if minutes >= 0 then "#{minutes}m ago" else "in #{Math.abs(minutes)}m"
+            return if minutes >= 0 then "#{minutes}m and #{remainingSeconds} seconds ago" else "in #{Math.abs(minutes)}m and #{Math.abs(remainingSeconds)} seconds"
         else
             return 'Just Now'
 
