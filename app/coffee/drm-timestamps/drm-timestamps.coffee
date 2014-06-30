@@ -109,9 +109,9 @@ class @DrmTimeStamps
             _that = $ @
             item = _that.text()
             date = self.parseDate item
-            elapse = self.elapseTime date
+            duration = self.getDuration date
             
-            _that.text elapse
+            _that.text duration
 
         setInterval ->
             self.now = new Date()
@@ -156,17 +156,26 @@ class @DrmTimeStamps
         # testDate6 = new Date 2016, 7, 27, 23, 41, 0
         # testDate7 = new Date 2014, 5, 26, 23, 41, 32
         # testDate8 = new Date 2014, 5, 27, 16, 37, 32
-        # console.log self.elapseTime(testDate)
-        # console.log self.elapseTime(testDate2)
-        # console.log self.elapseTime(testDate3)
-        # console.log self.elapseTime(testDate4)
-        # console.log self.elapseTime(testDate5)
-        # console.log self.elapseTime(testDate6)
-        # console.log self.elapseTime(testDate7)
-        # console.log self.elapseTime(testDate8)
+        # console.log self.getDuration(testDate)
+        # console.log self.getDuration(testDate2)
+        # console.log self.getDuration(testDate3)
+        # console.log self.getDuration(testDate4)
+        # console.log self.getDuration(testDate5)
+        # console.log self.getDuration(testDate6)
+        # console.log self.getDuration(testDate7)
+        # console.log self.getDuration(testDate8)
 
     isLeapYear: (year) ->
+        # The above expression evaluates whether or not the given date falls within a leap year 
+        # using the three following Gregorian calendar rules:
+        # Most years divisible by 4 are Leap Years (i.e. 1996)
+        # However, most years divisible by 100 are not (i.e. 1900)
+        # Unless they are also divisible by 400, in which case they are leap years (i.e. 2000)
+        
         return (year % 4 is 0 and year % 100 isnt 0) or year % 400 is 0
+
+    daysInYear: (year) =>
+        return if @isLeapYear(year) then 366 else 365
 
     getDaysInMonth: (month, year) ->
         # returns the number of days in a month
@@ -386,13 +395,19 @@ class @DrmTimeStamps
         else
             return
 
-    elapseTime: (date) =>
+    getDuration: (date) =>
         # display an approximate date and time relative to now ex. 2 hours ago or 6 months ago
         # always rounds to a whole number ex. 1.5 months is 1 months
         # will return the largest unit of time. ex. 1 week instead of 8 days, 58 minutes instead of 1 hour
         # months do not account for variations in length
         # years do not account for leap years
         
+        _getYearsToDays = (years) ->
+            return (years * 146097) / 400
+
+        _getDaysToYears = (days) ->
+            return (days * 400) / 146097
+
         now = new Date()
         # now = new Date 2014, 5, 26, 23, 41, 0
         # console.log @prettifyDate(now)
@@ -412,9 +427,8 @@ class @DrmTimeStamps
         weeks = if (days/7) >= 0 then Math.floor(days/7) else Math.ceil(days/7)
         remainingDays = if (days % 7) >= 0 then Math.floor(days % 7) else Math.ceil(days % 7)
 
-        # need to adjust for leap years
-        years = if (ms/31536e6) >= 0 then Math.floor(ms/31536e6) else Math.ceil(ms/31536e6)
-        remainingDaysInYear = if ((ms % 31536e6)/864e5) >= 0 then Math.floor((ms % 31536e6)/864e5) else Math.ceil((ms % 31536e6)/864e5)
+        years = if (_getDaysToYears(days)) >= 0 then Math.floor(_getDaysToYears(days)) else Math.ceil(_getDaysToYears(days))
+        remainingDaysInYear = if (days - _getYearsToDays(years)) >= 0 then Math.floor(days - _getYearsToDays(years)) else Math.ceil(days - _getYearsToDays(years))
 
         # 52 weeks / 12 months about 4.33333
         months = (ms/2592e6)
@@ -426,7 +440,6 @@ class @DrmTimeStamps
             months = 0
 
         if Math.abs(years) >= 1
-            console.log days
             return if years >= 0 then "#{years} years and #{remainingDaysInYear} days ago" else "in #{Math.abs(years)} years and #{Math.abs(remainingDaysInYear)} days"
         else if Math.abs(months) >= 1
             return if months >= 0 then "#{months} months ago" else "in #{Math.abs(months)} months"
