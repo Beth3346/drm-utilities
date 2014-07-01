@@ -101,7 +101,7 @@ class @DrmTimeStamps
             _that = $ @
             item = _that.text()
             date = self.parseDate item
-            prettyDate = self.prettifyDate date, 'dddd, MMMM DD, yyyy'
+            prettyDate = self.prettifyDate date, 'dddd, MMMM DD, yyyy, hh:mm:ss a'
             
             _that.text prettyDate
             
@@ -110,6 +110,7 @@ class @DrmTimeStamps
             item = _that.text()
             date = self.parseDate item
             duration = self.getDuration date
+            duration = self.formatDuration duration
             
             _that.text duration
 
@@ -123,7 +124,7 @@ class @DrmTimeStamps
                 hour: self.now.getHours()
                 minute: self.now.getMinutes()
                 second: self.now.getSeconds()
-            prettyNow = self.prettifyDate self.now, 'dddd, MMMM D, yyyy, h:mm:ss a'
+            prettyNow = self.prettifyDate self.now, 'dddd, MMMM DD, yyyy, hh:mm:ss a'
             
             $('.drm-now').text prettyNow
         , 1000
@@ -400,8 +401,9 @@ class @DrmTimeStamps
         # always rounds to a whole number ex. 1.5 months is 1 months
         # will return the largest unit of time. ex. 1 week instead of 8 days, 58 minutes instead of 1 hour
         # months do not account for variations in length
-        # years do not account for leap years
         
+        duration = {}
+
         _getYearsToDays = (years) ->
             return (years * 146097) / 400
 
@@ -414,54 +416,190 @@ class @DrmTimeStamps
             minutes: 6e4
             hours: 36e5
             days: 864e5
-            weeks: 7
+            weeks: 6048e5
             months: 2592e6
-            # years: 
+            years: 31556952e3
 
         now = new Date()
-        # now = new Date 2014, 5, 26, 23, 41, 0
-        # console.log @prettifyDate(now)
-        # console.log @prettifyDate(date)
-        ms = now.getTime() - date.getTime()
-        seconds = if (ms/factors.seconds) >= 0 then Math.floor(ms/factors.seconds) else Math.ceil(ms/factors.seconds)
-        
-        minutes = if (ms/factors.minutes) >= 0 then Math.floor(ms/factors.minutes) else Math.ceil(ms/factors.minutes)
-        remainingSeconds = if ((ms % factors.minutes)/factors.seconds) >= 0 then Math.floor(((ms % factors.minutes)/factors.seconds)) else Math.ceil(((ms % factors.minutes)/factors.seconds))
-        
-        hours = if (ms/factors.hours) >= 0 then Math.floor(ms/factors.hours) else Math.ceil(ms/factors.hours)
-        remainingMinutes = if ((ms % factors.hours)/factors.minutes) >= 0 then Math.floor(((ms % factors.hours)/factors.minutes)) else Math.ceil(((ms % factors.hours)/factors.minutes))
-        
-        days = if (ms/factors.days) >= 0 then Math.floor(ms/factors.days) else Math.ceil(ms/factors.days)
-        remainingHours = if ((ms % factors.days)/factors.hours) >= 0 then Math.floor(((ms % factors.days)/factors.hours)) else Math.ceil(((ms % factors.days)/factors.hours))
-        
-        weeks = if (days/factors.weeks) >= 0 then Math.floor(days/factors.weeks) else Math.ceil(days/factors.weeks)
-        remainingDays = if (days % factors.weeks) >= 0 then Math.floor(days % factors.weeks) else Math.ceil(days % factors.weeks)
 
-        years = if (_getDaysToYears(days)) >= 0 then Math.floor(_getDaysToYears(days)) else Math.ceil(_getDaysToYears(days))
-        remainingDaysInYear = if (days - _getYearsToDays(years)) >= 0 then Math.floor(days - _getYearsToDays(years)) else Math.ceil(days - _getYearsToDays(years))
+        _getMs = (now, date) ->
+            return now.getTime() - date.getTime()
 
-        # 52 weeks / 12 months about 4.33333
-        months = (ms/factors.months)
+        _getSeconds = (ms, factors) ->
+            if (ms/factors.seconds) >= 0
+                return Math.floor(ms/factors.seconds)
+            else
+                return Math.ceil(ms/factors.seconds)
+
+        _getMinutes = (ms, factors) ->
+            if (ms/factors.minutes) >= 0
+                return Math.floor(ms/factors.minutes)
+            else
+                return Math.ceil(ms/factors.minutes)
+
+        _getHours = (ms, factors) ->
+            if (ms/factors.hours) >= 0
+                return Math.floor(ms/factors.hours)
+            else
+                return Math.ceil(ms/factors.hours)
+
+        _getDays = (ms, factors) ->
+            if (ms/factors.days) >= 0
+                return Math.floor(ms/factors.days)
+            else
+                return Math.ceil(ms/factors.days)
+
+        _getWeeks = (ms, factors) ->
+            if (ms/factors.weeks) >= 0
+                return Math.floor(ms/factors.weeks)
+            else
+                return Math.ceil(ms/factors.weeks)
+
+        _getMonths = (ms, factors) ->
+            _months = (ms/factors.months)
+            
+            if Math.abs(_months) >= 1
+                # round months up to account for number of weeks estimated weirdness
+                return if _months >= 0 then Math.ceil(_months) else Math.floor(_months)
+            else
+                return 0
+
+        _getYears = (ms, factors) ->
+            if (ms/factors.days) >= 0
+                days = Math.floor(ms/factors.days)
+            else
+                days = Math.ceil(ms/factors.days)
+            
+            if (_getDaysToYears(days)) >= 0
+                return Math.floor(_getDaysToYears(days))
+            else
+                return Math.ceil(_getDaysToYears(days))
+
+        _getRemainingSeconds = (ms, factors) ->
+            if ((ms % factors.minutes)/factors.seconds) >= 0
+                return Math.floor(((ms % factors.minutes)/factors.seconds))
+            else
+                return Math.ceil(((ms % factors.minutes)/factors.seconds))
+
+        _getRemainingMinutes = (ms, factors) ->
+            if ((ms % factors.hours)/factors.minutes) >= 0
+                return Math.floor(((ms % factors.hours)/factors.minutes))
+            else
+                return Math.ceil(((ms % factors.hours)/factors.minutes))
+
+        _getRemainingHours = (ms, factors) ->
+            # is one hour short for years under 100
+            if ((ms % factors.days)/factors.hours) >= 0
+                return Math.floor(((ms % factors.days)/factors.hours))
+            else
+                return Math.ceil(((ms % factors.days)/factors.hours))
+
+        _getRemainingDays = (ms, factors) ->
+            if ((ms % factors.weeks)/factors.days) >= 0
+                return Math.floor((ms % factors.weeks)/factors.days)
+            else
+                return Math.ceil((ms % factors.weeks)/factors.days)
+
+        _getRemainingDaysInYear = (ms, factors) ->
+            days = _getDays ms, factors
+            years = _getYears ms, factors
+            
+            if (days - _getYearsToDays(years)) >= 0
+                return Math.floor(days - _getYearsToDays(years))
+            else
+                return Math.ceil(days - _getYearsToDays(years))
+
+        duration.ms = _getMs now, date
+        duration.seconds = _getSeconds duration.ms, factors
+        duration.minutes = _getMinutes duration.ms, factors
+        duration.hours = _getHours duration.ms, factors
+        duration.days = _getDays duration.ms, factors
+        duration.weeks = _getWeeks duration.ms, factors
+        duration.months = _getMonths duration.ms, factors
+        duration.years = _getYears duration.ms, factors
+        duration.remainingSeconds = _getRemainingSeconds duration.ms, factors        
+        duration.remainingMinutes = _getRemainingMinutes duration.ms, factors        
+        duration.remainingHours = _getRemainingHours duration.ms, factors
+        duration.remainingDays = _getRemainingDays duration.ms, factors
+        duration.remainingDaysInYear = _getRemainingDaysInYear duration.ms, factors
+
+        duration
+
+    formatDuration: (duration) ->
+        if Math.abs(duration.years) >= 1
+            if duration.years >= 0
+                return "#{duration.years} years,
+                    #{duration.remainingDaysInYear} days,
+                    and #{duration.remainingHours} hours,
+                    #{duration.remainingMinutes} minutes,
+                    #{duration.remainingSeconds} seconds ago"
+            else
+                return "in #{Math.abs(duration.years)} years,
+                    #{Math.abs(duration.remainingDaysInYear)} days,
+                    #{Math.abs(duration.remainingHours)} hours,
+                    #{Math.abs(duration.remainingMinutes)} minutes,
+                    #{Math.abs(duration.remainingSeconds)} seconds"
         
-        if Math.abs(months) >= 1
-            # round months up to account for number of weeks estimated weirdness
-            months = if months >= 0 then Math.ceil(months) else Math.floor(months)
+        else if Math.abs(duration.months) >= 1
+            if duration.months >= 0
+                return "#{duration.months} months,
+                    #{duration.remainingDays} days,
+                    and #{duration.remainingHours} hours,
+                    #{duration.remainingMinutes} minutes,
+                    #{duration.remainingSeconds} seconds ago"
+            else
+                return "in #{Math.abs(duration.months)} months,
+                    #{Math.abs(duration.remainingDays)} days,
+                    and #{Math.abs(duration.remainingHours)} hours,
+                    #{Math.abs(duration.remainingMinutes)} minutes,
+                    #{Math.abs(duration.remainingSeconds)} seconds"
+        
+        else if Math.abs(duration.weeks) >= 1
+            if duration.weeks >= 0
+                return "#{duration.weeks} weeks,
+                    #{duration.remainingDays} days,
+                    and #{duration.remainingHours} hours,
+                    #{duration.remainingMinutes} minutes,
+                    #{duration.remainingSeconds} seconds ago"
+            else
+                return "in #{Math.abs(duration.weeks)} weeks,
+                    #{Math.abs(duration.remainingDays)} days,
+                    and #{Math.abs(duration.remainingHours)} hours,
+                    #{Math.abs(duration.remainingMinutes)} minutes,
+                    #{Math.abs(duration.remainingSeconds)} seconds"
+        
+        else if Math.abs(duration.days) >= 1
+            if duration.days >= 0
+                return "#{duration.days} days,
+                    #{duration.remainingHours} hours,
+                    #{duration.remainingMinutes} minutes,
+                    #{duration.remainingSeconds} seconds ago"
+            else
+                return "in #{Math.abs(duration.days)} days,
+                    #{Math.abs(duration.remainingHours)} hours,
+                    #{Math.abs(duration.remainingMinutes)} minutes,
+                    #{Math.abs(duration.remainingSeconds)} seconds"
+        
+        else if Math.abs(duration.hours) >= 1
+            if duration.hours >= 0
+                return "#{duration.hours}hr,
+                    #{duration.remainingMinutes} minutes,
+                    #{duration.remainingSeconds} seconds ago"
+            else
+                return "in #{Math.abs(duration.hours)}hr,
+                    #{Math.abs(duration.remainingMinutes)} minutes,
+                    #{Math.abs(duration.remainingSeconds)} seconds"
+        
+        else if Math.abs(duration.minutes) >= 1
+            if duration.minutes >= 0
+                return "#{duration.minutes}m,
+                    #{duration.remainingSeconds} seconds ago"
+            else
+                return "in #{Math.abs(duration.minutes)}m,
+                    #{Math.abs(duration.remainingSeconds)} seconds"
+        
         else
-            months = 0
-
-        if Math.abs(years) >= 1
-            return if years >= 0 then "#{years} years and #{remainingDaysInYear} days ago" else "in #{Math.abs(years)} years and #{Math.abs(remainingDaysInYear)} days"
-        else if Math.abs(months) >= 1
-            return if months >= 0 then "#{months} months ago" else "in #{Math.abs(months)} months"
-        else if Math.abs(weeks) >= 1
-            return if weeks >= 0 then "#{weeks} weeks and #{remainingDays} days ago" else "in #{Math.abs(weeks)} weeks and #{Math.abs(remainingDays)} days"
-        else if Math.abs(days) >= 1
-            return if days >= 0 then "#{days} days and #{remainingHours} hours ago" else "in #{Math.abs(days)} days and #{Math.abs(remainingHours)} hours"
-        else if Math.abs(hours) >= 1
-            return if hours >= 0 then "#{hours}hr  and #{remainingMinutes} minutes ago" else "in #{Math.abs(hours)}hr and #{Math.abs(remainingMinutes)} minutes"
-        else if Math.abs(minutes) >= 1
-            return if minutes >= 0 then "#{minutes}m and #{remainingSeconds} seconds ago" else "in #{Math.abs(minutes)}m and #{Math.abs(remainingSeconds)} seconds"
-        else
+            # less than 1 minute ago
             return 'Just Now'
 
     countdownTo: (date) ->
