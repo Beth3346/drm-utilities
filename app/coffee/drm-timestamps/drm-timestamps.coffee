@@ -300,7 +300,7 @@ class @DrmTimeStamps
         if date? and time?
             return new Date date.year, date.month, date.date, time.hour, time.minute, time.second
         else if date? and !time
-            return new Date date.year, date.month, date.date, @today.hour, @today.minute, @today.second
+            return new Date date.year, date.month, date.date, 0, 0, 0
         else if !date and time?
             return new Date @today.year, @today.month, @today.date, time.hour, time.minute, time.second
 
@@ -408,30 +408,40 @@ class @DrmTimeStamps
         _getDaysToYears = (days) ->
             return (days * 400) / 146097
 
+        factors =
+            ms: 1
+            seconds: 1e3
+            minutes: 6e4
+            hours: 36e5
+            days: 864e5
+            weeks: 7
+            months: 2592e6
+            # years: 
+
         now = new Date()
         # now = new Date 2014, 5, 26, 23, 41, 0
         # console.log @prettifyDate(now)
         # console.log @prettifyDate(date)
         ms = now.getTime() - date.getTime()
-        seconds = if (ms/1e3) >= 0 then Math.floor(ms/1e3) else Math.ceil(ms/1e3)
+        seconds = if (ms/factors.seconds) >= 0 then Math.floor(ms/factors.seconds) else Math.ceil(ms/factors.seconds)
         
-        minutes = if (ms/6e4) >= 0 then Math.floor(ms/6e4) else Math.ceil(ms/6e4)
-        remainingSeconds = if ((ms % 6e4)/1e3) >= 0 then Math.floor(((ms % 6e4)/1e3)) else Math.ceil(((ms % 6e4)/1e3))
+        minutes = if (ms/factors.minutes) >= 0 then Math.floor(ms/factors.minutes) else Math.ceil(ms/factors.minutes)
+        remainingSeconds = if ((ms % factors.minutes)/factors.seconds) >= 0 then Math.floor(((ms % factors.minutes)/factors.seconds)) else Math.ceil(((ms % factors.minutes)/factors.seconds))
         
-        hours = if (ms/36e5) >= 0 then Math.floor(ms/36e5) else Math.ceil(ms/36e5)
-        remainingMinutes = if ((ms % 36e5)/6e4) >= 0 then Math.floor(((ms % 36e5)/6e4)) else Math.ceil(((ms % 36e5)/6e4))
+        hours = if (ms/factors.hours) >= 0 then Math.floor(ms/factors.hours) else Math.ceil(ms/factors.hours)
+        remainingMinutes = if ((ms % factors.hours)/factors.minutes) >= 0 then Math.floor(((ms % factors.hours)/factors.minutes)) else Math.ceil(((ms % factors.hours)/factors.minutes))
         
-        days = if (ms/864e5) >= 0 then Math.floor(ms/864e5) else Math.ceil(ms/864e5)
-        remainingHours = if ((ms % 864e5)/36e5) >= 0 then Math.floor(((ms % 864e5)/36e5)) else Math.ceil(((ms % 864e5)/36e5))
+        days = if (ms/factors.days) >= 0 then Math.floor(ms/factors.days) else Math.ceil(ms/factors.days)
+        remainingHours = if ((ms % factors.days)/factors.hours) >= 0 then Math.floor(((ms % factors.days)/factors.hours)) else Math.ceil(((ms % factors.days)/factors.hours))
         
-        weeks = if (days/7) >= 0 then Math.floor(days/7) else Math.ceil(days/7)
-        remainingDays = if (days % 7) >= 0 then Math.floor(days % 7) else Math.ceil(days % 7)
+        weeks = if (days/factors.weeks) >= 0 then Math.floor(days/factors.weeks) else Math.ceil(days/factors.weeks)
+        remainingDays = if (days % factors.weeks) >= 0 then Math.floor(days % factors.weeks) else Math.ceil(days % factors.weeks)
 
         years = if (_getDaysToYears(days)) >= 0 then Math.floor(_getDaysToYears(days)) else Math.ceil(_getDaysToYears(days))
         remainingDaysInYear = if (days - _getYearsToDays(years)) >= 0 then Math.floor(days - _getYearsToDays(years)) else Math.ceil(days - _getYearsToDays(years))
 
         # 52 weeks / 12 months about 4.33333
-        months = (ms/2592e6)
+        months = (ms/factors.months)
         
         if Math.abs(months) >= 1
             # round months up to account for number of weeks estimated weirdness
