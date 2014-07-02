@@ -101,7 +101,7 @@ class @DrmTimeStamps
             _that = $ @
             item = _that.text()
             date = self.parseDate item
-            prettyDate = self.prettifyDate date, 'dddd, MMMM DD, yyyy, hh:mm:ss a'
+            prettyDate = self.prettifyDate date, 'dddd, MMMM DD, yyyy, hh:mm:ssa'
             
             _that.text prettyDate
             
@@ -124,7 +124,7 @@ class @DrmTimeStamps
                 hour: self.now.getHours()
                 minute: self.now.getMinutes()
                 second: self.now.getSeconds()
-            prettyNow = self.prettifyDate self.now, 'dddd, MMMM DD, yyyy, hh:mm:ss a'
+            prettyNow = self.prettifyDate self.now, 'dddd, MMMM DD, yyyy, hh:mm:ssa'
             
             $('.drm-now').text prettyNow
         , 1000
@@ -145,26 +145,10 @@ class @DrmTimeStamps
 
         #     setInterval ->
         #         date = self.parseDate item
-        #         prettyDate = self.prettifyDate date
-        #         _that.text prettyDate
+        #         duration = self.getDuration date
+        #         duration = self.formatDuration duration
+        #         _that.text duration
         #     , 1000
-
-        # testDate = new Date 2014, 5, 24, 23, 41, 0
-        # testDate2 = new Date 2014, 5, 27, 23, 41, 0
-        # testDate3 = new Date 2014, 3, 27, 23, 41, 0
-        # testDate4 = new Date 2014, 7, 27, 23, 41, 0
-        # testDate5 = new Date 1914, 3, 27, 23, 41, 0
-        # testDate6 = new Date 2016, 7, 27, 23, 41, 0
-        # testDate7 = new Date 2014, 5, 26, 23, 41, 32
-        # testDate8 = new Date 2014, 5, 27, 16, 37, 32
-        # console.log self.getDuration(testDate)
-        # console.log self.getDuration(testDate2)
-        # console.log self.getDuration(testDate3)
-        # console.log self.getDuration(testDate4)
-        # console.log self.getDuration(testDate5)
-        # console.log self.getDuration(testDate6)
-        # console.log self.getDuration(testDate7)
-        # console.log self.getDuration(testDate8)
 
     isLeapYear: (year) ->
         # The above expression evaluates whether or not the given date falls within a leap year 
@@ -422,41 +406,59 @@ class @DrmTimeStamps
 
         now = new Date()
 
-        _getMs = (now, date) ->
-            return now.getTime() - date.getTime()
+        _convertMsToSeconds = (ms) -> return ms/factors.seconds
 
-        _getSeconds = (ms, factors) ->
-            if (ms/factors.seconds) >= 0
-                return Math.floor(ms/factors.seconds)
-            else
-                return Math.ceil(ms/factors.seconds)
+        _convertMsToMinutes = (ms) -> return ms/factors.minutes
 
-        _getMinutes = (ms, factors) ->
-            if (ms/factors.minutes) >= 0
-                return Math.floor(ms/factors.minutes)
-            else
-                return Math.ceil(ms/factors.minutes)
+        _convertMsToHours = (ms) -> return ms/factors.hours
 
-        _getHours = (ms, factors) ->
-            if (ms/factors.hours) >= 0
-                return Math.floor(ms/factors.hours)
-            else
-                return Math.ceil(ms/factors.hours)
+        _convertMsToDays = (ms) -> return ms/factors.days
 
-        _getDays = (ms, factors) ->
-            if (ms/factors.days) >= 0
-                return Math.floor(ms/factors.days)
-            else
-                return Math.ceil(ms/factors.days)
+        _convertMsToWeeks = (ms) -> return ms/factors.weeks
 
-        _getWeeks = (ms, factors) ->
-            if (ms/factors.weeks) >= 0
-                return Math.floor(ms/factors.weeks)
-            else
-                return Math.ceil(ms/factors.weeks)
+        _convertMsToMonths = (ms) -> return ms/factors.months
 
-        _getMonths = (ms, factors) ->
-            _months = (ms/factors.months)
+        _convertMsToYears = (ms) ->
+            _days = _convertMsToDays ms
+            _days = if (ms/factors.days) >= 0 then Math.floor(ms/factors.days) else Math.ceil(ms/factors.days)
+            
+            return _getDaysToYears _days
+
+        _getMsDuration = (now, date) -> return (now.getTime() - date.getTime()) / factors.ms
+
+        _getSecondsDuration = (now, date) ->
+            _ms = _getMsDuration now, date
+            _seconds = _convertMsToSeconds _ms
+
+            return if _seconds >= 0 then Math.floor _seconds else Math.ceil _seconds
+
+        _getMinutesDuration = (now, date) ->
+            _ms = _getMsDuration now, date
+            _minutes = _convertMsToMinutes _ms
+
+            return if _minutes >= 0 then Math.floor _minutes else Math.ceil _minutes
+
+        _getHoursDuration = (now, date) ->
+            _ms = _getMsDuration now, date
+            _hours = _convertMsToHours _ms
+
+            return if _hours >= 0 then Math.floor _hours else Math.ceil _hours
+
+        _getDaysDuration = (now, date) ->
+            _ms = _getMsDuration now, date
+            _days = _convertMsToDays _ms
+
+            return if _days >= 0 then Math.floor _days else Math.ceil _days
+
+        _getWeeksDuration = (now, date) ->
+            _ms = _getMsDuration now, date
+            _weeks = _convertMsToWeeks _ms
+
+            return if _weeks >= 0 then Math.floor _weeks else Math.ceil _weeks
+
+        _getMonthsDuration = (now, date) ->
+            _ms = _getMsDuration now, date
+            _months = _convertMsToMonths _ms
             
             if Math.abs(_months) >= 1
                 # round months up to account for number of weeks estimated weirdness
@@ -464,64 +466,70 @@ class @DrmTimeStamps
             else
                 return 0
 
-        _getYears = (ms, factors) ->
-            if (ms/factors.days) >= 0
-                days = Math.floor(ms/factors.days)
-            else
-                days = Math.ceil(ms/factors.days)
+        _getYearsDuration = (now, date) ->
+            _ms = _getMsDuration now, date            
+            _years =  _convertMsToYears _ms
             
-            if (_getDaysToYears(days)) >= 0
-                return Math.floor(_getDaysToYears(days))
-            else
-                return Math.ceil(_getDaysToYears(days))
+            return if _years >= 0 then Math.floor _years else Math.ceil _years
 
-        _getRemainingSeconds = (ms, factors) ->
-            if ((ms % factors.minutes)/factors.seconds) >= 0
-                return Math.floor(((ms % factors.minutes)/factors.seconds))
-            else
-                return Math.ceil(((ms % factors.minutes)/factors.seconds))
+        _getRemainingSeconds = (now, date) ->
+            _ms = _getMsDuration now, date
 
-        _getRemainingMinutes = (ms, factors) ->
-            if ((ms % factors.hours)/factors.minutes) >= 0
-                return Math.floor(((ms % factors.hours)/factors.minutes))
+            if ((_ms % factors.minutes)/factors.seconds) >= 0
+                return Math.floor(((_ms % factors.minutes)/factors.seconds))
             else
-                return Math.ceil(((ms % factors.hours)/factors.minutes))
+                return Math.ceil(((_ms % factors.minutes)/factors.seconds))
 
-        _getRemainingHours = (ms, factors) ->
-            # is one hour short for years under 100
-            if ((ms % factors.days)/factors.hours) >= 0
-                return Math.floor(((ms % factors.days)/factors.hours))
+        _getRemainingMinutes = (now, date) ->
+            _ms = _getMsDuration now, date
+
+            if ((_ms % factors.hours)/factors.minutes) >= 0
+                return Math.floor(((_ms % factors.hours)/factors.minutes))
             else
-                return Math.ceil(((ms % factors.days)/factors.hours))
+                return Math.ceil(((_ms % factors.hours)/factors.minutes))
 
-        _getRemainingDays = (ms, factors) ->
-            if ((ms % factors.weeks)/factors.days) >= 0
-                return Math.floor((ms % factors.weeks)/factors.days)
+        _getRemainingHours = (now, date) ->
+            _ms = _getMsDuration now, date
+
+            # doesn't work correctly durations under 100 years
+            if ((_ms % factors.days)/factors.hours) >= 0
+                return Math.floor(((_ms % factors.days)/factors.hours))
             else
-                return Math.ceil((ms % factors.weeks)/factors.days)
+                return Math.ceil(((_ms % factors.days)/factors.hours))
 
-        _getRemainingDaysInYear = (ms, factors) ->
-            days = _getDays ms, factors
-            years = _getYears ms, factors
-            
-            if (days - _getYearsToDays(years)) >= 0
-                return Math.floor(days - _getYearsToDays(years))
+        _getRemainingDays = (now, date) ->
+            _ms = _getMsDuration now, date
+
+            if ((_ms % factors.weeks)/factors.days) >= 0
+                return Math.floor((_ms % factors.weeks)/factors.days)
             else
-                return Math.ceil(days - _getYearsToDays(years))
+                return Math.ceil((_ms % factors.weeks)/factors.days)
 
-        duration.ms = _getMs now, date
-        duration.seconds = _getSeconds duration.ms, factors
-        duration.minutes = _getMinutes duration.ms, factors
-        duration.hours = _getHours duration.ms, factors
-        duration.days = _getDays duration.ms, factors
-        duration.weeks = _getWeeks duration.ms, factors
-        duration.months = _getMonths duration.ms, factors
-        duration.years = _getYears duration.ms, factors
-        duration.remainingSeconds = _getRemainingSeconds duration.ms, factors        
-        duration.remainingMinutes = _getRemainingMinutes duration.ms, factors        
-        duration.remainingHours = _getRemainingHours duration.ms, factors
-        duration.remainingDays = _getRemainingDays duration.ms, factors
-        duration.remainingDaysInYear = _getRemainingDaysInYear duration.ms, factors
+        _getRemainingDaysInYear = (now, date) =>
+            # doesn't work correctly durations under 100 years
+            _days = _getDaysDuration now, date
+            _years = _getYearsDuration now, date
+
+            if @isLeapYear(date.getFullYear()) then _days = _days + 1
+
+            if (_days - _getYearsToDays(_years)) >= 0
+                return Math.floor(_days - _getYearsToDays(_years))
+            else
+                return Math.ceil(_days - _getYearsToDays(_years))
+
+        duration.ms = _getMsDuration now, date
+        duration.seconds = _getSecondsDuration now, date
+        duration.minutes = _getMinutesDuration now, date
+        duration.hours = _getHoursDuration now, date
+        duration.days = _getDaysDuration now, date
+        duration.weeks = _getWeeksDuration now, date
+        duration.months = _getMonthsDuration now, date
+        duration.years = _getYearsDuration now, date
+        duration.remainingSeconds = _getRemainingSeconds now, date        
+        duration.remainingMinutes = _getRemainingMinutes now, date        
+        duration.remainingHours = _getRemainingHours now, date
+        duration.remainingDays = _getRemainingDays now, date
+        duration.remainingDaysInYear = _getRemainingDaysInYear now, date
 
         duration
 
