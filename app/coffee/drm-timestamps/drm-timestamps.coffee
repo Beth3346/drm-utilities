@@ -5,7 +5,7 @@
 
 $ = jQuery
 class @DrmTimeStamps
-    constructor: (@timestamps = $('.drm-timestamp'), @intervals = no) ->
+    constructor: (@timestamps = $('.drm-timestamp'), @intervals = yes) ->
         self = @
         @now = new Date()
         @today =
@@ -342,13 +342,11 @@ class @DrmTimeStamps
         self = @
         _getHours = (date) ->
             if date.getHours() is 0
-                _hrs = 12
+                return 12
             else if date.getHours() > 12
-                _hrs = date.getHours() - 12 
+                return date.getHours() - 12
             else 
-                _hrs = date.getHours()
-            
-            return _hrs.toString()
+                return date.getHours()
 
         formatTokens = {
             dddd: (date) -> return "#{self.days[date.getDay()]}" # long day name
@@ -362,7 +360,7 @@ class @DrmTimeStamps
             D: (date) -> return date.getDate() # one digit date
             yyyy: (date) -> return date.getFullYear() # four digit year
             yy: (date) -> return date.getFullYear().toString().slice -2 # two digit year
-            hh: (date) -> return if _getHours(date).length is 1 then "0#{_getHours(date)}" else _getHours(date) # two digit hours
+            hh: (date) -> return if _getHours(date).toString().length is 1 then "0#{_getHours(date).toString()}" else _getHours(date) # two digit hours
             h: (date) -> return _getHours(date) # one digit hours
             HH: (date) -> return if date.getHours().toString().length is 1 then "0#{date.getHours().toString()}" else date.getHours() # two digit 24hr format
             H: (date) -> return date.getHours() # one digit 24hr format
@@ -491,9 +489,22 @@ class @DrmTimeStamps
                 return if _years >= 0 then Math.floor _years else Math.ceil _years
 
         remainderUtilities =
-            getLeftOverSeconds: (now, date) -> return now.getSeconds() - date.getSeconds()
-            getLeftOverMinutes: (now, date) -> return now.getMinutes() - date.getMinutes()
-            getLeftOverHours: (now, date) -> return now.getHours() - date.getHours()
+            # seconds, minutes, hours need adjustments for countdowns
+            getLeftOverSeconds: (now, date) ->
+                if (date.getSeconds() isnt 0) or (durationUtilities.getMsDuration(now, date) > 0)
+                    return now.getSeconds() - date.getSeconds()
+                else
+                    return now.getSeconds() - 59
+            getLeftOverMinutes: (now, date) ->
+                if (date.getMinutes() isnt 0) or (durationUtilities.getMsDuration(now, date) > 0)
+                    return now.getMinutes() - date.getMinutes()
+                else
+                    return now.getMinutes() - 59
+            getLeftOverHours: (now, date) ->
+                if (date.getHours() isnt 0) or (durationUtilities.getMsDuration(now, date) > 0)
+                    return now.getHours() - date.getHours()
+                else
+                    return now.getHours() - 11
             getLeftOverDays: (now, date) ->
                 _ms = durationUtilities.getMsDuration now, date
                 _days = conversionUtilities.convertMsToDays(_ms % factors.weeks)
