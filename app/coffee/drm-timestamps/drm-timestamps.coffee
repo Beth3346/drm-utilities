@@ -5,7 +5,7 @@
 
 $ = jQuery
 class @DrmTimeStamps
-    constructor: (@timestamps = $('.drm-timestamp')) ->
+    constructor: (@timestamps = $('.drm-timestamp'), @intervals = no) ->
         self = @
         @now = new Date()
         @today =
@@ -26,6 +26,7 @@ class @DrmTimeStamps
             dateNumber: new RegExp '[\\s\\/\\-\\.](?:([3][01]),?[\\s\\/\\-\\.]?|([012][1-9]),?[\\s\\/\\-\\.]?|([1-9]),?[\\s\\/\\-\\.]?)'
             year: new RegExp '([0-9]{4})'
             dateKeywords: new RegExp '^(yesterday|today|tomorrow)', 'i'
+            timeKeywords: new RegExp '^(noon|midnight)', 'i'
             singleSpace: new RegExp '\\s'
 
         @unitTokens = {
@@ -110,15 +111,6 @@ class @DrmTimeStamps
             prettyDate = self.prettifyDate date, 'dddd, MMMM DD, yyyy, hh:mm:ssa'
             
             _that.text prettyDate
-            
-        # $.each self.timestamps, ->
-        #     _that = $ @
-        #     item = $.trim(_that.text())
-        #     date = self.parseDate item
-        #     duration = self.getDuration date
-        #     duration = self.formatDuration duration
-            
-        #     _that.text duration
 
         setInterval ->
             self.now = new Date()
@@ -130,32 +122,39 @@ class @DrmTimeStamps
                 hour: self.now.getHours()
                 minute: self.now.getMinutes()
                 second: self.now.getSeconds()
-            
-            if self.drmNow.length isnt 0
-                prettyNow = self.prettifyDate self.now, 'dddd, MMMM DD, yyyy, hh:mm:ssa'   
-                self.drmNow.text prettyNow
+            return
         , 1000
+        
+        if @intervals
+            $.each self.timestamps, ->
+                _that = $ @
+                item = $.trim(_that.text())
 
-        # $.each @prettyDate, ->
-        #     _that = $ @
-        #     item = $.trim(_that.text())
+                setInterval ->
+                    date = self.parseDate item
+                    duration = self.getDuration date
+                    duration = self.formatDuration duration
+                    _that.text duration
+                , 1000
 
-        #     setInterval ->
-        #         date = self.parseDate item
-        #         prettyDate = self.prettifyDate date
-        #         _that.text prettyDate
-        #     , 1000
-            
-        $.each self.timestamps, ->
-            _that = $ @
-            item = $.trim(_that.text())
-
-            setInterval ->
+            setInterval ->                
+                if self.drmNow.length isnt 0
+                    prettyNow = self.prettifyDate self.now, 'dddd, MMMM DD, yyyy, hh:mm:ssa'   
+                    self.drmNow.text prettyNow
+            , 1000
+        else
+            $.each self.timestamps, ->
+                _that = $ @
+                item = $.trim(_that.text())
                 date = self.parseDate item
                 duration = self.getDuration date
                 duration = self.formatDuration duration
+                
                 _that.text duration
-            , 1000
+                
+            if self.drmNow.length isnt 0
+                prettyNow = self.prettifyDate self.now, 'dddd, MMMM DD, yyyy, hh:mm:ssa'
+                self.drmNow.text prettyNow
 
     isLeapYear: (year) ->
         # The above expression evaluates whether or not the given date falls within a leap year 
@@ -281,7 +280,7 @@ class @DrmTimeStamps
                     when 'yesterday' then return parsingUtilities.getYesterday self.today
                     when 'today' then return parsingUtilities.getToday self.today
                     when 'tomorrow' then return parsingUtilities.getTomorrow self.today
-                
+
             # look for month names
             else if date.search(/^(?:[a-z]*[\.,]?\s)?[a-z]*\.?\s(?:[3][01],?\s|[012][1-9],?\s|[1-9],?\s)[0-9]{4}$/i) isnt -1
                 
@@ -305,7 +304,15 @@ class @DrmTimeStamps
 
         _parseTime = (time) ->
             # add noon and midnight keywords
-            if time.search(/((?:[12][012]:|[0]?[0-9]:)[012345][0-9](?:\:[012345][0-9])?(?:am|pm)?)/i) isnt -1
+            if time.search(/^(noon|midnight)/i) isnt -1
+                _keyword = time.match /^(noon|midnight)/i
+                _keyword = _keyword[0]
+
+                switch _keyword
+                    when 'noon' then return parsingUtilities.getNoon self.today
+                    when 'midnight' then return parsingUtilities.getMidnight self.today
+            
+            else if time.search(/((?:[12][012]:|[0]?[0-9]:)[012345][0-9](?:\:[012345][0-9])?(?:am|pm)?)/i) isnt -1
                 _fullTime = time.match /((?:[12][012]:|[0]?[0-9]:)[012345][0-9](?:\:[012345][0-9])?(?:am|pm)?)/i
                 _fullTime = _fullTime[0]
 
@@ -314,6 +321,7 @@ class @DrmTimeStamps
                     minute: parsingUtilities.getMinutes _fullTime
                     second: parsingUtilities.getSeconds _fullTime
                 }
+            
             else
                 return
 
@@ -428,6 +436,10 @@ class @DrmTimeStamps
                 _days = if (ms/factors.days) >= 0 then Math.floor(ms/factors.days) else Math.ceil(ms/factors.days)
                 
                 return dateUtilities.getDaysToYears _days
+            convertSecondsToMs: (seconds) -> return seconds * factors.seconds
+            convertMinutesToMs: (minutes) -> return minutes * factors.minutes
+            convertHoursToMs: (hours) -> return hours * factors.hours
+            convertDaysToMs: (days) -> return days * factors.days
 
         durationUtilities =
             getMsDuration: (now, date) -> return (now.getTime() - date.getTime()) / factors.ms
@@ -474,30 +486,14 @@ class @DrmTimeStamps
 
             getYearsDuration: (now, date) ->
                 _ms = @getMsDuration now, date            
-                _years =  conversionUtilities.convertMsToYears _ms
+                _years = conversionUtilities.convertMsToYears _ms
                 
                 return if _years >= 0 then Math.floor _years else Math.ceil _years
 
         remainderUtilities =
-            getLeftOverSeconds: (now, date) ->
-                _ms = durationUtilities.getMsDuration now, date
-                _seconds = conversionUtilities.convertMsToSeconds(_ms % factors.minutes)
-
-                return if _seconds >= 0 then Math.floor _seconds else Math.ceil _seconds
-
-            getLeftOverMinutes: (now, date) ->
-                _ms = durationUtilities.getMsDuration now, date
-                _minutes = conversionUtilities.convertMsToMinutes(_ms % factors.hours)
-
-                return if _minutes >= 0 then Math.floor _minutes else Math.ceil _minutes
-
-            getLeftOverHours: (now, date) ->
-                _ms = durationUtilities.getMsDuration now, date
-                _hours = conversionUtilities.convertMsToHours(_ms % factors.days)
-
-                # doesn't work correctly for some durationUtilities
-                return if _hours >= 0 then Math.floor _hours else Math.ceil _hours
-
+            getLeftOverSeconds: (now, date) -> return now.getSeconds() - date.getSeconds()
+            getLeftOverMinutes: (now, date) -> return now.getMinutes() - date.getMinutes()
+            getLeftOverHours: (now, date) -> return now.getHours() - date.getHours()
             getLeftOverDays: (now, date) ->
                 _ms = durationUtilities.getMsDuration now, date
                 _days = conversionUtilities.convertMsToDays(_ms % factors.weeks)
