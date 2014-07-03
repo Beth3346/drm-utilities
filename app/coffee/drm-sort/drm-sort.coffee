@@ -49,16 +49,16 @@ class @DrmSort
             types = []
 
             _isDate = (value) ->
-                if _patterns.monthDayYear.test(value) then true else false
+                return if _patterns.monthDayYear.test(value) then true else false
 
             _isNumber = (value) ->
-                if _patterns.number.test(value) then true else false
+                return if _patterns.number.test(value) then true else false
 
             _isAlpha = (value) ->
-                if _patterns.alpha.test(value) then true else false
+                return if _patterns.alpha.test(value) then true else false
 
             _isTime = (value) ->
-                if _patterns.time.test(value) then true else false
+                return if _patterns.time.test(value) then true else false
 
             $.each values, ->
                 if _isDate.call self, @
@@ -83,12 +83,12 @@ class @DrmSort
             _sortAsc = (a, b) ->
                 _a = new Date _patterns.monthDayYear.exec(a)
                 _b = new Date _patterns.monthDayYear.exec(b)
-                _a - _b
+                return _a - _b
 
             _sortDesc = (a, b) ->
                 _a = new Date _patterns.monthDayYear.exec(a)
                 _b = new Date _patterns.monthDayYear.exec(b)
-                _b - _a
+                return _b - _a
 
             if direction is 'ascending' then values.sort _sortAsc else values.sort _sortDesc    
 
@@ -106,20 +106,20 @@ class @DrmSort
                     else if _hour.length is 1
                         _hour = "0#{_hour}"
                         
-                    "#{_hour}:#{_minutes}"
+                    return "#{_hour}:#{_minutes}"
 
                 else if _ampm is 'pm'
-                    "#{_hour + 12}:#{_minutes}"
+                    return "#{_hour + 12}:#{_minutes}"
 
             _sortAsc = (a, b) ->
                 _a = _parseTime _patterns.time.exec(a)
                 _b = _parseTime _patterns.time.exec(b)
-                new Date("04-22-2014 #{_a}") - new Date("04-22-2014 #{_b}")
+                return new Date("04-22-2014 #{_a}") - new Date("04-22-2014 #{_b}")
 
             _sortDesc = (a, b) ->
                 _a = _parseTime _patterns.time.exec(a)
                 _b = _parseTime _patterns.time.exec(b)
-                new Date("04-22-2014 #{_b}") - new Date("04-22-2014 #{_a}")
+                return new Date("04-22-2014 #{_b}") - new Date("04-22-2014 #{_a}")
 
             if direction is 'ascending' then values.sort _sortAsc else values.sort _sortDesc
 
@@ -134,11 +134,11 @@ class @DrmSort
                 _b = _cleanAlpha(b).toLowerCase()
 
                 if _a < _b
-                    -1
+                    return -1
                 else if _a > _b
-                    1
+                    return 1
                 else if _a is _b
-                    0
+                    return 0
 
             _sortDesc = (a, b) ->
                 # use clean alpha to remove leading 'the' or 'a' then convert to lowercase for case insensitive sort
@@ -146,20 +146,20 @@ class @DrmSort
                 _b = _cleanAlpha(b).toLowerCase()
 
                 if _a < _b
-                    1
+                    return 1
                 else if _a > _b
-                    -1
+                    return -1
                 else if _a is _b
-                    0
+                    return 0
 
             if direction is 'ascending' then values.sort _sortAsc else values.sort _sortDesc
 
         else if type is 'number'
             _sortAsc = (a, b) ->
-                parseFloat(a) - parseFloat(b)
+                return parseFloat(a) - parseFloat(b)
 
             _sortDesc = (a, b) ->
-                parseFloat(b) - parseFloat(a)
+                return parseFloat(b) - parseFloat(a)
 
             if direction is 'ascending' then values.sort _sortAsc else values.sort _sortDesc
 
