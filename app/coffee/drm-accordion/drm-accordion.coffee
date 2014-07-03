@@ -59,11 +59,10 @@ class @DrmAccordionContent extends DrmAccordion
             self.buttons.hideButton.on 'click', self.hideAll
 
     addButtons: =>
-        buttons =
+        return {
             showButton: @createButton 'showButton', 'Show All', 'drm-show-all drm-button-inline'
             hideButton: @createButton 'hideButton', 'Hide All', 'drm-hide-all drm-button-inline'
-
-        buttons
+        }
 
     createButton: (button, message, className) =>
         $('<button></button>',
