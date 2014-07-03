@@ -17,12 +17,18 @@ class @DrmTimeStamps
             minute: @now.getMinutes()
             second: @now.getSeconds()
         @prettyDate = $ '.drm-pretty-date'
+        @drmNow = $ '.drm-now'
         @patterns =
             longDate: new RegExp '^(?:[a-z]*[\\.,]?\\s)?[a-z]*\\.?\\s(?:[3][01],?\\s|[012][1-9],?\\s|[1-9],?\\s)[0-9]{4}$', 'i'
             shortDate: new RegExp '((?:[0]?[1-9]|[1][012]|[1-9])[-\/.](?:[0]?[1-9]|[12][0-9]|[3][01])[-\/.][0-9]{4})'
             longTime: new RegExp '((?:[12][012]:|[0]?[0-9]:)[012345][0-9](?:\\:[012345][0-9])?(?:am|pm)?)', 'i'
+            longMonth: new RegExp '^(?:[a-z]*[\\.,]?\\s)?[a-z]*'
+            dateNumber: new RegExp '[\\s\\/\\-\\.](?:([3][01]),?[\\s\\/\\-\\.]?|([012][1-9]),?[\\s\\/\\-\\.]?|([1-9]),?[\\s\\/\\-\\.]?)'
+            year: new RegExp '([0-9]{4})'
+            dateKeywords: new RegExp '^(yesterday|today|tomorrow)', 'i'
+            singleSpace: new RegExp '\\s'
 
-        unitTokens = {
+        @unitTokens = {
             ms: 'millisecond'
             s: 'second'
             m: 'minute'
@@ -99,20 +105,20 @@ class @DrmTimeStamps
 
         $.each @prettyDate, ->
             _that = $ @
-            item = _that.text()
+            item = $.trim(_that.text())
             date = self.parseDate item
             prettyDate = self.prettifyDate date, 'dddd, MMMM DD, yyyy, hh:mm:ssa'
             
             _that.text prettyDate
             
-        $.each self.timestamps, ->
-            _that = $ @
-            item = _that.text()
-            date = self.parseDate item
-            duration = self.getDuration date
-            duration = self.formatDuration duration
+        # $.each self.timestamps, ->
+        #     _that = $ @
+        #     item = $.trim(_that.text())
+        #     date = self.parseDate item
+        #     duration = self.getDuration date
+        #     duration = self.formatDuration duration
             
-            _that.text duration
+        #     _that.text duration
 
         setInterval ->
             self.now = new Date()
@@ -124,14 +130,15 @@ class @DrmTimeStamps
                 hour: self.now.getHours()
                 minute: self.now.getMinutes()
                 second: self.now.getSeconds()
-            prettyNow = self.prettifyDate self.now, 'dddd, MMMM DD, yyyy, hh:mm:ssa'
             
-            $('.drm-now').text prettyNow
+            if self.drmNow.length isnt 0
+                prettyNow = self.prettifyDate self.now, 'dddd, MMMM DD, yyyy, hh:mm:ssa'   
+                self.drmNow.text prettyNow
         , 1000
 
         # $.each @prettyDate, ->
         #     _that = $ @
-        #     item = _that.text()
+        #     item = $.trim(_that.text())
 
         #     setInterval ->
         #         date = self.parseDate item
@@ -139,16 +146,16 @@ class @DrmTimeStamps
         #         _that.text prettyDate
         #     , 1000
             
-        # $.each self.timestamps, ->
-        #     _that = $ @
-        #     item = _that.text()
+        $.each self.timestamps, ->
+            _that = $ @
+            item = $.trim(_that.text())
 
-        #     setInterval ->
-        #         date = self.parseDate item
-        #         duration = self.getDuration date
-        #         duration = self.formatDuration duration
-        #         _that.text duration
-        #     , 1000
+            setInterval ->
+                date = self.parseDate item
+                duration = self.getDuration date
+                duration = self.formatDuration duration
+                _that.text duration
+            , 1000
 
     isLeapYear: (year) ->
         # The above expression evaluates whether or not the given date falls within a leap year 
@@ -167,131 +174,164 @@ class @DrmTimeStamps
         _month = month + 1
         new Date(year, _month, 0).getDate()
 
-    parseDate: (item) =>
+    parseDate: (dateTime) =>
         # check for Yesterday, Today, Tomorrow strings and look for time
-        item = item.toLowerCase()
-
-        _parseDate = (item) =>
-            date = {}
-            # look for date keywords yesterday, today, tomorrow
-            if item.search(/^(yesterday|today|tomorrow)/) isnt -1
-                _fullDate = item.match /^(yesterday|today|tomorrow)/i
-                _fullDate = _fullDate[0]
-                _lastMonth = if @today.month is 0 then 11 else @today.month - 1
-                _nextMonth = if @today.month is 11 then 0 else @today.month + 1
-
-                _lastDateInMonth = @getDaysInMonth @today.month, @today.year
-                _lastDateInLastMonth = @getDaysInMonth _lastMonth, @today.year
-
-                if _fullDate is 'yesterday'
-                    date.date = if @today.date is 1 then _lastDateInLastMonth else @today.date - 1
-                    date.month = if @today.date is 1 then _lastMonth else @today.month
-                    date.year = if (@today.month is 0) and (@today.date is 1) then @today.year - 1 else @today.year
-                else if _fullDate is 'today'
-                    date.date = @today.date
-                    date.month = @today.month
-                    date.year = @today.year
-                else if _fullDate is 'tomorrow'
-                    date.date = if @today.date is _lastDateInMonth then 1 else @today.date + 1
-                    date.month = if @today.date is _lastDateInMonth then _nextMonth else @today.month
-                    date.year = if (@today.month is 11) and (@today.date is _lastDateInMonth) then @today.year + 1 else @today.year
-
-                return date
+        self = @
+        dateTime = dateTime.toLowerCase()
+        parsingUtilities =
+            getYesterday: (today) ->
+                _lastMonth = if today.month is 0 then 11 else today.month - 1
+                _lastDateInLastMonth = self.getDaysInMonth _lastMonth, today.year
                 
-            # look for month names
-            else if item.search(/^(?:[a-z]*[\.,]?\s)?[a-z]*\.?\s(?:[3][01],?\s|[012][1-9],?\s|[1-9],?\s)[0-9]{4}$/i) isnt -1
+                return {
+                    month: if today.date is 1 then _lastMonth else today.month
+                    date: if today.date is 1 then _lastDateInLastMonth else today.date - 1
+                    year: if (today.month is 0) and (today.date is 1) then today.year - 1 else today.year
+                }
+            
+            getToday: (today) ->
+                return {
+                    month: today.month
+                    date: today.date
+                    year: today.year
+                }
+            
+            getTomorrow: (today) ->
+                _nextMonth = if today.month is 11 then 0 else today.month + 1
+                _lastDateInMonth = self.getDaysInMonth today.month, today.year
+                
+                return {
+                    month: if today.date is _lastDateInMonth then _nextMonth else today.month
+                    date: if today.date is _lastDateInMonth then 1 else today.date + 1
+                    year: if (today.month is 11) and (today.date is _lastDateInMonth) then today.year + 1 else today.year
+                }
+            
+            getMonth: (date) ->
+                _month = date.match /^([0]?[1-9]|[1][012]|[1-9])/
+                
+                return parseInt(_month[0], 10) - 1
+            
+            getMonthName: (date) ->
                 # month or day of the week
-                _dayMonth = item.match /^(?:[a-z]*[\.,]?\s)?[a-z]*/
+                _dayMonth = date.match /^(?:[a-z]*[\.,]?\s)?[a-z]*/
                 _dayMonth = $.trim _dayMonth[0]
                 _dayMonth = _dayMonth.replace /[\.,]/, ''
                 
                 if _dayMonth.search(/\s/) isnt -1
                     _dayMonth = _dayMonth.split(' ')
-                    date.month = _dayMonth[1]
+                    _month = _dayMonth[1]
                 else
-                    date.month = _dayMonth
+                    _month = _dayMonth
 
-                _months = $.map @months, (item) ->
-                    item.toLowerCase()
+                _months = $.map self.months, (str) ->
+                    str.toLowerCase()
 
-                _shortMonths = $.map @shortMonths, (item) ->
-                    item.toLowerCase()
+                _shortMonths = $.map self.shortMonths, (str) ->
+                    str.toLowerCase()
 
-                if date.month in _months
-                    date.month = $.inArray(date.month, _months)
-                else if date.month in _shortMonths
-                    date.month = $.inArray(date.month, _shortMonths)
+                if _month in _months
+                    return $.inArray(_month, _months)
+                else if _month in _shortMonths
+                    return $.inArray(_month, _shortMonths)
+            
+            getDate: (date) ->
+                _date = date.match /[\s\/\-\.](?:([3][01]),?[\s\/\-\.]?|([012][1-9]),?[\s\/\-\.]?|([1-9]),?[\s\/\-\.]?)/
+                
+                if _date[1]?
+                    return parseInt(_date[1], 10)
+                else if _date[2]?
+                    return parseInt(_date[2], 10)
+                else if _date[3]?
+                    return parseInt(_date[3], 10)
+            
+            getYear: (date) ->
+                _year = date.match /([0-9]{4})$/
+                
+                return parseInt(_year[1], 10)
 
-                date.date = item.match /\s(?:([3][01]),?\s|([012][1-9]),?\s|([1-9]),?\s)/
-                if date.date[1]?
-                    date.date = parseInt(date.date[1], 10)
-                else if date.date[2]?
-                    date.date = parseInt(date.date[2], 10)
-                else if date.date[3]?
-                    date.date = parseInt(date.date[3], 10)
-
-                date.year = item.match /([0-9]{4})$/
-                date.year = parseInt(date.year[1], 10)
-                return date
-
-            else if item.search(/((?:[0]?[1-9]|[1][012]|[1-9])[-\/.](?:[0]?[1-9]|[12][0-9]|[3][01])[-\/.][0-9]{4})/) isnt -1
-                _fullDate = item.match /((?:[0]?[1-9]|[1][012]|[1-9])[-\/.](?:[0]?[1-9]|[12][0-9]|[3][01])[-\/.][0-9]{4})/
-                _fullDate = _fullDate[0]
-
-                date.month = _fullDate.match /^([0]?[1-9]|[1][012]|[1-9])/
-                date.month = parseInt(date.month[0], 10) - 1
-
-                date.date = _fullDate.match /[\.\/\-]([012]?[0-9])[\.\/\-]/
-                date.date = parseInt(date.date[1], 10)
-
-                date.year = _fullDate.match /([0-9]{4})/
-                date.year = parseInt(date.year[0], 10)
-
-                return date
-            else
-                return
-
-        _parseTime = (item) ->
-            # add noon and midnight keywords
-            _fullTime = item.match /((?:[12][012]:|[0]?[0-9]:)[012345][0-9](?:\:[012345][0-9])?(?:am|pm)?)/i
-       
-            if _fullTime?
-                time = {}
-                _fullTime = _fullTime[0]
-                _ampm = _fullTime.match /(am|pm)$/i
+            getHours: (time) ->
+                _ampm = time.match /(am|pm)$/i
                 _ampm = _ampm[1]
 
-                time.hour = _fullTime.match /^(?:([12][012]):|([0]?[0-9]):)/
-                time.hour = if time.hour[1]? then parseInt(time.hour[1], 10) else parseInt(time.hour[2], 10)
+                _hour = time.match /^(?:([12][012]):|([0]?[0-9]):)/
+                _hour = if _hour[1]? then parseInt(_hour[1], 10) else parseInt(_hour[2], 10)
                 
-                if _ampm is 'am' and time.hour is 12
-                    time.hour = 0
-                else if _ampm is 'pm' and time.hour < 12
-                    time.hour = time.hour + 12
-                
-                time.minute = _fullTime.match /\:([012345][0-9])/
-                time.minute = parseInt(time.minute[1], 10)
-                
-                time.second = _fullTime.match /\:(?:[012345][0-9])\:([012345][0-9])/
-                time.second = if time.second? then parseInt(time.second[1], 10) else 0
+                if _ampm is 'am' and _hour is 12
+                    return 0
+                else if _ampm is 'pm' and _hour < 12
+                    return _hour + 12
+                else
+                    return _hour
 
-                return time
+            getMinutes: (time) ->
+                _minute = time.match /\:([012345][0-9])/                    
+                return parseInt(_minute[1], 10)
+
+            getSeconds: (time) ->
+                _second = time.match /\:(?:[012345][0-9])\:([012345][0-9])/
+                return if _second? then parseInt(_second[1], 10) else 0
+
+        _parseDate = (date) ->            
+            # look for date keywords yesterday, today, tomorrow
+            if date.search(/^(yesterday|today|tomorrow)/i) isnt -1
+                _keyword = date.match /^(yesterday|today|tomorrow)/i
+                _keyword = _keyword[0]
+
+                switch _keyword
+                    when 'yesterday' then return parsingUtilities.getYesterday self.today
+                    when 'today' then return parsingUtilities.getToday self.today
+                    when 'tomorrow' then return parsingUtilities.getTomorrow self.today
+                
+            # look for month names
+            else if date.search(/^(?:[a-z]*[\.,]?\s)?[a-z]*\.?\s(?:[3][01],?\s|[012][1-9],?\s|[1-9],?\s)[0-9]{4}$/i) isnt -1
+                
+                return {
+                    month: parsingUtilities.getMonthName date
+                    date: parsingUtilities.getDate date
+                    year: parsingUtilities.getYear date
+                }
+
+            else if date.search(/((?:[0]?[1-9]|[1][012]|[1-9])[-\/.](?:[0]?[1-9]|[12][0-9]|[3][01])[-\/.][0-9]{4})/) isnt -1
+                _fullDate = date.match /((?:[0]?[1-9]|[1][012]|[1-9])[-\/.](?:[0]?[1-9]|[12][0-9]|[3][01])[-\/.][0-9]{4})/
+                _fullDate = _fullDate[0]
+                
+                return {
+                    month: parsingUtilities.getMonth _fullDate
+                    date: parsingUtilities.getDate _fullDate
+                    year: parsingUtilities.getYear _fullDate
+                }
             else
                 return
 
-        date = _parseDate item
-        time = _parseTime item
+        _parseTime = (time) ->
+            # add noon and midnight keywords
+            if time.search(/((?:[12][012]:|[0]?[0-9]:)[012345][0-9](?:\:[012345][0-9])?(?:am|pm)?)/i) isnt -1
+                _fullTime = time.match /((?:[12][012]:|[0]?[0-9]:)[012345][0-9](?:\:[012345][0-9])?(?:am|pm)?)/i
+                _fullTime = _fullTime[0]
+
+                return {
+                    hour: parsingUtilities.getHours _fullTime
+                    minute: parsingUtilities.getMinutes _fullTime
+                    second: parsingUtilities.getSeconds _fullTime
+                }
+            else
+                return
+
+        date = _parseDate dateTime
+        time = _parseTime dateTime
         
         if date? and time?
             return new Date date.year, date.month, date.date, time.hour, time.minute, time.second
         else if date? and !time
             return new Date date.year, date.month, date.date, 0, 0, 0
         else if !date and time?
-            return new Date @today.year, @today.month, @today.date, time.hour, time.minute, time.second
+            return new Date self.today.year, self.today.month, self.today.date, time.hour, time.minute, time.second
+        else
+            console.log 'invalid date string'
 
     prettifyDate: (date, dateFormat = 'dddd, MMMM DD, yyyy, hh:mm:ss a') =>
         # format date and time
-
+        self = @
         _getHours = (date) ->
             if date.getHours() is 0
                 _hrs = 12
@@ -302,78 +342,52 @@ class @DrmTimeStamps
             
             return _hrs.toString()
 
-        if dateFormat?
-            format = {}
-            
-            # get day format options
-            if dateFormat.match /dddd/
-                format.dddd = "#{@days[date.getDay()]}" # long day name
-            else if dateFormat.match /ddd/
-                format.ddd = "#{@shortDays[date.getDay()]}" # short day name
-            else if dateFormat.match /dd/
-                format.dd = "#{@minDays[date.getDay()]}" # three letter day abbr
+        formatTokens = {
+            dddd: (date) -> return "#{self.days[date.getDay()]}" # long day name
+            ddd: (date) -> return "#{self.shortDays[date.getDay()]}" # short day name
+            dd: (date) -> return "#{self.minDays[date.getDay()]}" # three letter day abbr
+            MMMM: (date) -> return "#{self.months[date.getMonth()]}" # long month name
+            MMM: (date) -> return "#{self.shortMonths[date.getMonth()]}" # short month name
+            MM: (date) -> return if date.getMonth().toString().length is 1 then "0#{date.getMonth().toString()}" else date.getMonth() # two digit month
+            M: (date) -> return date.getMonth() # one digit month
+            DD: (date) -> return if date.getDate().toString().length is 1 then "0#{date.getDate().toString()}" else date.getDate() # two digit date
+            D: (date) -> return date.getDate() # one digit date
+            yyyy: (date) -> return date.getFullYear() # four digit year
+            yy: (date) -> return date.getFullYear().toString().slice -2 # two digit year
+            hh: (date) -> return if _getHours(date).length is 1 then "0#{_getHours(date)}" else _getHours(date) # two digit hours
+            h: (date) -> return _getHours(date) # one digit hours
+            HH: (date) -> return if date.getHours().toString().length is 1 then "0#{date.getHours().toString()}" else date.getHours() # two digit 24hr format
+            H: (date) -> return date.getHours() # one digit 24hr format
+            mm: (date) -> return if date.getMinutes().toString().length is 1 then "0#{date.getMinutes().toString()}" else date.getMinutes() # two digit minutes
+            m: (date) -> return date.getMinutes() # one digit minutes
+            ss: (date) -> return if date.getSeconds().toString().length is 1 then "0#{date.getSeconds().toString()}" else date.getSeconds().toString() # two digit seconds
+            s: (date) -> return date.getSeconds() # one digit seconds
+            a: (date) -> return if date.getHours() >= 12 then 'pm' else 'am' # ampm
+            A: (date) -> return if date.getHours() >= 12 then 'PM' else 'AM' # AMPM
+        }
 
-            # get month format options
-            if dateFormat.match /MMMM/
-                format.MMMM = "#{@months[date.getMonth()]}" # long month name
-            else if dateFormat.match /MMM/
-                format.MMM = "#{@shortMonths[date.getMonth()]}" # short month name
-            else if dateFormat.match /MM/
-                format.MM = if date.getMonth().toString().length is 1 then "0#{date.getMonth().toString()}" else date.getMonth() # two digit month
-            else if dateFormat.match /M/
-                format.M = date.getMonth() # one digit month
-
-            # get date format options        
-            if dateFormat.match /DD/    
-                format.DD = if date.getDate().toString().length is 1 then "0#{date.getDate().toString()}" else date.getDate() # two digit date
-            else if dateFormat.match /D/
-                format.D = date.getDate() # one digit date
-
-            # get year format options        
-            if dateFormat.match /yyyy/
-                format.yyyy = date.getFullYear() # four digit year
-            else if dateFormat.match /yy/
-                format.yy = date.getFullYear().toString().slice -2 # two digit year
-
-            # get hour format options       
-            if dateFormat.match /hh/   
-                format.hh =  if _getHours(date).length is 1 then "0#{_getHours(date)}" else _getHours(date) # two digit hours
-            else if dateFormat.match /h/
-                format.h = _getHours(date) # one digit hours
-            else if dateFormat.match /HH/
-                format.HH = if date.getHours().toString().length is 1 then "0#{date.getHours().toString()}" else date.getHours() # two digit 24hr format
-            else if dateFormat.match /H/
-                format.H = date.getHours() # one digit 24hr format
-
-            # get minute format options
-            if dateFormat.match /mm/
-                format.mm = if date.getMinutes().toString().length is 1 then "0#{date.getMinutes().toString()}" else date.getMinutes() # two digit minutes
-            else if dateFormat.match /m/
-                format.m = date.getMinutes() # one digit minutes
-
-            # get second format options        
-            if dateFormat.match /ss/
-                format.ss = if date.getSeconds().toString().length is 1 then "0#{date.getSeconds().toString()}" else date.getSeconds().toString() # two digit seconds
-            else if dateFormat.match /s/
-                format.s = date.getSeconds() # one digit seconds            
-
-            # get ampm format options        
-            if dateFormat.match /a/
-                format.a = if date.getHours() >= 12 then 'pm' else 'am' # ampm
-            else if dateFormat.match /A/
-                format.A = if date.getHours() >= 12 then 'PM' else 'AM' # AMPM
-            
+        if dateFormat?            
             # parse dateFormat string and replace tokens with date information
-            $.each format, (key) ->
+            tokens = []
+            tmpFormat = dateFormat
+            $.each formatTokens, (key) ->
                 tmp = new RegExp "#{key}"
-                dateFormat = dateFormat.replace tmp, "{{#{key}}}"
-                return dateFormat
+                if tmpFormat.search(tmp) isnt -1
+                    tokens.push key
+                tmpFormat = tmpFormat.replace tmp, ''
+                return tokens
 
+            $.each tokens, (key, value) ->
+                tmp = new RegExp "#{value}"
+                dateFormat = dateFormat.replace tmp, "{{#{value}}}"
+                return dateFormat
+            
             # render template
             prettyDate = dateFormat
-            $.each format, (key, value) ->
+            $.each formatTokens, (key, value) ->
                 re = new RegExp "{{#{key}}}"
-                prettyDate = prettyDate.replace re, value
+                str = value(date)
+                prettyDate = prettyDate.replace re, str
                 return prettyDate
 
             return prettyDate
@@ -385,14 +399,12 @@ class @DrmTimeStamps
         # always rounds to a whole number ex. 1.5 months is 1 months
         # will return the largest unit of time. ex. 1 week instead of 8 days, 58 minutes instead of 1 hour
         # months do not account for variations in length
-        
-        duration = {}
+        self = @
+        now = new Date()
 
-        _getYearsToDays = (years) ->
-            return (years * 146097) / 400
-
-        _getDaysToYears = (days) ->
-            return (days * 400) / 146097
+        dateUtilities =
+            getYearsToDays: (years) -> return (years * 146097) / 400
+            getDaysToYears: (days) -> return (days * 400) / 146097
 
         factors =
             ms: 1
@@ -404,127 +416,122 @@ class @DrmTimeStamps
             months: 2592e6
             years: 31556952e3
 
-        now = new Date()
+        conversionUtilities =
+            convertMsToSeconds: (ms) -> return ms/factors.seconds
+            convertMsToMinutes: (ms) -> return ms/factors.minutes
+            convertMsToHours: (ms) -> return ms/factors.hours
+            convertMsToDays: (ms) -> return ms/factors.days
+            convertMsToWeeks: (ms) -> return ms/factors.weeks
+            convertMsToMonths: (ms) -> return ms/factors.months
+            convertMsToYears: (ms) ->
+                _days = @convertMsToDays ms
+                _days = if (ms/factors.days) >= 0 then Math.floor(ms/factors.days) else Math.ceil(ms/factors.days)
+                
+                return dateUtilities.getDaysToYears _days
 
-        _convertMsToSeconds = (ms) -> return ms/factors.seconds
+        durationUtilities =
+            getMsDuration: (now, date) -> return (now.getTime() - date.getTime()) / factors.ms
 
-        _convertMsToMinutes = (ms) -> return ms/factors.minutes
+            getSecondsDuration: (now, date) ->
+                _ms = @getMsDuration now, date
+                _seconds = conversionUtilities.convertMsToSeconds _ms
 
-        _convertMsToHours = (ms) -> return ms/factors.hours
+                return if _seconds >= 0 then Math.floor _seconds else Math.ceil _seconds
 
-        _convertMsToDays = (ms) -> return ms/factors.days
+            getMinutesDuration: (now, date) ->
+                _ms = @getMsDuration now, date
+                _minutes = conversionUtilities.convertMsToMinutes _ms
 
-        _convertMsToWeeks = (ms) -> return ms/factors.weeks
+                return if _minutes >= 0 then Math.floor _minutes else Math.ceil _minutes
 
-        _convertMsToMonths = (ms) -> return ms/factors.months
+            getHoursDuration: (now, date) ->
+                _ms = @getMsDuration now, date
+                _hours = conversionUtilities.convertMsToHours _ms
 
-        _convertMsToYears = (ms) ->
-            _days = _convertMsToDays ms
-            _days = if (ms/factors.days) >= 0 then Math.floor(ms/factors.days) else Math.ceil(ms/factors.days)
-            
-            return _getDaysToYears _days
+                return if _hours >= 0 then Math.floor _hours else Math.ceil _hours
 
-        _getMsDuration = (now, date) -> return (now.getTime() - date.getTime()) / factors.ms
+            getDaysDuration: (now, date) ->
+                _ms = @getMsDuration now, date
+                _days = conversionUtilities.convertMsToDays _ms
 
-        _getSecondsDuration = (now, date) ->
-            _ms = _getMsDuration now, date
-            _seconds = _convertMsToSeconds _ms
+                return if _days >= 0 then Math.floor _days else Math.ceil _days
 
-            return if _seconds >= 0 then Math.floor _seconds else Math.ceil _seconds
+            getWeeksDuration: (now, date) ->
+                _ms = @getMsDuration now, date
+                _weeks = conversionUtilities.convertMsToWeeks _ms
 
-        _getMinutesDuration = (now, date) ->
-            _ms = _getMsDuration now, date
-            _minutes = _convertMsToMinutes _ms
+                return if _weeks >= 0 then Math.floor _weeks else Math.ceil _weeks
 
-            return if _minutes >= 0 then Math.floor _minutes else Math.ceil _minutes
+            getMonthsDuration: (now, date) ->
+                _ms = @getMsDuration now, date
+                _months = conversionUtilities.convertMsToMonths _ms
+                
+                if Math.abs(_months) >= 1
+                    # round months up to account for number of weeks estimated weirdness
+                    return if _months >= 0 then Math.ceil(_months) else Math.floor(_months)
+                else
+                    return 0
 
-        _getHoursDuration = (now, date) ->
-            _ms = _getMsDuration now, date
-            _hours = _convertMsToHours _ms
+            getYearsDuration: (now, date) ->
+                _ms = @getMsDuration now, date            
+                _years =  conversionUtilities.convertMsToYears _ms
+                
+                return if _years >= 0 then Math.floor _years else Math.ceil _years
 
-            return if _hours >= 0 then Math.floor _hours else Math.ceil _hours
+        remainderUtilities =
+            getLeftOverSeconds: (now, date) ->
+                _ms = durationUtilities.getMsDuration now, date
+                _seconds = conversionUtilities.convertMsToSeconds(_ms % factors.minutes)
 
-        _getDaysDuration = (now, date) ->
-            _ms = _getMsDuration now, date
-            _days = _convertMsToDays _ms
+                return if _seconds >= 0 then Math.floor _seconds else Math.ceil _seconds
 
-            return if _days >= 0 then Math.floor _days else Math.ceil _days
+            getLeftOverMinutes: (now, date) ->
+                _ms = durationUtilities.getMsDuration now, date
+                _minutes = conversionUtilities.convertMsToMinutes(_ms % factors.hours)
 
-        _getWeeksDuration = (now, date) ->
-            _ms = _getMsDuration now, date
-            _weeks = _convertMsToWeeks _ms
+                return if _minutes >= 0 then Math.floor _minutes else Math.ceil _minutes
 
-            return if _weeks >= 0 then Math.floor _weeks else Math.ceil _weeks
+            getLeftOverHours: (now, date) ->
+                _ms = durationUtilities.getMsDuration now, date
+                _hours = conversionUtilities.convertMsToHours(_ms % factors.days)
 
-        _getMonthsDuration = (now, date) ->
-            _ms = _getMsDuration now, date
-            _months = _convertMsToMonths _ms
-            
-            if Math.abs(_months) >= 1
-                # round months up to account for number of weeks estimated weirdness
-                return if _months >= 0 then Math.ceil(_months) else Math.floor(_months)
-            else
-                return 0
+                # doesn't work correctly for some durationUtilities
+                return if _hours >= 0 then Math.floor _hours else Math.ceil _hours
 
-        _getYearsDuration = (now, date) ->
-            _ms = _getMsDuration now, date            
-            _years =  _convertMsToYears _ms
-            
-            return if _years >= 0 then Math.floor _years else Math.ceil _years
+            getLeftOverDays: (now, date) ->
+                _ms = durationUtilities.getMsDuration now, date
+                _days = conversionUtilities.convertMsToDays(_ms % factors.weeks)
 
-        _getLeftOverSeconds = (now, date) ->
-            _ms = _getMsDuration now, date
-            _seconds = _convertMsToSeconds(_ms % factors.minutes)
+                return if _days >= 0 then Math.floor _days else Math.ceil _days
 
-            return if _seconds >= 0 then Math.floor _seconds else Math.ceil _seconds
+            getLeftOverDaysInYear: (now, date) ->
+                _days = durationUtilities.getDaysDuration now, date
+                _years = durationUtilities.getYearsDuration now, date
 
-        _getLeftOverMinutes = (now, date) ->
-            _ms = _getMsDuration now, date
-            _minutes = _convertMsToMinutes(_ms % factors.hours)
+                if self.isLeapYear(date.getFullYear()) then _days = _days + 1
+                
+                _days = _days - dateUtilities.getYearsToDays(_years)
+                
+                return if _days >= 0 then Math.floor _days else Math.ceil _days
 
-            return if _minutes >= 0 then Math.floor _minutes else Math.ceil _minutes
+        return {
+            ms: durationUtilities.getMsDuration now, date
+            seconds: durationUtilities.getSecondsDuration now, date
+            minutes: durationUtilities.getMinutesDuration now, date
+            hours: durationUtilities.getHoursDuration now, date
+            days: durationUtilities.getDaysDuration now, date
+            weeks: durationUtilities.getWeeksDuration now, date
+            months: durationUtilities.getMonthsDuration now, date
+            years: durationUtilities.getYearsDuration now, date
+            leftOverSeconds: remainderUtilities.getLeftOverSeconds now, date        
+            leftOverMinutes: remainderUtilities.getLeftOverMinutes now, date        
+            leftOverHours: remainderUtilities.getLeftOverHours now, date
+            leftOverDays: remainderUtilities.getLeftOverDays now, date
+            leftOverDaysInYear: remainderUtilities.getLeftOverDaysInYear now, date
+        }
 
-        _getLeftOverHours = (now, date) ->
-            _ms = _getMsDuration now, date
-            _hours = _convertMsToHours(_ms % factors.days)
 
-            # doesn't work correctly for some durations
-            return if _hours >= 0 then Math.floor _hours else Math.ceil _hours
-
-        _getLeftOverDays = (now, date) ->
-            _ms = _getMsDuration now, date
-            _days = _convertMsToDays(_ms % factors.weeks)
-
-            return if _days >= 0 then Math.floor _days else Math.ceil _days
-
-        _getLeftOverDaysInYear = (now, date) =>
-            _days = _getDaysDuration now, date
-            _years = _getYearsDuration now, date
-
-            if @isLeapYear(date.getFullYear()) then _days = _days + 1
-
-            if (_days - _getYearsToDays(_years)) >= 0
-                return Math.floor(_days - _getYearsToDays(_years))
-            else
-                return Math.ceil(_days - _getYearsToDays(_years))
-
-        duration.ms = _getMsDuration now, date
-        duration.seconds = _getSecondsDuration now, date
-        duration.minutes = _getMinutesDuration now, date
-        duration.hours = _getHoursDuration now, date
-        duration.days = _getDaysDuration now, date
-        duration.weeks = _getWeeksDuration now, date
-        duration.months = _getMonthsDuration now, date
-        duration.years = _getYearsDuration now, date
-        duration.leftOverSeconds = _getLeftOverSeconds now, date        
-        duration.leftOverMinutes = _getLeftOverMinutes now, date        
-        duration.leftOverHours = _getLeftOverHours now, date
-        duration.leftOverDays = _getLeftOverDays now, date
-        duration.leftOverDaysInYear = _getLeftOverDaysInYear now, date
-
-        duration
-
-    formatDuration: (duration) ->
+    formatDuration: (duration, precision = 'seconds') ->
         if Math.abs(duration.years) >= 1
             if duration.years >= 0
                 return "#{duration.years} years,
