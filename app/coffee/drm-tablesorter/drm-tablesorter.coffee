@@ -7,8 +7,13 @@ $ = jQuery
 class @DrmTableSorter
     constructor: (@tableClass = 'drm-sortable-table') ->
         self = @
-        self.table = $ ".#{@tableClass}"
-        self.buttonClass = 'drm-sortable-table-button'
+        @table = $ ".#{@tableClass}"
+        @buttonClass = 'drm-sortable-table-button'
+        @ignoreWords = [
+            'a'
+            'the'
+        ]
+
 
         self.table.on 'click', ".#{@buttonClass}", ->
             _that = $ @
@@ -22,6 +27,8 @@ class @DrmTableSorter
         _row.find('.drm-sortable-table-button.active').removeClass 'active'
         _that.addClass 'active'
 
+        return
+
     getData: (columnNum) =>
         values = []
         _rows = @table.find 'tbody tr'
@@ -30,7 +37,7 @@ class @DrmTableSorter
             text = $.trim $(value).find('td').eq(columnNum).text()
             if text.length > 0 then values.push text
 
-        values
+        return values
 
     sortRows: (direction, columnNum) =>
         self = @
@@ -49,16 +56,16 @@ class @DrmTableSorter
             _values = self.getData columnNum
 
             _isDate = (value) ->
-                if _patterns.monthDayYear.test(value) then true else false
+                return if _patterns.monthDayYear.test(value) then true else false
 
             _isNumber = (value) ->
-                if _patterns.number.test(value) then true else false
+                return if _patterns.number.test(value) then true else false
 
             _isAlpha = (value) ->
-                if _patterns.alpha.test(value) then true else false
+                return if _patterns.alpha.test(value) then true else false
 
             _isTime = (value) ->
-                if _patterns.time.test(value) then true else false
+                return if _patterns.time.test(value) then true else false
 
             $.each _values, (key, value) ->
                 if _isDate.call self, value
@@ -72,9 +79,10 @@ class @DrmTableSorter
                 else
                     types.push null
 
-            if $.inArray('alpha', types) isnt -1 then 'alpha' else types[0]
+            return if $.inArray('alpha', types) isnt -1 then 'alpha' else types[0]
 
         type = _getDataType columnNum
+        
         if !type
             null
 
@@ -82,14 +90,14 @@ class @DrmTableSorter
             _sortAsc = (a, b) ->
                 _a = new Date _patterns.monthDayYear.exec($.trim($(a).find('td').eq(columnNum).text()))
                 _b = new Date _patterns.monthDayYear.exec($.trim($(b).find('td').eq(columnNum).text()))
-                _a - _b
+                return _a - _b
 
             _sortDesc = (a, b) ->
                 _a = new Date _patterns.monthDayYear.exec($.trim($(a).find('td').eq(columnNum).text()))
                 _b = new Date _patterns.monthDayYear.exec($.trim($(b).find('td').eq(columnNum).text()))
-                _b - _a
+                return _b - _a
 
-            if direction is 'ascending' then _rows.sort _sortAsc else _rows.sort _sortDesc
+            return if direction is 'ascending' then _rows.sort _sortAsc else _rows.sort _sortDesc
 
         else if type is 'time'
             _parseTime = (time) ->
@@ -105,27 +113,32 @@ class @DrmTableSorter
                     else if _hour.length is 1
                         _hour = "0#{_hour}"
                         
-                    "#{_hour}:#{_minutes}"
+                    return "#{_hour}:#{_minutes}"
 
                 else if _ampm is 'pm'
-                    "#{_hour + 12}:#{_minutes}"
+                    return "#{_hour + 12}:#{_minutes}"
 
             _sortAsc = (a, b) ->
                 _a = _parseTime _patterns.time.exec($.trim($(a).find('td').eq(columnNum).text()))
                 _b = _parseTime _patterns.time.exec($.trim($(b).find('td').eq(columnNum).text()))
-                new Date("04-22-2014 #{_a}") - new Date("04-22-2014 #{_b}")
+                return new Date("04-22-2014 #{_a}") - new Date("04-22-2014 #{_b}")
 
             _sortDesc = (a, b) ->
                 _a = _parseTime _patterns.time.exec($.trim($(a).find('td').eq(columnNum).text()))
                 _b = _parseTime _patterns.time.exec($.trim($(b).find('td').eq(columnNum).text()))
-                new Date("04-22-2014 #{_b}") - new Date("04-22-2014 #{_a}")
+                return new Date("04-22-2014 #{_b}") - new Date("04-22-2014 #{_a}")
 
-            if direction is 'ascending' then _rows.sort _sortAsc else _rows.sort _sortDesc
+            return if direction is 'ascending' then _rows.sort _sortAsc else _rows.sort _sortDesc
 
         else if type is 'alpha'
-            _cleanAlpha = (value) ->
+            _cleanAlpha = (str) =>
                 # removes leading 'the' or 'a'
-                value.replace(/^the /i, '').replace /^a /i, ''
+                $.each @ignoreWords, ->
+                    re = new RegExp "^#{@}\\s", 'i'
+                    str = str.replace re, ''
+                    return str
+
+                return str
 
             _sortAsc = (a, b) ->
                 # use clean alpha to remove leading 'the' or 'a' then convert to lowercase for case insensitive sort
@@ -133,11 +146,11 @@ class @DrmTableSorter
                 _b = _cleanAlpha($.trim($(b).find('td').eq(columnNum).text())).toLowerCase()
 
                 if _a < _b
-                    -1
+                    return -1
                 else if _a > _b
-                    1
+                    return 1
                 else if _a is _b
-                    0
+                    return 0
 
             _sortDesc = (a, b) ->
                 # use clean alpha to remove leading 'the' or 'a' then convert to lowercase for case insensitive sort
@@ -145,22 +158,22 @@ class @DrmTableSorter
                 _b = _cleanAlpha($.trim($(b).find('td').eq(columnNum).text())).toLowerCase()
 
                 if _a < _b
-                    1
+                    return 1
                 else if _a > _b
-                    -1
+                    return -1
                 else if _a is _b
-                    0
+                    return 0
 
             if direction is 'ascending' then _rows.sort _sortAsc else _rows.sort _sortDesc
 
         else if type is 'number'
             _sortAsc = (a, b) ->
-                parseFloat($.trim($(a).find('td').eq(columnNum).text())) - parseFloat($.trim($(b).find('td').eq(columnNum).text()))
+                return parseFloat($.trim($(a).find('td').eq(columnNum).text())) - parseFloat($.trim($(b).find('td').eq(columnNum).text()))
 
             _sortDesc = (a, b) ->
-                parseFloat($.trim($(b).find('td').eq(columnNum).text())) - parseFloat($.trim($(a).find('td').eq(columnNum).text()))
+                return parseFloat($.trim($(b).find('td').eq(columnNum).text())) - parseFloat($.trim($(a).find('td').eq(columnNum).text()))
 
-            if direction is 'ascending' then _rows.sort _sortAsc else _rows.sort _sortDesc
+            return if direction is 'ascending' then _rows.sort _sortAsc else _rows.sort _sortDesc
 
     renderTable: (direction, columnNum) =>
         _sortedRows = @sortRows direction, columnNum

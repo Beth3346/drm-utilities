@@ -4,11 +4,15 @@
 "use strict"
 
 $ = jQuery
-# all items should be the same data type
+# all items in the list should be the same data type
 
 class @DrmSort
     constructor: (@lists = $('.drm-sortable'), @autoSort = yes) ->
         self = @
+        @ignoreWords = [
+            'a'
+            'the'
+        ]
 
         if self.autoSort
             $.each self.lists,  ->
@@ -33,10 +37,9 @@ class @DrmSort
             _that = $ @
             values.push $.trim(_that.text())
 
-        values
+        return values
 
     sortValues: (values, direction) =>
-        self = @
         _patterns =
             number: new RegExp "^(?:\\-?\\d+|\\d*)(?:\\.?\\d+|\\d)"
             alpha: new RegExp '^[a-z ,.\\-]*','i'
@@ -45,7 +48,8 @@ class @DrmSort
             # 00:00pm
             time: new RegExp '^(?:[12][012]|[0]?[0-9]):[012345][0-9](?:am|pm)', 'i'
 
-        _getDataType = (values) ->
+        _getDataType = (values) =>
+            self = @
             types = []
 
             _isDate = (value) ->
@@ -72,12 +76,12 @@ class @DrmSort
                 else
                     types.push null
 
-            if $.inArray('alpha', types) isnt -1 then 'alpha' else types[0]
+            return if $.inArray('alpha', types) isnt -1 then 'alpha' else types[0]
 
         type = _getDataType values
 
         if !type
-            null
+            return null
 
         else if type is 'date'
             _sortAsc = (a, b) ->
@@ -90,7 +94,7 @@ class @DrmSort
                 _b = new Date _patterns.monthDayYear.exec(b)
                 return _b - _a
 
-            if direction is 'ascending' then values.sort _sortAsc else values.sort _sortDesc    
+            return if direction is 'ascending' then values.sort _sortAsc else values.sort _sortDesc    
 
         else if type is 'time'
             _parseTime = (time) ->
@@ -114,19 +118,26 @@ class @DrmSort
             _sortAsc = (a, b) ->
                 _a = _parseTime _patterns.time.exec(a)
                 _b = _parseTime _patterns.time.exec(b)
+                
                 return new Date("04-22-2014 #{_a}") - new Date("04-22-2014 #{_b}")
 
             _sortDesc = (a, b) ->
                 _a = _parseTime _patterns.time.exec(a)
                 _b = _parseTime _patterns.time.exec(b)
+                
                 return new Date("04-22-2014 #{_b}") - new Date("04-22-2014 #{_a}")
 
-            if direction is 'ascending' then values.sort _sortAsc else values.sort _sortDesc
+            return if direction is 'ascending' then values.sort _sortAsc else values.sort _sortDesc
 
         else if type is 'alpha'
-            _cleanAlpha = (value) ->
+            _cleanAlpha = (str) =>
                 # removes leading 'the' or 'a'
-                value.replace(/^the /i, '').replace /^a /i, ''
+                $.each @ignoreWords, ->
+                    re = new RegExp "^#{@}\\s", 'i'
+                    str = str.replace re, ''
+                    return str
+
+                return str
 
             _sortAsc = (a, b) ->
                 # use clean alpha to remove leading 'the' or 'a' then convert to lowercase for case insensitive sort
@@ -152,7 +163,7 @@ class @DrmSort
                 else if _a is _b
                     return 0
 
-            if direction is 'ascending' then values.sort _sortAsc else values.sort _sortDesc
+            return if direction is 'ascending' then values.sort _sortAsc else values.sort _sortDesc
 
         else if type is 'number'
             _sortAsc = (a, b) ->
@@ -161,7 +172,7 @@ class @DrmSort
             _sortDesc = (a, b) ->
                 return parseFloat(b) - parseFloat(a)
 
-            if direction is 'ascending' then values.sort _sortAsc else values.sort _sortDesc
+            return if direction is 'ascending' then values.sort _sortAsc else values.sort _sortDesc
 
     renderSort: (values, direction, list) =>
         values = @sortValues values, direction
@@ -172,5 +183,7 @@ class @DrmSort
                 listHtml += "<li>#{value}</li>"
 
             list.html listHtml
+
+        return
 
 new DrmSort()
