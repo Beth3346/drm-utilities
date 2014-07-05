@@ -14,7 +14,6 @@ class @DrmTableSorter
             'the'
         ]
 
-
         self.table.on 'click', ".#{@buttonClass}", ->
             _that = $ @
             columnNum = _that.closest('th').index()

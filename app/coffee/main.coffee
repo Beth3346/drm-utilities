@@ -18,8 +18,6 @@ $ ->
     drmAlert.showAlert 'muted', 'A muted alert that will probably be ignored', $('.drm-alert-holder')
     drmAlert.showAlert 'custom', 'This is a custom alert', $('.drm-alert-holder')
 
-    calendarSort = new DrmSort $('.drm-events'), no
-
     drmCalendar = new DrmCalendar()
     drmCalendar.createEvent
         name: "Rabbit Rabbit Day"
@@ -80,5 +78,9 @@ $ ->
         eventDate: 4
         recurrance: "none"
         note: "do this once"
+
+    new DrmSort $('.drm-events'), yes
     
     # prettyPrint()
+
+    return

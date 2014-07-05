@@ -15,7 +15,7 @@ class @DrmSort
         ]
 
         if self.autoSort
-            $.each self.lists,  ->
+            $.each @lists,  ->
                 _that = $ @
                 values = self.getValues _that
                 self.renderSort values, 'ascending', _that
@@ -39,7 +39,8 @@ class @DrmSort
 
         return values
 
-    sortValues: (values, direction) =>
+    sortValues: (values, direction, list) =>
+        _listItems = list.find 'li'
         _patterns =
             number: new RegExp "^(?:\\-?\\d+|\\d*)(?:\\.?\\d+|\\d)"
             alpha: new RegExp '^[a-z ,.\\-]*','i'
@@ -85,16 +86,16 @@ class @DrmSort
 
         else if type is 'date'
             _sortAsc = (a, b) ->
-                _a = new Date _patterns.monthDayYear.exec(a)
-                _b = new Date _patterns.monthDayYear.exec(b)
+                _a = new Date _patterns.monthDayYear.exec($.trim($(a).text()))
+                _b = new Date _patterns.monthDayYear.exec($.trim($(b).text()))
                 return _a - _b
 
             _sortDesc = (a, b) ->
-                _a = new Date _patterns.monthDayYear.exec(a)
-                _b = new Date _patterns.monthDayYear.exec(b)
+                _a = new Date _patterns.monthDayYear.exec($.trim($(a).text()))
+                _b = new Date _patterns.monthDayYear.exec($.trim($(b).text()))
                 return _b - _a
 
-            return if direction is 'ascending' then values.sort _sortAsc else values.sort _sortDesc    
+            return if direction is 'ascending' then _listItems.sort _sortAsc else _listItems.sort _sortDesc    
 
         else if type is 'time'
             _parseTime = (time) ->
@@ -116,18 +117,18 @@ class @DrmSort
                     return "#{_hour + 12}:#{_minutes}"
 
             _sortAsc = (a, b) ->
-                _a = _parseTime _patterns.time.exec(a)
-                _b = _parseTime _patterns.time.exec(b)
+                _a = _parseTime _patterns.time.exec($.trim($(a).text()))
+                _b = _parseTime _patterns.time.exec($.trim($(b).text()))
                 
                 return new Date("04-22-2014 #{_a}") - new Date("04-22-2014 #{_b}")
 
             _sortDesc = (a, b) ->
-                _a = _parseTime _patterns.time.exec(a)
-                _b = _parseTime _patterns.time.exec(b)
+                _a = _parseTime _patterns.time.exec($.trim($(a).text()))
+                _b = _parseTime _patterns.time.exec($.trim($(b).text()))
                 
                 return new Date("04-22-2014 #{_b}") - new Date("04-22-2014 #{_a}")
 
-            return if direction is 'ascending' then values.sort _sortAsc else values.sort _sortDesc
+            return if direction is 'ascending' then _listItems.sort _sortAsc else _listItems.sort _sortDesc
 
         else if type is 'alpha'
             _cleanAlpha = (str) =>
@@ -141,8 +142,8 @@ class @DrmSort
 
             _sortAsc = (a, b) ->
                 # use clean alpha to remove leading 'the' or 'a' then convert to lowercase for case insensitive sort
-                _a = _cleanAlpha(a).toLowerCase()
-                _b = _cleanAlpha(b).toLowerCase()
+                _a = _cleanAlpha($.trim($(a).text())).toLowerCase()
+                _b = _cleanAlpha($.trim($(b).text())).toLowerCase()
 
                 if _a < _b
                     return -1
@@ -153,8 +154,8 @@ class @DrmSort
 
             _sortDesc = (a, b) ->
                 # use clean alpha to remove leading 'the' or 'a' then convert to lowercase for case insensitive sort
-                _a = _cleanAlpha(a).toLowerCase()
-                _b = _cleanAlpha(b).toLowerCase()
+                _a = _cleanAlpha($.trim($(a).text())).toLowerCase()
+                _b = _cleanAlpha($.trim($(b).text())).toLowerCase()
 
                 if _a < _b
                     return 1
@@ -163,27 +164,23 @@ class @DrmSort
                 else if _a is _b
                     return 0
 
-            return if direction is 'ascending' then values.sort _sortAsc else values.sort _sortDesc
+            return if direction is 'ascending' then _listItems.sort _sortAsc else _listItems.sort _sortDesc
 
         else if type is 'number'
             _sortAsc = (a, b) ->
-                return parseFloat(a) - parseFloat(b)
+                return parseFloat($.trim($(a).text())) - parseFloat($.trim($(b).text()))
 
             _sortDesc = (a, b) ->
-                return parseFloat(b) - parseFloat(a)
+                return parseFloat($.trim($(b).text())) - parseFloat($.trim($(a).text()))
 
-            return if direction is 'ascending' then values.sort _sortAsc else values.sort _sortDesc
+            return if direction is 'ascending' then _listItems.sort _sortAsc else _listItems.sort _sortDesc
 
     renderSort: (values, direction, list) =>
-        values = @sortValues values, direction
-        listHtml = ''
+        _sortedList = @sortValues values, direction, list
+        list.empty()
 
-        if values?
-            $.each values, (key, value) ->
-                listHtml += "<li>#{value}</li>"
-
-            list.html listHtml
-
-        return
+        if _sortedList?
+            $.each _sortedList, ->
+                list.append @
 
 new DrmSort()

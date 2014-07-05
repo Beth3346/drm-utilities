@@ -7,6 +7,7 @@
 "use strict"
 
 $ = jQuery
+
 class @DrmCalendar
     constructor: (@calendarClass = 'drm-calendar', @view = 'month', @addHolidays = yes) ->
         self = @
