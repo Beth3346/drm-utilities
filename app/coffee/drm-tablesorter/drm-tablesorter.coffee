@@ -5,26 +5,21 @@
 
 $ = jQuery
 class @DrmTableSorter
-    constructor: (@tableClass = 'drm-sortable-table') ->
+    constructor: (@tableClass = 'drm-sortable-table', @activeClass = 'active', @ignoreWords = ['a','the']) ->
         self = @
         @table = $ ".#{@tableClass}"
         @buttonClass = 'drm-sortable-table-button'
-        @ignoreWords = [
-            'a'
-            'the'
-        ]
 
         self.table.on 'click', ".#{@buttonClass}", ->
             _that = $ @
             columnNum = _that.closest('th').index()
-            self.addActiveClass.call @
+            self.toggleActiveClass.call @, self.activeClass
             self.renderTable _that.data('dir'), columnNum
 
-    addActiveClass: ->
+    toggleActiveClass: (className) ->
         _that = $ @
-        _row = _that.closest 'tr'
-        _row.find('.drm-sortable-table-button.active').removeClass 'active'
-        _that.addClass 'active'
+        _that.closest('tr').find(".#{className}").removeClass className
+        _that.addClass className
 
         return
 

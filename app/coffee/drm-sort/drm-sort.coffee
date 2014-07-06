@@ -5,6 +5,7 @@
 
 $ = jQuery
 # all items in the list should be the same data type
+# need to update sort methods for lists that contain more than one data type eg. dates and alpha for DrmCalendar
 
 class @DrmSort
     constructor: (@lists = $('.drm-sortable'), @autoSort = yes) ->
@@ -39,7 +40,7 @@ class @DrmSort
 
         return values
 
-    sortValues: (values, direction, list) =>
+    sortList: (values, direction, list) =>
         _listItems = list.find 'li'
         _patterns =
             number: new RegExp "^(?:\\-?\\d+|\\d*)(?:\\.?\\d+|\\d)"
@@ -77,27 +78,31 @@ class @DrmSort
                 else
                     types.push null
 
-            return if $.inArray('alpha', types) isnt -1 then 'alpha' else types[0]
+            return $.unique(types)
 
-        type = _getDataType values
+            # if $.inArray('time', types) isnt -1
+            #     return 'time'
+            # else if $.inArray('alpha', types) isnt -1
+            #     return 'alpha'
+            # else
+            #     return types[0]
 
-        if !type
-            return null
-
-        else if type is 'date'
+        _sortDate = ->
             _sortAsc = (a, b) ->
-                _a = new Date _patterns.monthDayYear.exec($.trim($(a).text()))
-                _b = new Date _patterns.monthDayYear.exec($.trim($(b).text()))
-                return _a - _b
+                if _patterns.monthDayYear.test($.trim($(a).text())) and _patterns.monthDayYear.test($.trim($(b).text()))
+                    _a = new Date _patterns.monthDayYear.exec($.trim($(a).text()))
+                    _b = new Date _patterns.monthDayYear.exec($.trim($(b).text()))
+                    return _a - _b
 
             _sortDesc = (a, b) ->
-                _a = new Date _patterns.monthDayYear.exec($.trim($(a).text()))
-                _b = new Date _patterns.monthDayYear.exec($.trim($(b).text()))
-                return _b - _a
+                if _patterns.monthDayYear.test($.trim($(a).text())) and _patterns.monthDayYear.test($.trim($(b).text()))
+                    _a = new Date _patterns.monthDayYear.exec($.trim($(a).text()))
+                    _b = new Date _patterns.monthDayYear.exec($.trim($(b).text()))
+                    return _b - _a
 
-            return if direction is 'ascending' then _listItems.sort _sortAsc else _listItems.sort _sortDesc    
+            return if direction is 'ascending' then _listItems.sort _sortAsc else _listItems.sort _sortDesc  
 
-        else if type is 'time'
+        _sortTime = ->
             _parseTime = (time) ->
                 _hour = parseInt(/^(\d+)/.exec(time)[1], 10)
                 _minutes = /:(\d+)/.exec(time)[1]
@@ -117,20 +122,22 @@ class @DrmSort
                     return "#{_hour + 12}:#{_minutes}"
 
             _sortAsc = (a, b) ->
-                _a = _parseTime _patterns.time.exec($.trim($(a).text()))
-                _b = _parseTime _patterns.time.exec($.trim($(b).text()))
+                if _patterns.time.test($.trim($(a).text())) and _patterns.time.test($.trim($(b).text()))
+                    _a = _parseTime _patterns.time.exec($.trim($(a).text()))
+                    _b = _parseTime _patterns.time.exec($.trim($(b).text()))
                 
-                return new Date("04-22-2014 #{_a}") - new Date("04-22-2014 #{_b}")
+                    return new Date("04-22-2014 #{_a}") - new Date("04-22-2014 #{_b}")
 
             _sortDesc = (a, b) ->
-                _a = _parseTime _patterns.time.exec($.trim($(a).text()))
-                _b = _parseTime _patterns.time.exec($.trim($(b).text()))
+                if _patterns.time.test($.trim($(a).text())) and _patterns.time.test($.trim($(b).text()))
+                    _a = _parseTime _patterns.time.exec($.trim($(a).text()))
+                    _b = _parseTime _patterns.time.exec($.trim($(b).text()))
                 
-                return new Date("04-22-2014 #{_b}") - new Date("04-22-2014 #{_a}")
+                    return new Date("04-22-2014 #{_b}") - new Date("04-22-2014 #{_a}")
 
             return if direction is 'ascending' then _listItems.sort _sortAsc else _listItems.sort _sortDesc
 
-        else if type is 'alpha'
+        _sortAlpha = =>
             _cleanAlpha = (str) =>
                 # removes leading 'the' or 'a'
                 $.each @ignoreWords, ->
@@ -166,7 +173,7 @@ class @DrmSort
 
             return if direction is 'ascending' then _listItems.sort _sortAsc else _listItems.sort _sortDesc
 
-        else if type is 'number'
+        _sortNumber = ->
             _sortAsc = (a, b) ->
                 return parseFloat($.trim($(a).text())) - parseFloat($.trim($(b).text()))
 
@@ -175,11 +182,22 @@ class @DrmSort
 
             return if direction is 'ascending' then _listItems.sort _sortAsc else _listItems.sort _sortDesc
 
+        types = _getDataType values
+
+        # if types.length is 1
+        type = types[0]
+        switch type
+            when null then return null
+            when 'date' then return _sortDate()
+            when 'time' then return _sortTime()
+            when 'alpha' then return _sortAlpha()
+            when 'number' then return _sortNumber()
+
     renderSort: (values, direction, list) =>
-        _sortedList = @sortValues values, direction, list
-        list.empty()
+        _sortedList = @sortList values, direction, list
 
         if _sortedList?
+            list.empty()
             $.each _sortedList, ->
                 list.append @
 
