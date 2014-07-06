@@ -50,148 +50,148 @@ class @DrmSort
             # 00:00pm
             time: new RegExp '^(?:[12][012]|[0]?[0-9]):[012345][0-9](?:am|pm)', 'i'
 
+        dataTypeChecks =
+            isDate: (value) -> return if _patterns.monthDayYear.test(value) then true else false
+            isNumber: (value) -> return if _patterns.number.test(value) then true else false
+            isAlpha: (value) -> return if _patterns.alpha.test(value) then true else false
+            isTime: (value) -> return if _patterns.time.test(value) then true else false
+        
         _getDataType = (values) =>
             self = @
             types = []
 
-            _isDate = (value) ->
-                return if _patterns.monthDayYear.test(value) then true else false
-
-            _isNumber = (value) ->
-                return if _patterns.number.test(value) then true else false
-
-            _isAlpha = (value) ->
-                return if _patterns.alpha.test(value) then true else false
-
-            _isTime = (value) ->
-                return if _patterns.time.test(value) then true else false
-
             $.each values, ->
-                if _isDate.call self, @
+                if dataTypeChecks.isDate.call self, @
                     types.push 'date'
-                else if _isTime.call self, @
+                else if dataTypeChecks.isTime.call self, @
                     types.push 'time'
-                else if _isNumber.call self, @
+                else if dataTypeChecks.isNumber.call self, @
                     types.push 'number'
-                else if _isAlpha.call self, @
+                else if dataTypeChecks.isAlpha.call self, @
                     types.push 'alpha'
                 else
                     types.push null
 
             return $.unique(types)
 
-            # if $.inArray('time', types) isnt -1
-            #     return 'time'
-            # else if $.inArray('alpha', types) isnt -1
-            #     return 'alpha'
-            # else
-            #     return types[0]
+        sortItems = 
+            sortDate: (list) ->
+                _sort = (a, b) ->
+                    if dataTypeChecks.isDate($.trim($(a).text())) and dataTypeChecks.isDate($.trim($(b).text()))
+                        _a = new Date _patterns.monthDayYear.exec($.trim($(a).text()))
+                        _b = new Date _patterns.monthDayYear.exec($.trim($(b).text()))
 
-        _sortDate = ->
-            _sortAsc = (a, b) ->
-                if _patterns.monthDayYear.test($.trim($(a).text())) and _patterns.monthDayYear.test($.trim($(b).text()))
-                    _a = new Date _patterns.monthDayYear.exec($.trim($(a).text()))
-                    _b = new Date _patterns.monthDayYear.exec($.trim($(b).text()))
-                    return _a - _b
+                    if direction is 'ascending' then return _a - _b else return _b - _a
 
-            _sortDesc = (a, b) ->
-                if _patterns.monthDayYear.test($.trim($(a).text())) and _patterns.monthDayYear.test($.trim($(b).text()))
-                    _a = new Date _patterns.monthDayYear.exec($.trim($(a).text()))
-                    _b = new Date _patterns.monthDayYear.exec($.trim($(b).text()))
-                    return _b - _a
+                return list.sort _sort 
 
-            return if direction is 'ascending' then _listItems.sort _sortAsc else _listItems.sort _sortDesc  
+            sortTime: (list) ->
+                _parseTime = (time) ->
+                    _hour = parseInt(/^(\d+)/.exec(time)[1], 10)
+                    _minutes = /:(\d+)/.exec(time)[1]
+                    _ampm = /(am|pm|AM|PM)$/.exec(time)[1].toLowerCase()
 
-        _sortTime = ->
-            _parseTime = (time) ->
-                _hour = parseInt(/^(\d+)/.exec(time)[1], 10)
-                _minutes = /:(\d+)/.exec(time)[1]
-                _ampm = /(am|pm|AM|PM)$/.exec(time)[1].toLowerCase()
-
-                if _ampm is 'am'
-                    _hour = _hour.toString()
-                    
-                    if _hour is '12'
-                        _hour = '0'
-                    else if _hour.length is 1
-                        _hour = "0#{_hour}"
+                    if _ampm is 'am'
+                        _hour = _hour.toString()
                         
-                    return "#{_hour}:#{_minutes}"
+                        if _hour is '12'
+                            _hour = '0'
+                        else if _hour.length is 1
+                            _hour = "0#{_hour}"
+                            
+                        return "#{_hour}:#{_minutes}"
 
-                else if _ampm is 'pm'
-                    return "#{_hour + 12}:#{_minutes}"
-
-            _sortAsc = (a, b) ->
-                if _patterns.time.test($.trim($(a).text())) and _patterns.time.test($.trim($(b).text()))
-                    _a = _parseTime _patterns.time.exec($.trim($(a).text()))
-                    _b = _parseTime _patterns.time.exec($.trim($(b).text()))
+                    else if _ampm is 'pm'
+                        return "#{_hour + 12}:#{_minutes}"
                 
-                    return new Date("04-22-2014 #{_a}") - new Date("04-22-2014 #{_b}")
+                _sort = (a, b) ->
+                    if dataTypeChecks.isTime($.trim($(a).text())) and dataTypeChecks.isTime($.trim($(b).text()))
+                        _a = _parseTime _patterns.time.exec($.trim($(a).text()))
+                        _b = _parseTime _patterns.time.exec($.trim($(b).text()))
 
-            _sortDesc = (a, b) ->
-                if _patterns.time.test($.trim($(a).text())) and _patterns.time.test($.trim($(b).text()))
-                    _a = _parseTime _patterns.time.exec($.trim($(a).text()))
-                    _b = _parseTime _patterns.time.exec($.trim($(b).text()))
-                
-                    return new Date("04-22-2014 #{_b}") - new Date("04-22-2014 #{_a}")
+                    if direction is 'ascending'
+                        return new Date("04-22-2014 #{_a}") - new Date("04-22-2014 #{_b}") 
+                    else
+                        new Date("04-22-2014 #{_b}") - new Date("04-22-2014 #{_a}")
 
-            return if direction is 'ascending' then _listItems.sort _sortAsc else _listItems.sort _sortDesc
+                return list.sort _sort
 
-        _sortAlpha = =>
-            _cleanAlpha = (str) =>
-                # removes leading 'the' or 'a'
-                $.each @ignoreWords, ->
-                    re = new RegExp "^#{@}\\s", 'i'
-                    str = str.replace re, ''
+            sortAlpha: (list) =>
+                _cleanAlpha = (str) =>
+                    # removes leading 'the' or 'a'
+                    $.each @ignoreWords, ->
+                        re = new RegExp "^#{@}\\s", 'i'
+                        str = str.replace re, ''
+                        return str
+
                     return str
+                
+                _sort = (a, b) ->
+                    _a = _cleanAlpha($.trim($(a).text())).toLowerCase()
+                    _b = _cleanAlpha($.trim($(b).text())).toLowerCase()
 
-                return str
+                    if direction is 'ascending'
+                        if _a < _b
+                            return -1
+                        else if _a > _b
+                            return 1
+                        else if _a is _b
+                            return 0
+                    else 
+                        if _a < _b
+                            return 1
+                        else if _a > _b
+                            return -1
+                        else if _a is _b
+                            return 0
 
-            _sortAsc = (a, b) ->
-                # use clean alpha to remove leading 'the' or 'a' then convert to lowercase for case insensitive sort
-                _a = _cleanAlpha($.trim($(a).text())).toLowerCase()
-                _b = _cleanAlpha($.trim($(b).text())).toLowerCase()
+                return list.sort _sort
 
-                if _a < _b
-                    return -1
-                else if _a > _b
-                    return 1
-                else if _a is _b
-                    return 0
+            sortNumber: (list) ->
+                _sort = (a, b) ->
+                    if direction is 'ascending'
+                        return parseFloat($.trim($(a).text())) - parseFloat($.trim($(b).text()))
+                    else 
+                        return parseFloat($.trim($(b).text())) - parseFloat($.trim($(a).text()))
 
-            _sortDesc = (a, b) ->
-                # use clean alpha to remove leading 'the' or 'a' then convert to lowercase for case insensitive sort
-                _a = _cleanAlpha($.trim($(a).text())).toLowerCase()
-                _b = _cleanAlpha($.trim($(b).text())).toLowerCase()
-
-                if _a < _b
-                    return 1
-                else if _a > _b
-                    return -1
-                else if _a is _b
-                    return 0
-
-            return if direction is 'ascending' then _listItems.sort _sortAsc else _listItems.sort _sortDesc
-
-        _sortNumber = ->
-            _sortAsc = (a, b) ->
-                return parseFloat($.trim($(a).text())) - parseFloat($.trim($(b).text()))
-
-            _sortDesc = (a, b) ->
-                return parseFloat($.trim($(b).text())) - parseFloat($.trim($(a).text()))
-
-            return if direction is 'ascending' then _listItems.sort _sortAsc else _listItems.sort _sortDesc
+                return list.sort _sort
 
         types = _getDataType values
 
-        # if types.length is 1
-        type = types[0]
-        switch type
-            when null then return null
-            when 'date' then return _sortDate()
-            when 'time' then return _sortTime()
-            when 'alpha' then return _sortAlpha()
-            when 'number' then return _sortNumber()
+        if types.length is 1
+            type = types[0]
+            switch type
+                when null then return null
+                when 'date' then return sortItems.sortDate(_listItems)
+                when 'time' then return sortItems.sortTime(_listItems)
+                when 'alpha' then return sortItems.sortAlpha(_listItems)
+                when 'number' then return sortItems.sortNumber(_listItems)
+        else
+            # group data types together
+            # sort lists individually then merge them
+            dates = []
+            times = []
+            alphas = []
+            numbers = []
+
+            $.each _listItems, ->
+                value = $.trim $(@).text()
+                
+                if dataTypeChecks.isDate.call self, value
+                    dates.push @
+                else if dataTypeChecks.isTime.call self, value
+                    times.push @
+                else if dataTypeChecks.isAlpha.call self, value
+                    alphas.push @
+                else if dataTypeChecks.isNumber.call self, value
+                    numbers.push @
+
+            sortItems.sortDate dates
+            sortItems.sortTime times
+            sortItems.sortAlpha alphas
+            sortItems.sortNumber numbers
+
+            return alphas.concat dates, times, numbers
 
     renderSort: (values, direction, list) =>
         _sortedList = @sortList values, direction, list
