@@ -4,12 +4,9 @@
 "use strict"
 
 $ = jQuery
-# all items in the list should be the same data type
-# need to update sort methods for lists that contain more than one data type eg. dates and alpha for DrmCalendar
-
 class @DrmSort
-    constructor: (@lists = $('.drm-sortable'), @autoSort = yes) ->
-        self = @
+    constructor: (@lists = $('.drm-sortable'), @autoSort = yes, @buttonClass = 'drm-sort-list', @activeClass = 'active') ->
+        self = @        
 
         if self.autoSort
             $.each @lists, ->
@@ -17,8 +14,9 @@ class @DrmSort
                 listItems = list.find 'li'
                 sortedList = self.sortList 'ascending', listItems
                 self.renderSort sortedList, list
+                $("button.drm-sort-list[data-sort='ascending']").addClass self.activeClass
 
-        $('body').on 'click', '.drm-sort-list', ->
+        $('body').on 'click', ".#{@buttonClass}", ->
             _that = $ @
             _listId = _that.data 'list'
             list = $ "ul##{_listId}"
@@ -26,6 +24,10 @@ class @DrmSort
             listItems = list.find 'li'
             sortedList = self.sortList direction, listItems
             self.renderSort sortedList, list
+            self.toggleActiveClass.call @, 'active', '.button-group'
+
+    toggleActiveClass: (className, parent) ->
+        $(@).closest(parent).find(".#{className}").removeClass(className).end().end().addClass className
 
     sortList: (direction, listItems) =>
         patterns =

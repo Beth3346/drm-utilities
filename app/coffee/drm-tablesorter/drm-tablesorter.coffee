@@ -2,102 +2,51 @@
 # Sort Tabular Data
 ###############################################################################
 "use strict"
-
+# TODO: merge with drm-sort to create a single sorting library that will sort any elements
+# major difference is the use of columnNum to find data to be sorted
 $ = jQuery
 class @DrmTableSorter
-    constructor: (@tableClass = 'drm-sortable-table', @activeClass = 'active', @ignoreWords = ['a','the']) ->
-        self = @
-        @table = $ ".#{@tableClass}"
-        @buttonClass = 'drm-sortable-table-button'
+    constructor: (@list = $('.drm-sortable-table'), @buttonClass = 'drm-sortable-table-button', @activeClass = 'active') ->
+        self = @        
+        @rows = @list.find 'tbody tr'
 
-        self.table.on 'click', ".#{@buttonClass}", ->
+        @list.on 'click', ".#{@buttonClass}", ->
             _that = $ @
             columnNum = _that.closest('th').index()
-            self.toggleActiveClass.call @, self.activeClass
-            self.renderTable _that.data('dir'), columnNum
+            self.toggleActiveClass.call @, self.activeClass, 'tr'
+            sortedRows = self.sortList _that.data('dir'), columnNum, self.rows
+            self.renderTable sortedRows
 
-    toggleActiveClass: (className) ->
-        _that = $ @
-        _that.closest('tr').find(".#{className}").removeClass className
-        _that.addClass className
+    toggleActiveClass: (className, parent) ->
+        $(@).closest(parent).find(".#{className}").removeClass(className).end().end().addClass className
 
-        return
-
-    getData: (columnNum) =>
-        values = []
-        _rows = @table.find 'tbody tr'
-
-        $.each _rows, (key, value) ->
-            text = $.trim $(value).find('td').eq(columnNum).text()
-            if text.length > 0 then values.push text
-
-        return values
-
-    sortRows: (direction, columnNum) =>
-        self = @
-        _rows = self.table.find 'tbody tr'
-
-        _patterns =
+    sortList: (direction, columnNum, listItems) =>
+        patterns =
             number: new RegExp "^(?:\\-?\\d+|\\d*)(?:\\.?\\d+|\\d)"
             alpha: new RegExp '^[a-z ,.\\-]*','i'
             # mm/dd/yyyy
             monthDayYear: new RegExp '^(?:[0]?[1-9]|[1][012]|[1-9])[-\/.](?:[0]?[1-9]|[12][0-9]|[3][01])(?:[-\/.][0-9]{4})'
             # 00:00pm
             time: new RegExp '^(?:[12][012]|[0]?[0-9]):[012345][0-9](?:am|pm)', 'i'
-
-        _getDataType = (columnNum) ->
-            types = []
-            _values = self.getData columnNum
-
-            _isDate = (value) ->
-                return if _patterns.monthDayYear.test(value) then true else false
-
-            _isNumber = (value) ->
-                return if _patterns.number.test(value) then true else false
-
-            _isAlpha = (value) ->
-                return if _patterns.alpha.test(value) then true else false
-
-            _isTime = (value) ->
-                return if _patterns.time.test(value) then true else false
-
-            $.each _values, (key, value) ->
-                if _isDate.call self, value
-                    types.push 'date'
-                else if _isTime.call self, value
-                    types.push 'time'
-                else if _isNumber.call self, value
-                    types.push 'number'
-                else if _isAlpha.call self, value
-                    types.push 'alpha'
-                else
-                    types.push null
-
-            return if $.inArray('alpha', types) isnt -1 then 'alpha' else types[0]
-
-        type = _getDataType columnNum
+            hour: new RegExp '^(\\d+)'
+            minute: new RegExp ':(\\d+)'
+            ampm: new RegExp '(am|pm|AM|PM)$'
         
-        if !type
-            null
+        sortUtilities =
+            getValues: (listItems, columnNum) ->
+                # creates an array of values from list items
+                values = []
 
-        else if type is 'date'
-            _sortAsc = (a, b) ->
-                _a = new Date _patterns.monthDayYear.exec($.trim($(a).find('td').eq(columnNum).text()))
-                _b = new Date _patterns.monthDayYear.exec($.trim($(b).find('td').eq(columnNum).text()))
-                return _a - _b
+                listItems.each ->
+                    value = $(@).find('td').eq(columnNum).text()
+                    values.push $.trim(value)
 
-            _sortDesc = (a, b) ->
-                _a = new Date _patterns.monthDayYear.exec($.trim($(a).find('td').eq(columnNum).text()))
-                _b = new Date _patterns.monthDayYear.exec($.trim($(b).find('td').eq(columnNum).text()))
-                return _b - _a
-
-            return if direction is 'ascending' then _rows.sort _sortAsc else _rows.sort _sortDesc
-
-        else if type is 'time'
-            _parseTime = (time) ->
-                _hour = parseInt(/^(\d+)/.exec(time)[1], 10)
-                _minutes = /:(\d+)/.exec(time)[1]
-                _ampm = /(am|pm|AM|PM)$/.exec(time)[1].toLowerCase()
+                return values
+            
+            parseTime: (time) ->
+                _hour = parseInt(patterns.hour.exec(time)[1], 10)
+                _minutes = patterns.minute.exec(time)[1]
+                _ampm = patterns.ampm.exec(time)[1].toLowerCase()
 
                 if _ampm is 'am'
                     _hour = _hour.toString()
@@ -111,69 +60,141 @@ class @DrmTableSorter
 
                 else if _ampm is 'pm'
                     return "#{_hour + 12}:#{_minutes}"
-
-            _sortAsc = (a, b) ->
-                _a = _parseTime _patterns.time.exec($.trim($(a).find('td').eq(columnNum).text()))
-                _b = _parseTime _patterns.time.exec($.trim($(b).find('td').eq(columnNum).text()))
-                return new Date("04-22-2014 #{_a}") - new Date("04-22-2014 #{_b}")
-
-            _sortDesc = (a, b) ->
-                _a = _parseTime _patterns.time.exec($.trim($(a).find('td').eq(columnNum).text()))
-                _b = _parseTime _patterns.time.exec($.trim($(b).find('td').eq(columnNum).text()))
-                return new Date("04-22-2014 #{_b}") - new Date("04-22-2014 #{_a}")
-
-            return if direction is 'ascending' then _rows.sort _sortAsc else _rows.sort _sortDesc
-
-        else if type is 'alpha'
-            _cleanAlpha = (str) =>
+            
+            cleanAlpha: (str, ignoreWords = ['a', 'the']) ->
                 # removes leading 'the' or 'a'
-                $.each @ignoreWords, ->
+                $.each ignoreWords, ->
                     re = new RegExp "^#{@}\\s", 'i'
                     str = str.replace re, ''
                     return str
 
                 return str
 
-            _sortAsc = (a, b) ->
-                # use clean alpha to remove leading 'the' or 'a' then convert to lowercase for case insensitive sort
-                _a = _cleanAlpha($.trim($(a).find('td').eq(columnNum).text())).toLowerCase()
-                _b = _cleanAlpha($.trim($(b).find('td').eq(columnNum).text())).toLowerCase()
+            sortValues: (a, b, direction = 'ascending') ->
+                # test for alpha values and perform alpha sort
+                if patterns.alpha.test(a)
+                    if a < b
+                        return if direction is 'ascending' then -1 else 1
+                    else if a > b
+                        return if direction is 'ascending' then 1 else -1
+                    else if a is b
+                        return 0
+                # if values are not alpha perform an numeric sort
+                else
+                    return if direction is 'ascending' then a - b else b - a
+        
+            getDataTypes: (listItems, columnNum) =>
+                self = @
+                values = sortUtilities.getValues listItems, columnNum
+                types = []
 
-                if _a < _b
-                    return -1
-                else if _a > _b
-                    return 1
-                else if _a is _b
-                    return 0
+                $.each values, ->
+                    if dataTypeChecks.isDate.call self, @
+                        types.push 'date'
+                    else if dataTypeChecks.isTime.call self, @
+                        types.push 'time'
+                    else if dataTypeChecks.isNumber.call self, @
+                        types.push 'number'
+                    else if dataTypeChecks.isAlpha.call self, @
+                        types.push 'alpha'
+                    else
+                        types.push null
 
-            _sortDesc = (a, b) ->
-                # use clean alpha to remove leading 'the' or 'a' then convert to lowercase for case insensitive sort
-                _a = _cleanAlpha($.trim($(a).find('td').eq(columnNum).text())).toLowerCase()
-                _b = _cleanAlpha($.trim($(b).find('td').eq(columnNum).text())).toLowerCase()
+                return $.unique types
 
-                if _a < _b
-                    return 1
-                else if _a > _b
-                    return -1
-                else if _a is _b
-                    return 0
+            sortSimpleList: (type, listItems, direction, columnNum) ->
+                # sort simple list
+                switch type
+                    when null then return null
+                    when 'date' then return comparators.sortDate listItems, direction, columnNum
+                    when 'time' then return comparators.sortTime listItems, direction, columnNum
+                    when 'alpha' then return comparators.sortAlpha listItems, direction, columnNum
+                    when 'number' then return comparators.sortNumber listItems, direction, columnNum
 
-            if direction is 'ascending' then _rows.sort _sortAsc else _rows.sort _sortDesc
+            sortComplexList: (listItems, direction, columnNum) ->
+                # sort complex list with two or more data types
+                # group data types together
+                dates = []
+                times = []
+                alphas = []
+                numbers = []
 
-        else if type is 'number'
-            _sortAsc = (a, b) ->
-                return parseFloat($.trim($(a).find('td').eq(columnNum).text())) - parseFloat($.trim($(b).find('td').eq(columnNum).text()))
+                $.each listItems, ->
+                    value = $.trim $(@).text()
+                    
+                    if dataTypeChecks.isDate.call self, value
+                        dates.push @
+                    else if dataTypeChecks.isTime.call self, value
+                        times.push @
+                    else if dataTypeChecks.isAlpha.call self, value
+                        alphas.push @
+                    else if dataTypeChecks.isNumber.call self, value
+                        numbers.push @
 
-            _sortDesc = (a, b) ->
-                return parseFloat($.trim($(b).find('td').eq(columnNum).text())) - parseFloat($.trim($(a).find('td').eq(columnNum).text()))
+                # sort lists individually then merge them
+                comparators.sortDate dates, direction, columnNum
+                comparators.sortTime times, direction, columnNum
+                comparators.sortAlpha alphas, direction, columnNum
+                comparators.sortNumber numbers, direction, columnNum
 
-            return if direction is 'ascending' then _rows.sort _sortAsc else _rows.sort _sortDesc
+                return alphas.concat dates, times, numbers
 
-    renderTable: (direction, columnNum) =>
-        _sortedRows = @sortRows direction, columnNum
-        tableBody = @table.find('tbody').empty()
+        dataTypeChecks =
+            isDate: (value) -> return if patterns.monthDayYear.test(value) then true else false
+            isNumber: (value) -> return if patterns.number.test(value) then true else false
+            isAlpha: (value) -> return if patterns.alpha.test(value) then true else false
+            isTime: (value) -> return if patterns.time.test(value) then true else false
+        
+        comparators = 
+            sortDate: (listItems, direction, columnNum) ->
+                # need support for various date and time formats
+                _sort = (a, b) ->
+                    if dataTypeChecks.isDate($.trim($(a).find('td').eq(columnNum).text())) and dataTypeChecks.isDate($.trim($(b).find('td').eq(columnNum).text()))
+                        a = new Date patterns.monthDayYear.exec($.trim($(a).find('td').eq(columnNum).text()))
+                        b = new Date patterns.monthDayYear.exec($.trim($(b).find('td').eq(columnNum).text()))
 
-        $.each _sortedRows, (key, value) ->
-            tableBody.append value
+                    return sortUtilities.sortValues a, b, direction
+
+                return listItems.sort _sort 
+
+            sortTime: (listItems, direction, columnNum) ->
+                # need support for various date and time formats                
+                _sort = (a, b) ->
+                    if dataTypeChecks.isTime($.trim($(a).find('td').eq(columnNum).text())) and dataTypeChecks.isTime($.trim($(b).find('td').eq(columnNum).text()))
+                        a = new Date "04-22-2014 #{sortUtilities.parseTime(patterns.time.exec($.trim($(a).find('td').eq(columnNum).text())))}"
+                        b = new Date "04-22-2014 #{sortUtilities.parseTime(patterns.time.exec($.trim($(b).find('td').eq(columnNum).text())))}"
+
+                    return sortUtilities.sortValues a, b, direction
+
+                return listItems.sort _sort
+
+            sortAlpha: (listItems, direction, columnNum) ->
+                _sort = (a, b) ->
+                    a = sortUtilities.cleanAlpha($.trim($(a).find('td').eq(columnNum).text())).toLowerCase()
+                    b = sortUtilities.cleanAlpha($.trim($(b).find('td').eq(columnNum).text())).toLowerCase()
+
+                    return sortUtilities.sortValues a, b, direction
+
+                return listItems.sort _sort
+
+            sortNumber: (listItems, direction, columnNum) ->
+                _sort = (a, b) ->
+                    a = parseFloat($.trim($(a).find('td').eq(columnNum).text()))
+                    b = parseFloat($.trim($(b).find('td').eq(columnNum).text()))
+
+                    return sortUtilities.sortValues a, b, direction
+
+                return listItems.sort _sort
+
+        types = sortUtilities.getDataTypes listItems, columnNum
+
+        if types.length is 1
+            sortUtilities.sortSimpleList types[0], listItems, direction, columnNum
+        else
+            sortUtilities.sortComplexList listItems, direction, columnNum
+
+    renderTable: (sortedRows) =>
+        tableBody = @list.find('tbody').empty()
+        $.each sortedRows, -> tableBody.append @
 
 new DrmTableSorter()
