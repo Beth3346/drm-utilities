@@ -5,7 +5,7 @@
 
 $ = jQuery
 class @DrmSort
-    constructor: (@lists = $('.drm-sortable'), @autoSort = yes, @buttonClass = 'drm-sort-list', @activeClass = 'active') ->
+    constructor: (@lists = $('.drm-sortable'), @autoSort = yes, @buttonClass = 'drm-sort-list', @activeClass = 'active', @ignoreWords = ['a', 'the']) ->
         self = @        
 
         if self.autoSort
@@ -30,6 +30,7 @@ class @DrmSort
         $(@).closest(parent).find(".#{className}").removeClass(className).end().end().addClass className
 
     sortList: (direction, listItems) =>
+        # TODO: add support for sorting datetime values
         patterns =
             number: new RegExp "^(?:\\-?\\d+|\\d*)(?:\\.?\\d+|\\d)"
             alpha: new RegExp '^[a-z ,.\\-]*','i'
@@ -42,6 +43,10 @@ class @DrmSort
             ampm: new RegExp '(am|pm|AM|PM)$'
         
         sortUtilities =
+            capitalize: (str) ->
+                str.toLowerCase().replace /^.|\s\S/g, (a) ->
+                    a.toUpperCase()
+
             getValues: (listItems) ->
                 # creates an array of values from list items
                 values = []
@@ -69,7 +74,7 @@ class @DrmSort
                 else if _ampm is 'pm'
                     return "#{_hour + 12}:#{_minutes}"
             
-            cleanAlpha: (str, ignoreWords = ['a', 'the']) ->
+            cleanAlpha: (str, ignoreWords = []) ->
                 # removes leading 'the' or 'a'
                 $.each ignoreWords, ->
                     re = new RegExp "^#{@}\\s", 'i'
@@ -95,57 +100,52 @@ class @DrmSort
                 self = @
                 values = sortUtilities.getValues listItems
                 types = []
+                type = listItems.parent().data 'type'
 
-                $.each values, ->
-                    if dataTypeChecks.isDate.call self, @
-                        types.push 'date'
-                    else if dataTypeChecks.isTime.call self, @
-                        types.push 'time'
-                    else if dataTypeChecks.isNumber.call self, @
-                        types.push 'number'
-                    else if dataTypeChecks.isAlpha.call self, @
-                        types.push 'alpha'
-                    else
-                        types.push null
+                if type?
+                    types.push type
+                else
+                    $.each values, ->
+                        if dataTypeChecks.isDate.call self, @
+                            types.push 'date'
+                        else if dataTypeChecks.isTime.call self, @
+                            types.push 'time'
+                        else if dataTypeChecks.isNumber.call self, @
+                            types.push 'number'
+                        else if dataTypeChecks.isAlpha.call self, @
+                            types.push 'alpha'
+                        else
+                            types.push null
 
                 return $.unique types
 
-            sortSimpleList: (type, listItems, direction) ->
-                # sort simple list
-                switch type
-                    when null then return null
-                    when 'date' then return comparators.sortDate listItems, direction
-                    when 'time' then return comparators.sortTime listItems, direction
-                    when 'alpha' then return comparators.sortAlpha listItems, direction
-                    when 'number' then return comparators.sortNumber listItems, direction
-
-            sortComplexList: (listItems, direction) ->
+            sortComplexList: (types, listItems, direction) ->
                 # sort complex list with two or more data types
                 # group data types together
-                dates = []
-                times = []
-                alphas = []
-                numbers = []
+                sortLists = {}
+
+                $.each types, ->
+                    sortLists[@] = []
+                    return
 
                 $.each listItems, ->
-                    value = $.trim $(@).text()
-                    
-                    if dataTypeChecks.isDate.call self, value
-                        dates.push @
-                    else if dataTypeChecks.isTime.call self, value
-                        times.push @
-                    else if dataTypeChecks.isAlpha.call self, value
-                        alphas.push @
-                    else if dataTypeChecks.isNumber.call self, value
-                        numbers.push @
+                    listItem = @
+                    value = $.trim $(listItem).text()
+                    $.each types, ->
+                        titleType = sortUtilities.capitalize @
+                        if dataTypeChecks["is#{titleType}"].call self, value
+                            sortLists["#{@}"].push listItem
 
-                # sort lists individually then merge them
-                comparators.sortDate dates, direction
-                comparators.sortTime times, direction
-                comparators.sortAlpha alphas, direction
-                comparators.sortNumber numbers, direction
+                $.each sortLists, (key) ->
+                    titleType = sortUtilities.capitalize key
+                    comparators["sort#{titleType}"] sortLists[key], direction
 
-                return alphas.concat dates, times, numbers
+                sortedList = []
+                $.each sortLists, ->
+                    sortedList = sortedList.concat @
+                    return
+
+                return sortedList
 
         dataTypeChecks =
             isDate: (value) -> return if patterns.monthDayYear.test(value) then true else false
@@ -176,10 +176,10 @@ class @DrmSort
 
                 return listItems.sort _sort
 
-            sortAlpha: (listItems, direction) ->
-                _sort = (a, b) ->
-                    a = sortUtilities.cleanAlpha($.trim($(a).text())).toLowerCase()
-                    b = sortUtilities.cleanAlpha($.trim($(b).text())).toLowerCase()
+            sortAlpha: (listItems, direction) =>
+                _sort = (a, b) =>
+                    a = sortUtilities.cleanAlpha($.trim($(a).text()), @ignoreWords).toLowerCase()
+                    b = sortUtilities.cleanAlpha($.trim($(b).text()), @ignoreWords).toLowerCase()
 
                     return sortUtilities.sortValues a, b, direction
 
@@ -195,8 +195,8 @@ class @DrmSort
                 return listItems.sort _sort
 
         types = sortUtilities.getDataTypes listItems
-        
-        return if types.length is 1 then sortUtilities.sortSimpleList types[0], listItems, direction else sortUtilities.sortComplexList listItems, direction
+
+        return sortUtilities.sortComplexList types, listItems, direction
 
     renderSort: (sortedList, list) ->
         # clear unsorted items from list

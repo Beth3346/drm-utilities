@@ -1,6 +1,7 @@
 ###############################################################################
-# Creates a Pinterest like sortable, draggable grid
+# Creates a Pinterest like sortable, image grid
 ###############################################################################
+#TODO: add check so that one column doesn't get too long. Skip it and move to the next column
 "use strict"
 
 $ = jQuery

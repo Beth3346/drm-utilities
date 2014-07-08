@@ -6,7 +6,7 @@
 # major difference is the use of columnNum to find data to be sorted
 $ = jQuery
 class @DrmTableSorter
-    constructor: (@list = $('.drm-sortable-table'), @buttonClass = 'drm-sortable-table-button', @activeClass = 'active') ->
+    constructor: (@list = $('.drm-sortable-table'), @buttonClass = 'drm-sortable-table-button', @activeClass = 'active', @ignoreWords = ['a', 'the']) ->
         self = @
         # parent list element
         tableBody = @list.find 'tbody'
@@ -35,6 +35,10 @@ class @DrmTableSorter
             ampm: new RegExp '(am|pm|AM|PM)$'
         
         sortUtilities =
+            capitalize: (str) ->
+                str.toLowerCase().replace /^.|\s\S/g, (a) ->
+                    a.toUpperCase()
+
             getValues: (listItems, columnNum) ->
                 # creates an array of values from list items
                 values = []
@@ -63,7 +67,7 @@ class @DrmTableSorter
                 else if _ampm is 'pm'
                     return "#{_hour + 12}:#{_minutes}"
             
-            cleanAlpha: (str, ignoreWords = ['a', 'the']) ->
+            cleanAlpha: (str, ignoreWords = []) ->
                 # removes leading 'the' or 'a'
                 $.each ignoreWords, ->
                     re = new RegExp "^#{@}\\s", 'i'
@@ -89,18 +93,22 @@ class @DrmTableSorter
                 self = @
                 values = sortUtilities.getValues listItems, columnNum
                 types = []
+                type = @list.find('th').eq(columnNum).data 'type'
 
-                $.each values, ->
-                    if dataTypeChecks.isDate.call self, @
-                        types.push 'date'
-                    else if dataTypeChecks.isTime.call self, @
-                        types.push 'time'
-                    else if dataTypeChecks.isNumber.call self, @
-                        types.push 'number'
-                    else if dataTypeChecks.isAlpha.call self, @
-                        types.push 'alpha'
-                    else
-                        types.push null
+                if type?
+                    types.push type
+                else
+                    $.each values, ->
+                        if dataTypeChecks.isDate.call self, @
+                            types.push 'date'
+                        else if dataTypeChecks.isTime.call self, @
+                            types.push 'time'
+                        else if dataTypeChecks.isNumber.call self, @
+                            types.push 'number'
+                        else if dataTypeChecks.isAlpha.call self, @
+                            types.push 'alpha'
+                        else
+                            types.push null
 
                 return $.unique types
 
@@ -113,33 +121,33 @@ class @DrmTableSorter
                     when 'alpha' then return comparators.sortAlpha listItems, direction, columnNum
                     when 'number' then return comparators.sortNumber listItems, direction, columnNum
 
-            sortComplexList: (listItems, direction, columnNum) ->
+            sortComplexList: (types, listItems, direction, columnNum) ->            
                 # sort complex list with two or more data types
                 # group data types together
-                dates = []
-                times = []
-                alphas = []
-                numbers = []
+                sortLists = {}
+
+                $.each types, ->
+                    sortLists[@] = []
+                    return
 
                 $.each listItems, ->
-                    value = $.trim $(@).text()
-                    
-                    if dataTypeChecks.isDate.call self, value
-                        dates.push @
-                    else if dataTypeChecks.isTime.call self, value
-                        times.push @
-                    else if dataTypeChecks.isAlpha.call self, value
-                        alphas.push @
-                    else if dataTypeChecks.isNumber.call self, value
-                        numbers.push @
+                    listItem = @
+                    value = $.trim $(listItem).text()
+                    $.each types, ->
+                        titleType = sortUtilities.capitalize @
+                        if dataTypeChecks["is#{titleType}"].call self, value
+                            sortLists["#{@}"].push listItem
 
-                # sort lists individually then merge them
-                comparators.sortDate dates, direction, columnNum
-                comparators.sortTime times, direction, columnNum
-                comparators.sortAlpha alphas, direction, columnNum
-                comparators.sortNumber numbers, direction, columnNum
+                $.each sortLists, (key) ->
+                    titleType = sortUtilities.capitalize key
+                    comparators["sort#{titleType}"] sortLists[key], direction, columnNum
 
-                return alphas.concat dates, times, numbers
+                sortedList = []
+                $.each sortLists, ->
+                    sortedList = sortedList.concat @
+                    return
+
+                return sortedList
 
         dataTypeChecks =
             isDate: (value) -> return if patterns.monthDayYear.test(value) then true else false
@@ -174,10 +182,10 @@ class @DrmTableSorter
 
                 return listItems.sort _sort
 
-            sortAlpha: (listItems, direction, columnNum) ->
-                _sort = (a, b) ->
-                    a = sortUtilities.cleanAlpha($.trim($(a).find('td').eq(columnNum).text())).toLowerCase()
-                    b = sortUtilities.cleanAlpha($.trim($(b).find('td').eq(columnNum).text())).toLowerCase()
+            sortAlpha: (listItems, direction, columnNum) =>
+                _sort = (a, b) =>
+                    a = sortUtilities.cleanAlpha($.trim($(a).find('td').eq(columnNum).text()), @ignoreWords).toLowerCase()
+                    b = sortUtilities.cleanAlpha($.trim($(b).find('td').eq(columnNum).text()), @ignoreWords).toLowerCase()
 
                     return sortUtilities.sortValues a, b, direction
 
@@ -193,11 +201,7 @@ class @DrmTableSorter
                 return listItems.sort _sort
 
         types = sortUtilities.getDataTypes listItems, columnNum
-
-        if types.length is 1
-            sortUtilities.sortSimpleList types[0], listItems, direction, columnNum
-        else
-            sortUtilities.sortComplexList listItems, direction, columnNum
+        return sortUtilities.sortComplexList types, listItems, direction, columnNum
 
     renderSort: (sortedRows, list) =>
         list.empty()

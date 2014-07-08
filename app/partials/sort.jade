@@ -3,7 +3,7 @@ section
 
     p Sort list items quickly
 
-    h2 Live Demo
+    h2 Numeric list
 
     .button-group
         button.drm-sort-list(data-sort="ascending" data-list="numbers") &#9650;
@@ -16,6 +16,27 @@ section
         li 0
         li 95
 
+    h2 Can sort lists with multiple data types
+
+    .button-group
+        button.drm-sort-list(data-sort="ascending" data-list="alpha-num") &#9650;
+        button.drm-sort-list(data-sort="descending" data-list="alpha-num") &#9660;
+    ul.drm-unstyled-list.drm-sortable#alpha-num
+        li 7
+        li 101
+        li 74
+        li 264
+        li 0
+        li 95
+        li Cat
+        li 5 Dog
+        li Bird
+        li Rabbit
+        li pet rock
+        li Guinea Pig
+
+    h2 Sorts lists of items that begin with numbers as a numeric list
+
     .button-group
         button.drm-sort-list(data-sort="ascending" data-list="miles") &#9650;
         button.drm-sort-list(data-sort="descending" data-list="miles") &#9660;
@@ -26,6 +47,21 @@ section
         li 264 miles
         li 0 miles
         li 95 miles
+
+    h2 Numeric list sorted as alpha with data-type value
+
+    .button-group
+        button.drm-sort-list(data-sort="ascending" data-list="alpha-miles") &#9650;
+        button.drm-sort-list(data-sort="descending" data-list="alpha-miles") &#9660;
+    ul.drm-unstyled-list.drm-sortable#alpha-miles(data-type="alpha")
+        li 7 miles
+        li 101 miles
+        li 74 miles
+        li 264 miles
+        li 0 miles
+        li 95 miles
+
+    h2 Sorts lists with decimal values
 
     .button-group
         button.drm-sort-list(data-sort="ascending" data-list="decimals") &#9650;
@@ -38,6 +74,8 @@ section
         li 3.67
         li 12.3252
 
+    h2 Sorts lists with decimal values and units
+
     .button-group
         button.drm-sort-list(data-sort="ascending" data-list="gallons") &#9650;
         button.drm-sort-list(data-sort="descending" data-list="gallons") &#9660;
@@ -49,18 +87,23 @@ section
         li 3.67 gallons
         li 12.3252 gallons
 
+    h2 Can ignore leading words like 'the' and 'a' when sorting
+
     .button-group
         button.drm-sort-list(data-sort="ascending" data-list="movies") &#9650;
         button.drm-sort-list(data-sort="descending" data-list="movies") &#9660;
     ul.drm-unstyled-list.drm-sortable#movies
         li Casablanca
         li Star Wars
+        li 39 Steps
         li American Beauty
         li Clueless
         li My Cousin Vinny
         li Of Mice and Men
         li A Beautiful Mind
         li The Graduate
+
+    h2 Alpha lists
 
     .button-group
         button.drm-sort-list(data-sort="ascending" data-list="animals") &#9650;
@@ -76,6 +119,10 @@ section
         li frog
         li Snake
 
+    h2 Will ignore trailing numbers when sorting alpha lists
+
+    p All characters following numbers will be ignored
+
     .button-group
         button.drm-sort-list(data-sort="ascending" data-list="animals2") &#9650;
         button.drm-sort-list(data-sort="descending" data-list="animals2") &#9660;
@@ -89,6 +136,8 @@ section
         li Fish 12
         li frog 12
         li Snake 12
+
+    h2 Can sort lists of dates
 
     .button-group
         button.drm-sort-list(data-sort="ascending" data-list="history") &#9650;
@@ -109,6 +158,8 @@ section
         li 7/14/1789 - Fall of the Bastille
         li 6/28/1914 - Archduke Francis Ferdinand is assassinated in Sarajevo
         li 11/7/1917 - October Revolution begins in Russia
+
+    h2 Can sort lists of times
 
     .button-group
         button.drm-sort-list(data-sort="ascending" data-list="hours") &#9650;

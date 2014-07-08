@@ -106,9 +106,9 @@ class @DrmTimeStamps
 
         $.each @prettyDate, ->
             _that = $ @
-            item = $.trim(_that.text())
-            date = self.parseDate item
-            prettyDate = self.prettifyDate date, 'dddd, MMMM DD, yyyy, hh:mm:ssa'
+            _item = $.trim(_that.text())
+            _date = self.parseDate _item
+            prettyDate = self.prettifyDate _date, 'dddd, MMMM DD, yyyy, hh:mm:ssa'
             
             _that.text prettyDate
 
@@ -539,6 +539,7 @@ class @DrmTimeStamps
 
 
     formatDuration: (duration, precision = 'seconds') ->
+        # TODO: add formatting option to control precision
         if Math.abs(duration.years) >= 1
             if duration.years >= 0
                 return "#{duration.years} years,
