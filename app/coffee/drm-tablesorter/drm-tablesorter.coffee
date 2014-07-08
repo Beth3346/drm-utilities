@@ -2,20 +2,22 @@
 # Sort Tabular Data
 ###############################################################################
 "use strict"
-# TODO: merge with drm-sort to create a single sorting library that will sort any elements
+# TODO: merge with drm-sort to create a single sorting library that will sort any type of elements
 # major difference is the use of columnNum to find data to be sorted
 $ = jQuery
 class @DrmTableSorter
     constructor: (@list = $('.drm-sortable-table'), @buttonClass = 'drm-sortable-table-button', @activeClass = 'active') ->
-        self = @        
-        @rows = @list.find 'tbody tr'
+        self = @
+        # parent list element
+        tableBody = @list.find 'tbody'
+        @rows = tableBody.find 'tr'
 
         @list.on 'click', ".#{@buttonClass}", ->
             _that = $ @
             columnNum = _that.closest('th').index()
             self.toggleActiveClass.call @, self.activeClass, 'tr'
             sortedRows = self.sortList _that.data('dir'), columnNum, self.rows
-            self.renderTable sortedRows
+            self.renderSort sortedRows, tableBody
 
     toggleActiveClass: (className, parent) ->
         $(@).closest(parent).find(".#{className}").removeClass(className).end().end().addClass className
@@ -149,9 +151,11 @@ class @DrmTableSorter
             sortDate: (listItems, direction, columnNum) ->
                 # need support for various date and time formats
                 _sort = (a, b) ->
-                    if dataTypeChecks.isDate($.trim($(a).find('td').eq(columnNum).text())) and dataTypeChecks.isDate($.trim($(b).find('td').eq(columnNum).text()))
-                        a = new Date patterns.monthDayYear.exec($.trim($(a).find('td').eq(columnNum).text()))
-                        b = new Date patterns.monthDayYear.exec($.trim($(b).find('td').eq(columnNum).text()))
+                    a = $.trim $(a).find('td').eq(columnNum).text()
+                    b = $.trim $(b).find('td').eq(columnNum).text()
+                    if dataTypeChecks.isDate(a) and dataTypeChecks.isDate(b)
+                        a = new Date patterns.monthDayYear.exec(a)
+                        b = new Date patterns.monthDayYear.exec(b)
 
                     return sortUtilities.sortValues a, b, direction
 
@@ -160,9 +164,11 @@ class @DrmTableSorter
             sortTime: (listItems, direction, columnNum) ->
                 # need support for various date and time formats                
                 _sort = (a, b) ->
-                    if dataTypeChecks.isTime($.trim($(a).find('td').eq(columnNum).text())) and dataTypeChecks.isTime($.trim($(b).find('td').eq(columnNum).text()))
-                        a = new Date "04-22-2014 #{sortUtilities.parseTime(patterns.time.exec($.trim($(a).find('td').eq(columnNum).text())))}"
-                        b = new Date "04-22-2014 #{sortUtilities.parseTime(patterns.time.exec($.trim($(b).find('td').eq(columnNum).text())))}"
+                    a = $.trim $(a).find('td').eq(columnNum).text()
+                    b = $.trim $(b).find('td').eq(columnNum).text()
+                    if dataTypeChecks.isTime(a) and dataTypeChecks.isTime(b)
+                        a = new Date "04-22-2014 #{sortUtilities.parseTime(patterns.time.exec(a))}"
+                        b = new Date "04-22-2014 #{sortUtilities.parseTime(patterns.time.exec(b))}"
 
                     return sortUtilities.sortValues a, b, direction
 
@@ -193,8 +199,8 @@ class @DrmTableSorter
         else
             sortUtilities.sortComplexList listItems, direction, columnNum
 
-    renderTable: (sortedRows) =>
-        tableBody = @list.find('tbody').empty()
-        $.each sortedRows, -> tableBody.append @
+    renderSort: (sortedRows, list) =>
+        list.empty()
+        $.each sortedRows, -> list.append @
 
 new DrmTableSorter()
