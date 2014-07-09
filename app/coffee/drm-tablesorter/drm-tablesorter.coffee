@@ -89,11 +89,10 @@ class @DrmTableSorter
                 else
                     return if direction is 'ascending' then a - b else b - a
         
-            getDataTypes: (listItems, columnNum) =>
+            getDataTypes: (listItems, columnNum, type = null) ->
                 self = @
-                values = sortUtilities.getValues listItems, columnNum
+                values = self.getValues listItems, columnNum
                 types = []
-                type = @list.find('th').eq(columnNum).data 'type'
 
                 if type?
                     types.push type
@@ -111,43 +110,41 @@ class @DrmTableSorter
                             types.push null
 
                 return $.unique types
+            
+            createArrays: (obj, list) ->
+                # create keys with empty arrays for each value in an array
+                $.each list, ->
+                    obj[@] = []
+                    return
+                return obj
 
-            sortSimpleList: (type, listItems, direction, columnNum) ->
-                # sort simple list
-                switch type
-                    when null then return null
-                    when 'date' then return comparators.sortDate listItems, direction, columnNum
-                    when 'time' then return comparators.sortTime listItems, direction, columnNum
-                    when 'alpha' then return comparators.sortAlpha listItems, direction, columnNum
-                    when 'number' then return comparators.sortNumber listItems, direction, columnNum
+            concatArrays: (obj) ->
+                # combine an object made up of arrays into a single array
+                arr = []
+                $.each obj, ->
+                    arr = arr.concat @
+                    return
+                return arr
 
             sortComplexList: (types, listItems, direction, columnNum) ->            
                 # sort complex list with two or more data types
                 # group data types together
+                self = @
                 sortLists = {}
-
-                $.each types, ->
-                    sortLists[@] = []
-                    return
-
+                # create sortLists arrays
+                @createArrays sortLists, types
+                # add listItems to sortLists arrays
                 $.each listItems, ->
                     listItem = @
                     value = $.trim $(listItem).text()
                     $.each types, ->
-                        titleType = sortUtilities.capitalize @
-                        if dataTypeChecks["is#{titleType}"].call self, value
+                        if dataTypeChecks["is#{self.capitalize(@)}"].call self, value
                             sortLists["#{@}"].push listItem
-
+                # sort sortLists arrays
                 $.each sortLists, (key) ->
-                    titleType = sortUtilities.capitalize key
-                    comparators["sort#{titleType}"] sortLists[key], direction, columnNum
+                    comparators["sort#{self.capitalize(key)}"] sortLists[key], direction, columnNum
 
-                sortedList = []
-                $.each sortLists, ->
-                    sortedList = sortedList.concat @
-                    return
-
-                return sortedList
+                return @concatArrays sortLists
 
         dataTypeChecks =
             isDate: (value) -> return if patterns.monthDayYear.test(value) then true else false
@@ -200,7 +197,8 @@ class @DrmTableSorter
 
                 return listItems.sort _sort
 
-        types = sortUtilities.getDataTypes listItems, columnNum
+        type = @list.find('th').eq(columnNum).data 'type'
+        types = sortUtilities.getDataTypes listItems, columnNum, type
         return sortUtilities.sortComplexList types, listItems, direction, columnNum
 
     renderSort: (sortedRows, list) =>
