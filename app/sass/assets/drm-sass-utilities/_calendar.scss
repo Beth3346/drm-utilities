@@ -316,3 +316,7 @@
         }
     }
 }
+
+.drm-calendar-event-edit {
+    @include drm-tabular-form();
+}

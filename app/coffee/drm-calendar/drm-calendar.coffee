@@ -492,7 +492,7 @@ class @DrmCalendar
                     year: day.data 'year'
                 e.preventDefault()
                 e.stopPropagation()
-                self.showEventDetails eventId, fullDate
+                self.readEvent eventId, fullDate
 
             @body.on 'click', 'div.drm-calendar-event-details', (e) ->
                 e.stopPropagation()
@@ -502,18 +502,17 @@ class @DrmCalendar
                 _that = $ @
                 eventId = _that.data 'event'
                 index = self.getEventIndex eventId
-                console.log "editing event #{index}"
+                self.editEvent()
 
             @body.on 'click', 'div.drm-calendar-event-details button.drm-event-delete', (e) ->
                 e.preventDefault()
                 _that = $ @
                 eventId = _that.data 'event'
                 index = self.getEventIndex eventId
-                self.removeCalendarEvent eventId, index
-                self.removeEventDetails e
+                self.destroyEvent eventId, index
+                self.closeEvent e
 
-            @body.on 'click', 'div.drm-calendar-event-details button.drm-event-close', @removeEventDetails
-            console.log @
+            @body.on 'click', 'div.drm-calendar-event-details button.drm-event-close', @closeEvent
     
     # utilities
     capitalize: (str) ->
@@ -668,6 +667,21 @@ class @DrmCalendar
         weekNums[_weekInfo.weekNum]
 
     # event utilities
+
+    getEventIndex: (eventId) ->
+        # gets the index of an event so we can keep track after events are removed
+        index = null
+        $.each @events, (key, value) ->
+            if value.id is eventId then index = key
+            index
+        index
+
+    closeEvent: (e) ->
+        $('div.drm-blackout').fadeOut 300, ->
+            $(@).remove()
+
+        e.preventDefault()
+
     createEvent: (newEvent) ->
         _id = @events.length
         obj =
@@ -686,20 +700,43 @@ class @DrmCalendar
         @events.push obj
         @addEventsToCalendar @events[obj.id]
 
-    removeCalendarEvent: (eventId, index) ->
+    destroyEvent: (eventId, index) ->
         events = @calendar.find "ul.#{@eventClass} a[data-event=#{eventId}]"
         events.remove()
         @events.splice index, 1
 
-    getEventIndex: (eventId) ->
-        # gets the index of an event so we can keep track after events are removed
-        index = null
-        $.each @events, (key, value) ->
-            if value.id is eventId then index = key
-            index
-        index
+    cleanString: (str, re) ->
+        re = new RegExp "#{re}", 'i'
+        str = str.replace re, ''
+        return $.trim str
 
-    showEventDetails: (eventId, fullDate) ->
+    editEvent: ->
+        self = @
+        eventDetailList = $('.drm-event-detail-list')
+        eventDetails = eventDetailList.find 'li'
+
+        # change event details to form fields and populate with text
+        eventFormHtml = ''
+        $.each eventDetails, ->
+            _that = $ @
+            label = $.trim(_that.find('span.drm-event-label').text()).toLowerCase()
+            label = self.cleanString label, ':'
+            value = $.trim _that.find('span.drm-event-detail').text()
+            eventFormHtml += "<label for='#{label}'>#{label}: </label><input type='text' value='#{value}' id='#{label}' name='#{label}'>"
+            return eventFormHtml
+
+        editEventForm = $ '<form></form>',
+            class: 'drm-calendar-event-edit'
+            html: eventFormHtml
+
+        eventDetailList.empty().append editEventForm
+
+        return
+
+    updateEvent: (eventId, index) ->
+        console.log "#{eventId}, #{index}"
+
+    readEvent: (eventId, fullDate) ->
         self = @
         _index = self.getEventIndex eventId
         _events = self.events[_index]
@@ -770,20 +807,14 @@ class @DrmCalendar
                 if value?
                     _title = self.capitalize key
                     _listItem = $ '<li></li>',
-                        html: "<span class='drm-bold'>#{_title}: </span><span class='drm-event-detail'>#{value}</span>"
+                        html: "<span class='drm-bold drm-event-label'>#{_title}: </span><span class='drm-event-detail'>#{value}</span>"
                     _listItem.appendTo _eventDetailList
 
-            _closeButton.appendTo _eventDetailList
-            _editButton.appendTo _eventDetailList
-            _deleteButton.appendTo _eventDetailList
+            _closeButton.insertAfter _eventDetailList
+            _deleteButton.insertAfter _eventDetailList
+            _editButton.insertAfter _eventDetailList
 
         return
-
-    removeEventDetails: (e) ->
-        $('div.drm-blackout').fadeOut 300, ->
-            $(@).remove()
-
-        e.preventDefault()
 
     # calendar creation utilities
     addEventsToCalendar: (events) ->
@@ -1159,7 +1190,7 @@ class @DrmCalendar
         views =
             createMonth: (newDate) ->
                 createWeekdays = ->
-                    weekdays = '<table><thead><tr>'
+                    weekdays = "<div class='#{self.calendarInnerClass}' data-month='#{newDate.month}' data-year='#{newDate.year}'><table><thead><tr>"
                     $.each self.days, ->
                         weekdays += "<th>#{@}</th>"
                     weekdays += '</tr></thead>'
@@ -1228,7 +1259,7 @@ class @DrmCalendar
                         weeks += '</tr>'
                         weekCount += 1
                     
-                    weeks += '</tbody></table>'
+                    weeks += '</tbody></table></div>'
 
                     return weeks
 
@@ -1238,18 +1269,14 @@ class @DrmCalendar
 
                 # add to DOM
                 addCalendar = ->
-                    _calendar = $ '<div></div>',
-                        class: self.calendarInnerClass
-                        html: createCalendarHtml()
-                        'data-month': newDate.month
-                        'data-year': newDate.year
+                    calendar = createCalendarHtml()
 
-                    _heading = $ '<h1></h1>',
+                    heading = $ '<h1></h1>',
                         class: 'drm-calendar-header'
                         text: "#{self.months[newDate.month]} #{newDate.year}"
                     
-                    _calendar.appendTo ".#{self.calendarClass}"
-                    _heading.prependTo ".#{self.calendarInnerClass}"
+                    $(calendar).appendTo ".#{self.calendarClass}"
+                    heading.prependTo ".#{self.calendarInnerClass}"
                     
                     # style weeks
                     utilities.highlightToday()
