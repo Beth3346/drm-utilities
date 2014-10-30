@@ -376,7 +376,22 @@ class @DrmCalendar
             @view = if !@calendar.data('view') then @view else @calendar.data('view')
             @addHolidays = if @calendar.data('holidays')? then @calendar.data('holidays') else @addHolidays
             @currentDate = if !@calendar.data('month') then @currentDate else {month: $.inArray(@calendar.data('month'), @months), date: @calendar.data('date'), year: @calendar.data('year')}
-            @events = if !@calendar.data('events') then @newEvents else @calendar.data('events')
+            @events = 
+                if !@calendar.data('event-name')
+                    @newEvents
+                else
+                    [{
+                        name: if @calendar.data('event-name')? then @calendar.data('event-name') else null
+                        recurrance: if @calendar.data('event-recurrance')? then @calendar.data('event-recurrance').toLowerCase() else null
+                        month: if @calendar.data('event-month')? then @calendar.data('event-month') else null
+                        year: if @calendar.data('event-year')? then @calendar.data('event-year') else null
+                        eventDate: if @calendar.data('event-date')? then @calendar.data('event-date') else null
+                        time: if @calendar.data('event-time')? then @calendar.data('event-time') else null
+                        day: if @calendar.data('event-day')? then @calendar.data('event-day') else null
+                        dayNum:  if @calendar.data('event-dayNum')? then @calendar.data('event-dayNum') else null
+                        type: if @calendar.data('event-type')? then @calendar.data('event-type').toLowerCase() else null
+                        notes: if @calendar.data('event-notes')? then @calendar.data('event-notes') else null
+                    }]
 
             if @addHolidays is true
                 $.each @holidays, ->

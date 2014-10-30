@@ -18,7 +18,7 @@ $ ->
     drmAlert.showAlert 'muted', 'A muted alert that will probably be ignored', $('.drm-alert-holder')
     drmAlert.showAlert 'custom', 'This is a custom alert', $('.drm-alert-holder')
 
-    drmCalendar = new DrmCalendar 'drm-calendar', 'month', yes, 'today', [{name: "My Birthday", month: "March", eventDate: 24, type: "birthday", recurrance: "yearly"}]    
+    drmCalendar = new DrmCalendar()
 
     drmCalendar.createEvent
         name: "Rabbit Rabbit Day"
