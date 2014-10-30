@@ -320,6 +320,7 @@
     width: $width;
     border: 1px solid $color;
     color: $color;
+    font-weight: bold;
     text-align: center;
     padding: 10px 0 10px 0;
     text-decoration: none;
@@ -369,6 +370,7 @@
     background-color: $bk-color;
     width: $width;
     color: $color;
+    font-weight: bold;
     text-align: center;
     padding: 10px 0 10px 0;
     text-decoration: none;
@@ -413,6 +415,7 @@
 @mixin drm-rectangle-button($color: $link-color, $text: white, $border-radius: 0, $width: 40%, $center: center, $display: block) {
     border: 1px solid darken($color, 10%);
     background-color: $color;
+    font-weight: bold;
     color: $text;
     padding: 10px 10px 10px 10px;
     cursor: pointer;
@@ -452,6 +455,7 @@
     width: $width;
     border: 1px solid $color;
     color: $color;
+    font-weight: normal;
     text-align: center;
     padding: 5px 0 5px 0;
     text-decoration: none;
@@ -501,6 +505,7 @@
     background-color: $bk-color;
     width: $width;
     color: $color;
+    font-weight: normal;
     text-align: center;
     padding: 5px 0 5px 0;
     text-decoration: none;
@@ -548,6 +553,7 @@
         float: left;
         background-color: $bk-color;
         color: $color;
+        font-weight: bold;
         text-align: center;
         display: block;
         padding: 10px 20px 10px 20px;
