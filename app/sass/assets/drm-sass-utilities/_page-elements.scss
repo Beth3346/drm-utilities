@@ -73,7 +73,7 @@
     height: 45px - 6;
     box-sizing: border-box;
     @include drm-em-font(24);
-    @include drm-stitched-row($color, $stitch-color, none, 1, $darker-grey);
+    @include drm-stitched-row(lighten($color, 10%), $stitch-color, none, 1);
 
     @if $text-shadow != none {
         @include drm-inset-text($text-shadow);  
@@ -88,7 +88,6 @@
         border: 20px solid $color;
         border-right-width: 30px;
         border-left-color: transparent;
-        box-shadow: $darker-grey 1px 1px 1px;
         @include drm-rectangle(0, 0);
     }
 
@@ -101,7 +100,6 @@
         border: 20px solid $color;
         border-left-width: 30px;
         border-right-color: transparent;
-        box-shadow: $darker-grey -1px 1px 1px;
         @include drm-rectangle(0, 0);
     }
 
@@ -180,7 +178,7 @@
         @if $shadow-color != none {
             @include drm-inset-border($border-color, $shadow-color);
         } @else {
-            bottom-border: $border-color;
+            border-bottom: 1px solid $border-color;
         }
     }
 
@@ -385,7 +383,7 @@
     }
 }
 
-@mixin drm-label($type: info, $border-radius: 3px, $color: none) {
+@mixin drm-label($type: info, $border-radius: 3px, $color: none, $border-color: none) {
     padding: 5px 10px 5px 10px;
 
     @if $border-radius != 0 {
@@ -414,8 +412,15 @@
         color: darken($muted-color, 20%);           
     } @else if $type == custom {
         background-color: lighten($color, 20%);
-        border: 1px solid $color;
-        color: darken($color, 20%);     
+        border-width: 1px;
+        border-style: solid;
+        @if $border-color != none {
+            border-color: $border-color;
+            color: $border-color;
+        } @else {
+            border-color: $color;
+            color: darken($color, 20%);
+        }
     } @else {
         @warn "#{error("That's not a context box type!")}";
     }

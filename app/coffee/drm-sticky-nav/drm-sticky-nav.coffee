@@ -63,7 +63,7 @@ class @DrmStickyNav
 
         _content.stop().animate {
             'scrollTop': $(target).position().top
-        }, 900, 'swing', ->
+        }, 900, swing, ->
             window.location.hash = target
             return
 

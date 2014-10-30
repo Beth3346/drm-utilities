@@ -9,14 +9,13 @@
 $ = jQuery
 
 class @DrmCalendar
-    constructor: (@calendarClass = 'drm-calendar', @view = 'month', @addHolidays = yes) ->
+    constructor: (@calendarClass = 'drm-calendar', @view = 'month', @addHolidays = yes, @currentDate = 'today', @newEvents = []) ->
         self = @
         @calendar = $ ".#{@calendarClass}"
 
         if @calendar isnt 0
             @body = $ 'body'
             @daysPerWeek = 7
-            @events = []
             @now = new Date()
             @today =
                 month: @now.getMonth()
@@ -373,12 +372,21 @@ class @DrmCalendar
                 }
             ]
 
-            if @addHolidays
+            # extract arguments 
+            @view = if !@calendar.data('view') then @view else @calendar.data('view')
+            @addHolidays = if @calendar.data('holidays')? then @calendar.data('holidays') else @addHolidays
+            @currentDate = if !@calendar.data('month') then @currentDate else {month: $.inArray(@calendar.data('month'), @months), date: @calendar.data('date'), year: @calendar.data('year')}
+            @events = if !@calendar.data('events') then @newEvents else @calendar.data('events')
+
+            if @addHolidays is true
                 $.each @holidays, ->
                     self.createEvent @
 
             if @calendar.length > 0
-                @createCalendar {month: @today.month, date: @today.date, year: @today.year}
+                if @currentDate is 'today'
+                    @createCalendar {month: @today.month, date: @today.date, year: @today.year}
+                else
+                    @createCalendar {month: @currentDate.month, date: @currentDate.date, year: @currentDate.year}
 
             @calendar.on 'click', '.drm-calendar-date-prev, .drm-calendar-date-next', ->
                 # skip date forward or backward
@@ -516,8 +524,11 @@ class @DrmCalendar
     
     # utilities
     capitalize: (str) ->
-        str.toLowerCase().replace /^.|\s\S/g, (a) ->
-            a.toUpperCase()
+        str.toLowerCase().replace /^.|\s\S/g, (a) -> a.toUpperCase()
+
+    cleanString: (str, re) ->
+        re = new RegExp "#{re}", 'i'
+        return $.trim str.replace re, ''
 
     getFormData: (form) ->
         # get form data and return an object
@@ -563,13 +574,13 @@ class @DrmCalendar
     # calendar utilities
     getDaysInMonth: (month, year) ->
         # returns the number of days in a month
-        month = month + 1
-        new Date(year, month, 0).getDate()
+        _month = month + 1
+        return new Date(year, _month, 0).getDate()
 
     getDayOfWeek: (month, date, year) ->
         # returns the day of the week for a specific date
         _day = new Date year, month, date
-        _day.getDay()
+        return _day.getDay()
 
     getWeeksInMonth: (month, year) ->
         # gets the number of weeks in a month
@@ -705,11 +716,6 @@ class @DrmCalendar
         events.remove()
         @events.splice index, 1
 
-    cleanString: (str, re) ->
-        re = new RegExp "#{re}", 'i'
-        str = str.replace re, ''
-        return $.trim str
-
     editEvent: ->
         self = @
         eventDetailList = $('.drm-event-detail-list')
@@ -722,7 +728,8 @@ class @DrmCalendar
             label = $.trim(_that.find('span.drm-event-label').text()).toLowerCase()
             label = self.cleanString label, ':'
             value = $.trim _that.find('span.drm-event-detail').text()
-            eventFormHtml += "<label for='#{label}'>#{label}: </label><input type='text' value='#{value}' id='#{label}' name='#{label}'>"
+            eventFormHtml += "<label for='#{label}'>#{self.capitalize(label)}: </label>
+            <input type='text' value='#{value}' id='#{label}' name='#{label}'>"
             return eventFormHtml
 
         editEventForm = $ '<form></form>',
@@ -1142,8 +1149,8 @@ class @DrmCalendar
                 _month = _calendarInner.data 'month'
                 _year = _calendarInner.data 'year'
 
-                if _month is self.today.month and _year is self.today.year
-                    _calendarInner.find(".drm-date[data-date=#{self.today.date}]")
+                if _month is self.currentDate.month and _year is self.currentDate.year
+                    _calendarInner.find(".drm-date[data-date=#{self.currentDate.date}]")
                         .addClass self.classes.today
 
             addWeekNumbers: ->

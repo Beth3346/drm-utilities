@@ -1,5 +1,7 @@
 # Dynamic Response Media Sass Utilities
 
+[![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+
 ## About drm-sass-utilities
 
 These are some sass extends and mixins that we are using over and over in our projects

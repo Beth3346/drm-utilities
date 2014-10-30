@@ -14,9 +14,14 @@ body {
 	background-color: white;
 
 	@include drm-breakpoint(tall) {		
-		font-size: ($default-font-size + 2)#{px};
-		line-height: $default-line-height + .5;
+        font-size: ($default-font-size + 1)#{px};
+        line-height: $default-line-height + .2;
 	}
+}
+
+// main element support for old browsers
+main {
+	display: block;
 }
 
 .drm-wrapper {

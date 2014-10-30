@@ -16,6 +16,7 @@ class @DrmTimeStamps
             hour: @now.getHours()
             minute: @now.getMinutes()
             second: @now.getSeconds()
+        @daysPerWeek = 7
         @prettyDate = $ '.drm-pretty-date'
         @drmNow = $ '.drm-now'
         @patterns =
@@ -171,7 +172,110 @@ class @DrmTimeStamps
     getDaysInMonth: (month, year) ->
         # returns the number of days in a month
         _month = month + 1
-        new Date(year, _month, 0).getDate()
+        return new Date(year, _month, 0).getDate()
+
+    getDayOfWeek: (month, date, year) ->
+        # returns the day of the week for a specific date
+        _day = new Date year, month, date
+        return _day.getDay()
+
+    getFirstDayOfMonth: (month, year) ->
+        return @getDayOfWeek month, 1, year
+    
+    getWeeksInMonth: (month, year) ->
+        # gets the number of weeks in a month
+        _firstDay = @getFirstDayOfMonth month, year
+        _numberDays = @getDaysInMonth month, year
+        _dayShift = if _firstDay is @daysPerWeek then 0 else _firstDay
+        Math.ceil (_numberDays + _dayShift) / @daysPerWeek
+    
+    # getMonthWeekNum: (dayNum, day, month, year) ->
+    #     # gets the week of the month which an event occurs
+    #     _weeks = @calendar.find("div.#{@calendarInnerClass}").find '.drm-week'
+    #     _firstDay = @getDayOfWeek month, 1, year
+    #     _dayShift = if _firstDay is @daysPerWeek then 0 else _firstDay
+    #     _numberWeeks = @getWeeksInMonth month, year
+    #     _lastWeekLength = _weeks.eq(_numberWeeks).length
+
+    #     if dayNum is 'last' and _dayShift <= day
+    #         eventWeekNum = if _lastWeekLength < day then (_numberWeeks - 2) else _numberWeeks - 1
+    #     else if dayNum is 'last' and _dayShift > day
+    #         eventWeekNum = _numberWeeks - 2
+    #     else
+    #         eventWeekNum = parseInt(dayNum, 10) - 1
+
+    #     return if _dayShift <= day then eventWeekNum else eventWeekNum + 1
+
+    # getDatesInWeek: (month, newDate, year) ->
+    #     _firstDay = @getDayOfWeek month, 1, year
+    #     _numberDays = @getDaysInMonth month, year
+    #     _dayShift = if _firstDay is @daysPerWeek then 0 else _firstDay
+    #     _currentDay = @getDayOfWeek month, newDate, year
+    #     _numberWeeks = @getWeeksInMonth month, year
+    #     weekInfo = {}
+    #     weekInfo.datesInWeek = []
+
+    #     _firstWeek = []
+    #     _lastWeek = []
+
+    #     _daysInFirstWeek = @daysPerWeek - _dayShift
+
+    #     _i = 1
+    #     # get the number of dates in each week
+    #     while _i <= _numberWeeks
+    #         dates = []
+
+    #         if _i is 1
+    #         # first week of the month
+    #             _j = 0
+    #             while _j < _daysInFirstWeek
+    #                 _j = _j + 1
+    #                 dates.push _j
+    #         # middle weeks
+    #         else if _i < _numberWeeks
+    #             if _i is 2 then _date = _daysInFirstWeek
+    #             _j = 0
+    #             while _j < @daysPerWeek
+    #                 _j = _j + 1
+    #                 _date = _date + 1
+    #                 dates.push _date
+    #         else if _i is _numberWeeks
+    #         # last week in month
+    #             while _date < _numberDays
+    #                 _date = _date + 1
+    #                 dates.push _date
+
+    #         # get the week number
+    #         if newDate in dates
+    #             weekInfo.weekNum = _i - 1
+    #             weekInfo.datesInWeek = dates
+
+    #         _i = _i + 1
+    #     weekInfo
+
+    # getWeekNumber: (month, newDate, year) ->
+    #     self = @
+    #     _weekNum = 1
+    #     weekNums = []
+    #     _weekInfo = self.getDatesInWeek month, newDate, year
+
+    #     $.each self.months, (key) ->
+    #         _numberDays = self.getDaysInMonth key, year
+    #         _firstDay = self.getDayOfWeek key, 1, year
+    #         _dayShift = if _firstDay is self.daysPerWeek then 0 else _firstDay
+    #         _numberWeeks = self.getWeeksInMonth month, year
+    #         _week = 1
+    #         if $.isNumeric _numberWeeks
+    #             while _week <= _numberWeeks
+    #                 if _week is 1 and _firstDay isnt 0
+    #                     _weekNum = _weekNum
+    #                 else
+    #                     _weekNum = _weekNum + 1
+    #                 _week = _week + 1
+    #                 if month is key
+    #                     weekNums.push _weekNum
+        
+    #     weekNums[_weekInfo.weekNum]
 
     parseDate: (dateTime) =>
         # check for Yesterday, Today, Tomorrow strings and look for time

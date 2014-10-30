@@ -5,9 +5,9 @@
 $ = jQuery
 class @DrmAccordion
     constructor: (@speed = 300, @container = $('.drm-accordion')) ->
-        @label = '.' + @container.children().first().attr 'class'
-        @containerClass = '.' + @container.attr 'class'
-        @contentHolder = @containerClass + ' .' + $("#{@label}").next().attr 'class'
+        @label = '.drm-accordion-label'
+        @containerClass = '.drm-accordion'
+        @contentHolder = '.drm-accordion-content'
         @state = @container.data 'state'
         @content = $ @contentHolder
 
@@ -39,9 +39,9 @@ class @DrmAccordion
 class @DrmAccordionContent extends DrmAccordion
     constructor: (@speed = 300, @container = $('.drm-accordion'), @showButtons = yes) ->
         @state = @container.data 'state'
-        @containerClass = '.' + @container.attr 'class'
-        @label = '.' + @container.children().first().attr 'class'
-        @contentHolder = @containerClass + ' .' + $("#{@label}").next().attr 'class'
+        @containerClass = '.drm-accordion'
+        @label = '.drm-accordion-label'
+        @contentHolder = '.drm-accordion-content'
         @content = $ @contentHolder
 
         if @showButtons

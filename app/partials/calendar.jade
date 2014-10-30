@@ -5,9 +5,9 @@ section
 
     h2 Live Demo
 
-    .drm-calendar
+    .drm-calendar(data-month="March" data-date="24" data-year="2015")
         button.drm-show-event-form.button-solid-radius(type="button") Add New Event
-        form.drm-calendar-new-event#drm-calendar-new-event(method="Get" action="" role="form")
+        form.drm-calendar-new-event#drm-calendar-new-event(method="get" action="" role="form")
             label(for="event_name") Event Name:
             input#name(type="text" name="event_name" required data-min-length="3" data-max-length="50")
             h3.drm-bold Event Recurrance:
