@@ -13,7 +13,7 @@
     text-align: center;
     box-sizing: border-box;
 
-    @include drm-breakpoint(tall) {
+    @include drm-breakpoint(neptune) {
         width: 100%;
     }
 }
@@ -24,15 +24,15 @@
     overflow: hidden;
     @include drm-em-font(20);   
 
-    @include drm-breakpoint(trenta) {
+    @include drm-breakpoint(mercury) {
         height: 60px;
     }   
 
-    @include drm-breakpoint(venti) {
+    @include drm-breakpoint(venus) {
         height: 60px;
     }
 
-    @include drm-breakpoint(tall) {
+    @include drm-breakpoint(neptune) {
         height: auto;
     }
 }
@@ -73,7 +73,7 @@
     height: 45px - 6;
     box-sizing: border-box;
     @include drm-em-font(24);
-    @include drm-stitched-row(lighten($color, 10%), $stitch-color, none, 1);
+    @include drm-stitched-row($color, $stitch-color, none, 1, $darker-grey);
 
     @if $text-shadow != none {
         @include drm-inset-text($text-shadow);  
@@ -88,6 +88,7 @@
         border: 20px solid $color;
         border-right-width: 30px;
         border-left-color: transparent;
+        box-shadow: $darker-grey 1px 1px 1px;
         @include drm-rectangle(0, 0);
     }
 
@@ -100,6 +101,7 @@
         border: 20px solid $color;
         border-left-width: 30px;
         border-right-color: transparent;
+        box-shadow: $darker-grey -1px 1px 1px;
         @include drm-rectangle(0, 0);
     }
 
@@ -178,7 +180,7 @@
         @if $shadow-color != none {
             @include drm-inset-border($border-color, $shadow-color);
         } @else {
-            border-bottom: 1px solid $border-color;
+            border-bottom: $border-color;
         }
     }
 
@@ -288,14 +290,14 @@
     box-sizing: border-box;
     @include drm-clearfix();
 
-    @include drm-breakpoint(trenta) {
+    @include drm-breakpoint(mercury) {
         width: 80%;
         margin-left: 10%;
         margin-right: 10%;
         box-sizing: border-box;
     }
 
-    @include drm-breakpoint(venti) {
+    @include drm-breakpoint(venus) {
         width: 95%;
         margin-left: 2.5%;
         margin-right: 2.5%;
@@ -383,7 +385,7 @@
     }
 }
 
-@mixin drm-label($type: info, $border-radius: 3px, $color: none, $border-color: none) {
+@mixin drm-label($type: info, $border-radius: 3px, $color: none) {
     padding: 5px 10px 5px 10px;
 
     @if $border-radius != 0 {
@@ -412,15 +414,8 @@
         color: darken($muted-color, 20%);           
     } @else if $type == custom {
         background-color: lighten($color, 20%);
-        border-width: 1px;
-        border-style: solid;
-        @if $border-color != none {
-            border-color: $border-color;
-            color: $border-color;
-        } @else {
-            border-color: $color;
-            color: darken($color, 20%);
-        }
+        border: 1px solid $color;
+        color: darken($color, 20%);     
     } @else {
         @warn "#{error("That's not a context box type!")}";
     }

@@ -12,10 +12,6 @@
 .drm-calendar {
     width: 100%;
 
-    button {        
-        @include drm-em-font(14);
-    }
-
     .drm-calendar-nav, .drm-calendar-view-nav {
         margin: 10px 0 10px 0;
         @include drm-button-group($drm-blue, white, 3px, $drm-blue);
@@ -113,14 +109,6 @@
         border-left: 1px solid $lighter-grey;
         color: $dark-grey;
         @include drm-em-font(14);
-
-        @include drm-breakpoint(trenta) {
-            min-height: 150px;
-        }
-
-        @include drm-breakpoint(venti) {
-            min-height: 100px;
-        }
 
         &:last-child {
             border-right: 1px solid $lighter-grey;
@@ -288,19 +276,19 @@
     left: 20%;
     position: absolute;
 
-    @include drm-breakpoint(trenta) {
+    @include drm-breakpoint(mercury) {
         width: 40%;
         left: 30%;
         top: 100px;
     }
 
-    @include drm-breakpoint(venti) {
+    @include drm-breakpoint(venus) {
         width: 60%;
         left: 20%;
         top: 20px;
     }
 
-    @include drm-breakpoint(tall) {
+    @include drm-breakpoint(neptune) {
         width: 80%;
         left: 10%;
         top: 20px;
@@ -321,12 +309,10 @@
     button {
         &.drm-event-close, &.drm-event-edit {
             @include drm-button-solid($drm-blue, white, 120px, left, 3px, $drm-blue, inline-block);
-            @include drm-em-font(14);
         }
 
         &.drm-event-delete {
             @include drm-button-solid($danger-color, white, 120px, left, 3px, $danger-color, inline-block);
-            @include drm-em-font(14);
         }
     }
 }

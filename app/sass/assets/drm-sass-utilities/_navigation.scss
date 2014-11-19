@@ -743,11 +743,11 @@
         position: fixed;
         top: 5%;
         
-        @include drm-breakpoint(trenta) {
+        @include drm-breakpoint(mercury) {
             left: 10%;
         }
 
-        @include drm-breakpoint(venti) {
+        @include drm-breakpoint(venus) {
             left: 2.5%;
         }
     }
@@ -766,7 +766,7 @@
     @include drm-square(50px, none, 3px);
     @include drm-em-font(48);
 
-    @include drm-breakpoint(trenta) {
+    @include drm-breakpoint(mercury) {
         right: 10%;
     }
 
