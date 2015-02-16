@@ -3,9 +3,6 @@
 -----------------------------------------------------------------------------*/
 
 .float-boxes {
-	margin: 20px;
-	padding: 20px;
-	border: 1px solid $grey;
 	background-color: white;
 	@include drm-clearfix();
 }
@@ -19,8 +16,5 @@
 }
 
 .typography-classes {
-	margin: 20px;
-	padding: 20px;
-	border: 1px solid $grey;
 	background-color: white;
 }

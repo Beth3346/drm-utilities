@@ -22,6 +22,8 @@
         @media screen and (max-width: $neptune) { @content; }
     } @else if $point == pluto {
         @media screen and (max-width: $pluto) { @content; }
+    } @else {
+        @media screen and (max-width: $point) { @content; }
     }
 }
 

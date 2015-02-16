@@ -24,6 +24,11 @@ section {
     padding: 20px;
 }
 
+pre.center-block {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 .example {
     margin: 20px;
     padding: 20px;
@@ -31,4 +36,12 @@ section {
     border: 1px solid $grey;
     box-sizing: border-box;
     @include drm-clearfix();
+}
+
+.argument-list {
+    padding-left: 40px;
+
+    h2 {
+        @include drm-em-font(18);
+    }
 }

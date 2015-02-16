@@ -64,7 +64,7 @@
 	margin: 20px;
 	padding: 20px;
 	background-color: white;
-	@include drm-triple-shadow($dark-aqua, $dark-pink);
+	@include drm-triple-shadow($dark-aqua, lighten($dark-aqua, 20%));
 }
 
 .inset-text {
@@ -91,6 +91,10 @@
 		list-style: none;
 		padding: 5px;
 		@include drm-inset-border($dark-aqua, lighten($dark-aqua, 40%));
+
+		&:last-child {
+			padding-bottom: 5px;
+		}
 	}
 }
 

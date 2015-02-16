@@ -1,286 +1,300 @@
-h1 Effects Utilities
+article.effects-examples
 
-nav
-    h2 Effects Examples
-    ul.nav-bar-stacked
-        li: a(href="#solid-drop-shadow") Solid Drop Shadow
-        li: a(href="#background-transparent") Background Transparent 
-        li: a(href="#border-transparent") Border Transparent
-        li: a(href="#stitched-box") Stitched Box
-        li: a(href="#stitched-row") Stitched Row 
-        li: a(href="#stitched-row-transparent") Stitched Row Transparent
-        li: a(href="#stitched-row-shadow") Stitched Row Shadow
-        li: a(href="#figure-border") Transparent Figure Border
-        li: a(href="#triple-shadow") Triple Shadow
-        li: a(href="#inset-text") Inset Text
-        li: a(href="#inset-border") Inset Border
-        li: a(href="#inset-box") Inset Box
-        li: a(href="#boxy-drop-shadow") Boxy Drop Shadow
-        li: a(href="#softer-thick-box-shadow") Softer Thick Box Shadow
-        li: a(href="#thumbnail") Thumbnail
+    h1 Effects Utilities
+
+    h2 Examples
 
     .example-holder
-        h3.drm-bold#solid-drop-shadow Solid Drop Shadow
 
-        .solid-drop-shadow.example
-            p.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
-                maxime molestias est numquam quos recusandae dignissimos commodi 
-                vero sequi ipsum sed nesciunt optio?
+        section#solid-drop-shadow
+            h1.drm-bold Solid Drop Shadow
 
-        p Creates a solid drop shadow effect
-        
-        pre.center-block.
-            @include drm-solid-drop-shadow($color);
-        
-        h4.drm-bold Arguments:
-        
-        ul.drm-unstyled-list
-            li $color: color of drop shadow      
-
-        h3.drm-bold#background-transparent Background Transparent
-        
-        .background-transparent.example        
-            p.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
-                maxime molestias est numquam quos recusandae dignissimos commodi 
-                vero sequi ipsum sed nesciunt optio?
-        
-        p Creates a transparent background with a hex color backup for browsers that do not support rgba colors
-        
-        pre.center-block.
-            @include drm-background-transparent($color, $opacity);
-        
-        h4.drm-bold Arguments:
-        
-        ul.drm-unstyled-list
-            li $color: background color
-            li $opacity: opacity of background color: default: 0.7          
-                
-        h3.drm-bold#border-transparent Border Transparent
-        
-        .border-transparent.example        
-            p.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
-                maxime molestias est numquam quos recusandae dignissimos commodi 
-                vero sequi ipsum sed nesciunt optio?
-
-        p Creates a transparent border with a hex color backup for browsers that do not support rgba colors 
-        
-        pre.center-block.
-            @include drm-border-transparent($color, $thickness, $opacity);
-
-        h4.drm-bold Arguments:
-
-        ul.drm-unstyled-list
-            li $color: color of border
-            li $thickness: thickness of the border: default: 5px
-            li $opacity: opacity of background color: default: 0.7          
-                
-        h3.drm-bold#stitched-box Stitched Box
-        
-        p Creates a box with a cute stitching effect around the edges
-
-        .stitched-box.example        
-            p.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
-                maxime molestias est numquam quos recusandae dignissimos commodi 
-                vero sequi ipsum sed nesciunt optio?
-        
-        pre.center-block.
-            @include drm-stitched-box($color, $stitch-color, $border-radius, $border-color, $opacity);
-        
-        h4.drm-bold Arguments:
-        
-        ul.drm-unstyled-list
-            li $color: box color
-            li $stitch-color: color of stitching: default: white
-            li $border-radius: default: 0
-            li $border-color: default: none
-            li $opacity: default: 1                
-                
-        h3.drm-bold#stitched-row Stitched Row
-        p creates a row that has a cute stitching effect along the top and bottom
-        .stitched-row.example
-            p.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
-                maxime molestias est numquam quos recusandae dignissimos commodi 
-                vero sequi ipsum sed nesciunt optio?
-        
-        pre.center-block.
-            @include drm-stitched-box($color, $stitch-color, $border-color, $opacity, $shadow);
-        
-        h4.drm-bold Arguments:
-
-        ul.drm-unstyled-list
-            li $color: box color
-            li $stitch-color: color of stitching: default: white
-            li $border-color: default: none
-            li $opacity: default: 1
-            li $shadow: default: transparent
-                
-        h3.drm-bold#stitched-row-transparent Stitched Row Transparent
-        .stitched-row-transparent.example
-            p.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
-                maxime molestias est numquam quos recusandae dignissimos commodi 
-                vero sequi ipsum sed nesciunt optio?
-        
-        pre.center-block.
-            @include drm-stitched-row($drm-blue, white, #333, .5, transparent);
-
-        h4.drm-bold Arguments:
-
-        ul.drm-unstyled-list
-            li $color: Color of drop shadow                           
-                
-        h3.drm-bold#stitched-row-shadow Stitched Row Shadow
-        .stitched-row-shadow.example
-            p.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
-                maxime molestias est numquam quos recusandae dignissimos commodi 
-                vero sequi ipsum sed nesciunt optio?
-        
-        pre.center-block.
-            @include drm-stitched-row($dark-pink, white, #999, 1, #333);
-
-        h4.drm-bold Arguments:
-
-        ul.drm-unstyled-list
-            li $color: Color of drop shadow                          
-                
-        h3.drm-bold#figure-border Transparent Figure Border 
-
-        .figure-border               
-            figure 
-                img(src="images/cat.jpg" alt="Kitten")
-        
-        pre.center-block.
-            @include drm-solid-drop-shadow($color);
-
-        h4.drm-bold Arguments:
-
-        ul.drm-unstyled-list
-            li $color: Color of drop shadow               
-                
-        h3.drm-bold#triple-shadow Triple Shadow
-        .triple-shadow.example        
-            p.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
-                maxime molestias est numquam quos recusandae dignissimos commodi 
-                vero sequi ipsum sed nesciunt optio?
-        
-        pre.center-block.
-            @include drm-solid-drop-shadow($color);
-
-        h4.drm-bold Arguments:
-
-        ul.drm-unstyled-list
-            li $color: Color of drop shadow                   
-                
-        h3.drm-bold#inset-text Inset Text           
-        .inset-text.example   
-            p.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
-                maxime molestias est numquam quos recusandae dignissimos commodi 
-                vero sequi ipsum sed nesciunt optio?
-        
-        pre.center-block.
-            @include drm-solid-drop-shadow($color);
-
-        h4.drm-bold Arguments:
-
-        ul.drm-unstyled-list
-            li $color: Color of drop shadow                     
-                
-        h3.drm-bold#inset-border Inset Border          
-        .inset-border.example        
-            ul.drm-unstyled-list 
-                li List Item
-                li List Item
-                li List Item
-        
-        pre.center-block.
-            @include drm-solid-drop-shadow($color);
-
-        h4.drm-bold Arguments:
-
-        ul.drm-unstyled-list
-            li $color: Color of drop shadow                  
-                
-        h3.drm-bold#inset-box Inset Box
-        .inset-box-holder
-            .inset-box.example
+            .solid-drop-shadow.example
                 p.
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                     Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
                     maxime molestias est numquam quos recusandae dignissimos commodi 
                     vero sequi ipsum sed nesciunt optio?
-        
-        pre.center-block.
-            @include drm-solid-drop-shadow($color);
 
-        h4.drm-bold Arguments:
+            p Creates a solid drop shadow effect
+            
+            pre.center-block.
+                @include drm-solid-drop-shadow($color);
+                    
+            .argument-list
 
-        ul.drm-unstyled-list
-            li $color: Color of drop shadow
+                h2.drm-bold Arguments:
                 
-        h3.drm-bold#boxy-drop-shadow Boxy Drop Shadow           
-        .boxy-drop-shadow.example        
-            p.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
-                maxime molestias est numquam quos recusandae dignissimos commodi 
-                vero sequi ipsum sed nesciunt optio?
-        
-        pre.center-block.
-            @include drm-solid-drop-shadow($shadow-color);
+                ul.drm-unstyled-list
+                    li $color: color of drop shadow
 
-        h4.drm-bold Arguments:
+        section#background-transparent
 
-        ul.drm-unstyled-list
-            li $shadow-color: Color of drop shadow
+            h1.drm-bold Background Transparent
+            
+            .background-transparent.example        
+                p.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
+                    maxime molestias est numquam quos recusandae dignissimos commodi 
+                    vero sequi ipsum sed nesciunt optio?
+            
+            p Creates a transparent background with a hex color backup for browsers that do not support rgba colors
+            
+            pre.center-block.
+                @include drm-background-transparent($color, $opacity);
+                    
+            .argument-list
+
+                h2.drm-bold Arguments:
                 
-        h3.drm-bold#softer-thick-box-shadow Soft Drop Shadow           
-        .softer-thick-box-shadow.example     
-            p.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
-                maxime molestias est numquam quos recusandae dignissimos commodi 
-                vero sequi ipsum sed nesciunt optio?
-        
-        pre.center-block.
-            @include drm-softer-thick-box-shadow($shadow-color);
+                ul.drm-unstyled-list
+                    li $color: background color
+                    li $opacity: opacity of background color: default: 0.7          
 
-        h4.drm-bold Arguments:
+        section#border-transparent
+                
+            h1.drm-bold Border Transparent
+            
+            .border-transparent.example        
+                p.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
+                    maxime molestias est numquam quos recusandae dignissimos commodi 
+                    vero sequi ipsum sed nesciunt optio?
 
-        ul.drm-unstyled-list
-            li $shadow-color: Color of drop shadow
+            p Creates a transparent border with a hex color backup for browsers that do not support rgba colors 
+            
+            pre.center-block.
+                @include drm-border-transparent($color, $thickness, $opacity);
+            
+            .argument-list
 
-        h3.drm-bold#thumbnail Thumbnail
+                h2.drm-bold Arguments:
 
-        img.drm-thumbnail(src="http://placekitten.com/198/207")
-        img.rounded-thumbnail(src="http://placekitten.com/200/200")
-        img.round-thumbnail(src="http://placekitten.com/200/200")
-        
-        pre.center-block.
-            @include drm-thumbnail(white, 150px, 125px, 0);
-            @include drm-thumbnail(white, 150px, 125px, 5px);
-            @include drm-thumbnail(white, 150px, null, round);
+                ul.drm-unstyled-list
+                    li $color: color of border
+                    li $thickness: thickness of the border: default: 5px
+                    li $opacity: opacity of background color: default: 0.7
 
-        h4.drm-bold Arguments:
+        section#stitched-box
+                
+            h1.drm-bold Stitched Box
+            
+            p Creates a box with a cute stitching effect around the edges
 
-        ul.drm-unstyled-list
-            li $border-color: defaults to white
-            li $width: defaults to 150px
-            li $height: defaults to 125px
-            li $border-radius: defaults to o for 90 degree corners - for a circular image enter round
+            .stitched-box.example        
+                p.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
+                    maxime molestias est numquam quos recusandae dignissimos commodi 
+                    vero sequi ipsum sed nesciunt optio?
+            
+            pre.center-block.
+                @include drm-stitched-box($color, $stitch-color, $border-radius, $border-color, $opacity);
+                    
+            .argument-list
+
+                h2.drm-bold Arguments:
+                
+                ul.drm-unstyled-list
+                    li $color: box color
+                    li $stitch-color: color of stitching: default: white
+                    li $border-radius: default: 0
+                    li $border-color: default: none
+                    li $opacity: default: 1
+
+        section#stitched-row
+                
+            h1.drm-bold Stitched Row
+            p creates a row that has a cute stitching effect along the top and bottom
+            .stitched-row.example
+                p.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
+                    maxime molestias est numquam quos recusandae dignissimos commodi 
+                    vero sequi ipsum sed nesciunt optio?
+            
+            pre.center-block.
+                @include drm-stitched-box($color, $stitch-color, $border-color, $opacity, $shadow);
+                    
+            .argument-list
+
+                h2.drm-bold Arguments:
+
+                ul.drm-unstyled-list
+                    li $color: box color
+                    li $stitch-color: color of stitching: default: white
+                    li $border-color: default: none
+                    li $opacity: default: 1
+                    li $shadow: default: transparent
+
+        section#figure-border
+                
+            h1.drm-bold Transparent Figure Border
+            p Creates a transparent, inset border that transitions to another color when the user hovers over the figure.
+
+            .figure-border               
+                figure 
+                    img(src="images/cat.jpg" alt="Kitten")
+            
+            pre.center-block.
+                @include drm-solid-drop-shadow($color);
+            
+            .argument-list
+
+                h2.drm-bold Arguments:
+
+                ul.drm-unstyled-list
+                    li $color: Color of drop shadow
+
+        section#triple-shadow
+                
+            h1.drm-bold Triple Shadow
+            p Creates a triple border effect
+
+            .triple-shadow.example        
+                p.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
+                    maxime molestias est numquam quos recusandae dignissimos commodi 
+                    vero sequi ipsum sed nesciunt optio?
+            
+            pre.center-block.
+                @include drm-solid-drop-shadow($color);
+            
+            .argument-list
+
+                h2.drm-bold Arguments:
+
+                ul.drm-unstyled-list
+                    li $color: Color of drop shadow                   
+
+        section#inset-text
+                    
+            h1.drm-bold Inset Text
+            p Applies a simple inset text effect.
+
+            .inset-text.example   
+                p.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
+                    maxime molestias est numquam quos recusandae dignissimos commodi 
+                    vero sequi ipsum sed nesciunt optio?
+            
+            pre.center-block.
+                @include drm-solid-drop-shadow($color);
+            
+            .argument-list
+
+                h2.drm-bold Arguments:
+
+                ul.drm-unstyled-list
+                    li $color: Color of drop shadow
+
+        section#inset-border
+                
+            h1.drm-bold Inset Border
+            p Applies a simple inset bottom border effect to an element.
+
+            .inset-border.example        
+                ul.drm-unstyled-list
+                    li List Item
+                    li List Item
+                    li List Item
+            
+            pre.center-block.
+                @include drm-solid-drop-shadow($color);
+            
+            .argument-list
+
+                h2.drm-bold Arguments:
+
+                ul.drm-unstyled-list
+                    li $color: Color of drop shadow
+
+        section#inset-box
+                
+            h1.drm-bold Inset Box
+            p Applies an inset box effect to a block element.
+            
+            .inset-box-holder
+                .inset-box.example
+                    p.
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
+                        maxime molestias est numquam quos recusandae dignissimos commodi 
+                        vero sequi ipsum sed nesciunt optio?
+            
+            pre.center-block.
+                @include drm-solid-drop-shadow($color);
+            
+            .argument-list
+
+                h2.drm-bold Arguments:
+
+                ul.drm-unstyled-list
+                    li $color: Color of drop shadow
+
+        section#boxy-drop-shadow
+                
+            h1.drm-bold Boxy Drop Shadow           
+            .boxy-drop-shadow.example        
+                p.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
+                    maxime molestias est numquam quos recusandae dignissimos commodi 
+                    vero sequi ipsum sed nesciunt optio?
+            
+            pre.center-block.
+                @include drm-solid-drop-shadow($shadow-color);
+            
+            .argument-list
+
+                h2.drm-bold Arguments:
+
+                ul.drm-unstyled-list
+                    li $shadow-color: Color of drop shadow
+
+        section#softer-thick-box-shadow
+                
+            h1.drm-bold Soft Drop Shadow
+            .softer-thick-box-shadow.example
+                p.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
+                    maxime molestias est numquam quos recusandae dignissimos commodi 
+                    vero sequi ipsum sed nesciunt optio?
+            
+            pre.center-block.
+                @include drm-softer-thick-box-shadow($shadow-color);
+            
+            .argument-list
+
+                h2.drm-bold Arguments:
+
+                ul.drm-unstyled-list
+                    li $shadow-color: Color of drop shadow
+
+        section#thumbnail
+
+            h1.drm-bold Thumbnail
+
+            img.drm-thumbnail(src="http://placehold.it/198/207")
+            img.rounded-thumbnail(src="http://placehold.it/200/200")
+            img.round-thumbnail(src="http://placehold.it/200/200")
+            
+            pre.center-block.
+                @include drm-thumbnail(white, 150px, 125px, 0);
+                @include drm-thumbnail(white, 150px, 125px, 5px);
+                @include drm-thumbnail(white, 150px, null, round);
+            
+            .argument-list
+
+                h2.drm-bold Arguments:
+
+                ul.drm-unstyled-list
+                    li $border-color: defaults to white
+                    li $width: defaults to 150px
+                    li $height: defaults to 125px
+                    li $border-radius: defaults to o for 90 degree corners - for a circular image enter round

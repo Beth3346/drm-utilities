@@ -2,6 +2,10 @@
     General Styles
 -----------------------------------------------------------------------------*/
 
+// include drm-helper-classes
+
+@include drm-helper-classes();
+
 .drm-button {	
 	@include drm-button-solid($drm-blue, white, 200px);
 }

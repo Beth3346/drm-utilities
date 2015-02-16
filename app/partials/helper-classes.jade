@@ -1,51 +1,89 @@
+article.helper-classes-examples
+
+h1 DRM Helper Classes
+
+p These are some pre-defined CSS classes and HTML element default styles I find myself using over and over.
+
+p To include it add the following line to your main stylesheet
+
+pre @include drm-helper-classes();
+
 h2 Helper Classes Examples
 
 .example-holder
-    .float-boxes
+    section.float-boxes
         h1 Float Boxes Left or Right
-        .drm-pull-left.box
-            p Left
         
-        .drm-pull-right.box
-            p Right
+        .drm-wrapper
+            .drm-pull-left.box
+                p Left
+        
+        pre .drm-pull-left
+        
+        .drm-wrapper            
+            .drm-pull-right.box
+                p Right
+        
+        pre .drm-pull-right
+
     
-    .typography-classes
+    section.typography-classes
         h1 Typography Styles
 
         p.drm-bold Bold
+        pre .drm-bold
 
         p.drm-italic Italic
+        pre .drm-italic
 
         p.drm-underline Underline
+        pre .drm-underline
 
         p.drm-uppercase Uppercase
+        pre .drm-uppercase
 
         p.drm-smaller-text Smaller Text
+        pre .drm-smaller-text
 
         p.drm-text-left Left Aligned
+        pre .drm-text-left
 
         p.drm-text-right Right Aligned
+        pre .drm-text-right
 
         p.drm-text-center Center Aligned
+        pre .drm-text-center
 
         p.drm-text-justified. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam, deleniti amet sequi fugiat voluptates veniam maxime. 
-            Officia consequatur quasi numquam ad enim et quos rem accusantium dolore dolores. Itaque, ab.
+            Officia consequatur quasi numquam ad enim et quos rem accusantium dolore dolores. Itaque, ab.  Lorem ipsum dolor sit amet, consectetur 
+            adipisicing elit. Perferendis atque cupiditate accusantium, doloribus excepturi, nobis vel consectetur quidem harum, eum esse laboriosam 
+            qui quo quisquam at officia ab possimus vero sapiente a necessitatibus ipsam porro nemo. Adipisci numquam velit maiores obcaecati dignissimos 
+            saepe, soluta architecto, facilis quidem, nostrum dolorum eius.
+        pre .drm-text-justified
 
         p.drm-text-muted Muted
+        pre .drm-text-muted
 
         p.drm-text-danger Danger
+        pre .drm-text-danger
 
         p.drm-text-error Error
+        pre .drm-text-error
 
         p.drm-text-info Info
+        pre .drm-text-info
 
         p.drm-text-warning Warning
+        pre .drm-text-warning
 
         p.drm-text-success Success
+        pre .drm-text-success
 
         mark Marked Text
+        pre &lt;mark&gt;Marked Text&lt;/mark&gt;
 
         p.drm-highlight Highlighted Text
+        pre .drm-highlight
 
         p. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo, cupiditate doloribus nemo quas quisquam voluptatem itaque veritatis 
             odit ipsam hic consequuntur dicta illum natus officiis porro vitae quo. Nihil, veritatis!
@@ -113,6 +151,7 @@ h2 Helper Classes Examples
             li Item Four
             li Item Five
             li Item Six
+        pre .drm-unstyled-list
 
         h3 Inline List
 
@@ -123,6 +162,7 @@ h2 Helper Classes Examples
             li Item Four
             li Item Five
             li Item Six
+        pre .drm-inline-list
 
         h3 Triangle List
 
@@ -133,6 +173,7 @@ h2 Helper Classes Examples
             li Item Four
             li Item Five
             li Item Six
+        pre .drm-triangle-list
 
         h3 Checked List
 
@@ -143,17 +184,36 @@ h2 Helper Classes Examples
             li Item Four
             li Item Five
             li Item Six
+        pre .drm-checked-list
 
         p: a(href="#") This is a link
 
         p: a(href="alerts.html") Alert Examples
 
-        ul.drm-unstyled-list
-            li .drm-info-alert
-            li .drm-danger-alert
-            li .drm-warning-alert
-            li .drm-success-alert
-            li .drm-muted-alert
-            li .drm-custom-alert
+        .drm-info-alert
+            p Info Alert
+
+        pre .drm-info-alert
+
+        .drm-danger-alert
+            p Danger Alert
+
+        pre .drm-danger-alert
+
+        .drm-warning-alert
+            p Warning Alert
+
+        pre .drm-warning-alert
+
+        .drm-success-alert
+            p Success Alert
+
+        pre .drm-success-alert
+
+        .drm-muted-alert
+            p Muted Alert
+
+        pre .drm-muted-alert
 
         img.drm-thumbnail(src="http://placekitten.com/198/207")
+        pre .drm-thumbnail
