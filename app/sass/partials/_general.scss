@@ -6,6 +6,10 @@
 
 @include drm-helper-classes();
 
+// include drm-grid
+
+@include drm-grid(12, 1em);
+
 .drm-button {	
 	@include drm-button-solid($drm-blue, white, 200px);
 }

@@ -30,10 +30,14 @@
     @import "navigation";               
     @import "effects";          
     @import "forms";    
-    @import "helper-classes";   
+    @import "helper-classes";
+    @import "grid";
+
+    // js components
+
     @import "calendar";
     @import "simple-slider";
     @import "lightbox";
     @import "tables";
     @import "tabbed-content";
-    @import "grid";
+    @import "image-grid";
