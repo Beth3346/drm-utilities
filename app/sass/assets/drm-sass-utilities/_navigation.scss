@@ -288,27 +288,29 @@
 
     .carat {
         position: relative;
+        padding-right: 25px;
         
         &:after {
             content: "\25BE";
             position: absolute;
-            right: 5%;
+            right: 8%;
             font-weight: bold;
             line-height: 1.9em;
-            @include drm-em-font(12);
+            font-size: 12px;
         }
     }
 
     .carat-right {
         position: relative;
+        padding-right: 25px;
         
         &:after {
             content: "\25B8";
             position: absolute;
-            right: 5%;
+            right: 8%;
             font-weight: bold;
             line-height: 1.9em;
-            @include drm-em-font(12);
+            font-size: 12px;
         }
     }
 }
