@@ -1,0 +1,50 @@
+/*-----------------------------------------------------------------------------
+    Grids
+-----------------------------------------------------------------------------*/
+
+@mixin drm-columns($num: 12, $gutter: 1em) {
+
+    @for $i from 1 through $num {
+        .drm-col-#{$i} {
+            width: ( 100 / $num ) * $i * 1%;
+            float: left;
+            padding: 0 $gutter;
+        }
+    }
+}
+
+@mixin drm-grid($column-count: 12, $gutter: 1em) {
+    .drm-container {
+        width: 95%;
+        margin: 0 auto;
+    }
+
+    .drm-row {
+        width: 100%;
+        margin-left: -$gutter;
+        margin-right: $gutter;
+        @include drm-clearfix();
+    }
+
+    @include drm-columns($column-count, $gutter);
+
+    .drm-col-full {
+        width: 100%;
+    }
+
+    .drm-col-half {
+        width: (100% / 2);
+    }
+
+    .drm-col-third {
+        width: (100% / 3);
+    }
+
+    .drm-col-two-thirds {
+        width: (100% / 3) * 2;
+    }
+
+    .drm-col-quarter {
+        width: (100% / 4);
+    }
+}
