@@ -1182,7 +1182,7 @@ class @DrmCalendar
                 _month = _calendarInner.data 'month'
                 _year = _calendarInner.data 'year'
 
-                if _month is newDate.month and _year is newDate.year
+                if _month is parseInt(newDate.month, 10) and _year is parseInt(newDate.year, 10)
                     _calendarInner.find(".drm-date[data-date=#{newDate.date}]").addClass self.classes.today
 
             addWeekNumbers: ->
