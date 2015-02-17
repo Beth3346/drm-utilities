@@ -1340,7 +1340,7 @@ class @DrmCalendar
 
                 addCalendar calendar
 
-            createWeek: (newDate) ->
+            createWeek: (newDate, calendar) ->
                 weekdaysHtml = "<thead><tr><th></th>"
                 $.each self.days, (key, value) ->
                     _dates = utilities.getDates datesInWeek, key
@@ -1378,8 +1378,8 @@ class @DrmCalendar
                     class: 'drm-calendar-header'
                     text: "#{self.months[newDate.month]} #{_weekDates}: Week #{weekNumber} of #{newDate.year}"
                 
-                _calendar.appendTo ".#{self.calendarClass}"
-                _heading.prependTo "div.#{self.calendarInnerClass}"
+                _calendar.appendTo calendar
+                _heading.prependTo calendar.find(".#{self.calendarInnerClass}")
 
                 $("div.#{self.calendarInnerClass}")
                     .find "tbody td[data-month=#{lastMonth}]"
@@ -1394,8 +1394,8 @@ class @DrmCalendar
                 utilities.highlightToday()
                 utilities.highlightWeekends()
 
-                $.each self.events, ->
-                    self.addEventsToCalendar @
+                $.each events, ->
+                    self.addEventsToCalendar @, calendar
 
                 $('.drm-calendar-year-prev').text lastYear
                 $('.drm-calendar-year-next').text nextYear
@@ -1406,7 +1406,7 @@ class @DrmCalendar
                 $('.drm-calendar-week-prev, .drm-calendar-week-next').show()
                 $('.drm-calendar-date-prev, .drm-calendar-date-next').hide()
 
-            createDate: (newDate) ->
+            createDate: (newDate, calendar) ->
                 dayListHtml = "<ul class='drm-week drm-day #{weekClass}' data-week='#{weekNumber}'>"
                 $.each self.hours, ->
                     _hour = @name
@@ -1430,11 +1430,11 @@ class @DrmCalendar
                     class: 'drm-calendar-header'
                     text: _headingText
                 
-                _calendar.appendTo ".#{self.calendarClass}"
-                _heading.prependTo ".#{self.calendarInnerClass}"
+                _calendar.appendTo calendar
+                _heading.prependTo calendar.find(".#{self.calendarInnerClass}")
 
-                $.each self.events, ->
-                    self.addEventsToCalendar @
+                $.each events, ->
+                    self.addEventsToCalendar @, calendar
 
                 $('.drm-calendar-year-prev').text lastYear
                 $('.drm-calendar-year-next').text nextYear
@@ -1447,5 +1447,5 @@ class @DrmCalendar
 
         switch self.view
             when 'month' then views.createMonth newDate, calendar
-            when 'week' then views.createWeek newDate
-            when 'date' then views.createDate newDate
+            when 'week' then views.createWeek newDate, calendar
+            when 'date' then views.createDate newDate, calendar
