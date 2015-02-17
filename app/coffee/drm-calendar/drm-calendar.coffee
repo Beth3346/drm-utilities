@@ -405,119 +405,133 @@ class @DrmCalendar
                 else
                     self.createCalendar {month: _currentDate.month, date: _currentDate.date, year: _currentDate.year}, that, events
 
-            @calendar.on 'click', '.drm-calendar-date-prev, .drm-calendar-date-next', ->
-                # skip date forward or backward
-                direction = $(@).data 'dir'
-                self.advanceDate.call @, direction
+                that.on 'click', '.drm-calendar-view-nav button', (e) ->
+                    # change calendar view
+                    e.preventDefault()
+                    _that = $ @
+                    _that.addClass 'active'
+                    calendar = _that.closest '.drm-calendar'
+                    calendar.find(".drm-calendar-view-nav button.active").removeClass 'active'
+                    view = _that.data 'view'
 
-            @calendar.on 'click', '.drm-calendar-week-prev, .drm-calendar-week-next', ->
-                # skip week forward or backward
-                direction = $(@).data 'dir'
-                self.advanceWeek.call @, direction
+                    self.changeCalendarView view, events, calendar
 
-            @calendar.on 'click', '.drm-calendar-month-prev, .drm-calendar-month-next', ->
-                # skip month forward or backward
-                direction = $(@).data 'dir'
-                self.advanceMonth.call @, direction
+                that.on 'click', '.drm-calendar-date-prev, .drm-calendar-date-next', ->
+                    # skip date forward or backward
+                    _that = $ @
+                    calendar = _that.closest '.drm-calendar'
+                    direction = $(@).data 'dir'
+                    self.advanceDate.call @, direction, events, calendar
 
-            @calendar.on 'click', '.drm-calendar-year-prev, .drm-calendar-year-next', ->
-                # skip year forward or backward
-                direction = $(@).data 'dir'
-                self.advanceYear.call @, direction
+                that.on 'click', '.drm-calendar-week-prev, .drm-calendar-week-next', ->
+                    # skip week forward or backward
+                    _that = $ @
+                    direction = $(@).data 'dir'
+                    calendar = _that.closest '.drm-calendar'
+                    self.advanceWeek.call @, direction, events, calendar
 
-            @calendar.on 'click', '.drm-calendar-current', ->
-                # go to today's date
-                self.changeCalendar.call @, {month: self.today.month, date: self.today.date, year: self.today.year}
+                that.on 'click', '.drm-calendar-month-prev, .drm-calendar-month-next', ->
+                    # skip month forward or backward
+                    _that = $ @
+                    calendar = _that.closest '.drm-calendar'
+                    direction = _that.data 'dir'
+                    self.advanceMonth.call @, direction, events, calendar
 
-            @calendar.on 'click', '.drm-calendar-select button[type=submit]', (e) ->
-                # go to a specific date
-                e.preventDefault()
-                _that = $ @
-                fields = _that.parent().find(':input').not 'button[type=submit]'
-                newDate =
-                    month: _that.parent().find('#month').val()
-                    date: _that.parent().find('#date').val()
-                    year: _that.parent().find('#year').val()
+                    return
 
-                # clear form
-                self.clearForm fields
+                that.on 'click', '.drm-calendar-year-prev, .drm-calendar-year-next', ->
+                    # skip year forward or backward
+                    _that = $ @
+                    direction = $(@).data 'dir'
+                    calendar = _that.closest '.drm-calendar'
+                    self.advanceYear.call @, direction, events, calendar
 
-                # parse form data
-                $.each newDate, ->
-                    parseInt @, 10
+                that.on 'click', '.drm-calendar-current', ->
+                    # go to today's date
+                    _that = $ @
+                    calendar = _that.closest '.drm-calendar'
+                    self.changeCalendar.call @, {month: self.today.month, date: self.today.date, year: self.today.year}, events, calendar
 
-                # change calendar view
-                self.changeCalendar.call self, newDate
-
-            @calendar.on 'click', 'button.drm-show-event-form', ->
-                # show add event form
-                _that = $ @
-                if self.addEventForm.is(':hidden')
-                    self.addEventForm.slideDown()
-                    _that.text 'Hide Form'
-                else
-                    self.addEventForm.slideUp()
-                    _that.text 'Add New Event'
-
-            @calendar.on 'click', '.drm-calendar-view-nav button', (e) ->
-                # change calendar view
-                e.preventDefault()
-                _that = $ @
-                _that.addClass 'active'
-                self.calendar.find(".drm-calendar-view-nav button.active").removeClass 'active'
-                view = _that.data 'view'
-
-                self.changeCalendarView view
-
-            @calendar.on 'click', 'form.drm-calendar-new-event button.addEvent', (e) ->
-                # add an new event to the events object
-                # this code should be moved to its own method
-                # write a method to get the form data and send the object to the createEvent method
-                e.preventDefault()
-                newEvent = self.getFormData self.addEventForm
-                currentMonth = $(".#{self.calendarInnerClass}").data 'month'
-
-                self.createEvent newEvent
-
-                newMonth = if newEvent.month? then $.inArray newEvent.month, self.months else self.today.month
-
-                if newMonth isnt currentMonth
+                that.on 'click', '.drm-calendar-select button[type=submit]', (e) ->
+                    # go to a specific date
+                    e.preventDefault()
+                    _that = $ @
+                    calendar = _that.closest '.drm-calendar'
+                    fields = _that.parent().find(':input').not 'button[type=submit]'
                     newDate =
-                        month: newMonth
-                        date: newEvent.eventDate
-                        year: self.today.year
+                        month: _that.parent().find('#month').val()
+                        date: _that.parent().find('#date').val()
+                        year: _that.parent().find('#year').val()
 
-                    self.changeCalendar.call @, newDate
+                    # clear form
+                    self.clearForm fields
 
-                # reset form
-                fields = self.addEventForm.find(':input').not('button[type=submit]').val ''
-                self.clearForm fields                
+                    # parse form data
+                    $.each newDate, ->
+                        parseInt @, 10
 
-            @calendar.on 'click', ".drm-date", ->
-                # show event form and fill out date infomation when a date is clicked
-                _that = $ @
+                    # change calendar view
+                    self.changeCalendar.call self, newDate, events, calendar
 
-                if self.addEventForm.is ':hidden'
-                    self.addEventForm.slideDown()
-                    self.showEventFormButton.text 'Hide Form'
+                that.on 'click', 'button.drm-show-event-form', ->
+                    # show add event form
+                    _that = $ @
+                    if self.addEventForm.is(':hidden')
+                        self.addEventForm.slideDown()
+                        _that.text 'Hide Form'
+                    else
+                        self.addEventForm.slideUp()
+                        _that.text 'Add New Event'
 
-                month: self.addEventForm.find('#month').val self.months[_that.data('month')]
-                year: self.addEventForm.find('#year').val _that.data('year')
-                eventDate: self.addEventForm.find('#eventDate').val _that.data('date')
-                time: self.addEventForm.find('#time').val _that.data('hour')
+                that.on 'click', 'form.drm-calendar-new-event button.addEvent', (e) ->
+                    # add an new event to the events object
+                    # this code should be moved to its own method
+                    # write a method to get the form data and send the object to the createEvent method
+                    e.preventDefault()
+                    newEvent = self.getFormData self.addEventForm
+                    currentMonth = $(".#{self.calendarInnerClass}").data 'month'
 
-            @calendar.on 'click', "ul.#{self.eventClass} a", (e) ->
-                # show event details
-                _that = $ @
-                day = _that.closest '.drm-date'
-                eventId = _that.data 'event'
-                fullDate =
-                    month: self.months[day.data('month')]
-                    date: day.data 'date'
-                    year: day.data 'year'
-                e.preventDefault()
-                e.stopPropagation()
-                self.readEvent eventId, fullDate
+                    self.createEvent newEvent
+
+                    newMonth = if newEvent.month? then $.inArray newEvent.month, self.months else self.today.month
+
+                    if newMonth isnt currentMonth
+                        newDate =
+                            month: newMonth
+                            date: newEvent.eventDate
+                            year: self.today.year
+
+                        self.changeCalendar.call @, newDate
+
+                    # reset form
+                    fields = self.addEventForm.find(':input').not('button[type=submit]').val ''
+                    self.clearForm fields                
+
+                that.on 'click', ".drm-date", ->
+                    # show event form and fill out date infomation when a date is clicked
+                    _that = $ @
+
+                    if self.addEventForm.is ':hidden'
+                        self.addEventForm.slideDown()
+                        self.showEventFormButton.text 'Hide Form'
+
+                    month: self.addEventForm.find('#month').val self.months[_that.data('month')]
+                    year: self.addEventForm.find('#year').val _that.data('year')
+                    eventDate: self.addEventForm.find('#eventDate').val _that.data('date')
+                    time: self.addEventForm.find('#time').val _that.data('hour')
+
+                that.on 'click', "ul.#{self.eventClass} a", (e) ->
+                    # show event details
+                    _that = $ @
+                    day = _that.closest '.drm-date'
+                    eventId = _that.data 'event'
+                    fullDate =
+                        month: self.months[day.data('month')]
+                        date: day.data 'date'
+                        year: day.data 'year'
+                    e.preventDefault()
+                    e.stopPropagation()
+                    self.readEvent eventId, fullDate
 
             @body.on 'click', 'div.drm-calendar-event-details', (e) ->
                 e.stopPropagation()
@@ -996,8 +1010,8 @@ class @DrmCalendar
                 # add css classes here
                 _addCalendarEvent events, date
 
-    advanceDate: (direction) =>
-        _calendarInner = @calendar.find "div.#{@calendarInnerClass}"
+    advanceDate: (direction, events, calendar) =>
+        _calendarInner = calendar.find "div.#{@calendarInnerClass}"
         newDate =
             month: _calendarInner.data 'month'
             date: _calendarInner.find(".#{@classes.date}").data 'date'
@@ -1027,10 +1041,10 @@ class @DrmCalendar
             else
                 newDate.date = newDate.date + 1
 
-        if @view is 'date' then @changeCalendar newDate
+        if @view is 'date' then @changeCalendar newDate, events, calendar
 
-    advanceWeek: (direction) =>
-        _calendarInner = @calendar.find "div.#{@calendarInnerClass}"
+    advanceWeek: (direction, events, calendar) =>
+        _calendarInner = calendar.find "div.#{@calendarInnerClass}"
         newDate =
             month: _calendarInner.data 'month'
             date: 1
@@ -1078,11 +1092,11 @@ class @DrmCalendar
             else
                 newDate.date = _lastDay + 7
 
-        if @view is 'date' or @view is 'week' then @changeCalendar newDate
+        if @view is 'date' or @view is 'week' then @changeCalendar newDate, events, calendar
 
-    advanceMonth: (direction) =>
+    advanceMonth: (direction, events, calendar) =>
         self = @
-        _calendarInner = @calendar.find "div.#{@calendarInnerClass}"
+        _calendarInner = calendar.find "div.#{@calendarInnerClass}"
         newDate =
             month: _calendarInner.data 'month'
             date: if @month is self.today.month then self.today.date else 1
@@ -1094,11 +1108,12 @@ class @DrmCalendar
         else if direction is 'next'
             newDate.month = if newDate.month is 11 then 0 else newDate.month + 1
             newDate.year = if newDate.month is 0 then newDate.year + 1 else newDate.year
-        @changeCalendar newDate
+        
+        @changeCalendar newDate, events, calendar
 
-    advanceYear: (direction) =>
+    advanceYear: (direction, events, calendar) =>
         self = @
-        _calendarInner = @calendar.find "div.#{@calendarInnerClass}"
+        _calendarInner = calendar.find "div.#{@calendarInnerClass}"
         newDate =
             month: _calendarInner.data 'month'
             year: _calendarInner.data 'year'
@@ -1106,11 +1121,11 @@ class @DrmCalendar
         newDate.date = if newDate.month is self.today.month then self.today.date else 1
         newDate.year = if direction is 'prev' then newDate.year - 1 else newDate.year + 1
         
-        @changeCalendar newDate
+        @changeCalendar newDate, events, calendar
 
-    changeCalendarView: (view) =>
+    changeCalendarView: (view, events, calendar) =>
         self = @
-        _calendarInner = @calendar.find "div.#{@calendarInnerClass}"
+        _calendarInner = calendar.find "div.#{@calendarInnerClass}"
         newDate =
             month: _calendarInner.data 'month'
             year: _calendarInner.data 'year'
@@ -1119,17 +1134,17 @@ class @DrmCalendar
 
         # update view
         @view = view
-        @changeCalendar newDate
+        @changeCalendar newDate, events, calendar
         # change calendar class
         @calendarInnerClass = "drm-calendar-#{view}-view"
         return
 
-    changeCalendar: (newDate) =>
+    changeCalendar: (newDate, events, calendar) =>
         self = @
-        _calendarInner = self.calendar.find "div.#{self.calendarInnerClass}"
+        _calendarInner = calendar.find "div.#{self.calendarInnerClass}"
         _calendarInner.fadeOut(300).queue (next) ->
             _that = $ @
-            $.when(_that.remove()).then(self.createCalendar(newDate))
+            $.when(_that.remove()).then(self.createCalendar(newDate, calendar, events))
             next()
 
     createCalendar: (newDate, calendar, events) ->
@@ -1212,7 +1227,7 @@ class @DrmCalendar
                 dates
 
         views =
-            createMonth: (newDate) ->
+            createMonth: (newDate, calendar) ->
                 _newDate = {month: newDate.month, date: newDate.date, year: newDate.year}
                 createWeekdays = ->
                     weekdays = "<div class='#{self.calendarInnerClass}' data-month='#{_newDate.month}' data-year='#{_newDate.year}'><table><thead><tr>"
@@ -1314,14 +1329,14 @@ class @DrmCalendar
                         self.addEventsToCalendar @, calendar
 
                     # add and remove navigation buttons
-                    # $('.drm-calendar-year-prev').text lastYear
-                    # $('.drm-calendar-year-next').text nextYear
+                    $('.drm-calendar-year-prev').text lastYear
+                    $('.drm-calendar-year-next').text nextYear
 
-                    # $('.drm-calendar-month-prev').text self.months[lastMonth]
-                    # $('.drm-calendar-month-next').text self.months[nextMonth]
+                    $('.drm-calendar-month-prev').text self.months[lastMonth]
+                    $('.drm-calendar-month-next').text self.months[nextMonth]
 
-                    # $('.drm-calendar-week-prev, .drm-calendar-week-next').hide()
-                    # $('.drm-calendar-date-prev, .drm-calendar-date-next').hide()
+                    $('.drm-calendar-week-prev, .drm-calendar-week-next').hide()
+                    $('.drm-calendar-date-prev, .drm-calendar-date-next').hide()
 
                 addCalendar calendar
 
@@ -1431,6 +1446,6 @@ class @DrmCalendar
                 $('.drm-calendar-date-prev, .drm-calendar-date-next').show()
 
         switch self.view
-            when 'month' then views.createMonth newDate
+            when 'month' then views.createMonth newDate, calendar
             when 'week' then views.createWeek newDate
             when 'date' then views.createDate newDate
