@@ -41,7 +41,7 @@ class @DrmAccordionContent extends DrmAccordion
         @state = @container.data 'state'
         @containerClass = '.drm-accordion'
         @label = '.drm-accordion-label'
-        @contentHolder = '.drm-accordion-content'
+        @contentHolder = '.drm-accordion-inner'
         @content = $ @contentHolder
 
         if @showButtons
@@ -70,9 +70,11 @@ class @DrmAccordionContent extends DrmAccordion
             class: className).prependTo @container
 
     showAll: =>
+        console.log 'show all'
         @content.slideDown @speed
 
     hideAll: =>
+        console.log 'hide all'
         @content.slideUp @speed
 
 class @DrmAccordionNav extends DrmAccordion

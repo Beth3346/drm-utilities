@@ -711,22 +711,23 @@ class @DrmCalendar
         e.preventDefault()
 
     createEvent: (newEvent, events, calendar) ->
-        _id = events.length
-        obj =
-            id: _id
-            name: if newEvent.name? then newEvent.name else null
-            recurrance: if newEvent.recurrance? then newEvent.recurrance.toLowerCase() else 'none'
-            month: if newEvent.month? then newEvent.month else null
-            year: if newEvent.year? then parseInt(newEvent.year, 10) else null
-            eventDate: if newEvent.eventDate? then parseInt(newEvent.eventDate, 10) else null
-            time: if newEvent.time? then newEvent.time else null
-            day: if newEvent.day? then newEvent.day else null
-            dayNum: if newEvent.dayNum? then newEvent.dayNum else null
-            type: if newEvent.type? then newEvent.type.toLowerCase() else null
-            notes: if newEvent.notes? then newEvent.notes else null
+        if events
+            _id = events.length
+            obj =
+                id: _id
+                name: if newEvent.name? then newEvent.name else null
+                recurrance: if newEvent.recurrance? then newEvent.recurrance.toLowerCase() else 'none'
+                month: if newEvent.month? then newEvent.month else null
+                year: if newEvent.year? then parseInt(newEvent.year, 10) else null
+                eventDate: if newEvent.eventDate? then parseInt(newEvent.eventDate, 10) else null
+                time: if newEvent.time? then newEvent.time else null
+                day: if newEvent.day? then newEvent.day else null
+                dayNum: if newEvent.dayNum? then newEvent.dayNum else null
+                type: if newEvent.type? then newEvent.type.toLowerCase() else null
+                notes: if newEvent.notes? then newEvent.notes else null
 
-        events.push obj
-        @addEventsToCalendar events[obj.id], calendar
+            events.push obj
+            @addEventsToCalendar events[obj.id], calendar
 
     destroyEvent: (eventId, index) ->
         events = @calendar.find "ul.#{@eventClass} a[data-event=#{eventId}]"
