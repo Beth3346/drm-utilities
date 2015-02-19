@@ -8,10 +8,76 @@ header {
         padding-top: 10px;
         padding-bottom: 10px;
 
-        ul {
+        ul.drm-dropdown-nav {
             float: right;
             margin: 10px;
-            @include drm-nav-bar-pills;
+
+            li {
+                margin: 0 5px 0 0;
+
+                ul {
+                    margin-top: 5px;
+                    background-color: transparent;
+                    border: 1px solid #ccc;
+                    border-radius: 3px;
+
+                    li {
+                        margin: 0;
+                        background-color: transparent;
+
+                        &:first-child a {
+                            border-radius: 3px 3px 0 0;
+                        }
+
+                        &:last-child a {
+                            border-radius: 0 0 3px 3px;
+                        }
+                    }
+
+                    a {
+                        border-radius: 0;
+                        background-color: white;
+                        color: $drm-blue;
+
+                        &:hover {
+                            background-color: $drm-blue;
+                            color: white;
+
+                            &:visited {
+                                color: white;
+                            }
+                        }
+
+                        &:visited {
+                            color: $drm-blue;
+                        }
+                    }
+                }
+            }
+
+            a {
+                background-color: white;
+                color: $drm-blue;
+                margin: 0;
+                border-radius: 3px;
+
+                &:hover {
+                    background-color: $drm-blue;
+                    color: white;
+
+                    li:hover {
+                        background-color: transparent;
+                    }
+
+                    &:visited {
+                        color: white;
+                    }
+                }
+
+                &:visited {
+                    color: $drm-blue;
+                }
+            }
 
             @include drm-breakpoint(tall) {
                 float: none;
