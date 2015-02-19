@@ -98,7 +98,7 @@
 @mixin drm-form($glow: $drm-blue, $bk-color: $lightest-grey, $border: $grey) {
     padding: 10px;
     width: 100%;
-    box-sizing: border-box;
+    
 
     small {
         display: block;
@@ -166,7 +166,7 @@
         margin: 5px 0;
         padding: 5px 10px;
         border-radius: 3px;
-        box-sizing: border-box;
+        
         @include drm-form-state($glow, $bk-color, $border);
 
         &.hidden-field {

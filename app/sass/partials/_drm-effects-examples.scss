@@ -23,7 +23,6 @@
 .stitched-row {
 	padding: 20px;
 	color: white;
-	box-sizing: border-box;
 	@include drm-stitched-row($dark-pink);
 }
 

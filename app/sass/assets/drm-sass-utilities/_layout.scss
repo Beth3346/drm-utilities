@@ -24,28 +24,24 @@
 	width: 90%;
 	margin-left: 5%;
 	margin-right: 5%;
-	box-sizing: border-box;
 	@include drm-clearfix();
 
 	@include drm-breakpoint(mercury) {
 		width: 70%;
 		margin-left: 15%;
 		margin-right: 15%;
-		box-sizing: border-box;
 	}
 
 	@include drm-breakpoint(venus) {
 		width: 90%;
 		margin-left: 5%;
 		margin-right: 5%;
-		box-sizing: border-box;
 	}
 
 	@include drm-breakpoint(mars) {
 		width: 100%;
 		margin-left: 0;
 		margin-right: 0;
-		box-sizing: border-box;
 	}
 }
 
@@ -54,25 +50,21 @@
 	margin-right: 0;
 	padding-left: 2.5%;
 	padding-right: 2.5%;
-	box-sizing: border-box;
 	@include drm-clearfix();
 
 	@include drm-breakpoint(mercury) {
 		padding-left: 15%;
 		padding-right: 15%;
-		box-sizing: border-box;
 	}
 
 	@include drm-breakpoint(venus) {
 		padding-left: 2.5%;
 		padding-right: 2.5%;
-		box-sizing: border-box;
 	}
 
 	@include drm-breakpoint(mars) {
 		padding-left: 0;
 		padding-right: 0;
-		box-sizing: border-box;
 	}	
 }
 
@@ -91,7 +83,7 @@
 	margin-right: 0;
 	width: 100%;
 	display: block;
-	box-sizing: border-box;
+	
 	@include drm-clearfix();
 }
 
@@ -126,13 +118,11 @@
 	margin: $margin-top 0 $margin-bottom 0;
 	width: ( 100% / $total );
 	float: left;
-	box-sizing: border-box;
 
 	@include drm-breakpoint(saturn) {
 		padding: 10px;
 		width: 100%;
 		float: none;
-		box-sizing: border-box;
 	}
 }
 
@@ -144,30 +134,27 @@
 	margin: $margin-top $margin $margin-bottom $margin;
 	width: (100% / $total) - ($margin * 2);
 	float: left;
-	box-sizing: border-box;
 
 	@include drm-breakpoint(saturn) {
 		padding: 10px;
 		margin: 0;
 		width: 100%;
 		float: none;
-		box-sizing: border-box;
+		
 	}	
 }
 
 @mixin drm-circle-blocks($container-width: 1000px, $margin: 20px, $total: 3) {
 	$margin-total: ($margin * 2) * $total;
-
 	float: left;
 	margin: $margin;
 	@include drm-circle( ( $container-width - 120 ) / $total );
-	box-sizing: border-box;
 
 	@include drm-breakpoint(saturn) {
 		padding: 10px;
 		margin: $margin auto $margin auto;
 		float: none;
-		box-sizing: border-box;
+		
 	}
 }
 

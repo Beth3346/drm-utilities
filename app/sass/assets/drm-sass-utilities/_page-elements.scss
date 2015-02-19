@@ -11,7 +11,6 @@
     margin-bottom: 5%;
     padding: 2%;
     text-align: center;
-    box-sizing: border-box;
 
     @include drm-breakpoint(neptune) {
         width: 100%;
@@ -71,7 +70,7 @@
     line-height: 1.1;
     position: relative;
     height: 45px - 6;
-    box-sizing: border-box;
+    
     @include drm-em-font(24);
     @include drm-stitched-row($color, $stitch-color, none, 1, $darker-grey);
 
@@ -287,21 +286,21 @@
     width: 95%;
     margin: 20px 2.5% 20px 2.5%;
     position: relative;
-    box-sizing: border-box;
+    
     @include drm-clearfix();
 
     @include drm-breakpoint(mercury) {
         width: 80%;
         margin-left: 10%;
         margin-right: 10%;
-        box-sizing: border-box;
+        
     }
 
     @include drm-breakpoint(venus) {
         width: 95%;
         margin-left: 2.5%;
         margin-right: 2.5%;
-        box-sizing: border-box;
+        
     }
 
     .close {
@@ -499,7 +498,6 @@
     min-height: 50px;
     z-index: 100;
     border-radius: 5px;
-    box-sizing: border-box;
     @include drm-em-font(14);
 
     @if $direction == "left" {
@@ -513,6 +511,7 @@
             left: 200px;
             @include drm-triangle(right, 20px, half, $bk-color);
         }
+
     } @else if $direction == "top" {
         bottom: 55px;
 
@@ -523,6 +522,7 @@
             left: (200px / 2) - 10;
             @include drm-triangle(bottom, 20px, half, $bk-color);
         }   
+
     } @else if $direction == "bottom" {
         &:before {
             content: "";
@@ -531,6 +531,7 @@
             left: (200px / 2) - 10;
             @include drm-triangle(top, 20px, half, $bk-color);
         }
+
     } @else {
         // $direction == right
         top: -13px;
@@ -554,7 +555,6 @@
     color: $color;
     z-index: 100;
     border-radius: 5px;
-    box-sizing: border-box;
     text-align: center;
     @include drm-em-font(12);
 

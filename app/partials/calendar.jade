@@ -5,7 +5,7 @@ section
 
     h2 Live Demo
 
-    .drm-calendar(data-month="March" data-date="24" data-year="2015" data-event-name="My Birthday" data-event-month="March", data-event-date="24", data-event-recurrance="yearly")
+    //- .drm-calendar(data-month="March" data-date="24" data-year="2015" data-event-name="My Birthday" data-event-month="March", data-event-date="24", data-event-recurrance="yearly")
 
     .drm-calendar
         button.drm-show-event-form.button-solid-radius(type="button") Add New Event
@@ -114,7 +114,7 @@ section
             h3.drm-bold Event Details:
             label(for="event_type") Event Type:
             input#type(type="text" name="event_type" placeholder="holiday")
-            label(for="event_notes") Event Type:
+            label(for="event_notes") Event Notes:
             textarea#notes(name="event_notes" cols="30" rows="2" placeholder="These are some notes") 
 
             button.addEvent#submit(type="submit") Add Event

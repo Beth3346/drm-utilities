@@ -118,7 +118,6 @@
 
 @mixin drm-figure-transparent-border($color, $hover-color, $thickness: 5px) {
     margin: auto;
-    box-sizing: border-box;
     transition: border .3s ease-out;
     @include drm-border-transparent($color, $thickness);
 
@@ -129,7 +128,6 @@
         left: -$thickness;
         background-color: $color;
         display: block;
-        box-sizing: border-box;
     }
 
     &:hover {

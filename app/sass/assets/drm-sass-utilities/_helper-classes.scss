@@ -18,6 +18,12 @@
         text-rendering: optimizeLegibility;
     }
 
+    // add html5 compatibilty
+
+    main, article, aside, header, footer, section {
+        display: block;
+    }
+
     .drm-wrapper {
         @extend %drm-container;
         margin-top: 20px;
@@ -26,7 +32,8 @@
     // add box-sizing to block elements
 
     h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dt, dd, li, blockquote, cite, form, 
-    input, label, textarea, div, section, aside, header, footer, a, button {
+    input, label, textarea, div, section, aside, header, footer, a, nav, button, span, button,
+    article, main, pre, table, td, tr, th, thead, tbody, tfoot {
         box-sizing: border-box;
     }
 
@@ -163,7 +170,6 @@
         background-color: $lightest-grey;
         border: 1px solid $light-grey;
         padding: 10px;
-        box-sizing: border-box;
         border-radius: 3px;
         white-space: pre-wrap;
         word-wrap: break-word;

@@ -154,11 +154,11 @@
         box-sizing: border-box;
         @include drm-sticky-menu('left');
 
-        @include drm-breakpoint(trenta) {            
+        @include drm-breakpoint(mercury) {            
             width: 250px;
         }
         
-        @include drm-breakpoint(venti) {
+        @include drm-breakpoint(venus) {
             width: 200px;
         }
     }

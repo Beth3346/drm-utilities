@@ -39,7 +39,6 @@
         text-align: $align;
         color: $text-color;
         text-decoration: none;
-        box-sizing: border-box;
         transition: all, .3s;
         @include drm-em-font(14);
 
@@ -331,7 +330,6 @@
     border-radius: $border-radius;
     text-shadow: none;
     box-shadow: none;
-    box-sizing: border-box;
     transition: all, .3s ease-out;
 
     @if $center == center {
@@ -379,7 +377,6 @@
     cursor: pointer;
     border-radius: $border-radius;
     text-shadow: none;
-    box-sizing: border-box;
     transition: all, .3s ease-out;
 
     @if $border-color != none {
@@ -425,7 +422,6 @@
     text-decoration: none;
     text-align: center;
     transition: all, .3s ease-out;
-    box-sizing: border-box;
     border-radius: $border-radius;
     @include drm-solid-drop-shadow(darken($color, 10%));
 
@@ -466,7 +462,6 @@
     border-radius: ($height / 2);
     text-shadow: none;
     box-shadow: none;
-    box-sizing: border-box;
     transition: all, .3s ease-out;
 
     @if $center == center {
@@ -515,7 +510,6 @@
     line-height: 1.8;
     border-radius: ($height / 2);
     text-shadow: none;
-    box-sizing: border-box;
     transition: all, .3s ease-out;
 
     @if $border-color != none {
@@ -563,7 +557,7 @@
         cursor: pointer;
         margin: 0;
         text-shadow: none;
-        box-sizing: border-box;
+        
         transition: all, .3s ease-out;
         box-shadow: none;
 
@@ -654,7 +648,7 @@
 
         @if $border != none {
             border: 1px solid $divider-color;
-            box-sizing: border-box;
+            
         }
 
         @include drm-nav-bar-solid-stacked($bk-color, $color, left, $divider-color);
@@ -701,7 +695,7 @@
 
         @if $border != none {
             border: 1px solid $divider-color;
-            box-sizing: border-box;
+            
         }
         
         @include drm-nav-bar-solid-stacked($bk-color, $color, left, $divider-color);
@@ -716,7 +710,6 @@
     height: 100%;
     background-color: $bk-color;
     z-index: 100;
-    box-sizing: border-box;
 
     ul {
         @include drm-nav-bar-solid-stacked();
@@ -735,7 +728,6 @@
         width: 100%;
         background-color: $dark-grey;
         padding: 10px 10% 10px 10%;
-        box-sizing: border-box;
         
         a {
             color: white;
