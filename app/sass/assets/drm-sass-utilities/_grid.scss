@@ -9,6 +9,18 @@
             width: ( 100 / $num ) * $i * 1%;
             float: left;
             padding: 0 $gutter;
+
+            .drm-container {
+                width: 100%;
+                padding-left: $gutter;
+                padding-right: $gutter;
+
+                .drm-row {
+                    margin-left: 0;
+                    margin-right: $gutter;
+                    margin-bottom: 0;
+                }
+            }
         }
     }
 }
@@ -32,29 +44,89 @@
         width: 100%;
         float: left;
         padding: 0 $gutter;
+
+        .drm-container {
+            width: 100%;
+            padding-left: $gutter;
+            padding-right: $gutter;
+
+            .drm-row {
+                margin-left: 0;
+                margin-right: $gutter;
+                margin-bottom: 0;
+            }
+        }
     }
 
     .drm-col-half {
         width: (100% / 2);
         float: left;
         padding: 0 $gutter;
+
+        .drm-container {
+            width: 100%;
+            padding-left: $gutter;
+            padding-right: $gutter;
+
+            .drm-row {
+                margin-left: 0;
+                margin-right: $gutter;
+                margin-bottom: 0;
+            }
+        }
     }
 
     .drm-col-third {
         width: (100% / 3);
         float: left;
         padding: 0 $gutter;
+
+        .drm-container {
+            width: 100%;
+            padding-left: $gutter;
+            padding-right: $gutter;
+
+            .drm-row {
+                margin-left: 0;
+                margin-right: $gutter;
+                margin-bottom: 0;
+            }
+        }
     }
 
     .drm-col-two-thirds {
         width: (100% / 3) * 2;
         float: left;
         padding: 0 $gutter;
+
+        .drm-container {
+            width: 100%;
+            padding-left: $gutter;
+            padding-right: $gutter;
+
+            .drm-row {
+                margin-left: 0;
+                margin-right: $gutter;
+                margin-bottom: 0;
+            }
+        }
     }
 
     .drm-col-quarter {
         width: (100% / 4);
         float: left;
         padding: 0 $gutter;
+
+        .drm-container {
+            width: 100%;
+            padding-left: $gutter;
+            padding-right: $gutter;
+
+            .drm-row {
+                margin-left: 0;
+                margin-right: $gutter;
+                margin-bottom: 0;
+            }
+        }
     }
 }

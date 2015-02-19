@@ -11,6 +11,20 @@
     color: white;
 }
 
+.example-col-nested {
+    background-color: white;
+    text-align: center;
+    padding: 0;
+    display: block;
+    border-radius: 3px;
+    color: #333;
+    margin: 10px 0;
+}
+
 .grids-examples .drm-row {
-    margin-bottom: 2em;
+    margin-bottom: 10px;
+
+    .drm-row + .drm-row .example-col-nested {
+        margin-top: 0;
+    }
 }
