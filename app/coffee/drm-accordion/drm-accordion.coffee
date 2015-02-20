@@ -70,23 +70,21 @@ class @DrmAccordionContent extends DrmAccordion
             class: className).prependTo @container
 
     showAll: =>
-        console.log 'show all'
         @content.slideDown @speed
 
     hideAll: =>
-        console.log 'hide all'
         @content.slideUp @speed
 
 class @DrmAccordionNav extends DrmAccordion
     constructor: (@speed = 300, @container = $('.drm-accordion-nav')) ->
         @state = @container.data 'state'
-        @containerClass = '.' + @container.attr 'class'
-        @label = '.' + @container.children('ul').children('li').children('a').attr 'class'
-        @contentHolder = @containerClass + ' .' + $("#{@label}").next('ul').attr 'class'
+        @containerClass = '.' + @container.prop('class').split(' ')[0]
+        @label = '.' + @container.children('ul').children('li').children('a').prop('class').split(' ')[0]
+        @contentHolder = @containerClass + ' .' + $("#{@label}").next('ul').prop('class').split(' ')[0]
         @content = $ @contentHolder
 
         @showDefaultContent()
         @addEvents()
 
-new DrmAccordionContent()
-new DrmAccordionNav()
+# new DrmAccordionContent()
+# new DrmAccordionNav()

@@ -2,6 +2,11 @@
     Main Content Styles
 -----------------------------------------------------------------------------*/
 
+.drm-container .drm-row .main-content {
+    padding-top: 20px;
+    min-height: 800px;
+}
+
 .example-holder {
     margin: 20px auto 20px auto;
     @include drm-clearfix();

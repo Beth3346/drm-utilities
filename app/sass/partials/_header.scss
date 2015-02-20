@@ -21,14 +21,19 @@ header {
         }
 
         &.mobile-nav-holder {
+            padding-bottom: 0;
+            @include drm-clearfix;
+
             .mobile-menu-toggle {
                 background-color: transparent;
                 border: 1px solid $drm-blue;
                 padding: 5px 10px;
                 border-radius: 3px;
-                margin-left: 20px;
+                margin-right: 20px;
+                margin-bottom: 10px;
                 color: $drm-blue;
                 cursor: pointer;
+                float: right;
                 @include drm-em-font(20);
 
                 i {
@@ -43,9 +48,9 @@ header {
         }
 
         .mobile-nav {
-            margin-top: 10px;
             list-style: none;
             padding: 0;
+            clear: both;
             display: none;
 
             li {
@@ -101,6 +106,32 @@ header {
             li {
                 margin: 0 5px 0 0;
 
+                a {
+                    background-color: white;
+                    color: $drm-blue;
+                    margin: 0;
+                    border-radius: 3px;
+                    padding-left: 10px;
+                    padding-right: 10px;
+
+                    &:hover {
+                        background-color: $drm-blue;
+                        color: white;
+
+                        li:hover {
+                            background-color: transparent;
+                        }
+
+                        &:visited {
+                            color: white;
+                        }
+                    }
+
+                    &:visited {
+                        color: $drm-blue;
+                    }
+                }
+
                 ul {
                     margin-top: 5px;
                     background-color: transparent;
@@ -140,30 +171,6 @@ header {
                     }
                 }
             }
-
-            a {
-                background-color: white;
-                color: $drm-blue;
-                margin: 0;
-                border-radius: 3px;
-
-                &:hover {
-                    background-color: $drm-blue;
-                    color: white;
-
-                    li:hover {
-                        background-color: transparent;
-                    }
-
-                    &:visited {
-                        color: white;
-                    }
-                }
-
-                &:visited {
-                    color: $drm-blue;
-                }
-            }
         }
     }
 }
@@ -177,14 +184,11 @@ header {
     line-height: 1.5;
 
     h1 {
-        @extend %drm-reset-box;
+        margin: 0;
+        padding: 0 0 0 30px;
         text-align: left;
         font-weight: bold;
         @include drm-em-font(48);
-
-        @include drm-breakpoint(jupiter) {
-            padding-left: 20px;
-        }
 
         @include drm-breakpoint(saturn) {
             padding: 0;
@@ -203,12 +207,11 @@ header {
     }
 
     p {
-        @include drm-breakpoint(jupiter) {
-            padding-left: 20px;
-        }
+        margin: 0;
+        padding: 0 0 0 30px;
 
         @include drm-breakpoint(saturn) {
-            padding: 0 20px 0 20px;
+            padding: 0 20px;
             margin: 0;
             text-align: center;
         }
