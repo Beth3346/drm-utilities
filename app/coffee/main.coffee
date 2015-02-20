@@ -84,4 +84,9 @@ $ ->
     
     # prettyPrint()
 
+    $('button.mobile-menu-toggle').on 'click', (e) ->
+        e.preventDefault()
+        e.stopPropagation()
+        $('ul.mobile-nav').slideToggle()
+
     return
