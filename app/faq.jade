@@ -5,15 +5,16 @@ html.no-js(lang="en")
 
     body
         include partials/header
-        .drm-wrapper
-            main
-                h1 FAQ
+        .drm-container
+            .drm-row
+                main.drm-col-9
+                    h1 FAQ
 
-                h2 Can I use DRM Utilities on my website?
-                p.
-                    DRM Utilities is free and open source so feel free to use it on your site.
-                    However, it is still an ongoing project so there are probably still a lot of bugs and documentation is still incomplete.
+                    h2 Can I use DRM Utilities on my website?
+                    p.
+                        DRM Utilities is free and open source so feel free to use it on your site.
+                        However, it is still an ongoing project so there are probably still a lot of bugs and documentation is still incomplete.
 
-            include partials/sidebar
+                include partials/sidebar
 
         include partials/footer

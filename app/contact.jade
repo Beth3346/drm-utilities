@@ -5,12 +5,13 @@ html.no-js(lang="en")
 
     body
         include partials/header
-        .drm-wrapper
-            main
-                h1 Contact Me
+        .drm-container
+            .drm-row
+                main.drm-col-9
+                    h1 Contact Me
 
-                p My contact info is available on 
-                    a(href='http://elizabeth-rogers.com') &nbsp;elizabeth-rogers.com
-            include partials/sidebar
+                    p My contact info is available on 
+                        a(href='http://elizabeth-rogers.com') &nbsp;elizabeth-rogers.com
+                include partials/sidebar
 
         include partials/footer

@@ -5,12 +5,13 @@ html.no-js(lang="en")
 
     body
         include partials/header
-        .drm-wrapper
-            main
-                h1 Page Not Found
-                p Sorry, but the page you were trying to view does not exist.
-                // IE requires 512+ bytes: http://www.404-error-page.com/404-error-page-too-short-problem-microsoft-ie.shtml
+        .drm-container
+            .drm-row
+                main.drm-col-9
+                    h1 Page Not Found
+                    p Sorry, but the page you were trying to view does not exist.
+                    // IE requires 512+ bytes: http://www.404-error-page.com/404-error-page-too-short-problem-microsoft-ie.shtml
 
-            include partials/sidebar
+                include partials/sidebar
 
         include partials/footer

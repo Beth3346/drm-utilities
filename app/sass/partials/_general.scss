@@ -8,7 +8,7 @@
 
 // include drm-grid
 
-@include drm-grid(12, 5px);
+@include drm-grid(12, 10px);
 
 .drm-button {	
 	@include drm-button-solid($drm-blue, white, 200px);

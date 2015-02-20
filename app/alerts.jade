@@ -5,9 +5,10 @@ html.no-js(lang="en")
 
     body
         include partials/header
-        .drm-wrapper
-            main
-                include partials/alerts
-            include partials/sidebar
+        .drm-container
+            .drm-row
+                main.drm-col-9
+                    include partials/alerts
+                include partials/sidebar
 
         include partials/footer

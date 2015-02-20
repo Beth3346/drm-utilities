@@ -5,19 +5,20 @@ html.no-js(lang="en")
 
     body
         include partials/header
-        .drm-wrapper
-            main
-                h1 About DRM Utilities
+        .drm-container
+            .drm-row
+                main.drm-col-9
+                    h1 About DRM Utilities
 
-                p DRM Utilities are a set of Sass mixins and jQuery resusable components.
+                    p DRM Utilities are a set of Sass mixins and jQuery resusable components.
 
-                p.
-                    I started this project with the hope of standardizing the components I use in almost all of the websites I build.
-                    I also wanted to decrease my reliance on 3rd party plugins and create components that are simple and easy to implement in a
-                    wide range of projects.
+                    p.
+                        I started this project with the hope of standardizing the components I use in almost all of the websites I build.
+                        I also wanted to decrease my reliance on 3rd party plugins and create components that are simple and easy to implement in a
+                        wide range of projects.
 
-                p This is an ongoing project and it still needs a lot of work before it will be ready for production websites.
-            
-            include partials/sidebar
+                    p This is an ongoing project and it still needs a lot of work before it will be ready for production websites.
+                
+                include partials/sidebar
 
         include partials/footer

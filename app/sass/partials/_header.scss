@@ -3,10 +3,22 @@
 -----------------------------------------------------------------------------*/
 
 header {
+    .mobile-nav-holder {
+        display: none;        
+
+        @include drm-breakpoint(saturn) {
+            display: block;
+        }
+    }
+
     nav {
         @extend %drm-container-full-width;
         padding-top: 10px;
         padding-bottom: 10px;
+
+        @include drm-breakpoint(saturn) {
+            display: none;
+        }
 
         ul.drm-dropdown-nav {
             float: right;
@@ -78,16 +90,6 @@ header {
                     color: $drm-blue;
                 }
             }
-
-            @include drm-breakpoint(tall) {
-                float: none;
-                text-align: center;
-
-                li {
-                    float: none;
-                    display: inline-block;
-                }
-            }
         }
     }
 }
@@ -106,11 +108,11 @@ header {
         font-weight: bold;
         @include drm-em-font(48);
 
-        @include drm-breakpoint(grande) {
+        @include drm-breakpoint(jupiter) {
             padding-left: 20px;
         }
 
-        @include drm-breakpoint(tall) {
+        @include drm-breakpoint(saturn) {
             padding: 0;
             margin: 0;
             text-align: center;
@@ -127,11 +129,11 @@ header {
     }
 
     p {
-        @include drm-breakpoint(grande) {
+        @include drm-breakpoint(jupiter) {
             padding-left: 20px;
         }
 
-        @include drm-breakpoint(tall) {
+        @include drm-breakpoint(saturn) {
             padding: 0 20px 0 20px;
             margin: 0;
             text-align: center;
