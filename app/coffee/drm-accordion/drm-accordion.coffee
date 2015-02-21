@@ -86,5 +86,5 @@ class @DrmAccordionNav extends DrmAccordion
         @showDefaultContent()
         @addEvents()
 
-# new DrmAccordionContent()
-# new DrmAccordionNav()
+new DrmAccordionContent()
+new DrmAccordionNav()
