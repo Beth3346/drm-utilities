@@ -56,6 +56,7 @@ class @DrmSort
                     values.push $.trim(_that.text())
 
                 return values
+
             parseTime: (time) ->
                 _hour = parseInt(patterns.hour.exec(time)[1], 10)
                 _minutes = patterns.minute.exec(time)[1]
@@ -159,7 +160,7 @@ class @DrmSort
             isAlpha: (value) -> return if patterns.alpha.test(value) then true else false
             isTime: (value) -> return if patterns.time.test(value) then true else false
         
-        comparators = 
+        comparators =
             sortDate: (listItems, direction) ->
                 # need support for various date and time formats
                 _sort = (a, b) ->

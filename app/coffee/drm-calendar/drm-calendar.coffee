@@ -2,7 +2,7 @@
 # Interactive JS Calendar
 ###############################################################################
 # needs support for events with start and end dates and times
-# needs support for events _that recur a limited number of times
+# needs support for events that recur a limited number of times
 # needs edit view
 "use strict"
 

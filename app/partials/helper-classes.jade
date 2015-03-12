@@ -1,219 +1,236 @@
 article.helper-classes-examples
+    header
+        .drm-container
+            .drm-row
+                .drm-col-full
+                    h1 DRM Helper Classes
+                    p These are some pre-defined CSS classes and HTML element default styles I find myself using over and over.
+                    p To include it add the following line to your main stylesheet
+                    pre @include drm-helper-classes();
+                    h2 Helper Classes Examples
+    .drm-container
+        .drm-row
+            .drm-col-10
+                h1 Float Boxes Left or Right
+            .drm-col-10
+                .drm-pull-left.box
+                    p Left
+            .drm-col-10
+                pre .drm-pull-left
+    .drm-container
+        .drm-row
+            .drm-col-10
+                .drm-pull-right.box
+                    p Right
+            .drm-col-10
+                pre .drm-pull-right
+    .drm-container
+        .drm-row
+            .drm-col-10
+                h1 Typography Styles
+                p.drm-bold Bold
+                pre .drm-bold
 
-h1 DRM Helper Classes
+                p.drm-italic Italic
+                pre .drm-italic
 
-p These are some pre-defined CSS classes and HTML element default styles I find myself using over and over.
+                p.drm-underline Underline
+                pre .drm-underline
 
-p To include it add the following line to your main stylesheet
+                p.drm-uppercase Uppercase
+                pre .drm-uppercase
 
-pre @include drm-helper-classes();
+                p.drm-smaller-text Smaller Text
+                pre .drm-smaller-text
 
-h2 Helper Classes Examples
+                p.drm-text-left. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam, deleniti amet sequi fugiat voluptates veniam maxime. 
+                    Officia consequatur quasi numquam ad enim et quos rem accusantium dolore dolores. Itaque, ab.  Lorem ipsum dolor sit amet, consectetur 
+                    adipisicing elit. Perferendis atque cupiditate accusantium, doloribus excepturi, nobis vel consectetur quidem harum, eum esse laboriosam 
+                    qui quo quisquam at officia ab possimus vero sapiente a necessitatibus ipsam porro nemo. Adipisci numquam velit maiores obcaecati dignissimos 
+                    saepe, soluta architecto, facilis quidem, nostrum dolorum eius.
+                pre .drm-text-left
 
-.example-holder
-    section.float-boxes
-        h1 Float Boxes Left or Right
-        
-        .drm-wrapper
-            .drm-pull-left.box
-                p Left
-        
-        pre .drm-pull-left
-        
-        .drm-wrapper            
-            .drm-pull-right.box
-                p Right
-        
-        pre .drm-pull-right
+                p.drm-text-right. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam, deleniti amet sequi fugiat voluptates veniam maxime. 
+                    Officia consequatur quasi numquam ad enim et quos rem accusantium dolore dolores. Itaque, ab.  Lorem ipsum dolor sit amet, consectetur 
+                    adipisicing elit. Perferendis atque cupiditate accusantium, doloribus excepturi, nobis vel consectetur quidem harum, eum esse laboriosam 
+                    qui quo quisquam at officia ab possimus vero sapiente a necessitatibus ipsam porro nemo. Adipisci numquam velit maiores obcaecati dignissimos 
+                    saepe, soluta architecto, facilis quidem, nostrum dolorum eius.
+                pre .drm-text-right
 
-    
-    section.typography-classes
-        h1 Typography Styles
+                p.drm-text-center. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam, deleniti amet sequi fugiat voluptates veniam maxime. 
+                    Officia consequatur quasi numquam ad enim et quos rem accusantium dolore dolores. Itaque, ab.  Lorem ipsum dolor sit amet, consectetur 
+                    adipisicing elit. Perferendis atque cupiditate accusantium, doloribus excepturi, nobis vel consectetur quidem harum, eum esse laboriosam 
+                    qui quo quisquam at officia ab possimus vero sapiente a necessitatibus ipsam porro nemo. Adipisci numquam velit maiores obcaecati dignissimos 
+                    saepe, soluta architecto, facilis quidem, nostrum dolorum eius.
+                pre .drm-text-center
 
-        p.drm-bold Bold
-        pre .drm-bold
+                p.drm-text-justified. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam, deleniti amet sequi fugiat voluptates veniam maxime. 
+                    Officia consequatur quasi numquam ad enim et quos rem accusantium dolore dolores. Itaque, ab.  Lorem ipsum dolor sit amet, consectetur 
+                    adipisicing elit. Perferendis atque cupiditate accusantium, doloribus excepturi, nobis vel consectetur quidem harum, eum esse laboriosam 
+                    qui quo quisquam at officia ab possimus vero sapiente a necessitatibus ipsam porro nemo. Adipisci numquam velit maiores obcaecati dignissimos 
+                    saepe, soluta architecto, facilis quidem, nostrum dolorum eius.
+                pre .drm-text-justified
 
-        p.drm-italic Italic
-        pre .drm-italic
+                p.drm-text-muted Muted
+                pre .drm-text-muted
 
-        p.drm-underline Underline
-        pre .drm-underline
+                p.drm-text-danger Danger
+                pre .drm-text-danger
 
-        p.drm-uppercase Uppercase
-        pre .drm-uppercase
+                p.drm-text-error Error
+                pre .drm-text-error
 
-        p.drm-smaller-text Smaller Text
-        pre .drm-smaller-text
+                p.drm-text-info Info
+                pre .drm-text-info
 
-        p.drm-text-left Left Aligned
-        pre .drm-text-left
+                p.drm-text-warning Warning
+                pre .drm-text-warning
 
-        p.drm-text-right Right Aligned
-        pre .drm-text-right
+                p.drm-text-success Success
+                pre .drm-text-success
 
-        p.drm-text-center Center Aligned
-        pre .drm-text-center
+                mark Marked Text
+                pre &lt;mark&gt;Marked Text&lt;/mark&gt;
 
-        p.drm-text-justified. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam, deleniti amet sequi fugiat voluptates veniam maxime. 
-            Officia consequatur quasi numquam ad enim et quos rem accusantium dolore dolores. Itaque, ab.  Lorem ipsum dolor sit amet, consectetur 
-            adipisicing elit. Perferendis atque cupiditate accusantium, doloribus excepturi, nobis vel consectetur quidem harum, eum esse laboriosam 
-            qui quo quisquam at officia ab possimus vero sapiente a necessitatibus ipsam porro nemo. Adipisci numquam velit maiores obcaecati dignissimos 
-            saepe, soluta architecto, facilis quidem, nostrum dolorum eius.
-        pre .drm-text-justified
+                p.drm-highlight Highlighted Text
+                pre .drm-highlight
 
-        p.drm-text-muted Muted
-        pre .drm-text-muted
+                p. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam, deleniti amet sequi fugiat voluptates veniam maxime. 
+                    Officia consequatur quasi numquam ad enim et quos rem accusantium dolore dolores. Itaque, ab.  Lorem ipsum dolor sit amet, consectetur 
+                    adipisicing elit. Perferendis atque cupiditate accusantium, doloribus excepturi, nobis vel consectetur quidem harum, eum esse laboriosam 
+                    qui quo quisquam at officia ab possimus vero sapiente a necessitatibus ipsam porro nemo. Adipisci numquam velit maiores obcaecati dignissimos 
+                    saepe, soluta architecto, facilis quidem, nostrum dolorum eius.
+                pre &lt;p&gt;
 
-        p.drm-text-danger Danger
-        pre .drm-text-danger
+                small Small Text
+                pre &lt;small&gt;
 
-        p.drm-text-error Error
-        pre .drm-text-error
+                blockquote
+                    p. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam, deleniti amet sequi fugiat voluptates veniam maxime. 
+                        Officia consequatur quasi numquam ad enim et quos rem accusantium dolore dolores. Itaque, ab.  Lorem ipsum dolor sit amet, consectetur 
+                        adipisicing elit. Perferendis atque cupiditate accusantium, doloribus excepturi, nobis vel consectetur quidem harum, eum esse laboriosam 
+                        qui quo quisquam at officia ab possimus vero sapiente a necessitatibus ipsam porro nemo. Adipisci numquam velit maiores obcaecati dignissimos 
+                        saepe, soluta architecto, facilis quidem, nostrum dolorum eius.
+                    cite Citation
+                pre &lt;blockquote&gt;
 
-        p.drm-text-info Info
-        pre .drm-text-info
+                h1 This is an h1 heading
 
-        p.drm-text-warning Warning
-        pre .drm-text-warning
+                h2 This is an h2 heading
 
-        p.drm-text-success Success
-        pre .drm-text-success
+                h3 This is an h3 heading
 
-        mark Marked Text
-        pre &lt;mark&gt;Marked Text&lt;/mark&gt;
+                h4 This is an h4 heading
 
-        p.drm-highlight Highlighted Text
-        pre .drm-highlight
+                h5 This is an h5 heading
 
-        p. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo, cupiditate doloribus nemo quas quisquam voluptatem itaque veritatis 
-            odit ipsam hic consequuntur dicta illum natus officiis porro vitae quo. Nihil, veritatis!
+                h6 This is an h6 heading
 
-        small Small Text
+                h3 Unordered List
 
-        blockquote. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus, aliquid, quam, labore, optio ipsam excepturi dolorem 
-            voluptas veniam dignissimos a repudiandae quae iure cum obcaecati aut itaque dolorum maiores distinctio.
+                ul
+                    li Item One
+                    li Item Two
+                    li Item Three
+                    li Item Four
+                    li Item Five
+                    li Item Six
 
-        cite Citation
+                h3 Ordered List
 
-        pre @include drm-stitched-box($color, $stitch-color, $border-radius, $border-color, $opacity);
+                ol
+                    li Item One
+                    li Item Two
+                    li Item Three
+                    li Item Four
+                    li Item Five
+                    li Item Six
 
-        h1 This is an h1 heading
+                dl
+                    dt Definition One
+                    dd.
+                        J. Chiles: So we got an attractive woman, wearing a bra, no top, walkin' around in broad daylight. 
+                        She's flouting society's conventions!
+                    dt Definition Two
+                    dd.
+                        George: She's got a little Marissa Tomei thing goin' on. Jerry: Ah, too bad you've got a little 
+                        George Costanza thing goin' on.
+                    dt Definition Three
+                    dd.
+                        Newman: I mean parcels are rarely damaged during shipping. Jerry: Define rarely. Newman: Frequently.
 
-        h2 This is an h2 heading
+                h3 Unstyled List
 
-        h3 This is an h3 heading
+                ul.drm-unstyled-list
+                    li Item One
+                    li Item Two
+                    li Item Three
+                    li Item Four
+                    li Item Five
+                    li Item Six
+                pre .drm-unstyled-list
 
-        h4 This is an h4 heading
+                h3 Inline List
 
-        h5 This is an h5 heading
+                ul.drm-inline-list
+                    li Item One
+                    li Item Two
+                    li Item Three
+                    li Item Four
+                    li Item Five
+                    li Item Six
+                pre .drm-inline-list
 
-        h6 This is an h6 heading
+                h3 Triangle List
 
-        h3 Unordered List
+                ul.drm-triangle-list
+                    li Item One
+                    li Item Two
+                    li Item Three
+                    li Item Four
+                    li Item Five
+                    li Item Six
+                pre .drm-triangle-list
 
-        ul
-            li Item One
-            li Item Two
-            li Item Three
-            li Item Four
-            li Item Five
-            li Item Six
+                h3 Checked List
 
-        h3 Ordered List
+                ul.drm-checked-list
+                    li Item One
+                    li Item Two
+                    li Item Three
+                    li Item Four
+                    li Item Five
+                    li Item Six
+                pre .drm-checked-list
 
-        ol
-            li Item One
-            li Item Two
-            li Item Three
-            li Item Four
-            li Item Five
-            li Item Six
+                p: a(href="#") This is a link
 
-        dl
-            dt Definition One
-            dd.
-                J. Chiles: So we got an attractive woman, wearing a bra, no top, walkin' around in broad daylight. 
-                She's flouting society's conventions!
-            dt Definition Two
-            dd.
-                George: She's got a little Marissa Tomei thing goin' on. Jerry: Ah, too bad you've got a little 
-                George Costanza thing goin' on.
-            dt Definition Three
-            dd.
-                Newman: I mean parcels are rarely damaged during shipping. Jerry: Define rarely. Newman: Frequently.
+                p: a(href="alerts.html") Alert Examples
 
-        h3 Unstyled List
+                .drm-info-alert
+                    p Info Alert
 
-        ul.drm-unstyled-list
-            li Item One
-            li Item Two
-            li Item Three
-            li Item Four
-            li Item Five
-            li Item Six
-        pre .drm-unstyled-list
+                pre .drm-info-alert
 
-        h3 Inline List
+                .drm-danger-alert
+                    p Danger Alert
 
-        ul.drm-inline-list
-            li Item One
-            li Item Two
-            li Item Three
-            li Item Four
-            li Item Five
-            li Item Six
-        pre .drm-inline-list
+                pre .drm-danger-alert
 
-        h3 Triangle List
+                .drm-warning-alert
+                    p Warning Alert
 
-        ul.drm-triangle-list
-            li Item One
-            li Item Two
-            li Item Three
-            li Item Four
-            li Item Five
-            li Item Six
-        pre .drm-triangle-list
+                pre .drm-warning-alert
 
-        h3 Checked List
+                .drm-success-alert
+                    p Success Alert
 
-        ul.drm-checked-list
-            li Item One
-            li Item Two
-            li Item Three
-            li Item Four
-            li Item Five
-            li Item Six
-        pre .drm-checked-list
+                pre .drm-success-alert
 
-        p: a(href="#") This is a link
+                .drm-muted-alert
+                    p Muted Alert
 
-        p: a(href="alerts.html") Alert Examples
+                pre .drm-muted-alert
 
-        .drm-info-alert
-            p Info Alert
-
-        pre .drm-info-alert
-
-        .drm-danger-alert
-            p Danger Alert
-
-        pre .drm-danger-alert
-
-        .drm-warning-alert
-            p Warning Alert
-
-        pre .drm-warning-alert
-
-        .drm-success-alert
-            p Success Alert
-
-        pre .drm-success-alert
-
-        .drm-muted-alert
-            p Muted Alert
-
-        pre .drm-muted-alert
-
-        img.drm-thumbnail(src="http://placekitten.com/198/207")
-        pre .drm-thumbnail
+                img.drm-thumbnail(src="http://placekitten.com/198/207")
+                pre .drm-thumbnail

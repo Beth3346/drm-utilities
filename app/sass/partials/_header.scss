@@ -12,7 +12,6 @@ header {
     }
 
     nav {
-        @extend %drm-container-full-width;
         padding-top: 10px;
         padding-bottom: 10px;
 
@@ -155,6 +154,7 @@ header {
                         border-radius: 0;
                         background-color: white;
                         color: $drm-blue;
+                        @include drm-em-font(12);
 
                         &:hover {
                             background-color: $drm-blue;
@@ -176,7 +176,6 @@ header {
 }
 
 .hero-unit {
-    @extend %drm-container-full-width;
     padding-top: 40px;
     padding-bottom: 40px;
     background-color: $drm-blue;

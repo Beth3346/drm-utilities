@@ -5,6 +5,7 @@
 @mixin drm-grid($column-count: 12, $gutter: 1em) {
     .drm-container {
         width: 95%;
+        max-width: 1400px;
         margin: 0 auto;
 
         .drm-row {
@@ -21,7 +22,7 @@
             .drm-col-full, .drm-col-half, .drm-col-two-thirds, .drm-col-third, .drm-col-quarter {
                 float: left;
                 padding: 0 $gutter;
-                margin-bottom: $gutter * 2;
+                // margin-bottom: $gutter * 2;
 
                 @include drm-breakpoint(jupiter) {
                     margin-bottom: $gutter;
@@ -70,7 +71,7 @@
                     width: ( 100 / $column-count ) * $i * 1%;
                     float: left;
                     padding: 0 $gutter;
-                    margin-bottom: $gutter * 2;
+                    // margin-bottom: $gutter * 2;
 
                     @include drm-breakpoint(jupiter) {
                         margin-bottom: $gutter;

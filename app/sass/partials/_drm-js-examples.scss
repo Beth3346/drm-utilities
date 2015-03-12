@@ -221,3 +221,7 @@ span.drm-has-tooltip {
 .drm-flexible-grid {
     @include drm-flexible-grid(4, true);
 }
+
+.drm-select {
+    @include drm-select-control(200px);
+}

@@ -98,7 +98,6 @@
 @mixin drm-form($glow: $drm-blue, $bk-color: $lightest-grey, $border: $grey) {
     padding: 10px;
     width: 100%;
-    
 
     small {
         display: block;
@@ -157,15 +156,16 @@
     }
 
     label {
-        margin: 15px 0 5px 0;
+        margin: 0;
         line-height: 2em;
         @include drm-em-font(14);
     }
 
     input, textarea, select {
         margin: 5px 0;
-        padding: 5px 10px;
+        padding: 10px 15px;
         border-radius: 3px;
+        @include drm-em-font(14);
         
         @include drm-form-state($glow, $bk-color, $border);
 
@@ -181,47 +181,51 @@
 
     .drm-control-label {
         margin: 0;
-        padding: 5px 0 5px 0;
+        padding: 5px 0;
         font-weight: normal;
         @include drm-em-font(18);
     }
 
     .drm-tabular-control-group {
-        padding: 15px 0 15px 0;     
+        padding: 15px 0;     
     }
 
     .drm-control-group {
-        padding: 5px 0 5px 0;
+        padding: 5px 0;
 
         label {
             padding: 0;
             display: inline;
             line-height: normal;
+            vertical-align: middle;
         }
 
         input[type="checkbox"], input[type="radio"] {
-            display: block;
-            margin: 7px 10px 0 0;
+            display: inline-block;
+            margin: 0 10px 0 0;
             padding: 0;
-            float: left;
         }
     }
 
     .drm-inline-control-group {
-        width: 100%;
-        margin: 5px 0;
+        float: left;
+        margin: 0 0 0 15px;
         @include drm-clearfix();
 
+        &:first-child {
+            margin-left: 0;
+        }
+
         label {
-            float: left;
-            width: auto;
-            margin: 6px 15px 0 0;
+            display: inline;
+            vertical-align: middle;
+            @include drm-em-font(14);
         }
 
         input[type="text"], input[type="tel"], input[type="email"], input[type="password"], input[type="url"], textarea, select {
-            float: left;
             width: auto;
-            margin: 7px 15px 0 0;
+            display: inline-block;
+            margin: 0 0 0 15px;
         }
 
         select {
@@ -266,11 +270,11 @@
     }
 
     input[type="text"], input[type="tel"], input[type="email"], input[type="password"], input[type="url"], select {
-        width: 80%;
+        width: 100%;
     }
 
     label {     
-        width: 80%;
+        width: 100%;
     }
 
     textarea {
@@ -282,6 +286,10 @@
         @include drm-em-font(14);
         @include drm-button-solid($drm-blue, white, 180px, null, 3px, $drm-blue, block);
     }
+
+    .drm-inline-control-group {
+        margin-top: 5px;
+    }
 }
 
 @mixin drm-inline-form($glow: $drm-blue, $bk-color: $lightest-grey, $border: $grey) {
@@ -291,17 +299,17 @@
     padding-left: 0;
 
     label {
-        margin: 5px;
-        line-height: 2em;
+        display: inline;
+        vertical-align: middle;
         @include drm-em-font(14);
     }
 
     input[type="text"], input[type="tel"], input[type="email"], input[type="password"], input[type="url"], textarea {
-        margin: 5px;
+        margin: 0 10px;
     }
 
     label, input[type="text"], input[type="tel"], input[type="email"], input[type="password"], input[type="url"], textarea, input[type="submit"], button {
-        float: left;
+        display: inline-block;
     }
 
     input[type="submit"], button {
@@ -312,7 +320,7 @@
 
     .drm-control-group {        
         margin: 0 20px;
-        float: left;
+        display: inline-block;
 
         input[type="checkbox"], input[type="radio"] {
             margin-top: 0;
@@ -367,5 +375,83 @@
         background-color: lighten($success-color, 20%);
         border: 1px solid $success-color;
         color: darken($success-color, 20%);
+    }
+}
+
+@mixin drm-select-control($width: 100%, $background-color: #eee, $border-color: #aaa, $text-color: #333, $border-radius: 3px, $font-size: 16, $height: 40px) {
+    width: $width;
+    position: relative;
+
+    .dropdown-label {
+        width: 100%;
+        height: $height;
+        display: block;
+        position: relative;
+        background-color: $background-color;
+        border-radius: $border-radius;
+        border: 1px solid $border-color;
+        @include drm-em-font($font-size);
+        @include drm-clearfix();
+
+        .dropdown-text {
+            padding: 0 5px 0 10px;
+            float: left;
+            display: block;
+            position: relative;
+            height: $height;
+            color: $text-color;
+            line-height: ($font-size * 2)+2#{px};
+        }
+
+        .dropdown-button {
+            display: block;
+            float: right;
+            width: 25%;
+            text-align: center;
+            line-height: ($font-size * 2)+2#{px};
+            cursor: pointer;
+            height: $height - 2;
+            border-left: 1px $border-color solid;
+            padding: 0;
+            color: $text-color;
+            font-size: 80%;
+        }
+    }
+
+    ul {
+        width: 100%;
+        margin-top: 5px;
+        border: 1px solid $border-color;
+        font-weight: 300;
+        padding: 0;
+        cursor: pointer;
+        list-style: none;
+        background-color: $background-color;
+        border-radius: $border-radius;
+        position: absolute;
+        z-index: 100;
+
+        li {
+            width: 100%;
+            height: $height;
+            display: block;
+            padding: 0 0 0 20px;
+            line-height: ($font-size * 2)+2#{px};
+            color: lighten($text-color, 5%);
+            background-color: $background-color;
+            @include drm-em-font($font-size);
+
+            &:hover {
+                background-color: lighten($background-color, 5%);
+            }
+
+            &:first-child {
+                border-radius: $border-radius $border-radius 0 0;
+            }
+
+            &:last-child {
+                border-radius: 0 0 $border-radius $border-radius;
+            }
+        }
     }
 }

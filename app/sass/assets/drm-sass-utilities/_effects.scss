@@ -58,6 +58,8 @@
     padding-bottom: 5px;
     border-top: 1px $stitch-color dashed;
     border-bottom: 1px $stitch-color dashed;
+    border-left: none;
+    border-right: none;
 
     @if $opacity == 1 {
         background: $color;
@@ -66,14 +68,10 @@
             @if $border-color == none {
                 box-shadow: 0 0 0 3px $color;
             } @else {
-                box-shadow: 0 0 0 3px $color, 0 0 0 4px $border-color;
+                box-shadow: 0 0 0 3px $color, 0 5px 4px 2px $shadow;
             }           
         } @else {
-            @if $border-color == none {
-                box-shadow: 0 0 0 3px $color, 0 1px 1px 4px $shadow;
-            } @else {
-                box-shadow: 0 0 0 3px $color, 0 0 0 4px $border-color, 0 1px 1px 5px $shadow;
-            }
+            box-shadow: 0 0 0 3px $color, 0 5px 4px 2px $shadow;
         }
 
     } @elseif $opacity < 0.6 {
@@ -83,14 +81,10 @@
             @if $border-color == none {
                 box-shadow: 0 0 0 3px rgba($color, $opacity);
             } @else {
-                box-shadow: 0 0 0 3px rgba($color, $opacity + 0.2), 0 0 0 4px $border-color;
+                box-shadow: 0 0 0 3px rgba($color, $opacity + 0.2), 0 5px 4px 2px $shadow;
             }           
         } @else {
-            @if $border-color == none {
-                box-shadow: 0 0 0 3px rgba($color, $opacity + 0.2), 0 1px 1px 4px $shadow;
-            } @else {
-                box-shadow: 0 0 0 3px rgba($color, $opacity + 0.2), 0 0 0 4px $border-color, 0 1px 1px 5px $shadow;
-            }
+           box-shadow: 0 0 0 3px rgba($color, $opacity + 0.2), 0 5px 4px 2px $shadow;
         }
 
     } @else {
@@ -100,14 +94,10 @@
             @if $border-color == none {
                 box-shadow: 0 0 0 3px rgba($color, $opacity);
             } @else {
-                box-shadow: 0 0 0 3px rgba($color, $opacity), 0 0 0 4px $border-color;
+                box-shadow: 0 0 0 3px rgba($color, $opacity), 0 5px 4px 2px $shadow;
             }           
         } @else {
-            @if $border-color == none {
-                box-shadow: 0 0 0 3px rgba($color, $opacity), 0 1px 1px 4px $shadow;
-            } @else {
-                box-shadow: 0 0 0 3px rgba($color, $opacity), 0 0 0 4px $border-color, 0 1px 1px 5px $shadow;
-            }
+            box-shadow: 0 0 0 3px rgba($color, $opacity), 0 5px 4px 2px $shadow;
         }       
     }
 }

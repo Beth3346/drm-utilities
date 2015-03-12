@@ -3,6 +3,7 @@
 ###############################################################################
 
 $ = jQuery
+
 class @DrmAccordion
     constructor: (@speed = 300, @container = $('.drm-accordion')) ->
         @label = '.drm-accordion-label'
@@ -37,9 +38,9 @@ class @DrmAccordion
         false
 
 class @DrmAccordionContent extends DrmAccordion
-    constructor: (@speed = 300, @container = $('.drm-accordion'), @showButtons = yes) ->
+    constructor: (@speed = 300, @containerClass = 'drm-accordion', @showButtons = yes) ->
+        @container = $ '.' + @containerClass
         @state = @container.data 'state'
-        @containerClass = '.drm-accordion'
         @label = '.drm-accordion-label'
         @contentHolder = '.drm-accordion-inner'
         @content = $ @contentHolder
@@ -76,7 +77,8 @@ class @DrmAccordionContent extends DrmAccordion
         @content.slideUp @speed
 
 class @DrmAccordionNav extends DrmAccordion
-    constructor: (@speed = 300, @container = $('.drm-accordion-nav')) ->
+    constructor: (@speed = 300, @containerClass = 'drm-accordion-nav') ->
+        @container = $ '.' + @containerClass
         @state = @container.data 'state'
         @containerClass = '.' + @container.prop('class').split(' ')[0]
         @label = '.' + @container.children('ul').children('li').children('a').prop('class').split(' ')[0]
@@ -87,4 +89,4 @@ class @DrmAccordionNav extends DrmAccordion
         @addEvents()
 
 new DrmAccordionContent()
-new DrmAccordionNav()
+# new DrmAccordionNav()

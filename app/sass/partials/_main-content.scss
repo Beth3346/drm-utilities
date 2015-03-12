@@ -12,11 +12,6 @@
     @include drm-clearfix();
 }
 
-section {
-    @extend %drm-container-full-width;
-    padding: 20px;
-}
-
 pre.center-block {
     margin-top: 20px;
     margin-bottom: 20px;

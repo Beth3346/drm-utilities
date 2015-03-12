@@ -37,7 +37,7 @@
 	padding: 20px;
 	margin: 20px 4px 20px 4px;
 	color: white;
-	@include drm-stitched-row($dark-pink, white, #999, 1, #333);
+	@include drm-stitched-row($dark-pink, white, #999, 1, #999);
 }
 
 .figure-border {
