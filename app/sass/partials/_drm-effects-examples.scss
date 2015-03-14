@@ -3,7 +3,7 @@
 -----------------------------------------------------------------------------*/
 
 .solid-drop-shadow {
-	@include drm-solid-drop-shadow(#999);
+	@include drm-solid-drop-shadow($grey);
 }
 
 .background-transparent {
@@ -28,16 +28,16 @@
 
 .stitched-row-transparent {
 	padding: 20px;
-	margin: 20px 3px 20px 3px;
+	margin: 20px 3px;
 	color: white;
-	@include drm-stitched-row($drm-blue, white, #333, .5, transparent);
+	@include drm-stitched-row($drm-blue, white, $dark-grey, .5, transparent);
 }
 
 .stitched-row-shadow {
 	padding: 20px;
-	margin: 20px 4px 20px 4px;
+	margin: 20px 4px;
 	color: white;
-	@include drm-stitched-row($dark-pink, white, #999, 1, #999);
+	@include drm-stitched-row($dark-pink, white, $grey, 1, $grey);
 }
 
 .figure-border {
@@ -45,14 +45,14 @@
 	z-index: 100;
 
 	figure {
-		@extend %drm-center-block;
-		@extend %drm-reset-box;
+		padding: 0;
 		width: 560px;
 		height: 373px;
 		@include drm-figure-transparent-border($dark-pink, $drm-blue, 10px);
 
 		img {
-			@extend %drm-reset-box;
+			padding: 0;
+			margin: 0;
 			width: 560px;
 			height: 373px;
 		}
@@ -60,14 +60,14 @@
 }
 
 .triple-shadow {
-	margin: 20px;
+	margin: 12px;
 	padding: 20px;
 	background-color: white;
 	@include drm-triple-shadow($dark-aqua, lighten($dark-aqua, 20%));
 }
 
 .inset-text {
-	margin: 20px;
+	margin: 0;
 	padding: 20px;
 	background-color: $drm-blue;
 	border: 1px solid $dark-aqua;
@@ -75,7 +75,7 @@
 }
 
 .inset-border {
-	margin: 20px;
+	margin: 0;
 	padding: 20px;
 	color: $dark-grey;
 	background-color: $drm-blue;
@@ -99,7 +99,7 @@
 
 .inset-box-holder {
 	background-color: $light-grey;
-    margin: 20px auto 20px auto;
+    margin: 20px auto;
     @include drm-clearfix();
 }
 
@@ -112,7 +112,7 @@
 }
 
 .boxy-drop-shadow {
-	margin: 20px;
+	margin: 0;
 	padding: 20px;
 	background-color: $drm-blue;
 	border: 1px solid $dark-grey;
@@ -120,19 +120,21 @@
 }
 
 .softer-thick-box-shadow {
-	margin: 20px;
+	margin: 0;
 	padding: 20px;
 	background-color: $drm-blue;
 	border: 1px solid $dark-grey;
 	@include drm-softer-thick-box-shadow();
 }
 
+.drm-thumbnail {
+	@include drm-thumbnail(white, 150px, 125px, 0);
+}
+
 .rounded-thumbnail {
-	margin: 10px;
 	@include drm-thumbnail(white, 150px, 125px, 5px);
 }
 
 .round-thumbnail {
-	margin: 10px;
 	@include drm-thumbnail(white, 150px, null, round);
 }

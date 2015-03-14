@@ -1,0 +1,261 @@
+/*-----------------------------------------------------------------------------
+    Forms
+-----------------------------------------------------------------------------*/
+
+@mixin drm-form($glow: $drm-blue, $bk-color: $lightest-grey, $border: $grey, $button-color: $dark-grey) {
+    padding: 10px;
+    width: 100%;
+
+    small {
+        display: block;
+        color: $grey;
+        margin: 0 0 20px 5px;
+        padding: 0;
+    }
+
+    .form-notice-holder {
+        float: left;
+        @include drm-clearfix();
+    }
+
+    p {
+        &.form-success-notice {
+            @include drm-form-notice(success);
+        }
+
+        &.form-warning-notice {
+            @include drm-form-notice(warning);
+        }
+
+        &.form-danger-notice {
+            @include drm-form-notice(danger);
+        }
+
+        &.form-info-notice, &.form-length-notice {
+            @include drm-form-notice(info); 
+        }
+
+        &.password-meter-danger {
+            @include drm-password-meter(danger);
+        }
+
+        &.password-meter-warning {
+            @include drm-password-meter(warning);
+        }
+
+        &.password-meter-success {
+            @include drm-password-meter(success);
+        }
+    }
+
+    small {
+        &.password-message-danger {
+            @include drm-form-notice(danger);
+        }
+
+        &.password-message-warning {
+            @include drm-form-notice(warning);
+        }
+
+        &.password-message-success {
+            @include drm-form-notice(success);
+        }
+    }
+
+    label {
+        margin: 0;
+        line-height: 2em;
+        @include drm-em-font(14);
+    }
+
+    input, textarea, select {
+        margin: 5px 0;
+        padding: 5px 15px;
+        border-radius: 3px;
+        @include drm-em-font(14);
+        
+        @include drm-form-state($glow, $bk-color, $border);
+
+        &.hidden-field {
+            display: none;
+        }
+    }
+
+    select {
+        height: 30px;
+    }
+
+    select[multiple] {
+        height: auto;
+    }
+
+    input[type="checkbox"], input[type="radio"] {
+        display: inline;
+        padding: 4px 4px 0 0;
+    }
+
+    .drm-control-label {
+        margin: 0;
+        padding: 5px 0;
+        font-weight: normal;
+        @include drm-em-font(18);
+    }
+
+    .drm-tabular-control-group {
+        padding: 15px 0;     
+    }
+
+    .drm-control-group {
+        padding: 5px 0;
+
+        label {
+            padding: 0;
+            display: inline;
+            line-height: normal;
+            vertical-align: middle;
+        }
+
+        input[type="checkbox"], input[type="radio"] {
+            display: inline-block;
+            margin: 0 10px 0 0;
+            padding: 0;
+        }
+    }
+
+    .drm-inline-control-group {
+        float: left;
+        margin: 0 0 0 15px;
+        @include drm-clearfix();
+
+        &:first-child {
+            margin-left: 0;
+        }
+
+        label {
+            display: inline;
+            vertical-align: middle;
+            @include drm-em-font(14);
+        }
+
+        input[type="text"], input[type="tel"], input[type="email"], input[type="password"], input[type="url"], textarea, select {
+            width: auto;
+            display: inline-block;
+            margin: 0 0 0 15px;
+        }
+
+        select {
+            margin-top: 10px;
+        }
+
+        .drm-control-group {
+            margin-left: -10px;
+            margin-right: 15px;
+            float: left;
+
+            input[type="checkbox"], input[type="radio"] {
+                margin-top: 3px;
+                margin-left: 10px;
+            }
+        }
+    }
+
+    input[type="submit"], input[type="button"], button {        
+        margin: 5px 0;
+        @include drm-em-font(14);
+        @include drm-button-solid($button-color, white, 180px, null, 3px, $button-color, block);
+    }
+
+    input[type="submit"][disabled], button[disabled] {      
+        @include drm-button-solid(lighten($button-color, 50%), white, 180px, null, 3px, lighten($button-color, 50%), block);
+
+        &:hover {
+            cursor: not-allowed;
+            background-color: lighten($button-color, 50%);
+            color: white;
+            transition: none;
+        }
+    }
+}
+
+@mixin drm-tabular-form($glow: $drm-blue, $bk-color: $lightest-grey, $border: $grey, $button-color: $dark-grey) {
+    @include drm-form($glow, $bk-color, $border);
+
+    label, input, select {
+        display: block;
+    }
+
+    input[type="text"], input[type="tel"], input[type="email"], input[type="password"], input[type="url"], select {
+        width: 100%;
+    }
+
+    label {     
+        width: 100%;
+    }
+
+    textarea {
+        width: 100%;
+    }
+
+    input[type="submit"], button {      
+        margin: 5px 0;
+        @include drm-em-font(14);
+        @include drm-button-solid($button-color, white, 180px, null, 3px, $button-color, block);
+    }
+
+    .drm-inline-control-group {
+        margin-top: 5px;
+    }
+}
+
+@mixin drm-inline-form($glow: $drm-blue, $bk-color: $lightest-grey, $border: $grey, $button-color: $dark-grey) {
+    @include drm-clearfix();
+    @include drm-form($glow, $bk-color, $border);
+
+    padding-left: 0;
+
+    label {
+        display: inline;
+        vertical-align: middle;
+        @include drm-em-font(14);
+    }
+
+    input[type="text"], input[type="tel"], input[type="email"], input[type="password"], input[type="url"], textarea {
+        margin: 0 10px;
+    }
+
+    label, input[type="text"], input[type="tel"], input[type="email"], input[type="password"], input[type="url"], textarea, input[type="submit"], button {
+        display: inline-block;
+    }
+
+    input[type="submit"], button {
+        @include drm-button-solid($button-color, white, 100px, null, 3px, $button-color, inline-block);
+        @include drm-em-font(14);
+        margin: 0;
+    }
+
+    .drm-inline-control-group {
+        height: 50px;
+    }
+
+    .drm-control-group {        
+        margin: 0 20px;
+        display: inline-block;
+
+        input[type="checkbox"], input[type="radio"] {
+            margin-top: 0;
+        }
+    }
+
+    input[type="submit"][disabled], button[disabled] {      
+        @include drm-button-solid(lighten($button-color, 50%), white, 180px, null, 3px, lighten($button-color, 50%), inline-block);
+        @include drm-em-font(14);
+        margin: 0;
+
+        &:hover {
+            cursor: not-allowed;
+            background-color: lighten($button-color, 50%);
+            color: white;
+            transition: none;
+        }
+    }
+}

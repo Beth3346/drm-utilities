@@ -8,7 +8,6 @@
 }
 
 .nav-bar-stacked {
-	margin: 10px;
 	@include drm-nav-bar-stacked;
 }
 
@@ -18,7 +17,6 @@
 }
 
 .nav-bar-solid-stacked {
-	margin: 10px;
 	width: 300px;
 	@include drm-nav-bar-solid-stacked;
 }
@@ -29,7 +27,6 @@
 }
 
 .nav-bar-pills-stacked {
-	margin: 10px;
 	width: 300px;
 	@include drm-nav-bar-pills-stacked;
 }
@@ -40,44 +37,46 @@
 }
 
 .nav-bar-pills-solid-stacked {
-	margin: 10px;
 	width: 300px;
 	@include drm-nav-bar-pills-solid-stacked;
 }
 
 .button-link {
-	@include drm-button-link($drm-blue, white, 25%, left, 0, white, block);
+	@include drm-button-link($drm-blue, white, 80%, left, 0, white, block);
 }
 
 .button-link-radius {
-	@include drm-button-link($drm-blue, white, 25%, left, 3px, white, block);
+	@include drm-button-link($drm-blue, white, 80%, left, 3px, white, block);
 }
 
 .button-solid {
-	@include drm-button-solid($drm-blue, white, 25%, left, 0, $drm-blue, block);
+	@include drm-button-solid($drm-blue, white, 80%, left, 0, $drm-blue, block);
 }
 
 .button-solid-radius {
-	@include drm-button-solid($drm-blue, white, 25%, left, 3px, $drm-blue, block);
+	@include drm-button-solid($drm-blue, white, 80%, left, 3px, $drm-blue, block);
 }
 
 .button-rectangle {
-	@include drm-rectangle-button($drm-blue, white, 0, 25%, left, block);
+	@include drm-rectangle-button($drm-blue, white, 0, 80%, left, block);
 }
 
 .button-rectangle-radius {
-	@include drm-rectangle-button($drm-blue, white, 3px, 25%, left, block);
+	@include drm-rectangle-button($drm-blue, white, 3px, 80%, left, block);
 }
 
 .pill-button-link {
-	@include drm-pill-button-link(50px, $drm-blue, white, 25%, left, $drm-blue, block);
+	@include drm-pill-button-link(50px, $drm-blue, white, 80%, left, $drm-blue, block);
 }
 
 .pill-button-solid {
-	@include drm-pill-button-solid(50px, $drm-blue, white, 25%, left, $drm-blue, block);
+	@include drm-pill-button-solid(50px, $drm-blue, white, 80%, left, $drm-blue, block);
 }
 
 .button-group {
-	margin: 10px;
 	@include drm-button-group(white, $drm-blue, 3px, $drm-blue);
+
+	button {
+		@include drm-em-font(14);
+	}
 }

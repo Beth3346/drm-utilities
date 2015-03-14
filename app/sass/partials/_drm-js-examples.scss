@@ -16,21 +16,29 @@
     margin: 0;
 }
 
+@include drm-calendar();
+
 .drm-dropdown-nav {
     margin-bottom: 200px;
     @include drm-dropdown-nav(white, $drm-blue, white);
 }
 
 .drm-dropdown-solid-btn-holder {
-    margin: 20px 10px 20px 10px;
-    float: left;
+    margin: 20px 0;
     @include drm-dropdown-button-solid($drm-blue, white, 200px, $drm-blue, 3px);
+
+    button {
+        @include drm-em-font(14);
+    }
 }
 
 .drm-dropdown-split-btn-holder {
-    margin: 20px 10px 20px 10px;
-    float: left;
-    @include drm-dropdown-button-split($drm-blue, white, 3px, $drm-blue, $light-grey);
+    margin: 20px 0;
+    @include drm-dropdown-button-split($drm-blue, white, 3px, $drm-blue, $light-grey, 200px);
+
+    button {
+        @include drm-em-font(14);
+    }
 }
 
 .drm-lightbox-thumbnails {
@@ -79,14 +87,11 @@
 }
 
 .drm-content-holder {
-    @extend %drm-center-block;
     width: 95%;
-    margin-top: 2%;
-    margin-bottom: 2%;
+    margin: 2px auto;
     position: relative;
     background-color: white;
     overflow: hidden;
-    box-sizing: border-box;
     border: 1px solid $light-grey;
     @include drm-clearfix();
 }
@@ -112,14 +117,12 @@
     width: 100%;
     padding: 10px;
     background-color: $dark-grey;
-    box-sizing: border-box;
 }
 
 .drm-offscreen-content {
     width: 80%;
     position: relative;
     left: 20%;
-    box-sizing: border-box;
 
     p {     
         padding: 10px 20px 10px 20px;
@@ -145,13 +148,12 @@
 }
 
 .drm-sticky-sidebar {
-    @extend %drm-reset-box;
+    padding: 0;
+    margin: 0;
     width: 25%;
     float: left;
-    box-sizing: border-box;
 
     &.sticky-left {
-        box-sizing: border-box;
         @include drm-sticky-menu('left');
 
         @include drm-breakpoint(mercury) {            
@@ -169,11 +171,10 @@
 }
 
 .sticky-sidebar-content {
-    @extend %drm-reset-box;
+    margin: 0;
     width: 75%;
     padding: 0 1% 0 2%;
     float: right;
-    box-sizing: border-box;
 
     section:first-child {
         margin-top: 0;

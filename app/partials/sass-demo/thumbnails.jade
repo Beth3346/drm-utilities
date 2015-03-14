@@ -1,0 +1,17 @@
+section#thumbnails
+    .drm-container
+        .drm-row
+            .drm-col-full
+                h3 Thumbnail
+                .drm-container
+                    .drm-row
+                        .drm-col-third
+                            img.drm-thumbnail(src="http://placehold.it/150/125")
+                        .drm-col-third   
+                            img.rounded-thumbnail(src="http://placehold.it/150/125")
+                        .drm-col-third
+                            img.round-thumbnail(src="http://placehold.it/200/200")
+                pre.
+                    @include drm-thumbnail(white, 150px, 125px, 0);
+                    @include drm-thumbnail(white, 150px, 125px, 5px);
+                    @include drm-thumbnail(white, 150px, null, round);

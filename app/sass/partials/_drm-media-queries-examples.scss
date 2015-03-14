@@ -1,20 +1,3 @@
 /*-----------------------------------------------------------------------------
     Media Query Utilities Examples
 -----------------------------------------------------------------------------*/
-
-.media-queries {
-	@extend %drm-container;
-	margin-top: 10px;
-	margin-bottom: 10px;
-	background-color: $drm-blue;
-	border: 1px solid darken($drm-blue, 20%);
-}
-
-.hide-mobile {
-	@extend %drm-container;
-	margin-top: 10px;
-	margin-bottom: 10px;
-	background-color: $drm-blue;
-	border: 1px solid darken($drm-blue, 20%);
-	@include drm-hide-breakpoint(espresso);
-}

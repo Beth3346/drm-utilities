@@ -1,0 +1,21 @@
+/*-----------------------------------------------------------------------------
+    Rectangles
+-----------------------------------------------------------------------------*/
+
+// Creates a rectangular element
+
+@mixin drm-rectangle($width, $height, $display: block, $border-radius: 0) {
+    display: $display;
+    width: $width;
+    height: $height;
+
+    @if $border-radius != 0 {
+        border-radius: $border-radius;
+    }
+}
+
+// Creates a square element
+
+@mixin drm-square($width, $display: block, $border-radius: 0) {
+    @include drm-rectangle($width, $width, $display, $border-radius);
+}

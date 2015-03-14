@@ -1,0 +1,155 @@
+/*-----------------------------------------------------------------------------
+    Shapes
+-----------------------------------------------------------------------------*/
+// complex shapes are borrowed from: 
+// https://github.com/MoOx/compass-recipes/blob/master/stylesheets/recipes/shape/
+
+// Creates a quadrilateral-diamond
+// default equilateral diamond
+// positive skew for horizontal diamond
+// negative skew for vertical diamond
+
+@mixin drm-quadrilateral-diamond($size, $skew: 0)
+{
+    transform: rotate(-45deg) skew($skew#{deg}, $skew#{deg});
+    @include drm-square($size);
+}
+
+// Creates a pentagon
+
+@mixin drm-pentagon($width, $height, $background-color)
+{
+    position: relative;
+    width: $width*0.54;
+    border-width: $height*0.5 $width*0.18 0;
+    border-style: solid;
+    border-color: $background-color transparent;
+
+    &:before {
+        content: "";
+        position: absolute;
+        height: 0;
+        width: 0;
+        top: -$height*0.85;
+        left: -$width*0.18;
+        border-width: 0 $width*0.45 $height*0.35;
+        border-style: solid;
+        border-color: transparent transparent $background-color;
+    }
+}
+
+// Creates a hexagon
+
+@mixin drm-hexagon($width, $height, $background-color)
+{
+    width: $width;
+    height: $height/2;
+    background-color: $background-color;
+    position: relative;
+    
+    &:before,
+    &:after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 0;
+
+        left: 0;
+        
+        border-left: $width/2 solid transparent;
+        border-right: $width/2 solid transparent;
+    }
+
+        &:before {
+            top: -$width/4;
+            border-bottom: $width/4 solid $background-color;
+        }
+
+        &:after {
+            bottom: -$width/4;
+            border-top: $width/4 solid $background-color;
+        }
+}
+
+// Creates an octagon
+
+@mixin drm-octagon($width, $height, $background-color)
+{
+    width: $width;
+    height: $height*0.42;
+    background: $background-color;
+    position: relative;
+
+    &:before,
+    &:after {
+        content: "";
+        position: absolute;
+        left: 0;
+
+        width: $width*0.42;
+        height: 0;
+        
+        border-left: $width*0.29 solid transparent;
+        border-right: $width*0.29 solid transparent;        
+    }
+
+        &:before {
+            top: -$height*0.29;
+            border-bottom: $height*0.29 solid $background-color;
+        }
+
+        &:after {
+            bottom: -$height*0.29;
+            border-top: $height*0.29 solid $background-color;
+        }
+}
+
+// Creates a parallelogram
+
+@mixin drm-parallelogram($width, $height, $skew: 20) {
+    width: $width;
+    height: $height;
+    transform: skew($skew#{deg}, 0deg);
+}
+
+// Creates a trapezoid
+
+@mixin drm-trapezoid($width, $height, $background-color)
+{
+    border-bottom: $height solid $background-color;
+    border-left: $width/2 solid transparent;
+    border-right: $width/2 solid transparent;
+    height: 0;
+    width: $width;
+}
+
+// ribbon wrapper
+
+@mixin drm-ribbon-wrapper ($height, $color, $stitch-color: white) {
+    width: 114%;
+    position: relative;
+    left: -7%;
+    text-align: center;
+    margin: 20px 0 0 0;
+    height: $height;
+    
+    @include drm-stitched-row($color, $stitch-color, none, 1, $darker-grey);
+
+    &:before {
+        content: "";
+        position: absolute;
+        top: -22px;
+        left: -4px;
+        z-index: -10;
+        @include drm-triangle(bottom-right, 14px, 9px, darken($color, 20%));
+    }
+
+    &:after {
+        content: "";
+        position: absolute;
+        top: -22px;
+        right: -4px;
+        z-index: -10;
+        @include drm-triangle(bottom-left, 14px, 9px, darken($color, 20%));
+    }
+}

@@ -1,0 +1,47 @@
+/*-----------------------------------------------------------------------------
+    List Classes
+-----------------------------------------------------------------------------*/
+
+@mixin drm-list-classes() {
+    ul {
+        margin: 0;
+        padding: 10px 10px 10px 20px;
+        list-style: disc;   
+    }
+
+    ol {
+        margin: 0;
+        padding: 10px 10px 10px 20px;
+        list-style: decimal;
+    }
+
+    li, dd, dt {
+        margin: 0;
+        padding: 5px 0;
+    }
+
+    dl {
+        padding: 0;
+        margin: 0;
+    }
+
+    dt {
+        font-weight: bold;
+    }
+
+    .drm-unstyled-list {
+        @include drm-unstyled-list(left);
+    }
+
+    .drm-inline-list {
+        @include drm-inline-list();
+    }
+
+    .drm-triangle-list {
+        @include drm-bullet-list("\25B6");
+    }
+
+    .drm-checked-list {
+        @include drm-bullet-list("\2713");
+    }
+}

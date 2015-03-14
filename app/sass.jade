@@ -1,0 +1,35 @@
+doctype html
+html.no-js(lang="en")
+
+    include partials/head
+
+    body
+        include partials/header
+        .drm-container
+            .drm-row
+                main.drm-col-9.main-content
+                    article
+                        header
+                            .drm-container
+                                .drm-row
+                                    .drm-col-full
+                                        h1 Sass
+                        include partials/sass-demo/border-effects
+                        include partials/sass-demo/box-effects
+                        include partials/sass-demo/circles
+                        include partials/sass-demo/forms
+                        include partials/sass-demo/grid
+                        include partials/sass-demo/layout
+                        include partials/sass-demo/lists
+                        include partials/sass-demo/media-queries
+                        include partials/sass-demo/rectangles
+                        include partials/sass-demo/shadows
+                        include partials/sass-demo/shapes
+                        include partials/sass-demo/stars
+                        include partials/sass-demo/tables
+                        include partials/sass-demo/text-effects
+                        include partials/sass-demo/thumbnails
+                        include partials/sass-demo/triangles
+                include partials/sidebar
+
+        include partials/footer

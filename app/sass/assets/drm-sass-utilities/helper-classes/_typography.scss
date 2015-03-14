@@ -1,0 +1,133 @@
+/*-----------------------------------------------------------------------------
+    Typography Classes
+-----------------------------------------------------------------------------*/
+
+@mixin drm-typography-classes() {
+    .drm-bold {
+        font-weight: bold;
+    }   
+
+    .drm-italic {
+        font-style: italic;
+    }   
+
+    .drm-underline {
+        text-decoration: underline;
+    }   
+
+    .drm-uppercase {
+        text-transform: uppercase;
+    }
+
+    .drm-capitalize {
+        text-transform: capitalize;
+    }
+
+    .drm-smaller-text {
+        @include drm-em-font(10);
+    }
+
+    .drm-text-left {
+        text-align: left;
+    }
+
+    .drm-text-right {
+        text-align: right;
+    }
+
+    .drm-text-center {
+        text-align: center;
+    }
+
+    .drm-text-justified {
+        text-align: justify;
+    }
+
+    .drm-text-muted {
+        color: $muted-color;
+    }
+
+    .drm-text-disabled {
+        color: $light-grey;
+    }
+
+    .drm-text-danger {
+        color: $danger-color;   
+    }
+
+    .drm-text-error {
+        color: $danger-color;
+        font-weight: bold;
+    }
+
+    .drm-text-info {
+        color: $info-color;
+    }
+
+    .drm-text-warning {
+        color: $warning-color;
+    }
+
+    .drm-text-success {
+        color: $success-color;
+    }
+
+    mark {
+        background-color: $link-color;
+        color: white;
+        padding-left: 3px;
+        padding-right: 3px;
+    }
+
+    .drm-highlight {
+        color: $link-color;
+    }
+
+    p {
+        margin: 0;
+        padding: 10px 0;
+    }
+
+    small {
+        @include drm-em-font(10);
+    }
+
+    blockquote {
+        margin: 0;
+        padding: 10px;
+        font-style: italic;
+    }
+
+    cite {
+        font-style: normal;
+    }
+
+    pre {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        background-color: $lightest-grey;
+        border: 1px solid $light-grey;
+        padding: 10px;
+        border-radius: 3px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        @include drm-em-font(14);
+
+        @include drm-breakpoint(neptune) {
+            width: 100%;
+        }
+    }
+
+    a {
+        text-decoration: underline;
+        color: $link-color;
+
+        &:hover, &:focus {
+            text-decoration: none;
+        }
+
+        &:visited {
+            color: darken($link-color,  20%);
+        }
+    }
+}

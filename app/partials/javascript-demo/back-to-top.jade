@@ -1,0 +1,23 @@
+section#drm-back-to-top
+    .drm-container
+        .drm-row
+            .drm-col-full
+                h1 Drm Back to Top
+                p. Click back to top button to scroll to the top of page. The button fades in as the user scrolls toward 
+                    the end of the page.
+    .drm-container
+        .drm-row
+            .drm-col-full
+                h2 Demo
+                p This site uses Drm Back to Top so the site itself is the demo.
+            .drm-col-full
+                h2 Usage
+                p: a(href="https://github.com/dynamicresponsemedia/drm-back-to-top" target="_blank") Visit GitHub Repo
+                p Just add compiled drm-back-to-top.coffee to your pages and you're ready to go.
+                h3.drm-bold Initialize new instance of DrmBackToTop
+                pre new DrmBackToTop(content, speed, scrollSpeed);
+                h4.drm-bold Options
+                ul
+                    li content: content to monitor - default: $('body')
+                    li speed: button fade in speed - default: 300
+                    li scrollSpeed: speed to scroll back to the top of the page - default: 900

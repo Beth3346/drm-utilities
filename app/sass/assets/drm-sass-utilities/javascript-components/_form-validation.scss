@@ -1,0 +1,88 @@
+/*-----------------------------------------------------------------------------
+    Form Validation
+-----------------------------------------------------------------------------*/
+
+@mixin drm-form-status($color) {
+        background-color: lighten($color, 30%);
+        border: 1px solid $color;
+
+        &:hover {
+            border: 1px solid $color;
+            box-shadow: 0 0 2px $color;
+            transition: border .5s ease-in, box-shadow .5s ease-in;
+        }
+
+        &:focus {
+            outline: none;
+            border: 1px solid darken($color, 20%);
+            background-color: white;
+            transition: border .5s ease-in, background .5s ease-in;
+        }    
+}
+
+@mixin drm-form-state($glow: $drm-blue, $bk-color: $lightest-grey, $border: $grey) {
+    background-color: $bk-color;
+    border: 1px solid $border;
+    transition: border .5s ease-out, box-shadow .5s ease-out;
+
+    &:hover {
+        border: 1px solid $glow;
+        box-shadow: 0 0 2px $glow;
+        transition: border .5s ease-in, box-shadow .5s ease-in;
+    }
+
+    &:focus {
+        outline: none;
+        border: 1px solid darken($border, 20%);
+        background-color: lighten($bk-color, 20%);
+        transition: border .5s ease-in, background .5s ease-in;
+    }
+
+    &.drm-form-success {
+        @include drm-form-status($success-color);
+    }
+
+    &.drm-form-warning {
+        @include drm-form-status($warning-color);
+    }
+
+    &.drm-form-danger {
+        @include drm-form-status($danger-color);
+    }
+
+    &[disabled] {
+        background-color: darken($bk-color, 10%);
+        border: 1px solid darken($border, 10%); 
+        transition: none;
+
+        &:hover {
+            cursor: not-allowed;
+            border:  1px solid darken($border, 10%);
+            box-shadow: none;
+            transition: none;
+        }
+
+        &:focus {
+            outline: none;
+            border:  1px solid darken($border, 10%);
+            background-color: darken($bk-color, 10%);
+            transition: none;
+        }
+    }
+}
+
+@mixin drm-form-notice($type: 'info', $font-size: 12) {
+    margin: 5px 0;
+    padding: 0;
+    @include drm-em-font($font-size);
+
+    @if $type == 'success' {
+        color: $success-color;
+    } @elseif $type == 'warning' {
+        color: $warning-color;
+    } @elseif $type == 'danger' {
+        color: $danger-color;
+    } @else {
+        color: $info-color;
+    }
+}

@@ -18,7 +18,7 @@
     padding: 0;
     display: block;
     border-radius: 3px;
-    color: #333;
+    color: $dark-grey;
     margin: 20px 0;
 
     @include drm-breakpoint(jupiter) {

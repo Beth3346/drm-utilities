@@ -5,9 +5,9 @@
 $ = jQuery
 
 class @DrmAccordion
-    constructor: (@speed = 300, @container = $('.drm-accordion')) ->
+    constructor: (@speed = 300, @containerClass = '.drm-accordion') ->
+        @container = $ '.' + @containerClass
         @label = '.drm-accordion-label'
-        @containerClass = '.drm-accordion'
         @contentHolder = '.drm-accordion-content'
         @state = @container.data 'state'
         @content = $ @contentHolder
@@ -79,14 +79,16 @@ class @DrmAccordionContent extends DrmAccordion
 class @DrmAccordionNav extends DrmAccordion
     constructor: (@speed = 300, @containerClass = 'drm-accordion-nav') ->
         @container = $ '.' + @containerClass
-        @state = @container.data 'state'
-        @containerClass = '.' + @container.prop('class').split(' ')[0]
-        @label = '.' + @container.children('ul').children('li').children('a').prop('class').split(' ')[0]
-        @contentHolder = @containerClass + ' .' + $("#{@label}").next('ul').prop('class').split(' ')[0]
-        @content = $ @contentHolder
 
-        @showDefaultContent()
-        @addEvents()
+        unless @container.length is 0
+            @state = @container.data 'state'
+            @containerClass = '.' + @container.prop('class').split(' ')[0]
+            @label = '.' + @container.children('ul').children('li').children('a').prop('class').split(' ')[0]
+            @contentHolder = @containerClass + ' .' + $("#{@label}").next('ul').prop('class').split(' ')[0]
+            @content = $ @contentHolder
+
+            @showDefaultContent()
+            @addEvents()
 
 new DrmAccordionContent()
-# new DrmAccordionNav()
+new DrmAccordionNav()

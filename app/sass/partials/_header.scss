@@ -184,7 +184,7 @@ header {
 
     h1 {
         margin: 0;
-        padding: 0 0 0 30px;
+        padding: 0 0 0 20px;
         text-align: left;
         font-weight: bold;
         @include drm-em-font(48);
@@ -207,7 +207,7 @@ header {
 
     p {
         margin: 0;
-        padding: 0 0 0 30px;
+        padding: 0 0 0 20px;
 
         @include drm-breakpoint(saturn) {
             padding: 0 20px;

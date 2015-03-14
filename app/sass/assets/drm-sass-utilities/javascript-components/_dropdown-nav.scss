@@ -1,0 +1,61 @@
+/*-----------------------------------------------------------------------------
+    Dropdown Nav Menu
+-----------------------------------------------------------------------------*/
+
+@mixin drm-dropdown-nav($text-color: white, $background-color: $link-color, $divider-color: $light-grey) {
+    @include drm-nav-bar-solid();
+
+    li {
+        position: relative;
+
+        a {
+            padding-left: 20px;
+            padding-right: 20px;
+        }   
+
+        > ul {
+            color: $text-color;
+            position: absolute;
+            width: 120%;
+            display: none;
+            z-index: 100;
+            @include drm-nav-bar-solid-stacked($text-color, $background-color, left);
+
+            > li ul {
+                display: none;
+                position: absolute;
+                left: 100%;
+                top: 0;
+                z-index: 100;
+            }
+        }
+    }
+
+    .carat {
+        position: relative;
+        padding-right: 25px;
+        
+        &:after {
+            content: "\25BE";
+            position: absolute;
+            right: 8%;
+            font-weight: bold;
+            line-height: 1.9em;
+            font-size: 12px;
+        }
+    }
+
+    .carat-right {
+        position: relative;
+        padding-right: 25px;
+        
+        &:after {
+            content: "\25B8";
+            position: absolute;
+            right: 8%;
+            font-weight: bold;
+            line-height: 1.9em;
+            font-size: 12px;
+        }
+    }
+}

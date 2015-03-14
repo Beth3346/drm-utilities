@@ -1,0 +1,35 @@
+/*-----------------------------------------------------------------------------
+    Responsive Classes
+-----------------------------------------------------------------------------*/
+
+@mixin drm-responsive-classes() {
+    .drm-hide {
+        display: none;
+    }
+
+    .drm-hide-desktop {
+        @include drm-breakpoint($mercury) {
+            display: none;
+        }
+
+        @include drm-breakpoint($venus) {
+            display: none;
+        }
+
+        @include drm-breakpoint($saturn) {
+            display: block;
+        }
+    }
+
+    .drm-hide-tablet {
+        @include drm-breakpoint($saturn) {
+            display: none;
+        }
+    }
+
+    .drm-hide-mobile {
+        @include drm-breakpoint($neptune) {
+            display: none;
+        }
+    }
+}
