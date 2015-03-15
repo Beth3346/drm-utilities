@@ -1,0 +1,172 @@
+section#drm-validation
+    .drm-container
+        .drm-row
+            .drm-col-full
+                h1 Drm Validation
+    .drm-container
+        .drm-row
+            .drm-col-full
+                h2 Tabular Form
+            .drm-col-full
+                form.tabular-form(role="form" action="")
+                    .drm-container
+                        .drm-row
+                            .drm-col-half
+                                label(for="full_name") Name:
+                                input.drm-valid-full-name#full-name(type="text" name="full_name" placeholder="First Last" data-min-length="3")
+                                small At least 3 characters
+                            .drm-col-half
+                                label(for="nickname") Nickname:
+                                input.drm-valid-alpha#nickname(type="text" name="nickname" placeholder="Nickname" data-max-length="20")
+                                small No more than 20 characters
+                    .drm-container
+                        .drm-row
+                            .drm-col-half
+                                label(for="username") *Username:
+                                input.drm-valid-alpha-num-underscore#username(type="text" name="username" placeholder="UserName" required)
+                                small Can include letters, underscores, and numbers
+                            .drm-col-half
+                                label(for="password") *Password:
+                                input.drm-valid-no-spaces.drm-password#password(type="password" name="password" required)
+                    .drm-container
+                        .drm-row
+                            .drm-col-half
+                                label(for="email") *Email:
+                                input.drm-valid-email#email(type="email" name="email" placeholder="youremail@email.com" required)
+                            .drm-col-half
+                                label(for="phone") Phone:
+                                input.drm-valid-phone#phone(type="tel" name="phone" placeholder="212-867-5309")
+                                small 212-867-5309x78 no spaces
+                    .drm-container
+                        .drm-row
+                            .drm-col-full
+                                label(for="fav_website") Favorite Website:
+                                input.drm-valid-url#fav-website(type="url" name="fav_website" placeholder="http://amazon.com")
+                                small Must start with http://
+                    .drm-container
+                        .drm-row
+                            .drm-col-third
+                                label(for="age") Age:
+                                input.drm-valid-integer#age(type="text" name="age" placeholder="25" data-min-value="1" data-max-value="130")
+                                small Must be between 1 and 130
+                            .drm-col-third
+                                label(for="sides") # Sides:
+                                input.drm-valid-integer#sides(type="text" name="sides" placeholder="5" data-max-value="10")
+                                small No more than 10 sides
+                            .drm-col-third
+                                label(for="meters") Meters:
+                                input.drm-valid-number#meters(type="text" name="meters" placeholder="12.5" data-min-value="0")
+                                small Must be a positive value
+                    .drm-container
+                        .drm-row
+                            .drm-col-full
+                                label(for="birthday") Date of Birth:
+                                input.drm-valid-month-day-year#birthday(type="text" name="birthday" placeholder="03-14-1879")
+                    .drm-container
+                        .drm-row
+                            .drm-col-full
+                                label(for="time") Time:
+                                input.drm-valid-time#time(type="text" name="time" placeholder="12:00am")
+                    .drm-container
+                        .drm-row
+                            .drm-col-half
+                                label(for="ccard") Credit Card #:
+                                input.drm-valid-credit-card#ccard(type="text" name="ccard" placeholder="0000000000000000")
+                                small no dashes or spaces
+                            .drm-col-quarter
+                                label(for="cvv") CVV:
+                                input.drm-valid-cvv#cvv(type="text" name="cvv" placeholder="000")
+                    .drm-container
+                        .drm-row
+                            .drm-col-half
+                                label(for="zip") Zip Code:
+                                input.drm-valid-zip#zip(type="text" name="zip" placeholder="90210-0202")
+                            .drm-col-half
+                                label(for="fav-animal") Favorite Animal:
+                                input.drm-valid-alpha#fav-animal(type="text" name="fav_animal" placeholder="Penguin" data-equal="Penguin")
+                    .drm-container
+                        .drm-row
+                            .drm-col-half
+                                label(for="least-fav-animal") Least Favorite Animal:
+                                input.drm-valid-alpha#least-fav-animal(type="text" name="least_fav_animal" placeholder="Lizard" data-not-equal="Penguin")
+                            .drm-col-half
+                                label(for="fav-programming-lang") Favorite Programming Language:
+                                input.drm-valid-no-tags#fav-programming-lang(type="text" name="fav-programming-lang" placeholder="JavaScript" data-in-list="JavaScript,Ruby,PHP,Python,C#")
+                    .drm-container
+                        .drm-row
+                            .drm-col-half
+                                label(for="fav-tv-show") Favorite Television Show:
+                                input.drm-valid-no-tags#fav-tv-show(type="text" name="fav-tv-show" placeholder="Seinfeld" data-not-list="American Idol,The Bachelor,Big Brother")
+                    .drm-container
+                        .drm-row
+                            .drm-col-half
+                                label(for="fav-movie") Favorite Movie:
+                                select#fav-movie(data-required-with="other-fav-movie")
+                                    option(value=" ") Pick a Movie
+                                    option(value="1") Casablanca
+                                    option(value="2") Star Wars
+                                    option(value="3") Breakfast at Tiffany's
+                                    option(value="4") Clueless
+                                    option(value="5") Ferris Bueller's Day Off
+                            .drm-col-half
+                                label(for="other-fav-movie") What Do You Like Best About Your Favorite Movie?:
+                                input#other-fav-movie(type="text" name="other_fav_movie" placeholder="Its the best" data-require-with="fav-movie")
+                    .drm-container
+                        .drm-row
+                            .drm-col-half
+                                label(for="fav-band") Favorite Band:
+                                select#fav-band(data-required-with="other-fav-band:other")
+                                    option(value=" ") Pick a Band
+                                    option(value="1") The National
+                                    option(value="2") Nirvana
+                                    option(value="3") Velvet Underground
+                                    option(value="4") Frightened Rabbit
+                                    option(value="5") Vampire Weekend
+                                    option(value="other") Other
+                            .drm-col-half
+                                label(for="other-fav-band") Who Is Your Favorite Musician?:
+                                input#other-fav-band(type="text" name="other_fav_band" placeholder="Its the best" data-require-with="fav-band:other")
+                    .drm-container
+                        .drm-row
+                            .drm-col-half
+                                label(for="fav-city") Favorite City:
+                                select#fav-city(data-allowed-with="why-fav-city")
+                                    option(value=" ") Pick a City
+                                    option(value="1") London
+                                    option(value="2") Paris
+                                    option(value="3") New York City
+                                    option(value="4") San Francisco
+                                    option(value="5") Tokyo
+                            .drm-col-half
+                                label(for="why-fav-city") What Do You Like About Your Favorite City?:
+                                input#why-fav-city(type="text" name="why_fav_city" placeholder="So much fun" disabled)
+                    .drm-container
+                        .drm-row
+                            .drm-col-half
+                                label(for="fav-color") Favorite Color:
+                                select#fav-color(data-allowed-with="other-fav-color:other")
+                                    option(value=" ") Pick a Color
+                                    option(value="1") Red
+                                    option(value="2") Orange
+                                    option(value="3") Yellow
+                                    option(value="4") Green
+                                    option(value="5") Blue
+                                    option(value="other") Other Color
+                            .drm-col-half
+                                label(for="other-fav-color") Other Favorite Color:
+                                input#other-fav-color(type="text" name="other_fav_color" placeholder="Purple" disabled)
+                    .drm-container
+                        .drm-row
+                            .drm-col-half
+                                label(for="notes") Notes:
+                                textarea.drm-valid-no-tags#notes(name="notes" cols="30" rows="10" placeholder="These are some notes" data-min-length="50" data-max-length="250") 
+                                small No html tags allowed. Should be between 50 and 250 characters
+                    .drm-container
+                        .drm-row
+                            .drm-col-full
+                                input(type="submit" id="submit" name="submit" value="Submit")
+    .drm-container
+        .drm-row
+            .drm-col-full
+                h2 Usage
+                p: a(href="https://github.com/dynamicresponsemedia/drm-validation" target="_blank") Visit GitHub Repo

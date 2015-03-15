@@ -1,17 +1,23 @@
 doctype html
 html.no-js(lang="en")
-
     include partials/head
-
     body
         include partials/header
-        .drm-container
+        .hero-unit
+            .drm-container
+                .drm-row
+                    .drm-col-full
+                        h1 404:Page Not Found&nbsp;
+                            i.fa.fa-wrench
+                        p Sorry, but the page you were trying to view does not exist.
+        main.main-content.drm-container
             .drm-row
-                main.drm-col-9.main-content
-                    h1 Page Not Found
-                    p Sorry, but the page you were trying to view does not exist.
-                    // IE requires 512+ bytes: http://www.404-error-page.com/404-error-page-too-short-problem-microsoft-ie.shtml
-
+                article.drm-col-9
+                    .drm-container
+                        .drm-row
+                            .drm-col-full
+                                p Maybe you want to return to the
+                                    a(href="index.html") &nbsp;homepage
+                                // IE requires 512+ bytes: http://www.404-error-page.com/404-error-page-too-short-problem-microsoft-ie.shtml
                 include partials/sidebar
-
         include partials/footer

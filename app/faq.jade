@@ -1,19 +1,24 @@
 doctype html
 html.no-js(lang="en")
-
     include partials/head
-
     body
         include partials/header
-        .drm-container
+        .hero-unit
+            .drm-container
+                .drm-row
+                    .drm-col-full
+                        h1 Frequently Asked Questions&nbsp;
+                            i.fa.fa-wrench
+                        p A collection of reusable, modular Sass and JavaScript components
+        main.main-content.drm-container
             .drm-row
-                main.drm-col-9.main-content
-                    h1 FAQ
-
-                    h2 Can I use DRM Utilities on my website?
-                    p. DRM Utilities is free and open source so feel free to use it on your site.
-                        However, it is still an ongoing project so there are probably still a lot of bugs and documentation is still incomplete.
-
+                article.drm-col-9
+                    .drm-container
+                        .drm-row
+                            .drm-col-full
+                                h2 Can I use DRM Utilities on my website?
+                                p.
+                                    DRM Utilities is free and open source so feel free to use it on your site.
+                                    However, it is still an ongoing project so there are probably still a lot of bugs and documentation is still incomplete.
                 include partials/sidebar
-
         include partials/footer

@@ -3,8 +3,37 @@
 -----------------------------------------------------------------------------*/
 
 header {
+    width: 95%;
+    max-width: 1400px;
+    margin: 0 auto;
+    @include drm-clearfix;
+
+    @include drm-breakpoint(saturn) {
+        width: 100%;
+    }
+
+    h1 {
+        padding: 10px 0 10px 20px;
+        float: left;
+
+        a {
+            color: $drm-blue;
+            font-weight: bold;
+            text-decoration: none;
+
+            &:visited {
+                color: $drm-blue;
+            }
+        }
+
+        @include drm-breakpoint(saturn) {
+            float: none;
+            text-align: center;
+        }
+    }
+
     .mobile-nav-holder {
-        display: none;        
+        display: none;
 
         @include drm-breakpoint(saturn) {
             display: block;

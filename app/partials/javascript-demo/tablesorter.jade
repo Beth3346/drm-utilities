@@ -1,0 +1,562 @@
+section#drm-tablesorter
+    .drm-container
+        .drm-row
+            .drm-col-full
+                h1 Tablesorter and Table Filter
+                p Easily and sorting and filtering to data tables
+    .drm-container
+        .drm-row
+            .drm-col-full
+                h2 Demo
+                h3 Academy Award Best Picture Winners
+                table.drm-sortable-table.drm-searchable-table#best-picture
+                    thead
+                        tr
+                            th Oscar Number
+                                button.drm-sortable-table-button(data-dir="ascending") &#9650;
+                                button.drm-sortable-table-button(data-dir="descending") &#9660;
+                                form(role="form" method="Get" action=""): input.drm-search-table(type="text" placeholder="Filter Oscar Number")
+                            th(data-type="alpha") Title
+                                button.drm-sortable-table-button(data-dir="ascending") &#9650;
+                                button.drm-sortable-table-button(data-dir="descending") &#9660;
+                                form(role="form" method="Get" action=""): input.drm-search-table(type="text" placeholder="Filter Title")
+                            th Year
+                                button.drm-sortable-table-button(data-dir="ascending") &#9650;
+                                button.drm-sortable-table-button(data-dir="descending") &#9660;
+                                form(role="form" method="Get" action=""): input.drm-search-table(type="text" placeholder="Filter Year")
+                            th Lead Actor
+                                button.drm-sortable-table-button(data-dir="ascending") &#9650;
+                                button.drm-sortable-table-button(data-dir="descending") &#9660;
+                                form(role="form" method="Get" action=""): input.drm-search-table(type="text" placeholder="Filter Actor")
+                            th Lead Actress
+                                button.drm-sortable-table-button(data-dir="ascending") &#9650;
+                                button.drm-sortable-table-button(data-dir="descending") &#9660;
+                                form(role="form" method="Get" action=""): input.drm-search-table(type="text" placeholder="Filter Actress")
+                    tbody
+                        tr
+                            td 1
+                            td Wings
+                            td 1928
+                            td Rogers, Charles 'Buddy'
+                            td Bow, Clara
+                        tr
+                            td 2
+                            td The Broadway Melody
+                            td 1929
+                            td King, Charles
+                            td Page, Anita
+                        tr
+                            td 3
+                            td All Quiet on the Western Front
+                            td 1930
+                            td Wolheim, Louis 
+                            td
+                        tr
+                            td 4
+                            td Cimarron
+                            td 1931
+                            td Dix, Richard
+                            td Dunne, Irene
+                        tr
+                            td 5
+                            td Grand Hotel
+                            td 1932
+                            td Barrymore, John
+                            td Garbo, Greta
+                        tr
+                            td 6
+                            td Cavalcade
+                            td 1933
+                            td Brook, Clive
+                            td Wynyard, Diana
+                        tr
+                            td 7
+                            td It Happened One Night
+                            td 1934
+                            td Gable, Clark
+                            td Colbert, Claudette
+                        tr
+                            td 8
+                            td Mutiny on the Bounty
+                            td 1935
+                            td Laughton, Charles
+                            td Byington, Spring
+                        tr
+                            td 9
+                            td The Great Ziegfeld
+                            td 1936
+                            td Powell, William
+                            td Loy, Myrna
+                        tr
+                            td 10
+                            td The Life of Emile Zola
+                            td 1937
+                            td Muni, Paul
+                            td Sondergaard, Gale
+                        tr
+                            td 11
+                            td You Can't Take It with You
+                            td 1938
+                            td Stewart, James
+                            td Arthur, Jean
+                        tr
+                            td 12
+                            td Gone with the Wind
+                            td 1939
+                            td Gable, Clark
+                            td Leigh, Vivien
+                        tr
+                            td 13
+                            td Rebecca
+                            td 1940
+                            td Olivier, Laurence
+                            td Fontaine, Joan
+                        tr
+                            td 14
+                            td How Green Was My Valley
+                            td 1941
+                            td Pidgeon, Walter
+                            td O'Hara, Maureen
+                        tr
+                            td 15
+                            td Mrs. Miniver
+                            td 1942
+                            td Pidgeon, Walter
+                            td Garson, Greer
+                        tr
+                            td 16
+                            td Casablanca
+                            td 1943
+                            td Bogart, Humphrey
+                            td Bergman, Ingrid
+                        tr
+                            td 17
+                            td Going My Way
+                            td 1944
+                            td Crosby, Bing
+                            td Heather, Jean
+                        tr
+                            td 18
+                            td The Lost Weekend
+                            td 1945
+                            td Miland, Ray
+                            td Wyman, Jane
+                        tr
+                            td 19
+                            td The Best Years of Our Lives
+                            td 1946
+                            td March, Fredric
+                            td Loy, Myrna
+                        tr
+                            td 20
+                            td Gentleman's Agreement
+                            td 1947
+                            td Peck, Gregory
+                            td McGuire, Dorothy
+                        tr
+                            td 21
+                            td Hamlet
+                            td 1948
+                            td Olivier, Laurence
+                            td Simmons, Jean
+                        tr
+                            td 22
+                            td All the King's Men
+                            td 1949
+                            td Crawford, Broderick
+                            td Dru, Joanne
+                        tr
+                            td 23
+                            td All About Eve
+                            td 1950
+                            td Sanders, George
+                            td David, Bette
+                        tr
+                            td 24
+                            td An American in Paris
+                            td 1951
+                            td Kelly, Gene
+                            td Caron, Leslie
+                        tr
+                            td 25
+                            td The Greatest Show on Earth
+                            td 1952
+                            td Heston, Charlton
+                            td Hutton, Betty
+                        tr
+                            td 26
+                            td From Here to Eternity
+                            td 1953
+                            td Lancaster, Burt
+                            td Kerr, Deborah
+                        tr
+                            td 27
+                            td On the Waterfront
+                            td 1954
+                            td Brando, Marlon
+                            td
+                        tr
+                            td 28
+                            td Marty
+                            td 1955
+                            td Borgnine, Ernest
+                            td Blair, Betsy
+                        tr
+                            td 29
+                            td Around the World in 80 Days
+                            td 1956
+                            td
+                            td
+                        tr
+                            td 30
+                            td The Bridge on the River Kwai
+                            td 1957
+                            td
+                            td
+                        tr
+                            td 31
+                            td Gigi
+                            td 1958
+                            td
+                            td
+                        tr
+                            td 32
+                            td Ben-Hur
+                            td 1959
+                            td
+                            td
+                        tr
+                            td 33
+                            td The Apartment
+                            td 1960
+                            td
+                            td
+                        tr
+                            td 34
+                            td West Side Story
+                            td 1961
+                            td
+                            td
+                        tr
+                            td 35
+                            td Lawrence of Arabia
+                            td 1962
+                            td
+                            td
+                        tr
+                            td 36
+                            td Tom Jones
+                            td 1963
+                            td
+                            td
+                        tr
+                            td 37
+                            td My Fair Lady
+                            td 1964
+                            td
+                            td
+                        tr
+                            td 38
+                            td The Sound of Music
+                            td 1965
+                            td
+                            td
+                        tr
+                            td 39
+                            td A Man for All Seasons
+                            td 1966
+                            td
+                            td
+                        tr
+                            td 40
+                            td In the Heat of the Night
+                            td 1967
+                            td
+                            td
+                        tr
+                            td 41
+                            td Oliver!
+                            td 1968
+                            td
+                            td
+                        tr
+                            td 42
+                            td Midnight Cowboy
+                            td 1969
+                            td
+                            td
+                        tr
+                            td 43
+                            td Patton
+                            td 1970
+                            td
+                            td
+                        tr
+                            td 44
+                            td The French Connection
+                            td 1971
+                            td
+                            td
+                        tr
+                            td 45
+                            td The Godfather
+                            td 1972
+                            td
+                            td
+                        tr
+                            td 46
+                            td The Sting
+                            td 1973
+                            td
+                            td
+                        tr
+                            td 47
+                            td The Godfather Part II
+                            td 1974
+                            td
+                            td
+                        tr
+                            td 48
+                            td One Flew Over the Cuckoo's Nest
+                            td 1975
+                            td
+                            td
+                        tr
+                            td 49
+                            td Rocky
+                            td 1976
+                            td
+                            td
+                        tr
+                            td 50
+                            td Annie Hall
+                            td 1977
+                            td
+                            td
+                        tr
+                            td 51
+                            td The Deer Hunter
+                            td 1978
+                            td
+                            td
+                        tr
+                            td 52
+                            td Kramer vs. Kramer
+                            td 1979
+                            td
+                            td
+                        tr
+                            td 53
+                            td Ordinary People
+                            td 1980
+                            td
+                            td
+                        tr
+                            td 54
+                            td Chariots of Fire
+                            td 1981
+                            td
+                            td
+                        tr
+                            td 55
+                            td Gandhi
+                            td 1982
+                            td
+                            td
+                        tr
+                            td 56
+                            td Terms of Endearment
+                            td 1983
+                            td
+                            td
+                        tr
+                            td 57
+                            td Amadeus
+                            td 1984
+                            td
+                            td
+                        tr
+                            td 58
+                            td Out of Africa
+                            td 1985
+                            td
+                            td
+                        tr
+                            td 59
+                            td Platoon
+                            td 1986
+                            td
+                            td
+                        tr
+                            td 60
+                            td The Last Emperor
+                            td 1987
+                            td
+                            td
+                        tr
+                            td 61
+                            td Rain Man
+                            td 1988
+                            td
+                            td
+                        tr
+                            td 62
+                            td Driving Miss Daisy
+                            td 1989
+                            td
+                            td
+                        tr
+                            td 63
+                            td Dances with Wolves
+                            td 1990
+                            td
+                            td
+                        tr
+                            td 64
+                            td The Silence of the Lambs
+                            td 1991
+                            td
+                            td
+                        tr
+                            td 65
+                            td Unforgiven
+                            td 1992
+                            td
+                            td
+                        tr
+                            td 66
+                            td Schindler's List
+                            td 1993
+                            td
+                            td
+                        tr
+                            td 67
+                            td Forrest Gump
+                            td 1994
+                            td
+                            td
+                        tr
+                            td 68
+                            td Braveheart
+                            td 1995
+                            td
+                            td
+                        tr
+                            td 69
+                            td The English Patient
+                            td 1996
+                            td
+                            td
+                        tr
+                            td 70
+                            td Titanic
+                            td 1997
+                            td
+                            td
+                        tr
+                            td 71
+                            td Shakespeare in Love
+                            td 1998
+                            td
+                            td
+                        tr
+                            td 72
+                            td American Beauty
+                            td 1999
+                            td
+                            td
+                        tr
+                            td 73
+                            td Gladiator
+                            td 2000
+                            td
+                            td
+                        tr
+                            td 74
+                            td A Beautiful Mind
+                            td 2001
+                            td
+                            td
+                        tr
+                            td 75
+                            td Chicago
+                            td 2002
+                            td
+                            td
+                        tr
+                            td 76
+                            td The Lord of the Rings: The Return of the King
+                            td 2003
+                            td
+                            td
+                        tr
+                            td 77
+                            td Million Dollar Baby
+                            td 2004
+                            td
+                            td
+                        tr
+                            td 78
+                            td Crash
+                            td 2005
+                            td
+                            td
+                        tr
+                            td 79
+                            td The Departed
+                            td 2006
+                            td
+                            td
+                        tr
+                            td 80
+                            td No Country for Old Men
+                            td 2007
+                            td
+                            td
+                        tr
+                            td 81
+                            td Slumdog Millionaire
+                            td 2008
+                            td
+                            td
+                        tr
+                            td 82
+                            td The Hurt Locker
+                            td 2009
+                            td
+                            td
+                        tr
+                            td 83
+                            td The King's Speech
+                            td 2010
+                            td
+                            td
+                        tr
+                            td 84
+                            td The Artist
+                            td 2011
+                            td
+                            td
+                        tr
+                            td 85
+                            td Argo
+                            td 2012
+                            td
+                            td
+                        tr
+                            td 86
+                            td 12 Years a Slave
+                            td 2013
+                            td
+                            td
+                        tr
+                            td 87
+                            td Birdman
+                            td 2014
+                            td
+                            td
+    .drm-container
+        .drm-row
+            .drm-col-full
+                h2 Usage
+                p: a(href="https://github.com/dynamicresponsemedia/drm-tablesorter" target="_blank") Visit GitHub Repo

@@ -1,0 +1,22 @@
+doctype html
+html.no-js(lang="en")
+    include partials/head
+    body
+        include partials/header
+        .hero-unit
+            .drm-container
+                .drm-row
+                    .drm-col-full
+                        h1 DRM Modal&nbsp;
+                            i.fa.fa-wrench
+                        p A collection of reusable, modular Sass and JavaScript components
+        main.main-content.drm-container
+            .drm-row
+                article.drm-col-9
+                    .drm-container
+                        .drm-row
+                            .drm-col-full
+                    include partials/javascript-demo/modal
+                include partials/sidebar
+
+        include partials/footer

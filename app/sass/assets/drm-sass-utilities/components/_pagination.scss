@@ -38,7 +38,7 @@
                     background-color: $lightest-grey;
                 }
 
-                &[disabled] {
+                &.disabled {
                     color: $color;
                     background-color: $border-color;
                     cursor: not-allowed;

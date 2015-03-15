@@ -1,48 +1,50 @@
 doctype html
 html.no-js(lang="en")
-
     include partials/head
-
     body
         include partials/header
-        .drm-container
+        .hero-unit
+            .drm-container
+                .drm-row
+                    .drm-col-full
+                        h1 JavaScript&nbsp;
+                            i.fa.fa-wrench
+                        p A collection of reusable, modular Sass and JavaScript components
+        main.main-content.drm-container
             .drm-row
-                main.drm-col-9.main-content
-                    article
-                        header
-                            .drm-container
-                                .drm-row
-                                    .drm-col-full
-                                        h1 JavaScript
-                        include partials/javascript-demo/accordion
-                        include partials/javascript-demo/alerts
-                        include partials/javascript-demo/back-to-top
-                        include partials/javascript-demo/calendar
-                        include partials/javascript-demo/dropdown-buttons
-                        include partials/javascript-demo/dropdown
-                        include partials/javascript-demo/file-uploads
-                        include partials/javascript-demo/flexible-grid
-                        include partials/javascript-demo/flexible-images
-                        include partials/javascript-demo/form-controls
-                        include partials/javascript-demo/lightbox
-                        include partials/javascript-demo/maps
-                        include partials/javascript-demo/modal
-                        include partials/javascript-demo/offscreen-menu
-                        include partials/javascript-demo/passwords
-                        include partials/javascript-demo/popover
-                        include partials/javascript-demo/reorder
-                        include partials/javascript-demo/simple-slider
-                        include partials/javascript-demo/slide-show
-                        include partials/javascript-demo/sort
-                        include partials/javascript-demo/spreadsheet
-                        include partials/javascript-demo/sticky-nav
-                        //- include partials/javascript-demo/sticky-sidebar
-                        include partials/javascript-demo/tablesorter
-                        include partials/javascript-demo/tabs
-                        include partials/javascript-demo/timestamps
-                        include partials/javascript-demo/tooltips
-                        include partials/javascript-demo/typeahead
-                        include partials/javascript-demo/validation
+                article.drm-col-9
+                    .drm-container
+                        .drm-row
+                            .drm-col-full
+                    include partials/javascript-demo/accordion
+                    include partials/javascript-demo/alerts
+                    include partials/javascript-demo/back-to-top
+                    include partials/javascript-demo/calendar
+                    include partials/javascript-demo/dropdown-buttons
+                    include partials/javascript-demo/dropdown
+                    include partials/javascript-demo/file-uploads
+                    include partials/javascript-demo/flexible-grid
+                    include partials/javascript-demo/flexible-images
+                    include partials/javascript-demo/form-controls
+                    include partials/javascript-demo/lightbox
+                    include partials/javascript-demo/maps
+                    include partials/javascript-demo/modal
+                    include partials/javascript-demo/offscreen-menu
+                    include partials/javascript-demo/passwords
+                    include partials/javascript-demo/popover
+                    include partials/javascript-demo/reorder
+                    include partials/javascript-demo/simple-slider
+                    include partials/javascript-demo/slide-show
+                    include partials/javascript-demo/sort
+                    include partials/javascript-demo/spreadsheet
+                    include partials/javascript-demo/sticky-nav
+                    include partials/javascript-demo/sticky-sidebar
+                    include partials/javascript-demo/tablesorter
+                    include partials/javascript-demo/tabs
+                    include partials/javascript-demo/timestamps
+                    include partials/javascript-demo/tooltips
+                    include partials/javascript-demo/typeahead
+                    include partials/javascript-demo/validation
                 include partials/sidebar
 
         include partials/footer

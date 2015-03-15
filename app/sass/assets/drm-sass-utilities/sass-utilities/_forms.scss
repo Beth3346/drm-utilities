@@ -140,7 +140,7 @@
         input[type="text"], input[type="tel"], input[type="email"], input[type="password"], input[type="url"], textarea, select {
             width: auto;
             display: inline-block;
-            margin: 0 0 0 15px;
+            margin: 10px 0 0 15px;
         }
 
         select {
@@ -157,10 +157,14 @@
                 margin-left: 10px;
             }
         }
+
+        input[type="submit"], input[type="button"], button {
+            margin-top: 5px;
+        }
     }
 
     input[type="submit"], input[type="button"], button {        
-        margin: 5px 0;
+        margin: 10px 0;
         @include drm-em-font(14);
         @include drm-button-solid($button-color, white, 180px, null, 3px, $button-color, block);
     }

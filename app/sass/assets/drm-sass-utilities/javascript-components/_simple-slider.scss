@@ -1,0 +1,119 @@
+/*-----------------------------------------------------------------------------
+    Simple Slider
+-----------------------------------------------------------------------------*/
+
+@mixin drm-simple-slider() {
+    margin: 50px auto 0 auto;
+    z-index: -1;
+    width: 700px;
+    height: 350px;
+    
+    @include drm-clearfix;
+
+    .drm-simple-slide-holder {  
+        padding: 0;
+        margin: 0;
+        position: relative;
+        width: 700px;
+        height: 350px;
+        overflow: hidden;
+        @include drm-clearfix;
+    }
+
+    .drm-simple-slide {
+        padding: 0;
+        margin: 0;
+        z-index: 0;
+        width: 700px;
+        height: 350px;
+        
+
+        figure {
+            padding: 0;
+            margin: 0;
+            position: relative;
+            @include drm-square(100%);
+
+            img {
+                @include drm-square(100%);
+            }
+
+            figcaption {
+                position: absolute;
+                top: 75%;
+                left: 0;
+                color: $dark-grey;
+                padding: 10px 10px 10px 20px;
+                margin: 0;
+                width: 80%;
+                font-weight: bold;
+                @include drm-background-transparent(white, 0.5);
+            }
+        }
+    }   
+
+    .drm-simple-slider-list {
+        padding: 0;
+        margin: 0;
+        position: absolute;
+        text-align: center;
+        z-index: 1;
+        width: 700px;
+        bottom: 10px;
+
+        li {
+            margin: 0 1px;
+            padding: 0;
+            display: inline-block;
+             
+        }
+
+        button {
+            padding: 0;
+            margin: 0;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            @include drm-circle(10px);
+            @include drm-background-transparent(white, 0.5);
+
+            &:hover, &:focus {
+                background-color: white;
+            }
+
+            &.active {
+                background-color: $link-color;
+            }
+        }
+    }
+
+    .drm-simple-slider-nav {
+        margin: 0;
+        padding: 0 20px;
+        z-index: 1;
+        width: 100%;
+        @include drm-vertically-center(350px, 64px);
+        @include drm-clearfix;
+
+        button {
+            padding: 0;
+            margin: 0;
+            border: none;
+            cursor: pointer;
+            @include opacity(.3);
+            @include drm-square(64px);
+
+            &:hover, &:focus {
+                @include opacity(1);
+            }
+        }
+
+        .drm-simple-slide-prev {
+            float: left;
+        }
+
+        .drm-simple-slide-next {
+            float: right;
+        }
+    }
+}

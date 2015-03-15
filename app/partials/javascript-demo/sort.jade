@@ -1,0 +1,209 @@
+section#drm-sort
+    .drm-container
+        .drm-row
+            .drm-col-full
+                h1 DRM Sort
+                p Sort list items quickly
+    .drm-container
+        .drm-row
+            .drm-col-third
+                h3 Numeric list
+                .button-group
+                    button.drm-sort-list(data-sort="ascending" data-list="numbers") &#9650;
+                    button.drm-sort-list(data-sort="descending" data-list="numbers") &#9660;
+                ul.drm-unstyled-list.drm-sortable#numbers
+                    li 7
+                    li 101
+                    li 74
+                    li 264
+                    li 0
+                    li 95
+            .drm-col-third
+                h3 Can sort lists with multiple data types
+                .button-group
+                    button.drm-sort-list(data-sort="ascending" data-list="alpha-num") &#9650;
+                    button.drm-sort-list(data-sort="descending" data-list="alpha-num") &#9660;
+                ul.drm-unstyled-list.drm-sortable#alpha-num
+                    li 7
+                    li 101
+                    li 74
+                    li 264
+                    li 0
+                    li 95
+                    li Cat
+                    li 5 Dog
+                    li Bird
+                    li Rabbit
+                    li pet rock
+                    li Guinea Pig
+            .drm-col-third
+                h3 Sorts lists of items that begin with numbers as a numeric list
+                .button-group
+                    button.drm-sort-list(data-sort="ascending" data-list="miles") &#9650;
+                    button.drm-sort-list(data-sort="descending" data-list="miles") &#9660;
+                ul.drm-unstyled-list.drm-sortable#miles
+                    li 7 miles
+                    li 101 miles
+                    li 74 miles
+                    li 264 miles
+                    li 0 miles
+                    li 95 miles
+    .drm-container
+        .drm-row
+            .drm-col-third
+                h3 Numeric list sorted as alpha with data-type value
+                .button-group
+                    button.drm-sort-list(data-sort="ascending" data-list="alpha-miles") &#9650;
+                    button.drm-sort-list(data-sort="descending" data-list="alpha-miles") &#9660;
+                ul.drm-unstyled-list.drm-sortable#alpha-miles(data-type="alpha")
+                    li 7 miles
+                    li 101 miles
+                    li 74 miles
+                    li 264 miles
+                    li 0 miles
+                    li 95 miles
+            .drm-col-third
+                h3 Sorts lists with decimal values
+                .button-group
+                    button.drm-sort-list(data-sort="ascending" data-list="decimals") &#9650;
+                    button.drm-sort-list(data-sort="descending" data-list="decimals") &#9660;
+                ul.drm-unstyled-list.drm-sortable#decimals
+                    li 3.64
+                    li 101.33
+                    li 7.293
+                    li 2.472
+                    li 3.67
+                    li 12.3252
+            .drm-col-third
+                h3 Sorts lists with decimal values and units
+                .button-group
+                    button.drm-sort-list(data-sort="ascending" data-list="gallons") &#9650;
+                    button.drm-sort-list(data-sort="descending" data-list="gallons") &#9660;
+                ul.drm-unstyled-list.drm-sortable#gallons
+                    li 3.64 gallons
+                    li 101.33 gallons
+                    li 7.293 gallons
+                    li 2.472 gallons
+                    li 3.67 gallons
+                    li 12.3252 gallons
+    .drm-container
+        .drm-row
+            .drm-col-third
+                h3 Can ignore leading words like 'the' and 'a' when sorting
+                .button-group
+                    button.drm-sort-list(data-sort="ascending" data-list="movies") &#9650;
+                    button.drm-sort-list(data-sort="descending" data-list="movies") &#9660;
+                ul.drm-unstyled-list.drm-sortable#movies
+                    li Casablanca
+                    li Star Wars
+                    li 39 Steps
+                    li American Beauty
+                    li Clueless
+                    li My Cousin Vinny
+                    li Of Mice and Men
+                    li A Beautiful Mind
+                    li The Graduate
+            .drm-col-third
+                h3 Alpha lists
+                .button-group
+                    button.drm-sort-list(data-sort="ascending" data-list="animals") &#9650;
+                    button.drm-sort-list(data-sort="descending" data-list="animals") &#9660;
+                ul.drm-unstyled-list.drm-sortable#animals
+                    li Cat
+                    li Dog
+                    li Bird
+                    li Rabbit
+                    li pet rock
+                    li Guinea Pig
+                    li Fish
+                    li frog
+                    li Snake
+            .drm-col-third
+                h3 Will ignore trailing numbers when sorting alpha lists
+                p All characters following numbers will be ignored
+                .button-group
+                    button.drm-sort-list(data-sort="ascending" data-list="animals2") &#9650;
+                    button.drm-sort-list(data-sort="descending" data-list="animals2") &#9660;
+                ul.drm-unstyled-list.drm-sortable#animals2
+                    li Cat 12
+                    li Cat 10
+                    li Bird 12
+                    li Rabbit 12
+                    li pet rock 12
+                    li Guinea Pig 12
+                    li Fish 12
+                    li frog 12
+                    li Snake 12
+    .drm-container
+        .drm-row
+            .drm-col-full
+                h3 Can sort lists of dates
+                p Support for datetime coming soon
+            .drm-col-third
+                .button-group
+                    button.drm-sort-list(data-sort="ascending" data-list="history") &#9650;
+                    button.drm-sort-list(data-sort="descending" data-list="history") &#9660;
+                ul.drm-unstyled-list.drm-sortable#history
+                    li 3/7/1945
+                    li 7/4/1776
+                    li 7/14/1789
+                    li 6/28/1914
+                    li 11/7/1917
+            .drm-col-third
+                .button-group
+                    button.drm-sort-list(data-sort="ascending" data-list="history-events") &#9650;
+                    button.drm-sort-list(data-sort="descending" data-list="history-events") &#9660;
+                ul.drm-unstyled-list.drm-sortable#history-events
+                    li 3/7/1945 - VE Day
+                    li 7/4/1776 - United States declares independence from England
+                    li 7/14/1789 - Fall of the Bastille
+                    li 6/28/1914 - Archduke Francis Ferdinand is assassinated in Sarajevo
+                    li 11/7/1917 - October Revolution begins in Russia
+    .drm-container
+        .drm-row
+            .drm-col-full
+                h3 Can sort lists of times
+            .drm-col-third
+                .button-group
+                    button.drm-sort-list(data-sort="ascending" data-list="hours") &#9650;
+                    button.drm-sort-list(data-sort="descending" data-list="hours") &#9660;
+                ul.drm-unstyled-list.drm-sortable#hours
+                    li 3:00pm
+                    li 8:23AM
+                    li 12:00AM
+                    li 3:00am
+                    li 6:00pm
+                    li 12:10am
+                    li 9:45am
+                    li 11:59pm
+            .drm-col-third
+                .button-group
+                    button.drm-sort-list(data-sort="ascending" data-list="hours2") &#9650;
+                    button.drm-sort-list(data-sort="descending" data-list="hours2") &#9660;
+                ul.drm-unstyled-list.drm-sortable#hours2
+                    li 3:00pm Some Event
+                    li 8:23AM Some Event
+                    li 12:00AM Some Event
+                    li 3:00am Some Event
+                    li 6:00pm Some Event
+                    li 12:10am Some Event
+                    li 9:45am Some Event
+                    li 11:59pm Some Event
+            .drm-col-third
+                .button-group
+                    button.drm-sort-list(data-sort="ascending" data-list="cal-events") &#9650;
+                    button.drm-sort-list(data-sort="descending" data-list="cal-events") &#9660;
+                ul.drm-unstyled-list.drm-sortable#cal-events
+                    li Birthday
+                    li 9:45am Some Event
+                    li 11:59pm Some Event
+                    li 3:00am Some Event
+                    li Fun Day
+                    li 6:00pm Some Event
+                    li 3:00pm Some Event
+                    li 8:23AM Some Event
+    .drm-container
+        .drm-row
+            .drm-col-full
+                h2 Usage
+                p: a(href="https://github.com/dynamicresponsemedia/drm-sort" target="_blank") Visit GitHub Repo

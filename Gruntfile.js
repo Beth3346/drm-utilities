@@ -9,7 +9,7 @@ module.exports = function(grunt) {
         copy: {
             build: {
                 cwd: '<%= appFolder %>',
-                src: [ '**', '!**/partials/**/*', '!*.jade' , '!**/images/**/*', '!**/sass/**/*', '!**/coffee/**/*'],
+                src: [ '**', '!**/partials/**/*', '!**/*.jade' , '!**/images/**/*', '!**/sass/**/*', '!**/coffee/**/*'],
                 dest: '<%= distFolder %>',
                 expand: true
             }

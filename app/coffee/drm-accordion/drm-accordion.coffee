@@ -5,15 +5,17 @@
 $ = jQuery
 
 class @DrmAccordion
-    constructor: (@speed = 300, @containerClass = '.drm-accordion') ->
+    constructor: (@speed = 300, @containerClass = 'drm-accordion') ->
         @container = $ '.' + @containerClass
-        @label = '.drm-accordion-label'
-        @contentHolder = '.drm-accordion-content'
-        @state = @container.data 'state'
-        @content = $ @contentHolder
 
-        @showDefaultContent()
-        @addEvents()
+        unless @container.length is 0
+            @label = '.drm-accordion-label'
+            @contentHolder = '.drm-accordion-content'
+            @state = @container.data 'state'
+            @content = $ @contentHolder
+
+            @showDefaultContent()
+            @addEvents()
 
     showDefaultContent: =>
         expandedContent = $ "#{@contentHolder}[data-state=expanded]"
@@ -40,16 +42,18 @@ class @DrmAccordion
 class @DrmAccordionContent extends DrmAccordion
     constructor: (@speed = 300, @containerClass = 'drm-accordion', @showButtons = yes) ->
         @container = $ '.' + @containerClass
-        @state = @container.data 'state'
-        @label = '.drm-accordion-label'
-        @contentHolder = '.drm-accordion-inner'
-        @content = $ @contentHolder
 
-        if @showButtons
-            @buttons = @addButtons()
+        unless @container.length is 0
+            @state = @container.data 'state'
+            @label = '.drm-accordion-label'
+            @contentHolder = '.drm-accordion-inner'
+            @content = $ @contentHolder
 
-        @showDefaultContent()
-        @addEvents()
+            if @showButtons
+                @buttons = @addButtons()
+
+            @showDefaultContent()
+            @addEvents()
 
     addEvents: =>
         self = @

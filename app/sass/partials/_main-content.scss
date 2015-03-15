@@ -2,29 +2,15 @@
     Main Content Styles
 -----------------------------------------------------------------------------*/
 
-.drm-container .drm-row .main-content {
+.main-content {
     padding-top: 20px;
     min-height: 800px;
-}
-
-.example-holder {
-    margin: 20px auto;
-    @include drm-clearfix();
 }
 
 pre {
     margin-top: 20px;
     margin-bottom: 20px;
     width: 100%;
-}
-
-.example {
-    margin: 0;
-    padding: 20px;
-    background-color: white;
-    border: 1px solid $grey;
-    box-sizing: border-box;
-    @include drm-clearfix();
 }
 
 .argument-list {

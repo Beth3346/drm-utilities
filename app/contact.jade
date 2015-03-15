@@ -1,17 +1,22 @@
 doctype html
 html.no-js(lang="en")
-
     include partials/head
-
     body
         include partials/header
-        .drm-container
+        .hero-unit
+            .drm-container
+                .drm-row
+                    .drm-col-full
+                        h1 Contact Me&nbsp;
+                            i.fa.fa-wrench
+                        p A collection of reusable, modular Sass and JavaScript components
+        main.main-content.drm-container
             .drm-row
-                main.drm-col-9.main-content
-                    h1 Contact Me
-
-                    p My contact info is available on 
-                        a(href='http://elizabeth-rogers.com') &nbsp;elizabeth-rogers.com
+                article.drm-col-9
+                    .drm-container
+                        .drm-row
+                            .drm-col-full
+                                p My contact info is available on 
+                                    a(href='http://elizabeth-rogers.com') &nbsp;elizabeth-rogers.com
                 include partials/sidebar
-
         include partials/footer
