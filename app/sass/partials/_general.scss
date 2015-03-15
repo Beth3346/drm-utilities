@@ -11,11 +11,11 @@
 @include drm-grid();
 
 .drm-button {	
-	@include drm-button-solid($drm-blue, white, 200px);
+	@include drm-button-solid($main-color, $background-color, 200px);
 }
 
 .drm-button-inline {
-	@include drm-button-solid($drm-blue, white, 200px, null, 3px, $drm-blue, inline-block);
+	@include drm-button-solid($main-color, $background-color, 200px, null, 3px, $main-color, inline-block);
 }
 
 .options-list {

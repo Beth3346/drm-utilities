@@ -7,20 +7,25 @@ section#box-effects
         .drm-row
             .drm-col-full
                 h3 Background Transparent
-                .background-transparent.example        
-                    p. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
-                        maxime molestias est numquam quos recusandae dignissimos commodi 
-                        vero sequi ipsum sed nesciunt optio?
+                .drm-container.background-transparent  
+                    .drm-row
+                        .drm-col-full
+                            p.
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
+                                maxime molestias est numquam quos recusandae dignissimos commodi 
+                                vero sequi ipsum sed nesciunt optio?
                 p Creates a transparent background with a hex color backup for browsers that do not support rgba colors
                 pre @include drm-background-transparent($color, $opacity);
 
                 h3 Inset Box
                 p Applies an inset box effect to a block element.
-                .inset-box-holder
-                    .inset-box.example
-                        p. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
-                            maxime molestias est numquam quos recusandae dignissimos commodi 
-                            vero sequi ipsum sed nesciunt optio?
+                .drm-container.inset-box-holder
+                    .drm-row.inset-box
+                        .drm-col-full
+                            p.
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
+                                maxime molestias est numquam quos recusandae dignissimos commodi 
+                                vero sequi ipsum sed nesciunt optio?
                 pre @include drm-solid-drop-shadow($color);

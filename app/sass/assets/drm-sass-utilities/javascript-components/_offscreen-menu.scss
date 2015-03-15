@@ -3,7 +3,7 @@
 -----------------------------------------------------------------------------*/
 
 // works with fluid and fixed layouts
-@mixin drm-offscreen-menu($bk-color: $link-color, $width: 15%) {
+@mixin drm-offscreen-menu($bk-color: $main-color, $width: 15%) {
     width: $width;
     position: absolute;
     left: 0;
@@ -16,6 +16,11 @@
 
         li a {
             padding: 10px 15px;
+            background-color: $bk-color;
+
+            &:hover {
+                background-color: lighten($bk-color, 20%);
+            }
         }
     }   
 }

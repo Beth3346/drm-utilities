@@ -2,7 +2,7 @@
     Dropdown Buttons
 -----------------------------------------------------------------------------*/   
 
-@mixin drm-dropdown-button-solid($bk-color: $link-color, $color: white, $width: 40%, $border: none, $border-radius: 0, $divider-color: $light-grey) {
+@mixin drm-dropdown-button-solid($bk-color: $link-color, $color: $background-color, $width: 40%, $border: none, $border-radius: 0, $divider-color: $light-grey) {
     width: $width;
     position: relative;
 
@@ -47,12 +47,12 @@
     }
 }   
 
-@mixin drm-dropdown-button-split($bk-color: $link-color, $color: white, $border-radius: 0, $border: none, $divider-color: $light-grey, $width: 150px) {
+@mixin drm-dropdown-button-split($bk-color: $main-color, $color: $background-color, $border-radius: 0, $border: none, $divider-color: $light-grey, $width: 150px) {
     position: relative;
     width: $width + 50px;
 
     .drm-dropdown-button-group {
-        @include drm-button-group(white, $drm-blue, $border-radius, $border);
+        @include drm-button-group($background-color, $main-color, $border-radius, $border);
 
         button {
             padding-left: 10px;

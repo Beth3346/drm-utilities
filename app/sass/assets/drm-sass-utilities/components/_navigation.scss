@@ -7,7 +7,7 @@
 @mixin drm-nav-bar($text-color: $text-color, $hover-color: $link-color, $align: left, $divider-color: $light-grey) {
     margin: 0;
     padding: 0;
-    @include drm-clearfix();
+    @include drm-clearfix;
 
     li {
         margin: 0;
@@ -78,7 +78,7 @@
 // creates a nav bar with a solid color background
 // hover state will invert text color and background color
 
-@mixin drm-nav-bar-solid($text-color: white, $background-color: $link-color, $align: center, $active-color: $hover-color) {
+@mixin drm-nav-bar-solid($text-color: $background-color, $background-color: $link-color, $align: center, $active-color: $hover-color) {
     @include drm-nav-bar($text-color, $background-color, $align);
 
     li > ul {
@@ -107,7 +107,7 @@
     }
 }
 
-@mixin drm-nav-bar-solid-stacked($text-color: white, $background-color: $link-color, $align: left, $active-color: $hover-color) {
+@mixin drm-nav-bar-solid-stacked($text-color: $background-color, $background-color: $link-color, $align: left, $active-color: $hover-color) {
     background-color: $background-color;
     @include drm-nav-bar-stacked($text-color, $background-color, $align);
 
@@ -138,7 +138,7 @@
 
 // creates a nav-bar with a pill shaped button that shows on hover
 
-@mixin drm-nav-bar-pills($text-color: $link-color, $hover-color: white, $align: left, $border: none ) {
+@mixin drm-nav-bar-pills($text-color: $link-color, $hover-color: $background-color, $align: left, $border: none ) {
     @include drm-nav-bar($text-color, $hover-color, $align);
 
     li {
@@ -187,7 +187,7 @@
     }
 }
 
-@mixin drm-nav-bar-pills-stacked($text-color: $link-color, $hover-color: white, $align: left, $border: none ) {
+@mixin drm-nav-bar-pills-stacked($text-color: $link-color, $hover-color: $background-color, $align: left, $border: none ) {
     @include drm-nav-bar-pills($text-color, $hover-color, $align, $border);
 
     li {
@@ -214,7 +214,7 @@
 
 // creates a nav-bar with pill shaped buttons
 
-@mixin drm-nav-bar-pills-solid($text-color: white, $background-color: $link-color, $align: left, $border: none, $active-color: $hover-color) {
+@mixin drm-nav-bar-pills-solid($text-color: $background-color, $background-color: $link-color, $align: left, $border: none, $active-color: $hover-color) {
     @include drm-nav-bar-pills($text-color, $active-color, $align, $border);
 
     li {
@@ -244,7 +244,7 @@
     }
 }
 
-@mixin drm-nav-bar-pills-solid-stacked($text-color: white, $background-color: $link-color, $align: left, $border: none, $active-color: $hover-color) {
+@mixin drm-nav-bar-pills-solid-stacked($text-color: $background-color, $background-color: $link-color, $align: left, $border: none, $active-color: $hover-color) {
     @include drm-nav-bar-pills-stacked($text-color, $background-color, $align, $border);
 
     li {

@@ -3,22 +3,22 @@
 -----------------------------------------------------------------------------*/
 
 .example-col {
-    background-color: $drm-blue;
+    background-color: $main-color;
     text-align: center;
     padding: 0;
     display: block;
     border-radius: 3px;
-    color: white;
+    color: $background-color;
     margin-bottom: 20px;
 }
 
 .example-col-nested {
-    background-color: white;
+    background-color: $background-color;
     text-align: center;
     padding: 0;
     display: block;
     border-radius: 3px;
-    color: $dark-grey;
+    color: $text-color;
     margin: 20px 0;
 
     @include drm-breakpoint(jupiter) {

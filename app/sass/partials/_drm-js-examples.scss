@@ -4,7 +4,7 @@
 
 .drm-accordion {
     max-width: 800px;
-    @include drm-accordion($drm-blue, 5px);
+    @include drm-accordion($main-color, 5px);
 }
 
 .back-to-top {
@@ -20,12 +20,12 @@
 
 .drm-dropdown-nav {
     margin-bottom: 200px;
-    @include drm-dropdown-nav(white, $drm-blue, white);
+    @include drm-dropdown-nav($background-color, $main-color, $background-color);
 }
 
 .drm-dropdown-solid-btn-holder {
     margin: 20px 0;
-    @include drm-dropdown-button-solid($drm-blue, white, 200px, $drm-blue, 3px);
+    @include drm-dropdown-button-solid($main-color, $background-color, 200px, $main-color, 3px);
 
     button {
         @include drm-em-font(14);
@@ -34,7 +34,7 @@
 
 .drm-dropdown-split-btn-holder {
     margin: 20px 0;
-    @include drm-dropdown-button-split($drm-blue, white, 3px, $drm-blue, $light-grey, 200px);
+    @include drm-dropdown-button-split($main-color, $background-color, 3px, $main-color, $light-grey, 200px);
 
     button {
         @include drm-em-font(14);
@@ -50,9 +50,9 @@
 }
 
 .drm-modal-demo-buttons {
-    margin: 10px auto 10px auto;
+    margin: 10px auto;
     width: 350px;
-    @include drm-button-group($drm-blue, white, 3px, $drm-blue);
+    @include drm-button-group($main-color, $background-color, 3px, $main-color);
 }
 
 .drm-modal-lightbox {
@@ -66,7 +66,7 @@
 
     button {
         margin: 5px;    
-        @include drm-button-solid($drm-blue, white, 200px, null, 3px, $drm-blue, inline-block); 
+        @include drm-button-solid($main-color, $background-color, 200px, null, 3px, $main-color, inline-block); 
     }
 }
 
@@ -90,42 +90,42 @@
     width: 95%;
     margin: 2px auto;
     position: relative;
-    background-color: white;
+    background-color: $background-color;
     overflow: hidden;
     border: 1px solid $light-grey;
-    @include drm-clearfix();
+    @include drm-clearfix;
 }
 
 .drm-offscreen-menu {
-    @include drm-offscreen-menu($link-color, 20%);  
+    @include drm-offscreen-menu($main-color, 20%);  
 }
 
 .drm-menu-button {
     border: none;
-    background-color: $dark-grey;
-    color: white;
-    padding: 5px 10px 5px 10px;
+    background-color: $text-color;
+    color: $background-color;
+    padding: 5px 10px;
 
     &:hover {
         cursor: pointer;
-        background-color: white;
-        color: $dark-grey;
+        background-color: $background-color;
+        color: $text-color;
     }
 }
 
 .drm-offscreen-nav {
     width: 100%;
     padding: 10px;
-    background-color: $dark-grey;
+    background-color: $text-color;
 }
 
 .drm-offscreen-content {
-    width: 80%;
+    width: 100%;
     position: relative;
-    left: 20%;
+    left: 0;
 
     p {     
-        padding: 10px 20px 10px 20px;
+        padding: 10px 20px;
     }
 }
 
@@ -166,7 +166,7 @@
     }
 
     ul {
-        @include drm-nav-bar-pills-solid-stacked(white, $drm-blue, left, $drm-blue);
+        @include drm-nav-bar-pills-solid-stacked($background-color, $main-color, left, $main-color);
     }
 }
 
@@ -192,7 +192,7 @@
 
 span.drm-has-tooltip {
     text-decoration: underline;
-    color: $drm-blue;
+    color: $main-color;
 
     &:hover {
         cursor: pointer;
@@ -200,23 +200,23 @@ span.drm-has-tooltip {
 }
 
 .drm-tooltip-left {
-    @include drm-tooltip(left, $dark-grey, white, 100px);
+    @include drm-tooltip(left, $text-color, $background-color, 100px);
 }
 
 .drm-tooltip-right {
-    @include drm-tooltip(right, $dark-grey, white, 100px);
+    @include drm-tooltip(right, $text-color, $background-color, 100px);
 }
 
 .drm-tooltip-top {
-    @include drm-tooltip(top, $dark-grey, white, 100px);
+    @include drm-tooltip(top, $text-color, $background-color, 100px);
 }
 
 .drm-tooltip-bottom {
-    @include drm-tooltip(bottom, $dark-grey, white, 100px);
+    @include drm-tooltip(bottom, $text-color, $background-color, 100px);
 }
 
 .drm-sortable-table {
-    @include drm-table-rounded(white, $dark-grey, $link-color, $light-grey, $lightest-grey);
+    @include drm-table-rounded($background-color, $text-color, $link-color, $light-grey, $lightest-grey);
 }
 
 .drm-flexible-grid {

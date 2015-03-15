@@ -31,7 +31,7 @@ $default-line-height: 1.5;
 
 $almost-black: #111;
 $dark-grey: #333;
-$darker-grey: #666666;
+$darker-grey: #666;
 $grey: #999;
 $light-grey: #ccc;
 $lighter-grey: #ddd;
@@ -54,10 +54,10 @@ $muted-color: $light-grey;
 
 // color scheme
 
-$text-color: $dark-grey;
 $link-color: $drm-blue;
-$hover-color: #89D6DA;
+$hover-color: #89D6DA; //#89D6DA
 $background-color: white;
-$main-color: $drm-blue;
+$main-color: $dark-grey;
+$text-color: $dark-grey;
 $accent-color: $dark-pink;
 $shadow-color: $off-white;

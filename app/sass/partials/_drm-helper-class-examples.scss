@@ -3,18 +3,18 @@
 -----------------------------------------------------------------------------*/
 
 .float-boxes {
-	background-color: white;
-	@include drm-clearfix();
+	background-color: $background-color;
+	@include drm-clearfix;
 }
 
 .box {
-	background-color: lighten($dark-pink, 20%);
-	border: 1px solid $dark-pink;
+	background-color: lighten($main-color, 20%);
+	border: 1px solid $main-color;
 	text-align: center;
-	color: white;
+	color: $background-color;
 	@include drm-square(200px);
 }
 
 .typography-classes {
-	background-color: white;
+	background-color: $background-color;
 }

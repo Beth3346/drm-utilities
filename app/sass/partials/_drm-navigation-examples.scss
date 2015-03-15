@@ -42,39 +42,39 @@
 }
 
 .button-link {
-	@include drm-button-link($drm-blue, white, 80%, left, 0, white, block);
+	@include drm-button-link($main-color, $background-color, 80%, left, 0, $background-color, block);
 }
 
 .button-link-radius {
-	@include drm-button-link($drm-blue, white, 80%, left, 3px, white, block);
+	@include drm-button-link($main-color, $background-color, 80%, left, 3px, $background-color, block);
 }
 
 .button-solid {
-	@include drm-button-solid($drm-blue, white, 80%, left, 0, $drm-blue, block);
+	@include drm-button-solid($main-color, $background-color, 80%, left, 0, $main-color, block);
 }
 
 .button-solid-radius {
-	@include drm-button-solid($drm-blue, white, 80%, left, 3px, $drm-blue, block);
+	@include drm-button-solid($main-color, $background-color, 80%, left, 3px, $main-color, block);
 }
 
 .button-rectangle {
-	@include drm-rectangle-button($drm-blue, white, 0, 80%, left, block);
+	@include drm-rectangle-button($main-color, $background-color, 0, 80%, left, block);
 }
 
 .button-rectangle-radius {
-	@include drm-rectangle-button($drm-blue, white, 3px, 80%, left, block);
+	@include drm-rectangle-button($main-color, $background-color, 3px, 80%, left, block);
 }
 
 .pill-button-link {
-	@include drm-pill-button-link(50px, $drm-blue, white, 80%, left, $drm-blue, block);
+	@include drm-pill-button-link(50px, $main-color, $background-color, 80%, left, $main-color, block);
 }
 
 .pill-button-solid {
-	@include drm-pill-button-solid(50px, $drm-blue, white, 80%, left, $drm-blue, block);
+	@include drm-pill-button-solid(50px, $main-color, $background-color, 80%, left, $main-color, block);
 }
 
 .button-group {
-	@include drm-button-group(white, $drm-blue, 3px, $drm-blue);
+	@include drm-button-group($background-color, $main-color, 3px, $main-color);
 
 	button {
 		@include drm-em-font(14);

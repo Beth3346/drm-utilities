@@ -5,38 +5,33 @@
 
 $ = jQuery
 class @DrmOffscreen
-    constructor: (@menu = $('nav.drm-offscreen-menu'), @button = $('button.drm-menu-button'), @content = $('div.drm-offscreen-content'), @holder = $('div.drm-content-holder'), @state = 'hide') ->
+    constructor: (@menu = $('nav.drm-offscreen-menu'), @button = $('button.drm-menu-button'), @content = $('.drm-offscreen-content'), @holder = $('.drm-content-holder'), @state = 'hide') ->
         self = @
         menuWidth = self.getDimensions()
 
         # set menu and content positions            
         if self.state is 'hide' then self.hideMenu(menuWidth)
 
+        self.content.on 'click', (e) ->
+            self.hideMenu(menuWidth)
+            e.stopPropagation()
         self.button.on 'click', $.proxy self.toggleMenu, self
 
-    toggleMenu: ->
+    toggleMenu: (e) ->
         _menuPos = @menu.css 'left'
         menuWidth = @getDimensions()
 
         if _menuPos is '0px' then @hideMenu menuWidth else @showMenu menuWidth
+        e.stopPropagation()
 
-    showMenu: (menuWidth) ->
-        _contentWidth = 100 - menuWidth
-
+    showMenu: ->
         @menu.animate {
-            'left': '0'
-        }
-
-        @content.animate {
-            'left': "#{menuWidth}%", 'width': "#{_contentWidth}%"
-        }
+            'left': '0'}
+        @addScroll()
 
     hideMenu: (menuWidth) ->
         @menu.animate {
             'left': "-#{menuWidth}%"}
-        @content.animate {
-            'left': '0', 'width': '100%'}
-        @addScroll()
 
     getDimensions: ->   
         _menuWidth = parseInt @menu.css('width'), 10

@@ -17,7 +17,7 @@
 .ribbon-heading {
     width: 400px;
     margin: 30px 0;
-    @include drm-ribbon-heading($drm-blue, white, white, 20);
+    @include drm-ribbon-heading($main-color, $background-color, $background-color, 20);
 }
 
 .unstyled-list-left {
@@ -37,7 +37,7 @@
 }
 
 .border-list-center {
-    @include drm-border-list(center, $drm-blue);
+    @include drm-border-list(center, $main-color);
 }
 
 .border-list-right {
@@ -105,5 +105,5 @@
 }
 
 .dark-pagination-bar {
-    @include drm-pagination-bar($dark-grey, 5px, $dark-grey, white);
+    @include drm-pagination-bar($text-color, 5px, $text-color, $background-color);
 }

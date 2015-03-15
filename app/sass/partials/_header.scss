@@ -17,12 +17,12 @@ header {
         float: left;
 
         a {
-            color: $drm-blue;
+            color: $main-color;
             font-weight: bold;
             text-decoration: none;
 
             &:visited {
-                color: $drm-blue;
+                color: $main-color;
             }
         }
 
@@ -54,12 +54,12 @@ header {
 
             .mobile-menu-toggle {
                 background-color: transparent;
-                border: 1px solid $drm-blue;
+                border: 1px solid $main-color;
                 padding: 5px 10px;
                 border-radius: 3px;
                 margin-right: 20px;
                 margin-bottom: 10px;
-                color: $drm-blue;
+                color: $main-color;
                 cursor: pointer;
                 float: right;
                 @include drm-em-font(20);
@@ -69,8 +69,8 @@ header {
                 }
 
                 &:hover, &:active {
-                    background-color: $drm-blue;
-                    color: white;
+                    background-color: $main-color;
+                    color: $background-color;
                 }
             }
         }
@@ -114,15 +114,15 @@ header {
             }
 
             a {
-                background-color: $drm-blue;
-                color: white;
+                background-color: $main-color;
+                color: $background-color;
                 text-decoration: none;
                 display: block;
                 padding: 10px 20px;
 
                 &:hover, &:active {
-                    background-color: white;
-                    color: $drm-blue;
+                    background-color: $background-color;
+                    color: $main-color;
                 }
             }
         }
@@ -135,35 +135,35 @@ header {
                 margin: 0 5px 0 0;
 
                 a {
-                    background-color: white;
-                    color: $drm-blue;
+                    background-color: $background-color;
+                    color: $main-color;
                     margin: 0;
                     border-radius: 3px;
                     padding-left: 10px;
                     padding-right: 10px;
 
                     &:hover {
-                        background-color: $drm-blue;
-                        color: white;
+                        background-color: $main-color;
+                        color: $background-color;
 
                         li:hover {
                             background-color: transparent;
                         }
 
                         &:visited {
-                            color: white;
+                            color: $background-color;
                         }
                     }
 
                     &:visited {
-                        color: $drm-blue;
+                        color: $main-color;
                     }
                 }
 
                 ul {
                     margin-top: 5px;
                     background-color: transparent;
-                    border: 1px solid #ccc;
+                    border: 1px solid $light-grey;
                     border-radius: 3px;
 
                     li {
@@ -181,21 +181,21 @@ header {
 
                     a {
                         border-radius: 0;
-                        background-color: white;
-                        color: $drm-blue;
+                        background-color: $background-color;
+                        color: $main-color;
                         @include drm-em-font(12);
 
                         &:hover {
-                            background-color: $drm-blue;
-                            color: white;
+                            background-color: $main-color;
+                            color: $background-color;
 
                             &:visited {
-                                color: white;
+                                color: $background-color;
                             }
                         }
 
                         &:visited {
-                            color: $drm-blue;
+                            color: $main-color;
                         }
                     }
                 }
@@ -207,8 +207,8 @@ header {
 .hero-unit {
     padding-top: 40px;
     padding-bottom: 40px;
-    background-color: $drm-blue;
-    color: white;
+    background-color: $main-color;
+    color: $background-color;
     line-height: 1.5;
 
     h1 {
@@ -226,10 +226,10 @@ header {
 
         a {
             text-decoration: none;
-            color: white;
+            color: $background-color;
 
             &:hover {
-                color: lighten($drm-blue, 10%);
+                color: lighten($main-color, 10%);
             }
         }
     }

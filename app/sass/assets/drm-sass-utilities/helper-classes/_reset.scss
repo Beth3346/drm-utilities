@@ -12,10 +12,6 @@
         background: transparent;
     }
 
-    body {
-        line-height: 1;
-    }
-
     ol, ul {
         list-style: none;
     }
@@ -62,8 +58,8 @@
         line-height: $default-line-height;
         font-size: $default-font-size#{px};
         font-family: $font-family;
-        color: $dark-grey;
-        background-color: white;
+        color: $main-color;
+        background-color: $background-color;
         -webkit-font-smoothing: antialiased;
         text-rendering: optimizeLegibility;
     }
