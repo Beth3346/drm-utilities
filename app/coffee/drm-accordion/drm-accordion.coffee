@@ -39,47 +39,6 @@ class @DrmAccordion
 
         false
 
-class @DrmAccordionContent extends DrmAccordion
-    constructor: (@speed = 300, @containerClass = 'drm-accordion', @showButtons = yes) ->
-        @container = $ '.' + @containerClass
-
-        unless @container.length is 0
-            @state = @container.data 'state'
-            @label = '.drm-accordion-label'
-            @contentHolder = '.drm-accordion-inner'
-            @content = $ @contentHolder
-
-            if @showButtons
-                @buttons = @addButtons()
-
-            @showDefaultContent()
-            @addEvents()
-
-    addEvents: =>
-        self = @
-        super()
-
-        if self.buttons?
-            self.buttons.showButton.on 'click', self.showAll
-            self.buttons.hideButton.on 'click', self.hideAll
-
-    addButtons: =>
-        return {
-            showButton: @createButton 'showButton', 'Show All', 'drm-show-all drm-button-inline'
-            hideButton: @createButton 'hideButton', 'Hide All', 'drm-hide-all drm-button-inline'
-        }
-
-    createButton: (button, message, className) =>
-        $('<button></button>',
-            text: message
-            class: className).prependTo @container
-
-    showAll: =>
-        @content.slideDown @speed
-
-    hideAll: =>
-        @content.slideUp @speed
-
 class @DrmAccordionNav extends DrmAccordion
     constructor: (@speed = 300, @containerClass = 'drm-accordion-nav') ->
         @container = $ '.' + @containerClass
@@ -94,5 +53,5 @@ class @DrmAccordionNav extends DrmAccordion
             @showDefaultContent()
             @addEvents()
 
-new DrmAccordionContent()
-new DrmAccordionNav()
+# new DrmAccordionContent()
+# new DrmAccordionNav()

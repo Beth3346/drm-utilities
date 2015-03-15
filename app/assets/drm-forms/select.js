@@ -10,9 +10,9 @@
     });
 
     list.on('click', 'li', function(e) {
-        that = $(this);
-        option = that.data('option');
-        text = that.text();
+        var that = $(this),
+            option = that.data('option'),
+            text = that.text();
         dropdownText.html(text);
         list.fadeOut();
         e.preventDefault();

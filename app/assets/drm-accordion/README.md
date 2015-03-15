@@ -22,9 +22,9 @@ Requires jQuery
         <div class=".drm-accordion-inner" data-state="collapsed">
         <div class=".drm-accordion-inner" data-state="expanded">
 
-#### Optional config options for speed, container, and buttons
-
-        new DrmAccordionContent(speed, container, showButtons);
+#### Optional config options for speed, container, buttons, and icons
+        
+        myAccordion = drmAccordion({});
 
 ### Example Usage:
 
@@ -70,9 +70,9 @@ Requires jQuery
         <div class=".drm-accordion-nav-inner" data-state="collapsed">
         <div class=".drm-accordion-nav-inner" data-state="expanded">
 
-#### Optional config options for speed, container, and buttons
+#### Optional config options for speed, container, and icons
 
-        new DrmAccordionNav(speed, container);
+        myNav = drmAccordionNav({});
 
 ### Example Usage:
 

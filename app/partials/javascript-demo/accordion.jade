@@ -6,7 +6,10 @@ section#drm-accordion
                 h2 Accordion Content
                 p Show or hide content on click with optional show all and hide all buttons.
                 .drm-accordion
-                    .drm-accordion-label: h3 Item One
+                    .drm-accordion-label
+                        h3
+                            span.drm-accordion-icon.fa.fa-minus
+                            | &nbsp;Item One
                     .drm-accordion-inner(data-state="expanded")
                         p.
                             Elaine: So is it a problem that I’m not religious? Puddy: Not for me. 
@@ -23,14 +26,20 @@ section#drm-accordion
                             freedom. Elaine: So is it a problem that I’m not religious? Puddy: Not for me. 
                             Elaine: Why not? Puddy: I’m not the one going to hell.
                     
-                    .drm-accordion-label: h3 Item Two
+                    .drm-accordion-label
+                        h3
+                            span.drm-accordion-icon.fa.fa-plus 
+                            | &nbsp;Item Two
                     .drm-accordion-inner
                         p.
                             Jerry: But the thing you don't realize is that there's good naked and bad naked. 
                             Naked hair brushing, good; naked crouching, bad. George: My whole life has been a 
                             complete waste of time. Jerry: And there's so much more to go.
                     
-                    .drm-accordion-label: h3 Item Three
+                    .drm-accordion-label
+                        h3
+                            span.drm-accordion-icon.fa.fa-plus 
+                            | &nbsp;Item Three
                     .drm-accordion-inner
                         p.
                             Kruger: Kruger Industrial Smoothing is heading into the red. Or the black, or whatever 
@@ -47,14 +56,20 @@ section#drm-accordion
                              Gehrig, DiMaggio, Mantle… Costanza?! Jerry: And you want to be my latex salesman. Jerry: 
                              Women don’t respect salad eaters. Bob: Who? Who does not want to wear the ribbon.
 
-                    .drm-accordion-label: h3 Item Four
+                    .drm-accordion-label
+                        h3
+                            span.drm-accordion-icon.fa.fa-plus 
+                            | &nbsp;Item Four
                     .drm-accordion-inner
                         p.
                             George: I'm much more comfortable criticizing people behind their backs. Kramer: 
                             Yamahama, it's fright night. Frank Costanza: Starting tonight we're having a little sales 
                             contest. The loser gets fired. The winner gets a Water Pik.
                     
-                    .drm-accordion-label: h3 Item Five
+                    .drm-accordion-label
+                        h3
+                            span.drm-accordion-icon.fa.fa-plus 
+                            | &nbsp;Item Five
                     .drm-accordion-inner
                         p.
                             Elaine: You'd really like him. Jerry: Why do people always say that? I hate everyone, 
@@ -68,22 +83,15 @@ section#drm-accordion
             .drm-col-full        
                 h3 Usage
                 p: a(href="https://github.com/dynamicresponsemedia/drm-accordion" target="_blank") Visit GitHub Repo
-                p Initialization: new DrmAccordionContent(speed, container, showButtons);
-                h4 Defaults:
-                ul
-                    li speed: 300
-                    li container: $('.drm-accordion')
-                    li showButtons: yes
-                pre.
-                    new DrmAccordionContent();
-                    new DrmAccordionContent(500, $('.drm-other-accordion'), no);
             .drm-col-full
                 h2 Accordion Navigation
                 p Show or hide navigation options on click
                 nav.drm-accordion-nav
                     ul.nav-bar-solid-stacked
                         li
-                            a.drm-accordion-nav-label(href="#") Bears
+                            a.drm-accordion-nav-label(href="#")
+                                span.drm-accordion-icon.fa.fa-minus
+                                | &nbsp;Bears
                             ul.drm-accordion-nav-inner(data-state="expanded")
                                 li: a(href="#") Grizzly
                                 li: a(href="#") Polar
@@ -91,7 +99,9 @@ section#drm-accordion
                                 li: a(href="#") Black Bear
                                 li: a(href="#") Brown Bear
                         li
-                            a.drm-accordion-nav-label(href="#") Dogs
+                            a.drm-accordion-nav-label(href="#")
+                                span.drm-accordion-icon.fa.fa-plus
+                                | &nbsp;Dogs
                             ul.drm-accordion-nav-inner
                                 li: a(href="#") Doberman
                                 li: a(href="#") Shetland Sheepdog
@@ -99,7 +109,9 @@ section#drm-accordion
                                 li: a(href="#") Poodle
                                 li: a(href="#") Scottish Terrier
                         li
-                            a.drm-accordion-nav-label(href="#") Big Cats
+                            a.drm-accordion-nav-label(href="#")
+                                span.drm-accordion-icon.fa.fa-plus
+                                | &nbsp;Big Cats
                             ul.drm-accordion-nav-inner
                                 li: a(href="#") Lion
                                 li: a(href="#") Tiger
@@ -107,7 +119,9 @@ section#drm-accordion
                                 li: a(href="#") Leopard
                                 li: a(href="#") Panther
                         li
-                            a.drm-accordion-nav-label(href="#") Fish
+                            a.drm-accordion-nav-label(href="#")
+                                span.drm-accordion-icon.fa.fa-plus
+                                | &nbsp;Fish
                             ul.drm-accordion-nav-inner
                                 li: a(href="#") Clown Fish
                                 li: a(href="#") Swordfish
@@ -115,7 +129,9 @@ section#drm-accordion
                                 li: a(href="#") Barracuda
                                 li: a(href="#") Cod
                         li
-                            a.drm-accordion-nav-label(href="#") Birds  
+                            a.drm-accordion-nav-label(href="#")
+                                span.drm-accordion-icon.fa.fa-plus
+                                | &nbsp;Birds  
                             ul.drm-accordion-nav-inner
                                 li: a(href="#") Parrot
                                 li: a(href="#") Bald Eagle
@@ -125,11 +141,3 @@ section#drm-accordion
             .drm-col-full
                 h3 Usage
                 p: a(href="https://github.com/dynamicresponsemedia/drm-accordion" target="_blank") Visit GitHub Repo
-                p Initialization: new DrmAccordionNav(speed, container);
-                h4 Defaults:
-                ul
-                    li speed: 300
-                    li container: $('.drm-accordion-nav')
-                pre.
-                    new DrmAccordionNav();
-                    new DrmAccordionNav(500, $('.drm-other-accordion-nav'));

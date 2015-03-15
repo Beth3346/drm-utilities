@@ -89,12 +89,12 @@ module.exports = function(grunt) {
         concat: {
             options: {
                     // define a string to put between each file in the concatenated output
-                separator: ';'
+                separator: ''
             },
 
             dist: {
                 // the files to concatenate
-                src: ['<%= distFolder %>assets/*.js','<%= distFolder %>js/coffee-compiled/*.js'],
+                src: ['<%= distFolder %>assets/jquery.js','<%= distFolder %>assets/drm-accordion/*.js','<%= distFolder %>assets/main.js','<%= distFolder %>js/coffee-compiled/*.js'],
                 // the location of the resulting JS file
                 dest: '<%= distFolder %>js/<%= pkg.name %>.<%= pkg.version %>.js'
             }
@@ -220,7 +220,7 @@ module.exports = function(grunt) {
 
             scripts: {
                 // We watch and compile sass files as normal but don't live reload here
-                files: ['<%= appFolder %>assets/**/*.js', '<%= appFolder %>coffee/**/*.coffee'],
+                files: ['<%= distFolder %>assets/jquery.js','<%= distFolder %>assets/drm-accordion/*.js','<%= distFolder %>assets/main.js','<%= appFolder %>coffee/**/*.coffee'],
                 tasks: [ 'coffee', 'concat', 'jshint' ],
             },
 
