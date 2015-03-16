@@ -71,12 +71,17 @@
             padding-right: 10px;
             width: 50px;
             height: 40px;
+
+            &.clicked {
+                background-color: $bk-color;
+                color: $color;
+            }
         }
 
         &.clicked {
             color: $bk-color;
             background-color: $color;
-        }   
+        }
     }
 
     ul {

@@ -1,7 +1,10 @@
 (function(){
     drmAccordion({});
     drmAccordionNav({});
-    drmAccordionNav({speed: 300, containerClass: 'sidebar'});
+    drmAccordionNav({
+        speed: 300,
+        containerClass: 'sidebar'
+    });
 })();
 
 (function($){
@@ -17,4 +20,13 @@
 
 (function() {
     drmBackToTop({});
+})();
+
+(function() {
+    drmDropdownButton({});
+    drmDropdownButton({
+        containerClass: 'drm-dropdown-split-btn-holder',
+        speed: 300,
+        button: 'button:last()'
+    });
 })();
