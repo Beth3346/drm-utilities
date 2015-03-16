@@ -15,7 +15,7 @@
     Vendor Dependencies
 -----------------------------------------------------------------------------*/
 
-    @import "font-awesome-4.3.0/scss/font-awesome";
+    @import "font-awesome/scss/font-awesome";
 
 /*-----------------------------------------------------------------------------
     Sass Utilities
@@ -56,6 +56,7 @@
     @import "javascript-components/form-validation";
     @import "javascript-components/image-grid";
     @import "javascript-components/lightbox";
+    @import "javascript-components/modals";
     @import "javascript-components/offscreen-menu";
     @import "javascript-components/passwords";
     @import "javascript-components/popover";
