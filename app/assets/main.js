@@ -30,3 +30,11 @@
         button: 'button:last()'
     });
 })();
+
+(function() {
+    drmDropdownMenu({});
+})();
+
+(function() {
+    drmFlexibleGrid({});
+})();
