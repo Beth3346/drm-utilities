@@ -38,3 +38,15 @@
 (function() {
     drmFlexibleGrid({});
 })();
+
+(function() {
+    var formControls = drmFormControls({
+        selectOptions: {
+            fn: function(option) {
+                console.log(option);
+            }
+        }
+    });
+    
+    formControls.select();
+})();
