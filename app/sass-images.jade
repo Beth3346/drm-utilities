@@ -7,15 +7,18 @@ html.no-js(lang="en")
             .drm-container
                 .drm-row
                     .drm-col-full
-                        h1 Sass Thumbnails&nbsp;
+                        h1 Images&nbsp;
                             i.fa.fa-wrench
-                        p A collection of reusable, modular Sass and JavaScript components
+                        p These are some pre-defined CSS classes and HTML element default styles I find myself using over and over.
         main.main-content.drm-container
             .drm-row
                 article.drm-col-9
                     .drm-container
                         .drm-row
                             .drm-col-full
-                    include partials/components-demo/thumbnails
+                                p To include it in your project add the following line to your main stylesheet
+                                pre @include drm-helper-classes();
+                    include partials/sass-demo/images
                 include partials/sidebar
+
         include partials/footer

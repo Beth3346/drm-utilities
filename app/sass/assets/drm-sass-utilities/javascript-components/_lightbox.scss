@@ -25,18 +25,20 @@
     }
 }
 
-@mixin drm-lightbox-slideshow($overlay-color: black, $opacity: 0.8, $image-size: 125px, $list-position: 'bottom-left') {
+@mixin drm-lightbox-slideshow($overlay-color: black, $opacity: 0.8, $image-size: 75px, $list-position: 'bottom-left') {
 
     @include drm-lightbox($overlay-color, $opacity);
 
     img {
         position: relative;
-        height: 60%;
+        height: 80%;
         @include drm-center-block;
     }
 
     .thumbnail-list {
-        position: relative;
+        margin: 0;
+        padding: 0;
+        position: absolute;
 
         @if $list-position == 'top-right' {
             top: 0;
@@ -57,16 +59,14 @@
 
         li {
             float: left;
+            margin: 0;
+            padding: 0;
         }
 
         img {
             padding: 0;
             margin: 0;
             @include drm-square($image-size);
-
-            @include drm-breakpoint(neptune) {
-                @include drm-square(($image-size / 2));
-            }
         }   
     }
 }

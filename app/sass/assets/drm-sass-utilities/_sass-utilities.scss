@@ -29,13 +29,22 @@
 -----------------------------------------------------------------------------*/ 
 
     @import "components/buttons";
+    @import "components/cards";
+    @import "components/comments";
+    @import "components/content-blocks";
     @import "components/context-boxes";
+    @import "components/context-buttons";
     @import "components/headings";
     @import "components/labels";
-    @import "components/lists";
+    @import "components/navbars";
     @import "components/navigation";
     @import "components/pagination";
+    @import "components/preloaders";
+    @import "components/pricing-tables";
+    @import "components/progress-meters";
+    @import "components/steps";
     @import "components/thumbnails";
+    @import "components/videos";
 
 /*-----------------------------------------------------------------------------
     Helper Classes
@@ -74,7 +83,9 @@
     @import "sass-utilities/circles";
     @import "sass-utilities/forms";
     @import "sass-utilities/grid";
+    @import "sass-utilities/images";
     @import "sass-utilities/layout";
+    @import "sass-utilities/lists";
     @import "sass-utilities/media-queries";
     @import "sass-utilities/rectangles";
     @import "sass-utilities/shadows";
