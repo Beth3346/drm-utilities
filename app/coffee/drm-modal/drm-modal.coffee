@@ -27,4 +27,4 @@ class @DrmModal
         @lightbox.fadeOut @speed
         e.preventDefault()
         
-new DrmModal()
+# new DrmModal()

@@ -39,6 +39,7 @@
         margin: 0;
         padding: 0;
         position: absolute;
+        list-style: none;
 
         @if $list-position == 'top-right' {
             top: 0;
@@ -54,7 +55,6 @@
             left: 0;        
         }
 
-        @include drm-unstyled-list();
         @include drm-clearfix();
 
         li {
@@ -72,16 +72,22 @@
 
     .lightbox-nav {
         position: absolute;
-        top: 50%;
+        top: 45%;
         width: 100%;
         @include drm-clearfix;
 
         button {
             border: none;
             background-color: white;
-            background-color: rgba(white, .7);
+            background-color: rgba(white, .4);
             cursor: pointer;
+            @include drm-em-font(36);
             @include drm-square(75px);
+
+            &:hover {
+                background-color: white;
+                background-color: rgba(white, .7);    
+            }
         }
 
         .prev {

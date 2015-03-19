@@ -17,20 +17,12 @@
 
 @mixin drm-thumbnail-list($border-color: white, $width: 150px, $height: 120px, $glow: $drm-blue) {
     padding: 10px;
-    @include drm-unstyled-list;
+    list-style: none;
     @include drm-clearfix;
 
     li {
         margin: 10px;
         float: left;
-
-        &:first-child {
-            margin-left: 0;
-        }
-
-        &:last-child {
-            margin-right: 0;
-        }
     }
 
     img {

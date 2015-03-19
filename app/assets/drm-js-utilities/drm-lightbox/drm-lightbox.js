@@ -38,7 +38,7 @@
                 }),
                 nav = $('<div></div>', {
                     'class': 'lightbox-nav',
-                    html: '<button class="prev" data-dir="prev">Previous</button><button class="next" data-dir="next">Next</button>'
+                    html: '<button class="prev" data-dir="prev"><i class="fa fa-caret-left"></i></button><button class="next" data-dir="next"><i class="fa fa-caret-right"></i></button>'
                 }),
                 lightboxHtml = $('<div></div>', {
                     'class': 'drm-blackout'
