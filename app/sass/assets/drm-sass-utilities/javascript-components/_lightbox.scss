@@ -69,4 +69,27 @@
             @include drm-square($image-size);
         }   
     }
+
+    .lightbox-nav {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        @include drm-clearfix;
+
+        button {
+            border: none;
+            background-color: white;
+            background-color: rgba(white, .7);
+            cursor: pointer;
+            @include drm-square(75px);
+        }
+
+        .prev {
+            float: left;
+        }
+
+        .next {
+            float: right;
+        }
+    }
 }

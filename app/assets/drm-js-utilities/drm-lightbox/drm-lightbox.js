@@ -36,6 +36,10 @@
                     'class': 'thumbnail-list',
                     html: thumbnails
                 }),
+                nav = $('<div></div>', {
+                    'class': 'lightbox-nav',
+                    html: '<button class="prev" data-dir="prev">Previous</button><button class="next" data-dir="next">Next</button>'
+                }),
                 lightboxHtml = $('<div></div>', {
                     'class': 'drm-blackout'
                 });
@@ -43,7 +47,29 @@
             lightboxHtml.hide().appendTo('body').fadeIn(300, function() {
                 close.appendTo(lightboxHtml);
                 imgVisible.appendTo(lightboxHtml);
+                nav.appendTo(lightboxHtml);
                 thumbnailHtml.appendTo(lightboxHtml);
+            });
+        };
+
+        self.advanceImage = function(direction) {
+            var list = $('.thumbnail-list'),
+                currentImg = $('div.drm-blackout img.img-visible'),
+                currentImgSrc = currentImg.attr('src'),
+                currentThumb = list.find('img[src$="' + currentImgSrc + '"]').closest('li').index(),
+                len = list.find('li').length - 1,
+                nextImg,
+                nextImgIndex;
+
+            if ( direction === 'prev' ) {
+                nextImgIndex = (currentThumb === 0) ? len : currentThumb - 1;
+            } else {
+                nextImgIndex = (currentThumb === len) ? 0 : currentThumb + 1;
+            }
+
+            nextImg = list.find('li').eq(nextImgIndex).find('img').attr('src');
+            currentImg.fadeOut(self.speed, function() {
+                $(this).attr('src', nextImg).fadeIn(self.speed);
             });
         };
 
@@ -76,7 +102,7 @@
             self.images.on('click', 'a', function(e) {
                 e.preventDefault();
                 self.createLightbox.call(this, thumbnails);
-            })
+            });
 
             body.on('click', 'div.drm-blackout button.close', self.removeLightbox);
             body.on('click', 'div.drm-blackout', self.removeLightbox);
@@ -84,6 +110,22 @@
                 e.preventDefault();
                 e.stopPropagation();
                 self.changeImage.call(this);
+            });
+
+            body.on('click', 'div.drm-blackout .lightbox-nav button', function(e) {
+                var direction = $(this).data('dir');
+
+                e.preventDefault();
+                e.stopPropagation();
+                self.advanceImage(direction);
+            });
+
+            body.on('keydown', function(e) {
+                if (e.which === 37) {   
+                    self.advanceImage('prev');
+                } else if (e.which === 39) {
+                    self.advanceImage('next');
+                } 
             });
         }
 
