@@ -54,3 +54,7 @@
 (function() {
     drmLightbox({});
 })();
+
+(function() {
+    drmModal({});
+})();

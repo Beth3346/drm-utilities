@@ -55,7 +55,7 @@
     @include drm-button-group($main-color, $background-color, 3px, $main-color);
 }
 
-.drm-modal-lightbox {
+.drm-modal {
     display: none;
     @include drm-modals();
 }
