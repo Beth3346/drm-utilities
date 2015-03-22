@@ -67,9 +67,7 @@
             });
 
             body.on('click', function(e) {
-                e.preventDefault();
                 self.hideModal();
-                e.stopPropagation();
             });
 
             modals.on('click', function(e) {
