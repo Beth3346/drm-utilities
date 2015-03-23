@@ -36,14 +36,15 @@
             }
         };
 
-        var menu = $('.' + menuClass);
+        var menu = $('.' + menuClass),
+            menuPos = menu.css('left');
 
         if ( menu.length > 0 ) {
             var content = $('.' + contentClass),
                 button = $('.' + buttonClass),
                 menuWidth = menu.css('width');
 
-            if ( state === 'hide' ) {
+            if ( state === 'hide' && menuPos === '0px' ) {
                 self.hideMenu(menuWidth, menu);
                 self.addScroll(menu, content);
             }

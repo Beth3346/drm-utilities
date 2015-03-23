@@ -6,8 +6,7 @@
 @mixin drm-offscreen-menu($bk-color: $main-color, $width: 15%) {
     width: $width;
     position: absolute;
-    // left: -$width;
-    left: 0;
+    left: -$width;
     height: 100%;
     background-color: $bk-color;
     z-index: 100;
