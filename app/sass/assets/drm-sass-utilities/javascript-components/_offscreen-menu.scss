@@ -3,7 +3,7 @@
 -----------------------------------------------------------------------------*/
 
 // works with fluid and fixed layouts
-@mixin drm-offscreen-menu($bk-color: $main-color, $width: 15%) {
+@mixin drm-offscreen-menu($bk-color: $main-color, $width: 200px) {
     width: $width;
     position: absolute;
     left: -$width;

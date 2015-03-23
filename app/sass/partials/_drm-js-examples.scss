@@ -87,7 +87,7 @@
 }
 
 .drm-offscreen-menu {
-    @include drm-offscreen-menu($main-color, 20%);  
+    @include drm-offscreen-menu($main-color);  
 }
 
 .drm-menu-button {
