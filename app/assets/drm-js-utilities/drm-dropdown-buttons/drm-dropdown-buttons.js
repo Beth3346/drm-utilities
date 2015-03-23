@@ -1,6 +1,7 @@
 (function($) {
-    window.drmDropdownButton = function(spec) {
-        var self = {};
+    window.drmDropdownButton = function(args) {
+        var self = {},
+            spec = args || {};
 
         self.containerClass = spec.containerClass || 'drm-dropdown-solid-btn-holder'
         self.speed = spec.speed || 300;

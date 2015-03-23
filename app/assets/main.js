@@ -1,6 +1,8 @@
 (function(){
-    drmAccordion({});
-    drmAccordionNav({});
+    drmAccordion();
+
+    drmAccordionNav();
+
     drmAccordionNav({
         speed: 300,
         containerClass: 'sidebar'
@@ -8,7 +10,7 @@
 })();
 
 (function($){
-    var drmAlert = drmAlerts({});
+    var drmAlert = drmAlerts();
     
     drmAlert.showAlert('info', 'This is just an informative alert', $('.drm-alert-holder'));
     drmAlert.showAlert('danger', 'Danger Danger Danger!', $('.drm-alert-holder'));
@@ -19,11 +21,11 @@
 })(jQuery);
 
 (function() {
-    drmBackToTop({});
+    drmBackToTop();
 })();
 
 (function() {
-    drmDropdownButton({});
+    drmDropdownButton();
     drmDropdownButton({
         containerClass: 'drm-dropdown-split-btn-holder',
         speed: 300,
@@ -32,11 +34,11 @@
 })();
 
 (function() {
-    drmDropdownMenu({});
+    drmDropdownMenu();
 })();
 
 (function() {
-    drmFlexibleGrid({});
+    drmFlexibleGrid();
 })();
 
 (function() {
@@ -52,9 +54,13 @@
 })();
 
 (function() {
-    drmLightbox({});
+    drmLightbox();
 })();
 
 (function() {
-    drmModal({});
+    drmModal();
+})();
+
+(function() {
+    drmOffscreenMenu();
 })();

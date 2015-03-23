@@ -1,6 +1,7 @@
 (function($) {
-    window.drmAlerts = function(spec) {
-        var self = {};
+    window.drmAlerts = function(args) {
+        var self = {},
+            spec = args || {};
 
         self.alertClass = spec.alertClass || 'drm-dismissible-alert';
         self.speed = spec.speed || 300;

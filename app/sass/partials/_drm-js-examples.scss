@@ -86,16 +86,6 @@
     @include drm-popover(right);
 }
 
-.drm-content-holder {
-    width: 95%;
-    margin: 2px auto;
-    position: relative;
-    background-color: $background-color;
-    overflow: hidden;
-    border: 1px solid $light-grey;
-    @include drm-clearfix;
-}
-
 .drm-offscreen-menu {
     @include drm-offscreen-menu($main-color, 20%);  
 }
@@ -105,6 +95,7 @@
     background-color: $text-color;
     color: $background-color;
     padding: 5px 10px;
+    @include drm-em-font(18);
 
     &:hover {
         cursor: pointer;
@@ -120,9 +111,13 @@
 }
 
 .drm-offscreen-content {
-    width: 100%;
+    width: 95%;
+    margin: 2px auto;
     position: relative;
-    left: 0;
+    background-color: $background-color;
+    overflow: hidden;
+    border: 1px solid $light-grey;
+    @include drm-clearfix;
 
     p {     
         padding: 10px 20px;

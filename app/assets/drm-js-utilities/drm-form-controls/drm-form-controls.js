@@ -1,6 +1,7 @@
 (function($) {
-    window.drmFormControls = function(spec) {
-        var self = {};
+    window.drmFormControls = function(args) {
+        var self = {},
+            spec = args || {};
 
         self.select = function() {
             var that = this;

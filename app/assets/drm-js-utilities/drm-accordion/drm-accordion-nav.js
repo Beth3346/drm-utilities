@@ -1,7 +1,8 @@
 (function($) {
 
-    window.drmAccordionNav = function(spec) {
-        var self = {};
+    window.drmAccordionNav = function(args) {
+        var self = {},
+            spec = args || {};
 
         self.speed = spec.speed || 300;
         self.containerClass = spec.containerClass || 'drm-accordion-nav';

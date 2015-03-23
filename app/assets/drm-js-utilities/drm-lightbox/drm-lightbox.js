@@ -1,6 +1,7 @@
 (function($) {
-    window.drmLightbox = function(spec) {
-        var self = {};
+    window.drmLightbox = function(args) {
+        var self = {},
+            spec = args || {};
 
         self.images = spec.images || $('ul.drm-lightbox-thumbnails');
         self.speed = spec.speed || 300;

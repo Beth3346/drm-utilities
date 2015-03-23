@@ -1,6 +1,7 @@
 (function($) {
-    window.drmModal = function(spec) {
-        var self = {};
+    window.drmModal = function(args) {
+        var self = {},
+            spec = args || {};
 
         buttonClass = spec.buttonClass || 'drm-modal-open';
         self.modalClass = spec.modalClass || 'drm-modal';
