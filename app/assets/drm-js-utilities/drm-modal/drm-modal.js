@@ -1,12 +1,12 @@
 (function($) {
     window.drmModal = function(args) {
         var self = {},
-            spec = args || {};
-
-        buttonClass = spec.buttonClass || 'drm-modal-open';
+            spec = args || {},
+            buttonClass = spec.buttonClass || 'drm-modal-open',
+            speed = spec.speed || 300;
+        
         self.modalClass = spec.modalClass || 'drm-modal';
         self.lightboxClass = spec.lightboxClass || 'drm-blackout';
-        speed = spec.speed || 300;
         self.closeClass = spec.closeClass || 'drm-modal-close';
 
         self.createLightbox = function(speed, modal) {

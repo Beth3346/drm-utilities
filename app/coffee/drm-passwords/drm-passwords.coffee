@@ -158,4 +158,4 @@ class @DrmPasswords
         _element.removeClass "#{elementClass}-warning"
         _element.removeClass "#{elementClass}-success"
 
-new DrmPasswords()
+# new DrmPasswords()

@@ -64,3 +64,7 @@
 (function() {
     drmOffscreenMenu();
 })();
+
+(function() {
+    drmPasswords();
+})();

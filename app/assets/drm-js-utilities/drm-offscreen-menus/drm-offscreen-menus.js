@@ -1,12 +1,11 @@
 (function($) {
     window.drmOffscreenMenu = function(args) {
         var self = {},
-            spec = args || {};
-
-        menuClass = spec.menuClass || 'drm-offscreen-menu';
-        buttonClass = spec.buttonClass || 'drm-menu-button';
-        contentClass = spec.contentClass || 'drm-offscreen-content';
-        state = spec.state || 'hide';
+            spec = args || {},
+            menuClass = spec.menuClass || 'drm-offscreen-menu',
+            buttonClass = spec.buttonClass || 'drm-menu-button',
+            contentClass = spec.contentClass || 'drm-offscreen-content',
+            state = spec.state || 'hide';
 
         self.toggleMenu = function(menuWidth, menu, holder) {
             var menuPos = menu.css('left');
