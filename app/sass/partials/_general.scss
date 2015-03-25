@@ -10,8 +10,11 @@
 
 @include drm-grid();
 
-.drm-button {	
-	@include drm-button-solid($main-color, $background-color, 200px);
+.drm-button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    @include drm-em-font(14);
+	@include drm-button-solid($main-color, $background-color, 200px, left, 3px, $main-color);
 }
 
 .drm-button-inline {

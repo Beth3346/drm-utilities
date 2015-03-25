@@ -221,3 +221,20 @@ span.drm-has-tooltip {
 .drm-select {
     @include drm-select-control(200px);
 }
+
+.password-holder {
+    background-color: $lightest-grey;
+    border: 1px solid $grey;
+    border-radius: 3px;
+    padding: 0 10px;
+    width: 100%;
+    height: 30px;
+    margin-bottom: 5px;
+
+    p {
+        margin: 0;
+        padding: 0;
+        line-height: 30px;
+        @include drm-em-font(14);
+    }
+}
