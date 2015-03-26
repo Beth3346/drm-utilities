@@ -61,12 +61,13 @@
 }
 
 .popover-holder {
-    float: left;
     position: relative;
+    width: 200px;
+    margin: 0 auto 20px auto;
 
     button {
-        margin: 5px;    
-        @include drm-button-solid($main-color, $background-color, 200px, null, 3px, $main-color, inline-block); 
+        @include drm-button-solid($main-color, $background-color, 200px, center, 3px, $main-color, inline-block);
+        @include drm-em-font(14);
     }
 }
 

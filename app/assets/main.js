@@ -68,3 +68,7 @@
 (function() {
     drmPasswords();
 })();
+
+(function() {
+    drmPopovers();
+})();

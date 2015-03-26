@@ -2,10 +2,10 @@
     Popovers
 -----------------------------------------------------------------------------*/
 
-@mixin drm-popover($direction: "left", $bk-color: $link-color, $color: white) {
-    width: 200px;
+@mixin drm-popover($direction: "left", $bk-color: $link-color, $color: white, $width: 200px) {
+    width: $width;
     padding: 10px;
-    margin: 10px 5px 5px 5px;
+    margin: 10px 0 5px 0;
     position: absolute;
     background-color: $bk-color;
     color: $color;
@@ -23,7 +23,7 @@
             content: "";
             position: absolute;
             top: 20px;
-            left: 200px;
+            left: $width;
             @include drm-triangle(right, 20px, half, $bk-color);
         }
 
@@ -34,7 +34,7 @@
             content: "";
             position: absolute;
             bottom: -10px;
-            left: (200px / 2) - 10;
+            left: ($width / 2) - 10;
             @include drm-triangle(bottom, 20px, half, $bk-color);
         }   
 
@@ -43,7 +43,7 @@
             content: "";
             position: absolute;
             top: -10px;
-            left: (200px / 2) - 10;
+            left: ($width / 2) - 10;
             @include drm-triangle(top, 20px, half, $bk-color);
         }
 
