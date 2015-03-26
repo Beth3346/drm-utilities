@@ -86,4 +86,4 @@ class @DrmSimpleSlider
     pauseShow: (start) ->
         clearInterval start
         
-new DrmSimpleSlider()
+# new DrmSimpleSlider()
