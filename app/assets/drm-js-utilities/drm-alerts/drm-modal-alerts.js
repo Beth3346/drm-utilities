@@ -1,7 +1,7 @@
 (function($) {
-    window.drmModalAlerts = function(args) {
+    window.drmModalAlerts = function(params) {
         var self = {},
-            spec = args || {};
+            spec = params || {};
 
         self.alertClass = spec.alertClass || 'drm-modal-alert';
         self.speed = spec.speed || 300;

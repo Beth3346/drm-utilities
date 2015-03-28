@@ -1,7 +1,7 @@
 (function($) {
-    window.drmDropdownMenu = function(args) {
+    window.drmDropdownMenu = function(params) {
         var self = {},
-            spec = args || {};
+            spec = params || {};
 
         self.menuClass = spec.menuClass || 'drm-dropdown-nav';
         self.speed = spec.speed || 1000;

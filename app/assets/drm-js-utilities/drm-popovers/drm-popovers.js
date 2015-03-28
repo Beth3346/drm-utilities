@@ -1,7 +1,7 @@
 (function($) {
-    window.drmPopovers = function(args) {
+    window.drmPopovers = function(params) {
         var self = {},
-            spec = args || {},
+            spec = params || {},
             holderClass = spec.holder || 'popover-holder',
             holder = $('.' + holderClass);
         

@@ -1,7 +1,7 @@
 (function($) {
-    window.drmAccordion = function(args) {
+    window.drmAccordion = function(params) {
         var self = {},
-            spec = args || {};
+            spec = params || {};
 
         self.speed = spec.speed || 300;
         self.containerClass = spec.containerClass || 'drm-accordion';

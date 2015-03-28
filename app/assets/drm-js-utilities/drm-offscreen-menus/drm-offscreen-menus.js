@@ -1,7 +1,7 @@
 (function($) {
-    window.drmOffscreenMenu = function(args) {
+    window.drmOffscreenMenu = function(params) {
         var self = {},
-            spec = args || {},
+            spec = params || {},
             menuClass = spec.menuClass || 'drm-offscreen-menu',
             buttonClass = spec.buttonClass || 'drm-menu-button',
             contentClass = spec.contentClass || 'drm-offscreen-content',

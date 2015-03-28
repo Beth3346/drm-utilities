@@ -1,7 +1,7 @@
 (function($) {
-    window.drmModal = function(args) {
+    window.drmModal = function(params) {
         var self = {},
-            spec = args || {},
+            spec = params || {},
             buttonClass = spec.buttonClass || 'drm-modal-open',
             speed = spec.speed || 300;
         

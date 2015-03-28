@@ -1,5 +1,5 @@
 (function($) {
-    window.drmSlideshow = function(spec) {
+    window.drmCarousel = function(spec) {
         var self = {};
 
         return self;

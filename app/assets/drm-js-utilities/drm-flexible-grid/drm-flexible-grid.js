@@ -7,9 +7,9 @@
         }
     });
 
-    window.drmFlexibleGrid = function(args) {
+    window.drmFlexibleGrid = function(params) {
         var self = {},
-            spec = args || {};
+            spec = params || {};
 
         self.gridClass = spec.gridClass || 'drm-flexible-grid';
         self.imagesPerRow = spec.imagesPerRow || 4;

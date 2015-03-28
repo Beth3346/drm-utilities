@@ -1,7 +1,7 @@
 (function($) {
-    window.drmPasswords = function(args) {
+    window.drmPasswords = function(params) {
         var self = {},
-            spec = args || {},
+            spec = params || {},
             bl = [
                 'password',
                 'pass',

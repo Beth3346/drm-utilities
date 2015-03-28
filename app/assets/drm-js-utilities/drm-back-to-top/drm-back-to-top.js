@@ -1,9 +1,9 @@
 // Adds a button for user to scroll to top immediately
 
 (function($) {
-    window.drmBackToTop = function(args) {
+    window.drmBackToTop = function(params) {
         var self = {},
-            spec = args || {};
+            spec = params || {};
 
         self.content = spec.content || $('body');
         self.speed = spec.speed || 300;

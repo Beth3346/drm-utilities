@@ -1,19 +1,20 @@
 (function($) {
-    window.drmSimpleSlider = function(args) {
-        var self = {},
-            spec = args || {};
 
-        var sliderClass = spec.sliderClass || 'drm-simple-slider',
-            interval = spec.interval || 5000,
-            speed = spec.speed || 500,
-            animate = spec.animate || false,
-            slider = $('.' + sliderClass);
+    window.drmSimpleSlider = function(params) {
+        var self = {},
+            spec = params || {};
         
-        self.slideClass = spec.slideClass || 'drm-simple-slide',
+        self.sliderClass = spec.sliderClass || 'drm-simple-slider';
+        self.slideClass = spec.slideClass || 'drm-simple-slide';
         self.slideHolderClass = spec.slideHolderClass || 'drm-simple-slide-holder';
         self.effect = spec.effect || 'fade';
         self.navClass = spec.navClass || 'drm-simple-slider-nav';
         self.slideListClass = spec.slideListClass || 'drm-simple-slider-list';
+
+        var interval = spec.interval || 5000,
+            speed = spec.speed || 500,
+            animate = spec.animate || false,
+            slider = $('.' + self.sliderClass);
         
         self.createSlideList = function(slides) {
             var li = '';
@@ -46,7 +47,7 @@
             if ( self.effect === 'fade' ) {
                 slides.eq(current).fadeOut();
                 slides.eq(slideNum).fadeIn();
-            } else {
+            } else if ( self.effect === 'slide-left' ) {
                 var slideWidth = parseInt(slides.first().width(), 10),
                     slideHolder = slides.closest('.' + self.slideHolderClass),
                     pos = slideHolder.position().left,
@@ -162,12 +163,10 @@
             var slides = slideHolder.find('.' + self.slideClass);
 
             if ( self.effect === 'fade' ) {
-                var nextSlide = self.fadeSlide(current, dir, slides);
+                return self.fadeSlide(current, dir, slides);
             } else if ( self.effect === 'slide-left' ) {
-                var nextSlide = self.slideLeft(current, dir, slides, slideHolder);
+                return self.slideLeft(current, dir, slides, slideHolder);
             }
-            
-            return nextSlide;
         };
 
         self.startShow = function(interval, slides, nextControl) {
@@ -184,11 +183,12 @@
         if ( slider.length > 0 ) {
 
             $.each(slider, function() {
-                var slider = $(this),
-                    slideHolder = slider.find('.' + self.slideHolderClass),
+                var currentSlider = $(this),
+                    slideHolder = currentSlider.find('.' + self.slideHolderClass),
                     slides = slideHolder.find('.' + self.slideClass),
-                    sliderControls = slider.find('.' + self.navClass).find('button'),
-                    nextControl = slider.find('.' + self.navClass).find("button[data-dir='next']"),
+                    currentSliderControls = currentSlider.find('.' + self.navClass).find('button'),
+                    nextControl = currentSlider.find('.' + self.navClass).find("button[data-dir='next']"),
+                    body = $('body'),
                     slideList,
                     begin;
 
@@ -196,13 +196,13 @@
                     var slideWidth = slides.first().width(),
                         numSlides = slides.length;
 
-                    slider.addClass('slide-left');
+                    currentSlider.addClass('slide-left');
                     slideHolder.css('width', slideWidth * numSlides);
                 } else if ( self.effect === 'fade' ) {
                     slides.hide().first().show();
                 }
 
-                slideList = self.createSlideList(slides).appendTo(slider);
+                slideList = self.createSlideList(slides).appendTo(currentSlider);
 
                 if ( animate === true ) {
                     begin = self.startShow(interval, slides, nextControl);
@@ -216,7 +216,7 @@
                     });
                 }
 
-                sliderControls.on('click', function(e) {
+                currentSliderControls.on('click', function(e) {
                     var dir = $(this).data('dir'),
                         current = self.getCurrent(slideHolder),
                         nextSlide;
@@ -230,7 +230,37 @@
                     e.stopPropagation();
                 });
 
-                slider.on('click', '.' + self.slideListClass + ' button', function(e) {
+                currentSlider.on({
+                    mouseenter: function () {
+                        var holder = $(this).find('.' + self.slideHolderClass),
+                            sliders = $('.' + self.sliderClass);
+
+                        body.on('keydown', function(e) {
+                            var current = self.getCurrent(holder),
+                                dir,
+                                nextSlide;
+                            
+                            if (e.which === 37) {   
+                                dir = 'prev';
+                            } else if (e.which === 39) {
+                                dir = 'next';
+                            }
+
+                            nextSlide = self.advanceSlide(current, dir, holder);
+
+                            slideList.find('button').removeClass('active');
+                            slideList.find('li').eq(nextSlide).find('button').addClass('active');
+
+                            e.preventDefault();
+                            e.stopPropagation();
+                        });
+                    },
+                    mouseleave: function () {
+                        body.off('keydown');
+                    }
+                });
+
+                currentSlider.on('click', '.' + self.slideListClass + ' button', function(e) {
                     var that = $(this),
                         current = self.getCurrent(slideHolder),
                         slideNum = that.data('item-num');
