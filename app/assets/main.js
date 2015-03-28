@@ -74,5 +74,6 @@
 })();
 
 (function() {
-    drmSimpleSlider({effect: 'slide-left'});
+    drmSimpleSlider({effect: 'fade'});
+    drmSimpleSlider({sliderClass: 'drm-simple-slider-2', effect: 'slide-left'});
 })();

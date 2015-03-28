@@ -47,6 +47,23 @@
                 slides.eq(current).fadeOut();
                 slides.eq(slideNum).fadeIn();
             } else {
+                var slideWidth = parseInt(slides.first().width(), 10),
+                    slideHolder = slides.closest('.' + self.slideHolderClass),
+                    pos = slideHolder.position().left,
+                    slideDiff,
+                    newPos;
+
+                if ( current < slideNum ) {
+                    slideDiff = current - slideNum;
+                    newPos = pos + (slideWidth * slideDiff);
+                } else if ( current > slideNum ) {
+                    slideDiff = -(current - slideNum);
+                    newPos = pos - (slideWidth * slideDiff);
+                }
+                
+                slideHolder.animate({
+                    left: newPos
+                });
             }
         };
 
