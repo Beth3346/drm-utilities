@@ -4,12 +4,14 @@
             spec = args || {};
 
         var sliderClass = spec.sliderClass || 'drm-simple-slider',
-            slideClass = spec.slideClass || 'drm-simple-slide',
             interval = spec.interval || 5000,
             speed = spec.speed || 500,
             animate = spec.animate || false,
             slider = $('.' + sliderClass);
-
+        
+        self.slideClass = spec.slideClass || 'drm-simple-slide',
+        self.slideHolderClass = spec.slideHolderClass || 'drm-simple-slide-holder';
+        self.effect = spec.effect || 'fade';
         self.navClass = spec.navClass || 'drm-simple-slider-nav';
         self.slideListClass = spec.slideListClass || 'drm-simple-slider-list';
         
@@ -30,16 +32,25 @@
             });
         };
 
-        self.getCurrent= function(slides) {
-            return slides.not(':hidden').index() - 1;
+        self.getCurrent= function(slideHolder) {
+            var slides = slideHolder.find('.' + self.slideClass);
+
+            if ( self.effect === 'fade' ) {
+                return slides.not(':hidden').index();                
+            } else if ( self.effect === 'slide-left' ) {
+                return (Math.abs(slideHolder.position().left) / parseInt(slides.first().width(), 10));
+            }
         };
 
         self.goToSlide = function(current, slideNum, slides) {
-            slides.eq(current).fadeOut();
-            slides.eq(slideNum).fadeIn();
+            if ( self.effect === 'fade' ) {
+                slides.eq(current).fadeOut();
+                slides.eq(slideNum).fadeIn();
+            } else {
+            }
         };
 
-        self.advanceSlide = function(current, dir, slides) {
+        self.fadeSlide = function(current, dir, slides) {
             var lastSlide = slides.length - 1,
                 nextSlide;
 
@@ -59,7 +70,87 @@
                 nextSlide = current - 1;
             }
 
-            slides.parent().find('.' + self.slideListClass).find('li').eq(nextSlide).find('button').addClass('active');
+            return nextSlide;
+        };
+
+        self.slideLeft = function(current, dir, slides, slideHolder) {
+            var lastSlide = slides.length - 1,
+                slideWidth = parseInt(slides.first().width(), 10),
+                pos = slideHolder.position().left,
+                newPos,
+                nextSlide;
+
+            if ( dir === 'next' && current === lastSlide ) {
+                var oldSlides = slides,
+                    newSlides = slides.clone(),
+                    numSlides = slides.length;
+                
+                slideHolder.css('width', slideWidth * (numSlides * 2));
+                slideHolder.append(newSlides);
+                newPos = pos - slideWidth;
+                
+                slideHolder.animate({
+                    left: newPos
+                }, 300, 'linear', function() {
+                    slideHolder.css({
+                        'width': slideWidth * numSlides,
+                        'left': 0
+                    });
+                    oldSlides.remove();
+                });
+
+                nextSlide = 0;
+            } else if ( dir === 'next' ) {
+                newPos = pos - slideWidth,
+                nextSlide = (Math.abs(newPos) / slideWidth);
+                
+                slideHolder.animate({
+                    left: newPos
+                });
+            } else if ( dir === 'prev' && current === 0 ) {
+                var oldSlides = slides,
+                    newSlides = slides.clone(),
+                    numSlides = slides.length,
+                    width = slideWidth * numSlides;
+                
+                slideHolder.css('width', width * 2);
+                slideHolder.prepend(newSlides);
+                slideHolder.css('left', -width);
+                newPos = -width + slideWidth;
+                
+                slideHolder.animate({
+                    left: newPos
+                }, 300, 'linear', function() {
+                    slideHolder.css({
+                        'width': width,
+                        'left': -(width - slideWidth)
+                    });
+                    oldSlides.remove();
+                });
+
+                nextSlide = numSlides - 1;
+            } else {
+                newPos = pos + slideWidth,
+                nextSlide = (Math.abs(newPos) / slideWidth);
+                
+                slideHolder.animate({
+                    left: newPos
+                });
+            }
+            
+            return nextSlide;
+        };
+
+        self.advanceSlide = function(current, dir, slideHolder) {
+            var slides = slideHolder.find('.' + self.slideClass);
+
+            if ( self.effect === 'fade' ) {
+                var nextSlide = self.fadeSlide(current, dir, slides);
+            } else if ( self.effect === 'slide-left' ) {
+                var nextSlide = self.slideLeft(current, dir, slides, slideHolder);
+            }
+            
+            return nextSlide;
         };
 
         self.startShow = function(interval, slides, nextControl) {
@@ -76,15 +167,25 @@
         if ( slider.length > 0 ) {
 
             $.each(slider, function() {
-                var that = $(this),
-                    slideHolder = that.find('div').first(),
-                    slides = slideHolder.find('.' + slideClass),
-                    sliderControls = that.find('.' + self.navClass).find('button'),
-                    nextControl = that.find('.' + self.navClass).find("button[data-dir='next']"),
+                var slider = $(this),
+                    slideHolder = slider.find('.' + self.slideHolderClass),
+                    slides = slideHolder.find('.' + self.slideClass),
+                    sliderControls = slider.find('.' + self.navClass).find('button'),
+                    nextControl = slider.find('.' + self.navClass).find("button[data-dir='next']"),
+                    slideList,
                     begin;
-                
-                slides.hide().first().show();
-                self.createSlideList(slides).appendTo(slideHolder);
+
+                if ( self.effect === 'slide-left' ) {
+                    var slideWidth = slides.first().width(),
+                        numSlides = slides.length;
+
+                    slider.addClass('slide-left');
+                    slideHolder.css('width', slideWidth * numSlides);
+                } else if ( self.effect === 'fade' ) {
+                    slides.hide().first().show();
+                }
+
+                slideList = self.createSlideList(slides).appendTo(slider);
 
                 if ( animate === true ) {
                     begin = self.startShow(interval, slides, nextControl);
@@ -100,21 +201,22 @@
 
                 sliderControls.on('click', function(e) {
                     var dir = $(this).data('dir'),
-                        current = self.getCurrent(slides),
-                        slideList = slideHolder.find('.' + self.slideListClass);
+                        current = self.getCurrent(slideHolder),
+                        nextSlide;
+
+                    nextSlide = self.advanceSlide(current, dir, slideHolder);
 
                     slideList.find('button').removeClass('active');
-                    self.advanceSlide(current, dir, slides);
+                    slideList.find('li').eq(nextSlide).find('button').addClass('active');
 
                     e.preventDefault();
                     e.stopPropagation();
                 });
 
-                that.on('click', '.' + self.slideListClass + ' button', function(e) {
+                slider.on('click', '.' + self.slideListClass + ' button', function(e) {
                     var that = $(this),
-                        current = self.getCurrent(slides),
-                        slideNum = that.data('item-num'),
-                        slideList = slideHolder.find('.' + self.slideListClass);;
+                        current = self.getCurrent(slideHolder),
+                        slideNum = that.data('item-num');
 
                     slideList.find('button').removeClass('active');
                     that.addClass('active');

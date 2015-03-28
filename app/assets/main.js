@@ -74,5 +74,5 @@
 })();
 
 (function() {
-    drmSimpleSlider();
+    drmSimpleSlider({effect: 'slide-left'});
 })();

@@ -2,11 +2,19 @@
     Simple Slider
 -----------------------------------------------------------------------------*/
 
-@mixin drm-simple-slider() {
+@mixin drm-simple-slider($width: 700px, $height: 350px) {
     margin: 50px auto 0 auto;
-    z-index: -1;
-    width: 700px;
-    height: 350px;
+    z-index: 0;
+    position: relative;
+    width: $width;
+    height: $height;
+    overflow: hidden;
+
+    &.slide-left {
+        .drm-simple-slide {
+            float: left;
+        }
+    }
     
     @include drm-clearfix;
 
@@ -14,9 +22,8 @@
         padding: 0;
         margin: 0;
         position: relative;
-        width: 700px;
-        height: 350px;
-        overflow: hidden;
+        width: $width;
+        height: $height;
         @include drm-clearfix;
     }
 
@@ -24,9 +31,8 @@
         padding: 0;
         margin: 0;
         z-index: 0;
-        width: 700px;
-        height: 350px;
-        
+        width: $width;
+        height: $height;
 
         figure {
             padding: 0;
@@ -58,7 +64,7 @@
         position: absolute;
         text-align: center;
         z-index: 1;
-        width: 700px;
+        width: $width;
         bottom: 10px;
 
         li {
@@ -91,8 +97,8 @@
         margin: 0;
         padding: 0;
         z-index: 1;
-        width: 100%;
-        @include drm-vertically-center(350px, 64px);
+        width: $width;
+        @include drm-vertically-center($height, 64px);
         @include drm-clearfix;
 
         button {
