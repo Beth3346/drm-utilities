@@ -10,12 +10,13 @@
         self.effect = spec.effect || 'fade';
         self.navClass = spec.navClass || 'drm-simple-slider-nav';
         self.slideListClass = spec.slideListClass || 'drm-simple-slider-list';
+        self.isAnimating = false;
 
         var interval = spec.interval || 5000,
             speed = spec.speed || 500,
-            animate = spec.animate || false,
+            auto = spec.auto || false,
             slider = $('.' + self.sliderClass);
-        
+
         self.createSlideList = function(slides) {
             var li = '';
 
@@ -43,13 +44,14 @@
             }
         };
 
-        self.goToSlide = function(current, slideNum, slides) {
+        self.goToSlide = function(current, slideNum, slideHolder) {
+            var slides = slideHolder.find('.' + self.slideClass);
+
             if ( self.effect === 'fade' ) {
                 slides.eq(current).fadeOut();
                 slides.eq(slideNum).fadeIn();
             } else if ( self.effect === 'slide-left' ) {
                 var slideWidth = parseInt(slides.first().width(), 10),
-                    slideHolder = slides.closest('.' + self.slideHolderClass),
                     pos = slideHolder.position().left,
                     slideDiff,
                     newPos;
@@ -62,7 +64,7 @@
                     newPos = pos - (slideWidth * slideDiff);
                 }
                 
-                slideHolder.animate({
+                slideHolder.stop().animate({
                     left: newPos
                 });
             }
@@ -98,6 +100,8 @@
                 newPos,
                 nextSlide;
 
+            self.isAnimating = true;
+
             if ( dir === 'next' && current === lastSlide ) {
                 var oldSlides = slides,
                     newSlides = slides.clone(),
@@ -107,7 +111,7 @@
                 slideHolder.append(newSlides);
                 newPos = pos - slideWidth;
                 
-                slideHolder.animate({
+                slideHolder.stop().animate({
                     left: newPos
                 }, 300, 'linear', function() {
                     slideHolder.css({
@@ -115,6 +119,7 @@
                         'left': 0
                     });
                     oldSlides.remove();
+                    self.isAnimating = false;
                 });
 
                 nextSlide = 0;
@@ -122,8 +127,10 @@
                 newPos = pos - slideWidth,
                 nextSlide = (Math.abs(newPos) / slideWidth);
                 
-                slideHolder.animate({
+                slideHolder.stop().animate({
                     left: newPos
+                }, 300, 'linear', function() {
+                    self.isAnimating = false;
                 });
             } else if ( dir === 'prev' && current === 0 ) {
                 var oldSlides = slides,
@@ -136,7 +143,7 @@
                 slideHolder.css('left', -width);
                 newPos = -width + slideWidth;
                 
-                slideHolder.animate({
+                slideHolder.stop().animate({
                     left: newPos
                 }, 300, 'linear', function() {
                     slideHolder.css({
@@ -144,6 +151,7 @@
                         'left': -(width - slideWidth)
                     });
                     oldSlides.remove();
+                    self.isAnimating = false;
                 });
 
                 nextSlide = numSlides - 1;
@@ -151,8 +159,10 @@
                 newPos = pos + slideWidth,
                 nextSlide = (Math.abs(newPos) / slideWidth);
                 
-                slideHolder.animate({
+                slideHolder.stop().animate({
                     left: newPos
+                }, 300, 'linear', function() {
+                    self.isAnimating = false;
                 });
             }
             
@@ -167,6 +177,21 @@
             } else if ( self.effect === 'slide-left' ) {
                 return self.slideLeft(current, dir, slides, slideHolder);
             }
+        };
+
+        self.pageSlide = function(e, slideHolder) {
+            var current = self.getCurrent(slideHolder),
+                dir;
+            
+            if (e.which === 37) {   
+                dir = 'prev';
+            } else if (e.which === 39) {
+                dir = 'next';
+            } else {
+                return;
+            }
+
+            return self.advanceSlide(current, dir, slideHolder);                                
         };
 
         self.startShow = function(interval, slides, nextControl) {
@@ -204,7 +229,7 @@
 
                 slideList = self.createSlideList(slides).appendTo(currentSlider);
 
-                if ( animate === true ) {
+                if ( auto ) {
                     begin = self.startShow(interval, slides, nextControl);
 
                     slides.on('mouseover', function() {
@@ -232,27 +257,18 @@
 
                 currentSlider.on({
                     mouseenter: function () {
-                        var holder = $(this).find('.' + self.slideHolderClass),
-                            sliders = $('.' + self.sliderClass);
-
-                        body.on('keydown', function(e) {
-                            var current = self.getCurrent(holder),
-                                dir,
-                                nextSlide;
-                            
-                            if (e.which === 37) {   
-                                dir = 'prev';
-                            } else if (e.which === 39) {
-                                dir = 'next';
+                        var holder = $(this).find('.' + self.slideHolderClass);
+                        
+                        body.keydown(function(e) {
+                            if( self.isAnimating ) {
+                                e.preventDefault();
+                                return false;
                             }
 
-                            nextSlide = self.advanceSlide(current, dir, holder);
+                            var nextSlide = self.pageSlide(e, holder);
 
                             slideList.find('button').removeClass('active');
                             slideList.find('li').eq(nextSlide).find('button').addClass('active');
-
-                            e.preventDefault();
-                            e.stopPropagation();
                         });
                     },
                     mouseleave: function () {
@@ -268,7 +284,7 @@
                     slideList.find('button').removeClass('active');
                     that.addClass('active');
 
-                    self.goToSlide(current, slideNum, slides);
+                    self.goToSlide(current, slideNum, slideHolder);
 
                     e.preventDefault();
                     e.stopPropagation();                    
