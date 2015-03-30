@@ -10,7 +10,7 @@
 
         self.container = $('.' + self.containerClass);
 
-        if (self.container.length > 0) {
+        if ( self.container.length ) {
             self.container.on('click', self.button, function(e) {
                 var that = $(this),
                     menu = that.next('ul'),
@@ -19,7 +19,7 @@
                 menu.slideDown(self.speed);
                 that.addClass(self.activeClass);
 
-                if (openButtons.length > 0) {
+                if ( openButtons.length ) {
                     openButtons.removeClass(self.activeClass);
                     openButtons.next('ul').slideUp(self.speed);
                 }
@@ -31,7 +31,7 @@
             $('body').on('click', function(e) {
                 var openButtons = self.container.find('ul').not(':hidden').prev('button');
 
-                if (openButtons.length > 0) {
+                if ( openButtons.length ) {
                     openButtons.removeClass(self.activeClass);
                     openButtons.next('ul').slideUp(self.speed);
                 }

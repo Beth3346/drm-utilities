@@ -1,14 +1,12 @@
 (function($) {
     window.drmAlerts = function(params) {
-        var self = {},
-            spec = params || {};
-
-        self.alertClass = spec.alertClass || 'drm-dismissible-alert';
-        self.speed = spec.speed || 300;
-        self.alerts = $('.' + self.alertClass);
+        var self = {};
+        var spec = params || {};
+        var speed = spec.speed || 300;
+        var alertClass = spec.alertClass || 'drm-dismissible-alert';
 
         self.showAlert = function(type, message, holder) {
-            var className = 'drm-' + type + '-alert ' + self.alertClass,
+            var className = 'drm-' + type + '-alert ' + alertClass,
                 newAlert = $('<div></div>', {
                     text: message,
                     'class': className
@@ -23,15 +21,11 @@
             close.prependTo(newAlert);
         };
 
-        self.clearAlert = function(speed) {
-            $(this).parent().fadeOut(speed, function() {
-                $(this).remove();
-            });
-        };
-
-        $('body').on('click', '.' + self.alertClass + ' button.close', function(e) {
+        $('body').on('click', '.' + alertClass + ' button.close', function(e) {
+            var alert = $(this).parent();
+            
+            drm.clearElement(alert, speed);
             e.preventDefault();
-            self.clearAlert.call(this, self.speed);
         });
 
         return self;

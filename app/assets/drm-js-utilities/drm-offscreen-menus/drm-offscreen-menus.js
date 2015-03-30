@@ -38,7 +38,7 @@
         var menu = $('.' + menuClass),
             menuPos = menu.css('left');
 
-        if ( menu.length > 0 ) {
+        if ( menu.length ) {
             var content = $('.' + contentClass),
                 button = $('.' + buttonClass),
                 menuWidth = menu.css('width');

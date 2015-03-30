@@ -2,18 +2,16 @@
 
 (function($) {
     window.drmBackToTop = function(params) {
-        var self = {},
-            spec = params || {};
-
-        self.content = spec.content || $('body');
-        self.speed = spec.speed || 300;
-        self.scrollSpeed = spec.scrollSpeed || 900;
+        var self = {};
+        var spec = params || {};
+        var content = spec.content || $('body');
+        var speed = spec.speed || 300;
+        var scrollSpeed = spec.scrollSpeed || 900;
 
         self.addButton = function() {
-            return $('<button></button>', {
-                'class': 'back-to-top',
-                html: '&#9652;'
-            }).appendTo('body').hide();
+            var button = drm.createElement('button', 'back-to-top', null, '&#9652;');
+            
+            return button.appendTo('body').hide();
         };
 
         self.showButton = function() {
@@ -21,22 +19,18 @@
             height = $(window).height();
 
             if (scroll > height) {
-                self.backToTop.fadeIn(self.speed);
+                self.backToTop.fadeIn(speed);
             } else if (scroll < height) {
-                self.backToTop.fadeOut(self.speed);
+                self.backToTop.fadeOut(speed);
             }
         };
 
-        self.toTop = function() {
-            self.content.stop().animate({
-                'scrollTop': self.content.position().top
-            }, self.scrollSpeed, 'swing');
-        };
-
-        if ( self.content.length > 0 ) {
+        if ( content.length ) {
             self.backToTop = self.addButton();
             $(window).on('scroll', self.showButton);
-            self.backToTop.on('click', self.toTop);
+            self.backToTop.on('click', function() {
+                drm.toTop(content, scrollSpeed);
+            });
         }
 
         return self;

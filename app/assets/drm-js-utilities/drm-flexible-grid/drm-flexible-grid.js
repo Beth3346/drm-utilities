@@ -1,11 +1,4 @@
 (function($) {
-    // adds case insensitive contains to jQuery
-
-    $.extend($.expr[":"], {
-        "containsNC": function(elem, i, match) {
-            return (elem.textContent || elem.innerText || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
-        }
-    });
 
     window.drmFlexibleGrid = function(params) {
         var self = {},
@@ -33,16 +26,11 @@
         };
 
         self.addFilterButtons = function(tags) {
-            var captitalize = function(str) {
-                return str.toLowerCase().replace(/^.|\s\S/g, function(a) {
-                    return a.toUpperCase();
-                });
-            };
 
             $.each(tags, function(k, v) {
                 var tagButton = $('<button></button>', {
                     'class': 'drm-grid-filter',
-                    text: captitalize(v),
+                    text: drm.captitalize(v),
                     'data-filter': v
                 });
 
@@ -146,7 +134,7 @@
             }
         };
 
-        if ( self.grid.length > 0 ) {
+        if ( self.grid.length ) {
             var hash = window.location.hash;
 
             self.gridNav = $('.drm-grid-nav');

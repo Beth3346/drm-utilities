@@ -15,7 +15,7 @@
             $(this).children('ul').stop().fadeOut(speed);
         };
 
-        if (self.menu.length > 0) {
+        if ( self.menu.length ) {
             self.listItem = self.menu.find('li:has(ul)');
 
             self.listItem.on('mouseenter', self.showMenu);

@@ -209,7 +209,7 @@
             console.log('slider paused');
         };
 
-        if ( slider.length > 0 ) {
+        if ( slider.length ) {
 
             $.each(slider, function() {
                 var currentSlider = $(this),

@@ -1,4 +1,12 @@
 (function($) {
+    // adds case insensitive contains to jQuery
+
+    $.extend($.expr[":"], {
+        "containsNC": function(elem, i, match) {
+            return (elem.textContent || elem.innerText || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+        }
+    });
+
     drmUtilities = function(params) {
         var self = {},
             spec = params || {};
@@ -54,6 +62,95 @@
             dateKeywords: new RegExp('^(yesterday|today|tomorrow)', 'i'),
             timeKeywords: new RegExp('^(noon|midnight)', 'i'),
             singleSpace: new RegExp('\\s')
+        };
+
+        self.generateRandomString = function(length, charset) {
+            var str = '';
+            length = length || 10;
+            charset = charset || 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+            for (var i = 0, n = charset.length; i < length; i++) {
+                str += charset.charAt(Math.floor(Math.random() * n));
+            }
+
+            return str;
+        };
+
+        self.checkBlacklist = function(password, blacklist) {
+            return $.inArray(password.toLowerCase(), blacklist);
+        };
+
+        self.checkLength = function(str, reqLength) {
+            return (str.length < reqLength) ? true : false;
+        };
+
+        self.getValue = function(field) {
+            return $.trim(field.val());
+        };
+        
+        self.throttle = function(fn, threshold, scope) {
+            var last,
+                deferTimer;
+            
+            threshold = threshold || 500;
+            
+            return function () {
+                var context = scope || this;
+                var now = +new Date(),
+                    args = arguments;
+            
+                if (last && now < last + threshold) {
+                    // hold on to it
+                    clearTimeout(deferTimer);
+                    deferTimer = setTimeout(function () {
+                        last = now;
+                        fn.apply(context, args);
+                    }, threshold);
+                } else {
+                    last = now;
+                    fn.apply(context, args);
+                }
+            };
+        };
+
+        self.clearElement = function(el, speed) {
+            speed = speed || 300;
+
+            el.fadeOut(speed, function() {
+                $(this).remove();
+            });
+        };
+
+        self.createElement = function(tagName, className, idName, htmlContent, text) {
+            className = className || null;
+            idName = idName || null;
+            htmlContent = htmlContent || null;
+            text = text || null;
+
+            return $('<' + tagName + '></' + tagName + '>', {
+                'id': idName,
+                'class': className,
+                html: htmlContent,
+                text: text
+            });
+        };
+
+        self.toTop = function(content, speed) {
+            content.stop().animate({
+                'scrollTop': content.position().top
+            }, speed, 'swing');
+        };
+
+        self.captitalize = function(str) {
+            return str.toLowerCase().replace(/^.|\s\S/g, function(a) {
+                return a.toUpperCase();
+            });
+        };
+
+        self.killEvent = function(el, eventType) {
+            el.on(eventType, function(e) {
+                e.stopPropagation();
+            });
         };
 
         return self;

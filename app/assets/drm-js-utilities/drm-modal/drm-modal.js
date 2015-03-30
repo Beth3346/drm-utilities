@@ -44,7 +44,7 @@
             });
         }; 
 
-        if (modals.length > 0) {
+        if ( modals.length ) {
             var body = $('body');
             
             modals.hide().appendTo('body');

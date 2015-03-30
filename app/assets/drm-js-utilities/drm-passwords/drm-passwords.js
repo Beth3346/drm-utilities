@@ -36,31 +36,6 @@
             reqLength = spec.reqLength || 8,
             showButtonText = spec.showButtonText || 'Show Password',
             hideButtonText = spec.hideButtonText || 'Hide Password';
-        
-        self.throttle = function(fn, threshold, scope) {
-            var last,
-                deferTimer;
-            
-            threshold = threshold || 500;
-            
-            return function () {
-                var context = scope || this;
-                var now = +new Date(),
-                    args = arguments;
-            
-                if (last && now < last + threshold) {
-                    // hold on to it
-                    clearTimeout(deferTimer);
-                    deferTimer = setTimeout(function () {
-                        last = now;
-                        fn.apply(context, args);
-                    }, threshold);
-                } else {
-                    last = now;
-                    fn.apply(context, args);
-                }
-            };
-        };
 
         self.showPassword = function(field, button, showButtonText, hideButtonText) {
             var fieldType = field.attr('type');
@@ -74,27 +49,11 @@
             }
         };
 
-        self.getPassword = function(field) {
-            return $.trim(field.val());
-        };
-
-        self.generateRandomString = function(length) {
-            // return Math.random().toString(36).slice(2).substring(length);
-
-            var charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()+?~.,/{}[]+=_-',
-                str = '';
-
-            for (var i = 0, n = charset.length; i < length; i++) {
-                str += charset.charAt(Math.floor(Math.random() * n));
-            }
-
-            return str;
-        };
-
         self.generatePassword = function(length) {
             var createPassword = function(length) {
-                    var pass = self.generateRandomString(length),
-                        strength = self.checkStrength(pass);
+                    var charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()+?~.,/{}[]+=_-';
+                    var pass = drm.generateRandomString(length, charset);
+                    var strength = self.checkStrength(pass);
 
                     if ( strength !== 'strong' || pass.length !== length ) {
                         return createPassword(length);
@@ -104,14 +63,6 @@
                 };
 
             return createPassword(length);
-        };
-
-        self.checkBlacklist = function(password, blacklist) {
-            return $.inArray(password.toLowerCase(), blacklist);
-        };
-
-        self.checkLength = function(length, reqLength) {
-            return (length < reqLength) ? true : false;
         };
 
         self.checkStrength = function(password) {
@@ -227,8 +178,8 @@
             self.showPassword(field, $(this), showButtonText, hideButtonText);
         });
 
-        field.on('blur', function() {
-            var password = self.getPassword(field);
+        field.on('keyup', drm.throttle(function() {
+            var password = drm.getValue(field);
             var passwordLength = password.length;
             var results = {
                     blacklist: null,
@@ -237,21 +188,15 @@
                 };
             var status;
 
-            var checkPassword = function() {
-                results.blacklist = self.checkBlacklist(password, blacklist);
-                results.length = self.checkLength(passwordLength, reqLength);
-                results.complexity = self.checkStrength(password);
-                
-                status = self.getStatus(results);
+            results.blacklist = drm.checkBlacklist(password, blacklist);
+            results.length = drm.checkLength(password, reqLength);
+            results.complexity = self.checkStrength(password);
+            
+            status = self.getStatus(results);
 
-                self.createMessage(status, passwordLength, field);
-                self.createMeter(status, passwordLength, field);                
-            };
-
-            if ( password.length ){
-                checkPassword();
-            }
-        });
+            self.createMessage(status, passwordLength, field);
+            self.createMeter(status, passwordLength, field);
+        }, 500));
 
         generateButton.on('click', function() {
             var passHolder = $('.password-holder').empty();
