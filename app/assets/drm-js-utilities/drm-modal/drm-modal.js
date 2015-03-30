@@ -1,13 +1,15 @@
 (function($) {
     window.drmModal = function(params) {
         var self = {},
-            spec = params || {},
-            buttonClass = spec.buttonClass || 'drm-modal-open',
-            speed = spec.speed || 300;
+            spec = params || {};
         
         self.modalClass = spec.modalClass || 'drm-modal';
         self.lightboxClass = spec.lightboxClass || 'drm-blackout';
         self.closeClass = spec.closeClass || 'drm-modal-close';
+
+        var buttonClass = spec.buttonClass || 'drm-modal-open',
+            speed = spec.speed || 300,
+            modals = $('.' + self.modalClass);
 
         self.createLightbox = function(speed, modal) {
             var close = $('<button></button>', {
@@ -40,9 +42,7 @@
                 modal.hide().appendTo('body');
                 $(this).remove();
             });
-        }
-
-        var modals = $('.' + self.modalClass)
+        }; 
 
         if (modals.length > 0) {
             var body = $('body');
@@ -67,7 +67,7 @@
                 self.hideModal();
             });
 
-            body.on('click', function(e) {
+            body.on('click', function() {
                 self.hideModal();
             });
 

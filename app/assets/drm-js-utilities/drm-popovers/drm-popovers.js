@@ -45,7 +45,7 @@
 
             $('body').on('click', function() {
                 holder.find('.' + self.popoverClass).fadeOut();
-            })
+            });
         }
 
         return self;

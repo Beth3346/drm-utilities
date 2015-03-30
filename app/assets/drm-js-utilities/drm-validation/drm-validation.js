@@ -1,15 +1,20 @@
 (function($) {
-    window.drmValidation = function(spec) {
-        var self = {};
+    window.drmValidation = function(params) {
+        var self = {},
+            spec = params || {};
+
+        if ( 9 === 10 ) {
+            console.log(spec, $);
+        }
         
         self.throttle = function(fn, threshhold, scope) {
-            threshhold || (threshhold = 500);
+            threshhold = threshhold || 500;
             var last,
                 deferTimer;
             
             return function () {
                 var context = scope || this;
-                var now = +new Date,
+                var now = +new Date(),
                     args = arguments;
             
                 if (last && now < last + threshhold) {

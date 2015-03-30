@@ -1,84 +1,96 @@
 (function($) {
     window.drmAccordion = function(params) {
-        var self = {},
-            spec = params || {};
+        var self = {};
+        var spec = params || {};
+        var containerClass = spec.containerClass || 'drm-accordion';
+        var labelClass = spec.labelClass || 'drm-accordion-label';
+        var contentHolderClass = spec.contentHolderClass || 'drm-accordion-inner';
+        var showButtons = (typeof spec.showButtons === 'undefined') ? true : spec.showButtons;
+        var speed = spec.speed || 300;
+        var container = $('.' + containerClass);
+        var expandIconClass = spec.expandIconClass  || 'fa-plus';
+        var collapseIconClass = spec.collapseIconClass  || 'fa-minus';
+        var iconClass = spec.iconClass || 'drm-accordion-icon';
 
-        self.speed = spec.speed || 300;
-        self.containerClass = spec.containerClass || 'drm-accordion';
-        self.showButtons = (typeof spec.showButtons === 'undefined') ? true : spec.showButtons;
-        self.expandIconClass = spec.expandIconClass  || 'fa-plus';
-        self.collapseIconClass = spec.collapseIconClass  || 'fa-minus';
+        var showDefaultContent = function(container, content) {
+            var expandedContent = container.find('.' + contentHolderClass + '[data-state=expanded]');
 
-        self.showDefaultContent = function() {
-            var expandedContent = $(self.container).find(self.contentHolder +'[data-state=expanded]');
-
-            self.content.hide();
+            content.hide();
             expandedContent.show();
         };
 
-        self.toggle = function(speed, content) {
-            var that = $(this),
-                nextContent = that.next(),
-                icon = that.find(self.icon),
-                openContent = $(content).not(':hidden');
-                openContentIcons = openContent.prev().find(self.icon);
+        var toggle = function(speed, openContent) {
+            var that = $(this);
+            var nextContent = that.next();
 
-                openContent.slideUp(speed);
-                
-                if (icon.hasClass(self.expandIconClass)) {
-                    icon.removeClass(self.expandIconClass).addClass(self.collapseIconClass);
-                    nextContent.slideDown(speed);
-                } else {
-                    icon.removeClass(self.collapseIconClass).addClass(self.expandIconClass);
-                    nextContent.slideUp(speed);
-                }
-
-                openContentIcons.removeClass(self.collapseIconClass).addClass(self.expandIconClass);
+            openContent.slideUp(speed);
+            
+            if ( $(nextContent).is(':hidden') ) {
+                nextContent.slideDown(speed);
+            } else {
+                nextContent.slideUp(speed);
+            }
         };
 
-        self.createButton = function(button, message, className) {
-            return $('<button></button>', {text: message, 'class': className}).prependTo(self.container);
+        var replaceIcons = function(openContent, iconClass, expandIconClass, collapseIconClass) {
+            var that = $(this);
+            var icon = that.find('.' + iconClass);
+            var openContentIcons = openContent.prev().find('.' + iconClass);
+            
+            if ( icon.hasClass(expandIconClass) ) {
+                icon.removeClass(expandIconClass).addClass(collapseIconClass);
+            } else {
+                icon.removeClass(collapseIconClass).addClass(expandIconClass);
+            }
+
+            openContentIcons.removeClass(collapseIconClass).addClass(expandIconClass);
+        };
+
+        var createButton = function(button, message, className, container) {
+            return $('<button></button>', {text: message, 'class': className}).prependTo(container);
         };
         
-        self.addButtons = function() {
+        var addButtons = function(container) {
             return {
-                'showButton': self.createButton('showButton', 'Show All', 'drm-show-all drm-button-inline'),
-                'hideButton': self.createButton('hideButton', 'Hide All', 'drm-hide-all drm-button-inline'),
+                'showButton': createButton('showButton', 'Show All', 'drm-show-all drm-button-inline', container),
+                'hideButton': createButton('hideButton', 'Hide All', 'drm-hide-all drm-button-inline', container),
             };
         };
 
-        self.showAll = function() {
-            var icons = self.label.find(self.icon);
-
-            icons.removeClass(self.expandIconClass).addClass(self.collapseIconClass);
-            self.content.slideDown(self.speed);
+        var showAll = function(speed, content) {
+            content.slideDown(speed);
         };
 
-        self.hideAll = function() {
-            var icons = self.label.find(self.icon);
-
-            icons.removeClass(self.collapseIconClass).addClass(self.expandIconClass);
-            self.content.slideUp(self.speed);
+        var hideAll = function(speed, content) {
+            content.slideUp(speed);
         };
 
-        self.container = $('.' + self.containerClass);
+        if ( container.length ) {
+            var label = $(container).find('.' + labelClass);
+            var content = $(container).find('.' + contentHolderClass);
+            var icons = label.find('.' + iconClass);
 
-        if ( self.container.length >= 1 ) {
-            self.icon = '.drm-accordion-icon';
-            self.label = $(self.container).find('.drm-accordion-label');
-            self.contentHolder = '.drm-accordion-inner';
-            self.content = $(self.container).find(self.contentHolder);
+            if ( showButtons ) {
+                var buttons = addButtons(container);
 
-            if (self.showButtons === true) {
-                self.buttons = self.addButtons();
-                $(self.buttons.showButton).on('click', self.showAll);
-                $(self.buttons.hideButton).on('click', self.hideAll);
+                $(buttons.showButton).on('click', function() {
+                    showAll(speed, content);
+                    icons.removeClass(expandIconClass).addClass(collapseIconClass);
+                });
+
+                $(buttons.hideButton).on('click', function() {
+                    hideAll(speed, content);
+                    icons.removeClass(collapseIconClass).addClass(expandIconClass);
+                });
             }
 
-            self.showDefaultContent();
+            showDefaultContent(container, content);
 
-            self.label.on('click', function(e) {
-                self.toggle.call(this, self.speed, self.contentHolder);
+            label.on('click', function(e) {
+                var openContent = $(content).not(':hidden');
+                
+                replaceIcons.call(this, openContent, iconClass, expandIconClass, collapseIconClass);
+                toggle.call(this, speed, openContent);
                 e.stopPropagation();
             });
         }

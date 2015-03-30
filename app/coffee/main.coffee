@@ -7,7 +7,7 @@ $ = jQuery
 $ ->
     # new DrmSimpleSlider $('div.drm-simple-slider-2')
     new DrmStickyNav $('nav.drm-sticky-sidebar'), null, $('div.sticky-sidebar-content')
-    new DrmStickyNav $('aside.sidebar'), null, $('main'), no
+    # new DrmStickyNav $('aside.sidebar'), null, $('main'), no
 
     drmCalendar = new DrmCalendar()
 

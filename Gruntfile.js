@@ -94,14 +94,14 @@ module.exports = function(grunt) {
 
             dist: {
                 // the files to concatenate
-                src: ['<%= distFolder %>assets/jquery.js', '<%= distFolder %>assets/drm-js-utilities/**/*.js', '<%= distFolder %>assets/main.js', '<%= distFolder %>js/coffee-compiled/*.js'],
+                src: ['<%= distFolder %>assets/jquery.js', '<%= appFolder %>assets/drm-utility-lib/**/*.js', '<%= distFolder %>assets/drm-js-utilities/**/*.js', '<%= distFolder %>assets/main.js', '<%= distFolder %>js/coffee-compiled/*.js'],
                 // the location of the resulting JS file
                 dest: '<%= distFolder %>js/<%= pkg.name %>.<%= pkg.version %>.js'
             }
         },
 
         jshint: {
-            files: ['<%= distFolder %>js/coffee-compiled/*.js', '<%= appFolder %>js/assets/drm-js-utilities/**/*.js', '<%= appFolder %>js/assets/main.js', '<%= appFolder %>js/assets/drm-utility-lib/**/*.js'],
+            files: ['<%= distFolder %>js/coffee-compiled/*.js', '<%= appFolder %>assets/drm-js-utilities/**/*.js', '<%= appFolder %>assets/main.js', '<%= appFolder %>assets/drm-utility-lib/**/*.js'],
             options: {
                 maxerr: 10,
                 unused: true,
@@ -220,7 +220,7 @@ module.exports = function(grunt) {
 
             scripts: {
                 // We watch and compile sass files as normal but don't live reload here
-                files: ['<%= distFolder %>assets/jquery.js', '<%= distFolder %>assets/drm-js-utilities/**/*.js', '<%= distFolder %>assets/main.js','<%= appFolder %>coffee/**/*.coffee'],
+                files: ['<%= distFolder %>assets/jquery.js', '<%= appFolder %>assets/drm-utility-lib/**/*.js', '<%= distFolder %>assets/drm-js-utilities/**/*.js', '<%= distFolder %>assets/main.js','<%= appFolder %>coffee/**/*.coffee'],
                 tasks: [ 'coffee', 'concat', 'jshint' ],
             },
 
@@ -259,6 +259,6 @@ module.exports = function(grunt) {
     grunt.registerTask('jsstuff', ['clean:scripts', 'copy', 'coffee', 'concat', 'jshint', 'uglify', 'clean:postbuild']);
     grunt.registerTask('imgstuff', ['clean:images', 'copy', 'imagemin', 'clean:postbuild']);
     grunt.registerTask('default', ['clean:build', 'copy', 'jade:dev', 'imagemin', 'coffee', 'concat', 'compass:dev', 'autoprefixer', 'csslint', 'jshint', 'watch']);
-    grunt.registerTask('build', ['clean:build', 'copy', 'jade:dist', 'imagemin', 'coffee', 'concat', 'uglify', 'compass:dist', 'autoprefixer', 'csslint', 'clean:postbuild'])
+    grunt.registerTask('build', ['clean:build', 'copy', 'jade:dist', 'imagemin', 'coffee', 'concat', 'uglify', 'compass:dist', 'autoprefixer', 'csslint', 'jshint', 'clean:postbuild'])
 
 };

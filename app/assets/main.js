@@ -1,10 +1,7 @@
 (function(){
     drmAccordion();
-
     drmAccordionNav();
-
     drmAccordionNav({
-        speed: 300,
         containerClass: 'sidebar'
     });
 })();

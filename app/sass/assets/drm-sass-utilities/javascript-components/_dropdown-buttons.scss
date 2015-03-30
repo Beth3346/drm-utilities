@@ -7,6 +7,7 @@
     position: relative;
 
     button {
+        margin-bottom: 5px;
         position: relative;
         @if $border == none {           
             @include drm-button-solid($bk-color, $color, 100%);
@@ -57,6 +58,7 @@
         button {
             padding-left: 10px;
             padding-right: 10px;
+            margin-bottom: 5px;
         }
     }
 
@@ -99,10 +101,8 @@
 
         @if $border != none {
             border: 1px solid $divider-color;
-            
         }
         
         @include drm-nav-bar-solid-stacked($bk-color, $color, left, $divider-color);
-        margin-top: 5px;
     }
 }

@@ -2,8 +2,8 @@
     // adds case insensitive contains to jQuery
 
     $.extend($.expr[":"], {
-        "containsNC": function (elem, i, match) {
-            (elem.textContent || elem.innerText || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+        "containsNC": function(elem, i, match) {
+            return (elem.textContent || elem.innerText || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
         }
     });
 
@@ -125,8 +125,9 @@
 
         self.filterListItems = function(filter) {
             // filter list items by tag
-            var filteredItems,
-                filter = (window.location.hash) ? filter : 'all';
+            var filteredItems;
+                
+            filter = (window.location.hash) ? filter : 'all';
 
             window.location.hash = filter;
 

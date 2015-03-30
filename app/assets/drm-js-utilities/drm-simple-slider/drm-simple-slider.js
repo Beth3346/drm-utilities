@@ -11,9 +11,9 @@
         self.navClass = spec.navClass || 'drm-simple-slider-nav';
         self.slideListClass = spec.slideListClass || 'drm-simple-slider-list';
         self.isAnimating = false;
+        self.speed = spec.speed || 500;
 
         var interval = spec.interval || 5000,
-            speed = spec.speed || 500,
             auto = spec.auto || false,
             slider = $('.' + self.sliderClass);
 
@@ -48,8 +48,8 @@
             var slides = slideHolder.find('.' + self.slideClass);
 
             if ( self.effect === 'fade' ) {
-                slides.eq(current).fadeOut();
-                slides.eq(slideNum).fadeIn();
+                slides.eq(current).fadeOut(self.speed);
+                slides.eq(slideNum).fadeIn(self.speed);
             } else if ( self.effect === 'slide-left' ) {
                 var slideWidth = parseInt(slides.first().width(), 10),
                     pos = slideHolder.position().left,
@@ -66,7 +66,7 @@
                 
                 slideHolder.stop().animate({
                     left: newPos
-                });
+                }, self.speed);
             }
         };
 
@@ -74,19 +74,19 @@
             var lastSlide = slides.length - 1,
                 nextSlide;
 
-            slides.eq(current).fadeOut();
+            slides.eq(current).fadeOut(self.speed);
 
             if ( dir === 'next' && current === lastSlide ) {
-                slides.first().fadeIn();
+                slides.first().fadeIn(self.speed);
                 nextSlide = 0;
             } else if ( dir === 'next' ) {
-                slides.eq(current + 1).fadeIn();
+                slides.eq(current + 1).fadeIn(self.speed);
                 nextSlide = current + 1;
             } else if ( dir === 'prev' && current === 0 ) {
-                slides.eq(lastSlide).fadeIn();
+                slides.eq(lastSlide).fadeIn(self.speed);
                 nextSlide = lastSlide;
             } else {
-                slides.eq(current - 1).fadeIn();
+                slides.eq(current - 1).fadeIn(self.speed);
                 nextSlide = current - 1;
             }
 
@@ -98,14 +98,18 @@
                 slideWidth = parseInt(slides.first().width(), 10),
                 pos = slideHolder.position().left,
                 newPos,
-                nextSlide;
+                newSlides,
+                numSlides,
+                nextSlide,
+                width,
+                oldSlides;
 
             self.isAnimating = true;
 
             if ( dir === 'next' && current === lastSlide ) {
-                var oldSlides = slides,
-                    newSlides = slides.clone(),
-                    numSlides = slides.length;
+                oldSlides = slides;
+                newSlides = slides.clone();
+                numSlides = slides.length;
                 
                 slideHolder.css('width', slideWidth * (numSlides * 2));
                 slideHolder.append(newSlides);
@@ -113,7 +117,7 @@
                 
                 slideHolder.stop().animate({
                     left: newPos
-                }, 300, 'linear', function() {
+                }, self.speed, 'linear', function() {
                     slideHolder.css({
                         'width': slideWidth * numSlides,
                         'left': 0
@@ -124,19 +128,19 @@
 
                 nextSlide = 0;
             } else if ( dir === 'next' ) {
-                newPos = pos - slideWidth,
+                newPos = pos - slideWidth;
                 nextSlide = (Math.abs(newPos) / slideWidth);
                 
                 slideHolder.stop().animate({
                     left: newPos
-                }, 300, 'linear', function() {
+                }, self.speed, 'linear', function() {
                     self.isAnimating = false;
                 });
             } else if ( dir === 'prev' && current === 0 ) {
-                var oldSlides = slides,
-                    newSlides = slides.clone(),
-                    numSlides = slides.length,
-                    width = slideWidth * numSlides;
+                oldSlides = slides;
+                newSlides = slides.clone();
+                numSlides = slides.length;
+                width = slideWidth * numSlides;
                 
                 slideHolder.css('width', width * 2);
                 slideHolder.prepend(newSlides);
@@ -145,7 +149,7 @@
                 
                 slideHolder.stop().animate({
                     left: newPos
-                }, 300, 'linear', function() {
+                }, self.speed, 'linear', function() {
                     slideHolder.css({
                         'width': width,
                         'left': -(width - slideWidth)
@@ -156,12 +160,12 @@
 
                 nextSlide = numSlides - 1;
             } else {
-                newPos = pos + slideWidth,
+                newPos = pos + slideWidth;
                 nextSlide = (Math.abs(newPos) / slideWidth);
                 
                 slideHolder.stop().animate({
                     left: newPos
-                }, 300, 'linear', function() {
+                }, self.speed, 'linear', function() {
                     self.isAnimating = false;
                 });
             }

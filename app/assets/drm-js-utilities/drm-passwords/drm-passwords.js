@@ -37,23 +37,24 @@
             showButtonText = spec.showButtonText || 'Show Password',
             hideButtonText = spec.hideButtonText || 'Hide Password';
         
-        self.throttle = function(fn, threshhold, scope) {
-            threshhold || (threshhold = 500);
+        self.throttle = function(fn, threshold, scope) {
             var last,
                 deferTimer;
             
+            threshold = threshold || 500;
+            
             return function () {
                 var context = scope || this;
-                var now = +new Date,
+                var now = +new Date(),
                     args = arguments;
             
-                if (last && now < last + threshhold) {
+                if (last && now < last + threshold) {
                     // hold on to it
                     clearTimeout(deferTimer);
                     deferTimer = setTimeout(function () {
                         last = now;
                         fn.apply(context, args);
-                    }, threshhold);
+                    }, threshold);
                 } else {
                     last = now;
                     fn.apply(context, args);
@@ -95,7 +96,7 @@
                     var pass = self.generateRandomString(length),
                         strength = self.checkStrength(pass);
 
-                    if ( strength === 'strong' || pass.length !== length ) {
+                    if ( strength !== 'strong' || pass.length !== length ) {
                         return createPassword(length);
                     } else {
                         return pass;
@@ -115,30 +116,20 @@
 
         self.checkStrength = function(password) {
             // ensure that passwords contain a mixture of uppercase and lowercase letters, numbers, and special characters
-            var patterns = {
-                    number: new RegExp('[0-9]+','g'),
-                    alphaLower: new RegExp('[a-z]+','g'),
-                    alphaUpper: new RegExp('[A-Z]+','g'),
-                    specialCharacters: new RegExp('[^a-zA-Z0-9_]','g'),
-                    allNumbers: new RegExp('^[0-9]*$','g'),
-                    allAlphaLower: new RegExp('^[a-z]*$','g'),
-                    allAlphaUpper: new RegExp('^[A-Z]*$','g'),
-                    allSpecialCharacters: new RegExp('^[^a-zA-Z0-9_]*$','g'),
-                },
-                results = {
-                    containsNum: patterns.number.test(password),
-                    containsAlphaLower: patterns.alphaLower.test(password),
-                    containsAlphaUpper: patterns.alphaUpper.test(password),
-                    containsSpecialCharacters: patterns.specialCharacters.test(password),
-                    allNumbers: patterns.allNumbers.test(password),
-                    allAlphaLower: patterns.allAlphaLower.test(password),
-                    allAlphaUpper: patterns.allAlphaUpper.test(password),
-                    allSpecialCharacters: patterns.allSpecialCharacters.test(password)
-                }
+            var stats = {};
 
-            if ( results.allNumbers || results.allAlphaUpper || results.allAlphaLower || results.allSpecialCharacters ) {
+            stats.containsNum = drm.patterns.numeral.test(password);
+            stats.containsAlphaLower = drm.patterns.alphaLower.test(password);
+            stats.containsAlphaUpper = drm.patterns.alphaUpper.test(password);
+            stats.containsSpecialCharacters = drm.patterns.specialCharacters.test(password);
+            stats.allNumbers = drm.patterns.allNumbers.test(password);
+            stats.allAlphaLower = drm.patterns.allAlphaLower.test(password);
+            stats.allAlphaUpper = drm.patterns.allAlphaUpper.test(password);
+            stats.allSpecialCharacters = drm.patterns.allSpecialCharacters.test(password);
+
+            if ( stats.allNumbers || stats.allAlphaUpper || stats.allAlphaLower || stats.allSpecialCharacters ) {
                 return 'weak';
-            } else if ( results.containsNum && results.containsSpecialCharacters && results.containsAlphaUpper && results.containsAlphaLower ) {
+            } else if ( stats.containsNum && stats.containsSpecialCharacters && stats.containsAlphaUpper && stats.containsAlphaLower ) {
                 return 'strong';
             } else {
                 return 'medium';
@@ -194,7 +185,7 @@
                 message: null,
                 strength: null,
                 status: null
-            }
+            };
 
             if ( results.blacklist !== -1 ) {
                 status.strength = 'weak';
@@ -225,40 +216,46 @@
             }
 
             return status;
-        }
+        };
 
-        var field = $('.' + fieldClass),
-            showButton = $('button.' + buttonClass),
-            generateButton = $('button.drm-generate-password');
+        var field = $('.' + fieldClass);
+        var showButton = $('button.' + buttonClass);
+        var generateButton = $('button.drm-generate-password');
 
         showButton.on('click', function(e) {
             e.preventDefault();
             self.showPassword(field, $(this), showButtonText, hideButtonText);
         });
 
-        field.on('keyup', function() {
-            var password = self.getPassword(field),
-                passwordLength = password.length,
-                results = {
+        field.on('blur', function() {
+            var password = self.getPassword(field);
+            var passwordLength = password.length;
+            var results = {
                     blacklist: null,
                     length: null,
                     complexity: null
-                },
-                status;
+                };
+            var status;
 
-            results.blacklist = self.checkBlacklist(password, blacklist);
-            results.length = self.checkLength(passwordLength, reqLength);
-            results.complexity = self.checkStrength(password);
-            
-            status = self.getStatus(results);
+            var checkPassword = function() {
+                results.blacklist = self.checkBlacklist(password, blacklist);
+                results.length = self.checkLength(passwordLength, reqLength);
+                results.complexity = self.checkStrength(password);
+                
+                status = self.getStatus(results);
 
-            self.createMessage(status, passwordLength, field);
-            self.createMeter(status, passwordLength, field);
+                self.createMessage(status, passwordLength, field);
+                self.createMeter(status, passwordLength, field);                
+            };
+
+            if ( password.length ){
+                checkPassword();
+            }
         });
 
         generateButton.on('click', function() {
-            var passHolder = $('.password-holder').empty(),
-                newPassword = self.generatePassword(reqLength);
+            var passHolder = $('.password-holder').empty();
+            var newPassword = self.generatePassword(reqLength);
 
             $('<p></p>', {
                 text: newPassword

@@ -1,6 +1,11 @@
 (function($) {
-    window.drmReorder = function(spec) {
-        var self = {};
+    window.drmReorder = function(params) {
+        var self = {},
+            spec = params || {};
+
+        if ( 9 === 10 ) {
+            console.log(spec, $);
+        }
 
         return self;
     };

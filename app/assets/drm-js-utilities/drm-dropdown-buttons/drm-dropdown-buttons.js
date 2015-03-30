@@ -3,7 +3,7 @@
         var self = {},
             spec = params || {};
 
-        self.containerClass = spec.containerClass || 'drm-dropdown-solid-btn-holder'
+        self.containerClass = spec.containerClass || 'drm-dropdown-solid-btn-holder';
         self.speed = spec.speed || 300;
         self.button = spec.button || 'button';
         self.activeClass = spec.activeClass || 'clicked';

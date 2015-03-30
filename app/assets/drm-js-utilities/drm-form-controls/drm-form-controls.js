@@ -50,7 +50,7 @@
                     e.stopPropagation();
                 });
             }
-        }
+        };
 
         return self;
     };

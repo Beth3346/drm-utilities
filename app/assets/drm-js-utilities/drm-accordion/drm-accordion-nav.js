@@ -1,52 +1,60 @@
 (function($) {
-
     window.drmAccordionNav = function(params) {
-        var self = {},
-            spec = params || {};
+        var self = {};
+        var spec = params || {};
+        var speed = spec.speed || 300;
+        var containerClass = spec.containerClass || 'drm-accordion-nav';
+        var expandIconClass = spec.expandIconClass  || 'fa-plus';
+        var collapseIconClass = spec.collapseIconClass  || 'fa-minus';
+        var iconClass = spec.iconClass || 'drm-accordion-icon';
+        var contentHolderClass = contentHolderClass || 'drm-accordion-nav-inner';
+        var container = $('.' + containerClass);
 
-        self.speed = spec.speed || 300;
-        self.containerClass = spec.containerClass || 'drm-accordion-nav';
-        self.expandIconClass = spec.expandIconClass  || 'fa-plus';
-        self.collapseIconClass = spec.collapseIconClass  || 'fa-minus';
-        self.container = $('.' + self.containerClass);
+        var showDefaultContent = function() {
+            var expandedContent = $(container).find('.' + contentHolderClass +'[data-state=expanded]');
 
-        self.showDefaultContent = function() {
-            var expandedContent = $(self.container).find(self.contentHolder +'[data-state=expanded]');
-
-            self.content.hide();
+            content.hide();
             expandedContent.show();
         };
 
-        self.toggle = function(speed, content) {
-            var that = $(this),
-                nextContent = that.next(),
-                icon = that.find(self.icon),
-                openContent = $(content).not(':hidden');
-                openContentIcons = openContent.prev().find(self.icon);
+        var toggle = function(speed, openContent) {
+            var that = $(this);
+            var nextContent = that.next();
 
                 openContent.slideUp(speed);
                 
                 if (nextContent.is(':hidden')) {
-                    icon.removeClass(self.expandIconClass).addClass(self.collapseIconClass);
                     nextContent.slideDown(speed);
                 } else {
-                    icon.removeClass(self.collapseIconClass).addClass(self.expandIconClass);
                     nextContent.slideUp(speed);
                 }
-
-                openContentIcons.removeClass(self.collapseIconClass).addClass(self.expandIconClass);
         };
 
-        if (self.container.length >= 1 ) {
-            self.icon = '.drm-accordion-icon';
-            self.contentHolder = '.drm-accordion-nav-inner';
-            self.label = self.container.children('ul').children('li').children('a');
-            self.content = self.label.next('ul');
+        var replaceIcons = function(openContent, iconClass, expandIconClass, collapseIconClass) {
+            var that = $(this);
+            var icon = that.find('.' + iconClass);
+            var openContentIcons = openContent.prev().find('.' + iconClass);
+            
+            if ( icon.hasClass(expandIconClass) ) {
+                icon.removeClass(expandIconClass).addClass(collapseIconClass);
+            } else {
+                icon.removeClass(collapseIconClass).addClass(expandIconClass);
+            }
 
-            self.showDefaultContent();
+            openContentIcons.removeClass(collapseIconClass).addClass(expandIconClass);
+        };
 
-            self.label.on('click', function(e) {
-                self.toggle.call(this, self.speed, self.content);
+        if ( container.length ) {
+            var label = container.children('ul').children('li').children('a');
+            var content = label.next('ul');
+
+            showDefaultContent();
+
+            label.on('click', function(e) {
+                var openContent = $(content).not(':hidden');
+                
+                toggle.call(this, speed, openContent);
+                replaceIcons.call(this, openContent, iconClass, expandIconClass, collapseIconClass);
                 e.stopPropagation();
                 e.preventDefault();
             });
