@@ -7,90 +7,89 @@
         var contentHolderClass = spec.contentHolderClass || 'drm-accordion-inner';
         var showButtons = (typeof spec.showButtons === 'undefined') ? true : spec.showButtons;
         var speed = spec.speed || 300;
-        var container = $('.' + containerClass);
         var expandIconClass = spec.expandIconClass  || 'fa-plus';
         var collapseIconClass = spec.collapseIconClass  || 'fa-minus';
         var iconClass = spec.iconClass || 'drm-accordion-icon';
+        var $container = $('.' + containerClass);
 
-        var showDefaultContent = function(container, content) {
-            var expandedContent = container.find('.' + contentHolderClass + '[data-state=expanded]');
-
-            content.hide();
-            expandedContent.show();
+        var showDefaultContent = function($expandedContent, $content) {
+            $content.hide();
+            $expandedContent.show();
         };
 
-        var toggle = function(speed, openContent) {
-            var that = $(this);
-            var nextContent = that.next();
+        var toggle = function(speed, $openContent) {
+            var $that = $(this);
+            var $nextContent = $that.next();
 
-            openContent.slideUp(speed);
+            $openContent.slideUp(speed);
             
-            if ( $(nextContent).is(':hidden') ) {
-                nextContent.slideDown(speed);
+            if ( $($nextContent).is(':hidden') ) {
+                $nextContent.slideDown(speed);
             } else {
-                nextContent.slideUp(speed);
+                $nextContent.slideUp(speed);
             }
         };
 
-        var replaceIcons = function(openContent, iconClass, expandIconClass, collapseIconClass) {
-            var that = $(this);
-            var icon = that.find('.' + iconClass);
-            var openContentIcons = openContent.prev().find('.' + iconClass);
+        var replaceIcons = function($openContent, iconClass, expandIconClass, collapseIconClass) {
+            var $that = $(this);
+            var $icon = $that.find('.' + iconClass);
+            var $openContentIcons = $openContent.prev().find('.' + iconClass);
             
-            if ( icon.hasClass(expandIconClass) ) {
-                icon.removeClass(expandIconClass).addClass(collapseIconClass);
+            if ( $icon.hasClass(expandIconClass) ) {
+                $icon.removeClass(expandIconClass).addClass(collapseIconClass);
             } else {
-                icon.removeClass(collapseIconClass).addClass(expandIconClass);
+                $icon.removeClass(collapseIconClass).addClass(expandIconClass);
             }
 
-            openContentIcons.removeClass(collapseIconClass).addClass(expandIconClass);
+            $openContentIcons.removeClass(collapseIconClass).addClass(expandIconClass);
         };
 
-        var createButton = function(button, message, className, container) {
-            return $('<button></button>', {text: message, 'class': className}).prependTo(container);
+        var createButton = function(button, message, className, $container) {
+            return $('<button></button>', {text: message, 'class': className}).prependTo($container);
         };
         
-        var addButtons = function(container) {
+        var addButtons = function($container) {
             return {
-                'showButton': createButton('showButton', 'Show All', 'drm-show-all drm-button-inline', container),
-                'hideButton': createButton('hideButton', 'Hide All', 'drm-hide-all drm-button-inline', container),
+                'showButton': createButton('showButton', 'Show All', 'drm-show-all drm-button-inline', $container),
+                'hideButton': createButton('hideButton', 'Hide All', 'drm-hide-all drm-button-inline', $container),
             };
         };
 
-        var showAll = function(speed, content) {
-            content.slideDown(speed);
+        var showAll = function(speed, $content) {
+            $content.slideDown(speed);
         };
 
-        var hideAll = function(speed, content) {
-            content.slideUp(speed);
+        var hideAll = function(speed, $content) {
+            $content.slideUp(speed);
         };
 
-        if ( container.length ) {
-            var label = $(container).find('.' + labelClass);
-            var content = $(container).find('.' + contentHolderClass);
-            var icons = label.find('.' + iconClass);
+        if ( $container.length ) {
+            var $label = $container.find('.' + labelClass);
+            var $content = $container.find('.' + contentHolderClass);
+            var $icons = $label.find('.' + iconClass);
+            var $expandedContent = $container.find('.' + contentHolderClass + '[data-state=expanded]');
 
             if ( showButtons ) {
-                var buttons = addButtons(container);
+                var $buttons = addButtons($container);
 
-                $(buttons.showButton).on('click', function() {
-                    showAll(speed, content);
-                    icons.removeClass(expandIconClass).addClass(collapseIconClass);
+                $buttons.showButton.on('click', function() {
+                    showAll(speed, $content);
+                    $icons.removeClass(expandIconClass).addClass(collapseIconClass);
                 });
 
-                $(buttons.hideButton).on('click', function() {
-                    hideAll(speed, content);
-                    icons.removeClass(collapseIconClass).addClass(expandIconClass);
+                $buttons.hideButton.on('click', function() {
+                    hideAll(speed, $content);
+                    $icons.removeClass(collapseIconClass).addClass(expandIconClass);
                 });
             }
 
-            showDefaultContent(container, content);
+            showDefaultContent($expandedContent, $content);
 
-            label.on('click', function(e) {
-                var openContent = $(content).not(':hidden');
+            $label.on('click', function(e) {
+                var $openContent = $($content).not(':hidden');
                 
-                replaceIcons.call(this, openContent, iconClass, expandIconClass, collapseIconClass);
-                toggle.call(this, speed, openContent);
+                replaceIcons.call(this, $openContent, iconClass, expandIconClass, collapseIconClass);
+                toggle.call(this, speed, $openContent);
                 e.stopPropagation();
             });
         }

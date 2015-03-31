@@ -5,26 +5,26 @@
         var speed = spec.speed || 300;
         var alertClass = spec.alertClass || 'drm-dismissible-alert';
 
-        self.showAlert = function(type, message, holder) {
+        self.showAlert = function(type, message, $holder) {
             var className = 'drm-' + type + '-alert ' + alertClass,
-                newAlert = $('<div></div>', {
+                $newAlert = $('<div></div>', {
                     text: message,
                     'class': className
                 }),
 
-                close = $('<button></button>', {
+                $close = $('<button></button>', {
                     text: 'x',
                     'class': 'close'
                 });
 
-            newAlert.prependTo(holder);
-            close.prependTo(newAlert);
+            $newAlert.prependTo($holder);
+            $close.prependTo($newAlert);
         };
 
         $('body').on('click', '.' + alertClass + ' button.close', function(e) {
-            var alert = $(this).parent();
+            var $alert = $(this).parent();
             
-            drm.clearElement(alert, speed);
+            drm.clearElement($alert, speed);
             e.preventDefault();
         });
 

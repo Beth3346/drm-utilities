@@ -7,13 +7,8 @@
         }
     });
 
-    drmUtilities = function(params) {
-        var self = {},
-            spec = params || {};
-
-        if ( 9 === 10 ) {
-            console.log(spec, $);
-        }
+    drmUtilities = function() {
+        var self = {};
 
         // TODO: add support for sorting datetime values
         self.patterns = {
@@ -84,8 +79,8 @@
             return (str.length < reqLength) ? true : false;
         };
 
-        self.getValue = function(field) {
-            return $.trim(field.val());
+        self.getValue = function($field) {
+            return $.trim($field.val());
         };
         
         self.throttle = function(fn, threshold, scope) {
@@ -113,31 +108,31 @@
             };
         };
 
-        self.clearElement = function(el, speed) {
+        self.clearElement = function($el, speed) {
             speed = speed || 300;
 
-            el.fadeOut(speed, function() {
+            $el.fadeOut(speed, function() {
                 $(this).remove();
             });
         };
 
-        self.createElement = function(tagName, className, idName, htmlContent, text) {
+        self.createElement = function(tagName, className, idName, htmlContent, content) {
             className = className || null;
             idName = idName || null;
             htmlContent = htmlContent || null;
-            text = text || null;
+            content = content || null;
 
             return $('<' + tagName + '></' + tagName + '>', {
                 'id': idName,
                 'class': className,
-                html: htmlContent,
-                text: text
+                'html': htmlContent,
+                'text': content
             });
         };
 
-        self.toTop = function(content, speed) {
-            content.stop().animate({
-                'scrollTop': content.position().top
+        self.toTop = function($content, speed) {
+            $content.stop().animate({
+                'scrollTop': $content.position().top
             }, speed, 'swing');
         };
 
@@ -148,9 +143,22 @@
         };
 
         self.killEvent = function(el, eventType) {
-            el.on(eventType, function(e) {
+            $el.on(eventType, function(e) {
                 e.stopPropagation();
             });
+        };
+
+        self.scrollToView = function($el, speed) {
+            var scroll = $('body').scrollTop();
+            var height = $(window).height() - 200;
+
+            speed = speed || 300;
+
+            if ( scroll > height ) {
+                $el.fadeIn(speed);
+            } else if ( scroll < height ) {
+                $el.fadeOut(speed);
+            }
         };
 
         return self;

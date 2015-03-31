@@ -10,51 +10,50 @@
         var contentHolderClass = contentHolderClass || 'drm-accordion-nav-inner';
         var container = $('.' + containerClass);
 
-        var showDefaultContent = function() {
-            var expandedContent = $(container).find('.' + contentHolderClass +'[data-state=expanded]');
-
-            content.hide();
-            expandedContent.show();
+        var showDefaultContent = function($expandedContent, $content) {
+            $content.hide();
+            $expandedContent.show();
         };
 
-        var toggle = function(speed, openContent) {
-            var that = $(this);
-            var nextContent = that.next();
+        var toggle = function(speed, $openContent) {
+            var $that = $(this);
+            var $nextContent = $that.next();
 
-                openContent.slideUp(speed);
+                $openContent.slideUp(speed);
                 
-                if (nextContent.is(':hidden')) {
-                    nextContent.slideDown(speed);
+                if ($nextContent.is(':hidden')) {
+                    $nextContent.slideDown(speed);
                 } else {
-                    nextContent.slideUp(speed);
+                    $nextContent.slideUp(speed);
                 }
         };
 
-        var replaceIcons = function(openContent, iconClass, expandIconClass, collapseIconClass) {
-            var that = $(this);
-            var icon = that.find('.' + iconClass);
-            var openContentIcons = openContent.prev().find('.' + iconClass);
+        var replaceIcons = function($openContent, iconClass, expandIconClass, collapseIconClass) {
+            var $that = $(this);
+            var $icon = $that.find('.' + iconClass);
+            var $openContentIcons = $openContent.prev().find('.' + iconClass);
             
-            if ( icon.hasClass(expandIconClass) ) {
-                icon.removeClass(expandIconClass).addClass(collapseIconClass);
+            if ( $icon.hasClass(expandIconClass) ) {
+                $icon.removeClass(expandIconClass).addClass(collapseIconClass);
             } else {
-                icon.removeClass(collapseIconClass).addClass(expandIconClass);
+                $icon.removeClass(collapseIconClass).addClass(expandIconClass);
             }
 
-            openContentIcons.removeClass(collapseIconClass).addClass(expandIconClass);
+            $openContentIcons.removeClass(collapseIconClass).addClass(expandIconClass);
         };
 
         if ( container.length ) {
-            var label = container.children('ul').children('li').children('a');
-            var content = label.next('ul');
+            var $label = container.children('ul').children('li').children('a');
+            var $content = $label.next('ul');
+            var $expandedContent = container.find('.' + contentHolderClass +'[data-state=expanded]');
 
-            showDefaultContent();
+            showDefaultContent($expandedContent, $content);
 
-            label.on('click', function(e) {
-                var openContent = $(content).not(':hidden');
+            $label.on('click', function(e) {
+                var $openContent = $($content).not(':hidden');
                 
-                toggle.call(this, speed, openContent);
-                replaceIcons.call(this, openContent, iconClass, expandIconClass, collapseIconClass);
+                toggle.call(this, speed, $openContent);
+                replaceIcons.call(this, $openContent, iconClass, expandIconClass, collapseIconClass);
                 e.stopPropagation();
                 e.preventDefault();
             });

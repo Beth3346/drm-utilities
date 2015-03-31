@@ -5,30 +5,22 @@
         var self = {};
         var spec = params || {};
         var content = spec.content || $('body');
-        var speed = spec.speed || 300;
         var scrollSpeed = spec.scrollSpeed || 900;
 
-        self.addButton = function() {
-            var button = drm.createElement('button', 'back-to-top', null, '&#9652;');
+        addButton = function() {
+            var button = drm.createElement('button', 'back-to-top fa fa-caret-up');
             
             return button.appendTo('body').hide();
         };
 
-        self.showButton = function() {
-            scroll = $('body').scrollTop();
-            height = $(window).height();
-
-            if (scroll > height) {
-                self.backToTop.fadeIn(speed);
-            } else if (scroll < height) {
-                self.backToTop.fadeOut(speed);
-            }
-        };
-
         if ( content.length ) {
-            self.backToTop = self.addButton();
-            $(window).on('scroll', self.showButton);
-            self.backToTop.on('click', function() {
+            var backToTop = addButton();
+            
+            $(window).on('scroll', function() {
+                drm.scrollToView(backToTop);
+            });
+            
+            backToTop.on('click', function() {
                 drm.toTop(content, scrollSpeed);
             });
         }

@@ -12,16 +12,16 @@
 
         if ( self.container.length ) {
             self.container.on('click', self.button, function(e) {
-                var that = $(this),
-                    menu = that.next('ul'),
-                    openButtons = self.container.find('ul').not(':hidden').prev('button');
+                var $that = $(this);
+                var $menu = $that.next('ul');
+                var $openButtons = self.container.find('ul').not(':hidden').prev('button');
 
-                menu.slideDown(self.speed);
-                that.addClass(self.activeClass);
+                $menu.slideDown(self.speed);
+                $that.addClass(self.activeClass);
 
-                if ( openButtons.length ) {
-                    openButtons.removeClass(self.activeClass);
-                    openButtons.next('ul').slideUp(self.speed);
+                if ( $openButtons.length ) {
+                    $openButtons.removeClass(self.activeClass);
+                    $openButtons.next('ul').slideUp(self.speed);
                 }
                 
                 e.preventDefault();
@@ -29,11 +29,11 @@
             });
 
             $('body').on('click', function(e) {
-                var openButtons = self.container.find('ul').not(':hidden').prev('button');
+                var $openButtons = self.container.find('ul').not(':hidden').prev('button');
 
-                if ( openButtons.length ) {
-                    openButtons.removeClass(self.activeClass);
-                    openButtons.next('ul').slideUp(self.speed);
+                if ( $openButtons.length ) {
+                    $openButtons.removeClass(self.activeClass);
+                    $openButtons.next('ul').slideUp(self.speed);
                 }
 
                 e.stopPropagation();

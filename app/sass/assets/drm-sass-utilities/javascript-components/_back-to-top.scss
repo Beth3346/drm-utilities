@@ -13,7 +13,7 @@
     line-height: 0;
     @include drm-background-transparent($bk-color, 0.7);
     @include drm-square(50px, none, 3px);
-    @include drm-em-font(48);
+    @include drm-em-font(36);
 
     @include drm-breakpoint(mercury) {
         right: 10%;
