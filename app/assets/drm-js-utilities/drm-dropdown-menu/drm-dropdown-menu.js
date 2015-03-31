@@ -1,30 +1,29 @@
 (function($) {
     window.drmDropdownMenu = function(params) {
-        var self = {},
-            spec = params || {};
+        var self = {};
+        var spec = params || {};
+        var menuClass = spec.menuClass || 'drm-dropdown-nav';
+        var speed = spec.speed || 1000;
+        var $menu = $('.' + menuClass);
 
-        self.menuClass = spec.menuClass || 'drm-dropdown-nav';
-        self.speed = spec.speed || 1000;
-        self.menu = $('.' + self.menuClass);
-
-        self.showMenu = function() {
+        var showMenu = function() {
             $(this).children('ul').stop().fadeIn(300);
         };
 
-        self.hideMenu = function(speed) {
+        var hideMenu = function(speed) {
             $(this).children('ul').stop().fadeOut(speed);
         };
 
-        if ( self.menu.length ) {
-            self.listItem = self.menu.find('li:has(ul)');
+        if ( $menu.length ) {
+            $listItem = $menu.find('li:has(ul)');
 
-            self.listItem.on('mouseenter', self.showMenu);
+            $listItem.on('mouseenter', showMenu);
 
-            self.listItem.on('mouseleave', function() {
-                self.hideMenu.call(this, self.speed);
+            $listItem.on('mouseleave', function() {
+                hideMenu.call(this, speed);
             });
 
-            self.listItem.children('a').on('click', function(e) {
+            $listItem.children('a').on('click', function(e) {
                 e.preventDefault();
             });
         }

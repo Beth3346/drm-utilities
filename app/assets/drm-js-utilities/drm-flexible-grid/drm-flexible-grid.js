@@ -1,76 +1,59 @@
 (function($) {
 
     window.drmFlexibleGrid = function(params) {
-        var self = {},
-            spec = params || {};
+        var self = {};
+        var spec = params || {};
+        var gridClass = spec.gridClass || 'drm-flexible-grid';
+        var imagesPerRow = spec.imagesPerRow || 4;
+        var flex = spec.flex || true;
+        var $grid = $('.' + gridClass);
 
-        self.gridClass = spec.gridClass || 'drm-flexible-grid';
-        self.imagesPerRow = spec.imagesPerRow || 4;
-        self.flex = spec.flex || true;
-
-        self.grid = $('.' + self.gridClass);
-
-        self.getTags = function() {
-            var tags = [],
-                tagListItems = self.grid.find('ul.caption-tags li');
-
-            $.each(tagListItems, function(k, v) {
-                var tag = $(v).text();
-                
-                tags.push(tag);
-                
-                return $.unique(tags);
-            });
-
-            return tags;
-        };
-
-        self.addFilterButtons = function(tags) {
+        var addFilterButtons = function(tags) {
 
             $.each(tags, function(k, v) {
-                var tagButton = $('<button></button>', {
+                var $tagButton = $('<button></button>', {
                     'class': 'drm-grid-filter',
                     text: drm.captitalize(v),
                     'data-filter': v
                 });
 
-                tagButton.appendTo(self.gridNav);
+                $tagButton.appendTo($gridNav);
             });
 
-            self.gridNav.find('.drm-grid-filter').first().addClass('active');
+            $gridNav.find('.drm-grid-filter').first().addClass('active');
         };
 
-        self.resizeOverlay = function() {
-            var overlay = self.grid.find('.overlay');
+        var resizeOverlay = function() {
+            var overlay = $grid.find('.overlay');
 
             $.each(overlay, function(k, v) {
-                var that = $(v),
-                    imageHeight = that.parent('.drm-grid-item').find('img').outerHeight(true);
+                var $that = $(v),
+                    imageHeight = $that.parent('.drm-grid-item').find('img').outerHeight(true);
 
-                that.height(imageHeight).hide();
+                $that.height(imageHeight).hide();
             });
         };
 
-        self.addListItems = function(items) {
-            self.grid.empty();
-            items.appendTo(self.grid).hide(0, function() {
-                self.positionListItems(items);
+        var addListItems = function($items) {
+            $grid.empty();
+            $items.appendTo($grid).hide(0, function() {
+                positionListItems($items);
             });
         };
 
-        self.positionListItems = function(items) {
-            var resizeHolder = function(items) {
-                var tallestColumn = 0,
-                    columnHeights = [];
+        var positionListItems = function($items) {
+            var resizeHolder = function($items) {
+                var tallestColumn = 0;
+                var columnHeights = [];
 
-                for (var i = 0; i < self.imagesPerRow; i++) {
+                for (var i = 0; i < imagesPerRow; i++) {
                     columnHeights.push(0);
                 }
 
-                $.each(items, function(k, v) {
-                    var that = $(v),
-                        columnNum = that.data('column'),
-                        height = that.outerHeight(true);
+                $.each($items, function(k, v) {
+                    var $that = $(v);
+                    var columnNum = $that.data('column');
+                    var height = $that.outerHeight(true);
 
                     return columnHeights[columnNum] += height;
                 });
@@ -83,114 +66,113 @@
                     }
                 });
 
-                self.grid.css({'height': tallestColumn + 40});
+                $grid.css({'height': tallestColumn + 40});
             };
 
-            $.each(items, function(k, v) {
-                var that = $(v),
-                    index = k + 1,
-                    columnNum = ((index % self.imagesPerRow) === 0) ? self.imagesPerRow - 1 : ((index % self.imagesPerRow) - 1),
-                    prevImage = (index > self.imagesPerRow) ? self.grid.find('.drm-grid-item').eq(index - (self.imagesPerRow + 1)) : null;
+            $.each($items, function(k, v) {
+                var $that = $(v);
+                var index = k + 1;
+                var columnNum = ((index % imagesPerRow) === 0) ? imagesPerRow - 1 : ((index % imagesPerRow) - 1);
+                var $prevImage = (index > imagesPerRow) ? $grid.find('.drm-grid-item').eq(index - (imagesPerRow + 1)) : null;
 
-                that.attr('data-column', columnNum);
-                that.attr('data_num', index);
+                $that.attr('data-column', columnNum);
+                $that.attr('data_num', index);
 
-                if ((typeof prevImage !== 'undefined') && (prevImage !== null)) {
-                    var margin = prevImage.outerWidth(true) - prevImage.outerWidth(false),
-                        top = (index < ((self.imagesPerRow * 2) + 1)) ? prevImage.outerHeight(false) + margin : prevImage.outerHeight(false) + margin + prevImage.position().top;
-                        left = (prevImage.outerWidth(false) * columnNum) + (margin * columnNum);
+                if ((typeof $prevImage !== 'undefined') && ($prevImage !== null)) {
+                    var margin = $prevImage.outerWidth(true) - $prevImage.outerWidth(false),
+                        top = (index < ((self.imagesPerRow * 2) + 1)) ? $prevImage.outerHeight(false) + margin : $prevImage.outerHeight(false) + margin + $prevImage.position().top;
+                        left = ($prevImage.outerWidth(false) * columnNum) + (margin * columnNum);
 
-                    that.css({'top' : top, 'left' : left, 'position': 'absolute'});
+                    $that.css({'top' : top, 'left' : left, 'position': 'absolute'});
                 } else {
-                    that.css({'top' : 0, 'left' : 0, 'position': 'relative'});
+                    $that.css({'top' : 0, 'left' : 0, 'position': 'relative'});
                 }
 
-                that.show();
+                $that.show();
             });
 
-            resizeHolder(items);
+            resizeHolder($items);
         };
 
-        self.filterListItems = function(filter) {
+        var filterListItems = function(filter, $items) {
             // filter list items by tag
-            var filteredItems;
+            var $filteredItems;
                 
             filter = (window.location.hash) ? filter : 'all';
 
             window.location.hash = filter;
 
-            if ( ( $.inArray( filter, self.tags ) !== -1 ) || filter === 'all' ) {
+            if ( ( $.inArray( filter, tags ) !== -1 ) || filter === 'all' ) {
                 if ( filter === 'all' ) {
-                    filteredItems = self.items;
+                    $filteredItems = $items;
                 } else {
-                    filteredItems = self.items.has('ul.caption-tags li:containsNC(' + filter + ')');
+                    $filteredItems = $items.has('ul.caption-tags li:containsNC(' + filter + ')');
                 }
                 
-                self.addListItems(filteredItems);
+                addListItems($filteredItems);
             } else {
                 $('<p></p>', {
                     text: 'no items match'
-                }).appendTo(self.grid);
+                }).appendTo($grid);
             }
         };
 
-        if ( self.grid.length ) {
+        if ( $grid.length ) {
             var hash = window.location.hash;
 
-            self.gridNav = $('.drm-grid-nav');
-            self.items = self.grid.find('.drm-grid-item').hide();
+            $gridNav = $('.drm-grid-nav');
+            $items = $grid.find('.drm-grid-item').hide();
 
             $(window).load(function() {
                 var filter = hash ? hash.replace(/^#/, '') : null;
 
-                self.tags = self.getTags();
+                tags = drm.toArray($grid.find('ul.caption-tags li'));
 
-                self.addFilterButtons(self.tags);
-                self.filterListItems(filter);
+                addFilterButtons(tags);
+                filterListItems(filter, $items);
 
-                if (typeof filter !== 'undefined') {
-                    var activeButton = $('button.drm-grid-filter[data-filter=' + filter + ']');
+                if ( typeof filter !== 'undefined' ) {
+                    var $activeButton = $('button.drm-grid-filter[data-filter=' + filter + ']');
 
-                    activeButton.siblings('button').removeClass('active');
-                    activeButton.addClass('active');
+                    $activeButton.siblings('button').removeClass('active');
+                    $activeButton.addClass('active');
                 }
             });
 
-            if (self.flex === true) {
+            if ( flex === true ) {
                 $(window).resize(function() {
-                    self.positionListItems(self.items);
-                    self.resizeOverlay();
+                    positionListItems(items);
+                    resizeOverlay();
                 });
             }
 
-            $(window).load(self.resizeOverlay);
+            $(window).load(resizeOverlay);
 
-            self.grid.on('mouseenter', '.drm-grid-item', function() {
+            $grid.on('mouseenter', '.drm-grid-item', function() {
                 $(this).find('.overlay').stop().fadeIn('fast');
             });
 
-            self.grid.on('mouseleave', '.drm-grid-item', function() {
+            $grid.on('mouseleave', '.drm-grid-item', function() {
                 $(this).find('.overlay').stop().fadeOut('fast');
             });
 
-            self.gridNav.on('click', 'button.drm-grid-filter', function(e) {
-                var that = $(this),
-                    filter = that.data('filter').toLowerCase();
+            $gridNav.on('click', 'button.drm-grid-filter', function(e) {
+                var $that = $(this);
+                var filter = $that.data('filter').toLowerCase();
                 
-                self.filterListItems(filter);
-                that.siblings('button').removeClass('active');
-                that.addClass('active');
+                filterListItems(filter, $items);
+                $that.siblings('button').removeClass('active');
+                $that.addClass('active');
                 e.preventDefault();
             });
 
-            self.grid.on('click', '.caption-tags li', function(e) {
-                var that = $(this),
-                    filter = that.data('filter').toLowerCase();
+            $grid.on('click', '.caption-tags li', function(e) {
+                var filter = $(this).data('filter').toLowerCase();
                 
-                self.filterListItems(filter);
-                button = self.gridNav.find('button[data-filter=' + filter + ']');
-                button.siblings('button').removeClass('active');
-                button.addClass('active');
+                filterListItems(filter, $items);
+                $button = $gridNav.find('button[data-filter=' + filter + ']');
+                $button.siblings('button').removeClass('active');
+                $button.addClass('active');
                 e.preventDefault();
             });
         }

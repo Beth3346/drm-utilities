@@ -1,17 +1,16 @@
 (function($) {
     window.drmLightbox = function(params) {
-        var self = {},
-            spec = params || {};
+        var self = {};
+        var spec = params || {};
+        var $images = spec.images || $('ul.drm-lightbox-thumbnails');
+        var speed = spec.speed || 300;
 
-        self.images = spec.images || $('ul.drm-lightbox-thumbnails');
-        self.speed = spec.speed || 300;
+        var createThumbnails = function(list) {
+            var $links = list.find('a');
+            var thumbnailList = [];
+            var thumbnails = '';
 
-        self.createThumbnails = function(list) {
-            var links = list.find('a'),
-                thumbnailList = [],
-                thumbnails = '';
-
-            links.each(function() {
+            $links.each(function() {
                 thumbnailList.push($(this).attr('href'));
             });
 
@@ -22,110 +21,125 @@
             return thumbnails;
         };
 
-        self.createLightbox = function(thumbnails) {
-            var img = $(this).attr('href'),
-                imgVisible = $('<img></img>', {
-                    'class': 'img-visible',
-                    src: img,
-                    alt: 'thumbnail'
-                }),
-                close = $('<button></button>', {
-                    'class': 'close',
-                    text: 'x'
-                }),
-                thumbnailHtml = $('<ul></ul>', {
-                    'class': 'thumbnail-list',
-                    html: thumbnails
-                }),
-                nav = $('<div></div>', {
-                    'class': 'lightbox-nav',
-                    html: '<button class="prev" data-dir="prev"><i class="fa fa-caret-left"></i></button><button class="next" data-dir="next"><i class="fa fa-caret-right"></i></button>'
-                }),
-                lightboxHtml = $('<div></div>', {
-                    'class': 'drm-blackout'
-                });
+        var createLightbox = function(thumbnails, speed) {
+            var img = $(this).attr('href');
+            
+            var $imgVisible = $('<img></img>', {
+                'class': 'img-visible',
+                src: img,
+                alt: 'thumbnail'
+            });
 
-            lightboxHtml.hide().appendTo('body').fadeIn(300, function() {
-                close.appendTo(lightboxHtml);
-                imgVisible.appendTo(lightboxHtml);
-                nav.appendTo(lightboxHtml);
-                thumbnailHtml.appendTo(lightboxHtml);
+            var $close = $('<button></button>', {
+                'class': 'close',
+                text: 'x'
+            });
+
+            var $thumbnails = $('<ul></ul>', {
+                'class': 'thumbnail-list',
+                html: thumbnails
+            });
+
+            var $nav = $('<div></div>', {
+                'class': 'lightbox-nav',
+                html: '<button class="prev" data-dir="prev"><i class="fa fa-caret-left"></i></button><button class="next" data-dir="next"><i class="fa fa-caret-right"></i></button>'
+            });
+
+            var $lightbox = $('<div></div>', {
+                'class': 'drm-blackout'
+            });
+            
+            $lightbox.hide().appendTo('body').fadeIn(speed, function() {
+                $close.appendTo($lightbox);
+                $imgVisible.appendTo($lightbox);
+                $nav.appendTo($lightbox);
+                $thumbnails.appendTo($lightbox);
             });
         };
 
-        self.advanceImage = function(direction) {
-            var list = $('.thumbnail-list'),
-                currentImg = $('div.drm-blackout img.img-visible'),
-                currentImgSrc = currentImg.attr('src'),
-                currentThumb = list.find('img[src$="' + currentImgSrc + '"]').closest('li').index(),
-                len = list.find('li').length - 1,
-                nextImg,
-                nextImgIndex;
+        var advanceImage = function(direction) {
+            var $list = $('.thumbnail-list');
+            var $currentImg = $('div.drm-blackout img.img-visible');
+            var currentImgSrc = $currentImg.attr('src');
+            var $currentThumb = $list.find('img[src$="' + currentImgSrc + '"]').closest('li').index();
+            var len = $list.find('li').length - 1;
+            var $nextImg;
+            var nextImgIndex;
 
             if ( direction === 'prev' ) {
-                nextImgIndex = (currentThumb === 0) ? len : currentThumb - 1;
+                nextImgIndex = ($currentThumb === 0) ? len : $currentThumb - 1;
             } else {
-                nextImgIndex = (currentThumb === len) ? 0 : currentThumb + 1;
+                nextImgIndex = ($currentThumb === len) ? 0 : $currentThumb + 1;
             }
 
-            nextImg = list.find('li').eq(nextImgIndex).find('img').attr('src');
-            currentImg.fadeOut(self.speed, function() {
-                $(this).attr('src', nextImg).fadeIn(self.speed);
+            $nextImg = $list.find('li').eq(nextImgIndex).find('img').attr('src');
+            $currentImg.fadeOut(speed, function() {
+                $(this).attr('src', $nextImg).fadeIn(speed);
             });
         };
 
-        self.changeImage = function() {
-            var img = $(this).attr('href'),
-                oldImg = $('div.drm-blackout img.img-visible'),
-                oldImgSrc = oldImg.attr('src');
+        var changeImage = function() {
+            var img = $(this).attr('href');
+            var $oldImg = $('div.drm-blackout img.img-visible');
+            var oldImgSrc = $oldImg.attr('src');
 
-            if (oldImgSrc !== img) {
-                oldImg.fadeOut(self.speed, function() {
-                    $(this).attr('src', img).fadeIn(self.speed);
+            if ( oldImgSrc !== img ) {
+                $oldImg.fadeOut(speed, function() {
+                    $(this).attr('src', img).fadeIn(speed);
                 });
             }
         };
 
-        self.removeLightbox = function() {
-            $('div.drm-blackout').fadeOut(self.speed, function() {
+        var removeLightbox = function() {
+            $('div.drm-blackout').fadeOut(speed, function() {
                 $(this).remove();
             });
         };
 
-        if ( self.images.length > 0 ) {
-            var thumbnails = self.createThumbnails(self.images);
-                body = $('body');
+        if ( $images.length ) {
+            var thumbnails = createThumbnails($images);
+            var $body = $('body');
 
-            body.on('click', 'div.drm-backout img.img-visible', function(e) {
+            console.log($body);
+
+            $images.on('click', 'a', function(e) {
+                e.preventDefault();
+                createLightbox.call(this, thumbnails, speed);
+            });
+
+            $body.on('click', 'div.drm-blackout button.close', removeLightbox);
+            $body.on('click', 'div.drm-blackout', function(e) {
+                removeLightbox();
                 e.stopPropagation();
             });
 
-            self.images.on('click', 'a', function(e) {
-                e.preventDefault();
-                self.createLightbox.call(this, thumbnails);
-            });
-
-            body.on('click', 'div.drm-blackout button.close', self.removeLightbox);
-            body.on('click', 'div.drm-blackout', self.removeLightbox);
-            body.on('click', 'div.drm-blackout ul.thumbnail-list a', function(e) {
+            $body.on('click', 'div.drm-blackout ul.thumbnail-list a', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
-                self.changeImage.call(this);
+                changeImage.call(this);
             });
 
-            body.on('click', 'div.drm-blackout .lightbox-nav button', function(e) {
+            $body.on('click', 'div.drm-blackout .img-visible', function(e) {
+                e.stopPropagation();
+            });
+
+            $body.on('click', 'div.drm-blackout .lightbox-nav', function(e) {
+                e.stopPropagation();
+            });
+
+            $body.on('click', 'div.drm-blackout .lightbox-nav button', function(e) {
                 var direction = $(this).data('dir');
 
                 e.preventDefault();
                 e.stopPropagation();
-                self.advanceImage(direction);
+                advanceImage(direction);
             });
 
-            body.on('keydown', function(e) {
+            $body.on('keydown', function(e) {
                 if (e.which === 37) {   
-                    self.advanceImage('prev');
+                    advanceImage('prev');
                 } else if (e.which === 39) {
-                    self.advanceImage('next');
+                    advanceImage('next');
                 } 
             });
         }

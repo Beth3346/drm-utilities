@@ -1,60 +1,59 @@
 (function($) {
     window.drmOffscreenMenu = function(params) {
-        var self = {},
-            spec = params || {},
-            menuClass = spec.menuClass || 'drm-offscreen-menu',
-            buttonClass = spec.buttonClass || 'drm-menu-button',
-            contentClass = spec.contentClass || 'drm-offscreen-content',
-            state = spec.state || 'hide';
+        var self = {};
+        var spec = params || {};
+        var menuClass = spec.menuClass || 'drm-offscreen-menu';
+        var buttonClass = spec.buttonClass || 'drm-menu-button';
+        var contentClass = spec.contentClass || 'drm-offscreen-content';
+        var state = spec.state || 'hide';
+        var $menu = $('.' + menuClass);
 
-        self.toggleMenu = function(menuWidth, menu, holder) {
-            var menuPos = menu.css('left');
+        var toggleMenu = function(menuWidth, $menu, $holder) {
+            var menuPos = $menu.css('left');
 
             if ( menuPos === '0px' ) {
-                self.hideMenu(menuWidth, menu);
+                hideMenu(menuWidth, $menu);
             } else {
-                self.showMenu(menu, holder);
+                showMenu($menu, $holder);
             }
         };
 
-        self.showMenu = function(menu, holder) {
-            menu.animate({'left': '0'});
-            self.addScroll(menu, holder);
+        var showMenu = function($menu, $holder) {
+            $menu.animate({'left': '0'});
+            addScroll($menu, $holder);
         };
 
-        self.hideMenu = function(menuWidth, menu) {
-            menu.animate({'left': '-' + menuWidth});
+        var hideMenu = function(menuWidth, $menu) {
+            $menu.animate({'left': '-' + menuWidth});
         };
 
-        self.addScroll = function(menu, holder) {
-            var menuHeight = parseInt(menu.find('ul').css('height'), 10),
-                contentHeight = parseInt(holder.css('height'), 10);
+        var addScroll = function($menu, $holder) {
+            var menuHeight = parseInt($menu.find('ul').css('height'), 10),
+                contentHeight = parseInt($holder.css('height'), 10);
 
             if ( menuHeight > contentHeight ) {
-                menu.css({'overflow-y': 'scroll'});
+                $menu.css({'overflow-y': 'scroll'});
             }
         };
 
-        var menu = $('.' + menuClass),
-            menuPos = menu.css('left');
-
-        if ( menu.length ) {
-            var content = $('.' + contentClass),
-                button = $('.' + buttonClass),
-                menuWidth = menu.css('width');
+        if ( $menu.length ) {
+            var $content = $('.' + contentClass);
+            var $button = $('.' + buttonClass);
+            var menuWidth = $menu.css('width');
+            var menuPos = $menu.css('left');
 
             if ( state === 'hide' && menuPos === '0px' ) {
-                self.hideMenu(menuWidth, menu);
-                self.addScroll(menu, content);
+                hideMenu(menuWidth, $menu);
+                addScroll($menu, $content);
             }
 
-            content.on('click', function(e) {
-                self.hideMenu(menuWidth, menu);
+            $content.on('click', function(e) {
+                hideMenu(menuWidth, $menu);
                 e.stopPropagation();
             });
 
-            button.on('click', function(e) {
-                self.toggleMenu(menuWidth, menu, content);
+            $button.on('click', function(e) {
+                toggleMenu(menuWidth, $menu, $content);
                 e.preventDefault();
                 e.stopPropagation();
             });

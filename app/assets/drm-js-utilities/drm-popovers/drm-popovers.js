@@ -1,50 +1,50 @@
 (function($) {
     window.drmPopovers = function(params) {
-        var self = {},
-            spec = params || {},
-            holderClass = spec.holder || 'popover-holder',
-            holder = $('.' + holderClass);
-        
-        self.popoverClass = spec.popoverClass || 'drm-popover';
+        var self = {};
+        var spec = params || {};
+        var holderClass = spec.holder || 'popover-holder';
+        var $holder = $('.' + holderClass);
+        var popoverClass = spec.popoverClass || 'drm-popover';
 
-        self.togglePopover = function() {
-            var that = $(this),
-                popoverId = that.data('popover'),
-                popover = $('#' + popoverId);
+        var togglePopover = function() {
+            var $that = $(this);
+            var popoverId = $that.data('popover');
+            var $popover = $('#' + popoverId);
             
             // fade out any visible popovers
-            $('.' + self.popoverClass).not('#' + popoverId).not(':hidden').fadeOut();
-            popover.fadeToggle();
+            $('.' + popoverClass).not('#' + popoverId).not(':hidden').fadeOut();
+            $popover.fadeToggle();
 
-            checkPosition = function() {
+            var checkPosition = function() {
                 // reposition popover if its too close to the edge of the browser window
-                var that = $(this),
-                    positionLeft = that.position().left,
-                    offsetLeft = that.offset().left,
-                    positionTop = that.position().top,
-                    offsetTop = that.offset().top,
-                    popoverHeight = that.height();
+                var $that = $(this);
+                var positionLeft = $that.position().left;
+                var offsetLeft = $that.offset().left;
+                var positionTop = $that.position().top;
+                var offsetTop = $that.offset().top;
+                var popoverHeight = $that.height();
 
                 if ( offsetLeft < 0 ) {
-                    that.css('left', (Math.abs(offsetLeft) + 10) + positionLeft);
+                    $that.css('left', (Math.abs(offsetLeft) + 10) + positionLeft);
                 } else if ( offsetTop < 0 ) {
-                    that.css('bottom', (Math.abs(positionTop) - popoverHeight) - Math.abs(offsetTop));
+                    $that.css('bottom', (Math.abs(positionTop) - popoverHeight) - Math.abs(offsetTop));
                 }
             };
 
-            checkPosition.call(popover);
+            checkPosition.call($popover);
         };
 
-        if ( holder.length > 0 ) {
-            buttons = holder.find('button');
+        if ( $holder.length ) {
+            $buttons = $holder.find('button');
+
             $('body').on('click', '.' + holderClass + ' button', function(e) {
-                self.togglePopover.call(this);
+                togglePopover.call(this);
                 e.stopPropagation();
                 e.preventDefault();
             });
 
             $('body').on('click', function() {
-                holder.find('.' + self.popoverClass).fadeOut();
+                $holder.find('.' + popoverClass).fadeOut();
             });
         }
 

@@ -161,6 +161,18 @@
             }
         };
 
+        // create an array from jQuery object text
+        self.toArray = function($items) {
+            var arr = [];
+
+            $.each($items, function(key, value) {
+                arr.push($(value).text());
+                return $.unique(arr);
+            });
+
+            return arr;
+        };
+
         return self;
     };
 

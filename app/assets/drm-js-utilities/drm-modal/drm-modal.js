@@ -1,77 +1,75 @@
 (function($) {
     window.drmModal = function(params) {
-        var self = {},
-            spec = params || {};
-        
-        self.modalClass = spec.modalClass || 'drm-modal';
-        self.lightboxClass = spec.lightboxClass || 'drm-blackout';
-        self.closeClass = spec.closeClass || 'drm-modal-close';
+        var self = {};
+        var spec = params || {};
+        var modalClass = spec.modalClass || 'drm-modal';
+        var lightboxClass = spec.lightboxClass || 'drm-blackout';
+        var closeClass = spec.closeClass || 'drm-modal-close';
+        var buttonClass = spec.buttonClass || 'drm-modal-open';
+        var speed = spec.speed || 300;
+        var $modals = $('.' + modalClass);
 
-        var buttonClass = spec.buttonClass || 'drm-modal-open',
-            speed = spec.speed || 300,
-            modals = $('.' + self.modalClass);
-
-        self.createLightbox = function(speed, modal) {
-            var close = $('<button></button>', {
+        var createLightbox = function(speed, $modal) {
+            var $close = $('<button></button>', {
                     'class': 'close',
                     text: 'x'
-                }),
-                lightboxHtml = $('<div></div>', {
-                    'class': self.lightboxClass
-                });
+            });
+                
+            var $lightbox = $('<div></div>', {
+                    'class': lightboxClass
+            });
 
-            lightboxHtml.hide().appendTo('body').fadeIn(speed, function() {
-                console.log('showing lightbox');
-                close.appendTo(lightboxHtml);
-                modal.appendTo(lightboxHtml).show();
+            $lightbox.hide().appendTo('body').fadeIn(speed, function() {
+                $close.appendTo($lightbox);
+                $modal.appendTo($lightbox).show();
             });
         };
 
-        self.showModal = function(speed) {
-            var modalId = $(this).data('modal'),
-                modal = $('#' + modalId);
+        var showModal = function(speed) {
+            var modalId = $(this).data('modal');
+            var $modal = $('#' + modalId);
 
-            self.createLightbox(speed, modal);
+            createLightbox(speed, $modal);
         };
 
-        self.hideModal = function(speed) {
-            var lightbox = $('.' + self.lightboxClass),
-                modal = lightbox.find('.' + self.modalClass);
+        var hideModal = function(speed) {
+            var $lightbox = $('.' + lightboxClass);
+            var $modal = $lightbox.find('.' + modalClass);
 
-            lightbox.fadeOut(speed, function() {
-                modal.hide().appendTo('body');
+            $lightbox.fadeOut(speed, function() {
+                $modal.hide().appendTo('body');
                 $(this).remove();
             });
         }; 
 
-        if ( modals.length ) {
-            var body = $('body');
+        if ( $modals.length ) {
+            var $body = $('body');
             
-            modals.hide().appendTo('body');
+            $modals.hide().appendTo('body');
 
-            body.on('click', '.' + buttonClass, function(e) {
+            $body.on('click', '.' + buttonClass, function(e) {
                 e.preventDefault();
                 e.stopPropagation();
-                self.showModal.call(this, speed);
+                showModal.call(this, speed);
             });
 
-            $('.' + self.closeClass).on('click', function(e) {
+            $('.' + closeClass).on('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
-                self.hideModal();
+                hideModal();
             });
 
-            body.on('click', '.' + self.lightboxClass + ' .close', function(e) {
+            $body.on('click', '.' + lightboxClass + ' .close', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
-                self.hideModal();
+                hideModal();
             });
 
-            body.on('click', function() {
-                self.hideModal();
+            $body.on('click', function() {
+                hideModal();
             });
 
-            modals.on('click', function(e) {
+            $modals.on('click', function(e) {
                 e.stopPropagation();
             });
         }

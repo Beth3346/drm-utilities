@@ -1,59 +1,59 @@
 (function($) {
     window.drmPasswords = function(params) {
-        var self = {},
-            spec = params || {},
-            bl = [
-                'password',
-                'pass',
-                '1234',
-                'shadow',
-                '12345',
-                '123456',
-                'qwerty',
-                '1234',
-                'iloveyou',
-                'abc123',
-                '123456789',
-                '1234567890',
-                'adobe123',
-                '123123',
-                'admin',
-                'letmein',
-                'photoshop',
-                'monkey',
-                'sunshine',
-                'princess',
-                'password1',
-                'azerty',
-                'trustno1',
-                '000000',
-                'guest',
-                'default'
-            ],
-            fieldClass = spec.fieldClass || 'drm-password',
-            buttonClass = spec.buttonClass || 'drm-show-password',
-            blacklist = spec.blacklist || bl,
-            reqLength = spec.reqLength || 8,
-            showButtonText = spec.showButtonText || 'Show Password',
-            hideButtonText = spec.hideButtonText || 'Hide Password';
+        var self = {};
+        var spec = params || {};
+        var bl = [
+            'password',
+            'pass',
+            '1234',
+            'shadow',
+            '12345',
+            '123456',
+            'qwerty',
+            '1234',
+            'iloveyou',
+            'abc123',
+            '123456789',
+            '1234567890',
+            'adobe123',
+            '123123',
+            'admin',
+            'letmein',
+            'photoshop',
+            'monkey',
+            'sunshine',
+            'princess',
+            'password1',
+            'azerty',
+            'trustno1',
+            '000000',
+            'guest',
+            'default'
+        ];
+        var fieldClass = spec.fieldClass || 'drm-password';
+        var buttonClass = spec.buttonClass || 'drm-show-password';
+        var blacklist = spec.blacklist || bl;
+        var reqLength = spec.reqLength || 8;
+        var showButtonText = spec.showButtonText || 'Show Password';
+        var hideButtonText = spec.hideButtonText || 'Hide Password';
 
-        self.showPassword = function(field, button, showButtonText, hideButtonText) {
-            var fieldType = field.attr('type');
+        var showPassword = function($field, $button, showButtonText, hideButtonText) {
+            var fieldType = $field.attr('type');
 
             if ( fieldType === 'password' ) {
-                field.attr('type', 'text');
-                button.text(hideButtonText);
+                $field.attr('type', 'text');
+                $button.text(hideButtonText);
             } else {
-                field.attr('type', 'password');
-                button.text(showButtonText);
+                $field.attr('type', 'password');
+                $button.text(showButtonText);
             }
         };
 
-        self.generatePassword = function(length) {
+        var generatePassword = function(length) {
             var createPassword = function(length) {
                     var charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()+?~.,/{}[]+=_-';
                     var pass = drm.generateRandomString(length, charset);
-                    var strength = self.checkStrength(pass);
+                    var strength = checkStrength(pass);
 
                     if ( strength !== 'strong' || pass.length !== length ) {
                         return createPassword(length);
@@ -65,7 +65,7 @@
             return createPassword(length);
         };
 
-        self.checkStrength = function(password) {
+        var checkStrength = function(password) {
             // ensure that passwords contain a mixture of uppercase and lowercase letters, numbers, and special characters
             var stats = {};
 
@@ -87,51 +87,51 @@
             }
         };
 
-        self.createMessage = function(results, passwordLength, field) {
-            var passwordMessage = $('small.password-message'),
-                messageClass = 'password-message';
+        var createMessage = function(results, passwordLength, $field) {
+            var $passwordMessage = $('small.password-message');
+            var messageClass = 'password-message';
 
             if ( passwordLength === 0 ) {
-                passwordMessage.remove();
-            } else if ( passwordMessage.length === 0 && results.message !== null ) {
+                $passwordMessage.remove();
+            } else if ( $passwordMessage.length === 0 && results.message !== null ) {
                 $('<small></small>', {
                     text: results.message,
                     'class': 'password-message-' + results.status + ' ' + messageClass
-                }).hide().insertAfter(field).show();
+                }).hide().insertAfter($field).show();
             } else {
-                self.removeStatusClass(messageClass);
-                passwordMessage.text(results.message);
-                passwordMessage.addClass('password-message-' + results.status);
+                removeStatusClass(messageClass);
+                $passwordMessage.text(results.message);
+                $passwordMessage.addClass('password-message-' + results.status);
             }
         };
 
-        self.createMeter = function(results, passwordLength, field) {
-            var passwordMeter = $('p.password-meter'),
-                meterClass = 'password-meter';
+        var createMeter = function(results, passwordLength, $field) {
+            var $passwordMeter = $('p.password-meter');
+            var meterClass = 'password-meter';
 
             if ( passwordLength === 0 ) {
-                passwordMeter.remove();
-            } else if ( passwordMeter.length === 0 ) {
+                $passwordMeter.remove();
+            } else if ( $passwordMeter.length === 0 ) {
                 $('<p></p>', {
                     text: results.strength,
                     'class': 'password-meter-' + results.status + ' ' + meterClass 
-                }).hide().insertAfter(field).show();
+                }).hide().insertAfter($field).show();
             } else {
-                self.removeStatusClass(meterClass);
-                passwordMeter.text(results.strength);
-                passwordMeter.addClass('password-meter-' + results.status);
+                removeStatusClass(meterClass);
+                $passwordMeter.text(results.strength);
+                $passwordMeter.addClass('password-meter-' + results.status);
             }
         };
 
-        self.removeStatusClass = function(elementClass) {
-            var element = $('.' + elementClass);
+        var removeStatusClass = function(elementClass) {
+            var $element = $('.' + elementClass);
 
-            element.removeClass(elementClass + '-danger');
-            element.removeClass(elementClass + '-warning');
-            element.removeClass(elementClass + '-success');
+            $element.removeClass(elementClass + '-danger');
+            $element.removeClass(elementClass + '-warning');
+            $element.removeClass(elementClass + '-success');
         };
 
-        self.getStatus = function(results) {
+        var getStatus = function(results) {
             var status = {
                 message: null,
                 strength: null,
@@ -169,17 +169,17 @@
             return status;
         };
 
-        var field = $('.' + fieldClass);
-        var showButton = $('button.' + buttonClass);
-        var generateButton = $('button.drm-generate-password');
+        var $field = $('.' + fieldClass);
+        var $showButton = $('button.' + buttonClass);
+        var $generateButton = $('button.drm-generate-password');
 
-        showButton.on('click', function(e) {
+        $showButton.on('click', function(e) {
             e.preventDefault();
-            self.showPassword(field, $(this), showButtonText, hideButtonText);
+            showPassword($field, $(this), showButtonText, hideButtonText);
         });
 
-        field.on('keyup', drm.throttle(function() {
-            var password = drm.getValue(field);
+        $field.on('keyup', drm.throttle(function() {
+            var password = drm.getValue($field);
             var passwordLength = password.length;
             var results = {
                     blacklist: null,
@@ -190,21 +190,21 @@
 
             results.blacklist = drm.checkBlacklist(password, blacklist);
             results.length = drm.checkLength(password, reqLength);
-            results.complexity = self.checkStrength(password);
+            results.complexity = checkStrength(password);
             
-            status = self.getStatus(results);
+            status = getStatus(results);
 
-            self.createMessage(status, passwordLength, field);
-            self.createMeter(status, passwordLength, field);
+            createMessage(status, passwordLength, $field);
+            createMeter(status, passwordLength, $field);
         }, 500));
 
-        generateButton.on('click', function() {
-            var passHolder = $('.password-holder').empty();
-            var newPassword = self.generatePassword(reqLength);
+        $generateButton.on('click', function() {
+            var $passHolder = $('.password-holder').empty();
+            var newPassword = generatePassword(reqLength);
 
             $('<p></p>', {
                 text: newPassword
-            }).appendTo(passHolder);
+            }).appendTo($passHolder);
         });
 
         return self;

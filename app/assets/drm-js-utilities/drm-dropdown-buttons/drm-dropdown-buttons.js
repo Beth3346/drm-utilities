@@ -1,27 +1,25 @@
 (function($) {
     window.drmDropdownButton = function(params) {
-        var self = {},
-            spec = params || {};
+        var self = {};
+        var spec = params || {};
+        var containerClass = spec.containerClass || 'drm-dropdown-solid-btn-holder';
+        var speed = spec.speed || 300;
+        var button = spec.button || 'button';
+        var activeClass = spec.activeClass || 'clicked';
+        var $container = $('.' + containerClass);
 
-        self.containerClass = spec.containerClass || 'drm-dropdown-solid-btn-holder';
-        self.speed = spec.speed || 300;
-        self.button = spec.button || 'button';
-        self.activeClass = spec.activeClass || 'clicked';
-
-        self.container = $('.' + self.containerClass);
-
-        if ( self.container.length ) {
-            self.container.on('click', self.button, function(e) {
+        if ( $container.length ) {
+            $container.on('click', button, function(e) {
                 var $that = $(this);
                 var $menu = $that.next('ul');
-                var $openButtons = self.container.find('ul').not(':hidden').prev('button');
+                var $openButtons = $container.find('ul').not(':hidden').prev('button');
 
-                $menu.slideDown(self.speed);
-                $that.addClass(self.activeClass);
+                $menu.slideDown(speed);
+                $that.addClass(activeClass);
 
                 if ( $openButtons.length ) {
-                    $openButtons.removeClass(self.activeClass);
-                    $openButtons.next('ul').slideUp(self.speed);
+                    $openButtons.removeClass(activeClass);
+                    $openButtons.next('ul').slideUp(speed);
                 }
                 
                 e.preventDefault();
@@ -29,11 +27,11 @@
             });
 
             $('body').on('click', function(e) {
-                var $openButtons = self.container.find('ul').not(':hidden').prev('button');
+                var $openButtons = $container.find('ul').not(':hidden').prev('button');
 
                 if ( $openButtons.length ) {
-                    $openButtons.removeClass(self.activeClass);
-                    $openButtons.next('ul').slideUp(self.speed);
+                    $openButtons.removeClass(activeClass);
+                    $openButtons.next('ul').slideUp(speed);
                 }
 
                 e.stopPropagation();
