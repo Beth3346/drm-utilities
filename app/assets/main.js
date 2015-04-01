@@ -74,3 +74,12 @@
     drmSimpleSlider({effect: 'fade'});
     drmSimpleSlider({sliderClass: 'drm-simple-slider-2', effect: 'slide-left'});
 })();
+
+(function() {
+    console.log(drm.parseTime('11:05 pm'));
+    console.log(drm.cleanAlpha('The Tempest'));
+    console.log(drm.cleanAlpha("A Midsummer Night's Dream"));
+    console.log(drm.sortValues('Beth', 'Foby'));
+    console.log(drm.sortValues('Dog', 'Cat'));
+    console.log(drm.sortValues('Dog', 'Dog'));
+})();

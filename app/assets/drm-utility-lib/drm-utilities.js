@@ -82,6 +82,59 @@
         self.getValue = function($field) {
             return $.trim($field.val());
         };
+
+        // converts a time string to 24hr time
+        self.parseTime = function(time) {
+            var hour = parseInt(self.patterns.hour.exec(time)[1], 10);
+            var minutes = self.patterns.minute.exec(time)[1];
+            var ampm = self.patterns.ampm.exec(time)[1].toLowerCase();
+
+            if ( ampm === 'am' ) {
+                hour = hour.toString();
+                
+                if ( hour === '12' ) {
+                    hour = '0';
+                } else if ( hour.length === 1 ) {
+                    hour = '0' + hour;
+                }
+
+                return hour + ':' + minutes;
+
+            } else if ( ampm === 'pm' ) {
+                return (hour + 12) + ':' + minutes;
+            }
+        };
+
+        // removes leading 'the' or 'a' from a string
+        self.cleanAlpha = function(str, ignoreWords) {
+            ignoreWords = ignoreWords || ['the', 'a'];
+
+            $.each(ignoreWords, function() {
+                var re = new RegExp("^" + this + "\\s", 'i');
+                str = str.replace(re, '');
+
+                return str;
+            });
+
+            return str;
+        };
+
+        // test for alpha values and perform alpha sort
+        self.sortValues = function(a, b, dir) {
+            dir = dir || 'ascending';
+
+            if ( drm.patterns.alpha.test(a) ) {
+                if ( a < b ) {
+                    return ( dir === 'ascending' ) ? -1 : 1;
+                } else if ( a > b ) {
+                    return ( dir === 'ascending' ) ? 1 : -1;
+                } else if ( a === b ) {
+                    return 0;
+                }
+            } else {
+                return ( dir === 'ascending' ) ? a - b : b - a;
+            }
+        };
         
         self.throttle = function(fn, threshold, scope) {
             var last,
@@ -160,13 +213,19 @@
             }
         };
 
-        // create an array from jQuery object text
-        self.toArray = function($items) {
+        // create an array of unique items from jQuery object text
+        self.toArray = function($items, unique) {
             var arr = [];
+            unique = unique || false;
 
             $.each($items, function(key, value) {
                 arr.push($(value).text());
-                return $.unique(arr);
+
+                if ( unique ) {
+                    return $.unique(arr);    
+                } else {
+                    return arr;
+                }
             });
 
             return arr;
