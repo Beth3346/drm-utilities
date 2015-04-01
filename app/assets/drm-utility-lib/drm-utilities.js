@@ -116,18 +116,9 @@
             });
         };
 
-        self.createElement = function(tagName, className, idName, htmlContent, content) {
-            className = className || null;
-            idName = idName || null;
-            htmlContent = htmlContent || null;
-            content = content || null;
-
-            return $('<' + tagName + '></' + tagName + '>', {
-                'id': idName,
-                'class': className,
-                'html': htmlContent,
-                'text': content
-            });
+        self.createElement = function(tagName, attrs) {
+            attrs = attrs || {};
+            return $('<' + tagName + '></' + tagName + '>', attrs);
         };
 
         self.toTop = function($content, speed) {
@@ -142,10 +133,18 @@
             });
         };
 
-        self.killEvent = function(el, eventType) {
-            $el.on(eventType, function(e) {
-                e.stopPropagation();
-            });
+        self.killEvent = function($el, eventType, selector) {
+            selector = selector || null;
+
+            if ( selector === null ) {
+                $el.on(eventType, function(e) {
+                    e.stopPropagation();
+                });                
+            } else {
+                $el.on(eventType, selector, function(e) {
+                    e.stopPropagation();
+                });                  
+            }
         };
 
         self.scrollToView = function($el, speed) {

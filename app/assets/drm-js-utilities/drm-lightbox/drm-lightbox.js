@@ -24,28 +24,28 @@
         var createLightbox = function(thumbnails, speed) {
             var img = $(this).attr('href');
             
-            var $imgVisible = $('<img></img>', {
+            var $imgVisible = drm.createElement('img', {
                 'class': 'img-visible',
-                src: img,
-                alt: 'thumbnail'
+                'src': img,
+                'alt': 'thumbnail'
             });
 
-            var $close = $('<button></button>', {
+            var $close = drm.createElement('button', {
                 'class': 'close',
                 text: 'x'
             });
 
-            var $thumbnails = $('<ul></ul>', {
+            var $thumbnails = drm.createElement('ul', {
                 'class': 'thumbnail-list',
                 html: thumbnails
             });
 
-            var $nav = $('<div></div>', {
+            var $nav = drm.createElement('div', {
                 'class': 'lightbox-nav',
                 html: '<button class="prev" data-dir="prev"><i class="fa fa-caret-left"></i></button><button class="next" data-dir="next"><i class="fa fa-caret-right"></i></button>'
             });
 
-            var $lightbox = $('<div></div>', {
+            var $lightbox = drm.createElement('div', {
                 'class': 'drm-blackout'
             });
             
@@ -100,8 +100,6 @@
             var thumbnails = createThumbnails($images);
             var $body = $('body');
 
-            console.log($body);
-
             $images.on('click', 'a', function(e) {
                 e.preventDefault();
                 createLightbox.call(this, thumbnails, speed);
@@ -119,13 +117,8 @@
                 changeImage.call(this);
             });
 
-            $body.on('click', 'div.drm-blackout .img-visible', function(e) {
-                e.stopPropagation();
-            });
-
-            $body.on('click', 'div.drm-blackout .lightbox-nav', function(e) {
-                e.stopPropagation();
-            });
+            drm.killEvent($body, 'click', 'div.drm-blackout .img-visible');
+            drm.killEvent($body, 'click', 'div.drm-blackout .lightbox-nav');
 
             $body.on('click', 'div.drm-blackout .lightbox-nav button', function(e) {
                 var direction = $(this).data('dir');

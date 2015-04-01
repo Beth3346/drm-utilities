@@ -4,24 +4,20 @@
     window.drmBackToTop = function(params) {
         var self = {};
         var spec = params || {};
-        var content = spec.content || $('body');
         var scrollSpeed = spec.scrollSpeed || 900;
+        var $content = spec.content || $('body');
 
-        addButton = function() {
-            var button = drm.createElement('button', 'back-to-top fa fa-caret-up');
-            
-            return button.appendTo('body').hide();
-        };
-
-        if ( content.length ) {
-            var backToTop = addButton();
+        if ( $content.length ) {
+            var $backToTop = drm.createElement('button', {
+                'class': 'back-to-top fa fa-caret-up'
+            }).appendTo('body').hide();
             
             $(window).on('scroll', function() {
-                drm.scrollToView(backToTop);
+                drm.scrollToView($backToTop);
             });
             
-            backToTop.on('click', function() {
-                drm.toTop(content, scrollSpeed);
+            $backToTop.on('click', function() {
+                drm.toTop($content, scrollSpeed);
             });
         }
 
