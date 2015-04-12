@@ -1,0 +1,88 @@
+/*-----------------------------------------------------------------------------
+    Form Validation
+-----------------------------------------------------------------------------*/
+
+@mixin elr-form-status($color) {
+        background-color: lighten($color, 30%);
+        border: 1px solid $color;
+
+        &:hover {
+            border: 1px solid $color;
+            box-shadow: 0 0 2px $color;
+            transition: border .5s ease-in, box-shadow .5s ease-in;
+        }
+
+        &:focus {
+            outline: none;
+            border: 1px solid darken($color, 20%);
+            background-color: white;
+            transition: border .5s ease-in, background .5s ease-in;
+        }    
+}
+
+@mixin elr-form-state($glow: $elr-blue, $bk-color: $lightest-grey, $border: $grey) {
+    background-color: $bk-color;
+    border: 1px solid $border;
+    transition: border .5s ease-out, box-shadow .5s ease-out;
+
+    &:hover {
+        border: 1px solid $glow;
+        box-shadow: 0 0 2px $glow;
+        transition: border .5s ease-in, box-shadow .5s ease-in;
+    }
+
+    &:focus {
+        outline: none;
+        border: 1px solid darken($border, 20%);
+        background-color: lighten($bk-color, 20%);
+        transition: border .5s ease-in, background .5s ease-in;
+    }
+
+    &.elr-form-success {
+        @include elr-form-status($success-color);
+    }
+
+    &.elr-form-warning {
+        @include elr-form-status($warning-color);
+    }
+
+    &.elr-form-danger {
+        @include elr-form-status($danger-color);
+    }
+
+    &[disabled] {
+        background-color: darken($bk-color, 10%);
+        border: 1px solid darken($border, 10%); 
+        transition: none;
+
+        &:hover {
+            cursor: not-allowed;
+            border:  1px solid darken($border, 10%);
+            box-shadow: none;
+            transition: none;
+        }
+
+        &:focus {
+            outline: none;
+            border:  1px solid darken($border, 10%);
+            background-color: darken($bk-color, 10%);
+            transition: none;
+        }
+    }
+}
+
+@mixin elr-form-notice($type: 'info', $font-size: 12) {
+    margin: 5px 0;
+    padding: 0;
+    @include elr-em-font($font-size);
+
+    @if $type == 'success' {
+        color: $success-color;
+    } @elseif $type == 'warning' {
+        color: $warning-color;
+    } @elseif $type == 'danger' {
+        color: $danger-color;
+    } @else {
+        color: $info-color;
+    }
+}

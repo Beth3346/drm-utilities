@@ -1,0 +1,241 @@
+/*-----------------------------------------------------------------------------
+    JavaScript Examples
+-----------------------------------------------------------------------------*/
+
+.elr-accordion {
+    max-width: 800px;
+    @include elr-accordion($main-color, 5px);
+}
+
+.back-to-top {
+    @include elr-back-to-top();
+}
+
+.elr-back-to-top-content {
+    padding: 0;
+    margin: 0;
+}
+
+@include elr-calendar();
+
+.elr-dropdown-nav {
+    margin-bottom: 200px;
+    @include elr-dropdown-nav($background-color, $main-color, $background-color);
+}
+
+.elr-dropdown-solid-btn-holder {
+    margin: 20px 0;
+    @include elr-dropdown-button-solid($main-color, $background-color, 200px, $main-color, 3px);
+
+    button {
+        @include elr-em-font(14);
+    }
+}
+
+.elr-dropdown-split-btn-holder {
+    margin: 20px 0;
+    @include elr-dropdown-button-split($main-color, $background-color, 3px, $main-color, $light-grey, 200px);
+
+    button {
+        @include elr-em-font(14);
+    }
+}
+
+.elr-lightbox-thumbnails {
+    @include elr-thumbnail-list();
+}
+
+.elr-blackout {
+    @include elr-lightbox-slideshow();
+}
+
+.elr-modal-demo-buttons {
+    margin: 10px auto;
+    width: 350px;
+    @include elr-button-group($main-color, $background-color, 3px, $main-color);
+}
+
+.elr-modal {
+    display: none;
+    @include elr-modals();
+}
+
+.popover-holder {
+    position: relative;
+    width: 200px;
+    margin: 0 auto 20px auto;
+
+    button {
+        @include elr-button-solid($main-color, $background-color, 200px, center, 3px, $main-color, inline-block);
+        @include elr-em-font(14);
+    }
+}
+
+.elr-popover-bottom {
+    @include elr-popover(bottom);
+}
+
+.elr-popover-top {
+    @include elr-popover(top);
+}
+
+.elr-popover-left {
+    @include elr-popover(left);
+}
+
+.elr-popover-right {
+    @include elr-popover(right);
+}
+
+.elr-offscreen-menu {
+    @include elr-offscreen-menu($main-color);  
+}
+
+.elr-menu-button {
+    border: none;
+    background-color: $text-color;
+    color: $background-color;
+    padding: 5px 10px;
+    @include elr-em-font(18);
+
+    &:hover {
+        cursor: pointer;
+        background-color: $background-color;
+        color: $text-color;
+    }
+}
+
+.elr-offscreen-nav {
+    width: 100%;
+    padding: 10px;
+    background-color: $text-color;
+}
+
+.elr-offscreen-content {
+    width: 95%;
+    margin: 2px auto;
+    position: relative;
+    background-color: $background-color;
+    overflow: hidden;
+    border: 1px solid $light-grey;
+    @include elr-clearfix;
+
+    p {     
+        padding: 10px 20px;
+    }
+}
+
+.elr-simple-slider {
+    @include elr-simple-slider;
+}
+
+.elr-simple-slider-2 {
+    @include elr-simple-slider;
+}
+
+.elr-sticky-nav {
+    &.sticky-top {
+        @include elr-sticky-menu('top');          
+    }
+
+    ul {
+        @include elr-nav-bar-pills;
+    }   
+}
+
+.elr-sticky-sidebar {
+    padding: 0;
+    margin: 0;
+    width: 25%;
+    float: left;
+
+    &.sticky-left {
+        @include elr-sticky-menu('left');
+
+        @include elr-breakpoint(mercury) {            
+            width: 250px;
+        }
+        
+        @include elr-breakpoint(venus) {
+            width: 200px;
+        }
+    }
+
+    ul {
+        @include elr-nav-bar-pills-solid-stacked($background-color, $main-color, left, $main-color);
+    }
+}
+
+.sticky-sidebar-content {
+    margin: 0;
+    width: 75%;
+    padding: 0 1% 0 2%;
+    float: right;
+
+    section:first-child {
+        margin-top: 0;
+        padding-top: 0;
+    }
+}
+
+.elr-tab-holder {
+    @include elr-tabbed-content();
+}
+
+.elr-tab-list {
+    @include elr-tab-list();
+}
+
+span.elr-has-tooltip {
+    text-decoration: underline;
+    color: $main-color;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.elr-tooltip-left {
+    @include elr-tooltip(left, $text-color, $background-color, 100px);
+}
+
+.elr-tooltip-right {
+    @include elr-tooltip(right, $text-color, $background-color, 100px);
+}
+
+.elr-tooltip-top {
+    @include elr-tooltip(top, $text-color, $background-color, 100px);
+}
+
+.elr-tooltip-bottom {
+    @include elr-tooltip(bottom, $text-color, $background-color, 100px);
+}
+
+.elr-sortable-table {
+    @include elr-table-rounded($background-color, $text-color, $link-color, $light-grey, $lightest-grey);
+}
+
+.elr-flexible-grid {
+    @include elr-flexible-grid(4, true);
+}
+
+.elr-select {
+    @include elr-select-control(200px);
+}
+
+.password-holder {
+    background-color: $lightest-grey;
+    border: 1px solid $grey;
+    border-radius: 3px;
+    padding: 0 10px;
+    width: 100%;
+    height: 30px;
+    margin-bottom: 5px;
+
+    p {
+        margin: 0;
+        padding: 0;
+        line-height: 30px;
+        @include elr-em-font(14);
+    }
+}

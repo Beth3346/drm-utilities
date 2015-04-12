@@ -1,5 +1,4 @@
-drm-utilities
-=============
+# ELR Utilities
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
-Examples of what drm-utilities can do
+Examples of what elr-utilities can do

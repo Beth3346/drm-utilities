@@ -1,0 +1,35 @@
+/*-----------------------------------------------------------------------------
+    Heading Classes
+-----------------------------------------------------------------------------*/
+
+@mixin elr-heading-classes() {
+    h1, h2, h3, h4, h5, h6 {
+        margin: 0;
+        padding: 5px 0;
+        font-weight: normal;
+    }
+
+    h1 {
+        @include elr-em-font(30);
+    }
+
+    h2 {
+        @include elr-em-font(26);
+    }
+
+    h3 {
+        @include elr-em-font(18);
+    }
+
+    h4 {
+        @include elr-em-font(16);   
+    }
+
+    h5 {
+        @include elr-em-font(14);
+    }
+
+    h6 {
+        @include elr-em-font(12);
+    }
+}

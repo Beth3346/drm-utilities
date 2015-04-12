@@ -1,0 +1,81 @@
+/*-----------------------------------------------------------------------------
+    Dropdown Nav Menu
+-----------------------------------------------------------------------------*/
+
+@mixin elr-dropdown-nav($text-color: white, $background-color: $link-color, $divider-color: $light-grey) {
+    @include elr-nav-bar-solid();
+
+    li {
+        position: relative;
+
+        a {
+            padding-left: 20px;
+            padding-right: 20px;
+        }   
+
+        > ul {
+            color: $text-color;
+            position: absolute;
+            min-width: 130px;
+            width: 120%;
+            display: none;
+            z-index: 100;
+            @include elr-nav-bar-solid-stacked($text-color, $background-color, left);
+
+            &.col-two {
+                min-width: 130px * 2;
+
+                > li {
+                    float: left;
+                    width: (100% / 2);
+                }
+            }
+
+            &.col-three {
+                min-width: 130px * 3;
+
+                > li {
+                    float: left;
+                    width: (100% / 3);
+                }
+            }
+
+            > li ul {
+                display: none;
+                position: absolute;
+                left: 100%;
+                top: 0;
+                z-index: 100;
+                background-color: $background-color;
+            }
+        }
+    }
+
+    .carat {
+        position: relative;
+        padding-right: 25px;
+        
+        &:after {
+            content: "\25BE";
+            position: absolute;
+            right: 8%;
+            font-weight: bold;
+            line-height: 1.9em;
+            font-size: 12px;
+        }
+    }
+
+    .carat-right {
+        position: relative;
+        padding-right: 25px;
+        
+        &:after {
+            content: "\25B8";
+            position: absolute;
+            right: 8%;
+            font-weight: bold;
+            line-height: 1.9em;
+            font-size: 12px;
+        }
+    }
+}

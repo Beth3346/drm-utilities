@@ -94,14 +94,14 @@ module.exports = function(grunt) {
 
             dist: {
                 // the files to concatenate
-                src: ['<%= distFolder %>assets/jquery.js', '<%= appFolder %>assets/drm-utility-lib/**/*.js', '<%= distFolder %>assets/drm-js-utilities/**/*.js', '<%= distFolder %>assets/main.js', '<%= distFolder %>js/coffee-compiled/*.js'],
+                src: ['<%= distFolder %>assets/jquery.js', '<%= appFolder %>assets/elr-utility-lib/**/*.js', '<%= distFolder %>assets/elr-js-utilities/**/*.js', '<%= distFolder %>assets/main.js', '<%= distFolder %>js/coffee-compiled/*.js'],
                 // the location of the resulting JS file
                 dest: '<%= distFolder %>js/<%= pkg.name %>.<%= pkg.version %>.js'
             }
         },
 
         jshint: {
-            files: ['<%= distFolder %>js/coffee-compiled/*.js', '<%= appFolder %>assets/drm-js-utilities/**/*.js', '<%= appFolder %>assets/main.js', '<%= appFolder %>assets/drm-utility-lib/**/*.js'],
+            files: ['<%= distFolder %>js/coffee-compiled/*.js', '<%= appFolder %>assets/elr-js-utilities/**/*.js', '<%= appFolder %>assets/main.js', '<%= appFolder %>assets/elr-utility-lib/**/*.js'],
             options: {
                 maxerr: 10,
                 unused: true,
@@ -220,7 +220,7 @@ module.exports = function(grunt) {
 
             scripts: {
                 // We watch and compile sass files as normal but don't live reload here
-                files: ['<%= distFolder %>assets/jquery.js', '<%= appFolder %>assets/drm-utility-lib/**/*.js', '<%= distFolder %>assets/drm-js-utilities/**/*.js', '<%= distFolder %>assets/main.js','<%= appFolder %>coffee/**/*.coffee'],
+                files: ['<%= distFolder %>assets/jquery.js', '<%= appFolder %>assets/elr-utility-lib/**/*.js', '<%= distFolder %>assets/elr-js-utilities/**/*.js', '<%= distFolder %>assets/main.js','<%= appFolder %>coffee/**/*.coffee'],
                 tasks: [ 'coffee', 'concat', 'jshint' ],
             },
 

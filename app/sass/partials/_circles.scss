@@ -5,17 +5,17 @@
 .circle {
     margin-top: 20px;
     background-color: $main-color;
-    @include drm-circle(200px);
+    @include elr-circle(200px);
 }
 
 .ellipse {
     margin-top: 20px;
     background-color: $main-color;
-    @include drm-ellipse(200px, 150px);
+    @include elr-ellipse(200px, 150px);
 }
 
 .ellipse-tall {
     margin-top: 20px;
     background-color: $main-color;
-    @include drm-ellipse(150px, 200px);
+    @include elr-ellipse(150px, 200px);
 }

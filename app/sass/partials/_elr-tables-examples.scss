@@ -1,0 +1,19 @@
+/*-----------------------------------------------------------------------------
+    Tables Examples
+-----------------------------------------------------------------------------*/
+
+.elr-table {
+    @include elr-table-base();
+}
+
+.elr-table-bordered {    
+    @include elr-table($background-color, $text-color, $link-color, $light-grey, $lightest-grey);
+}
+
+.elr-table-rounded {    
+    @include elr-table-rounded($background-color, $text-color, $link-color, $light-grey, $lightest-grey);
+}
+
+.elr-table-dark {    
+    @include elr-table-rounded(#222, $background-color, $link-color, $almost-black, $text-color);
+}

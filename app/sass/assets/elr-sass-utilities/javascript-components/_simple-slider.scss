@@ -1,0 +1,127 @@
+/*-----------------------------------------------------------------------------
+    Simple Slider
+-----------------------------------------------------------------------------*/
+
+@mixin elr-simple-slider($width: 700px, $height: 350px) {
+    margin: 50px auto 0 auto;
+    z-index: 0;
+    position: relative;
+    width: $width;
+    height: $height;
+    overflow: hidden;
+
+    &.slide-left {
+        .elr-simple-slide {
+            float: left;
+        }
+    }
+    
+    @include elr-clearfix;
+
+    .elr-simple-slide-holder {  
+        padding: 0;
+        margin: 0;
+        position: relative;
+        width: $width;
+        height: $height;
+        @include elr-clearfix;
+    }
+
+    .elr-simple-slide {
+        padding: 0;
+        margin: 0;
+        z-index: 0;
+        width: $width;
+        height: $height;
+
+        figure {
+            padding: 0;
+            margin: 0;
+            position: relative;
+            @include elr-square(100%);
+
+            img {
+                @include elr-square(100%);
+            }
+
+            figcaption {
+                position: absolute;
+                top: 75%;
+                left: 0;
+                color: $dark-grey;
+                padding: 10px 10px 10px 20px;
+                margin: 0;
+                width: 80%;
+                font-weight: bold;
+                @include elr-background-transparent(white, 0.5);
+            }
+        }
+    }   
+
+    .elr-simple-slider-list {
+        padding: 0;
+        margin: 0;
+        position: absolute;
+        text-align: center;
+        z-index: 1;
+        width: $width;
+        bottom: 10px;
+
+        li {
+            margin: 0 1px;
+            padding: 0;
+            display: inline-block;
+             
+        }
+
+        button {
+            padding: 0;
+            margin: 0;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            @include elr-circle(10px);
+            @include elr-background-transparent(white, 0.5);
+
+            &:hover, &:focus {
+                background-color: white;
+            }
+
+            &.active {
+                background-color: $link-color;
+            }
+        }
+    }
+
+    .elr-simple-slider-nav {
+        margin: 0;
+        padding: 0;
+        z-index: 1;
+        width: $width;
+        @include elr-vertically-center($height, 64px);
+        @include elr-clearfix;
+
+        button {
+            padding: 0;
+            margin: 0;
+            border: none;
+            cursor: pointer;
+            background-color: white;
+            background-color: rgba(white, .5);
+            @include elr-square(64px);
+
+            &:hover, &:focus {
+                background-color: white;
+                background-color: rgba(white, .8);
+            }
+        }
+
+        .elr-simple-slide-prev {
+            float: left;
+        }
+
+        .elr-simple-slide-next {
+            float: right;
+        }
+    }
+}

@@ -1,0 +1,54 @@
+/*-----------------------------------------------------------------------------
+    Pagination
+-----------------------------------------------------------------------------*/
+
+@mixin elr-pagination-bar($background-color: white, $border-radius: 5px, $border-color: $light-grey, $color: $link-color, $font-size: 12) {
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    display: inline-block;
+    background-color: $background-color;
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        @include elr-clearfix;
+
+        li {
+            display: block;
+            padding: 0;
+            margin: 0;
+            float: left;
+
+            &:last-child a {
+                border-right: none;
+                border-radius: 0 $border-radius $border-radius 0;
+            }
+
+            a {
+                display: inline-block;
+                text-decoration: none;
+                padding: 10px 15px;
+                border-right: 1px solid $border-color;
+                color: $color;
+                @include elr-em-font($font-size);
+
+                &:hover {
+                    color: $border-color;
+                    background-color: $lightest-grey;
+                }
+
+                &.disabled {
+                    color: $color;
+                    background-color: $border-color;
+                    cursor: not-allowed;
+                }
+
+                &.active {
+                    color: $background-color;
+                    background-color: $color;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,98 @@
+/*-----------------------------------------------------------------------------
+    Navigation Utilities Examples
+-----------------------------------------------------------------------------*/
+
+.nav-bar {
+	margin: 10px;
+	@include elr-nav-bar;
+}
+
+.nav-bar-stacked {
+	@include elr-nav-bar-stacked;
+}
+
+.nav-bar-solid {
+	margin: 10px;
+	@include elr-nav-bar-solid;
+}
+
+.nav-bar-solid-stacked {
+	width: 300px;
+	@include elr-nav-bar-solid-stacked;
+}
+
+.nav-bar-pills {
+	margin: 10px;
+	@include elr-nav-bar-pills;
+}
+
+.nav-bar-pills-stacked {
+	width: 300px;
+	@include elr-nav-bar-pills-stacked;
+}
+
+.nav-bar-pills-solid {
+	margin: 10px;
+	@include elr-nav-bar-pills-solid;
+}
+
+.nav-bar-pills-solid-stacked {
+	width: 300px;
+	@include elr-nav-bar-pills-solid-stacked;
+}
+
+.button-link {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	@include elr-button-link($main-color, $background-color, 80%, left, 0, $background-color, block);
+}
+
+.button-link-radius {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	@include elr-button-link($main-color, $background-color, 80%, left, 3px, $background-color, block);
+}
+
+.button-solid {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	@include elr-button-solid($main-color, $background-color, 80%, left, 0, $main-color, block);
+}
+
+.button-solid-radius {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	@include elr-button-solid($main-color, $background-color, 80%, left, 3px, $main-color, block);
+}
+
+.button-rectangle {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	@include elr-rectangle-button($main-color, $background-color, 0, 80%, left, block);
+}
+
+.button-rectangle-radius {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	@include elr-rectangle-button($main-color, $background-color, 3px, 80%, left, block);
+}
+
+.pill-button-link {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	@include elr-pill-button-link(40px, $main-color, $background-color, 80%, left, $main-color, block);
+}
+
+.pill-button-solid {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	@include elr-pill-button-solid(40px, $main-color, $background-color, 80%, left, $main-color, block);
+}
+
+.button-group {
+	@include elr-button-group($background-color, $main-color, 3px, $main-color);
+
+	button {
+		@include elr-em-font(14);
+	}
+}

@@ -1,0 +1,142 @@
+/*-----------------------------------------------------------------------------
+    Effects Utilities Examples
+-----------------------------------------------------------------------------*/
+
+.solid-drop-shadow {
+	background-color: $link-color;
+	color: $background-color;
+	@include elr-solid-drop-shadow($grey);
+}
+
+.background-transparent {
+	border: 1px solid $main-color;
+	@include elr-background-transparent($main-color, 0.5);
+}
+
+.border-transparent {
+	@include elr-border-transparent($accent-color);
+}
+
+.stitched-box {
+	color: $background-color;
+	@include elr-stitched-box($main-color);
+}
+
+.stitched-row {
+	padding: 20px;
+	color: $background-color;
+	@include elr-stitched-row($accent-color);
+}
+
+.stitched-row-transparent {
+	padding: 20px;
+	margin: 20px 3px;
+	color: $background-color;
+	@include elr-stitched-row($main-color, $background-color, $text-color, .5, transparent);
+}
+
+.stitched-row-shadow {
+	padding: 20px;
+	margin: 20px 4px;
+	color: $background-color;
+	@include elr-stitched-row($accent-color, $background-color, $grey, 1, $grey);
+}
+
+.figure-border {
+	position: relative;
+	z-index: 100;
+
+	figure {
+		padding: 0;
+		width: 560px;
+		height: 373px;
+		@include elr-figure-transparent-border($accent-color, $main-color, 10px);
+
+		img {
+			padding: 0;
+			margin: 0;
+			width: 560px;
+			height: 373px;
+		}
+	}
+}
+
+.triple-shadow {
+	margin: 12px;
+	padding: 20px;
+	background-color: $background-color;
+	@include elr-triple-shadow($main-color, lighten($main-color, 20%));
+}
+
+.inset-text {
+	margin: 0;
+	padding: 20px;
+	background-color: lighten($accent-color, 30%);
+	@include elr-inset-text($shadow-color);
+}
+
+.inset-border {
+	margin: 0;
+	padding: 20px;
+	color: $accent-color;
+	background-color: lighten($accent-color, 30%);
+	@include elr-inset-text($shadow-color);
+
+	ul {
+		padding: 20px;	
+	}
+
+	li {
+		list-style: none;
+		padding: 5px;
+		@include elr-inset-border($accent-color, lighten($accent-color, 40%));
+
+		&:last-child {
+			padding-bottom: 5px;
+		}
+	}
+}
+
+.inset-box-holder {
+	background-color: $light-grey;
+    margin: 20px auto;
+    @include elr-clearfix();
+}
+
+.inset-box {
+	margin: 20px;
+	padding: 20px;
+	background-color: lighten($accent-color, 30%);
+	border: 1px solid $grey;
+	@include elr-inset-box($shadow-color);
+}
+
+.boxy-drop-shadow {
+	margin: 0;
+	padding: 20px;
+	color: $background-color;
+	background-color: $main-color;
+	border: 1px solid $text-color;
+	@include elr-boxy-drop-shadow();
+}
+
+.softer-thick-box-shadow {
+	margin: 0;
+	padding: 20px;
+	color: $background-color;
+	background-color: $main-color;
+	border: 1px solid $text-color;
+	@include elr-softer-thick-box-shadow();
+}
+
+.elr-thumbnail {
+	@include elr-thumbnail($background-color, 150px, 125px, 0);
+}
+
+.rounded-thumbnail {
+	@include elr-thumbnail($background-color, 150px, 125px, 5px);
+}
+
+.round-thumbnail {
+	@include elr-thumbnail($background-color, 150px, null, round);
+}

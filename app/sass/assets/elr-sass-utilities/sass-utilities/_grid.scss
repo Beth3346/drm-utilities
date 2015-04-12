@@ -1,0 +1,164 @@
+/*-----------------------------------------------------------------------------
+    Grids
+-----------------------------------------------------------------------------*/
+
+@mixin elr-grid($column-count: 12, $gutter: 5px) {
+    .elr-container {
+        width: 95%;
+        max-width: 1400px;
+        margin: 0 auto;
+
+        .elr-row {
+            width: 100%;
+            margin-left: -$gutter * 2;
+            margin-right: $gutter * 2;
+            @include elr-clearfix();
+
+            @include elr-breakpoint(jupiter) {
+                margin-left: -$gutter;
+                margin-right: $gutter;
+            }
+
+            .elr-col-full, .elr-col-half, .elr-col-two-thirds, .elr-col-third, .elr-col-quarter {
+                float: left;
+                padding: 0 $gutter * 2;
+                @include elr-clearfix();
+
+                @include elr-breakpoint(jupiter) {
+                    margin-bottom: $gutter * 2;
+                    padding-left: $gutter;
+                    padding-right: $gutter;
+                }
+
+                @include elr-breakpoint(saturn) {
+                    float: none;
+                }
+
+                .elr-container {
+                    width: 100%;
+                    padding-left: $gutter * 2;
+                    padding-right: $gutter * 2;
+
+                    @include elr-breakpoint(jupiter) {
+                        padding-left: $gutter;
+                        padding-right: $gutter;
+                    }
+
+                    .elr-row {
+                        margin-left: 0;
+                        margin-right: $gutter * 2;
+
+                        @include elr-breakpoint(jupiter) {
+                            margin-right: $gutter;
+                        }
+
+                        @for $i from 1 through $column-count {
+
+                            .elr-col-#{$i} {
+                                margin-bottom: 0;
+                            }
+
+                            .elr-col-full, .elr-col-half, .elr-col-two-thirds, .elr-col-third, .elr-col-quarter {
+                                margin-bottom: 0;
+                            }
+                        }
+                    }
+                }
+            }
+
+            @for $i from 1 through $column-count {
+                .elr-col-#{$i} {
+                    width: ( 100 / $column-count ) * $i * 1%;
+                    float: left;
+                    padding: 0 $gutter * 2;
+                    @include elr-clearfix();
+
+                    @include elr-breakpoint(jupiter) {
+                        margin-bottom: $gutter * 2;
+                        padding-left: $gutter;
+                        padding-right: $gutter;
+                    }
+
+                    @include elr-breakpoint(saturn) {
+                        float: none;
+                        width: 100%;
+                    }
+
+                    .elr-container {
+                        width: 100%;
+                        padding-left: $gutter * 2;
+                        padding-right: $gutter * 2;
+
+                        @include elr-breakpoint(jupiter) {
+                            padding-left: $gutter;
+                            padding-right: $gutter;
+                        }
+
+                        .elr-row {
+                            margin-left: 0;
+                            margin-right: $gutter * 2;
+
+                            @include elr-breakpoint(jupiter) {
+                                margin-right: $gutter;
+                            }
+
+                            .elr-col-#{$i} {
+                                margin-bottom: 0;
+                            }
+                        }
+                    }
+                }
+            }
+
+            @for $i from 1 through $column-count {
+                .elr-col-offset-#{$i} {
+                    margin-left: ( 100 / $column-count ) * $i * 1%;
+
+                    @include elr-breakpoint(jupiter) {
+                        margin-left: 0;
+                    }
+                }
+            }
+
+            .elr-col-full {
+                width: 100%;
+
+                @include elr-breakpoint(saturn) {
+                    width: 100%;
+                }
+            }
+
+            .elr-col-half {
+                width: (100% / 2);
+
+                @include elr-breakpoint(saturn) {
+                    width: 100%;
+                }
+            }
+
+            .elr-col-third {
+                width: (100% / 3);
+
+                @include elr-breakpoint(saturn) {
+                    width: 100%;
+                }
+            }
+
+            .elr-col-two-thirds {
+                width: (100% / 3) * 2;
+
+                @include elr-breakpoint(saturn) {
+                    width: 100%;
+                }
+            }
+
+            .elr-col-quarter {
+                width: (100% / 4);
+
+                @include elr-breakpoint(saturn) {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

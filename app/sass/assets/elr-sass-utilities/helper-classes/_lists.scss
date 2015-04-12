@@ -1,0 +1,47 @@
+/*-----------------------------------------------------------------------------
+    List Classes
+-----------------------------------------------------------------------------*/
+
+@mixin elr-list-classes() {
+    ul {
+        margin: 0;
+        padding: 10px 10px 10px 20px;
+        list-style: disc;   
+    }
+
+    ol {
+        margin: 0;
+        padding: 10px 10px 10px 20px;
+        list-style: decimal;
+    }
+
+    li, dd, dt {
+        margin: 0;
+        padding: 5px 0;
+    }
+
+    dl {
+        padding: 0;
+        margin: 0;
+    }
+
+    dt {
+        font-weight: bold;
+    }
+
+    .elr-unstyled-list {
+        @include elr-unstyled-list(left);
+    }
+
+    .elr-inline-list {
+        @include elr-inline-list();
+    }
+
+    .elr-triangle-list {
+        @include elr-bullet-list("\25B6");
+    }
+
+    .elr-checked-list {
+        @include elr-bullet-list("\2713");
+    }
+}

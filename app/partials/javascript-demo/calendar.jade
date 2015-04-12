@@ -1,34 +1,34 @@
-section#drm-calendar
-    .drm-container
-        .drm-row
-            .drm-col-full
-                h1 Calendar
+section#elr-calendar
+    .elr-container
+        .elr-row
+            .elr-col-full
+                h1 Elr Calendar
                 p Interative JS Calendar
                 h2 Demo
-    .drm-container
-        .drm-row
-            .drm-col-full
-                .drm-calendar(data-month="March" data-date="24" data-year="2015" data-event-name="My Birthday" data-event-month="March", data-event-date="24", data-event-recurrance="yearly")
-    .drm-container
-        .drm-row
-            .drm-col-full
-                .drm-calendar
-                    .drm-container
-                        .drm-row
-                            .drm-col-full
-                                button.drm-show-event-form.button-solid-radius(type="button") Add New Event
-                    form.drm-calendar-new-event#drm-calendar-new-event(method="get" action="" role="form")
-                        .drm-container
-                            .drm-row
-                                .drm-col-full
+    .elr-container
+        .elr-row
+            .elr-col-full
+                .elr-calendar(data-month="March" data-date="24" data-year="2015" data-event-name="My Birthday" data-event-month="March", data-event-date="24", data-event-recurrance="yearly")
+    .elr-container
+        .elr-row
+            .elr-col-full
+                .elr-calendar
+                    .elr-container
+                        .elr-row
+                            .elr-col-full
+                                button.elr-show-event-form.button-solid-radius(type="button") Add New Event
+                    form.elr-calendar-new-event#elr-calendar-new-event(method="get" action="" role="form")
+                        .elr-container
+                            .elr-row
+                                .elr-col-full
                                     label(for="event_name") Event Name:
                                     input#name(type="text" name="event_name" required data-min-length="3" data-max-length="50")
-                        .drm-container
-                            .drm-row
-                                .drm-col-full
-                                    h3.drm-bold Event Recurrance:
-                                .drm-col-full
-                                    .drm-inline-control-group
+                        .elr-container
+                            .elr-row
+                                .elr-col-full
+                                    h3.elr-bold Event Recurrance:
+                                .elr-col-full
+                                    .elr-inline-control-group
                                         label(for="recurrance") Recurrance:
                                         select#recurrance(name="recurrance")
                                             option(value="none") None
@@ -37,8 +37,8 @@ section#drm-calendar
                                             option(value="biweekly") Bi-Weekly
                                             option(value="monthly") Monthly
                                             option(value="yearly") Yearly
-                                .drm-col-full
-                                    .drm-inline-control-group
+                                .elr-col-full
+                                    .elr-inline-control-group
                                         label(for="month") Month:
                                         select#month(name="month")
                                             option(value="") Select Month
@@ -54,7 +54,7 @@ section#drm-calendar
                                             option(value="October") October
                                             option(value="November") November
                                             option(value="December") December
-                                    .drm-inline-control-group
+                                    .elr-inline-control-group
                                         label(for="event_date") Date:
                                         select#eventDate(name="event_date")
                                             option(value="") Select Date
@@ -89,15 +89,15 @@ section#drm-calendar
                                             option(value="29") 29
                                             option(value="30") 30
                                             option(value="31") 31
-                                    .drm-inline-control-group
+                                    .elr-inline-control-group
                                         label(for="year") Year:
-                                        input.drm-valid-integer#year(type="text" name="year" data-min-value="1" data-min-length="4" data-max-length="4")
-                                    .drm-inline-control-group
+                                        input.elr-valid-integer#year(type="text" name="year" data-min-value="1" data-min-length="4" data-max-length="4")
+                                    .elr-inline-control-group
                                         label(for="time") Time:
-                                        input.drm-valid-time#time(type="text" name="time" placeholder="12:00pm")
-                                .drm-col-full
-                                    .drm-inline-control-group
-                                        .drm-control-group
+                                        input.elr-valid-time#time(type="text" name="time" placeholder="12:00pm")
+                                .elr-col-full
+                                    .elr-inline-control-group
+                                        .elr-control-group
                                             label
                                                 input.day-checkbox#day(type="checkbox" name="day" value="Sunday")
                                                 | Sunday
@@ -119,8 +119,8 @@ section#drm-calendar
                                             label
                                                 input.day-checkbox#day(type="checkbox" name="day" value="Saturday")
                                                 | Saturday
-                                .drm-col-full
-                                    .drm-inline-control-group
+                                .elr-col-full
+                                    .elr-inline-control-group
                                         label(for="day_num") Week Number:
                                         select#dayNum(name="day_num")
                                             option(value="") Select Week
@@ -129,23 +129,23 @@ section#drm-calendar
                                             option(value="3") Third
                                             option(value="4") Fourth
                                             option(value="last") Last
-                        .drm-container
-                            .drm-row
-                                .drm-col-full
-                                    h3.drm-bold Event Details:
-                                .drm-col-half
+                        .elr-container
+                            .elr-row
+                                .elr-col-full
+                                    h3.elr-bold Event Details:
+                                .elr-col-half
                                     label(for="event_type") Event Type:
                                     input#type(type="text" name="event_type" placeholder="holiday")
-                                .drm-col-half
+                                .elr-col-half
                                     label(for="event_notes") Event Notes:
                                     textarea#notes(name="event_notes" cols="30" rows="2" placeholder="These are some notes") 
-                                .drm-col-full    
+                                .elr-col-full    
                                     button.addEvent#submit(type="submit") Add Event
-                    .drm-container
-                        .drm-row
-                            .drm-col-full
-                                form.drm-calendar-select#drm-calendar-select(method="Get" action="" role="form")
-                                    .drm-inline-control-group
+                    .elr-container
+                        .elr-row
+                            .elr-col-full
+                                form.elr-calendar-select#elr-calendar-select(method="Get" action="" role="form")
+                                    .elr-inline-control-group
                                         label(for="month") Month:
                                         select#month(name="month")
                                             option(value="") Select Month
@@ -161,7 +161,7 @@ section#drm-calendar
                                             option(value=9) October
                                             option(value=10) November
                                             option(value=11) December
-                                    .drm-inline-control-group
+                                    .elr-inline-control-group
                                         label(for="date") Date:
                                         select#date(name="date")
                                             option(value="") Select Date
@@ -196,122 +196,122 @@ section#drm-calendar
                                             option(value="29") 29
                                             option(value="30") 30
                                             option(value="31") 31
-                                    .drm-inline-control-group
+                                    .elr-inline-control-group
                                         label(for="year") Year:
-                                        input.drm-valid-integer#year(type="text" name="year" data-min-value="1" data-min-length="4" data-max-length="4")
-                                    .drm-inline-control-group
+                                        input.elr-valid-integer#year(type="text" name="year" data-min-value="1" data-min-length="4" data-max-length="4")
+                                    .elr-inline-control-group
                                         button#submit(type="submit") Select
-                    .drm-container
-                        .drm-row
-                            .drm-col-full
-                                .drm-calendar-view-nav
-                                    button.drm-calendar-view(data-view='month') Month
-                                    button.drm-calendar-view(data-view='week') Week
-                                    button.drm-calendar-view(data-view='date') Day
-                                .drm-calendar-nav
-                                    button.drm-calendar-year-prev(data-dir='prev') Previous Year
-                                    button.drm-calendar-month-prev(data-dir='prev') Previous Month
-                                    button.drm-calendar-week-prev(data-dir='prev') Previous Week
-                                    button.drm-calendar-date-prev(data-dir='prev') Yesterday
-                                    button.drm-calendar-current Today
-                                    button.drm-calendar-date-next(data-dir='next') Tomorrow
-                                    button.drm-calendar-week-next(data-dir='next') Next Week
-                                    button.drm-calendar-month-next(data-dir='next') Next Month
-                                    button.drm-calendar-year-next(data-dir='next') Next Year
+                    .elr-container
+                        .elr-row
+                            .elr-col-full
+                                .elr-calendar-view-nav
+                                    button.elr-calendar-view(data-view='month') Month
+                                    button.elr-calendar-view(data-view='week') Week
+                                    button.elr-calendar-view(data-view='date') Day
+                                .elr-calendar-nav
+                                    button.elr-calendar-year-prev(data-dir='prev') Previous Year
+                                    button.elr-calendar-month-prev(data-dir='prev') Previous Month
+                                    button.elr-calendar-week-prev(data-dir='prev') Previous Week
+                                    button.elr-calendar-date-prev(data-dir='prev') Yesterday
+                                    button.elr-calendar-current Today
+                                    button.elr-calendar-date-next(data-dir='next') Tomorrow
+                                    button.elr-calendar-week-next(data-dir='next') Next Week
+                                    button.elr-calendar-month-next(data-dir='next') Next Month
+                                    button.elr-calendar-year-next(data-dir='next') Next Year
 
                 h2 Usage
                 
-                a(href="https://github.com/dynamicresponsemedia/drm-calendar" target="_blank") Visit GitHub Repo
+                a(href="https://github.com/dynamicresponsemedia/elr-calendar" target="_blank") Visit GitHub Repo
                 p at the moment only US style dates and times are used
 
-                h3.drm-bold Initialize:
+                h3.elr-bold Initialize:
 
-                pre new DrmCalendar(calendarClass = 'drm-calendar', @view = 'month', @addHolidays = yes);
+                pre new DrmCalendar(calendarClass = 'elr-calendar', @view = 'month', @addHolidays = yes);
 
-                h4.drm-bold Options:
-                ul.drm-unstyled-list
+                h4.elr-bold Options:
+                ul.elr-unstyled-list
                     li
-                        span.drm-bold calendarClass: 
-                        | classname of the calendar holder - default: drm-calendar
+                        span.elr-bold calendarClass: 
+                        | classname of the calendar holder - default: elr-calendar
                     li
-                        span.drm-bold view: 
+                        span.elr-bold view: 
                         | first view when the calendar loads - default: month
                         ul
                             li month
                             li week
                             li date
                     li
-                        span.drm-bold addHolidays: 
+                        span.elr-bold addHolidays: 
                         | add holidays to calendar (US only for now) - default: yes
 
-                h3.drm-bold Add events dynamically using the createEvent method
+                h3.elr-bold Add events dynamically using the createEvent method
                 p createEvent takes an object as its only argument
 
                 pre.
-                    drmCalendar = new DrmCalendar();
-                    drmCalendar.createEvent(newEvent);
+                    elrCalendar = new DrmCalendar();
+                    elrCalendar.createEvent(newEvent);
 
-                h4.drm-bold Options:
-                ul.drm-unstyled-list
+                h4.elr-bold Options:
+                ul.elr-unstyled-list
                     li
-                        span.drm-bold id: 
+                        span.elr-bold id: 
                         | the event id number (DrmCalendar will add this for you - don't add this yourself)
                     li
-                        span.drm-bold name: 
+                        span.elr-bold name: 
                         | name of your event
                     li
-                        span.drm-bold recurrance: 
+                        span.elr-bold recurrance: 
                         | how often the event will occur
                         ul
                             li
-                                span.drm-bold yearly: 
+                                span.elr-bold yearly: 
                                 | once per year
                             li
-                                span.drm-bold monthly: 
+                                span.elr-bold monthly: 
                                 | once per month
                             li
-                                span.drm-bold biweekly: 
+                                span.elr-bold biweekly: 
                                 | every other week
                             li
-                                span.drm-bold weekly: 
+                                span.elr-bold weekly: 
                                 | once per week
                             li
-                                span.drm-bold daily: 
+                                span.elr-bold daily: 
                                 | every single day
                             li
-                                span.drm-bold none: 
+                                span.elr-bold none: 
                                 | exactly once
                     li
-                        span.drm-bold month: 
+                        span.elr-bold month: 
                         | month of your event - full name of month not abbreviations or month number
                     li
-                        span.drm-bold year: 
+                        span.elr-bold year: 
                         | year of your event - for non-recurring events only
                     li
-                        span.drm-bold eventDate: 
+                        span.elr-bold eventDate: 
                         | date of event
                     li
-                        span.drm-bold time: 
+                        span.elr-bold time: 
                         | time of event ex. 2:30pm - omit for all day events
                     li
-                        span.drm-bold day: 
+                        span.elr-bold day: 
                         | day of the week - array of days of the week - full name of day not abbreviations or day number - can be an array ex. ['Saturday', 'Sunday']
                     li
-                        span.drm-bold dayNum: 
+                        span.elr-bold dayNum: 
                         | day number - ex. 1 for first occurance of day in month - use 'last' for the last occurance in the month
                     li
-                        span.drm-bold type: 
+                        span.elr-bold type: 
                         | event type - so far holiday is the only type that has any effect
                     li
-                        span.drm-bold notes: 
+                        span.elr-bold notes: 
                         | event notes - show up in the event view
 
-                h4.drm-bold Examples:
+                h4.elr-bold Examples:
 
-                h5.drm-bold Yearly Event:
+                h5.elr-bold Yearly Event:
                 
                 pre.
-                    drmCalendar.createEvent({
+                    elrCalendar.createEvent({
                         name: 'Thanksgiving',
                         month: 'November',
                         dayNum: 'last',
@@ -321,10 +321,10 @@ section#drm-calendar
                         notes: 'Thanksgiving occurs on the last Thursday in November'
                     });
 
-                h5.drm-bold Monthly Event:
+                h5.elr-bold Monthly Event:
 
                 pre.
-                    drmCalendar.createEvent({
+                    elrCalendar.createEvent({
                         name: 'Rabbit Rabbit Day',
                         eventDate: 1,
                         type: 'fun day',
@@ -332,10 +332,10 @@ section#drm-calendar
                         notes: 'Say Rabbit Rabbit for good luck this month'
                     });
 
-                h5.drm-bold Weekly Event:
+                h5.elr-bold Weekly Event:
                 
                 pre.
-                    drmCalendar.createEvent({
+                    elrCalendar.createEvent({
                         name: 'Sleep In!',
                         day: ['Sunday', 'Saturday']
                         time: '9:00am'
@@ -343,10 +343,10 @@ section#drm-calendar
                         notes: 'Thanksgiving occurs on the last Thursday in November'
                     });
 
-                h5.drm-bold Daily Event:
+                h5.elr-bold Daily Event:
                 
                 pre.
-                    drmCalendar.createEvent({
+                    elrCalendar.createEvent({
                         name: 'Eat Lunch',
                         time: '12:00pm'
                         recurrance: 'daily',

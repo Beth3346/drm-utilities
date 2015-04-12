@@ -2,20 +2,20 @@
     Sidebar
 -----------------------------------------------------------------------------*/
 
-.drm-container .drm-row aside.sidebar {
+.elr-container .elr-row aside.sidebar {
     padding-top: 20px;
     padding-left: 60px;
 
-    @include drm-breakpoint(saturn) {
+    @include elr-breakpoint(saturn) {
         display: none;
     }
 
     &.sticky-right {
-        @include drm-sticky-menu('left');
+        @include elr-sticky-menu('left');
     }
 
     ul {
-        @include drm-nav-bar-stacked;
+        @include elr-nav-bar-stacked;
 
         li {
             padding-top: 2px;
@@ -25,7 +25,7 @@
                 color: $text-color;
                 font-weight: bold;
                 padding: 5px 10px 10px 10px;
-                @include drm-em-font(20);
+                @include elr-em-font(20);
 
                 &:hover, &:focus {
                     text-decoration: none;
@@ -39,7 +39,7 @@
                     color: $text-color;
                     font-weight: normal;
                     padding: 2px 10px;
-                    @include drm-em-font(14);
+                    @include elr-em-font(14);
 
                     &:hover {
                         text-decoration: underline;

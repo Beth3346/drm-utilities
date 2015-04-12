@@ -1,45 +1,45 @@
 (function(){
-    drmAccordion();
-    drmAccordionNav();
-    drmAccordionNav({
+    elrAccordion();
+    elrAccordionNav();
+    elrAccordionNav({
         containerClass: 'sidebar'
     });
 })();
 
 (function($){
-    var drmAlert = drmAlerts();
+    var elrAlert = elrAlerts();
     
-    drmAlert.showAlert('info', 'This is just an informative alert', $('.drm-alert-holder'));
-    drmAlert.showAlert('danger', 'Danger Danger Danger!', $('.drm-alert-holder'));
-    drmAlert.showAlert('warning', 'This is just a gentle warning', $('.drm-alert-holder'));
-    drmAlert.showAlert('success', 'your request was successful', $('.drm-alert-holder'));
-    drmAlert.showAlert('muted', 'A muted alert that will probably be ignored', $('.drm-alert-holder'));
-    drmAlert.showAlert('custom', 'This is a custom alert', $('.drm-alert-holder'));
+    elrAlert.showAlert('info', 'This is just an informative alert', $('.elr-alert-holder'));
+    elrAlert.showAlert('danger', 'Danger Danger Danger!', $('.elr-alert-holder'));
+    elrAlert.showAlert('warning', 'This is just a gentle warning', $('.elr-alert-holder'));
+    elrAlert.showAlert('success', 'your request was successful', $('.elr-alert-holder'));
+    elrAlert.showAlert('muted', 'A muted alert that will probably be ignored', $('.elr-alert-holder'));
+    elrAlert.showAlert('custom', 'This is a custom alert', $('.elr-alert-holder'));
 })(jQuery);
 
 (function() {
-    drmBackToTop();
+    elrBackToTop();
 })();
 
 (function() {
-    drmDropdownButton();
-    drmDropdownButton({
-        containerClass: 'drm-dropdown-split-btn-holder',
+    elrDropdownButton();
+    elrDropdownButton({
+        containerClass: 'elr-dropdown-split-btn-holder',
         speed: 300,
         button: 'button:last()'
     });
 })();
 
 (function() {
-    drmDropdownMenu();
+    elrDropdownMenu();
 })();
 
 (function() {
-    drmFlexibleGrid();
+    elrFlexibleGrid();
 })();
 
 (function() {
-    var formControls = drmFormControls({
+    var formControls = elrFormControls({
         selectOptions: {
             fn: function(option) {
                 console.log(option);
@@ -51,35 +51,53 @@
 })();
 
 (function() {
-    drmLightbox();
+    elrLightbox();
 })();
 
 (function() {
-    drmModal();
+    elrModal();
 })();
 
 (function() {
-    drmOffscreenMenu();
+    elrOffscreenMenu();
 })();
 
 (function() {
-    drmPasswords();
+    elrPasswords();
 })();
 
 (function() {
-    drmPopovers();
+    elrPopovers();
 })();
 
 (function() {
-    drmSimpleSlider({effect: 'fade'});
-    drmSimpleSlider({sliderClass: 'drm-simple-slider-2', effect: 'slide-left'});
+    elrSimpleSlider({effect: 'fade'});
+    elrSimpleSlider({sliderClass: 'elr-simple-slider-2', effect: 'slide-left'});
 })();
 
+// (function() {
+//     console.log(elr.parseTime('11:05 pm'));
+//     console.log(elr.cleanAlpha('The Tempest'));
+//     console.log(elr.cleanAlpha("A Midsummer Night's Dream"));
+//     console.log(elr.sortValues('Beth', 'Foby'));
+//     console.log(elr.sortValues('Dog', 'Cat'));
+//     console.log(elr.sortValues('Dog', 'Dog'));
+//     console.log(elr.getDataTypes(['Dog', 'Cat', 'Bird', 'Sheep', 'Horse']));
+//     console.log(elr.getDataTypes([1, 2, 3, 123, 9000]));
+//     console.log(elr.getDataTypes(['12:33am', '7:45pm', '09:34am', '10:00pm', '08:23am']));
+//     console.log(elr.getDataTypes(['12/25/1988', '2/23/1988', '3/14/1988', '1/01/1999', '05/12/1879']));
+//     console.log(elr.getDataTypes(['Dog', 124, '12:33am', '12/25/1988', 'Horse']));
+// })();
+
 (function() {
-    console.log(drm.parseTime('11:05 pm'));
-    console.log(drm.cleanAlpha('The Tempest'));
-    console.log(drm.cleanAlpha("A Midsummer Night's Dream"));
-    console.log(drm.sortValues('Beth', 'Foby'));
-    console.log(drm.sortValues('Dog', 'Cat'));
-    console.log(drm.sortValues('Dog', 'Dog'));
+    $items = elr.createElement('ul', {
+        html: '<li>12</li><li>Dog</li><li>14</li><li>122</li><li>Cat</li>'
+    });
+
+    $list = $items.find('li');
+
+    var text = elr.getText($list);
+    var types = elr.getDataTypes(text);
+
+    console.log(elr.sortComplexList(types, $list));
 })();

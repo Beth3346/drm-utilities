@@ -1,0 +1,29 @@
+/*-----------------------------------------------------------------------------
+    Alert Classes
+-----------------------------------------------------------------------------*/
+
+@mixin elr-alert-classes() {
+    .elr-info-alert {
+        @include elr-context-box(info, 3px);
+    }
+
+    .elr-danger-alert {
+        @include elr-context-box(danger, 3px);
+    }
+
+    .elr-warning-alert {
+        @include elr-context-box(warning, 3px);
+    }
+
+    .elr-success-alert {
+        @include elr-context-box(success, 3px);
+    }
+
+    .elr-muted-alert {
+        @include elr-context-box(muted, 3px);
+    }
+
+    .elr-custom-alert {
+        @include elr-context-box(custom, 3px, $elr-blue);
+    }
+}

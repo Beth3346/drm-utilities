@@ -2,30 +2,30 @@
     General Styles
 -----------------------------------------------------------------------------*/
 
-// include drm-helper-classes
+// include elr-helper-classes
 
-@include drm-helper-classes();
+@include elr-helper-classes();
 
-// include drm-grid
+// include elr-grid
 
-@include drm-grid();
+@include elr-grid();
 
-.drm-button {
+.elr-button {
     margin-top: 10px;
     margin-bottom: 10px;
-    @include drm-em-font(14);
-	@include drm-button-solid($main-color, $background-color, 200px, left, 3px, $main-color);
+    @include elr-em-font(14);
+	@include elr-button-solid($main-color, $background-color, 200px, left, 3px, $main-color);
 }
 
-.drm-button-inline {
-	@include drm-button-solid($main-color, $background-color, 200px, null, 3px, $main-color, inline-block);
+.elr-button-inline {
+	@include elr-button-solid($main-color, $background-color, 200px, null, 3px, $main-color, inline-block);
 }
 
 .options-list {
-	@include drm-em-font(14);
+	@include elr-em-font(14);
 }
 
 .copyright {
     text-align: center;
-    @include drm-em-font(12);
+    @include elr-em-font(12);
 }

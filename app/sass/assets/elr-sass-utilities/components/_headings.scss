@@ -1,0 +1,84 @@
+/*-----------------------------------------------------------------------------
+    Headings
+-----------------------------------------------------------------------------*/
+
+// makes a rounded heading
+
+@mixin elr-rounded-heading($bk-color: $dark-grey, $text-color: white, $border-radius: 3px) {
+    font-weight: bold;
+    background-color: $bk-color;
+    color: $text-color;
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+
+// makes a pill heading
+
+@mixin elr-pill-heading($bk-color: $dark-grey, $text-color: white, $height: 50px) {
+    font-weight: bold;
+    background-color: $bk-color;
+    color: $text-color;
+    padding: 5px 10px 5px 20px;
+    border-radius: ($height / 2);
+}
+
+// ribbon heading
+
+@mixin elr-ribbon-heading($color: $dark-grey, $stitch-color: white, $text-color: white, $font-size: 16) {
+    $height: 3px + ($font-size * 2);
+    color: $text-color;
+    text-align: center;
+    line-height: ($font-size * 1.2px);
+    position: relative;
+    height: $height - 6;
+    
+    @include elr-em-font($font-size);
+    @include elr-stitched-row($color, $stitch-color, none, 1);
+
+    &:before {
+        content: "";
+        position: absolute;
+        top: -($height - ($height * .667));
+        left: -($height - 9);
+        z-index: -10;
+        border: ($height - ($height / 2)) solid $color;
+        border-right-width: $height - ($height / 3);
+        border-left-color: transparent;
+        @include elr-rectangle(0, 0);
+    }
+
+    &:after {
+        content: "";
+        position: absolute;
+        top: -($height - ($height * .667));
+        right: -($height - 9);
+        z-index: -10;
+        border: ($height - ($height / 2)) solid $color;
+        border-left-width: $height - ($height / 3);
+        border-right-color: transparent;
+        @include elr-rectangle(0, 0);
+    }
+
+    .ribbon-content {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: $height - ($height / 3);
+
+        &:before {
+            content: "";
+            position: absolute;
+            top: -($height - ($height / 3));
+            left: -2px;
+            @include elr-triangle(bottom-right, 16px, 5px, darken($color, 20%));
+        }
+
+        &:after {
+            content: "";
+            position: absolute;
+            top: -($height - ($height / 3));
+            right: -2px;
+            @include elr-triangle(bottom-left, 16px, 5px, darken($color, 20%));
+        }
+    }
+}

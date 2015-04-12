@@ -1,0 +1,16 @@
+/*-----------------------------------------------------------------------------
+    Forms Utilities Examples
+-----------------------------------------------------------------------------*/
+
+.form-state {
+	padding: 20px;
+	@include elr-tabular-form();
+}
+
+.tabular-form {
+	@include elr-tabular-form();
+}
+
+.inline-form {
+	@include elr-inline-form();
+}

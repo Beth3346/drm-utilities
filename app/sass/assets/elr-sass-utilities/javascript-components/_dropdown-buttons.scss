@@ -1,0 +1,108 @@
+/*-----------------------------------------------------------------------------
+    Dropdown Buttons
+-----------------------------------------------------------------------------*/   
+
+@mixin elr-dropdown-button-solid($bk-color: $link-color, $color: $background-color, $width: 40%, $border: none, $border-radius: 0, $divider-color: $light-grey) {
+    width: $width;
+    position: relative;
+
+    button {
+        margin-bottom: 5px;
+        position: relative;
+        @if $border == none {           
+            @include elr-button-solid($bk-color, $color, 100%);
+        } @else {
+            @include elr-button-solid($bk-color, $color, 100%, center, $border-radius, $border);
+        }
+        
+        &:after {
+            content: "\25BE";
+            position: absolute;
+            right: 5%;
+        }
+
+        &.clicked {
+            color: $bk-color;
+            background-color: $color;
+        }   
+    }
+
+    ul {
+        width: 100%;
+        position: absolute;
+        display: none;
+        z-index: 100;
+
+        @if $border-radius > 5px {
+            border-radius: 5px;
+        } @else if $border-radius {
+            border-radius: $border-radius
+        }
+
+        @if $border != none {
+            border: 1px solid $divider-color;
+            
+        }
+
+        @include elr-nav-bar-solid-stacked($bk-color, $color, left, $divider-color);
+    }
+}   
+
+@mixin elr-dropdown-button-split($bk-color: $main-color, $color: $background-color, $border-radius: 0, $border: none, $divider-color: $light-grey, $width: 150px) {
+    position: relative;
+    width: $width + 50px;
+
+    .elr-dropdown-button-group {
+        @include elr-button-group($background-color, $main-color, $border-radius, $border);
+
+        button {
+            padding-left: 10px;
+            padding-right: 10px;
+            margin-bottom: 5px;
+        }
+    }
+
+    button {
+        position: relative;
+        margin: 0;
+        width: $width - 50;
+        height: 40px;
+
+        &:last-of-type {
+            padding-left: 10px;
+            padding-right: 10px;
+            width: 50px;
+            height: 40px;
+
+            &.clicked {
+                background-color: $bk-color;
+                color: $color;
+            }
+        }
+
+        &.clicked {
+            color: $bk-color;
+            background-color: $color;
+        }
+    }
+
+    ul {
+        width: 100%;
+        position: absolute;
+        top: 100%;
+        display: none;
+        z-index: 100;
+        
+        @if $border-radius > 5px {
+            border-radius: 5px;
+        } @else if $border-radius {
+            border-radius: $border-radius
+        }
+
+        @if $border != none {
+            border: 1px solid $divider-color;
+        }
+        
+        @include elr-nav-bar-solid-stacked($bk-color, $color, left, $divider-color);
+    }
+}

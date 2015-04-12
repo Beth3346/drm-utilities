@@ -1,0 +1,9 @@
+/*-----------------------------------------------------------------------------
+    Text Effects
+-----------------------------------------------------------------------------*/
+
+// gives a slight shadow effect on text
+
+@mixin elr-inset-text($shadow-color: $shadow-color) {
+    text-shadow: 1px 1px 0 $shadow-color;
+}

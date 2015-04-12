@@ -1,0 +1,17 @@
+/*-----------------------------------------------------------------------------
+    Layout Classes
+-----------------------------------------------------------------------------*/
+
+@mixin elr-layout-classes() {
+    .elr-pull-left {
+        float: left;
+    }
+
+    .elr-pull-right {
+        float: right;
+    }
+
+    .elr-clear {
+        @include elr-clearfix();
+    }
+}

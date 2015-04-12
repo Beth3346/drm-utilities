@@ -1,0 +1,39 @@
+/*-----------------------------------------------------------------------------
+    Thumbnails
+-----------------------------------------------------------------------------*/
+
+@mixin elr-thumbnail($border-color: white, $width: 150px, $height: 125px, $border-radius: 0, $display: block) {
+    border: 5px solid $border-color;
+    box-shadow: $grey 0 0 0 1px;
+
+    @if $border-radius == 'round' {
+        @include elr-circle($width);
+    } @else if $border-radius != 0 {
+        @include elr-rectangle($width, $height, $display, $border-radius);
+    } @else if $border-radius == 0 {
+        @include elr-rectangle($width, $height, $display);
+    }
+}
+
+@mixin elr-thumbnail-list($border-color: white, $width: 150px, $height: 120px, $glow: $elr-blue) {
+    padding: 10px;
+    list-style: none;
+    @include elr-clearfix;
+
+    li {
+        margin: 10px;
+        float: left;
+    }
+
+    img {
+        padding: 0;
+        margin: 0;
+        transition: box-shadow, .3s, ease-out;
+        @include elr-thumbnail;
+
+        &:hover {
+            transition: box-shadow, .3s, ease-in;
+            box-shadow: $grey 0 0 0 1px, $glow 0 0 3px 2px;
+        }
+    }   
+}

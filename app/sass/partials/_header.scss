@@ -6,9 +6,9 @@ header {
     width: 95%;
     max-width: 1400px;
     margin: 0 auto;
-    @include drm-clearfix;
+    @include elr-clearfix;
 
-    @include drm-breakpoint(saturn) {
+    @include elr-breakpoint(saturn) {
         width: 100%;
     }
 
@@ -26,7 +26,7 @@ header {
             }
         }
 
-        @include drm-breakpoint(saturn) {
+        @include elr-breakpoint(saturn) {
             float: none;
             text-align: center;
         }
@@ -35,7 +35,7 @@ header {
     .mobile-nav-holder {
         display: none;
 
-        @include drm-breakpoint(saturn) {
+        @include elr-breakpoint(saturn) {
             display: block;
         }
     }
@@ -43,15 +43,15 @@ header {
     nav {
         padding-top: 10px;
         padding-bottom: 10px;
-        @include drm-clearfix;
+        @include elr-clearfix;
 
-        @include drm-breakpoint(saturn) {
+        @include elr-breakpoint(saturn) {
             display: none;
         }
 
         &.mobile-nav-holder {
             padding-bottom: 0;
-            @include drm-clearfix;
+            @include elr-clearfix;
 
             .mobile-menu-toggle {
                 background-color: transparent;
@@ -63,7 +63,7 @@ header {
                 color: $main-color;
                 cursor: pointer;
                 float: right;
-                @include drm-em-font(20);
+                @include elr-em-font(20);
 
                 i {
                     margin-left: 5px;
@@ -132,7 +132,7 @@ header {
             }
         }
 
-        ul.drm-dropdown-nav {
+        ul.elr-dropdown-nav {
             float: right;
             margin: 10px;
 
@@ -188,7 +188,7 @@ header {
                         border-radius: 0;
                         background-color: $background-color;
                         color: $main-color;
-                        @include drm-em-font(12);
+                        @include elr-em-font(12);
 
                         &:hover {
                             background-color: $main-color;
@@ -221,9 +221,9 @@ header {
         padding: 0 0 0 20px;
         text-align: left;
         font-weight: bold;
-        @include drm-em-font(48);
+        @include elr-em-font(48);
 
-        @include drm-breakpoint(saturn) {
+        @include elr-breakpoint(saturn) {
             padding: 0;
             margin: 0;
             text-align: center;
@@ -243,7 +243,7 @@ header {
         margin: 0;
         padding: 0 0 0 20px;
 
-        @include drm-breakpoint(saturn) {
+        @include elr-breakpoint(saturn) {
             padding: 0 20px;
             margin: 0;
             text-align: center;

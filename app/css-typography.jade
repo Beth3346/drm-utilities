@@ -4,20 +4,20 @@ html.no-js(lang="en")
     body
         include partials/header
         .hero-unit
-            .drm-container
-                .drm-row
-                    .drm-col-full
+            .elr-container
+                .elr-row
+                    .elr-col-full
                         h1 Typography&nbsp;
                             i.fa.fa-wrench
                         p These are some pre-defined CSS classes and HTML element default styles I find myself using over and over.
-        main.main-content.drm-container
-            .drm-row
-                article.drm-col-9
-                    .drm-container
-                        .drm-row
-                            .drm-col-full
+        main.main-content.elr-container
+            .elr-row
+                article.elr-col-9
+                    .elr-container
+                        .elr-row
+                            .elr-col-full
                                 p To include it in your project add the following line to your main stylesheet
-                                pre @include drm-helper-classes();
+                                pre @include elr-helper-classes();
                     include partials/css-demo/typography
                 include partials/sidebar
 

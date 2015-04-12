@@ -1,0 +1,35 @@
+/*-----------------------------------------------------------------------------
+    Responsive Classes
+-----------------------------------------------------------------------------*/
+
+@mixin elr-responsive-classes() {
+    .elr-hide {
+        display: none;
+    }
+
+    .elr-hide-desktop {
+        @include elr-breakpoint($mercury) {
+            display: none;
+        }
+
+        @include elr-breakpoint($venus) {
+            display: none;
+        }
+
+        @include elr-breakpoint($saturn) {
+            display: block;
+        }
+    }
+
+    .elr-hide-tablet {
+        @include elr-breakpoint($saturn) {
+            display: none;
+        }
+    }
+
+    .elr-hide-mobile {
+        @include elr-breakpoint($neptune) {
+            display: none;
+        }
+    }
+}

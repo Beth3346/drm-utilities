@@ -1,74 +1,74 @@
 section#border-effects
-    .drm-container
-        .drm-row
-            .drm-col-full
+    .elr-container
+        .elr-row
+            .elr-col-full
                 h1 Border Effects
-    .drm-container
-        .drm-row
-            .drm-col-full
+    .elr-container
+        .elr-row
+            .elr-col-full
                 h3 Border Transparent
-                .drm-container.border-transparent
-                    .drm-row
-                        .drm-col-full
+                .elr-container.border-transparent
+                    .elr-row
+                        .elr-col-full
                             p.
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                 Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
                                 maxime molestias est numquam quos recusandae dignissimos commodi 
                                 vero sequi ipsum sed nesciunt optio?
                 p Creates a transparent border with a hex color backup for browsers that do not support rgba colors 
-                pre @include drm-border-transparent($color, $thickness, $opacity);
+                pre @include elr-border-transparent($color, $thickness, $opacity);
                     
                 h3 Stitched Box
                 p Creates a box with a cute stitching effect around the edges
-                .drm-container.stitched-box
-                    .drm-row
-                        .drm-col-full
+                .elr-container.stitched-box
+                    .elr-row
+                        .elr-col-full
                             p.
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                 Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
                                 maxime molestias est numquam quos recusandae dignissimos commodi 
                                 vero sequi ipsum sed nesciunt optio?
-                pre @include drm-stitched-box($color, $stitch-color, $border-radius, $border-color, $opacity);
+                pre @include elr-stitched-box($color, $stitch-color, $border-radius, $border-color, $opacity);
                     
                 h3 Stitched Row
                 p creates a row that has a cute stitching effect along the top and bottom
-                .drm-container.stitched-row
-                    .drm-row
-                        .drm-col-full
+                .elr-container.stitched-row
+                    .elr-row
+                        .elr-col-full
                             p.
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                 Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
                                 maxime molestias est numquam quos recusandae dignissimos commodi 
                                 vero sequi ipsum sed nesciunt optio?
-                pre @include drm-stitched-box($color, $stitch-color, $border-color, $opacity, $shadow);
+                pre @include elr-stitched-box($color, $stitch-color, $border-color, $opacity, $shadow);
                     
                 h3 Stitched Row with Shadow
                 p creates a row that has a cute stitching effect along the top and bottom
-                .drm-container.stitched-row-shadow
-                    .drm-row
-                        .drm-col-full
+                .elr-container.stitched-row-shadow
+                    .elr-row
+                        .elr-col-full
                             p.
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                 Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
                                 maxime molestias est numquam quos recusandae dignissimos commodi 
                                 vero sequi ipsum sed nesciunt optio?
-                pre @include drm-stitched-box($color, $stitch-color, $border-color, $opacity, $shadow);
+                pre @include elr-stitched-box($color, $stitch-color, $border-color, $opacity, $shadow);
                     
                 h3 Transparent Figure Border
                 p Creates a transparent, inset border that transitions to another color when the user hovers over the figure.
-                .drm-container.figure-border
-                    .drm-row
-                        .drm-col-full
+                .elr-container.figure-border
+                    .elr-row
+                        .elr-col-full
                             figure 
                                 img(src="images/cat.jpg" alt="Kitten")
-                pre @include drm-solid-drop-shadow($color);
+                pre @include elr-solid-drop-shadow($color);
 
                 h3 Inset Border
                 p Applies a simple inset bottom border effect to an element.
-                .drm-container.inset-border   
-                    .drm-row
-                        .drm-col-full   
-                            ul.drm-unstyled-list
+                .elr-container.inset-border   
+                    .elr-row
+                        .elr-col-full   
+                            ul.elr-unstyled-list
                                 li List Item
                                 li List Item
                                 li List Item

@@ -1,0 +1,133 @@
+/*-----------------------------------------------------------------------------
+    Typography Classes
+-----------------------------------------------------------------------------*/
+
+@mixin elr-typography-classes() {
+    .elr-bold {
+        font-weight: bold;
+    }   
+
+    .elr-italic {
+        font-style: italic;
+    }   
+
+    .elr-underline {
+        text-decoration: underline;
+    }   
+
+    .elr-uppercase {
+        text-transform: uppercase;
+    }
+
+    .elr-capitalize {
+        text-transform: capitalize;
+    }
+
+    .elr-smaller-text {
+        @include elr-em-font(10);
+    }
+
+    .elr-text-left {
+        text-align: left;
+    }
+
+    .elr-text-right {
+        text-align: right;
+    }
+
+    .elr-text-center {
+        text-align: center;
+    }
+
+    .elr-text-justified {
+        text-align: justify;
+    }
+
+    .elr-text-muted {
+        color: $muted-color;
+    }
+
+    .elr-text-disabled {
+        color: $light-grey;
+    }
+
+    .elr-text-danger {
+        color: $danger-color;   
+    }
+
+    .elr-text-error {
+        color: $danger-color;
+        font-weight: bold;
+    }
+
+    .elr-text-info {
+        color: $info-color;
+    }
+
+    .elr-text-warning {
+        color: $warning-color;
+    }
+
+    .elr-text-success {
+        color: $success-color;
+    }
+
+    mark {
+        background-color: $main-color;
+        color: white;
+        padding-left: 3px;
+        padding-right: 3px;
+    }
+
+    .elr-highlight {
+        color: $main-color;
+    }
+
+    p {
+        margin: 0;
+        padding: 10px 0;
+    }
+
+    small {
+        @include elr-em-font(10);
+    }
+
+    blockquote {
+        margin: 0;
+        padding: 10px;
+        font-style: italic;
+    }
+
+    cite {
+        font-style: normal;
+    }
+
+    pre {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        background-color: $lightest-grey;
+        border: 1px solid $light-grey;
+        padding: 10px;
+        border-radius: 3px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        @include elr-em-font(14);
+
+        @include elr-breakpoint(neptune) {
+            width: 100%;
+        }
+    }
+
+    a {
+        text-decoration: underline;
+        color: $link-color;
+
+        &:hover, &:focus {
+            text-decoration: none;
+        }
+
+        &:visited {
+            color: darken($link-color,  20%);
+        }
+    }
+}

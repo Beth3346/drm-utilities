@@ -1,0 +1,80 @@
+/*-----------------------------------------------------------------------------
+    Reset Classes
+-----------------------------------------------------------------------------*/
+
+@mixin elr-reset-classes() {
+    html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        vertical-align: baseline;
+        background: transparent;
+    }
+
+    ol, ul {
+        list-style: none;
+    }
+
+    blockquote, q {
+        quotes: none;
+    }
+
+    blockquote:before, blockquote:after, q:before, q:after {
+        content: '';
+        content: none;
+    }
+
+    /*remember to define focus styles! */
+    :focus {
+        outline: 0;
+        text-decoration: none;
+    }
+
+    /*remember to highlight inserts somehow! */
+    ins {
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+
+        del {
+        text-decoration: line-through;
+    }     
+
+    /* set img max-width */
+    img {
+        height: auto;
+    }
+
+    /* ie 8 img max-width */
+    @media \0screen {
+        img { width: auto;}
+    }
+
+    body {
+        line-height: $default-line-height;
+        font-size: $default-font-size#{px};
+        font-family: $font-family;
+        color: $main-color;
+        background-color: $background-color;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+    }
+
+    // add html5 compatibilty
+
+    main, article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { 
+        display: block;
+    }
+
+    // add box-sizing to block elements
+
+    h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dt, dd, li, blockquote, cite, form, 
+    input, label, textarea, div, section, aside, header, footer, a, nav, button, span, button, span,
+    article, main, pre, table, td, tr, th, thead, tbody, tfoot, details, img, figure, menu, figcaption, i, b {
+        box-sizing: border-box;
+    }
+}

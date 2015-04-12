@@ -212,4 +212,4 @@ class @DrmSort
         # replace with sortedList
         $.each sortedList, -> list.append @
 
-new DrmSort()
+# new DrmSort()

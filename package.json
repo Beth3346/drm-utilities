@@ -1,10 +1,10 @@
 {
-    "name": "drm-utilities",
-    "version": "0.1.0",
-    "description": "a demonstration of what drm-utilities can do",
+    "name": "elr-utilities",
+    "version": "0.9.1",
+    "description": "a demonstration of what elr-utilities can do",
     "repository": {
         "type": "git",
-        "url": "https://github.com/dynamicresponsemedia/drm-utilities.git"
+        "url": "https://github.com/elr-utilities/elr-utilities.git"
     },
     "devDependencies": {
         "grunt": "~0.4.4",

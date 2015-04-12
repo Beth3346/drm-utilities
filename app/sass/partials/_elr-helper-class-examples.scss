@@ -1,0 +1,20 @@
+/*-----------------------------------------------------------------------------
+    Helper Classes Utilities Examples
+-----------------------------------------------------------------------------*/
+
+.float-boxes {
+	background-color: $background-color;
+	@include elr-clearfix;
+}
+
+.box {
+	background-color: lighten($main-color, 20%);
+	border: 1px solid $main-color;
+	text-align: center;
+	color: $background-color;
+	@include elr-square(200px);
+}
+
+.typography-classes {
+	background-color: $background-color;
+}
