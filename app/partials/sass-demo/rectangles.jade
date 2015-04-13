@@ -3,6 +3,35 @@ section#rectangles
         .elr-row
             .elr-col-full
                 h1 Rectangles
-    .elr-container
+                p Easy rectangles and squares.
+    .elr-container.rectangle
         .elr-row
             .elr-col-full
+                h3 Rectangle
+                pre @include elr-rectangle($width, $height, $display, $border-radius);
+                p Rectangle with sharp corners
+                .elr-rectangle
+
+                pre
+                    @include elr-rectangle(300px, 200px, block);
+                p Rectangle with rounded corners
+                .elr-rounded-rectangle
+
+                pre
+                    @include elr-rectangle(300px, 200px, block, 5px);
+
+    .elr-container.square
+        .elr-row
+            .elr-col-full
+                h3 Square
+                pre @include elr-square($width, $display, $border-radius);
+                p Square with sharp corners
+                .elr-square
+
+                pre
+                    @include elr-square(300px, block);
+                p Square with rounded corners
+                .elr-rounded-square
+
+                pre
+                    @include elr-square(300px, block, 5px);

@@ -81,7 +81,7 @@
 
 // Creates an equilateral triangle
 
-@mixin elr-equilateral-triangle($direction: top, $base: 100px, $color: #ccc) {
+@mixin elr-equilateral-triangle($direction: top, $base: 100px, $color: $light-grey) {
     $height: $base * 0.8;
 
     @if ($direction == top or $direction == right or $direction == bottom or $direction == left) {

@@ -20,7 +20,7 @@
 @mixin elr-pentagon($width, $height, $background-color)
 {
     position: relative;
-    width: $width*0.54;
+    width: $width*0.90;
     border-width: $height*0.5 $width*0.18 0;
     border-style: solid;
     border-color: $background-color transparent;
@@ -114,32 +114,35 @@
 
 // Creates a trapezoid
 
-@mixin elr-trapezoid($width, $height, $background-color)
+@mixin elr-trapezoid($width, $background-color)
 {
-    border-bottom: $height solid $background-color;
-    border-left: $width/2 solid transparent;
-    border-right: $width/2 solid transparent;
+    border-bottom: ($width / 2) solid $background-color;
+    border-left: ($width / 3) solid transparent;
+    border-right: ($width / 3) solid transparent;
     height: 0;
     width: $width;
+
 }
 
 // ribbon wrapper
 
 @mixin elr-ribbon-wrapper ($height, $color, $stitch-color: white) {
-    width: 114%;
+    width: 100%;
     position: relative;
-    left: -7%;
+    left: 0;
     text-align: center;
     margin: 20px 0 0 0;
     height: $height;
+    line-height: $height - 22; 
     
-    @include elr-stitched-row($color, $stitch-color, none, 1, $darker-grey);
+    @include elr-stitched-row($color, $stitch-color, none, 1);
+    padding: 0;
 
     &:before {
         content: "";
         position: absolute;
         top: -22px;
-        left: -4px;
+        left: -3px;
         z-index: -10;
         @include elr-triangle(bottom-right, 14px, 9px, darken($color, 20%));
     }
@@ -148,7 +151,7 @@
         content: "";
         position: absolute;
         top: -22px;
-        right: -4px;
+        right: -3px;
         z-index: -10;
         @include elr-triangle(bottom-left, 14px, 9px, darken($color, 20%));
     }

@@ -2,10 +2,13 @@ section#media-queries
     .elr-container
         .elr-row
             .elr-col-full
-                h1 Media Queries Example
+                h1 Media Queries
+                p Using a mixin makes media queries simple and easy.
     .elr-container
         .elr-row
             .elr-col-full
+                h2 The most common breakpoints are provided as named breakpoints.
+                p You can override the default widths in your config file.
                 ul.elr-unstyled-list
                     li mercury: 1680px - widescreen
                     li venus: 1680px - widescreen
@@ -16,3 +19,14 @@ section#media-queries
                     li uranus: 640px - small tablet
                     li neptune: 480px - phone horizontal
                     li pluto: 400px - phone vertical
+                p These breakpoints include the most common device widths.
+
+                pre.
+                    @include elr-breakpoint($point, $modifier) {
+                        //css rules go here
+                    }
+
+                p.
+                    You can use a named breakpoint or a custom breakpoint.  If you choose to use a named breakpoint you should not include a modifier.
+                    If you use a custom breakpoint you can specify a modifier.  This should be 'min-width' or 'max-width'.  If you do not include a
+                    modifier elr-breakpoint will use 'max-width'.

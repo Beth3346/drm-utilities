@@ -83,7 +83,8 @@
     &,
     &:before,
     {
-        @include elr-square($width, $background-color);
+        background-color: $background-color;
+        @include elr-square($width);
     }
 
     position: relative;
@@ -107,7 +108,8 @@
     &:before,
     &:after
     {
-        @include elr-square($width, $color);
+        background-color: $background-color;
+        @include elr-square($width);
     }
 
     position: relative;

@@ -1,10 +1,10 @@
 (function($) {
-    window.drmPopovers = function(params) {
+    window.elrPopovers = function(params) {
         var self = {};
         var spec = params || {};
         var holderClass = spec.holder || 'popover-holder';
         var $holder = $('.' + holderClass);
-        var popoverClass = spec.popoverClass || 'drm-popover';
+        var popoverClass = spec.popoverClass || 'elr-popover';
 
         var togglePopover = function() {
             var $that = $(this);

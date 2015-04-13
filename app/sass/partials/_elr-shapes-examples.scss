@@ -1,3 +1,99 @@
 /*-----------------------------------------------------------------------------
     Shapes Utilities Examples
 -----------------------------------------------------------------------------*/
+
+.elr-rectangle {
+    background-color: $main-color;
+    margin: 20px;
+    @include elr-rectangle(300px, 200px);
+}
+
+.elr-rounded-rectangle {
+    background-color: $main-color;
+    margin: 20px;
+    @include elr-rectangle(300px, 200px, null, 5px);
+}
+
+.elr-square {
+    background-color: $main-color;
+    margin: 20px;
+    @include elr-square(200px);
+}
+
+.elr-rounded-square {
+    background-color: $main-color;
+    margin: 20px;
+    @include elr-square(200px, null, 5px);
+}
+
+.shapes .elr-col-4 {
+    height: 300px;
+}
+
+.elr-diamond {
+    background-color: $main-color;
+    margin: 60px;
+    @include elr-quadrilateral-diamond(100px, 10);
+}
+
+.elr-pentagon {
+    margin: 60px;
+    @include elr-pentagon(160px, 160px, $main-color);
+}
+
+.elr-hexagon {
+    margin: 60px;
+    @include elr-hexagon(160px, 160px, $main-color);
+}
+
+.elr-octagon {
+    background-color: $main-color;
+    margin: 60px;
+    @include elr-octagon(160px, 160px, $main-color);
+}
+
+.elr-parallelogram {
+    background-color: $main-color;
+    margin: 60px;
+    @include elr-parallelogram(150px, 100px);
+}
+
+.elr-trapezoid {
+    margin: 60px;
+    @include elr-trapezoid(200px, $main-color);
+}
+
+.elr-ribbon-wrapper {
+    color: white;
+    @include elr-ribbon-wrapper(40px, $main-color);
+}
+
+.elr-star-5 {
+    margin: 60px;
+    @include elr-star-5(200px, $main-color);
+}
+
+.elr-star-6 {
+    margin: 60px;
+    @include elr-star-6(200px, $main-color);
+}
+
+.elr-star-8 {
+    margin: 60px;
+    @include elr-star-8(200px, $main-color);
+}
+
+.elr-badge {
+    margin: 60px;
+    @include elr-badge(200px, $main-color);
+}
+
+.elr-triangle {
+    margin: 60px;
+    @include elr-triangle(top-left, 100px, auto, $main-color);
+}
+
+.elr-equilateral-triangle {
+    margin: 60px;
+    @include elr-equilateral-triangle(top, 100px, $main-color);
+}

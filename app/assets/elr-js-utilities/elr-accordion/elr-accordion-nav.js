@@ -1,4 +1,6 @@
 (function($) {
+    // TODO: add feature that leaves accordion open to show current page link so that visitors
+    // don't need to keep opeing the content to click to a page in the same ul
     window.elrAccordionNav = function(params) {
         var self = {};
         var spec = params || {};
@@ -41,6 +43,10 @@
 
             $openContentIcons.removeClass(collapseIconClass).addClass(expandIconClass);
         };
+
+        // var showCurrent = function() {
+            
+        // };
 
         if ( container.length ) {
             var $label = container.children('ul').children('li').children('a');
