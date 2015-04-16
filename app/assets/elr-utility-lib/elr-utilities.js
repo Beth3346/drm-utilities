@@ -296,7 +296,7 @@
             var arr = [];
 
             $.each(obj, function() {
-                var arr = arr.concat(this);
+                arr = arr.concat(this);
             });
 
             return arr;
@@ -327,7 +327,7 @@
 
             // sort sortLists arrays
             $.each(sortLists, function(key) {
-                elr.comparators['sort' + self.captitalize(key)](sortLists[key], direction);
+                self.comparators['sort' + self.captitalize(key)](sortLists[key], direction);
             });
 
             return self.concatArrays(sortLists);
