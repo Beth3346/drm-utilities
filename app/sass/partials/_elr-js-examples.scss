@@ -20,7 +20,12 @@
 
 .elr-dropdown-nav {
     margin-bottom: 200px;
-    @include elr-dropdown-nav($background-color, $main-color, $background-color);
+    @include elr-dropdown-nav($background-color, $main-color, $main-color);
+}
+
+.main-nav {
+    margin-bottom: 200px;
+    @include elr-dropdown-nav($main-color, white, $light-grey, 5px);
 }
 
 .elr-dropdown-solid-btn-holder {

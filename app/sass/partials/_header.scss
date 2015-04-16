@@ -132,76 +132,37 @@ header {
             }
         }
 
-        ul.elr-dropdown-nav {
+        ul.main-nav {
             float: right;
             margin: 10px;
 
-            li {
+            > li {
                 margin: 0 5px 0 0;
+                border: none;
+
+                &:first-child {
+                    border-left: none;
+                }
+
+                &:last-child {
+                    border-right: none;
+                }
 
                 a {
-                    background-color: $background-color;
-                    color: $main-color;
                     margin: 0;
-                    border-radius: 3px;
                     padding-left: 10px;
                     padding-right: 10px;
-
-                    &:hover {
-                        background-color: $main-color;
-                        color: $background-color;
-
-                        li:hover {
-                            background-color: transparent;
-                        }
-
-                        &:visited {
-                            color: $background-color;
-                        }
-                    }
-
-                    &:visited {
-                        color: $main-color;
-                    }
                 }
 
                 ul {
                     margin-top: 5px;
-                    background-color: transparent;
-                    border: 1px solid $light-grey;
-                    border-radius: 3px;
 
                     li {
                         margin: 0;
-                        background-color: transparent;
-
-                        &:first-child a {
-                            border-radius: 3px 3px 0 0;
-                        }
-
-                        &:last-child a {
-                            border-radius: 0 0 3px 3px;
-                        }
                     }
 
                     a {
-                        border-radius: 0;
-                        background-color: $background-color;
-                        color: $main-color;
                         @include elr-em-font(12);
-
-                        &:hover {
-                            background-color: $main-color;
-                            color: $background-color;
-
-                            &:visited {
-                                color: $background-color;
-                            }
-                        }
-
-                        &:visited {
-                            color: $main-color;
-                        }
                     }
                 }
             }

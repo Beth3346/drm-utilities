@@ -32,6 +32,7 @@
 
 (function() {
     elrDropdownMenu();
+    elrDropdownMenu({menuClass: 'main-nav'});
 })();
 
 (function() {
