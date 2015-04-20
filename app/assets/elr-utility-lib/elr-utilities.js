@@ -24,7 +24,7 @@
             minute: new RegExp(':(\\d+)'),
             ampm: new RegExp('(am|pm|AM|PM)$'),
             // an integer can be negative or positive and can include one comma separator followed by exactly 3 numbers
-            integer: new RegExp("^\\-?\\d*"),
+            integer: new RegExp("(^\\-?\\d*$)|(^\\-?\\d*(,\\d{3})*$)"),
             number: new RegExp("^(?:\\-?\\d+|\\d*)(?:\\.?\\d+|\\d)$"),
             url: new RegExp('^https?:\\/\\/[\\da-z\\.\\-]+[\\.a-z]{2,6}[\\/\\w/.\\-]*\\/?$','i'),
             email: new RegExp('^[a-z][a-z\\-\\_\\.\\d]*@[a-z\\-\\_\\.\\d]*\\.[a-z]{2,6}$','i'),
@@ -170,21 +170,10 @@
             return str;
         };
 
-        // test for alpha values and perform alpha sort
-        self.sortValues = function(a, b, dir) {
-            dir = dir || 'ascending';
-
-            if ( elr.patterns.alpha.test(a) ) {
-                if ( a < b ) {
-                    return ( dir === 'ascending' ) ? -1 : 1;
-                } else if ( a > b ) {
-                    return ( dir === 'ascending' ) ? 1 : -1;
-                } else if ( a === b ) {
-                    return 0;
-                }
-            } else {
-                return ( dir === 'ascending' ) ? a - b : b - a;
-            }
+        self.captitalize = function(str) {
+            return str.toLowerCase().replace(/^.|\s\S/g, function(a) {
+                return a.toUpperCase();
+            });
         };
         
         self.throttle = function(fn, threshold, scope) {
@@ -229,12 +218,6 @@
             $content.stop().animate({
                 'scrollTop': $content.position().top
             }, speed, 'swing');
-        };
-
-        self.captitalize = function(str) {
-            return str.toLowerCase().replace(/^.|\s\S/g, function(a) {
-                return a.toUpperCase();
-            });
         };
 
         self.killEvent = function($el, eventType, selector) {
@@ -300,6 +283,23 @@
             });
 
             return arr;
+        };
+
+        // test for alpha values and perform alpha sort
+        self.sortValues = function(a, b, dir) {
+            dir = dir || 'ascending';
+
+            if ( elr.patterns.alpha.test(a) ) {
+                if ( a < b ) {
+                    return ( dir === 'ascending' ) ? -1 : 1;
+                } else if ( a > b ) {
+                    return ( dir === 'ascending' ) ? 1 : -1;
+                } else if ( a === b ) {
+                    return 0;
+                }
+            } else {
+                return ( dir === 'ascending' ) ? a - b : b - a;
+            }
         };
 
         self.sortComplexList = function(types, $listItems, direction) {

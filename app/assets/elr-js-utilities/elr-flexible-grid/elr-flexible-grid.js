@@ -7,6 +7,7 @@
         var imagesPerRow = spec.imagesPerRow || 4;
         var flex = spec.flex || true;
         var $grid = $('.' + gridClass);
+        var tags;
 
         var addFilterButtons = function(tags) {
 
@@ -126,7 +127,7 @@
             $(window).load(function() {
                 var filter = hash ? hash.replace(/^#/, '') : null;
 
-                tags = elr.toArray($grid.find('ul.caption-tags li'));
+                tags = elr.toArray($grid.find('ul.caption-tags li'), true);
 
                 addFilterButtons(tags);
                 filterListItems(filter, $items);
@@ -141,7 +142,7 @@
 
             if ( flex === true ) {
                 $(window).resize(function() {
-                    positionListItems(items);
+                    positionListItems($items);
                     resizeOverlay();
                 });
             }
