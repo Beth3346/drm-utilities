@@ -56,21 +56,26 @@
             year: new RegExp('([0-9]{4})'),
             dateKeywords: new RegExp('^(yesterday|today|tomorrow)', 'i'),
             timeKeywords: new RegExp('^(noon|midnight)', 'i'),
-            singleSpace: new RegExp('\\s')
+            singleSpace: new RegExp('\\s'),
+
+            // sort patterns
+            sortNumber: new RegExp("^(?:\\-?\\d+|\\d*)(?:\\.?\\d+|\\d)"),
+            sortMonthDayYear: new RegExp('^(?:[0]?[1-9]|[1][012]|[1-9])[-\/.](?:[0]?[1-9]|[12][0-9]|[3][01])[-\/.][0-9]{4}'),
+            sortTime: new RegExp('^(?:[12][012]:|[0]?[0-9]:)[012345][0-9](?:\/:[012345][0-9])?(?:am|pm|AM|PM)', 'i')
         };
 
         self.dataTypeChecks = {
             isDate: function(value) {
-                return ( self.patterns.monthDayYear.test(value) ) ? true : false;
+                return ( self.patterns.sortMonthDayYear.test(value) ) ? true : false;
             },
             isNumber: function(value) {
-                return ( self.patterns.number.test(value) ) ? true : false;
+                return ( self.patterns.sortNumber.test(value) ) ? true : false;
             },
             isAlpha: function(value) {
                 return ( self.patterns.alpha.test(value) ) ? true : false;
             },
             isTime: function(value) {
-                return ( self.patterns.time.test(value) ) ? true : false;
+                return ( self.patterns.sortTime.test(value) ) ? true : false;
             }
         };
 
@@ -96,7 +101,6 @@
                     }
                 });
             }
-
             return $.unique(types);
         };
 
@@ -265,7 +269,7 @@
             return arr;
         };
 
-        // create keys with empty arrays for each value in an array
+        // create object keys with arrays for each value in an array
         self.createArrays = function(obj, list) {
             $.each(list, function() {
                 obj[this] = [];
@@ -281,7 +285,6 @@
             $.each(obj, function() {
                 arr = arr.concat(this);
             });
-
             return arr;
         };
 
@@ -302,7 +305,7 @@
             }
         };
 
-        self.sortComplexList = function(types, $listItems, direction) {
+        self.sortComplexList = function(types, listItems, direction) {
             var that = this;
             var sortLists = {};
 
@@ -312,16 +315,30 @@
             self.createArrays(sortLists, types);
 
             // add list items to sortLists arrays
-            $.each($listItems, function() {
-                var listItem = this;
-                var value = $.trim($(listItem).text());
 
-                $.each(types, function() {
-                    if ( self.dataTypeChecks['is' + self.captitalize(this)].call(that, value) ) {
-                        sortLists[this].push(listItem);
+            $.each(types, function() {
+                var type = this;
+                $.each(listItems, function() {
+                    var listItem = this;
+                    var value = $.trim($(listItem).text());
+
+                    if ( self.dataTypeChecks['is' + self.captitalize(type)].call(that, value) ) {
+                        sortLists[type].push(listItem);
                     } else {
                         return;
                     }
+                });
+
+                $.each(sortLists[type], function() {
+                    var value = ($(this).text());
+
+                    $(listItems).each(function(k) {
+                        var listVal = $(this).text();
+
+                        if (listVal === value) {
+                            listItems.splice(k, 1);
+                        }
+                    });
                 });
             });
 
@@ -330,6 +347,13 @@
                 self.comparators['sort' + self.captitalize(key)](sortLists[key], direction);
             });
 
+            // $.each(types, function() {
+            //     var type = this;
+            //     $.each(sortLists[type], function(k, v) {
+            //         console.log($(v).text() + ':' + type);
+            //     });
+            // });
+
             return self.concatArrays(sortLists);
         };
 
@@ -337,8 +361,8 @@
             sortDate: function($items, direction) {
                 var sort = function(a, b) {
                     if ( self.dataTypeChecks.isDate($.trim($(a).text())) && self.dataTypeChecks.isDate($.trim($(b).text())) ) {
-                        a = new Date(self.patterns.monthDayYear.exec($.trim($(a).text())));
-                        b = new Date(self.patterns.monthDayYear.exec($.trim($(b).text())));
+                        a = new Date(self.patterns.sortMonthDayYear.exec($.trim($(a).text())));
+                        b = new Date(self.patterns.sortMonthDayYear.exec($.trim($(b).text())));
                     }
 
                     return self.sortValues(a, b, direction);
@@ -349,9 +373,12 @@
 
             sortTime: function($items, direction) {
                 var sort = function(a, b) {
+                    var time1 = self.patterns.sortTime.exec($.trim($(a).text()))[0];
+                    var time2 = self.patterns.sortTime.exec($.trim($(b).text()))[0];
+
                     if ( self.dataTypeChecks.isTime($.trim($(a).text())) && self.dataTypeChecks.isTime($.trim($(b).text())) ) {
-                        a = new Date("04-22-2014" + self.parseTime(self.patterns.time.exec($.trim($(a).text()))));
-                        b = new Date("04-22-2014" + self.parseTime(self.patterns.time.exec($.trim($(b).text()))));
+                        a = new Date("04-22-2014 " + elr.parseTime(time1));
+                        b = new Date("04-22-2014 " + elr.parseTime(time2));
                     }
 
                     return self.sortValues(a, b, direction);

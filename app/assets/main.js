@@ -4,6 +4,13 @@
     elrAccordionNav({
         containerClass: 'sidebar'
     });
+
+    $('button.mobile-menu-toggle').on('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $('ul.mobile-nav').slideToggle();
+    });
+
 })();
 
 (function($){
