@@ -8,8 +8,8 @@
 
 $ = jQuery
 
-class @DrmCalendar
-    constructor: (@calendarClass = 'drm-calendar', @view = 'month', @addHolidays = yes, @currentDate = 'today', @newEvents = []) ->
+class @ElrCalendar
+    constructor: (@calendarClass = 'elr-calendar', @view = 'month', @addHolidays = yes, @currentDate = 'today', @newEvents = []) ->
         self = @
         @calendar = $ ".#{@calendarClass}"
         if @calendar.length isnt 0
@@ -20,16 +20,16 @@ class @DrmCalendar
                 month: @now.getMonth()
                 date: @now.getDate()
                 year: @now.getFullYear()
-            @calendarInnerClass = "drm-calendar-#{@view}-view"
-            @eventClass = 'drm-events'
+            @calendarInnerClass = "elr-calendar-#{@view}-view"
+            @eventClass = 'elr-events'
             @classes =
-                weekend: 'drm-cal-weekend'
-                muted: 'drm-cal-muted'
-                holiday: 'drm-cal-holiday'
-                today: 'drm-cal-today'
-                month: 'drm-month'
-                week: 'drm-week'
-                date: 'drm-date'
+                weekend: 'elr-cal-weekend'
+                muted: 'elr-cal-muted'
+                holiday: 'elr-cal-holiday'
+                today: 'elr-cal-today'
+                month: 'elr-month'
+                week: 'elr-week'
+                date: 'elr-date'
             @months = [
                 'January'
                 'February'
@@ -365,12 +365,12 @@ class @DrmCalendar
             ]
 
             # calendar navigation
-            @calendarNav = $ '.drm-calendar-nav'
-            @calendarSelect = $ '.drm-calendar-select'
+            @calendarNav = $ '.elr-calendar-nav'
+            @calendarSelect = $ '.elr-calendar-select'
             @calendarSelectButton = @calendarSelect.find 'button[type=submit]'
-            @addEventForm = @calendar.find('form.drm-calendar-new-event').hide()
-            @showEventFormButton = @calendar.find 'button.drm-show-event-form'
-            @calendarViewActiveButton = @calendar.find(".drm-calendar-view-nav button[data-view=#{@view}]").addClass 'active'
+            @addEventForm = @calendar.find('form.elr-calendar-new-event').hide()
+            @showEventFormButton = @calendar.find 'button.elr-show-event-form'
+            @calendarViewActiveButton = @calendar.find(".elr-calendar-view-nav button[data-view=#{@view}]").addClass 'active'
 
             @calendar.each ->
                 that = $ @
@@ -405,58 +405,58 @@ class @DrmCalendar
                 else
                     self.createCalendar {month: _currentDate.month, date: _currentDate.date, year: _currentDate.year}, that, events
 
-                that.on 'click', '.drm-calendar-view-nav button', (e) ->
+                that.on 'click', '.elr-calendar-view-nav button', (e) ->
                     # change calendar view
                     e.preventDefault()
                     _that = $ @
                     _that.addClass 'active'
-                    calendar = _that.closest '.drm-calendar'
-                    calendar.find(".drm-calendar-view-nav button.active").removeClass 'active'
+                    calendar = _that.closest '.elr-calendar'
+                    calendar.find(".elr-calendar-view-nav button.active").removeClass 'active'
                     view = _that.data 'view'
 
                     self.changeCalendarView view, events, calendar
 
-                that.on 'click', '.drm-calendar-date-prev, .drm-calendar-date-next', ->
+                that.on 'click', '.elr-calendar-date-prev, .elr-calendar-date-next', ->
                     # skip date forward or backward
                     _that = $ @
-                    calendar = _that.closest '.drm-calendar'
+                    calendar = _that.closest '.elr-calendar'
                     direction = $(@).data 'dir'
                     self.advanceDate.call @, direction, events, calendar
 
-                that.on 'click', '.drm-calendar-week-prev, .drm-calendar-week-next', ->
+                that.on 'click', '.elr-calendar-week-prev, .elr-calendar-week-next', ->
                     # skip week forward or backward
                     _that = $ @
                     direction = $(@).data 'dir'
-                    calendar = _that.closest '.drm-calendar'
+                    calendar = _that.closest '.elr-calendar'
                     self.advanceWeek.call @, direction, events, calendar
 
-                that.on 'click', '.drm-calendar-month-prev, .drm-calendar-month-next', ->
+                that.on 'click', '.elr-calendar-month-prev, .elr-calendar-month-next', ->
                     # skip month forward or backward
                     _that = $ @
-                    calendar = _that.closest '.drm-calendar'
+                    calendar = _that.closest '.elr-calendar'
                     direction = _that.data 'dir'
                     self.advanceMonth.call @, direction, events, calendar
 
                     return
 
-                that.on 'click', '.drm-calendar-year-prev, .drm-calendar-year-next', ->
+                that.on 'click', '.elr-calendar-year-prev, .elr-calendar-year-next', ->
                     # skip year forward or backward
                     _that = $ @
                     direction = $(@).data 'dir'
-                    calendar = _that.closest '.drm-calendar'
+                    calendar = _that.closest '.elr-calendar'
                     self.advanceYear.call @, direction, events, calendar
 
-                that.on 'click', '.drm-calendar-current', ->
+                that.on 'click', '.elr-calendar-current', ->
                     # go to today's date
                     _that = $ @
-                    calendar = _that.closest '.drm-calendar'
+                    calendar = _that.closest '.elr-calendar'
                     self.changeCalendar.call @, {month: self.today.month, date: self.today.date, year: self.today.year}, events, calendar
 
-                that.on 'click', '.drm-calendar-select button[type=submit]', (e) ->
+                that.on 'click', '.elr-calendar-select button[type=submit]', (e) ->
                     # go to a specific date
                     e.preventDefault()
                     _that = $ @
-                    calendar = _that.closest '.drm-calendar'
+                    calendar = _that.closest '.elr-calendar'
                     fields = _that.parent().find(':input').not 'button[type=submit]'
                     newDate =
                         month: _that.parent().find('#month').val()
@@ -473,7 +473,7 @@ class @DrmCalendar
                     # change calendar view
                     self.changeCalendar.call self, newDate, events, calendar
 
-                that.on 'click', 'button.drm-show-event-form', ->
+                that.on 'click', 'button.elr-show-event-form', ->
                     # show add event form
                     _that = $ @
                     if self.addEventForm.is(':hidden')
@@ -483,7 +483,7 @@ class @DrmCalendar
                         self.addEventForm.slideUp()
                         _that.text 'Add New Event'
 
-                that.on 'click', 'form.drm-calendar-new-event button.addEvent', (e) ->
+                that.on 'click', 'form.elr-calendar-new-event button.addEvent', (e) ->
                     # add an new event to the events object
                     # this code should be moved to its own method
                     # write a method to get the form data and send the object to the createEvent method
@@ -507,7 +507,7 @@ class @DrmCalendar
                     fields = self.addEventForm.find(':input').not('button[type=submit]').val ''
                     self.clearForm fields                
 
-                that.on 'click', ".drm-date", ->
+                that.on 'click', ".elr-date", ->
                     # show event form and fill out date infomation when a date is clicked
                     _that = $ @
 
@@ -523,7 +523,7 @@ class @DrmCalendar
                 that.on 'click', "ul.#{self.eventClass} a", (e) ->
                     # show event details
                     _that = $ @
-                    day = _that.closest '.drm-date'
+                    day = _that.closest '.elr-date'
                     eventId = _that.data 'event'
                     fullDate =
                         month: self.months[day.data('month')]
@@ -533,17 +533,17 @@ class @DrmCalendar
                     e.stopPropagation()
                     self.readEvent eventId, fullDate
 
-            @body.on 'click', 'div.drm-calendar-event-details', (e) ->
+            @body.on 'click', 'div.elr-calendar-event-details', (e) ->
                 e.stopPropagation()
 
-            @body.on 'click', 'div.drm-calendar-event-details button.drm-event-edit', (e) ->
+            @body.on 'click', 'div.elr-calendar-event-details button.elr-event-edit', (e) ->
                 e.preventDefault()
                 _that = $ @
                 eventId = _that.data 'event'
                 index = self.getEventIndex eventId
                 self.editEvent()
 
-            @body.on 'click', 'div.drm-calendar-event-details button.drm-event-delete', (e) ->
+            @body.on 'click', 'div.elr-calendar-event-details button.elr-event-delete', (e) ->
                 e.preventDefault()
                 _that = $ @
                 eventId = _that.data 'event'
@@ -551,7 +551,7 @@ class @DrmCalendar
                 self.destroyEvent eventId, index
                 self.closeEvent e
 
-            @body.on 'click', 'div.drm-calendar-event-details button.drm-event-close', @closeEvent
+            @body.on 'click', 'div.elr-calendar-event-details button.elr-event-close', @closeEvent
     
     # utilities
     capitalize: (str) ->
@@ -622,7 +622,7 @@ class @DrmCalendar
 
     getMonthWeekNum: (dayNum, day, month, year) ->
         # gets the week of the month which an event occurs
-        _weeks = @calendar.find("div.#{@calendarInnerClass}").find '.drm-week'
+        _weeks = @calendar.find("div.#{@calendarInnerClass}").find '.elr-week'
         _firstDay = @getDayOfWeek month, 1, year
         _dayShift = if _firstDay is @daysPerWeek then 0 else _firstDay
         _numberWeeks = @getWeeksInMonth month, year
@@ -719,7 +719,7 @@ class @DrmCalendar
         index
 
     closeEvent: (e) ->
-        $('div.drm-blackout').fadeOut 300, ->
+        $('div.elr-blackout').fadeOut 300, ->
             $(@).remove()
 
         e.preventDefault()
@@ -750,22 +750,22 @@ class @DrmCalendar
 
     editEvent: ->
         self = @
-        eventDetailList = $('.drm-event-detail-list')
+        eventDetailList = $('.elr-event-detail-list')
         eventDetails = eventDetailList.find 'li'
 
         # change event details to form fields and populate with text
         eventFormHtml = ''
         $.each eventDetails, ->
             _that = $ @
-            label = $.trim(_that.find('span.drm-event-label').text()).toLowerCase()
+            label = $.trim(_that.find('span.elr-event-label').text()).toLowerCase()
             label = self.cleanString label, ':'
-            value = $.trim _that.find('span.drm-event-detail').text()
+            value = $.trim _that.find('span.elr-event-detail').text()
             eventFormHtml += "<label for='#{label}'>#{self.capitalize(label)}: </label>
             <input type='text' value='#{value}' id='#{label}' name='#{label}'>"
             return eventFormHtml
 
         editEventForm = $ '<form></form>',
-            class: 'drm-calendar-event-edit'
+            class: 'elr-calendar-event-edit'
             html: eventFormHtml
 
         eventDetailList.empty().append editEventForm
@@ -808,35 +808,35 @@ class @DrmCalendar
             notes: _events.notes
 
         _eventHolder = $ '<div></div>',
-            class: 'drm-calendar-event-details'
-            html: "<h1 class='drm-calendar-header'>#{_events.name}</h1>"
+            class: 'elr-calendar-event-details'
+            html: "<h1 class='elr-calendar-header'>#{_events.name}</h1>"
 
         _closeButton = $ '<button></button>',
-            class: 'drm-event-close'
+            class: 'elr-event-close'
             text: 'Close'
             type: 'button'
 
         _editButton = $ "<button></button>",
-            class: 'drm-event-edit'
+            class: 'elr-event-edit'
             'data-event': _events.id
             text: 'Edit'
             type: 'button'
 
         _deleteButton = $ "<button></button>",
-            class: 'drm-event-delete'
+            class: 'elr-event-delete'
             'data-event': _events.id
             text: 'Delete'
             type: 'button'
 
         _eventDetailList = $ '<ul></ul>',
-            class: 'drm-event-detail-list'
+            class: 'elr-event-detail-list'
 
         _close = $ '<button></button>',
             class: 'close'
             text: 'x'
 
         _lightboxHtml = $ '<div></div>',
-            class: 'drm-blackout'
+            class: 'elr-blackout'
             html: _close + _eventHolder
 
         _lightboxHtml.hide().appendTo('body').fadeIn 300, ->
@@ -846,7 +846,7 @@ class @DrmCalendar
                 if value?
                     _title = self.capitalize key
                     _listItem = $ '<li></li>',
-                        html: "<span class='drm-bold drm-event-label'>#{_title}: </span><span class='drm-event-detail'>#{value}</span>"
+                        html: "<span class='elr-bold elr-event-label'>#{_title}: </span><span class='elr-event-detail'>#{value}</span>"
                     _listItem.appendTo _eventDetailList
 
             _closeButton.insertAfter _eventDetailList
@@ -862,7 +862,7 @@ class @DrmCalendar
         eventMonth = calendarInner.data 'month'
         eventYear = calendarInner.data 'year'
         month = $.inArray events.month, self.months
-        weeks = calendarInner.find '.drm-week'
+        weeks = calendarInner.find '.elr-week'
         eventDates = []
 
         addEvents =
@@ -910,7 +910,7 @@ class @DrmCalendar
 
                         $.each _eventWeeks, ->
                             _that = $ @
-                            _weekLength = _that.find(".drm-date").length
+                            _weekLength = _that.find(".elr-date").length
                             eventDates.push _that.find(".#{self.classes.date}[data-day=#{_day}]").data('date')
 
             addWeeklyEvents: (events, eventDates) ->
@@ -956,24 +956,24 @@ class @DrmCalendar
             # create event html
 
             if self.view is 'month'
-                _calendarItem = calendarInner.find ".drm-date[data-date=#{dates}]"
+                _calendarItem = calendarInner.find ".elr-date[data-date=#{dates}]"
             else if !events.time?
-                _calendarItem = calendarInner.find ".drm-date[data-date=#{dates}][data-hour='All Day Event']"
+                _calendarItem = calendarInner.find ".elr-date[data-date=#{dates}][data-hour='All Day Event']"
             else
                 # find hour td element
                 re = new RegExp '^0?','gi'
                 re2 = new RegExp ':[0-9]{2}', 'gi'
                 hour = events.time.replace re, ''
                 hour = hour.replace re2, ''
-                _calendarItem = calendarInner.find ".drm-date[data-date=#{dates}][data-hour=#{hour}]"
+                _calendarItem = calendarInner.find ".elr-date[data-date=#{dates}][data-hour=#{hour}]"
 
             _eventList = _calendarItem.find "ul.#{self.eventClass}"
 
             _eventContent = 
                 if events.time?
-                    "<span class='drm-time'>#{events.time}: </span><span class='drm-event'>#{events.name}</span>"
+                    "<span class='elr-time'>#{events.time}: </span><span class='elr-event'>#{events.name}</span>"
                 else
-                    "<span class='drm-event drm-all-day-event'>#{events.name}</span>"
+                    "<span class='elr-event elr-all-day-event'>#{events.name}</span>"
 
             _eventHtml = $ '<a></a>',
                 href: '#'
@@ -1136,7 +1136,7 @@ class @DrmCalendar
         @view = view
         @changeCalendar newDate, events, calendar
         # change calendar class
-        @calendarInnerClass = "drm-calendar-#{view}-view"
+        @calendarInnerClass = "elr-calendar-#{view}-view"
         return
 
     changeCalendar: (newDate, events, calendar) =>
@@ -1167,7 +1167,7 @@ class @DrmCalendar
         utilities =
             highlightWeekends: ->
                 _calendarInner = calendar.find "div.#{self.calendarInnerClass}"
-                _weeks = _calendarInner.find '.drm-week'
+                _weeks = _calendarInner.find '.elr-week'
                 weekends = [0, 6]
 
                 $.each _weeks, ->
@@ -1183,14 +1183,14 @@ class @DrmCalendar
                 _year = _calendarInner.data 'year'
 
                 if _month is parseInt(newDate.month, 10) and _year is parseInt(newDate.year, 10)
-                    _calendarInner.find(".drm-date[data-date=#{newDate.date}]").addClass self.classes.today
+                    _calendarInner.find(".elr-date[data-date=#{newDate.date}]").addClass self.classes.today
 
             addWeekNumbers: ->
-                _weeks = calendar.find("div.#{self.calendarInnerClass}").find '.drm-week'
+                _weeks = calendar.find("div.#{self.calendarInnerClass}").find '.elr-week'
 
                 $.each _weeks, ->
                     _that = $ @
-                    _firstDateInWeek = _that.find('.drm-date').first().data 'date'
+                    _firstDateInWeek = _that.find('.elr-date').first().data 'date'
                     _weekNumber = self.getWeekNumber newDate.month, _firstDateInWeek, newDate.year
 
                     if _weekNumber % 2 is 0
@@ -1312,7 +1312,7 @@ class @DrmCalendar
                     _calendarHtml = createCalendarHtml()
 
                     _heading = $ '<h1></h1>',
-                        class: 'drm-calendar-header'
+                        class: 'elr-calendar-header'
                         text: "#{self.months[newDate.month]} #{newDate.year}"
                     
                     calendar.append _calendarHtml
@@ -1329,14 +1329,14 @@ class @DrmCalendar
                         self.addEventsToCalendar @, calendar
 
                     # add and remove navigation buttons
-                    $('.drm-calendar-year-prev').text lastYear
-                    $('.drm-calendar-year-next').text nextYear
+                    $('.elr-calendar-year-prev').text lastYear
+                    $('.elr-calendar-year-next').text nextYear
 
-                    $('.drm-calendar-month-prev').text self.months[lastMonth]
-                    $('.drm-calendar-month-next').text self.months[nextMonth]
+                    $('.elr-calendar-month-prev').text self.months[lastMonth]
+                    $('.elr-calendar-month-next').text self.months[nextMonth]
 
-                    $('.drm-calendar-week-prev, .drm-calendar-week-next').hide()
-                    $('.drm-calendar-date-prev, .drm-calendar-date-next').hide()
+                    $('.elr-calendar-week-prev, .elr-calendar-week-next').hide()
+                    $('.elr-calendar-date-prev, .elr-calendar-date-next').hide()
 
                 addCalendar calendar
 
@@ -1375,7 +1375,7 @@ class @DrmCalendar
                         "#{datesInWeek[0]}"
 
                 _heading = $ '<h1></h1>',
-                    class: 'drm-calendar-header'
+                    class: 'elr-calendar-header'
                     text: "#{self.months[newDate.month]} #{_weekDates}: Week #{weekNumber} of #{newDate.year}"
                 
                 _calendar.appendTo calendar
@@ -1384,12 +1384,12 @@ class @DrmCalendar
                 $("div.#{self.calendarInnerClass}")
                     .find "tbody td[data-month=#{lastMonth}]"
                     .addClass self.classes.muted
-                    .removeClass 'drm-date'
+                    .removeClass 'elr-date'
                 
                 $("div.#{self.calendarInnerClass}")
                     .find "tbody td[data-month=#{nextMonth}]"
                     .addClass self.classes.muted
-                    .removeClass 'drm-date'
+                    .removeClass 'elr-date'
 
                 utilities.highlightToday()
                 utilities.highlightWeekends()
@@ -1397,17 +1397,17 @@ class @DrmCalendar
                 $.each events, ->
                     self.addEventsToCalendar @, calendar
 
-                $('.drm-calendar-year-prev').text lastYear
-                $('.drm-calendar-year-next').text nextYear
+                $('.elr-calendar-year-prev').text lastYear
+                $('.elr-calendar-year-next').text nextYear
 
-                $('.drm-calendar-month-prev').text self.months[lastMonth]
-                $('.drm-calendar-month-next').text self.months[nextMonth]
+                $('.elr-calendar-month-prev').text self.months[lastMonth]
+                $('.elr-calendar-month-next').text self.months[nextMonth]
 
-                $('.drm-calendar-week-prev, .drm-calendar-week-next').show()
-                $('.drm-calendar-date-prev, .drm-calendar-date-next').hide()
+                $('.elr-calendar-week-prev, .elr-calendar-week-next').show()
+                $('.elr-calendar-date-prev, .elr-calendar-date-next').hide()
 
             createDate: (newDate, calendar) ->
-                dayListHtml = "<ul class='drm-week drm-day #{weekClass}' data-week='#{weekNumber}'>"
+                dayListHtml = "<ul class='elr-week elr-day #{weekClass}' data-week='#{weekNumber}'>"
                 $.each self.hours, ->
                     _hour = @name
                     dayListHtml += "<li class='#{self.classes.date}' data-month='#{newDate.month}' data-date='#{newDate.date}' 
@@ -1427,7 +1427,7 @@ class @DrmCalendar
                         "#{self.days[day]}, #{self.months[newDate.month]} #{newDate.date} #{newDate.year}"
 
                 _heading = $ '<h1></h1>',
-                    class: 'drm-calendar-header'
+                    class: 'elr-calendar-header'
                     text: _headingText
                 
                 _calendar.appendTo calendar
@@ -1436,14 +1436,14 @@ class @DrmCalendar
                 $.each events, ->
                     self.addEventsToCalendar @, calendar
 
-                $('.drm-calendar-year-prev').text lastYear
-                $('.drm-calendar-year-next').text nextYear
+                $('.elr-calendar-year-prev').text lastYear
+                $('.elr-calendar-year-next').text nextYear
 
-                $('.drm-calendar-month-prev').text self.months[lastMonth]
-                $('.drm-calendar-month-next').text self.months[nextMonth]
+                $('.elr-calendar-month-prev').text self.months[lastMonth]
+                $('.elr-calendar-month-next').text self.months[nextMonth]
 
-                $('.drm-calendar-week-prev, .drm-calendar-week-next').show()
-                $('.drm-calendar-date-prev, .drm-calendar-date-next').show()
+                $('.elr-calendar-week-prev, .elr-calendar-week-next').show()
+                $('.elr-calendar-date-prev, .elr-calendar-date-next').show()
 
         switch self.view
             when 'month' then views.createMonth newDate, calendar

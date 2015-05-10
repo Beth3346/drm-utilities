@@ -4,8 +4,8 @@
 "use strict"
 
 $ = jQuery
-class @DrmStickyNav
-    constructor: (@nav = $('nav.drm-sticky-nav'), @activeClass = 'active', @content = $('div.sticky-nav-content'), @spy = yes) ->
+class @ElrStickyNav
+    constructor: (@nav = $('nav.elr-sticky-nav'), @activeClass = 'active', @content = $('div.sticky-nav-content'), @spy = yes) ->
         self = @
         _links = self.nav.find 'a[href^="#"]'
         _hash = window.location.hash
@@ -116,4 +116,4 @@ class @DrmStickyNav
                 $("a.#{@activeClass}").removeClass @activeClass
                 links.eq(index).addClass @activeClass
 
-new DrmStickyNav()
+new ElrStickyNav()

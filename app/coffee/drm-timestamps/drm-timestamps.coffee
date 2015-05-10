@@ -4,8 +4,8 @@
 "use strict"
 
 $ = jQuery
-class @DrmTimeStamps
-    constructor: (@timestamps = $('.drm-timestamp'), @intervals = yes) ->
+class @ElrTimeStamps
+    constructor: (@timestamps = $('.elr-timestamp'), @intervals = yes) ->
         self = @
         @now = new Date()
         @today =
@@ -17,8 +17,8 @@ class @DrmTimeStamps
             minute: @now.getMinutes()
             second: @now.getSeconds()
         @daysPerWeek = 7
-        @prettyDate = $ '.drm-pretty-date'
-        @drmNow = $ '.drm-now'
+        @prettyDate = $ '.elr-pretty-date'
+        @elrNow = $ '.elr-now'
         @patterns =
             longDate: new RegExp '^(?:[a-z]*[\\.,]?\\s)?[a-z]*\\.?\\s(?:[3][01],?\\s|[012][1-9],?\\s|[1-9],?\\s)[0-9]{4}$', 'i'
             shortDate: new RegExp '((?:[0]?[1-9]|[1][012]|[1-9])[-\/.](?:[0]?[1-9]|[12][0-9]|[3][01])[-\/.][0-9]{4})'
@@ -139,9 +139,9 @@ class @DrmTimeStamps
                 , 1000
 
             setInterval ->                
-                if self.drmNow.length isnt 0
+                if self.elrNow.length isnt 0
                     prettyNow = self.prettifyDate self.now, 'dddd, MMMM DD, yyyy, hh:mm:ssa'   
-                    self.drmNow.text prettyNow
+                    self.elrNow.text prettyNow
             , 1000
         else
             $.each self.timestamps, ->
@@ -153,9 +153,9 @@ class @DrmTimeStamps
                 
                 _that.text duration
                 
-            if self.drmNow.length isnt 0
+            if self.elrNow.length isnt 0
                 prettyNow = self.prettifyDate self.now, 'dddd, MMMM DD, yyyy, hh:mm:ssa'
-                self.drmNow.text prettyNow
+                self.elrNow.text prettyNow
 
     isLeapYear: (year) ->
         # The above expression evaluates whether or not the given date falls within a leap year 
@@ -191,7 +191,7 @@ class @DrmTimeStamps
     
     # getMonthWeekNum: (dayNum, day, month, year) ->
     #     # gets the week of the month which an event occurs
-    #     _weeks = @calendar.find("div.#{@calendarInnerClass}").find '.drm-week'
+    #     _weeks = @calendar.find("div.#{@calendarInnerClass}").find '.elr-week'
     #     _firstDay = @getDayOfWeek month, 1, year
     #     _dayShift = if _firstDay is @daysPerWeek then 0 else _firstDay
     #     _numberWeeks = @getWeeksInMonth month, year
@@ -729,4 +729,4 @@ class @DrmTimeStamps
         # ex. Next Tuesday at 2:24pm
         console.log date
 
-new DrmTimeStamps()
+new ElrTimeStamps()

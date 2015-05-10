@@ -10,7 +10,7 @@ Need to add custom messages
 "use strict"
 
 $ = jQuery
-class @DrmValidation
+class @ElrValidation
     constructor: (@speed = 300) ->
         self = @
         body = $ 'body'
@@ -64,103 +64,103 @@ class @DrmValidation
 
         body.on 'click', ':disabled', (e) -> e.preventDefault()
 
-        body.on 'keyup', ':input.drm-valid-integer', ->
+        body.on 'keyup', ':input.elr-valid-integer', ->
             value = self.getValue.call @
             validate = self.validateInteger value, patterns.integer
             if validate?
                 validateField.call @, value, validate
 
-        body.on 'keyup', ':input.drm-valid-number', ->
+        body.on 'keyup', ':input.elr-valid-number', ->
             value = self.getValue.call @
             validate = self.validateNumber value, patterns.number
             if validate?
                 validateField.call @, value, validate
 
-        body.on 'keyup', ':input.drm-valid-url', ->
+        body.on 'keyup', ':input.elr-valid-url', ->
             value = self.getValue.call @
             validate = self.validateURL value, patterns.url
             if validate?
                 validateField.call @, value, validate
 
-        body.on 'keyup', ':input.drm-valid-phone', ->
+        body.on 'keyup', ':input.elr-valid-phone', ->
             value = self.getValue.call @
             validate = self.validatePhone value, patterns.phone
             if validate?
                 validateField.call @, value, validate
         
-        body.on 'keyup', ':input.drm-valid-email', ->
+        body.on 'keyup', ':input.elr-valid-email', ->
             value = self.getValue.call @
             validate = self.validateEmail value, patterns.email
             if validate?
                 validateField.call @, value, validate
         
-        body.on 'keyup', ':input.drm-valid-full-name', ->
+        body.on 'keyup', ':input.elr-valid-full-name', ->
             value = self.getValue.call @
             validate = self.validateFullName value, patterns.fullName
             if validate?
                 validateField.call @, value, validate
         
-        body.on 'keyup', ':input.drm-valid-alpha', ->
+        body.on 'keyup', ':input.elr-valid-alpha', ->
             value = self.getValue.call @
             validate = self.validateAlpha value, patterns.alpha
             if validate?
                 validateField.call @, value, validate
         
-        body.on 'keyup', ':input.drm-valid-alphanum', ->
+        body.on 'keyup', ':input.elr-valid-alphanum', ->
             value = self.getValue.call @
             validate = self.validateAlphaNum value, patterns.alphaNum
             if validate?
                 validateField.call @, value, validate
         
-        body.on 'keyup', ':input.drm-valid-alphadash', ->
+        body.on 'keyup', ':input.elr-valid-alphadash', ->
             value = self.getValue.call @
             validate = self.validateAlphaNumDash value, patterns.alphaNumDash
             if validate?
                 validateField.call @, value, validate
         
-        body.on 'keyup', ':input.drm-valid-alpha-num-underscore', ->
+        body.on 'keyup', ':input.elr-valid-alpha-num-underscore', ->
             value = self.getValue.call @
             validate = self.validateAlphaNumUnderscore value, patterns.alphaNumUnderscore
             if validate?
                 validateField.call @, value, validate
         
-        body.on 'keyup', ':input.drm-valid-no-spaces', ->
+        body.on 'keyup', ':input.elr-valid-no-spaces', ->
             value = self.getValue.call @
             validate = self.validateNoSpaces value, patterns.noSpaces
             if validate?
                 validateField.call @, value, validate
         
-        body.on 'keyup', ':input.drm-valid-no-tags', ->
+        body.on 'keyup', ':input.elr-valid-no-tags', ->
             value = self.getValue.call @
             validate = self.validateNoTags value, patterns.noTags
             if validate?
                 validateField.call @, value, validate
         
-        body.on 'keyup', ':input.drm-valid-credit-card', ->
+        body.on 'keyup', ':input.elr-valid-credit-card', ->
             value = self.getValue.call @
             validate = self.validateCreditCard value, patterns.creditCard
             if validate?
                 validateField.call @, value, validate
         
-        body.on 'keyup', ':input.drm-valid-cvv', ->
+        body.on 'keyup', ':input.elr-valid-cvv', ->
             value = self.getValue.call @
             validate = self.validateCvv value, patterns.cvv
             if validate?
                 validateField.call @, value, validate
         
-        body.on 'keyup', ':input.drm-valid-zip', ->
+        body.on 'keyup', ':input.elr-valid-zip', ->
             value = self.getValue.call @
             validate = self.validateZip value, patterns.zip
             if validate?
                 validateField.call @, value, validate
         
-        body.on 'keyup', ':input.drm-valid-month-day-year', ->
+        body.on 'keyup', ':input.elr-valid-month-day-year', ->
             value = self.getValue.call @
             validate = self.validateMonthDayYear value, patterns.monthDayYear
             if validate?
                 validateField.call @, value, validate
         
-        body.on 'keyup', ':input.drm-valid-time', ->
+        body.on 'keyup', ':input.elr-valid-time', ->
             value = self.getValue.call @
             validate = self.validateTime value, patterns.time
             if validate?
@@ -374,27 +374,27 @@ class @DrmValidation
         _that = $ @
 
         switch status
-            when 'danger' then _that.addClass 'drm-form-danger' 
-            when 'warning' then _that.addClass 'drm-form-warning'
-            when 'success' then _that.addClass 'drm-form-success'
+            when 'danger' then _that.addClass 'elr-form-danger' 
+            when 'warning' then _that.addClass 'elr-form-warning'
+            when 'success' then _that.addClass 'elr-form-success'
 
     removeValidationClass: (status) ->
         _that = $ @
 
         switch status
             when 'danger'
-                _that.removeClass 'drm-form-warning'
-                _that.removeClass 'drm-form-success'
+                _that.removeClass 'elr-form-warning'
+                _that.removeClass 'elr-form-success'
             when 'warning'
-                _that.removeClass 'drm-form-danger'
-                _that.removeClass 'drm-form-success'
+                _that.removeClass 'elr-form-danger'
+                _that.removeClass 'elr-form-success'
             when 'success'
-                _that.removeClass 'drm-form-danger'
-                _that.removeClass 'drm-form-warning'
+                _that.removeClass 'elr-form-danger'
+                _that.removeClass 'elr-form-warning'
             else
-                _that.removeClass 'drm-form-danger'
-                _that.removeClass 'drm-form-warning'
-                _that.removeClass 'drm-form-success'
+                _that.removeClass 'elr-form-danger'
+                _that.removeClass 'elr-form-warning'
+                _that.removeClass 'elr-form-success'
 
     validateRequired: (value) ->
         validate =
@@ -1049,4 +1049,4 @@ class @DrmValidation
             length = value.length
             _evaluate min, max, length
 
-new DrmValidation()
+new ElrValidation()

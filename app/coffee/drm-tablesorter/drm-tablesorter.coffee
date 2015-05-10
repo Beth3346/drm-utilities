@@ -2,11 +2,11 @@
 # Sort Tabular Data
 ###############################################################################
 "use strict"
-# TODO: merge with drm-sort to create a single sorting library that will sort any type of elements
+# TODO: merge with elr-sort to create a single sorting library that will sort any type of elements
 # major difference is the use of columnNum to find data to be sorted
 $ = jQuery
-class @DrmTableSorter
-    constructor: (@list = $('.drm-sortable-table'), @buttonClass = 'drm-sortable-table-button', @activeClass = 'active', @ignoreWords = ['a', 'the']) ->
+class @ElrTableSorter
+    constructor: (@list = $('.elr-sortable-table'), @buttonClass = 'elr-sortable-table-button', @activeClass = 'active', @ignoreWords = ['a', 'the']) ->
         self = @
         # parent list element
         tableBody = @list.find 'tbody'
@@ -205,4 +205,4 @@ class @DrmTableSorter
         list.empty()
         $.each sortedRows, -> list.append @
 
-new DrmTableSorter()
+new ElrTableSorter()

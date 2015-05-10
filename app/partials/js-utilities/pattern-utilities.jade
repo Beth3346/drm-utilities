@@ -104,7 +104,7 @@ section#pattern-utilities
                 pre self.patterns.integer
             .elr-col-full
                 h3 Number
-                p A number can be negative or positive and can include one comma separator followed by exactly 3 numbers
+                p A number can be negative or positive and can include one comma separator followed by exactly 3 numbers.
                 h4 Regex Tester
                 form.tabular-form.regex-tester
                     input(type="text" placeholder="test regex" data-pattern="number")
@@ -112,7 +112,7 @@ section#pattern-utilities
                 pre self.patterns.number
             .elr-col-full
                 h3 URL
-                p 
+                p Checks a string to make sure it is a valid URL.
                 h4 Regex Tester
                 form.tabular-form.regex-tester
                     input(type="text" placeholder="test regex" data-pattern="url")
@@ -120,7 +120,7 @@ section#pattern-utilities
                 pre self.patterns.url
             .elr-col-full
                 h3 Email
-                p 
+                p Checks a string to make sure it is a valid email.
                 h4 Regex Tester
                 form.tabular-form.regex-tester
                     input(type="text" placeholder="test regex" data-pattern="email")
@@ -128,7 +128,8 @@ section#pattern-utilities
                 pre self.patterns.email
             .elr-col-full
                 h3 Zip Code
-                p 
+                p Checks a string to make sure it is a properly formatted zip code. Allows for 5 digit and 9 digit zip codes.
+                p Note: Does not check for a zip code's existance.
                 h4 Regex Tester
                 form.tabular-form.regex-tester
                     input(type="text" placeholder="test regex" data-pattern="zip")

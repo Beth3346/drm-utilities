@@ -4,33 +4,33 @@
 "use strict"
 
 ( ($) ->	
-    drmTooltips =
+    elrTooltips =
         config:
-            tooltip: $ '.drm-has-tooltip'
+            tooltip: $ '.elr-has-tooltip'
             speed: 300
 
         init: (config) ->
             $.extend @config, config
 
-            drmTooltips.config.tooltip.on 'mouseenter', @.addTooltip
-            drmTooltips.config.tooltip.on 'mouseleave', @.removeTooltip
+            elrTooltips.config.tooltip.on 'mouseenter', @.addTooltip
+            elrTooltips.config.tooltip.on 'mouseleave', @.removeTooltip
 
         addTooltip: ->
             that = $ @
             content = that.data 'title'
-            oldTooltip = $ "div.drm-tooltip-#{position}:contains(#{content})"
+            oldTooltip = $ "div.elr-tooltip-#{position}:contains(#{content})"
             position = that.data 'position'
 
             unless oldTooltip.length isnt 0
                 newTooltip = $ '<div></div>', {
                     text: content,
-                    class: "drm-tooltip-#{position}"
+                    class: "elr-tooltip-#{position}"
                 }
 
                 newTooltip.hide().insertBefore that
-                tooltipCSS = drmTooltips.positionTooltip.call(that, newTooltip, position)
+                tooltipCSS = elrTooltips.positionTooltip.call(that, newTooltip, position)
 
-                newTooltip.css(tooltipCSS).fadeIn drmTooltips.config.speed
+                newTooltip.css(tooltipCSS).fadeIn elrTooltips.config.speed
 
         positionTooltip: (newTooltip, position) ->
             that = $ @
@@ -68,12 +68,12 @@
             that = $ @
             content = that.data 'title'
             position = that.data 'position'
-            oldTooltip = $ "div.drm-tooltip-#{position}:contains(#{content})"
+            oldTooltip = $ "div.elr-tooltip-#{position}:contains(#{content})"
 
             unless oldTooltip.length is 0
-                oldTooltip.fadeOut drmTooltips.config.speed, ->
+                oldTooltip.fadeOut elrTooltips.config.speed, ->
                     $(@).remove()
 
-    drmTooltips.init()
+    elrTooltips.init()
 
 ) jQuery

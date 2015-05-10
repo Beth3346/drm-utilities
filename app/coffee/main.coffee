@@ -5,46 +5,46 @@
 
 $ = jQuery
 $ ->
-    new DrmStickyNav $('nav.drm-sticky-sidebar'), null, $('div.sticky-sidebar-content')
+    new ElrStickyNav $('nav.elr-sticky-sidebar'), null, $('div.sticky-sidebar-content')
 
-    drmCalendar = new DrmCalendar()
+    elrCalendar = new ElrCalendar()
 
-    drmCalendar.createEvent
+    elrCalendar.createEvent
         name: "Rabbit Rabbit Day"
         eventDate: 1
         type: "fun day"
         recurrance: "monthly"
         notes: "Say Rabbit Rabbit for good luck this month"
-    drmCalendar.createEvent
+    elrCalendar.createEvent
         name: "First Monday"
         day: ["Monday"]
         dayNum : 1
         recurrance: "monthly"
         notes: "This is the first Monday of the month"
-    drmCalendar.createEvent
+    elrCalendar.createEvent
         name: "Lawn Day"
         month: "April"
         eventDate: 24
         day: ["Thursday"]
         recurrance: "biweekly"
         notes: "Every other Thursday"
-    drmCalendar.createEvent
+    elrCalendar.createEvent
         name: "Wake Up"
         day: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
         time: "6:00am"
         recurrance: "weekly"
         note: "Wake Up Every Day"
-    drmCalendar.createEvent
+    elrCalendar.createEvent
         name: "Sleep In!"
         day: ["Saturday", "Sunday"]
         time: "9:00am"
         recurrance: "weekly"
-    drmCalendar.createEvent
+    elrCalendar.createEvent
         name: "Eat Lunch"
         time: "12:00pm"
         notes: "eat a healthy lunch"
         recurrance: "daily"
-    drmCalendar.createEvent
+    elrCalendar.createEvent
         name: "One Time Event"
         month: "May"
         year: 2014
@@ -52,7 +52,7 @@ $ ->
         eventDate: 4
         recurrance: "none"
         note: "do this once"
-    drmCalendar.createEvent
+    elrCalendar.createEvent
         name: "Later That Day"
         month: "May"
         year: 2014
@@ -60,7 +60,7 @@ $ ->
         eventDate: 4
         recurrance: "none"
         note: "do this once"
-    drmCalendar.createEvent
+    elrCalendar.createEvent
         name: "Another One Time Event"
         month: "May"
         year: 2014
@@ -69,13 +69,8 @@ $ ->
         recurrance: "none"
         note: "do this once"
 
-    # new DrmSort $('.drm-events'), yes
+    # new ElrSort $('.elr-events'), yes
     
     # prettyPrint()
-
-    $('button.mobile-menu-toggle').on 'click', (e) ->
-        e.preventDefault()
-        e.stopPropagation()
-        $('ul.mobile-nav').slideToggle()
 
     return

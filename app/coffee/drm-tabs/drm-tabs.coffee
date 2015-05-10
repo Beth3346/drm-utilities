@@ -4,8 +4,8 @@
 "use strict"
 
 $ = jQuery
-class @DrmTabs
-    constructor: (@holder = $('div.drm-tabs'), @activeClass = 'active', @speed = 300) ->
+class @ElrTabs
+    constructor: (@holder = $('div.elr-tabs'), @activeClass = 'active', @speed = 300) ->
         self = @
         self.nav = self.holder.find 'nav'
         self.tabs = self.holder.find 'section'
@@ -39,4 +39,4 @@ class @DrmTabs
         window.location.hash = target
         @nav.find("a[href='#{target}']").addClass @activeClass
 
-new DrmTabs()
+new ElrTabs()

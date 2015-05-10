@@ -9,7 +9,11 @@ module.exports = function(grunt) {
         copy: {
             build: {
                 cwd: '<%= appFolder %>',
-                src: [ '**', '!**/partials/**/*', '!**/*.jade' , '!**/images/**/*', '!**/sass/**/*', '!**/coffee/**/*'],
+                src: [ '**', '!**/partials/**/*',
+                    '!**/*.jade' ,
+                    '!**/images/**/*',
+                    '!**/sass/**/*',
+                    '!**/coffee/**/*'],
                 dest: '<%= distFolder %>',
                 expand: true
             }
@@ -28,7 +32,7 @@ module.exports = function(grunt) {
 
             scripts: {
                 nonull: false,
-                src: ['<%= distFolder %>js']        
+                src: ['<%= distFolder %>js']
             },
 
             images: {
@@ -38,7 +42,13 @@ module.exports = function(grunt) {
 
             postbuild: {
                 nonull: false,
-                src: ['<%= distFolder %>coffee','<%= distFolder %>js/coffee-compiled','<%= distFolder %>js/dist','<%= distFolder %>sass','<%= distFolder %>partials','<%= distFolder %>assets','<%= distFolder %>css']
+                src: ['<%= distFolder %>coffee',
+                    '<%= distFolder %>js/coffee-compiled',
+                    '<%= distFolder %>js/dist',
+                    '<%= distFolder %>sass',
+                    '<%= distFolder %>partials',
+                    '<%= distFolder %>assets',
+                    '<%= distFolder %>css']
             }
         },
 
@@ -94,14 +104,21 @@ module.exports = function(grunt) {
 
             dist: {
                 // the files to concatenate
-                src: ['<%= distFolder %>assets/jquery.js', '<%= appFolder %>assets/elr-utility-lib/**/*.js', '<%= distFolder %>assets/elr-js-utilities/**/*.js', '<%= distFolder %>assets/main.js', '<%= distFolder %>js/coffee-compiled/*.js'],
+                src: ['<%= distFolder %>assets/jquery.js',
+                    '<%= appFolder %>assets/elr-utilities.js',
+                    '<%= distFolder %>assets/elr-js-utilities/*.js',
+                    '<%= distFolder %>assets/main.js',
+                    '<%= distFolder %>js/coffee-compiled/*.js'],
                 // the location of the resulting JS file
                 dest: '<%= distFolder %>js/<%= pkg.name %>.<%= pkg.version %>.js'
             }
         },
 
         jshint: {
-            files: ['<%= distFolder %>js/coffee-compiled/*.js', '<%= appFolder %>assets/elr-js-utilities/**/*.js', '<%= appFolder %>assets/main.js', '<%= appFolder %>assets/elr-utility-lib/**/*.js'],
+            files: ['<%= distFolder %>js/coffee-compiled/*.js',
+                '<%= appFolder %>assets/elr-js-utilities/*.js',
+                '<%= appFolder %>assets/main.js',
+                '<%= appFolder %>assets/elr-utilities.js'],
             options: {
                 maxerr: 10,
                 unused: true,
@@ -220,12 +237,23 @@ module.exports = function(grunt) {
 
             scripts: {
                 // We watch and compile sass files as normal but don't live reload here
-                files: ['<%= distFolder %>assets/jquery.js', '<%= appFolder %>assets/elr-utility-lib/**/*.js', '<%= distFolder %>assets/elr-js-utilities/**/*.js', '<%= distFolder %>assets/main.js','<%= appFolder %>coffee/**/*.coffee'],
+                files: ['<%= distFolder %>assets/jquery.js',
+                '<%= appFolder %>assets/el-utilities.js',
+                '<%= distFolder %>assets/elr-js-utilities/*.js',
+                '<%= distFolder %>assets/main.js',
+                '<%= appFolder %>coffee/**/*.coffee'],
                 tasks: [ 'coffee', 'concat', 'jshint' ],
             },
 
             copy: {
-                files: [ '<%= appFolder %>**/*', '!<%= appFolder %>**/*.scss', '!<%= appFolder %>**/*.coffee', '!<%= appFolder %>**/*.{png,jpg,jpeg}' ],
+                files: [ '<%= appFolder %>*',
+                '<%= appFolder %>assets/*',
+                '<%= appFolder %>assets/elr-js-utilities/*',
+                '<%= appFolder %>sass/**/*',
+                '<%= appFolder %>partials/**/*',
+                '!<%= appFolder %>**/*.scss',
+                '!<%= appFolder %>**/*.coffee',
+                '!<%= appFolder %>**/*.{png,jpg,jpeg}' ],
                 tasks: [ 'copy' ]
             },
 
@@ -255,10 +283,58 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-autoprefixer');
 
     // Default task(s).
-    grunt.registerTask('cssstuff', ['clean:stylesheets', 'copy', 'compass:dev', 'autoprefixer', 'csslint', 'clean:postbuild']);
-    grunt.registerTask('jsstuff', ['clean:scripts', 'copy', 'coffee', 'concat', 'jshint', 'uglify', 'clean:postbuild']);
-    grunt.registerTask('imgstuff', ['clean:images', 'copy', 'imagemin', 'clean:postbuild']);
-    grunt.registerTask('default', ['clean:build', 'copy', 'jade:dev', 'imagemin', 'coffee', 'concat', 'compass:dev', 'autoprefixer', 'csslint', 'jshint', 'watch']);
-    grunt.registerTask('build', ['clean:build', 'copy', 'jade:dist', 'imagemin', 'coffee', 'concat', 'uglify', 'compass:dist', 'autoprefixer', 'csslint', 'jshint', 'clean:postbuild'])
+    grunt.registerTask('cssstuff',
+        ['clean:stylesheets',
+        'copy',
+        'compass:dev',
+        'autoprefixer',
+        'csslint',
+        'clean:postbuild']
+    );
 
+    grunt.registerTask('jsstuff',
+        ['clean:scripts',
+        'copy',
+        'coffee',
+        'concat',
+        'jshint',
+        'uglify',
+        'clean:postbuild']
+    );
+
+    grunt.registerTask('imgstuff',
+        ['clean:images',
+        'copy',
+        'imagemin',
+        'clean:postbuild']
+    );
+
+    grunt.registerTask('default',
+        ['clean:build',
+        'copy',
+        'jade:dev',
+        'imagemin',
+        'coffee',
+        'concat',
+        'compass:dev',
+        'autoprefixer',
+        'csslint',
+        'jshint',
+        'watch']
+    );
+
+    grunt.registerTask('build',
+        ['clean:build',
+        'copy',
+        'jade:dist',
+        'imagemin',
+        'coffee',
+        'concat',
+        'uglify',
+        'compass:dist',
+        'autoprefixer',
+        'csslint',
+        'jshint',
+        'clean:postbuild']
+    );
 };

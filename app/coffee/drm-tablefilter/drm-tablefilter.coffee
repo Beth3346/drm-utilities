@@ -11,11 +11,11 @@ $.extend $.expr[":"], {
         (elem.textContent || elem.innerText || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0
 }
 
-class @DrmTableFilter
-    constructor: (@tableClass = 'drm-searchable-table') ->
+class @ElrTableFilter
+    constructor: (@tableClass = 'elr-searchable-table') ->
         self = @
         self.table = $ ".#{@tableClass}"
-        self.searchInput = 'drm-search-table'
+        self.searchInput = 'elr-search-table'
         # cache full table
         self.fullRows = @table.find 'tbody tr'
 
@@ -58,4 +58,4 @@ class @DrmTableFilter
         $.each _filteredRows, (key, value) ->
             tableBody.append value
 
-new DrmTableFilter()
+new ElrTableFilter()
