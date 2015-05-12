@@ -116,4 +116,4 @@ class @ElrStickyNav
                 $("a.#{@activeClass}").removeClass @activeClass
                 links.eq(index).addClass @activeClass
 
-new ElrStickyNav()
+# new ElrStickyNav()

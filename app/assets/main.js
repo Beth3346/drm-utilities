@@ -139,3 +139,7 @@
         });
     }
 })();
+
+(function() {
+    elrStickyNav();
+})();

@@ -413,7 +413,7 @@
         self.scrollSpy = function($nav, $content, el, activeClass) {
             var scroll = $('body').scrollTop();
             var links = $nav.find('a[href^="#"]');
-            var positions = findPositions($content, el);
+            var positions = self.findPositions($content, el);
 
             $.each(positions, function(index, value) {
                 // console.log('value:' + value + ': scroll:' + scroll);
@@ -430,18 +430,18 @@
 
         self.getPosition = function(height, $obj) {
             if ( height > 200 ) {
-                $obj.position().top - ( $obj.height() / 2 );
+                return $obj.position().top - ( $obj.height() / 4 );
             } else {
-                $obj.position().top = $obj.height();
+                return $obj.position().top - ( $obj.height() / 2 );
             }
         };
 
         self.findPositions = function($content, el) {
-            var $sections = content.find(el);
+            var $sections = $content.find(el);
             var positions = [];
 
             // populate positions array with the position of the top of each section element
-            section.each(function(index) {
+            $sections.each(function(index) {
                 var $that = $(this);
                 var length = $sections.length;
                 var position;
@@ -456,12 +456,16 @@
                 } else {
                     // for all other elements correct position by only subtracting half of its height
                     // from its top position
-                    position = $that.position().top - ( $that.height() / 2 );
+                    position = $that.position().top - ( $that.height() / 4 );
                 }
 
                 // correct for any elements _that may have a negative position value
 
-                ( position < 0 ) ? positions.push(0) : positions.push(position);
+                if ( position < 0 ) {
+                    positions.push(0); 
+                } else {
+                    positions.push(position);
+                }
             });
 
             return positions;
