@@ -410,6 +410,63 @@
             }
         };
 
+        self.scrollSpy = function($nav, $content, el, activeClass) {
+            var scroll = $('body').scrollTop();
+            var links = $nav.find('a[href^="#"]');
+            var positions = findPositions($content, el);
+
+            $.each(positions, function(index, value) {
+                // console.log('value:' + value + ': scroll:' + scroll);
+                if ( scroll === 0 ) {
+                    $('a.' + activeClass).removeClass(activeClass);
+                    links.eq(0).addClass(activeClass);
+                } else if ( value < scroll ) {
+                    // if value is less than scroll add activeClass to link with the same index
+                    $('a.' + activeClass).removeClass(activeClass);
+                    links.eq(index).addClass(activeClass);
+                }
+            });     
+        };
+
+        self.getPosition = function(height, $obj) {
+            if ( height > 200 ) {
+                $obj.position().top - ( $obj.height() / 2 );
+            } else {
+                $obj.position().top = $obj.height();
+            }
+        };
+
+        self.findPositions = function($content, el) {
+            var $sections = content.find(el);
+            var positions = [];
+
+            // populate positions array with the position of the top of each section element
+            section.each(function(index) {
+                var $that = $(this);
+                var length = $sections.length;
+                var position;
+
+                // the first element's position should always be 0
+                if ( index === 0 ) {
+                    position = 0;
+                } else if ( index === ( length - 1 ) ) {
+                    // subtract the bottom container's full height so final scroll value is equivalent 
+                    // to last container's position
+                    position = self.getPosition( $that.height, $that );
+                } else {
+                    // for all other elements correct position by only subtracting half of its height
+                    // from its top position
+                    position = $that.position().top - ( $that.height() / 2 );
+                }
+
+                // correct for any elements _that may have a negative position value
+
+                ( position < 0 ) ? positions.push(0) : positions.push(position);
+            });
+
+            return positions;
+        };
+
         return self;
     };
 
