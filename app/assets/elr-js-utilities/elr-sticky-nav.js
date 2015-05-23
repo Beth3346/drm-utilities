@@ -44,8 +44,6 @@
             var $content = $('body');
             var $target = $(target);
 
-            console.log($that);
-
             $('a.active').removeClass(activeClass);
             $that.addClass(activeClass);
 
@@ -61,9 +59,9 @@
 
             $hashLink.addClass(activeClass);
             $hashLink.trigger('click');
-            // $nav.on('click', "a[href='" + hash + "']", function() {
-            //     gotoSection.call(this, activeClass);
-            // });
+            $nav.on('click', "a[href='" + hash + "']", function() {
+                gotoSection.call(this, activeClass);
+            });
         } else {
             $links.first().addClass(activeClass);
         }
@@ -83,7 +81,6 @@
             }
 
             $nav.on('click', 'a[href^="#"]', function() {
-                console.log(this);
                 gotoSection.call(this, activeClass);
             });
         }
