@@ -118,7 +118,7 @@
     elrSort();
 })();
 
-(function() {
+(function($) {
     var $input = $('.regex-tester').find('input');
 
     if ( $input.length ) {
@@ -138,8 +138,17 @@
             }
         });
     }
-})();
+})(jQuery);
+
+(function($) {
+    elrStickyNav();
+    elrStickyNav({
+        nav: $('nav.elr-sticky-sidebar'),
+        content: $('div.sticky-sidebar-content')
+    });
+})(jQuery);
 
 (function() {
-    elrStickyNav();
+    elrTableFilter();
+    elrTableSorter();
 })();

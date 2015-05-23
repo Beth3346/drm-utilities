@@ -121,7 +121,7 @@ module.exports = function(grunt) {
                 '<%= appFolder %>assets/elr-utilities.js'],
             options: {
                 maxerr: 10,
-                unused: true,
+                // unused: true,
                 eqnull: true,
                 eqeqeq: true,
                 jquery: true

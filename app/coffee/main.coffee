@@ -5,8 +5,6 @@
 
 $ = jQuery
 $ ->
-    new ElrStickyNav $('nav.elr-sticky-sidebar'), null, $('div.sticky-sidebar-content')
-
     elrCalendar = new ElrCalendar()
 
     elrCalendar.createEvent
