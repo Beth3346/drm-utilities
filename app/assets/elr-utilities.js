@@ -138,6 +138,30 @@
             return $.trim($field.val());
         };
 
+        self.getColumnList = function(columnNum, $listItems) {
+            var $list = [];
+
+            $.each($listItems, function(k,v) {
+                $list.push($(v).find('td').eq(columnNum));
+
+                return $list;
+            });
+
+            return $list;
+        };
+
+        self.getListValues = function($list) {
+            var values = [];
+
+            $.each($list, function(k,v) {
+                values.push($.trim($(v).text()).toLowerCase());
+
+                return values;
+            });
+
+            return values;
+        };
+
         // converts a time string to 24hr time
         self.parseTime = function(time) {
             var hour = parseInt(self.patterns.hour.exec(time)[1], 10);
@@ -174,7 +198,7 @@
             return str;
         };
 
-        self.captitalize = function(str) {
+        self.capitalize = function(str) {
             return str.toLowerCase().replace(/^.|\s\S/g, function(a) {
                 return a.toUpperCase();
             });
@@ -292,7 +316,7 @@
         self.sortValues = function(a, b, dir) {
             dir = dir || 'ascending';
 
-            if ( elr.patterns.alpha.test(a) ) {
+            if ( self.patterns.alpha.test(a) ) {
                 if ( a < b ) {
                     return ( dir === 'ascending' ) ? -1 : 1;
                 } else if ( a > b ) {
@@ -322,7 +346,7 @@
                     var listItem = this;
                     var value = $.trim($(listItem).text());
 
-                    if ( self.dataTypeChecks['is' + self.captitalize(type)].call(that, value) ) {
+                    if ( self.dataTypeChecks['is' + self.capitalize(type)].call(that, value) ) {
                         sortLists[type].push(listItem);
                     } else {
                         return;
@@ -344,7 +368,7 @@
 
             // sort sortLists arrays
             $.each(sortLists, function(key) {
-                self.comparators['sort' + self.captitalize(key)](sortLists[key], direction);
+                self.comparators['sort' + self.capitalize(key)](sortLists[key], direction);
             });
 
             // $.each(types, function() {
@@ -377,8 +401,8 @@
                     var time2 = self.patterns.sortTime.exec($.trim($(b).text()))[0];
 
                     if ( self.dataTypeChecks.isTime($.trim($(a).text())) && self.dataTypeChecks.isTime($.trim($(b).text())) ) {
-                        a = new Date("04-22-2014 " + elr.parseTime(time1));
-                        b = new Date("04-22-2014 " + elr.parseTime(time2));
+                        a = new Date("04-22-2014 " + self.parseTime(time1));
+                        b = new Date("04-22-2014 " + self.parseTime(time2));
                     }
 
                     return self.sortValues(a, b, direction);
@@ -407,6 +431,65 @@
                 };
 
                 return $items.sort(sort);
+            },
+
+            sortColumnDate: function($listItems, dir, columnNum) {
+                var sort = function(a,b) {
+                    a = $.trim($(a).find('td').eq(columnNum).text());
+                    b = $.trim($(b).find('td').eq(columnNum).text());
+
+                    if ( self.dataTypeChecks.isDate(a) && self.dataTypeChecks.isDate(b) ) {
+                        a = new Date(self.patterns.monthDayYear.exec(a));
+                        b = new Date(self.patterns.monthDayYear.exec(b));
+                    } else {
+                        return;
+                    }
+
+                    return self.sortValues(a, b, dir);
+                };
+
+                return $listItems.sort(sort);
+            },
+
+            sortColumnTime: function($listItems, dir, columnNum) {
+                var sort = function(a,b) {
+                    a = $.trim($(a).find('td').eq(columnNum).text());
+                    b = $.trim($(b).find('td').eq(columnNum).text());
+
+                    if ( self.dataTypeChecks.isTime(a) && self.dataTypeChecks.isTime(b) ) {
+                        a = new Date('04-22-2014' + self.parseTime(self.patterns.monthDayYear.exec(a)));
+                        b = new Date('04-22-2014' + self.parseTime(self.patterns.monthDayYear.exec(b)));
+                    } else {
+                        return;
+                    }
+
+                    return self.sortValues(a, b, dir);
+                };
+
+                return $listItems.sort(sort);
+            },
+
+            sortColumnAlpha: function($listItems, dir, columnNum) {
+                var ignoreWords = ['a', 'the'];
+                var sort = function(a,b) {
+                    a = self.cleanAlpha($.trim($(a).find('td').eq(columnNum).text()), ignoreWords).toLowerCase();
+                    b = self.cleanAlpha($.trim($(b).find('td').eq(columnNum).text()), ignoreWords).toLowerCase();
+
+                    return self.sortValues(a, b, dir);
+                };
+
+                return $listItems.sort(sort);
+            },
+
+            sortColumnNumber: function($listItems, dir, columnNum) {
+                var sort = function(a,b) {
+                    a = parseFloat($.trim($(a).find('td').eq(columnNum).text()));
+                    b = parseFloat($.trim($(b).find('td').eq(columnNum).text()));
+
+                    return self.sortValues(a, b, dir);
+                };
+
+                return $listItems.sort(sort);
             }
         };
 
