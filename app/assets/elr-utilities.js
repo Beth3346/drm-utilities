@@ -658,6 +658,34 @@
             }
         };
 
+        self.daysInYear = function(year) {
+            if ( self.isLeapYear(year) ) {
+                return 366;
+            } else {
+                return 365;
+            }
+        };
+
+        self.daysInMonth = function(month, year) {
+            return new Date(year, month, 0).getDate();
+        };
+
+        self.dayOfWeek = function(month, date, year) {
+            return new Date(year, ( month - 1 ), date).getDay();
+        };
+
+        self.firstDayOfMonth = function(month, year) {
+            return self.dayOfWeek(month, 1, year);
+        };
+
+        self.weeksInMonth = function(month, year) {
+            var firstDay = self.firstDayOfMonth(month, year);
+            var numberDays = self.daysInMonth(month, year);
+            var dayShift = ( firstDay === self.daysPerWeek ) ? 0 : firstDay;
+
+            return Math.ceil((numberDays + dayShift) / self.daysPerWeek);
+        };
+
         return self;
     };
 

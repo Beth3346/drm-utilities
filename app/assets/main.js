@@ -158,9 +158,19 @@
 })();
 
 (function() {
-    console.log('1900: ' + elrTime.isLeapYear(1900));
-    console.log('1996: ' + elrTime.isLeapYear(1996));
-    console.log('2000: ' + elrTime.isLeapYear(2000));
-    console.log('cat: ' + elrTime.isLeapYear('cat'));
-    console.log('2015: ' + elrTime.isLeapYear(2015));
+    // console.log('1900: ' + elrTime.isLeapYear(1900));
+    // console.log('1996: ' + elrTime.isLeapYear(1996));
+    // console.log('2000: ' + elrTime.isLeapYear(2000));
+    // console.log('cat: ' + elrTime.isLeapYear('cat'));
+    // console.log('2015: ' + elrTime.isLeapYear(2015));
+    // console.log('2000: ' + elrTime.daysInYear(2000));
+    // console.log('2015: ' + elrTime.daysInYear(2015));
+    // console.log('February 2000: ' + elrTime.daysInMonth(2, 2000));
+    // console.log('February 2015: ' + elrTime.daysInMonth(2, 2015));
+    // console.log('May 2015: ' + elrTime.daysInMonth(5, 2015));
+    // console.log('May 24, 2015: ' + elrTime.dayOfWeek(5, 24, 2015));
+    // console.log('June 28, 2015: ' + elrTime.dayOfWeek(6, 28, 2015));
+    console.log(elrTime.firstDayOfMonth(6, 2015));
+    console.log(elrTime.firstDayOfMonth(7, 2015));
+    console.log(elrTime.weeksInMonth(5, 2015));
 })();
