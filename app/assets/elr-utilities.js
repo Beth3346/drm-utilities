@@ -162,28 +162,6 @@
             return values;
         };
 
-        // converts a time string to 24hr time
-        self.parseTime = function(time) {
-            var hour = parseInt(self.patterns.hour.exec(time)[1], 10);
-            var minutes = self.patterns.minute.exec(time)[1];
-            var ampm = self.patterns.ampm.exec(time)[1].toLowerCase();
-
-            if ( ampm === 'am' ) {
-                hour = hour.toString();
-                
-                if ( hour === '12' ) {
-                    hour = '0';
-                } else if ( hour.length === 1 ) {
-                    hour = '0' + hour;
-                }
-
-                return hour + ':' + minutes;
-
-            } else if ( ampm === 'pm' ) {
-                return (hour + 12) + ':' + minutes;
-            }
-        };
-
         // removes leading 'the' or 'a' from a string
         self.cleanAlpha = function(str, ignoreWords) {
             ignoreWords = ignoreWords || ['the', 'a'];
@@ -553,8 +531,136 @@
             return positions;
         };
 
+        // converts a time string to 24hr time
+        self.parseTime = function(time) {
+            var hour = parseInt(self.patterns.hour.exec(time)[1], 10);
+            var minutes = self.patterns.minute.exec(time)[1];
+            var ampm = self.patterns.ampm.exec(time)[1].toLowerCase();
+
+            if ( ampm === 'am' ) {
+                hour = hour.toString();
+                
+                if ( hour === '12' ) {
+                    hour = '0';
+                } else if ( hour.length === 1 ) {
+                    hour = '0' + hour;
+                }
+
+                return hour + ':' + minutes;
+
+            } else if ( ampm === 'pm' ) {
+                return (hour + 12) + ':' + minutes;
+            }
+        };
+
+        return self;
+    };
+
+    elrTimeUtilities = function() {
+        var self = {};
+
+        self.now = new Date();
+
+        self.today = {
+            month: self.now.getMonth(),
+            day: self.now.getDay(),
+            date: self.now.getDate(),
+            year: self.now.getFullYear(),
+            hour: self.now.getHours(),
+            minute: self.now.getMinutes(),
+            second: self.now.getSeconds()
+        };
+
+        self.daysPerWeek = 7;
+
+        self.unitTokens = {
+            ms: 'millisecond',
+            s: 'second',
+            m: 'minute',
+            h: 'hour',
+            d: 'day',
+            D: 'date',
+            w: 'week',
+            M: 'month',
+            Q: 'quarter',
+            y: 'year',
+            DDD: 'dayOfYear',
+            a: 'ampm'
+        };
+
+        self.months = [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December'
+        ];
+
+        self.shortMonths = [
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'May',
+            'Jun',
+            'Jul',
+            'Aug',
+            'Sep',
+            'Oct',
+            'Nov',
+            'Dec'
+        ];
+
+        self.days = [
+            'Sunday',
+            'Monday',
+            'Tuesday',
+            'Wednesday',
+            'Thursday',
+            'Friday',
+            'Saturday'
+        ];
+
+        self.shortDays = [
+            'Sun',
+            'Mon',
+            'Tues',
+            'Wed',
+            'Thurs',
+            'Fri',
+            'Sat'
+        ];
+
+        self.minDays = [
+            'Sun',
+            'Mon',
+            'Tue',
+            'Wed',
+            'Thu',
+            'Fri',
+            'Sat'
+        ];
+
+        self.isLeapYear = function(year) {
+            // return (year % 4 is 0 and year % 100 isnt 0) or year % 400 is 0
+
+            if ( ( year % 4 === 0 ) && ( year % 100 !== 0 ) || ( year % 400 === 0 )  ) {
+                return true;
+            } else {
+                return false;
+            }
+        };
+
         return self;
     };
 
     window.elr = elrUtilities();
+    window.elrTime = elrTimeUtilities();
 })(jQuery);

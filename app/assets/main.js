@@ -156,3 +156,11 @@
 (function() {
     elrTabs();
 })();
+
+(function() {
+    console.log('1900: ' + elrTime.isLeapYear(1900));
+    console.log('1996: ' + elrTime.isLeapYear(1996));
+    console.log('2000: ' + elrTime.isLeapYear(2000));
+    console.log('cat: ' + elrTime.isLeapYear('cat'));
+    console.log('2015: ' + elrTime.isLeapYear(2015));
+})();
