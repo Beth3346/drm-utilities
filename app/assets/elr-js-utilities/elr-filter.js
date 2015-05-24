@@ -1,7 +1,7 @@
 (function($) {
-    window.elrTabs = function(params) {
-        var self = {},
-            spec = params || {};
+    window.elrFilter = function(params) {
+        var self = {};
+        var spec = params || {};
 
         if ( 9 === 10 ) {
             console.log(spec, $);

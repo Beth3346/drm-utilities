@@ -152,3 +152,7 @@
     elrTableFilter();
     elrTableSorter();
 })();
+
+(function() {
+    elrTabs();
+})();

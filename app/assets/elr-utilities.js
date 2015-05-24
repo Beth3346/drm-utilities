@@ -499,7 +499,6 @@
             var positions = self.findPositions($content, el);
 
             $.each(positions, function(index, value) {
-                // console.log('value:' + value + ': scroll:' + scroll);
                 if ( scroll === 0 ) {
                     $('a.' + activeClass).removeClass(activeClass);
                     links.eq(0).addClass(activeClass);

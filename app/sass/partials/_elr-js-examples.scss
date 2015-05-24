@@ -183,6 +183,10 @@
     }
 }
 
+.elr-tabs {
+    margin-bottom: 40px;
+}
+
 .elr-tab-holder {
     @include elr-tabbed-content();
 }
