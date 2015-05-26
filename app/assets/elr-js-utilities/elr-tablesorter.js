@@ -11,7 +11,7 @@
             $(this).addClass(className);
         };
 
-        var sortComplexList= function($listItems, dir, columnNum) {
+        var sortComplexList= function($listItems, dir, columnNum, types) {
             var that = this;
             var sortLists = {};
 
@@ -54,7 +54,7 @@
             var $list = elr.getColumnList(columnNum, $rows);
             var values = elr.getListValues($list);
             var types = elr.getDataTypes(values, type);
-            var $sortedRows = sortComplexList(types, $rows, $that.data('dir'), columnNum);
+            var $sortedRows = sortComplexList($rows, $that.data('dir'), columnNum, types);
 
             toggleActiveClass.call(this, activeClass, 'tr');
             renderSort($sortedRows, $tableBody);
