@@ -850,6 +850,28 @@
         };
 
         self.getYear = function(date) {
+            var year = date.match(/([0-9]{4})$/);
+            
+            return parseInt(year[1], 10);
+        };
+
+        self.getHours = function(time) {
+
+        };
+
+        self.getMinutes = function(time) {
+
+        };
+
+        self.getSeconds = function(time) {
+
+        };
+
+        self.parseDate = function(date) {
+
+        };
+
+        self.parseTime = function(time) {
 
         };
 
