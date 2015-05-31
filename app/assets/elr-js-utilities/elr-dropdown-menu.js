@@ -3,7 +3,7 @@
         var self = {};
         var spec = params || {};
         var menuClass = spec.menuClass || 'elr-dropdown-nav';
-        var speed = spec.speed || 1000;
+        var speed = spec.speed || 500;
         var $menu = $('.' + menuClass);
 
         var showMenu = function() {
