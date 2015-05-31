@@ -729,4 +729,4 @@ class @ElrTimeStamps
         # ex. Next Tuesday at 2:24pm
         console.log date
 
-new ElrTimeStamps()
+# new ElrTimeStamps()

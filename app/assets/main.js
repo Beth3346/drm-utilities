@@ -1,4 +1,4 @@
-(function(){
+(function($){
     elrAccordion();
     elrAccordionNav();
     elrAccordionNav({
@@ -11,7 +11,7 @@
         $('ul.mobile-nav').slideToggle();
     });
 
-})();
+})(jQuery);
 
 (function($){
     var elrAlert = elrAlerts();
@@ -78,37 +78,6 @@
     elrPopovers();
 })();
 
-// (function() {
-//     console.log(elr.parseTime('11:05 pm'));
-//     console.log(elr.cleanAlpha('The Tempest'));
-//     console.log(elr.cleanAlpha("A Midsummer Night's Dream"));
-//     console.log(elr.sortValues('Beth', 'Foby'));
-//     console.log(elr.sortValues('Dog', 'Cat'));
-//     console.log(elr.sortValues('Dog', 'Dog'));
-//     console.log(elr.getDataTypes(['Dog', 'Cat', 'Bird', 'Sheep', 'Horse']));
-//     console.log(elr.getDataTypes([1, 2, 3, 123, 9000]));
-//     console.log(elr.getDataTypes(['12:33am', '7:45pm', '09:34am', '10:00pm', '08:23am']));
-//     console.log(elr.getDataTypes(['12/25/1988', '2/23/1988', '3/14/1988', '1/01/1999', '05/12/1879']));
-//     console.log(elr.getDataTypes(['Dog', 124, '12:33am', '12/25/1988', 'Horse']));
-// })();
-
-// (function() {
-//     var $list = elr.createElement('ul', {
-//         html: '<li>12</li><li>Dog</li><li>14</li><li>122</li><li>Cat</li>'
-//     });
-
-//     $list = $list.find('li');
-
-//     var text = elr.getText($list);
-//     var types = elr.getDataTypes(text);
-
-//     $list = elr.sortComplexList(types, $list);
-
-//     $.each($list, function() {
-//         console.log($(this).text());
-//     });
-// })();
-
 (function() {
     elrSimpleSlider({effect: 'fade'});
     elrSimpleSlider({sliderClass: 'elr-simple-slider-2', effect: 'slide-left'});
@@ -125,34 +94,28 @@
         $('#pattern-utilities').on('keyup', '.regex-tester input', function() {
             var that = $(this);
             var patternName = that.data('pattern');
-            var str = $.trim(that.val());
+            var str = that.val();
             var result = elr.patterns[patternName].exec(str);
             var results = that.parent().find('.regex-test-results');
 
             if ( result !== null ) {
-                results.html('This string matches');
+                results.html('This string matches ' + patternName);
             } else if ( str.length === 0 ) {
                 results.html('');
             } else {
-                results.html('This string doesn\'t contain any matches');
+                results.html('This string doesn\'t match ' + patternName);
             }
         });
     }
-})(jQuery);
 
-(function($) {
     elrStickyNav();
     elrStickyNav({
         nav: $('nav.elr-sticky-sidebar'),
         content: $('div.sticky-sidebar-content')
     });
-})(jQuery);
-
-(function() {
     elrTableFilter();
     elrTableSorter();
-})();
-
-(function() {
     elrTabs();
-})();
+
+    console.log(elrTime.months);
+})(jQuery);
