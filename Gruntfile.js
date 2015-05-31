@@ -106,6 +106,7 @@ module.exports = function(grunt) {
                 // the files to concatenate
                 src: ['<%= distFolder %>assets/jquery.js',
                     '<%= appFolder %>assets/elr-utilities.js',
+                    '<%= appFolder %>assets/elr-time-utilities.js',
                     '<%= distFolder %>assets/elr-js-utilities/*.js',
                     '<%= distFolder %>assets/main.js',
                     '<%= distFolder %>js/coffee-compiled/*.js'],
@@ -118,7 +119,8 @@ module.exports = function(grunt) {
             files: ['<%= distFolder %>js/coffee-compiled/*.js',
                 '<%= appFolder %>assets/elr-js-utilities/*.js',
                 '<%= appFolder %>assets/main.js',
-                '<%= appFolder %>assets/elr-utilities.js'],
+                '<%= appFolder %>assets/elr-utilities.js',
+                '<%= appFolder %>assets/elr-time-utilities.js'],
             options: {
                 maxerr: 10,
                 // unused: true,
@@ -239,6 +241,7 @@ module.exports = function(grunt) {
                 // We watch and compile sass files as normal but don't live reload here
                 files: ['<%= distFolder %>assets/jquery.js',
                 '<%= appFolder %>assets/el-utilities.js',
+                '<%= appFolder %>assets/el-time-utilities.js',
                 '<%= distFolder %>assets/elr-js-utilities/*.js',
                 '<%= distFolder %>assets/main.js',
                 '<%= appFolder %>coffee/**/*.coffee'],
