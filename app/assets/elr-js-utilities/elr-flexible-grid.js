@@ -14,7 +14,7 @@
             $.each(tags, function(k, v) {
                 var $tagButton = $('<button></button>', {
                     'class': 'elr-grid-filter',
-                    text: elr.captitalize(v),
+                    text: elr.capitalize(v),
                     'data-filter': v
                 });
 
