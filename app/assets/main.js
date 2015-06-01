@@ -26,23 +26,17 @@
 
 (function() {
     elrBackToTop();
-})();
 
-(function() {
     elrDropdownButton();
     elrDropdownButton({
         containerClass: 'elr-dropdown-split-btn-holder',
         speed: 300,
         button: 'button:last()'
     });
-})();
 
-(function() {
     elrDropdownMenu();
     elrDropdownMenu({menuClass: 'main-nav'});
-})();
 
-(function() {
     elrFlexibleGrid();
 })();
 
@@ -60,30 +54,18 @@
 
 (function() {
     elrLightbox();
-})();
 
-(function() {
     elrModal();
-})();
 
-(function() {
     elrOffscreenMenu();
-})();
 
-(function() {
     elrPasswords();
-})();
 
-(function() {
     elrPopovers();
-})();
 
-(function() {
     elrSimpleSlider({effect: 'fade'});
     elrSimpleSlider({sliderClass: 'elr-simple-slider-2', effect: 'slide-left'});
-})();
 
-(function() {
     elrSort();
 })();
 
@@ -107,7 +89,9 @@
             }
         });
     }
+})(jQuery);
 
+(function($) {
     elrStickyNav();
     elrStickyNav({
         nav: $('nav.elr-sticky-sidebar'),
@@ -116,6 +100,63 @@
     elrTableFilter();
     elrTableSorter();
     elrTabs();
+})(jQuery);
 
-    console.log(elrTime.months);
+(function($) {
+    $('.now').text(elrTime.now);
+    console.log(elrTime.today);
+    console.log(elrTime.daysPerWeek);
+    console.log(elrTime.unitTokens);
+
+    $.each(elrTime.months, function(k,v) {
+        $('<li>', {
+            text: v
+        }).appendTo($('ul.months'));
+    });
+
+    $.each(elrTime.shortMonths, function(k,v) {
+        $('<li>', {
+            text: v
+        }).appendTo($('ul.shortMonths'));
+    });
+
+    $.each(elrTime.days, function(k,v) {
+        $('<li>', {
+            text: v
+        }).appendTo($('ul.days'));
+    });
+
+    $.each(elrTime.shortDays, function(k,v) {
+        $('<li>', {
+            text: v
+        }).appendTo($('ul.shortDays'));
+    });
+
+    $.each(elrTime.minDays, function(k,v) {
+        $('<li>', {
+            text: v
+        }).appendTo($('ul.minDays'));
+    });
+
+    $('ul.leapYear li').each(function(k, v) {
+        var $that = $(v);
+        var year = $that.find('.year').text();
+        var result = elrTime.isLeapYear(year);
+        $that.append('<span>: ' + result + '</span>');
+    });
+
+    $('ul.daysInYear li').each(function(k, v) {
+        var $that = $(v);
+        var year = $that.find('.year').text();
+        var result = elrTime.getDaysInYear(year);
+        $that.append('<span>: ' + result + '</span>');
+    });
+
+    $('ul.daysInMonth li').each(function(k, v) {
+        var $that = $(v);
+        var month = $.inArray($that.find('.month').text(), elrTime.months);
+        var year = $that.find('.year').text();
+        var result = elrTime.getDaysInMonth(month, year);
+        $that.append('<span>: ' + result + '</span>');
+    });
 })(jQuery);

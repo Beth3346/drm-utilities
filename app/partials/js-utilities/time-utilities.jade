@@ -1,0 +1,258 @@
+section#time-utilities
+    .elr-container
+        .elr-row
+            .elr-col-full
+                h1 Time Utilities
+                p A series of methods that make it easier to work with dates and times.
+
+    .elr-container
+        .elr-row
+            .elr-col-full
+                h3 Now
+                p Returns a new date object with the exact date and time.
+                p.now
+                pre var now = elrTime.now;
+            .elr-col-full
+                h3 Today
+                p Returns an object with the exact date and time
+                pre.
+                    var today = elrTime.today;
+                    today.month // 4
+                    today.day // 0
+                    today.date // 31
+                    today.year // 2015
+                    today.hour // 19
+                    today.minute // 47
+                    today.second // 43
+            .elr-col-full
+                h3 Days Per Week
+                p Number of days in a week.
+                pre.
+                    var daysPerWeek = elrTime.daysPerWeek; // 7
+
+            .elr-col-full
+                h3 Unit Tokens
+                p Unit tokens for use in date formatting.
+                pre.
+                    var tokens = elrTime.unitTokens;
+                    tokens.ms // millisecond
+                    tokens.s // second
+                    tokens.m // minute
+                    tokens.h // hour
+                    tokens.d // day
+                    tokens.D // date
+                    tokens.w // week
+                    tokens.M // month
+                    tokens.Q // quarter
+                    tokens.y // year
+                    tokens.DDD // dayOfYear
+                    tokens.a // ampm
+
+            .elr-col-full
+                h3 Months
+                p Array of long month names
+                ul.months
+                pre.
+                    var months = elrTime.months;
+
+            .elr-col-full
+                h3 Short Months
+                p Array of short month names
+                ul.shortMonths
+                pre.
+                    var months = elrTime.months;
+
+            .elr-col-full
+                h3 Days
+                p Array of long day names
+                ul.days
+                pre.
+                    var days = elrTime.days;
+
+            .elr-col-full
+                h3 Short Days
+                p Array of short day names
+                ul.shortDays
+                pre.
+                    var shortDays = elrTime.shortDays;
+
+            .elr-col-full
+                h3 Min Days
+                p Array of minified day names
+                ul.minDays
+                pre.
+                    var minDays = elrTime.minDays;
+
+            .elr-col-full
+                h3 Is Leap Year
+                p Returns true if a year is a leap year.
+                ul.leapYear
+                    li
+                        span.year 1900
+                    li
+                        span.year 2000
+                    li
+                        span.year 2004
+                    li
+                        span.year 2006
+                    li
+                        span.year 2007
+                    li
+                        span.year 2015
+                pre.
+                    elrTime.isLeapYear(1900); // false
+                    elrTime.isLeapYear(2000); // true
+
+            .elr-col-full
+                h3 Days in Year
+                p Returns the number of days in a given year.
+                ul.daysInYear
+                    li
+                        span.year 1900
+                    li
+                        span.year 2000
+                    li
+                        span.year 2004
+                    li
+                        span.year 2006
+                    li
+                        span.year 2007
+                    li
+                        span.year 2015
+                pre.
+                    elrTime.getDaysInYear(1900); // 365
+                    elrTime.getDaysInYear(2000); // 366
+
+            .elr-col-full
+                h3 Days in Month
+                p Returns the number of days in a given month.
+                ul.daysInMonth
+                    li
+                        span.month February
+                        , 
+                        span.year 1900
+                    li
+                        span.month February
+                        , 
+                        span.year 2000
+                    li
+                        span.month March
+                        , 
+                        span.year 2004
+                    li
+                        span.month June
+                        , 
+                        span.year 2006
+                    li
+                        span.month August
+                        , 
+                        span.year 2007
+                    li
+                        span.month December
+                        , 
+                        span.year 2015
+                pre.
+                    elrTime.getDaysInMonth(month, year); // January is 0
+                    elrTime.getDaysInMonth(1, 1900); // 28
+                    elrTime.getDaysInMonth(1, 2000); // 29
+
+            .elr-col-full
+                h3 Day of Week
+                p
+                pre.
+
+            .elr-col-full
+                h3 First Day of Month
+                p
+                pre.
+
+            .elr-col-full
+                h3 Weeks in Month
+                p
+                pre.
+
+            .elr-col-full
+                h3 Last Month
+                p
+                pre.
+                    
+            .elr-col-full
+                h3 Next Month
+                p
+                pre.
+                    
+            .elr-col-full
+                h3 Last Date
+                p
+                pre.
+                    
+            .elr-col-full
+                h3 Next Date
+                p
+                pre.
+                    
+            .elr-col-full
+                h3 Yesterday
+                p
+                pre.
+                    
+            .elr-col-full
+                h3 Today
+                p
+                pre.
+                    
+            .elr-col-full
+                h3 Tomorrow
+                p
+                pre.
+                    
+            .elr-col-full
+                h3 Month Num
+                p
+                pre.
+                    
+            .elr-col-full
+                h3 Month by Name
+                p
+                pre.
+                    
+            .elr-col-full
+                h3 Month Name
+                p
+                pre.
+                    
+            .elr-col-full
+                h3 Date Num
+                p
+                pre.
+                    
+            .elr-col-full
+                h3 Year
+                p
+                pre.
+                    
+            .elr-col-full
+                h3 Hours
+                p
+                pre.
+                    
+            .elr-col-full
+                h3 Minutes
+                p
+                pre.
+                    
+            .elr-col-full
+                h3 Seconds
+                p
+                pre.
+                    
+            .elr-col-full
+                h3 Parse Date
+                p
+                pre.
+                    
+            .elr-col-full
+                h3 Parse Time
+                p
+                pre.
+                    
