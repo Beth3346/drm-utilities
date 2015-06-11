@@ -1,4 +1,6 @@
 (function($) {
+    'use strict';
+    
     window.elrCountdown = function(params) {
         var self = {},
             spec = params || {};

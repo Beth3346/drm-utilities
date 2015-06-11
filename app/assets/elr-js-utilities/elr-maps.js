@@ -1,4 +1,6 @@
 (function() {
+    'use strict';
+    
 //     var houstonLocation = new google.maps.LatLng(29.754013, -95.452374),
 //         tulsaLocation = new google.maps.LatLng(36.060046, -95.923329),
 //         bartlesvilleLocation = new google.maps.LatLng(36.750590, -95.977802),

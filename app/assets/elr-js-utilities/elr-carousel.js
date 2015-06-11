@@ -1,4 +1,6 @@
 (function($) {
+    'use strict';
+    
     window.elrCarousel = function(params) {
         var self = {},
             spec = params || {};

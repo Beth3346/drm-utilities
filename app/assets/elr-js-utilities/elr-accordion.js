@@ -1,4 +1,6 @@
 (function($) {
+    'use strict';
+    
     window.elrAccordion = function(params) {
         var self = {};
         var spec = params || {};

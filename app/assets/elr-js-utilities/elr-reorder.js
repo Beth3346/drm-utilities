@@ -1,4 +1,6 @@
 (function($) {
+    'use strict';
+    
     window.elrReorder = function(params) {
         var self = {},
             spec = params || {};

@@ -1,4 +1,6 @@
 (function($) {
+    'use strict';
+    
     window.elrDropdownButton = function(params) {
         var self = {};
         var spec = params || {};

@@ -1,4 +1,6 @@
 (function($) {
+    'use strict';
+    
     window.elrDatePicker = function(params) {
         var self = {},
             spec = params || {};

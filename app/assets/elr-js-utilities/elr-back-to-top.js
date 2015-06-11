@@ -1,6 +1,8 @@
 // Adds a button for user to scroll to top immediately
 
 (function($) {
+    'use strict';
+    
     window.elrBackToTop = function(params) {
         var self = {};
         var spec = params || {};

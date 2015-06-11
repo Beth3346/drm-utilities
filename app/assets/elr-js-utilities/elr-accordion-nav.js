@@ -1,4 +1,6 @@
 (function($) {
+    'use strict';
+    
     // TODO: add feature that leaves accordion open to show current page link so that visitors
     // don't need to keep opeing the content to click to a page in the same ul
     window.elrAccordionNav = function(params) {

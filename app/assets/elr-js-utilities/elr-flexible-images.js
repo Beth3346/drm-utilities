@@ -1,4 +1,6 @@
 (function($) {
+    'use strict';
+    
     window.elrFlexibleImages = function(params) {
         var self = {},
             spec = params || {};

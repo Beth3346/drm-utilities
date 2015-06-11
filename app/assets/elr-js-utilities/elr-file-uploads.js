@@ -1,4 +1,6 @@
 (function($) {
+    'use strict';
+    
     window.elrFileUploads = function(params) {
         var self = {},
             spec = params || {};

@@ -1,4 +1,6 @@
 (function($) {
+    'use strict';
+    
     window.elrTypeahead = function(params) {
         var self = {},
             spec = params || {};

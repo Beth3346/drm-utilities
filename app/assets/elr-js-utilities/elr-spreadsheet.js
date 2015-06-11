@@ -1,4 +1,6 @@
 (function($) {
+    'use strict';
+    
     window.elrSpreadsheet = function(params) {
         var self = {},
             spec = params || {};

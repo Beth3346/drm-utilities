@@ -1,5 +1,6 @@
 (function($) {
-
+    'use strict';
+    
     window.elrSimpleSlider = function(params) {
         var self = {};
         var spec = params || {};

@@ -1,4 +1,6 @@
 (function($) {
+    'use strict';
+    
     window.elrFixed = function(params) {
         var self = {};
         var spec = params || {};

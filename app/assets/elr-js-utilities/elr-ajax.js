@@ -1,4 +1,6 @@
 (function($) {
+    'use strict';
+    
     window.elrAjax = function(params) {
         var self = {},
             spec = params || {};

@@ -1,4 +1,6 @@
 (function($) {
+    'use strict';
+    
     window.elrRatings = function(params) {
         var self = {},
             spec = params || {};

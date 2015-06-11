@@ -1,4 +1,6 @@
 (function($) {
+    'use strict';
+    
     window.elrTypeflow = function(params) {
         var self = {},
             spec = params || {};

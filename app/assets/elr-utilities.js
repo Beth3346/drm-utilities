@@ -1,4 +1,6 @@
 (function($) {
+    'use strict';
+    
     // adds case insensitive contains to jQuery
 
     $.extend($.expr[":"], {

@@ -1,4 +1,6 @@
 (function($) {
+    'use strict';
+    
     window.elrTimestamps = function(params) {
         var self = {},
             spec = params || {};

@@ -1,4 +1,6 @@
 (function($) {
+    'use strict';
+    
     window.drmCalendar = function(params) {
         var self = {},
             spec = params || {};

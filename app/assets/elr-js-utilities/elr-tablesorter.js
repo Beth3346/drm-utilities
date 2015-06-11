@@ -1,4 +1,6 @@
 (function($) {
+    'use strict';
+    
     window.elrTableSorter = function(params) {
         var self = {};
         var spec = params || {};

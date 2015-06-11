@@ -1,4 +1,6 @@
 (function($) {
+    'use strict';
+    
     window.elrAlerts = function(params) {
         var self = {};
         var spec = params || {};

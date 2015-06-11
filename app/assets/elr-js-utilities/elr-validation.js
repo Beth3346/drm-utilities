@@ -1,4 +1,6 @@
 (function($) {
+    'use strict';
+    
     window.elrValidation = function(params) {
         var self = {},
             spec = params || {};

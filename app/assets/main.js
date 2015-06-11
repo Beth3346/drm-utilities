@@ -1,4 +1,16 @@
 (function($){
+    'use strict';
+    
+    var elrAlert = elrAlerts();
+    var formControls = elrFormControls({
+        selectOptions: {
+            fn: function(option) {
+                console.log(option);
+            }
+        }
+    });
+    var $input = $('.regex-tester').find('input');
+
     elrAccordion();
     elrAccordionNav();
     elrAccordionNav({
@@ -10,11 +22,6 @@
         e.stopPropagation();
         $('ul.mobile-nav').slideToggle();
     });
-
-})(jQuery);
-
-(function($){
-    var elrAlert = elrAlerts();
     
     elrAlert.showAlert('info', 'This is just an informative alert', $('.elr-alert-holder'));
     elrAlert.showAlert('danger', 'Danger Danger Danger!', $('.elr-alert-holder'));
@@ -22,9 +29,7 @@
     elrAlert.showAlert('success', 'your request was successful', $('.elr-alert-holder'));
     elrAlert.showAlert('muted', 'A muted alert that will probably be ignored', $('.elr-alert-holder'));
     elrAlert.showAlert('custom', 'This is a custom alert', $('.elr-alert-holder'));
-})(jQuery);
 
-(function() {
     elrBackToTop();
 
     elrDropdownButton();
@@ -38,21 +43,9 @@
     elrDropdownMenu({menuClass: 'main-nav'});
 
     elrFlexibleGrid();
-})();
-
-(function() {
-    var formControls = elrFormControls({
-        selectOptions: {
-            fn: function(option) {
-                console.log(option);
-            }
-        }
-    });
     
     formControls.select();
-})();
 
-(function() {
     elrLightbox();
 
     elrModal();
@@ -67,10 +60,6 @@
     elrSimpleSlider({sliderClass: 'elr-simple-slider-2', effect: 'slide-left'});
 
     elrSort();
-})();
-
-(function($) {
-    var $input = $('.regex-tester').find('input');
 
     if ( $input.length ) {
         $('#pattern-utilities').on('keyup', '.regex-tester input', function() {
@@ -89,9 +78,7 @@
             }
         });
     }
-})(jQuery);
 
-(function($) {
     elrStickyNav();
     elrStickyNav({
         nav: $('nav.elr-sticky-sidebar'),
@@ -100,9 +87,7 @@
     elrTableFilter();
     elrTableSorter();
     elrTabs();
-})(jQuery);
 
-(function($) {
     $('.now').text(elrTime.now);
     console.log(elrTime.today);
     console.log(elrTime.daysPerWeek);
