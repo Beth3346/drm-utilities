@@ -9,7 +9,7 @@
         }
     });
 
-    elrUtilities = function() {
+    var elrUtilities = function() {
         var self = {};
 
         // TODO: add support for sorting datetime values
