@@ -286,31 +286,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-autoprefixer');
 
     // Default task(s).
-    grunt.registerTask('cssstuff',
-        ['clean:stylesheets',
-        'copy',
-        'compass:dev',
-        'autoprefixer',
-        'csslint',
-        'clean:postbuild']
-    );
-
-    grunt.registerTask('jsstuff',
-        ['clean:scripts',
-        'copy',
-        'coffee',
-        'concat',
-        'jshint',
-        'uglify',
-        'clean:postbuild']
-    );
-
-    grunt.registerTask('imgstuff',
-        ['clean:images',
-        'copy',
-        'imagemin',
-        'clean:postbuild']
-    );
 
     grunt.registerTask('default',
         ['clean:build',
