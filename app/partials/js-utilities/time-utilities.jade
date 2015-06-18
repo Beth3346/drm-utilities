@@ -58,7 +58,7 @@ section#time-utilities
             .elr-col-full
                 h3 Short Months
                 p Array of short month names
-                ul.shortMonths
+                ul.short-months
                 pre.
                     var months = elrTime.months;
 
@@ -72,21 +72,21 @@ section#time-utilities
             .elr-col-full
                 h3 Short Days
                 p Array of short day names
-                ul.shortDays
+                ul.short-days
                 pre.
                     var shortDays = elrTime.shortDays;
 
             .elr-col-full
                 h3 Min Days
                 p Array of minified day names
-                ul.minDays
+                ul.min-days
                 pre.
                     var minDays = elrTime.minDays;
 
             .elr-col-full
                 h3 Is Leap Year
                 p Returns true if a year is a leap year.
-                ul.leapYear
+                ul.leap-year
                     li
                         span.year 1900
                     li
@@ -106,7 +106,7 @@ section#time-utilities
             .elr-col-full
                 h3 Days in Year
                 p Returns the number of days in a given year.
-                ul.daysInYear
+                ul.days-in-year
                     li
                         span.year 1900
                     li
@@ -126,7 +126,7 @@ section#time-utilities
             .elr-col-full
                 h3 Days in Month
                 p Returns the number of days in a given month.
-                ul.daysInMonth
+                ul.days-in-month
                     li
                         span.month February
                         , 
@@ -158,22 +158,65 @@ section#time-utilities
 
             .elr-col-full
                 h3 Day of Week
-                p
+                p Returns the index of the day of the week
+                p.day-of-week
                 pre.
+                    elrTime.getDayOfWeek(elrTime.today.month, elrTime.today.date, elrTime.today.year);
+
 
             .elr-col-full
                 h3 First Day of Month
-                p
+                p Returns the index of the first day of the month
+                ul.first-day-of-month
+                    li
+                        span.month May
+                        , 
+                        span.year 2015
+                    li
+                        span.month June
+                        , 
+                        span.year 2015
+                    li
+                        span.month March
+                        , 
+                        span.year 2004
+                    li
+                        span.month June
+                        , 
+                        span.year 2006
+                    li
+                        span.month August
+                        , 
+                        span.year 2007
+                    li
+                        span.month December
+                        , 
+                        span.year 2015
                 pre.
+                    elrTime.getFirstDayOfMonth(month, year);
+                    elrTime.getFirstDayOfMonth(5, 2015); // 1
+                    elrTime.getFirstDayOfMonth(4, 2015); // 5
 
             .elr-col-full
                 h3 Weeks in Month
-                p
+                p Returns the number of weeks in a given month
+                ul.weeks-in-month
+                    li
+                        span.month May
+                        , 
+                        span.year 2015
+                    li
+                        span.month June
+                        , 
+                        span.year 2015
                 pre.
+                    elrTime.getWeeksInMonth(month, year);
+                    elrTime.getWeeksInMonth(5, 2015); // 6
+                    elrTime.getWeeksInMonth(4, 2015); // 5
 
             .elr-col-full
-                h3 Last Month
-                p
+                h3 Prev Month
+                p 
                 pre.
                     
             .elr-col-full
@@ -182,7 +225,7 @@ section#time-utilities
                 pre.
                     
             .elr-col-full
-                h3 Last Date
+                h3 Prev Date
                 p
                 pre.
                     

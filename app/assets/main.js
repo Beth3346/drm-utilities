@@ -102,7 +102,7 @@
     $.each(elrTime.shortMonths, function(k,v) {
         $('<li>', {
             text: v
-        }).appendTo($('ul.shortMonths'));
+        }).appendTo($('ul.short-months'));
     });
 
     $.each(elrTime.days, function(k,v) {
@@ -114,34 +114,61 @@
     $.each(elrTime.shortDays, function(k,v) {
         $('<li>', {
             text: v
-        }).appendTo($('ul.shortDays'));
+        }).appendTo($('ul.short-days'));
     });
 
     $.each(elrTime.minDays, function(k,v) {
         $('<li>', {
             text: v
-        }).appendTo($('ul.minDays'));
+        }).appendTo($('ul.min-days'));
     });
 
-    $('ul.leapYear li').each(function(k, v) {
+    $('ul.leap-year li').each(function(k,v) {
         var $that = $(v);
         var year = $that.find('.year').text();
         var result = elrTime.isLeapYear(year);
         $that.append('<span>: ' + result + '</span>');
     });
 
-    $('ul.daysInYear li').each(function(k, v) {
+    $('ul.days-in-year li').each(function(k,v) {
         var $that = $(v);
         var year = $that.find('.year').text();
         var result = elrTime.getDaysInYear(year);
         $that.append('<span>: ' + result + '</span>');
     });
 
-    $('ul.daysInMonth li').each(function(k, v) {
+    $('ul.days-in-month li').each(function(k,v) {
         var $that = $(v);
         var month = $.inArray($that.find('.month').text(), elrTime.months);
         var year = $that.find('.year').text();
         var result = elrTime.getDaysInMonth(month, year);
         $that.append('<span>: ' + result + '</span>');
     });
+
+    var dayOfWeek = elrTime.getDayOfWeek(elrTime.today.month, elrTime.today.date, elrTime.today.year);
+    $('p.day-of-week').text('Today is ' + elrTime.days[dayOfWeek] + ' (' + dayOfWeek + ')');
+
+    $('ul.first-day-of-month li').each(function(k,v) {
+        var $that = $(v);
+        var month = $.inArray($that.find('.month').text(), elrTime.months);
+        var year = $that.find('.year').text();
+        var result = elrTime.getFirstDayOfMonth(month, year);
+        $that.append('<span>: ' + elrTime.days[result] + ' (' + result + ')' + '</span>');
+    });
+
+    $('ul.weeks-in-month li').each(function(k,v) {
+        var $that = $(v);
+        var month = $.inArray($that.find('.month').text(), elrTime.months);
+        var year = $that.find('.year').text();
+        var result = elrTime.getWeeksInMonth(month, year);
+        $that.append('<span>: ' + result + '</span>');
+    });
+
+    $('ul.prev-month li').each(function(k,v) {
+        var $that = $(v);
+        var date = $that.text();
+        var result = elrTime.getPrevMonth(date);
+        $that.append('<span>: ' + result + '</span>');
+    });    
+
 })(jQuery);
