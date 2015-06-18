@@ -222,6 +222,72 @@
             });
         };
 
+        self.clearForm = function($fields) {
+            $fields.each(function() {
+                var $that = $(this);
+                if ( $that.attr('type') === 'checkbox' ) {
+                    $that.prop('checked', false);
+                } else {
+                    $that.val('');
+                }
+            });        
+        };
+
+        self.cleanString = function(str, re) {
+            var reg = new RegExp(re, 'i');
+            return $.trim(str.replace(reg, ''));
+        };
+
+        self.getFormData = function($form) {
+            // get form data and return an object
+            // need to remove dashes from ids
+            var formInput = {};
+            var $fields = $form.find(':input').not('button').not(':checkbox');
+            var $checkboxes = $form.find('input:checked');
+
+            if ( $checkboxes.length !== 0 ) {
+                var boxIds = [];
+
+                $checkboxes.each(function() {
+                    boxIds.push $(this).attr('id');
+                });
+
+                boxIds = $.unique(boxIds);
+
+                $.each(boxIds, function() {
+                    var checkboxValues = [];
+                    var $boxes = form.find('"input:checked#"' + this + '"');
+
+                    $boxes.each(function() {
+                        checkboxValues.push($.trim($(this).val()));
+                    });
+
+                    formInput[this] = checkboxValues;
+                    return;
+                });
+            }
+
+            $.each(fields, function() {
+                var $that = $(this);
+                var id = $that.attr('id');
+                var input;
+
+                if ( $.trim($that.val()) === '' ) {
+                    input = null;
+                } else {
+                    input = $.trim($that.val());
+                }
+
+                if ( input ) {
+                    var formInput[id] = input;
+                }
+
+                return;
+            });
+
+            return formInput;
+        };
+
         self.createElement = function(tagName, attrs) {
             attrs = attrs || {};
             return $('<' + tagName + '></' + tagName + '>', attrs);
