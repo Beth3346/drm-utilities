@@ -637,7 +637,7 @@
 
             getDaysDuration: function(now, date) {
                 var ms = self.getMsDuration(now, date);
-                var days = self.conversionUtilities.convertMsToDays ms
+                var days = self.conversionUtilities.convertMsToDays(ms);
 
                 if ( days >= 0 ) {
                     return Math.floor(days);
@@ -780,8 +780,8 @@
 
         // dateObj is a date object
         self.getPrevMonth = function(dateObj) {
-            if ( dateObj.month === 1 ) {
-                return 12;
+            if ( dateObj.month === 0 ) {
+                return 11;
             } else {
                 return dateObj.month - 1;
             }
@@ -789,8 +789,8 @@
 
         // dateObj is a date object
         self.getNextMonth = function(dateObj) {
-            if ( dateObj.month === 12 ) {
-                return 1;
+            if ( dateObj.month === 11 ) {
+                return 0;
             } else {
                 return dateObj.month + 1;
             }
@@ -949,7 +949,6 @@
 
         self.getTimeHours = function(time) {
             var ampm = time.match(/(am|pm)$/i)[1];
-
             var hour = time.match(/^(?:([12][012]):|([0]?[0-9]):)/);
             
             if ( hour[1] ) {
@@ -1062,8 +1061,21 @@
             } else if ( date.getHours() > 12 ) {
                 return date.getHours() - 12;
             } else {
-                return date.getHours();           
+                return date.getHours();
             }
+        };
+
+        //gets the week of the month when an event occurs
+        self.getMonthWeekNum = function(dayNum, day, month, year) {
+
+        };
+
+        self.getDatesInWeek = function(month, date, year) {
+
+        };
+
+        self.getWeekNumber = function(month, date, year) {
+
         };
 
         return self;

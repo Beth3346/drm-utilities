@@ -89,35 +89,35 @@
     elrTabs();
 
     $('.now').text(elrTime.now);
-    console.log(elrTime.today);
-    console.log(elrTime.daysPerWeek);
-    console.log(elrTime.unitTokens);
+    // console.log(elrTime.today);
+    // console.log(elrTime.daysPerWeek);
+    // console.log(elrTime.unitTokens);
 
-    $.each(elrTime.months, function(k,v) {
+    elr.each(elrTime.months, function(k,v) {
         $('<li>', {
             text: v
         }).appendTo($('ul.months'));
     });
 
-    $.each(elrTime.shortMonths, function(k,v) {
+    elr.each(elrTime.shortMonths, function(k,v) {
         $('<li>', {
             text: v
         }).appendTo($('ul.short-months'));
     });
 
-    $.each(elrTime.days, function(k,v) {
+    elr.each(elrTime.days, function(k,v) {
         $('<li>', {
             text: v
         }).appendTo($('ul.days'));
     });
 
-    $.each(elrTime.shortDays, function(k,v) {
+    elr.each(elrTime.shortDays, function(k,v) {
         $('<li>', {
             text: v
         }).appendTo($('ul.short-days'));
     });
 
-    $.each(elrTime.minDays, function(k,v) {
+    elr.each(elrTime.minDays, function(k,v) {
         $('<li>', {
             text: v
         }).appendTo($('ul.min-days'));
@@ -139,7 +139,7 @@
 
     $('ul.days-in-month li').each(function(k,v) {
         var $that = $(v);
-        var month = $.inArray($that.find('.month').text(), elrTime.months);
+        var month = elr.inArray($that.find('.month').text(), elrTime.months);
         var year = $that.find('.year').text();
         var result = elrTime.getDaysInMonth(month, year);
         $that.append('<span>: ' + result + '</span>');
@@ -150,7 +150,7 @@
 
     $('ul.first-day-of-month li').each(function(k,v) {
         var $that = $(v);
-        var month = $.inArray($that.find('.month').text(), elrTime.months);
+        var month = elr.inArray($that.find('.month').text(), elrTime.months);
         var year = $that.find('.year').text();
         var result = elrTime.getFirstDayOfMonth(month, year);
         $that.append('<span>: ' + elrTime.days[result] + ' (' + result + ')' + '</span>');
@@ -158,7 +158,7 @@
 
     $('ul.weeks-in-month li').each(function(k,v) {
         var $that = $(v);
-        var month = $.inArray($that.find('.month').text(), elrTime.months);
+        var month = elr.inArray($that.find('.month').text(), elrTime.months);
         var year = $that.find('.year').text();
         var result = elrTime.getWeeksInMonth(month, year);
         $that.append('<span>: ' + result + '</span>');
@@ -166,9 +166,54 @@
 
     $('ul.prev-month li').each(function(k,v) {
         var $that = $(v);
-        var date = $that.text();
-        var result = elrTime.getPrevMonth(date);
+        var dateObj = {};
+        var result;
+
+        dateObj.month = elr.inArray($that.find('.month').text(), elrTime.months);
+        dateObj.date = parseInt($that.find('.date').text(), 10);
+        dateObj.year = $that.find('.year').text();
+
+        result = elrTime.getPrevMonth(dateObj);
+        $that.append('<span>: ' + result + ' // ' + elrTime.months[result] + '</span>');
+    });
+
+    $('ul.next-month li').each(function(k,v) {
+        var $that = $(v);
+        var dateObj = {};
+        var result;
+
+        dateObj.month = elr.inArray($that.find('.month').text(), elrTime.months);
+        dateObj.date = parseInt($that.find('.date').text(), 10);
+        dateObj.year = $that.find('.year').text();
+
+        result = elrTime.getNextMonth(dateObj);
+        $that.append('<span>: ' + result + ' // ' + elrTime.months[result] + '</span>');
+    });
+
+    $('ul.prev-date li').each(function(k,v) {
+        var $that = $(v);
+        var dateObj = {};
+        var result;
+
+        dateObj.month = elr.inArray($that.find('.month').text(), elrTime.months);
+        dateObj.date = parseInt($that.find('.date').text(), 10);
+        dateObj.year = $that.find('.year').text();
+
+        result = elrTime.getPrevDate(dateObj);
         $that.append('<span>: ' + result + '</span>');
-    });    
+    });
+
+    $('ul.next-date li').each(function(k,v) {
+        var $that = $(v);
+        var dateObj = {};
+        var result;
+
+        dateObj.month = elr.inArray($that.find('.month').text(), elrTime.months);
+        dateObj.date = parseInt($that.find('.date').text(), 10);
+        dateObj.year = $that.find('.year').text();
+
+        result = elrTime.getNextDate(dateObj);
+        $that.append('<span>: ' + result + '</span>');
+    });
 
 })(jQuery);
