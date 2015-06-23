@@ -67,6 +67,49 @@
             sortTime: new RegExp('^(?:[12][012]:|[0]?[0-9]:)[012345][0-9](?:\/:[012345][0-9])?(?:am|pm|AM|PM)', 'i')
         };
 
+        self.isArray = Array.isArray;
+
+        self.isArrayLike = function(obj) {
+            return obj && typeof obj === "object" && (obj.length === 0 || typeof obj.length === "number" && obj.length > 0 && obj.length - 1 in obj);
+        };
+
+        self.each = function(collection, callback) {
+            var i = 0,
+                length = collection.length,
+                isArray = self.isArrayLike( collection );
+
+            if ( isArray ) {
+                for ( ; i < length; i++ ) {
+                    if ( callback.call( collection[ i ], i, collection[ i ] ) === false ) {
+                        break;
+                    }
+                }
+            } else {
+                for ( i in collection ) {
+                    if ( callback.call( collection[ i ], i, collection[ i ] ) === false ) {
+                        break;
+                    }
+                }
+            }
+
+            return collection;
+        };
+
+        self.trim = function(str) {
+            return ( str === null ) ? '' : str.replace(/^\s+|\s+$/g,'');
+        };
+
+        self.unique = function(arr) {
+            var that = this;
+            return arr.filter(function(v, i, that) {
+                return that.indexOf(v) === i;
+            });
+        };
+
+        self.inArray = function(arr, str, i) {
+            return ( arr == null ) ? -1 : arr.indexOf( str, i );
+        };
+
         self.dataTypeChecks = {
             isDate: function(value) {
                 return ( self.patterns.sortMonthDayYear.test(value) ) ? true : false;
@@ -90,7 +133,7 @@
             if ( type ) {
                 types.push(type);
             } else {
-                $.each(values, function(k,v) {
+                self.each(values, function(k,v) {
                     if ( v === '' ) {
                         return;
                     }
@@ -108,7 +151,7 @@
                     }
                 });
             }
-            return $.unique(types);
+            return self.unique(types);
         };
 
         self.generateRandomString = function(length, charset) {
@@ -124,7 +167,8 @@
         };
 
         self.checkBlacklist = function(password, blacklist) {
-            return $.inArray(password.toLowerCase(), blacklist);
+            console.log(self.inArray(blacklist, password.toLowerCase()));
+            return self.inArray(blacklist, password.toLowerCase());
         };
 
         self.checkLength = function(str, reqLength) {
@@ -134,7 +178,7 @@
         self.getText = function($elems) {
             var text = [];
 
-            $.each($elems, function() {
+            self.each($elems, function() {
                 text.push($(this).text());
             });
 
@@ -142,13 +186,13 @@
         };
 
         self.getValue = function($field) {
-            return $.trim($field.val());
+            return self.trim($field.val());
         };
 
         self.getColumnList = function(columnNum, $listItems) {
             var $list = [];
 
-            $.each($listItems, function(k,v) {
+            self.each($listItems, function(k,v) {
                 $list.push($(v).find('td').eq(columnNum));
 
                 return $list;
@@ -160,8 +204,8 @@
         self.getListValues = function($list) {
             var values = [];
 
-            $.each($list, function(k,v) {
-                values.push($.trim($(v).text()).toLowerCase());
+            self.each($list, function(k,v) {
+                values.push(self.trim($(v).text()).toLowerCase());
 
                 return values;
             });
@@ -173,7 +217,7 @@
         self.cleanAlpha = function(str, ignoreWords) {
             ignoreWords = ignoreWords || ['the', 'a'];
 
-            $.each(ignoreWords, function() {
+            self.each(ignoreWords, function() {
                 var re = new RegExp("^" + this + "\\s", 'i');
                 str = str.replace(re, '');
 
@@ -235,7 +279,7 @@
 
         self.cleanString = function(str, re) {
             var reg = new RegExp(re, 'i');
-            return $.trim(str.replace(reg, ''));
+            return self.trim(str.replace(reg, ''));
         };
 
         self.getFormData = function($form) {
@@ -249,17 +293,17 @@
                 var boxIds = [];
 
                 $checkboxes.each(function() {
-                    boxIds.push $(this).attr('id');
+                    boxIds.push($(this).attr('id'));
                 });
 
-                boxIds = $.unique(boxIds);
+                boxIds = self.unique(boxIds);
 
-                $.each(boxIds, function() {
+                self.each(boxIds, function() {
                     var checkboxValues = [];
                     var $boxes = form.find('"input:checked#"' + this + '"');
 
                     $boxes.each(function() {
-                        checkboxValues.push($.trim($(this).val()));
+                        checkboxValues.push(self.trim($(this).val()));
                     });
 
                     formInput[this] = checkboxValues;
@@ -267,19 +311,20 @@
                 });
             }
 
-            $.each(fields, function() {
+            self.each(fields, function() {
                 var $that = $(this);
                 var id = $that.attr('id');
+                var formInput = [];
                 var input;
 
-                if ( $.trim($that.val()) === '' ) {
+                if ( self.trim($that.val()) === '' ) {
                     input = null;
                 } else {
-                    input = $.trim($that.val());
+                    input = self.trim($that.val());
                 }
 
                 if ( input ) {
-                    var formInput[id] = input;
+                    formInput[id] = input;
                 }
 
                 return;
@@ -331,11 +376,11 @@
             var arr = [];
             unique = unique || false;
 
-            $.each($items, function(key, value) {
+            self.each($items, function(key, value) {
                 arr.push($(value).text());
 
                 if ( unique ) {
-                    return $.unique(arr);    
+                    return self.unique(arr);    
                 } else {
                     return arr;
                 }
@@ -346,7 +391,7 @@
 
         // create object keys with arrays for each value in an array
         self.createArrays = function(obj, list) {
-            $.each(list, function() {
+            self.each(list, function() {
                 obj[this] = [];
             });
 
@@ -357,7 +402,7 @@
         self.concatArrays = function(obj) {
             var arr = [];
 
-            $.each(obj, function() {
+            self.each(obj, function() {
                 arr = arr.concat(this);
             });
             return arr;
@@ -391,12 +436,12 @@
 
             // add list items to sortLists arrays
 
-            $.each(types, function() {
+            self.each(types, function() {
                 var type = this;
                 
-                $.each(listItems, function() {
+                self.each(listItems, function() {
                     var listItem = this;
-                    var value = $.trim($(listItem).text());
+                    var value = self.trim($(listItem).text());
 
                     if ( self.dataTypeChecks['is' + self.capitalize(type)].call(that, value) ) {
                         sortLists[type].push(listItem);
@@ -405,7 +450,7 @@
                     }
                 });
 
-                $.each(sortLists[type], function() {
+                self.each(sortLists[type], function() {
                     var value = ($(this).text());
 
                     $(listItems).each(function(k) {
@@ -419,13 +464,13 @@
             });
 
             // sort sortLists arrays
-            $.each(sortLists, function(key) {
+            self.each(sortLists, function(key) {
                 self.comparators['sort' + self.capitalize(key)](sortLists[key], direction);
             });
 
-            // $.each(types, function() {
+            // self.each(types, function() {
             //     var type = this;
-            //     $.each(sortLists[type], function(k, v) {
+            //     self.each(sortLists[type], function(k, v) {
             //         console.log($(v).text() + ':' + type);
             //     });
             // });
@@ -436,9 +481,9 @@
         self.comparators = {
             sortDate: function($items, direction) {
                 var sort = function(a, b) {
-                    if ( self.dataTypeChecks.isDate($.trim($(a).text())) && self.dataTypeChecks.isDate($.trim($(b).text())) ) {
-                        a = new Date(self.patterns.sortMonthDayYear.exec($.trim($(a).text())));
-                        b = new Date(self.patterns.sortMonthDayYear.exec($.trim($(b).text())));
+                    if ( self.dataTypeChecks.isDate(self.trim($(a).text())) && self.dataTypeChecks.isDate(self.trim($(b).text())) ) {
+                        a = new Date(self.patterns.sortMonthDayYear.exec(self.trim($(a).text())));
+                        b = new Date(self.patterns.sortMonthDayYear.exec(self.trim($(b).text())));
                     }
 
                     return self.sortValues(a, b, direction);
@@ -449,10 +494,10 @@
 
             sortTime: function($items, direction) {
                 var sort = function(a, b) {
-                    var time1 = self.patterns.sortTime.exec($.trim($(a).text()))[0];
-                    var time2 = self.patterns.sortTime.exec($.trim($(b).text()))[0];
+                    var time1 = self.patterns.sortTime.exec(self.trim($(a).text()))[0];
+                    var time2 = self.patterns.sortTime.exec(self.trim($(b).text()))[0];
 
-                    if ( self.dataTypeChecks.isTime($.trim($(a).text())) && self.dataTypeChecks.isTime($.trim($(b).text())) ) {
+                    if ( self.dataTypeChecks.isTime(self.trim($(a).text())) && self.dataTypeChecks.isTime(self.trim($(b).text())) ) {
                         a = new Date("04-22-2014 " + self.parseTime(time1));
                         b = new Date("04-22-2014 " + self.parseTime(time2));
                     }
@@ -465,8 +510,8 @@
 
             sortAlpha: function($items, direction) {
                 var sort = function(a, b) {
-                    a = self.cleanAlpha($.trim($(a).text()), ['the', 'a']).toLowerCase();
-                    b = self.cleanAlpha($.trim($(b).text()), ['the', 'a']).toLowerCase();
+                    a = self.cleanAlpha(self.trim($(a).text()), ['the', 'a']).toLowerCase();
+                    b = self.cleanAlpha(self.trim($(b).text()), ['the', 'a']).toLowerCase();
 
                     return self.sortValues(a, b, direction);
                 };
@@ -476,8 +521,8 @@
 
             sortNumber: function($items, direction) {
                 var sort = function(a, b) {
-                    a = parseFloat($.trim($(a).text()));
-                    b = parseFloat($.trim($(b).text()));
+                    a = parseFloat(self.trim($(a).text()));
+                    b = parseFloat(self.trim($(b).text()));
 
                     return self.sortValues(a, b, direction);
                 };
@@ -487,8 +532,8 @@
 
             sortColumnDate: function($listItems, dir, columnNum) {
                 var sort = function(a,b) {
-                    a = $.trim($(a).find('td').eq(columnNum).text());
-                    b = $.trim($(b).find('td').eq(columnNum).text());
+                    a = self.trim($(a).find('td').eq(columnNum).text());
+                    b = self.trim($(b).find('td').eq(columnNum).text());
 
                     if ( self.dataTypeChecks.isDate(a) && self.dataTypeChecks.isDate(b) ) {
                         a = new Date(self.patterns.monthDayYear.exec(a));
@@ -505,8 +550,8 @@
 
             sortColumnTime: function($listItems, dir, columnNum) {
                 var sort = function(a,b) {
-                    a = $.trim($(a).find('td').eq(columnNum).text());
-                    b = $.trim($(b).find('td').eq(columnNum).text());
+                    a = self.trim($(a).find('td').eq(columnNum).text());
+                    b = self.trim($(b).find('td').eq(columnNum).text());
 
                     if ( self.dataTypeChecks.isTime(a) && self.dataTypeChecks.isTime(b) ) {
                         a = new Date('04-22-2014' + self.parseTime(self.patterns.monthDayYear.exec(a)));
@@ -524,8 +569,8 @@
             sortColumnAlpha: function($listItems, dir, columnNum) {
                 var ignoreWords = ['a', 'the'];
                 var sort = function(a,b) {
-                    a = self.cleanAlpha($.trim($(a).find('td').eq(columnNum).text()), ignoreWords).toLowerCase();
-                    b = self.cleanAlpha($.trim($(b).find('td').eq(columnNum).text()), ignoreWords).toLowerCase();
+                    a = self.cleanAlpha(self.trim($(a).find('td').eq(columnNum).text()), ignoreWords).toLowerCase();
+                    b = self.cleanAlpha(self.trim($(b).find('td').eq(columnNum).text()), ignoreWords).toLowerCase();
 
                     return self.sortValues(a, b, dir);
                 };
@@ -535,8 +580,8 @@
 
             sortColumnNumber: function($listItems, dir, columnNum) {
                 var sort = function(a,b) {
-                    a = parseFloat($.trim($(a).find('td').eq(columnNum).text()));
-                    b = parseFloat($.trim($(b).find('td').eq(columnNum).text()));
+                    a = parseFloat(self.trim($(a).find('td').eq(columnNum).text()));
+                    b = parseFloat(self.trim($(b).find('td').eq(columnNum).text()));
 
                     return self.sortValues(a, b, dir);
                 };
@@ -550,7 +595,7 @@
             var links = $nav.find('a[href^="#"]');
             var positions = self.findPositions($content, el);
 
-            $.each(positions, function(index, value) {
+            self.each(positions, function(index, value) {
                 if ( scroll === 0 ) {
                     $('a.' + activeClass).removeClass(activeClass);
                     links.eq(0).addClass(activeClass);

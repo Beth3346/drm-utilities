@@ -20,8 +20,6 @@
         var sortList = function(direction, $listItems) {
             var type = $listItems.parent().data('type');
             var types = [];
-            // var values = elr.toArray($listItems);
-            // var types = elr.getDataTypes(values, type);
 
             if ( type ) {
                 types.push(type);
