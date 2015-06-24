@@ -1065,17 +1065,158 @@
             }
         };
 
-        //gets the week of the month when an event occurs
-        self.getMonthWeekNum = function(dayNum, day, month, year) {
+        self.getDatesInWeek = function(month, date, year) {
+            var firstDay = self.getDayOfWeek(month, 1, year);
+            var numberDays = self.getDaysInMonth(month, year);
+            var currentDay = self.getDayOfWeek(month, date, year);
+            var numberWeeks = self.getWeeksInMonth(month, year);
+            var weekInfo = {};
+            var firstWeek = [];
+            var lastWeek = [];
+            var i;
+            var dayShift;
+            var daysInFirstWeek;
 
+            console.log(month);
+            console.log(date);
+            console.log(year);
+
+            if ( firstDay === self.daysPerWeek ) {
+                dayShift = 0;
+            } else {
+                dayShift = firstDay;
+            }
+
+            daysInFirstWeek = self.daysPerWeek - dayShift;
+            weekInfo.datesInWeek = [];
+            i = 1;
+            // get the number of dates in each week
+            while ( i <= numberWeeks ) {
+                var dates = [];
+                var currentDate = date;
+                var j;
+                var _date;
+
+                if ( i === 1 ) {
+                // first week of the month
+                    j = 0;
+                    while ( j < daysInFirstWeek ) {
+                        j = j + 1;
+                        dates.push(j);
+                    }
+                // middle weeks
+                } else if ( i < numberWeeks ) {
+                    j = 0;
+
+                    if ( i === 2 ) {
+                        _date = daysInFirstWeek;
+                    }
+
+                    while ( j < self.daysPerWeek ) {
+                        j = j + 1;
+                        _date = _date + 1;
+                        dates.push(_date);
+                    }
+                } else if ( i === numberWeeks ) {
+                // last week in month
+                    while ( _date < numberDays ) {
+                        _date = _date + 1;
+                        dates.push(_date);
+                    }
+                }
+
+                // get the week number
+                if ( elr.inArray(dates, currentDate) !== -1 ) {
+                    weekInfo.weekNum = i - 1;
+                    weekInfo.datesInWeek = dates;
+                    break;
+                } else {
+                    i = i + 1;
+                }
+            }
+
+            return weekInfo;
         };
 
-        self.getDatesInWeek = function(month, date, year) {
+        // gets the length of the last week of the month
+        self.getLastWeekLength = function(month, year) {
+            var lastDate = self.getDaysInMonth(month, year);
+            var lastWeek = self.getDatesInWeek(month, lastDate, year);
 
+            return lastWeek.datesInWeek.length;
+        };
+
+        //gets the week of the month when an event occurs
+        self.getMonthWeekNum = function(dayNum, day, month, year) {
+            // gets the week of the month which an event occurs
+            
+            var firstDay = self.getDayOfWeek(month, 1, year);
+            var numberWeeks = self.getWeeksInMonth(month, year);
+            var lastWeekLength = self.getLastWeekLength(month, year);
+            var dayShift;
+            var eventWeekNum;
+            
+            if ( firstDay === self.daysPerWeek ) {
+                dayShift = 0;
+            } else {
+                dayShift = firstDay;
+            }
+
+            if ( dayNum === 'last' && dayShift <= day ) {
+                if ( lastWeekLength < day ) {
+                    eventWeekNum = (numberWeeks - 2);
+                } else {
+                    eventWeekNum = numberWeeks - 1;
+                }
+            } else if ( dayNum === 'last' && dayShift > day ) {
+                eventWeekNum = numberWeeks - 2;
+            } else {
+                eventWeekNum = parseInt(dayNum, 10) - 1;
+            }
+
+            if ( dayShift <= day ) {
+                return eventWeekNum;
+            } else {
+                return eventWeekNum + 1;
+            }
         };
 
         self.getWeekNumber = function(month, date, year) {
+            var weekNum = 1;
+            var weekNums = [];
+            var weekInfo = self.getDatesInWeek(month, date, year);
 
+            elr.each(self.months, function(key) {
+                var numberDays = self.getDaysInMonth(key, year);
+                var firstDay = self.getDayOfWeek(key, 1, year);
+                var numberWeeks = self.getWeeksInMonth(month, year);
+                var week = 1;
+                var dayShift;
+
+                if ( firstDay === self.daysPerWeek ) {
+                    dayShift = 0;
+                } else {
+                    dayShift = firstDay;
+                }
+
+                if ( $.isNumeric(numberWeeks) ) {
+                    while ( week <= numberWeeks ) {
+                        if ( ( week === 1 ) && ( firstDay !== 0 ) ) {
+                            weekNum = weekNum;
+                        } else {
+                            weekNum = weekNum + 1;
+                        }
+
+                        week = week + 1;
+
+                        if ( month === key ) {
+                            weekNums.push(weekNum);
+                        }
+                    }
+                }
+            });
+            
+            return weekNums[weekInfo.weekNum];
         };
 
         return self;

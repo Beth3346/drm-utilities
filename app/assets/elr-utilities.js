@@ -106,8 +106,8 @@
             });
         };
 
-        self.inArray = function(arr, str, i) {
-            return ( arr == null ) ? -1 : arr.indexOf( str, i );
+        self.inArray = function(arr, item, i) {
+            return ( arr == null ) ? -1 : arr.indexOf( item, i );
         };
 
         self.dataTypeChecks = {

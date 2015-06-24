@@ -34,7 +34,7 @@
             $list.empty();
             
             $.each(sortedList, function() {
-                var value = $.trim($(this).text());
+                var value = elr.trim($(this).text());
                 var $listItem = $('<li>', {
                     text: value
                 });
