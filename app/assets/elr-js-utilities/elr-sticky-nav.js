@@ -21,7 +21,7 @@
             var contentHeight = $content.height();
 
             if ( scroll > ( top + contentHeight ) ) {
-                $nav.removeClass('sticy-' + position);
+                $nav.removeClass('sticky-' + position);
             } else if ( ( scroll > (top - 50) ) && ( navHeight < winHeight ) ) {
                 $nav.addClass('sticky-' + position);
                 positionRight(navPositionLeft);
