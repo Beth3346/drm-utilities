@@ -1,6 +1,4 @@
-/*-----------------------------------------------------------------------------
-    Dropdown Buttons
------------------------------------------------------------------------------*/   
+// Dropdown Buttons
 
 @mixin elr-dropdown-button-solid($bk-color: $link-color, $color: $background-color, $width: 40%, $border: none, $border-radius: 0, $divider-color: $light-grey) {
     width: $width;

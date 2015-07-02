@@ -1,6 +1,4 @@
-/*-----------------------------------------------------------------------------
-    Thumbnails
------------------------------------------------------------------------------*/
+// Thumbnails
 
 @mixin elr-thumbnail($border-color: white, $width: 150px, $height: 125px, $border-radius: 0, $display: block) {
     border: 5px solid $border-color;

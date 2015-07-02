@@ -1,6 +1,4 @@
-/*-----------------------------------------------------------------------------
-    Grids
------------------------------------------------------------------------------*/
+// Grids
 
 @mixin elr-flexible-grid($images-per-row: 4, $flex: true, $grid-width: 1040px, $fixed-height: 'no') {
     background-color: white;

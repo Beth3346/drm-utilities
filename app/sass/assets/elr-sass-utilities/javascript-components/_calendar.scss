@@ -1,6 +1,4 @@
-/*-----------------------------------------------------------------------------
-    Calendar
------------------------------------------------------------------------------*/
+// Calendar
 
 @mixin elr-calendar($border-radius: 3px, $main-color: $elr-blue, $secondary-color: $light-grey, $text-color: $dark-grey, $background-color: white, $holiday-color: #FF3659) {
     .elr-calendar-header {

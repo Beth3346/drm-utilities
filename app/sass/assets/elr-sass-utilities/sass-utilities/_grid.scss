@@ -1,6 +1,4 @@
-/*-----------------------------------------------------------------------------
-    Grids
------------------------------------------------------------------------------*/
+// Grids
 
 @mixin elr-grid($column-count: 12, $gutter: 5px) {
     .elr-container {
@@ -10,18 +8,17 @@
 
         .elr-row {
             width: 100%;
-            margin-left: -$gutter * 2;
             margin-right: $gutter * 2;
             @include elr-clearfix();
 
             @include elr-breakpoint(jupiter) {
-                margin-left: -$gutter;
                 margin-right: $gutter;
             }
 
             .elr-col-full, .elr-col-half, .elr-col-two-thirds, .elr-col-third, .elr-col-quarter, .elr-col-fifth {
                 float: left;
                 padding: 0 $gutter * 2;
+                box-sizing: border-box;
                 @include elr-clearfix();
 
                 @include elr-breakpoint(jupiter) {
@@ -45,10 +42,11 @@
                     }
 
                     .elr-row {
-                        margin-left: 0;
+                        margin-left: $gutter * 2;
                         margin-right: $gutter * 2;
 
                         @include elr-breakpoint(jupiter) {
+                            margin-left: $gutter;
                             margin-right: $gutter;
                         }
 

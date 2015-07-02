@@ -1,6 +1,4 @@
-/*-----------------------------------------------------------------------------
-    Pagination
------------------------------------------------------------------------------*/
+// Pagination
 
 @mixin elr-pagination-bar($background-color: white, $border-radius: 5px, $border-color: $light-grey, $color: $link-color, $font-size: 12) {
     border: 1px solid $border-color;

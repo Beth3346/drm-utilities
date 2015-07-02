@@ -1,6 +1,4 @@
-/*-----------------------------------------------------------------------------
-    Dropdown Nav Menu
------------------------------------------------------------------------------*/
+// Dropdown Nav Menu
 
 @mixin elr-dropdown-nav($text-color: $link-color, $background-color: white, $divider-color: $light-grey, $border-radius: 0) {
     @include elr-nav-bar-solid($text-color, $background-color, left, $text-color);

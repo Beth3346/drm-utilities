@@ -11,22 +11,16 @@
 
 -----------------------------------------------------------------------------*/
 
-/*-----------------------------------------------------------------------------
-    Vendor Dependencies
------------------------------------------------------------------------------*/
+// Vendor Dependencies
 
     @import "font-awesome/scss/font-awesome";
 
-/*-----------------------------------------------------------------------------
-    Sass Utilities
------------------------------------------------------------------------------*/ 
+// Sass Utilities
 
     @import "default-config";
     @import "../config";
 
-/*-----------------------------------------------------------------------------
-    Sass Components
------------------------------------------------------------------------------*/ 
+// Sass Components
 
     @import "components/buttons";
     @import "components/cards";
@@ -46,15 +40,11 @@
     @import "components/thumbnails";
     @import "components/videos";
 
-/*-----------------------------------------------------------------------------
-    Helper Classes
------------------------------------------------------------------------------*/ 
+// Helper Classes
 
     @import "helper-classes/helper-classes";
 
-/*-----------------------------------------------------------------------------
-    JavaScript Components
------------------------------------------------------------------------------*/ 
+// JavaScript Components
 
     @import "javascript-components/accordion";
     @import "javascript-components/back-to-top";
@@ -74,9 +64,7 @@
     @import "javascript-components/tabbed-content";
     @import "javascript-components/tooltips";
 
-/*-----------------------------------------------------------------------------
-    Sass Utilities
------------------------------------------------------------------------------*/ 
+// Sass Utilities 
 
     @import "sass-utilities/border-effects";
     @import "sass-utilities/box-effects";
