@@ -1049,4 +1049,4 @@ class @ElrValidation
             length = value.length
             _evaluate min, max, length
 
-new ElrValidation()
+# new ElrValidation()

@@ -87,6 +87,7 @@
     elrTableFilter();
     elrTableSorter();
     elrTabs();
+    elrValidation();
 
     $('.now').text(elrTime.now);
     // console.log(elrTime.today);
