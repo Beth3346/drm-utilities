@@ -7,7 +7,7 @@
         var self = {};
         var spec = params || {};
         var scrollSpeed = spec.scrollSpeed || 900;
-        var $content = spec.content || $('body');
+        var $content = spec.content || $('body, html');
 
         if ( $content.length ) {
             var $backToTop = elr.createElement('button', {
