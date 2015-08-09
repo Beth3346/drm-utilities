@@ -1,11 +1,11 @@
 // Media Query Breaking Points
 
-@mixin elr-breakpoint($point, $modifier: max-width) {
+@mixin elr-breakpoint($point, $modifier: max-width, $secondary-point: null, $secondary-modifier: null) {
 
     @if $point == mercury {
-    	@media screen and (min-width: $mercury) { @content; }
+        @media screen and (min-width: $mercury) { @content; }
     } @else if $point == venus {
-    	@media screen and (max-width: $venus) { @content; }
+        @media screen and (max-width: $venus) { @content; }
     } @else if $point == earth {
         @media screen and (max-width: $earth) { @content; }
     } @else if $point == mars {
@@ -20,6 +20,8 @@
         @media screen and (max-width: $neptune) { @content; }
     } @else if $point == pluto {
         @media screen and (max-width: $pluto) { @content; }
+    } @else if $secondary-point != null {
+        @media screen and ($modifier: $point) and ($secondary-modifier: $secondary-point) { @content; }
     } @else {
         @media screen and ($modifier: $point) { @content; }
     }
