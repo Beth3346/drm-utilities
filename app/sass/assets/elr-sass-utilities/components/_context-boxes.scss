@@ -1,6 +1,4 @@
-/*-----------------------------------------------------------------------------
-    Content Boxes
------------------------------------------------------------------------------*/
+// Content Boxes
 
 @mixin elr-context-box($type: info, $border-radius: 0, $color: none, $width: 100%, $text-color: none) {
     padding: 10px 20px;
