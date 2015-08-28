@@ -84,6 +84,11 @@
     p {
         margin: 0;
         padding: 10px 0;
+        @include elr-em-font(16);
+
+        @include elr-breakpoint(neptune) {
+            @include elr-em-font(14);
+        }
     }
 
     small {
