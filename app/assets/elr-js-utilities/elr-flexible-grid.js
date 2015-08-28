@@ -9,13 +9,16 @@
         var flex = spec.flex || true;
         var $grid = $('.' + gridClass);
         var tags;
+        var $gridNav;
+        var $items;
+        var filter;
 
         var addFilterButtons = function(tags) {
 
             $.each(tags, function(k, v) {
                 var $tagButton = $('<button></button>', {
                     'class': 'elr-grid-filter',
-                    text: elr.capitalize(v),
+                    'text': elr.capitalize(v),
                     'data-filter': v
                 });
 
@@ -29,8 +32,8 @@
             var overlay = $grid.find('.overlay');
 
             $.each(overlay, function(k, v) {
-                var $that = $(v),
-                    imageHeight = $that.parent('.elr-grid-item').find('img').outerHeight(true);
+                var $that = $(v);
+                var imageHeight = $that.parent('.elr-grid-item').find('img').outerHeight(true);
 
                 $that.height(imageHeight).hide();
             });
@@ -81,9 +84,9 @@
                 $that.attr('data_num', index);
 
                 if ((typeof $prevImage !== 'undefined') && ($prevImage !== null)) {
-                    var margin = $prevImage.outerWidth(true) - $prevImage.outerWidth(false),
-                        top = (index < ((self.imagesPerRow * 2) + 1)) ? $prevImage.outerHeight(false) + margin : $prevImage.outerHeight(false) + margin + $prevImage.position().top;
-                        left = ($prevImage.outerWidth(false) * columnNum) + (margin * columnNum);
+                    var margin = $prevImage.outerWidth(true) - $prevImage.outerWidth(false);
+                    var top = (index < ((self.imagesPerRow * 2) + 1)) ? $prevImage.outerHeight(false) + margin : $prevImage.outerHeight(false) + margin + $prevImage.position().top;
+                    var left = ($prevImage.outerWidth(false) * columnNum) + (margin * columnNum);
 
                     $that.css({'top' : top, 'left' : left, 'position': 'absolute'});
                 } else {
@@ -100,9 +103,10 @@
             // filter list items by tag
             var $filteredItems;
                 
-            filter = (window.location.hash) ? filter : 'all';
-
             window.location.hash = filter;
+            // filter = (window.location.hash) ? filter : 'all';
+            filter = filter || 'all';
+            console.log(filter);
 
             if ( ( $.inArray( filter, tags ) !== -1 ) || filter === 'all' ) {
                 if ( filter === 'all' ) {
@@ -126,9 +130,8 @@
             $items = $grid.find('.elr-grid-item').hide();
 
             $(window).load(function() {
-                var filter = hash ? hash.replace(/^#/, '') : null;
-
-                tags = elr.toArray($grid.find('ul.caption-tags li'), true);
+                filter = hash ? hash.replace(/^#/, '') : 'all';
+                tags = elr.unique(elr.toArray($grid.find('ul.caption-tags li')));
 
                 addFilterButtons(tags);
                 filterListItems(filter, $items);
@@ -161,6 +164,8 @@
             $gridNav.on('click', 'button.elr-grid-filter', function(e) {
                 var $that = $(this);
                 var filter = $that.data('filter').toLowerCase();
+
+                console.log(filter);
                 
                 filterListItems(filter, $items);
                 $that.siblings('button').removeClass('active');
@@ -170,9 +175,9 @@
 
             $grid.on('click', '.caption-tags li', function(e) {
                 var filter = $(this).data('filter').toLowerCase();
+                var $button = $gridNav.find('button[data-filter=' + filter + ']');
                 
                 filterListItems(filter, $items);
-                $button = $gridNav.find('button[data-filter=' + filter + ']');
                 $button.siblings('button').removeClass('active');
                 $button.addClass('active');
                 e.preventDefault();

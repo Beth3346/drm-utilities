@@ -7,8 +7,6 @@
         var tableClass = spec.tableClass || 'elr-searchable-table';
         var searchInput = spec.searchInput || 'elr-search-table';
         var $table = $('.' + tableClass);
-        var $fullRows = $table.find('tbody tr');
-        var $inputs = $table.find('th').find('.' + searchInput);
 
         var getFilterValues = function($inputs) {
             var filterValues = [];
@@ -27,35 +25,34 @@
         };
 
         var getRows = function($fullRows, filterValues) {
+            var $newRows;
+            
             $.each(filterValues, function(k,v) {
                 var $that = $(v);
                 var input = $.trim($that.val()).toLowerCase();
                 var columnNum = $that.closest('th').index();
 
                 if ( filterValues.length === 1 ) {
-                    $rows = $fullRows.has('td:eq(' + columnNum + '):containsNC(' + input + ')');
+                    $newRows = $fullRows.has('td:eq(' + columnNum + '):containsNC(' + input + ')');
                 } else if ( k === 0 ) {
-                    $rows = $fullRows.has('td:eq(' + columnNum + '):containsNC(' + input + ')');
+                    $newRows = $fullRows.has('td:eq(' + columnNum + '):containsNC(' + input + ')');
                 } else {
-                    $rows = $rows.has('td:eq(' + columnNum + '):containsNC(' + input + ')');
+                    $newRows = $newRows.has('td:eq(' + columnNum + '):containsNC(' + input + ')');
                 }
 
-                return $rows;
+                return $newRows;
             });
 
-            return $rows;
+            return $newRows;
         };
 
         var filterRows = function($fullRows, filterValues) {
-            var $rows;
 
             if ( filterValues.length === 0 ) {
-                $rows = $fullRows;
+                return $fullRows;
             } else {
-                $rows = getRows($fullRows, filterValues);
+                return getRows($fullRows, filterValues);
             }
-
-            return $rows;
         };
 
         var renderTable = function($table, $filteredRows) {
@@ -66,11 +63,17 @@
             });
         };
 
-        $table.on('keyup', 'input.' + searchInput, function() {
-            var filterValues = getFilterValues($inputs);
-            var $filteredRows = filterRows($fullRows, filterValues);
-            
-            renderTable($table, $filteredRows);
+        $table.each(function() {
+            var $that = $(this);
+            var $fullRows = $that.find('tbody tr');
+            var $inputs = $that.find('th').find('.' + searchInput);
+
+            $that.on('keyup', 'input.' + searchInput, function() {
+                var filterValues = getFilterValues($inputs);
+                var $filteredRows = filterRows($fullRows, filterValues);
+                
+                renderTable($that, $filteredRows);
+            });
         });
 
         return self;

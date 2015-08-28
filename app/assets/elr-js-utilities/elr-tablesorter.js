@@ -21,7 +21,7 @@
 
             $.each($listItems, function() {
                 var listItem = this;
-                var value = $.trim($(listItem).text());
+                var value = $.trim($(listItem).find('td').eq(columnNum).text());
 
                 $.each(types, function() {
                     if ( elr.dataTypeChecks['is' + elr.capitalize(this)].call(that, value) ) {
@@ -49,10 +49,11 @@
 
         $table.on('click', '.' + buttonClass, function(e) {
             var $that = $(this);
-            var $tableBody = $table.find('tbody');
+            var $parentTable = $that.closest('table');
+            var $tableBody = $parentTable.find('tbody');
             var $rows = $tableBody.find('tr');
             var columnNum = $that.closest('th').index();
-            var type = $table.find('th').eq(columnNum).data('type');
+            var type = $parentTable.find('th').eq(columnNum).data('type');
             var $list = elr.getColumnList(columnNum, $rows);
             var values = elr.getListValues($list);
             var types = elr.getDataTypes(values, type);

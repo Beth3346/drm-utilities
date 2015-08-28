@@ -386,7 +386,7 @@
                 arr.push($(value).text());
 
                 if ( unique ) {
-                    return self.unique(arr);    
+                    return self.unique(arr);
                 } else {
                     return arr;
                 }
@@ -591,6 +591,8 @@
 
                     return self.sortValues(a, b, dir);
                 };
+
+                console.log($listItems);
 
                 return $listItems.sort(sort);
             }
