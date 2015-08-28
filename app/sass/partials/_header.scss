@@ -186,6 +186,11 @@ header {
             padding: 0;
             margin: 0;
             text-align: center;
+            @include elr-em-font(36);
+        }
+
+        @include elr-breakpoint(neptune) {
+            @include elr-em-font(24);
         }
 
         a {

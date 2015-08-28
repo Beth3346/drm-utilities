@@ -8,7 +8,7 @@ section#elr-validation
             .elr-col-full
                 h2 Tabular Form
             .elr-col-full
-                form.tabular-form(role="form" action="")
+                form.tabular-form(role="form" action="" autocomplete="off" )
                     .elr-container
                         .elr-row
                             .elr-col-half
@@ -22,20 +22,20 @@ section#elr-validation
                     .elr-container
                         .elr-row
                             .elr-col-half
-                                label(for="username") *Username:
-                                input.elr-valid-alpha-num-underscore#username(type="text" name="username" placeholder="UserName" required)
+                                label(for="jksgioj") *Username:
+                                input.elr-valid-alpha-num-underscore#jksgioj( autocomplete="off" type="text" name="jksgioj" placeholder="UserName" required)
                                 small Can include letters, underscores, and numbers
                             .elr-col-half
-                                label(for="password") *Password:
-                                input.elr-valid-no-spaces.elr-password#password(type="password" name="password" required)
+                                label(for="annoying") *Password:
+                                input.elr-valid-no-spaces.elr-password#annoying( autocomplete="off" type="password" name="annoying" required)
                     .elr-container
                         .elr-row
                             .elr-col-half
                                 label(for="email") *Email:
-                                input.elr-valid-email#email(type="email" name="email" placeholder="youremail@email.com" required)
+                                input.elr-valid-email#email( autocomplete="off" type="email" name="email" placeholder="youremail@email.com" required)
                             .elr-col-half
                                 label(for="phone") Phone:
-                                input.elr-valid-phone#phone(type="tel" name="phone" placeholder="212-867-5309")
+                                input.elr-valid-phone#phone( autocomplete="off" type="tel" name="phone" placeholder="212-867-5309")
                                 small 212-867-5309x78 no spaces
                     .elr-container
                         .elr-row

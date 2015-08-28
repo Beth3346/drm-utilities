@@ -1,7 +1,8 @@
 // Forms
 
 @mixin elr-form($glow: $elr-blue, $bk-color: $lightest-grey, $border: $grey, $button-color: $dark-grey) {
-    padding: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     width: 100%;
 
     small {
