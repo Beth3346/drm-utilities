@@ -1,30 +1,42 @@
 // Grids
 
-@mixin elr-grid($column-count: 12, $gutter: 5px) {
+@mixin elr-grid($column-count: 12, $gutter: 5px, $max-width: 1400px, $container-width: 95%) {
     .elr-container {
-        width: 95%;
-        max-width: 1400px;
+        width: $container-width;
+        max-width: $max-width;
         margin: 0 auto;
 
         .elr-row {
             width: 100%;
-            margin-right: $gutter * 2;
             @include elr-clearfix();
 
-            @include elr-breakpoint(jupiter) {
-                margin-right: $gutter;
+            @if ($gutter > 0) {
+                margin-right: $gutter * 2;
+
+                @include elr-breakpoint(jupiter) {
+                    margin-right: $gutter;
+                }
             }
 
-            .elr-col-full, .elr-col-half, .elr-col-two-thirds, .elr-col-third, .elr-col-quarter, .elr-col-fifth {
+            .elr-col-full,
+            .elr-col-half,
+            .elr-col-two-thirds,
+            .elr-col-third,
+            .elr-col-quarter,
+            .elr-col-fifth,
+            .elr-col-three-fourths {
                 float: left;
-                padding: 0 $gutter * 2;
                 box-sizing: border-box;
                 @include elr-clearfix();
 
-                @include elr-breakpoint(jupiter) {
-                    margin-bottom: $gutter * 2;
-                    padding-left: $gutter;
-                    padding-right: $gutter;
+                @if ($gutter > 0) {
+                    padding: 0 $gutter * 2;
+
+                    @include elr-breakpoint(jupiter) {
+                        margin-bottom: $gutter * 2;
+                        padding-left: $gutter;
+                        padding-right: $gutter;
+                    }
                 }
 
                 @include elr-breakpoint(saturn) {
@@ -33,21 +45,30 @@
 
                 .elr-container {
                     width: 100%;
-                    padding-left: $gutter * 2;
-                    padding-right: $gutter * 2;
 
-                    @include elr-breakpoint(jupiter) {
-                        padding-left: $gutter;
-                        padding-right: $gutter;
+                    @if ($gutter > 0) {
+                        padding-left: $gutter * 2;
+                        padding-right: $gutter * 2;
+
+                        @include elr-breakpoint(jupiter) {
+                            padding-left: $gutter;
+                            padding-right: $gutter;
+                        }
                     }
 
                     .elr-row {
-                        margin-left: $gutter * 2;
-                        margin-right: $gutter * 2;
+
+                        @if ($gutter > 0) {
+                            margin-left: $gutter * 2;
+                            margin-right: $gutter * 2;
+                        }
 
                         @include elr-breakpoint(jupiter) {
-                            margin-left: $gutter;
-                            margin-right: $gutter;
+
+                            @if ($gutter > 0) {
+                                margin-left: $gutter;
+                                margin-right: $gutter;
+                            }
                         }
 
                         @for $i from 1 through $column-count {
@@ -56,7 +77,13 @@
                                 margin-bottom: 0;
                             }
 
-                            .elr-col-full, .elr-col-half, .elr-col-two-thirds, .elr-col-third, .elr-col-quarter, .elr-col-fifth {
+                            .elr-col-full,
+                            .elr-col-half,
+                            .elr-col-two-thirds,
+                            .elr-col-third,
+                            .elr-col-quarter,
+                            .elr-col-fifth,
+                            .elr-col-three-fourths {
                                 margin-bottom: 0;
                             }
                         }
@@ -68,13 +95,16 @@
                 .elr-col-#{$i} {
                     width: ( 100 / $column-count ) * $i * 1%;
                     float: left;
-                    padding: 0 $gutter * 2;
                     @include elr-clearfix();
 
-                    @include elr-breakpoint(jupiter) {
-                        margin-bottom: $gutter * 2;
-                        padding-left: $gutter;
-                        padding-right: $gutter;
+                    @if ($gutter > 0) {
+                        padding: 0 $gutter * 2;
+
+                        @include elr-breakpoint(jupiter) {
+                            margin-bottom: $gutter * 2;
+                            padding-left: $gutter;
+                            padding-right: $gutter;
+                        }
                     }
 
                     @include elr-breakpoint(saturn) {
@@ -84,20 +114,26 @@
 
                     .elr-container {
                         width: 100%;
-                        padding-left: $gutter * 2;
-                        padding-right: $gutter * 2;
+                        
+                        @if ($gutter > 0) {
+                            padding-left: $gutter * 2;
+                            padding-right: $gutter * 2;
 
-                        @include elr-breakpoint(jupiter) {
-                            padding-left: $gutter;
-                            padding-right: $gutter;
+                            @include elr-breakpoint(jupiter) {
+                                padding-left: $gutter;
+                                padding-right: $gutter;
+                            }
                         }
 
                         .elr-row {
                             margin-left: 0;
-                            margin-right: $gutter * 2;
+                            
+                            @if ($gutter > 0) {
+                                margin-right: $gutter * 2;
 
-                            @include elr-breakpoint(jupiter) {
-                                margin-right: $gutter;
+                                @include elr-breakpoint(jupiter) {
+                                    margin-right: $gutter;
+                                }
                             }
 
                             .elr-col-#{$i} {
@@ -144,6 +180,14 @@
 
             .elr-col-two-thirds {
                 width: (100% / 3) * 2;
+
+                @include elr-breakpoint(saturn) {
+                    width: 100%;
+                }
+            }
+
+            .elr-col-three-fourths {
+                width: (100% / 4) * 3;
 
                 @include elr-breakpoint(saturn) {
                     width: 100%;
