@@ -262,3 +262,85 @@
         }
     }
 }
+
+@mixin elr-formstack-reset {
+    // Formstack Form reset
+    .fsForm {
+        border: 0 !important;
+        color: $text-color;
+        width: 100% !important;
+    }
+
+    .fsBody .fsLabel, .fsBody label {
+        font-weight: normal !important;
+    }
+
+    .fsForm input[type=text],
+    .fsForm input[type=name],
+    .fsForm input[type=email],
+    .fsForm input[type=tel],
+    .fsForm textarea {
+        width: 100% !important;
+        background-image: none !important;
+        max-width: none !important;
+        box-shadow: none !important;
+    }
+
+    .fsPage:after,
+    .fsPage:before,
+    .fsSection:after,
+    .fsSection:before,
+    .fsFieldRow:after,
+    .fsFieldRow:before {
+        content: "";
+        display: table;
+    }
+
+    .fsPage:after,
+    .fsSection:after,
+    .fsFieldRow:after {
+        clear: both;
+    }
+
+    .fsForm .fsSubmit {
+        background: none !important;
+        text-align: right;
+    }
+
+    .fsForm .fsSubmit input {
+        border: 0 !important;
+        padding: 0.5em 1em !important;
+        font-weight: normal !important;
+        border-radius: 2px !important;
+        cursor: pointer;
+        transition: all 0.3s ease-in;
+    }
+
+    .fsForm input.fsField[type="email"]:focus,
+    .fsForm input.fsField[type="file"]:focus,
+    .fsForm input.fsField[type="number"]:focus,
+    .fsForm input.fsField[type="tel"]:focus,
+    .fsForm input.fsField[type="text"]:focus,
+    .fsForm textarea.fsField:focus {
+        border-color: #ffd100 !important;
+    }
+
+    .fsError {
+        border: 0 !important;
+        background: 0 !important;
+        color: #e7402f !important;
+        text-align: left !important;
+    }
+
+    .fsForm {
+        color: black !important;
+    }
+
+    .fsboxshadow .fsBody .fsForm {
+        box-shadow: none !important;
+    }
+
+    .fsFieldFocused {
+        background-color: transparent !important;
+    }
+}
