@@ -132,3 +132,19 @@
         }
     }
 }
+
+@mixin elr-font-awesome-list($icon, $icon-font-size: 80%) {
+    @include elr-unstyled-list;
+
+    li {
+        margin-left: 0;
+
+        &:before {
+            display: inline;
+            padding-right: 10px;
+            font-size: $icon-font-size;
+            vertical-align: middle;
+            @include elr-font-awesome($icon);
+        }
+    }
+}
