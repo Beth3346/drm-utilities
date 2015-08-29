@@ -2,3 +2,35 @@ section#responsiveness
     .elr-container
         .elr-row
             .elr-col-full
+                p Hit certain content based on window size. Resize your window to see how it works
+            .elr-col-full
+                ul.elr-unstyled-list
+                    li List Item 1
+                    li
+                        pre .elr-hide
+                        span.elr-hide This content is hidden
+                    li The previous item's content is hidden
+                    li
+                        pre .elr-hide-desktop
+                        span.elr-hide-desktop This content is hidden on screens larger than 768px
+                    li
+                        pre .elr-hide-tablet
+                        span.elr-hide-tablet This content is hidden on screens smaller than 768px and larger than 480px
+                    li
+                        pre .elr-hide-tablet.elr-hide-mobile
+                        span.elr-hide-tablet.elr-hide-mobile This content is hidden on screens smaller than 768px
+                    li
+                        pre .elr-hide-mobile
+                        span.elr-hide-mobile This content is hidden on screens smaller than 480px
+                    li
+                        pre .elr-show-desktop
+                        span.elr-show-desktop This content is visible only on screens larger than 768px
+                    li
+                        pre .elr-show-desktop.elr-show-tablet
+                        span.elr-show-tablet This content is visible only on screens larger than 480px
+                    li
+                        pre .elr-show-tablet
+                        span.elr-show-tablet This content is visible only on screens smaller than 768px and larger than 480px
+                    li
+                        pre .elr-show-mobile
+                        span.elr-show-mobile This content is visible only on screens smaller than 480px

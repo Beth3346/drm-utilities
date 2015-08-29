@@ -6,27 +6,41 @@
     }
 
     .elr-hide-desktop {
-        @include elr-breakpoint($mercury) {
+        @include elr-breakpoint($saturn - 1, 'min-width') {
             display: none;
-        }
-
-        @include elr-breakpoint($venus) {
-            display: none;
-        }
-
-        @include elr-breakpoint($saturn) {
-            display: block;
         }
     }
 
     .elr-hide-tablet {
-        @include elr-breakpoint($saturn) {
+        @include elr-breakpoint($saturn, 'max-width', $neptune - 1, 'min-width') {
             display: none;
         }
     }
 
     .elr-hide-mobile {
-        @include elr-breakpoint($neptune) {
+        @include elr-breakpoint(neptune) {
+            display: none;
+        }
+    }
+
+    .elr-show-desktop {
+        @include elr-breakpoint($saturn, 'max-width') {
+            display: none;
+        }
+    }
+
+    .elr-show-tablet {
+        @include elr-breakpoint($saturn, 'min-width') {
+            display: none;
+        }
+
+        @include elr-breakpoint($neptune, 'max-width') {
+            display: none;
+        }
+    }
+
+    .elr-show-mobile {
+        @include elr-breakpoint($neptune, 'min-width') {
             display: none;
         }
     }
