@@ -395,7 +395,7 @@ class @ElrCalendar
                             notes: if that.data('event-notes')? then that.data('event-notes') else null
                         }]
 
-                if _addHolidays is true
+                if _addHolidays is yes
                     $.each self.holidays, ->
                         self.createEvent @, events, that
 
