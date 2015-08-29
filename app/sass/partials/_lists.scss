@@ -1,0 +1,35 @@
+.unstyled-list-left {
+    @include elr-unstyled-list(left);
+}
+
+.unstyled-list-center {
+    @include elr-unstyled-list(center);
+}
+
+.unstyled-list-right {
+    @include elr-unstyled-list(right);
+}
+
+.border-list-left {
+    @include elr-border-list(left);
+}
+
+.border-list-center {
+    @include elr-border-list(center, $main-color);
+}
+
+.border-list-right {
+    @include elr-border-list(right, green);
+}
+
+.inline-list {
+    @include elr-inline-list;
+}
+
+.breadcrumbs {
+    @include elr-breadcrumbs;
+}
+
+.bullet-list {
+    @include elr-bullet-list;
+}

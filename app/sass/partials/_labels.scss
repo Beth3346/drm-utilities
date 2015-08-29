@@ -1,0 +1,35 @@
+.label-info {
+    margin-bottom: 5px;
+    @include elr-em-font(12);
+    @include elr-label(info);
+}
+
+.label-danger {
+    margin-bottom: 5px;
+    @include elr-em-font(12);
+    @include elr-label(danger);
+}
+
+.label-warning {
+    margin-bottom: 5px;
+    @include elr-em-font(12);
+    @include elr-label(warning);
+}
+
+.label-success {
+    margin-bottom: 5px;
+    @include elr-em-font(12);
+    @include elr-label(success);
+}
+
+.label-muted {
+    margin-bottom: 5px;
+    @include elr-em-font(12);
+    @include elr-label(muted);
+}
+
+.label-custom {
+    margin-bottom: 5px;
+    @include elr-em-font(12);
+    @include elr-label(custom, 5px, coral);
+}
