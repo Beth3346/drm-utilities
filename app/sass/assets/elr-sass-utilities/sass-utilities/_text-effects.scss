@@ -5,3 +5,14 @@
 @mixin elr-inset-text($shadow-color: $shadow-color) {
     text-shadow: 1px 1px 0 $shadow-color;
 }
+
+@mixin elr-font-awesome($icon) {
+    content: $icon;
+    line-height: 1;
+    font-weight: normal;
+    font-style: normal;
+    font-family: FontAwesome;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
