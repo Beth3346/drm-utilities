@@ -30,7 +30,7 @@
     img {
         position: relative;
         height: 80%;
-        @include elr-center-block;
+        @include elr-center-block(100%);
     }
 
     .thumbnail-list {

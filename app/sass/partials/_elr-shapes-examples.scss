@@ -1,5 +1,23 @@
 // Shapes Utilities Examples
 
+.circle {
+    margin-top: 20px;
+    background-color: $main-color;
+    @include elr-circle(200px);
+}
+
+.ellipse {
+    margin-top: 20px;
+    background-color: $main-color;
+    @include elr-ellipse(200px, 150px);
+}
+
+.ellipse-tall {
+    margin-top: 20px;
+    background-color: $main-color;
+    @include elr-ellipse(150px, 200px);
+}
+
 .elr-rectangle {
     background-color: $main-color;
     margin: 20px;

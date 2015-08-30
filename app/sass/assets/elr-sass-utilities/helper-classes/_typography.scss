@@ -1,6 +1,63 @@
 // Typography Classes
 
 @mixin elr-typography-classes() {
+
+    mark {
+        background-color: $main-color;
+        color: white;
+        padding-left: 3px;
+        padding-right: 3px;
+    }
+
+    p {
+        margin: 0;
+        padding: 0 0 10px 0;
+        @include elr-em-font($default-font-size);
+
+        @include elr-breakpoint(neptune) {
+            @include elr-em-font($default-font-size - 2);
+        }
+    }
+
+    small {
+        @include elr-em-font($default-font-size - 4);
+    }
+
+    blockquote {
+        margin: 0;
+        padding: 10px;
+        font-style: italic;
+    }
+
+    cite {
+        font-style: normal;
+    }
+
+    pre {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        background-color: $lightest-grey;
+        border: 1px solid $light-grey;
+        padding: 10px;
+        border-radius: 3px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        @include elr-em-font(14);
+
+        @include elr-breakpoint(neptune) {
+            width: 100%;
+        }
+    }
+
+    a {
+        text-decoration: underline;
+        color: $link-color;
+
+        &:hover, &:focus {
+            text-decoration: none;
+        }
+    }
+
     .elr-bold {
         font-weight: bold;
     }   
@@ -70,67 +127,7 @@
         color: $success-color;
     }
 
-    mark {
-        background-color: $main-color;
-        color: white;
-        padding-left: 3px;
-        padding-right: 3px;
-    }
-
     .elr-highlight {
         color: $main-color;
-    }
-
-    p {
-        margin: 0;
-        padding: 0 0 10px 0;
-        @include elr-em-font(16);
-
-        @include elr-breakpoint(neptune) {
-            @include elr-em-font(14);
-        }
-    }
-
-    small {
-        @include elr-em-font(10);
-    }
-
-    blockquote {
-        margin: 0;
-        padding: 10px;
-        font-style: italic;
-    }
-
-    cite {
-        font-style: normal;
-    }
-
-    pre {
-        margin-top: 20px;
-        margin-bottom: 20px;
-        background-color: $lightest-grey;
-        border: 1px solid $light-grey;
-        padding: 10px;
-        border-radius: 3px;
-        white-space: pre-wrap;
-        word-wrap: break-word;
-        @include elr-em-font(14);
-
-        @include elr-breakpoint(neptune) {
-            width: 100%;
-        }
-    }
-
-    a {
-        text-decoration: underline;
-        color: $link-color;
-
-        &:hover, &:focus {
-            text-decoration: none;
-        }
-
-        &:visited {
-            color: darken($link-color,  20%);
-        }
     }
 }

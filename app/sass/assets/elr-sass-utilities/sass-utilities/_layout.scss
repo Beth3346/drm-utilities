@@ -16,16 +16,14 @@
 
 // Centers an element horizontally on the page
 
-@mixin elr-center-block() {
+@mixin elr-center-block($width: null) {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
-}
 
-// calculates em font size from px font size
-
-@mixin elr-em-font($size) {
-	font-size: ($size / $default-font-size)#{rem};
+    @if $width != null {
+        width: $width;
+    }
 }
 
 // calculates em font size from px font size
@@ -33,6 +31,8 @@
 @mixin elr-em-margin($top, $right, $bottom, $left) {
 	@if $right == null {
 		margin: ($top / $default-font-size)#{rem};
+    } @else if $bottom == null {
+        margin: ($top / $default-font-size)#{rem}, ($right / $default-font-size)#{rem};
 	} @else {
 		margin: ($top / $default-font-size)#{rem}, ($right / $default-font-size)#{rem}, ($bottom / $default-font-size)#{rem}, ($left / $default-font-size)#{rem};		
 	}
@@ -43,6 +43,8 @@
 @mixin elr-em-padding($top, $right, $bottom, $left) {
 	@if $right == null {
 		padding: ($top / $default-font-size)#{rem};
+    } @else if $bottom == null {
+        margin: ($top / $default-font-size)#{rem}, ($right / $default-font-size)#{rem};
 	} @else {
 		padding: ($top / $default-font-size)#{rem}, ($right / $default-font-size)#{rem}, ($bottom / $default-font-size)#{rem}, ($left / $default-font-size)#{rem};		
 	}

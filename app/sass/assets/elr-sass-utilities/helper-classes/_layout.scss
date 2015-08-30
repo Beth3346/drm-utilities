@@ -10,6 +10,10 @@
     }
 
     .elr-clear {
-        @include elr-clearfix();
+        @include elr-clearfix;
+    }
+
+    .elr-center-block {
+        @include elr-center-block;
     }
 }
