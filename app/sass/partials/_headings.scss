@@ -15,3 +15,7 @@
     margin: 30px 0;
     @include elr-ribbon-heading($main-color, $background-color, $background-color, 20);
 }
+
+#headings {
+    @include elr-headings();
+}

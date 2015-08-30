@@ -3,6 +3,25 @@
 .main-content {
     padding-top: 20px;
     min-height: 800px;
+
+    h1 {
+        @include elr-em-font(30);
+    }
+
+    h2 {
+        @include elr-em-font(24);
+    }
+
+    h3 {
+        @include elr-em-font(18);
+    }
+}
+
+.example-holder {
+    padding: 20px;
+    margin: 10px 0;
+    border: 1px solid $elr-blue;
+    background-color: $elr-blue-light;
 }
 
 pre {
@@ -16,5 +35,22 @@ pre {
 
     h2 {
         @include elr-em-font(18);
+    }
+}
+
+.inline-demo {
+    border: 1px solid $elr-blue;
+    padding: 10px;
+    margin: 20px 0 0 0;
+    background-color: $elr-blue-light;
+    border-radius: 3px;
+
+    &.demo-light {
+        background-color: white;
+        border-color: $elr-blue-light;
+    }
+
+    p {
+        padding: 0;
     }
 }

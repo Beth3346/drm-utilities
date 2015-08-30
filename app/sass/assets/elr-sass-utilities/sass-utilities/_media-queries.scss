@@ -20,6 +20,8 @@
         @media screen and (max-width: $neptune) { @content; }
     } @else if $point == pluto {
         @media screen and (max-width: $pluto) { @content; }
+    } @else if $point == triton {
+        @media screen and (max-width: $triton) { @content; }
     } @else if $secondary-point != null {
         @media screen and ($modifier: $point) and ($secondary-modifier: $secondary-point) { @content; }
     } @else {

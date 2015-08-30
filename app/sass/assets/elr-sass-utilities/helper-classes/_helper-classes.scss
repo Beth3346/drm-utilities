@@ -9,7 +9,7 @@
 
 @mixin elr-helper-classes() {
     @include elr-reset-classes();
-    @include elr-heading-classes();
+    @include elr-headings();
     @include elr-typography-classes();
     @include elr-layout-classes();
     @include elr-list-classes();

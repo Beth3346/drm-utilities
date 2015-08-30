@@ -59,13 +59,13 @@
     }
 
         &:before {
-            top: -$width/4;
-            border-bottom: $width/4 solid $background-color;
+            top: -$width/3.3;
+            border-bottom: $width/3.3 solid $background-color;
         }
 
         &:after {
-            bottom: -$width/4;
-            border-top: $width/4 solid $background-color;
+            bottom: -$width/3.3;
+            border-top: $width/3.3 solid $background-color;
         }
 }
 
@@ -135,6 +135,10 @@
     
     @include elr-stitched-row($color, $stitch-color, none, 1);
     padding: 0;
+
+    p, h1, h2, h3, h4, h5, h6 {
+        padding: 10px 0;
+    }
 
     &:before {
         content: "";

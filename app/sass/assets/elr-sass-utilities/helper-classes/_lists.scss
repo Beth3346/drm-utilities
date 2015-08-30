@@ -3,19 +3,19 @@
 @mixin elr-list-classes() {
     ul {
         margin: 0;
-        padding: 10px 10px 10px 20px;
+        padding: 10px 10px 10px 30px;
         list-style: disc;   
     }
 
     ol {
         margin: 0;
-        padding: 10px 10px 10px 20px;
+        padding: 10px 10px 10px 30px;
         list-style: decimal;
     }
 
     li, dd, dt {
         margin: 0;
-        padding: 5px 0;
+        padding: 0 0 10px 0;
     }
 
     dl {

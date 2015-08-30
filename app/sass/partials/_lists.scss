@@ -15,15 +15,23 @@
 }
 
 .border-list-center {
-    @include elr-border-list(center, $main-color);
+    @include elr-border-list(center);
 }
 
 .border-list-right {
-    @include elr-border-list(right, green);
+    @include elr-border-list(right);
 }
 
-.inline-list {
-    @include elr-inline-list;
+.inline-list-left {
+    @include elr-inline-list(left);
+}
+
+.inline-list-center {
+    @include elr-inline-list(center);
+}
+
+.inline-list-right {
+    @include elr-inline-list(right);
 }
 
 .breadcrumbs {
@@ -32,4 +40,16 @@
 
 .bullet-list {
     @include elr-bullet-list;
+}
+
+.heart-list {
+    @include elr-font-awesome-list('\f004');
+}
+
+.paw-list {
+    @include elr-font-awesome-list('\f1b0');
+}
+
+.star-list {
+    @include elr-font-awesome-list('\f005');
 }

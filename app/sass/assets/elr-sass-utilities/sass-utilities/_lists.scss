@@ -62,9 +62,10 @@
     }
 }
 
-@mixin elr-inline-list() {
+@mixin elr-inline-list($align: left) {
     padding: 0;
     margin: 0;
+    text-align: $align;
 
     li {
         display: inline-block;
@@ -122,6 +123,7 @@
 
     li {
         margin-left: 0;
+        padding-left: 10px;
 
         &:before {
             content: $icon;
@@ -138,6 +140,7 @@
 
     li {
         margin-left: 0;
+        padding-left: 10px;
 
         &:before {
             display: inline;

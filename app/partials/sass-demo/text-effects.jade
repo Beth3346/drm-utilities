@@ -5,6 +5,20 @@ section#text-effects
                 h1 Text Effects
     .elr-container
         .elr-row
+            .elr-col-full
+                h3 Background Transparent
+                .elr-container.background-transparent  
+                    .elr-row
+                        .elr-col-full
+                            p.
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
+                                maxime molestias est numquam quos recusandae dignissimos commodi 
+                                vero sequi ipsum sed nesciunt optio?
+                p Creates a transparent background with a hex color backup for browsers that do not support rgba colors
+                pre @include elr-background-transparent($color, $opacity);
+    .elr-container
+        .elr-row
             .elr-col-full                        
                 h3 Inset Text
                 p Applies a simple inset text effect.

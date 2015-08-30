@@ -2,17 +2,14 @@ section#forms
     .elr-container
         .elr-row
             .elr-col-full
-                h2 Forms
-    .elr-container
-        .elr-row
-            .elr-col-full
-                h2 Form State
+                h2.elr-bold Form State
                 p Adds an active and focus state to form fields
                 form.form-state(role="form" action="")
                     .elr-container
                         .elr-row
                             .elr-col-full
                                 label Name:
+                        .elr-row
                             .elr-col-half
                                 input(type="text" name="fname" id="fname" placeholder="First")
                             .elr-col-half
@@ -20,12 +17,13 @@ section#forms
     .elr-container
         .elr-row
             .elr-col-full
-                h2 Tabular Form
+                h2.elr-bold Tabular Form
                 form.tabular-form(role="form" action="")
                     .elr-container
                         .elr-row
                             .elr-col-full
                                 label Name:
+                        .elr-row
                             .elr-col-half
                                 input(type="text" name="fname" id="fname" placeholder="First")
                             .elr-col-half
@@ -34,7 +32,12 @@ section#forms
                         .elr-row
                             .elr-col-full
                                 label Address:
-                                input(type="text" name="address" id="address" placeholder="Street Address")
+                        .elr-row
+                            .elr-col-half
+                                input(type="text" name="address1" id="address1" placeholder="Street Address")
+                            .elr-col-half
+                                input(type="text" name="address2" id="address2" placeholder="Street Address 2")
+                        .elr-row
                             .elr-col-third
                                 input(type="text" name="city" id="city" placeholder="City")
                             .elr-col-third
@@ -104,7 +107,7 @@ section#forms
                         .elr-row
                             .elr-col-full
                                 .elr-tabular-control-group
-                                    h3.elr-control-label Select an Option
+                                    h3.elr-bold.elr-control-label Select an Option
                                     .elr-control-group
                                         label
                                             input(type="radio" name="radio-options" id="option1" value="option1" checked) 
@@ -128,7 +131,7 @@ section#forms
                         .elr-row
                             .elr-col-full
                                 .elr-inline-control-group
-                                    h3.elr-control-label Select a Color
+                                    h3.elr-bold.elr-control-label Select a Color
                                     .elr-control-group
                                         label
                                             input(type="radio" name="radio-colors" value="red") 
@@ -184,6 +187,7 @@ section#forms
                                     option 3
                                     option 4
                                     option 5
+                        .elr-row
                             .elr-col-full
                                 label(for="notes") Notes:
                                 textarea(name="notes" id="notes" cols="30" rows="10" placeholder="These are some notes") 
@@ -198,7 +202,7 @@ section#forms
     .elr-container
         .elr-row
             .elr-col-full
-                h2 Inline Form
+                h2.elr-bold Inline Form
                 form.inline-form(role="form" action="")
                     .elr-container
                         .elr-row
@@ -219,7 +223,7 @@ section#forms
     .elr-container
         .elr-row
             .elr-col-full
-                h2 Form Validation Styles
+                h2.elr-bold Form Validation Styles
                 form.tabular-form(role="form" action="")
                     .elr-container
                         .elr-row
@@ -232,5 +236,6 @@ section#forms
                             .elr-col-third
                                 label(for="phone-num") Phone:
                                 input(type="tel" class="elr-form-danger" name="phone-num" placeholder="212-867-5309")
+                        .elr-row
                             .elr-col-full
                                 input(type="submit" id="submit" name="submit" value="Submit")

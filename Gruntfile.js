@@ -216,7 +216,8 @@ module.exports = function(grunt) {
                     "box-model": false,
                     "adjoining-classes": false,
                     "compatible-vendor-prefixes": false,
-                    "selector-max-approaching": false
+                    "selector-max-approaching": false,
+                    "important": false
                 },
                 src: ['<%= distFolder %>*.css']
             }

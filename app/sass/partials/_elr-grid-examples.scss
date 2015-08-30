@@ -8,6 +8,10 @@
     border-radius: 3px;
     color: $background-color;
     margin-bottom: 20px;
+
+    p {
+        padding: 10px;
+    }
 }
 
 .example-col-nested {
@@ -22,6 +26,10 @@
     @include elr-breakpoint(jupiter) {
         margin-top: 10px;
         margin-bottom: 10px;
+    }
+
+    p {
+        padding: 10px;
     }
 }
 
