@@ -9,24 +9,33 @@ section#media-queries
             .elr-col-full
                 h2 The most common breakpoints are provided as named breakpoints.
                 p You can override the default widths in your config file.
+        .elr-row
+            .elr-col-full
+                h3.elr-bold Basic Breakpoints
                 ul.elr-unstyled-list
-                    li mercury: 1680px - widescreen
-                    li venus: 1680px - widescreen
-                    li earth: 1366px - large desktop
-                    li mars: 1200px - laptop
-                    li jupiter: 1024px - tablet horizontal
-                    li saturn: 768px - tablet vertical
-                    li uranus: 640px - small tablet
-                    li neptune: 480px - phone horizontal
-                    li pluto: 400px - phone vertical
+                    li mercury: 1600px - widescreen
+                    li venus: 1600px - widescreen
+                    li earth: 1400px - large laptop
+                    li mars: 1200px - small laptop
+                    li jupiter: 1024px - tablet landscape
+                    li saturn: 768px - tablet portrait
+                    li uranus: 667px - iphone6 landscape
+                    li neptune: 568px - iphone5 landscape
+                    li pluto: 375px - iphone6 portrait
+        .elr-row
+            .elr-col-full
+                h3.elr-bold Additional Breakpoints
+                ul.elr-unstyled-list
+                    li iphone6pLandscape: 736px - iphone6plus landscape
+                    li iphone6pPortrait: 414px - iphone6plus portrait
+                    li iphone5Portrait: 350px - iphone5 portrait
                 p These breakpoints include the most common device widths.
 
                 pre.
-                    @include elr-breakpoint($point, $modifier) {
+                    @include elr-breakpoint($point, $modifier, $secondary-point, $secondary-modifier) {
                         //css rules go here
                     }
 
-                p.
-                    You can use a named breakpoint or a custom breakpoint.  If you choose to use a named breakpoint you should not include a modifier.
-                    If you use a custom breakpoint you can specify a modifier.  This should be 'min-width' or 'max-width'.  If you do not include a
-                    modifier elr-breakpoint will use 'max-width'.
+                p You can use a named breakpoint or a custom breakpoint.  If you choose to use a named breakpoint you should not include a modifier.
+                p If you use a custom breakpoint you can specify a modifier.  This should be 'min-width' or 'max-width'.  If you do not include a modifier elr-breakpoint will use 'max-width' by default.
+                p If you want to create complex media queries with the named breakpoints just use the keywords as variable names. eg. 'saturn' becomes $saturn.

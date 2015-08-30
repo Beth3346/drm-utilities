@@ -20,8 +20,12 @@
         @media screen and (max-width: $neptune) { @content; }
     } @else if $point == pluto {
         @media screen and (max-width: $pluto) { @content; }
-    } @else if $point == triton {
-        @media screen and (max-width: $triton) { @content; }
+    } @else if $point == iphone6pLandscape {
+        @media screen and (max-width: $iphone6pLandscape) { @content; }
+    } @else if $point == iphone6pPortrait {
+        @media screen and (max-width: $iphone6pPortrait) { @content; }
+    } @else if $point == iphone5Portrait {
+        @media screen and (max-width: $iphone5Portrait) { @content; }
     } @else if $secondary-point != null {
         @media screen and ($modifier: $point) and ($secondary-modifier: $secondary-point) { @content; }
     } @else {

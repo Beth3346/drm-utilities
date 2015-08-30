@@ -2,16 +2,19 @@
 
 // screen sizes
 
-$mercury: 1680px; // widescreen
-$venus: 1680px; // widescreen
-$earth: 1366px; // large desktop
-$mars: 1200px; // laptop
-$jupiter: 1024px; // tablet horizontal
-$saturn: 768px; // tablet vertical
-$uranus: 640px; // small tablet
-$neptune: 480px; // phone horizontal
-$pluto: 400px; // phone vertical
-$triton: 350px; // iphone5
+$mercury: 1600px;
+$venus: 1600px;
+$earth: 1400px;
+$mars: 1200px;
+$jupiter: 1024px;
+$saturn: 768px;
+$uranus: 667px;
+$neptune: 568px;
+$pluto: 375px;
+
+$iphone6Landscape: 736px;
+$iphone6Portrait: 414px;
+$iphone5Portrait: 350px;
 
 // font faces
 
