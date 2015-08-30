@@ -1,10 +1,33 @@
 // Grids
 
-@mixin elr-grid($column-count: 12, $gutter: 5px, $max-width: 1200px, $container-width: 95%) {
+@mixin elr-grid($column-count: 12, $gutter: 5px, $max-width: $mars, $container-width: 95%, $responsive-container: 'yes') {
     .elr-container {
-        width: $container-width;
-        max-width: $max-width;
         margin: 0 auto;
+
+        @if ( $responsive-container == 'yes' ) {
+            width: 95%;
+
+            @include elr-breakpoint(mercury) {
+                max-width: $venus;
+            }
+
+            @include elr-breakpoint(venus) {
+                max-width: $earth;
+            }
+
+            @include elr-breakpoint(earth) {
+                max-width: $mars;
+            }
+
+            @include elr-breakpoint(mars) {
+                max-width: $jupiter;
+            }
+        } @else {
+            width: $container-width;
+            max-width: $max-width;
+        }
+
+        @include elr-clearfix();
 
         .elr-row {
             width: 100%;
@@ -154,59 +177,197 @@
                 }
             }
 
-            .elr-col-full {
+            .elr-col-full,
+            .elr-col-12 {
                 width: 100%;
-
-                @include elr-breakpoint(saturn) {
-                    width: 100%;
-                }
+                padding-left: 0;
+                padding-right: 0;
             }
 
-            .elr-col-half {
+            .elr-col-half,
+            .elr-col-6 {
                 width: (100% / 2);
 
+                &:nth-of-type(odd) {
+                    padding-left: 0;
+                }
+                
+                &:nth-of-type(even) {
+                    padding-right: 0;
+                }
+
                 @include elr-breakpoint(saturn) {
                     width: 100%;
+                    padding-left: 0;
+                    padding-right: 0;
                 }
             }
 
-            .elr-col-third {
+            .elr-col-third,
+            .elr-col-4 {
                 width: (100% / 3);
 
                 @include elr-breakpoint(saturn) {
                     width: 100%;
+                    padding-left: 0;
+                    padding-right: 0;
                 }
             }
 
-            .elr-col-two-thirds {
+            .elr-col-two-thirds,
+            .elr-col-8 {
                 width: (100% / 3) * 2;
+                
+                &:first-child {
+                    padding-left: 0;
+                }
+
+                &:last-child {
+                    padding-right: 0;
+                }
+
+                & + .elr-col-third, .elr-col-4 {
+                    padding-right: 0;
+                }
 
                 @include elr-breakpoint(saturn) {
                     width: 100%;
+                    padding-left: 0;
+                    padding-right: 0;
                 }
             }
 
-            .elr-col-three-fourths {
+            .elr-col-8 + .elr-col-third,
+            .elr-col-8 + .elr-col-4,
+            .elr-col-two-thirds + .elr-col-third,
+            .elr-col-two-thirds + .elr-col-4 {
+                padding-right: 0;
+            }
+
+            .elr-col-4 + .elr-col-two-thirds,
+            .elr-col-4 + .elr-col-8,
+            .elr-col-third + .elr-col-two-thirds,
+            .elr-col-third + .elr-col-8 {
+                padding-right: $gutter * 2;
+
+                @include elr-breakpoint(saturn) {
+                    padding-right: 0;
+                }
+            }
+
+            .elr-col-three-fourths,
+            .elr-col-9 {
                 width: (100% / 4) * 3;
+                
+                &:first-child {
+                    padding-left: 0;
+                }
+
+                &:last-child {
+                    padding-right: 0;
+                }
+
+                @include elr-breakpoint(mars) {
+                    width: (100% / 3) * 2;
+                }
 
                 @include elr-breakpoint(saturn) {
                     width: 100%;
                 }
             }
 
-            .elr-col-quarter {
+            .elr-col-9 + .elr-col-quarter,
+            .elr-col-9 + .elr-col-3,
+            .elr-col-three-fourths + .elr-col-quarter,
+            .elr-col-three-fourths + .elr-col-3 {
+                padding-right: 0;
+
+                @include elr-breakpoint(mars) {
+                    width: (100% / 3);
+                }
+
+                @include elr-breakpoint(saturn) {
+                    width: 100%;
+                }
+            }
+
+            .elr-col-quarter, .elr-col-3 {
                 width: (100% / 4);
 
+                @include elr-breakpoint(mars) {
+                    width: (100% / 2);
+
+                    &:nth-of-type(odd) {
+                        padding-left: 0;
+                    }
+                    
+                    &:nth-of-type(even) {
+                        padding-right: 0;
+                    }
+                }
+
                 @include elr-breakpoint(saturn) {
-                    width: 100%;
+                    width: 50%;
+                    float: left;
                 }
             }
 
             .elr-col-fifth {
                 width: (100% / 5);
 
+                @include elr-breakpoint(mars) {
+                    &:first-child,
+                    &:nth-child(2) {
+                        width: 50%;
+                    }
+
+                    &:first-child {
+                        padding-left: 0;
+                    }
+
+                    &:nth-child(2) {
+                        padding-right: 0;
+                    }
+
+                    &:nth-child(3),
+                    &:nth-child(4),
+                    &:last-child {
+                        width: (100% / 3);
+                    }
+
+                    &:nth-child(3) {
+                        padding-left: 0;
+                    }
+
+                    &:last-child {
+                        padding-right: 0;
+                    }
+                }
+
                 @include elr-breakpoint(saturn) {
-                    width: 100%;
+                    // width: 100% !important;
+                    // padding-left: 0 !important;
+                    // padding-right: 0 !important;
+                    float: left;
+                }
+            }
+
+            .elr-col-2 {
+                @include elr-breakpoint(mars) {
+                    width: (100% / 3);
+                }
+
+                @include elr-breakpoint(saturn) {
+                    width: (100% / 2);
+                    float: left;
+
+                    &:nth-of-type(odd) {
+                        padding-left: 0;
+                    }
+                    
+                    &:nth-of-type(even) {
+                        padding-right: 0;
+                    }
                 }
             }
         }

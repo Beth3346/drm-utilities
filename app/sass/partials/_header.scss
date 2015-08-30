@@ -1,14 +1,8 @@
 // Header
 
 header {
-    width: 95%;
-    max-width: 1400px;
     margin: 0 auto;
     @include elr-clearfix;
-
-    @include elr-breakpoint(saturn) {
-        width: 100%;
-    }
 
     h1 {
         padding: 10px 0 10px 20px;
@@ -26,7 +20,6 @@ header {
         }
 
         @include elr-breakpoint(saturn) {
-            float: none;
             text-align: center;
         }
     }
