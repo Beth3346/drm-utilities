@@ -6,6 +6,12 @@
     text-shadow: 1px 1px 0 $shadow-color;
 }
 
+// calculates em font size from px font size
+
+@mixin elr-em-font($size) {
+    font-size: ($size / $default-font-size)#{rem};
+}
+
 @mixin elr-font-awesome($icon) {
     content: $icon;
     line-height: 1;

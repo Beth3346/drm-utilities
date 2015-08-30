@@ -2,11 +2,7 @@ section#text-effects
     .elr-container
         .elr-row
             .elr-col-full
-                h1 Text Effects
-    .elr-container
-        .elr-row
-            .elr-col-full
-                h3 Background Transparent
+                h3.elr-bold Background Transparent
                 .elr-container.background-transparent  
                     .elr-row
                         .elr-col-full
@@ -19,12 +15,15 @@ section#text-effects
                 pre @include elr-background-transparent($color, $opacity);
     .elr-container
         .elr-row
-            .elr-col-full                        
-                h3 Inset Text
-                p Applies a simple inset text effect.
-                .inset-text.example   
-                    p. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Deserunt, assumenda, neque vitae voluptatem alias ducimus porro 
-                        maxime molestias est numquam quos recusandae dignissimos commodi 
-                        vero sequi ipsum sed nesciunt optio?
-                pre @include elr-solid-drop-shadow($color);
+            .elr-col-full
+                h3.elr-bold REM Font
+                p Converts px font-size to rems; enter value only - no units
+                h3.elr-bold Arguments:
+                ul.elr-unstyled-list
+                    li $font-size: enter value only - no units
+                pre @include elr-em-font(18);
+    .elr-container
+        .elr-row
+            .elr-col-full
+                h3.elr-bold Font Awesome
+                p Use font awesome icons in before and after psuedo elements
