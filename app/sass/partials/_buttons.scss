@@ -37,7 +37,6 @@
 }
 
 .button-group-no-border {
-    margin-bottom: 20px;
     @include elr-button-group($background-color, $main-color, 3px, none);
 
     button {
