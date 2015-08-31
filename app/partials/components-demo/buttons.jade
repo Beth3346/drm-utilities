@@ -2,49 +2,28 @@ section#buttons
     .elr-container
         .elr-row
             .elr-col-full
-                h1 Buttons
-    .elr-container
-        .elr-row
-            .elr-col-third
-                h3 Button Link
-                a.button-link(href="#") Click Here
-                a.button-link-radius(href="#") Click Here
-
-            .elr-col-third
-                h3 Button Solid
-                a.button-solid(href="#") Click Here
-                a.button-solid-radius(href="#") Click Here
-
-            .elr-col-third
-                h3 Retangle Button
-                a.button-rectangle(href="#") Click Here
-                a.button-rectangle-radius(href="#") Click Here
-
-            .elr-col-third
-                h3 Pill Button Link
-                a.pill-button-link(href="#") Click Here
-
-            .elr-col-third
-                h3 Pill Button Solid
-                a.pill-button-solid(href="#") Click Here
-
-            .elr-col-full
-                h4 Button Link
+                h3.elr-bold Button Link
                 p Basic button with a solid border and transparent background. Smooth transition to solid background on hover. 
+                .example-holder
+                    a.button-link(href="#") Click Here
+                    a.button-link-radius(href="#") Click Here
                 pre @include elr-button-link($color, $bk-color, $width, $center, $border-radius, $border-color, $display);
-
+        .elr-row
             .elr-col-full
-                h3 Button Groups
-                .button-group
-                    button Button 1
-                    button Button 2
-                    button Button 3
-                    button Button 4
-                    button Button 5
-                    button Button 6
-
+                h3.elr-bold Button Solid
+                .example-holder
+                    a.button-solid(href="#") Click Here
+                    a.button-solid-radius(href="#") Click Here
+        .elr-row
             .elr-col-full
-                h3 Solid Dropdown Button
+                h3.elr-bold Pill Buttons
+                .example-holder
+                    a.pill-button-link(href="#") Click Here
+                    a.pill-button-solid(href="#") Click Here
+        .elr-row
+            .elr-col-full
+                h3.elr-bold Solid Dropdown Button
+        .elr-row.example-holder
             .elr-col-quarter
                 .elr-dropdown-solid-btn-holder
                     button Info
@@ -69,9 +48,11 @@ section#buttons
                         li: a(href="#") Info 1
                         li: a(href="#") Info 2
                         li: a(href="#") Info 3
-                        li: a(href="#") Info 4 
+                        li: a(href="#") Info 4
+        .elr-row
             .elr-col-full
-                h3 Split Dropdown Button
+                h3.elr-bold Split Dropdown Button
+        .elr-row.example-holder
             .elr-col-quarter
                 .elr-dropdown-split-btn-holder
                     .elr-dropdown-button-group
@@ -92,3 +73,21 @@ section#buttons
                             li: a(href="#") Info 2
                             li: a(href="#") Info 3
                             li: a(href="#") Info 4
+        .elr-row
+            .elr-col-full
+                h3.elr-bold Button Groups
+                .example-holder
+                    .button-group
+                        button Button 1
+                        button Button 2
+                        button Button 3
+                        button Button 4
+                        button Button 5
+                        button Button 6
+                    .button-group-no-border
+                        button Button 1
+                        button Button 2
+                        button Button 3
+                        button Button 4
+                        button Button 5
+                        button Button 6

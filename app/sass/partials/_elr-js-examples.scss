@@ -26,24 +26,6 @@
     @include elr-dropdown-nav($main-color, white, $light-grey, 5px);
 }
 
-.elr-dropdown-solid-btn-holder {
-    margin: 20px 0;
-    @include elr-dropdown-button-solid($main-color, $background-color, 200px, $main-color, 3px);
-
-    button {
-        @include elr-em-font(14);
-    }
-}
-
-.elr-dropdown-split-btn-holder {
-    margin: 20px 0;
-    @include elr-dropdown-button-split($main-color, $background-color, 3px, $main-color, $light-grey, 200px);
-
-    button {
-        @include elr-em-font(14);
-    }
-}
-
 .elr-lightbox-thumbnails {
     @include elr-thumbnail-list();
 }

@@ -1,0 +1,62 @@
+// Button Examples
+
+.button-link {
+    margin-right: 20px;
+    @include elr-button-link($main-color, $background-color, 300px, left, 0, none, inline-block);
+}
+
+.button-link-radius {
+    @include elr-button-link($main-color, $background-color, 300px, left, 3px, none, inline-block);
+}
+
+.button-solid {
+    margin-right: 20px;
+    @include elr-button-solid($main-color, $background-color, 300px, left, 0, none, inline-block);
+}
+
+.button-solid-radius {
+    @include elr-button-solid($main-color, $background-color, 300px, left, 3px, none, inline-block);
+}
+
+.pill-button-link {
+    margin-right: 20px;
+    @include elr-pill-button-link(50px, $main-color, $background-color, 300px, left, none, inline-block);
+}
+
+.pill-button-solid {
+    @include elr-pill-button-solid(50px, $main-color, $background-color, 300px, left, none, inline-block);
+}
+
+.button-group {
+    margin-bottom: 20px;
+    @include elr-button-group($background-color, $main-color, 3px, $main-color);
+
+    button {
+        @include elr-em-font(14);
+    }
+}
+
+.button-group-no-border {
+    margin-bottom: 20px;
+    @include elr-button-group($background-color, $main-color, 3px, none);
+
+    button {
+        @include elr-em-font(14);
+    }
+}
+
+.elr-dropdown-solid-btn-holder {
+    @include elr-dropdown-button-solid($main-color, $background-color, 200px, none, 3px);
+
+    button {
+        @include elr-em-font(14);
+    }
+}
+
+.elr-dropdown-split-btn-holder {
+    @include elr-dropdown-button-split($main-color, $background-color, 3px);
+
+    button {
+        @include elr-em-font(14);
+    }
+}
