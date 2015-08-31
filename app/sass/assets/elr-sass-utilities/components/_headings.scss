@@ -3,17 +3,15 @@
 // makes a rounded heading
 
 @mixin elr-rounded-heading($bk-color: $dark-grey, $text-color: white, $border-radius: 3px) {
-    font-weight: bold;
     background-color: $bk-color;
     color: $text-color;
     padding: 5px 10px;
-    border-radius: 3px;
+    border-radius: $border-radius;
 }
 
 // makes a pill heading
 
 @mixin elr-pill-heading($bk-color: $dark-grey, $text-color: white, $height: 50px) {
-    font-weight: bold;
     background-color: $bk-color;
     color: $text-color;
     padding: 5px 10px 5px 20px;
