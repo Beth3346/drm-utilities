@@ -22,6 +22,11 @@
     margin: 10px 0;
     border: 1px solid $elr-blue;
     background-color: $elr-blue-light;
+
+    &.example-holder-light {
+        background-color: white;
+        border-color: $elr-blue-light;
+    }
 }
 
 pre {
