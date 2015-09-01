@@ -248,6 +248,22 @@
     }
 }
 
-@mixin fluid-button-group() {
-    
+@mixin elr-fluid-button-group($num-buttons, $width: 100%) {
+    @include elr-button-group($bk-color: $link-color, $color: white, $border-radius: 0, $border: none);
+    button {
+        width: ($width / $num-buttons);
+    }
 }
+
+@mixin elr-font-awesome-button(
+        $icon,
+        $bk-color: $link-color,
+        $color: white,
+        $width: 300px,
+        $center: center,
+        $border-radius: 0,
+        $display: block,
+        $border-color: none
+    ) {
+        @include elr-button-solid( $bk-color, $color, $width, $center, $border-radius, $border-color, $display);
+    }
