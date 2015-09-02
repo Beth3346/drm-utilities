@@ -16,3 +16,10 @@
         height: auto;
     }
 }
+
+@mixin elr-image-overlay( $width, $height ) {
+    img {
+        max-width: 100%;
+        height: auto;
+    }    
+}
