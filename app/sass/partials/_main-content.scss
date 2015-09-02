@@ -31,6 +31,18 @@
         background-color: white;
         border-color: $elr-blue-light;
     }
+
+    h1 {
+        @include elr-em-font(48);
+    }
+
+    h2 {
+        @include elr-em-font(36);
+    }
+
+    h3 {
+        @include elr-em-font(30);
+    }
 }
 
 pre {
