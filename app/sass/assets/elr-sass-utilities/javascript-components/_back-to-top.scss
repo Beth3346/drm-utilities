@@ -11,7 +11,10 @@
     line-height: 0;
     @include elr-background-transparent($bk-color, 0.7);
     @include elr-square(50px, none, 3px);
-    @include elr-em-font(36);
+
+    &.fa {
+        @include elr-em-font(36);        
+    }
 
     @include elr-breakpoint(mercury) {
         right: 10%;

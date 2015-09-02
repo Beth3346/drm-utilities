@@ -364,9 +364,13 @@
             }
         };
 
+        self.scrollEvent = function($el, offset, callback) {
+
+        };
+
         self.scrollToView = function($el, speed) {
-            var scroll = $('body, html').scrollTop();
-            var height = $(window).height() - 200;
+            var scroll = $(document).scrollTop();
+            var height = $(window).height();
 
             speed = speed || 300;
 
