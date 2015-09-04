@@ -14,9 +14,7 @@
                 'class': 'back-to-top fa fa-caret-up'
             }).appendTo('body').hide();
             
-            $(window).on('scroll', function() {
-                elr.scrollToView($backToTop);
-            });
+            elr.scrollToView($backToTop);
             
             $backToTop.on('click', function() {
                 elr.toTop($content, scrollSpeed);

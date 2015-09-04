@@ -364,21 +364,26 @@
             }
         };
 
-        self.scrollEvent = function($el, offset, callback) {
-
-        };
+        // self.scrollEvent = function($el, offset, callback) {
+        //     if ( $(document).scrollTop() > $(window).height() ) {
+        //         callback();
+        //     }
+        // };
 
         self.scrollToView = function($el, speed) {
-            var scroll = $(document).scrollTop();
-            var height = $(window).height();
+            var showElement = function() {
+                var scroll = $(document).scrollTop();
+                var height = $(window).height();
+                speed = speed || 300;
 
-            speed = speed || 300;
+                if ( scroll > height ) {
+                    $el.fadeIn(speed);
+                } else if ( scroll < height ) {
+                    $el.fadeOut(speed);
+                }
+            };
 
-            if ( scroll > height ) {
-                $el.fadeIn(speed);
-            } else if ( scroll < height ) {
-                $el.fadeOut(speed);
-            }
+            $(window).on('scroll', self.throttle(showElement, 100));
         };
 
         // create an array of unique items from jQuery object text
