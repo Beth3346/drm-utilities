@@ -1,6 +1,7 @@
 // Grids
 
 @mixin elr-flexible-grid($images-per-row: 4, $flex: true, $grid-width: 1040px, $fixed-height: 'no') {
+    @include elr-clearfix;
     background-color: white;
     position: relative;
     padding: 0;
@@ -10,8 +11,6 @@
     } @else if $flex == false {
         width: $grid-width + (10 * $images-per-row);
     }
-    
-    @include elr-clearfix;
 
     .elr-grid-item {
         @if $flex == true {
@@ -44,40 +43,40 @@
     }
 
     .overlay {
+        @include elr-background-transparent(white, .5);  
         width: 100%;
         z-index: 100;
         border-radius: 5px 5px 0 0;
         position: absolute;
-        cursor: pointer;
-        @include elr-background-transparent(white, .5);        
+        cursor: pointer;      
     }
 
     .caption {
         padding: 10px;
 
         h1 {
+            @include elr-em-font(16);
             color: $elr-blue;
             margin: 0;
             padding: 0;
-            @include elr-em-font(16);
         }
 
         h2 {
+            @include elr-em-font(14); 
             margin: 0;
-            padding: 0;
-            @include elr-em-font(14);            
+            padding: 0;           
         }
 
         p {
+            @include elr-em-font(14);
             margin: 0;
             padding: 0;
-            @include elr-em-font(14);
         }
 
         ul {
+            @include elr-clearfix;
             margin: 0;
             padding: 0;
-            @include elr-clearfix;
         }
 
         li {

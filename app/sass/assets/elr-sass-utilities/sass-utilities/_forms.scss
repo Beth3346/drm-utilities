@@ -35,8 +35,8 @@
     }
 
     .form-notice-holder {
-        float: left;
         @include elr-clearfix();
+        float: left;
     }
 
     p {
@@ -84,16 +84,16 @@
     }
 
     label {
+        @include elr-em-font(14);
         margin: 0;
         line-height: 2em;
-        @include elr-em-font(14);
     }
 
     input, textarea, select {
+        @include elr-em-font(14);
         margin: 5px 0;
         padding: 5px 15px;
         border-radius: 3px;
-        @include elr-em-font(14);
         
         @include elr-form-state($glow, $bk-color, $border);
 
@@ -142,18 +142,18 @@
     }
 
     .elr-inline-control-group {
+        @include elr-clearfix();
         float: left;
         margin: 0 0 0 15px;
-        @include elr-clearfix();
 
         &:first-child {
             margin-left: 0;
         }
 
         label {
+            @include elr-em-font(14);
             display: inline;
             vertical-align: middle;
-            @include elr-em-font(14);
         }
 
         input[type="text"], input[type="tel"], input[type="email"], input[type="password"], input[type="url"], textarea, select {
@@ -182,10 +182,10 @@
         }
     }
 
-    input[type="submit"], input[type="button"], button {        
-        margin: 10px 0;
+    input[type="submit"], input[type="button"], button {  
         @include elr-em-font(14);
-        @include elr-button-solid($button-color, white, 180px, null, 3px, $button-color, block);
+        @include elr-button-solid($button-color, white, 180px, null, 3px, $button-color, block);      
+        margin: 10px 0;
     }
 
     input[type="submit"][disabled], button[disabled] {      
@@ -219,10 +219,10 @@
         width: 100%;
     }
 
-    input[type="submit"], button {      
-        margin: 5px 0;
+    input[type="submit"], button {   
         @include elr-em-font(14);
-        @include elr-button-solid($button-color, white, 180px, null, 3px, $button-color, block);
+        @include elr-button-solid($button-color, white, 180px, null, 3px, $button-color, block);   
+        margin: 5px 0;
     }
 
     .elr-inline-control-group {
@@ -237,9 +237,9 @@
     padding-left: 0;
 
     label {
+        @include elr-em-font(14);
         display: inline;
         vertical-align: middle;
-        @include elr-em-font(14);
     }
 
     input[type="text"], input[type="tel"], input[type="email"], input[type="password"], input[type="url"], textarea {

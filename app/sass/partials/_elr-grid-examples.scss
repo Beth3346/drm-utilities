@@ -1,13 +1,13 @@
 // Grid Examples
 
 .example-col {
-    background-color: $main-color;
+    background-color: white;
     text-align: center;
     padding: 0;
     display: block;
-    border-radius: 3px;
-    color: $background-color;
-    margin-bottom: 20px;
+    border: 1px solid $main-color;
+    color: $main-color;
+    border-collapse: collapse;
 
     p {
         padding: 10px;
@@ -15,18 +15,11 @@
 }
 
 .example-col-nested {
-    background-color: $background-color;
     text-align: center;
     padding: 0;
     display: block;
-    border-radius: 3px;
     color: $text-color;
-    margin: 20px 0;
-
-    @include elr-breakpoint(jupiter) {
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
+    border: 1px solid $main-color;
 
     p {
         padding: 10px;

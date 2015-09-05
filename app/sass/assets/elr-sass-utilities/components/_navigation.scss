@@ -3,9 +3,9 @@
 // creates a nav-bar with a transparent background
 
 @mixin elr-nav-bar($text-color: $text-color, $hover-color: $link-color, $align: left, $divider-color: $light-grey) {
+    @include elr-clearfix;
     margin: 0;
     padding: 0;
-    @include elr-clearfix;
 
     li {
         margin: 0;
@@ -102,8 +102,8 @@
 }
 
 @mixin elr-nav-bar-solid-stacked($text-color: $background-color, $background-color: $link-color, $align: left, $active-color: $hover-color) {
-    background-color: $background-color;
     @include elr-nav-bar-stacked($text-color, $background-color, $align);
+    background-color: $background-color;
 
     li > ul {
         padding: 0;

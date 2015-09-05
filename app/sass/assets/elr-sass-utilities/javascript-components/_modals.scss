@@ -30,8 +30,8 @@
     }
 
     .video-holder {
-        text-align: center;
         @include elr-center-block(90%);
+        text-align: center;
 
         iframe {
             display: inline-block;

@@ -23,6 +23,7 @@
         }   
 
         > ul {
+            @include elr-nav-bar-solid-stacked($text-color, $background-color, left, $text-color);
             position: absolute;
             min-width: 130px;
             width: 120%;
@@ -30,7 +31,6 @@
             z-index: 100;
             border-radius: $border-radius;
             border: 1px solid $divider-color;
-            @include elr-nav-bar-solid-stacked($text-color, $background-color, left, $text-color);
 
             li {
                 position: relative;
@@ -63,7 +63,7 @@
                 min-width: 130px * 2;
                 background-color: $background-color;
 
-                &> li {
+                & > li {
                     float: left;
                     width: (100% / 2);
 
@@ -81,7 +81,7 @@
                 min-width: 130px * 3;
                 background-color: $background-color;
 
-                &> li {
+                & > li {
                     float: left;
                     width: (100% / 3);
 

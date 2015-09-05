@@ -5,9 +5,9 @@ header {
     @include elr-clearfix;
 
     h1 {
+        @include elr-em-font(30);
         padding: 10px 0 10px 20px;
         float: left;
-        @include elr-em-font(30);
 
         a {
             color: $main-color;
@@ -33,9 +33,9 @@ header {
     }
 
     nav {
+        @include elr-clearfix;
         padding-top: 10px;
         padding-bottom: 10px;
-        @include elr-clearfix;
 
         @include elr-breakpoint(saturn) {
             display: none;
@@ -46,6 +46,7 @@ header {
             @include elr-clearfix;
 
             .mobile-menu-toggle {
+                @include elr-em-font(20);
                 background-color: transparent;
                 border: 1px solid $main-color;
                 padding: 5px 10px;
@@ -55,7 +56,6 @@ header {
                 color: $main-color;
                 cursor: pointer;
                 float: right;
-                @include elr-em-font(20);
 
                 i {
                     margin-left: 5px;

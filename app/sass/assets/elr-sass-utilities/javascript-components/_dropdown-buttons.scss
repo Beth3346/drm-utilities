@@ -5,13 +5,14 @@
     position: relative;
 
     button {
-        margin-bottom: 5px;
-        position: relative;
-        @if $border == none {           
+        @if $border == none {
             @include elr-button-solid($bk-color, $color, 100%);
         } @else {
             @include elr-button-solid($bk-color, $color, 100%, center, $border-radius, $border);
         }
+
+        margin-bottom: 5px;
+        position: relative;
         
         &:after {
             content: "\25BE";
@@ -26,6 +27,7 @@
     }
 
     ul {
+        @include elr-nav-bar-solid-stacked($bk-color, $color, left, $divider-color);
         width: 100%;
         position: absolute;
         display: none;
@@ -40,8 +42,6 @@
         @if $border != none {
             border: 1px solid $border;
         }
-
-        @include elr-nav-bar-solid-stacked($bk-color, $color, left, $divider-color);
     }
 }   
 

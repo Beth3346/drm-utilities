@@ -5,6 +5,8 @@
     position: relative;
 
     .dropdown-label {
+        @include elr-em-font($font-size);
+        @include elr-clearfix();
         width: 100%;
         height: $height;
         display: block;
@@ -12,8 +14,6 @@
         background-color: $background-color;
         border-radius: $border-radius;
         border: 1px solid $border-color;
-        @include elr-em-font($font-size);
-        @include elr-clearfix();
 
         .dropdown-text {
             padding: 0 5px 0 10px;
@@ -54,6 +54,7 @@
         z-index: 100;
 
         li {
+            @include elr-em-font($font-size);
             width: 100%;
             height: $height;
             display: block;
@@ -61,7 +62,6 @@
             line-height: ($font-size * 2)+2#{px};
             color: lighten($text-color, 5%);
             background-color: $background-color;
-            @include elr-em-font($font-size);
 
             &:hover {
                 background-color: lighten($background-color, 5%);

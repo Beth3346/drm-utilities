@@ -1,31 +1,11 @@
 // Content Boxes
 
 @mixin elr-context-box($type: info, $border-radius: 0, $color: none, $width: 100%, $text-color: none) {
+    @include elr-clearfix;
     padding: 10px 20px;
     width: $width;
     margin: 20px 0;
     position: relative;
-    
-    @include elr-clearfix;
-
-    .close {
-        padding: 0;
-        margin: 0;
-        position: absolute;
-        right: 5px;
-        top: 3px;
-        border: none;
-        background: none;
-        transition: color, .3s, ease-out;
-        @include elr-square(20px);
-        @include elr-em-font(14);
-
-        &:hover {
-            color: white;
-            cursor: pointer;
-            transition: color, .3s, ease-in;
-        }
-    }
 
     @if $border-radius != 0 {
         border-radius: $border-radius;
@@ -117,5 +97,24 @@
 
     } @else {
         @warn "#{error("That's not a context box type!")}";
+    }
+
+    .close {
+        @include elr-square(20px);
+        @include elr-em-font(14);
+        padding: 0;
+        margin: 0;
+        position: absolute;
+        right: 5px;
+        top: 3px;
+        border: none;
+        background: none;
+        transition: color, .3s, ease-out;
+
+        &:hover {
+            color: white;
+            cursor: pointer;
+            transition: color, .3s, ease-in;
+        }
     }
 }

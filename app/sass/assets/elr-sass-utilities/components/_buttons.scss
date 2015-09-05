@@ -183,8 +183,8 @@
 }
 
 @mixin elr-button-group($bk-color: $link-color, $color: white, $border-radius: 0, $border: none) {
-    border-collapse: collapse;
     @include elr-clearfix();
+    border-collapse: collapse;
 
     button {
         float: left;
@@ -250,6 +250,7 @@
 
 @mixin elr-fluid-button-group($num-buttons, $width: 100%) {
     @include elr-button-group($bk-color: $link-color, $color: white, $border-radius: 0, $border: none);
+    
     button {
         width: ($width / $num-buttons);
     }

@@ -2,23 +2,23 @@
 
 @mixin elr-calendar($border-radius: 3px, $main-color: $elr-blue, $secondary-color: $light-grey, $text-color: $dark-grey, $background-color: white, $holiday-color: #FF3659) {
     .elr-calendar-header {
+        @include elr-em-font(32);
         color: $darker-grey;
         font-weight: bold;
         border-bottom: 1px solid $secondary-color;
-        @include elr-em-font(32);
     }
 
     .elr-calendar {
         width: 100%;
 
         .button-solid-radius {
-            width: 200px;
             @include elr-em-font(14);
+            width: 200px;
         }
 
         .elr-calendar-nav, .elr-calendar-view-nav {
-            margin: 10px 0;
             @include elr-button-group($main-color, $background-color, 3px, $main-color);
+            margin: 10px 0;
             
             button {
                 @include elr-em-font(14);
@@ -112,10 +112,10 @@
         } 
 
         td {
+            @include elr-em-font(14);
             border-top: 1px solid $lighter-grey;
             border-left: 1px solid $lighter-grey;
             color: $text-color;
-            @include elr-em-font(14);
 
             &:last-child {
                 border-right: 1px solid $lighter-grey;
@@ -135,8 +135,8 @@
         }
 
         .elr-events {
-            line-height: 1.3;
             @include elr-unstyled-list(left);
+            line-height: 1.3;
 
             .elr-hour, .elr-time {
                 color: $grey;
@@ -209,9 +209,9 @@
         } 
 
         td {
+            @include elr-em-font(14);
             border-left: 1px solid $lighter-grey;
             border-bottom: none;
-            @include elr-em-font(14);
 
             &:last-child {
                 border-right: 1px solid $lighter-grey;

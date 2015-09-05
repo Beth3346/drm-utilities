@@ -1,34 +1,34 @@
 // Effects Utilities Examples
 
 .triple-shadow {
+	@include elr-triple-shadow($main-color, lighten($main-color, 20%));
 	margin: 12px;
 	padding: 20px;
 	background-color: $background-color;
-	@include elr-triple-shadow($main-color, lighten($main-color, 20%));
 }
 
 .inset-text {
+	@include elr-inset-text($shadow-color);
 	margin: 0;
 	padding: 20px;
 	background-color: lighten($accent-color, 30%);
-	@include elr-inset-text($shadow-color);
 }
 
 .inset-border {
+	@include elr-inset-text($shadow-color);
 	margin: 0;
 	padding: 20px;
 	color: $accent-color;
 	background-color: lighten($accent-color, 30%);
-	@include elr-inset-text($shadow-color);
 
 	ul {
 		padding: 20px;	
 	}
 
 	li {
+		@include elr-inset-border($accent-color, lighten($accent-color, 40%));
 		list-style: none;
 		padding: 5px;
-		@include elr-inset-border($accent-color, lighten($accent-color, 40%));
 
 		&:last-child {
 			padding-bottom: 5px;
@@ -37,35 +37,35 @@
 }
 
 .inset-box-holder {
+    @include elr-clearfix();
 	background-color: $light-grey;
     margin: 20px auto;
-    @include elr-clearfix();
 }
 
 .inset-box {
+	@include elr-inset-box($shadow-color);
 	margin: 20px;
 	padding: 20px;
 	background-color: lighten($accent-color, 30%);
 	border: 1px solid $grey;
-	@include elr-inset-box($shadow-color);
 }
 
 .boxy-drop-shadow {
+	@include elr-boxy-drop-shadow();
 	margin: 0;
 	padding: 20px;
 	color: $background-color;
 	background-color: $main-color;
 	border: 1px solid $text-color;
-	@include elr-boxy-drop-shadow();
 }
 
 .softer-thick-box-shadow {
+	@include elr-softer-thick-box-shadow();
 	margin: 0;
 	padding: 20px;
 	color: $background-color;
 	background-color: $main-color;
 	border: 1px solid $text-color;
-	@include elr-softer-thick-box-shadow();
 }
 
 .elr-thumbnail {

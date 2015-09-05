@@ -143,11 +143,11 @@
         padding-left: 10px;
 
         &:before {
+            @include elr-font-awesome($icon);
             display: inline;
             padding-right: 10px;
             font-size: $icon-font-size;
             vertical-align: middle;
-            @include elr-font-awesome($icon);
         }
     }
 }

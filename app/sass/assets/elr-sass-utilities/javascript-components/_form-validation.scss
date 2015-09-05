@@ -70,9 +70,9 @@
 }
 
 @mixin elr-form-notice($type: 'info', $font-size: 12) {
+    @include elr-em-font($font-size);
     margin: 5px 0;
     padding: 0;
-    @include elr-em-font($font-size);
 
     @if $type == 'success' {
         color: $success-color;

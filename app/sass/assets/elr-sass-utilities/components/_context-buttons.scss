@@ -2,6 +2,8 @@
 
 @mixin elr-context-button($type: info, $color: white, $width: 300px, $center: center, $border-radius: 0, $display: block) {
 
+    @include elr-button-solid($bk-color, $color, $width, $center, $border-radius, $display);
+
     @if $type == info {
         $bk-color: $info-color;
     } @else if $type == danger {
@@ -13,6 +15,4 @@
     } @else if $type == muted {
         $bk-color: $muted-color;
     }
-
-    @include elr-button-solid($bk-color, $color, $width, $center, $border-radius, $display);
 }

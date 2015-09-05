@@ -1,40 +1,24 @@
 // Navigation Utilities Examples
 
-.nav-bar {
-	margin: 10px;
-	@include elr-nav-bar;
-}
-
-.nav-bar-stacked {
-	@include elr-nav-bar-stacked;
-}
-
-.nav-bar-solid {
-	margin: 10px;
-	@include elr-nav-bar-solid;
-}
-
-.nav-bar-solid-stacked {
-	width: 300px;
-	@include elr-nav-bar-solid-stacked;
-}
-
-.nav-bar-pills {
-	margin: 10px;
-	@include elr-nav-bar-pills;
-}
-
-.nav-bar-pills-stacked {
-	width: 300px;
-	@include elr-nav-bar-pills-stacked;
-}
-
+.nav-bar,
+.nav-bar-solid,
+.nav-bar-pills,
 .nav-bar-pills-solid {
-	margin: 10px;
-	@include elr-nav-bar-pills-solid;
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
+.nav-bar-solid-stacked,
+.nav-bar-pills-stacked,
 .nav-bar-pills-solid-stacked {
 	width: 300px;
-	@include elr-nav-bar-pills-solid-stacked;
 }
+
+.nav-bar { @include elr-nav-bar; }
+.nav-bar-stacked { @include elr-nav-bar-stacked; }
+.nav-bar-solid { @include elr-nav-bar-solid; }
+.nav-bar-solid-stacked { @include elr-nav-bar-solid-stacked; }
+.nav-bar-pills { @include elr-nav-bar-pills; }
+.nav-bar-pills-stacked { @include elr-nav-bar-pills-stacked; }
+.nav-bar-pills-solid { @include elr-nav-bar-pills-solid; }
+.nav-bar-pills-solid-stacked { @include elr-nav-bar-pills-solid-stacked; }

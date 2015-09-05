@@ -1,8 +1,8 @@
 // Button Examples
 
 .button-link {
-    margin-right: 20px;
     @include elr-button-link($main-color, $background-color, 300px, left, 0, none, inline-block);
+    margin-right: 20px;
 }
 
 .button-link-radius {
@@ -10,8 +10,8 @@
 }
 
 .button-solid {
-    margin-right: 20px;
     @include elr-button-solid($main-color, $background-color, 300px, left, 0, none, inline-block);
+    margin-right: 20px;
 }
 
 .button-solid-radius {
@@ -19,8 +19,8 @@
 }
 
 .pill-button-link {
-    margin-right: 20px;
     @include elr-pill-button-link(50px, $main-color, $background-color, 300px, left, none, inline-block);
+    margin-right: 20px;
 }
 
 .pill-button-solid {
@@ -28,8 +28,8 @@
 }
 
 .button-group {
-    margin-bottom: 20px;
     @include elr-button-group($background-color, $main-color, 3px, $main-color);
+    margin-bottom: 20px;
 
     button {
         @include elr-em-font(14);

@@ -17,13 +17,13 @@
 @include elr-calendar();
 
 .elr-dropdown-nav {
-    margin-bottom: 200px;
     @include elr-dropdown-nav($background-color, $main-color, $main-color);
+    margin-bottom: 200px;
 }
 
 .main-nav {
-    margin-bottom: 200px;
     @include elr-dropdown-nav($main-color, white, $light-grey, 5px);
+    margin-bottom: 200px;
 }
 
 .elr-lightbox-thumbnails {
@@ -35,14 +35,14 @@
 }
 
 .elr-modal-demo-buttons {
+    @include elr-button-group($main-color, $background-color, 3px, $main-color);
     margin: 10px auto;
     width: 350px;
-    @include elr-button-group($main-color, $background-color, 3px, $main-color);
 }
 
 .elr-modal {
-    display: none;
     @include elr-modals();
+    display: none;
 }
 
 .popover-holder {
@@ -77,11 +77,11 @@
 }
 
 .elr-menu-button {
+    @include elr-em-font(18);
     border: none;
     background-color: $text-color;
     color: $background-color;
     padding: 5px 10px;
-    @include elr-em-font(18);
 
     &:hover {
         cursor: pointer;
@@ -97,13 +97,13 @@
 }
 
 .elr-offscreen-content {
+    @include elr-clearfix;
     width: 95%;
     margin: 2px auto;
     position: relative;
     background-color: $background-color;
     overflow: hidden;
     border: 1px solid $light-grey;
-    @include elr-clearfix;
 
     p {     
         padding: 10px 20px;
@@ -222,9 +222,9 @@ span.elr-has-tooltip {
     margin-bottom: 5px;
 
     p {
+        @include elr-em-font(14);
         margin: 0;
         padding: 0;
         line-height: 30px;
-        @include elr-em-font(14);
     }
 }
