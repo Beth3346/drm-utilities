@@ -1,0 +1,376 @@
+// Grids
+
+@mixin elr-flexbox-grid($column-count: 12, $gutter: 0, $max-width: $mars, $container-width: 100%, $responsive-container: 'yes') {
+    .elr-container {
+        margin: 0 auto;
+        display: flex;
+
+        @if ( $responsive-container == 'yes' ) {
+            width: $container-width;
+
+            @include elr-breakpoint(mercury) {
+                max-width: $venus;
+            }
+
+            @include elr-breakpoint(venus) {
+                max-width: $earth;
+            }
+
+            @include elr-breakpoint(earth) {
+                max-width: $mars;
+            }
+
+            @include elr-breakpoint(mars) {
+                max-width: $jupiter;
+            }
+        } @else {
+            width: $container-width;
+            max-width: $max-width;
+        }
+
+        @include elr-clearfix();
+
+        .elr-row {
+            @include elr-clearfix();
+            width: 100%;
+
+            @if ($gutter > 0) {
+                margin-right: $gutter * 2;
+
+                @include elr-breakpoint(jupiter) {
+                    margin-right: $gutter;
+                }
+            }
+
+            .elr-col-full,
+            .elr-col-half,
+            .elr-col-two-thirds,
+            .elr-col-third,
+            .elr-col-quarter,
+            .elr-col-fifth,
+            .elr-col-three-fourths {
+                @include elr-clearfix();
+                float: left;
+                box-sizing: border-box;
+
+                @if ($gutter > 0) {
+                    padding: 0 $gutter * 2;
+
+                    @include elr-breakpoint(jupiter) {
+                        margin-bottom: $gutter * 2;
+                        padding-left: $gutter;
+                        padding-right: $gutter;
+                    }
+                }
+
+                @include elr-breakpoint(saturn) {
+                    float: none;
+                }
+
+                .elr-container {
+                    width: 100%;
+
+                    @if ($gutter > 0) {
+                        padding-left: $gutter * 2;
+                        padding-right: $gutter * 2;
+
+                        @include elr-breakpoint(jupiter) {
+                            padding-left: $gutter;
+                            padding-right: $gutter;
+                        }
+                    }
+
+                    .elr-row {
+
+                        @if ($gutter > 0) {
+                            margin-left: $gutter * 2;
+                            margin-right: $gutter * 2;
+                        }
+
+                        @include elr-breakpoint(jupiter) {
+
+                            @if ($gutter > 0) {
+                                margin-left: $gutter;
+                                margin-right: $gutter;
+                            }
+                        }
+
+                        @for $i from 1 through $column-count {
+
+                            .elr-col-#{$i} {
+                                margin-bottom: 0;
+                            }
+
+                            .elr-col-full,
+                            .elr-col-half,
+                            .elr-col-two-thirds,
+                            .elr-col-third,
+                            .elr-col-quarter,
+                            .elr-col-fifth,
+                            .elr-col-three-fourths {
+                                margin-bottom: 0;
+                            }
+                        }
+                    }
+                }
+            }
+
+            @for $i from 1 through $column-count {
+                .elr-col-#{$i} {
+                    @include elr-clearfix();
+                    width: ( 100 / $column-count ) * $i * 1%;
+                    float: left;
+
+                    @if ($gutter > 0) {
+                        padding: 0 $gutter * 2;
+
+                        @include elr-breakpoint(jupiter) {
+                            margin-bottom: $gutter * 2;
+                            padding-left: $gutter;
+                            padding-right: $gutter;
+                        }
+                    }
+
+                    @include elr-breakpoint(saturn) {
+                        float: none;
+                        width: 100%;
+                    }
+
+                    .elr-container {
+                        width: 100%;
+                        
+                        @if ($gutter > 0) {
+                            padding-left: $gutter * 2;
+                            padding-right: $gutter * 2;
+
+                            @include elr-breakpoint(jupiter) {
+                                padding-left: $gutter;
+                                padding-right: $gutter;
+                            }
+                        }
+
+                        .elr-row {
+                            margin-left: 0;
+                            
+                            @if ($gutter > 0) {
+                                margin-right: $gutter * 2;
+
+                                @include elr-breakpoint(jupiter) {
+                                    margin-right: $gutter;
+                                }
+                            }
+
+                            .elr-col-#{$i} {
+                                margin-bottom: 0;
+                            }
+                        }
+                    }
+                }
+            }
+
+            @for $i from 1 through $column-count {
+                .elr-col-offset-#{$i} {
+                    margin-left: ( 100 / $column-count ) * $i * 1%;
+
+                    @include elr-breakpoint(jupiter) {
+                        margin-left: 0;
+                    }
+                }
+            }
+
+            .elr-col-full,
+            .elr-col-12 {
+                width: 100%;
+                padding-left: 0;
+                padding-right: 0;
+            }
+
+            .elr-col-half,
+            .elr-col-6 {
+                width: (100% / 2);
+
+                &:nth-of-type(odd) {
+                    padding-left: 0;
+                }
+                
+                &:nth-of-type(even) {
+                    padding-right: 0;
+                }
+
+                @include elr-breakpoint(saturn) {
+                    width: 100%;
+                    padding-left: 0;
+                    padding-right: 0;
+                }
+            }
+
+            .elr-col-third,
+            .elr-col-4 {
+                width: (100% / 3);
+
+                @include elr-breakpoint(saturn) {
+                    width: 100%;
+                    padding-left: 0;
+                    padding-right: 0;
+                }
+            }
+
+            .elr-col-two-thirds,
+            .elr-col-8 {
+                width: (100% / 3) * 2;
+                
+                &:first-child {
+                    padding-left: 0;
+                }
+
+                &:last-child {
+                    padding-right: 0;
+                }
+
+                & + .elr-col-third, .elr-col-4 {
+                    padding-right: 0;
+                }
+
+                @include elr-breakpoint(saturn) {
+                    width: 100%;
+                    padding-left: 0;
+                    padding-right: 0;
+                }
+            }
+
+            .elr-col-8 + .elr-col-third,
+            .elr-col-8 + .elr-col-4,
+            .elr-col-two-thirds + .elr-col-third,
+            .elr-col-two-thirds + .elr-col-4 {
+                padding-right: 0;
+            }
+
+            .elr-col-4 + .elr-col-two-thirds,
+            .elr-col-4 + .elr-col-8,
+            .elr-col-third + .elr-col-two-thirds,
+            .elr-col-third + .elr-col-8 {
+                padding-right: $gutter * 2;
+
+                @include elr-breakpoint(saturn) {
+                    padding-right: 0;
+                }
+            }
+
+            .elr-col-three-fourths,
+            .elr-col-9 {
+                width: (100% / 4) * 3;
+                
+                &:first-child {
+                    padding-left: 0;
+                }
+
+                &:last-child {
+                    padding-right: 0;
+                }
+
+                @include elr-breakpoint(mars) {
+                    width: (100% / 3) * 2;
+                }
+
+                @include elr-breakpoint(saturn) {
+                    width: 100%;
+                }
+            }
+
+            .elr-col-9 + .elr-col-quarter,
+            .elr-col-9 + .elr-col-3,
+            .elr-col-three-fourths + .elr-col-quarter,
+            .elr-col-three-fourths + .elr-col-3 {
+                padding-right: 0;
+
+                @include elr-breakpoint(mars) {
+                    width: (100% / 3);
+                }
+
+                @include elr-breakpoint(saturn) {
+                    width: 100%;
+                }
+            }
+
+            .elr-col-quarter, .elr-col-3 {
+                width: (100% / 4);
+
+                @include elr-breakpoint(mars) {
+                    width: (100% / 2);
+
+                    &:nth-of-type(odd) {
+                        padding-left: 0;
+                    }
+                    
+                    &:nth-of-type(even) {
+                        padding-right: 0;
+                    }
+                }
+
+                @include elr-breakpoint(saturn) {
+                    width: 50%;
+                    float: left;
+                }
+            }
+
+            .elr-col-fifth {
+                width: (100% / 5);
+
+                @include elr-breakpoint(mars) {
+                    &:first-child,
+                    &:nth-child(2) {
+                        width: 50%;
+                    }
+
+                    &:first-child {
+                        padding-left: 0;
+                    }
+
+                    &:nth-child(2) {
+                        padding-right: 0;
+                    }
+
+                    &:nth-child(3),
+                    &:nth-child(4),
+                    &:last-child {
+                        width: (100% / 3);
+                    }
+
+                    &:nth-child(3) {
+                        padding-left: 0;
+                    }
+
+                    &:last-child {
+                        padding-right: 0;
+                    }
+                }
+
+                @include elr-breakpoint(saturn) {
+                    // width: 100% !important;
+                    // padding-left: 0 !important;
+                    // padding-right: 0 !important;
+                    float: left;
+                }
+            }
+
+            .elr-col-2 {
+                @include elr-breakpoint(mars) {
+                    width: (100% / 3);
+                }
+
+                @include elr-breakpoint(saturn) {
+                    width: (100% / 2);
+                    float: left;
+
+                    &:nth-of-type(odd) {
+                        padding-left: 0;
+                    }
+                    
+                    &:nth-of-type(even) {
+                        padding-right: 0;
+                    }
+                }
+            }
+        }
+    }
+}
