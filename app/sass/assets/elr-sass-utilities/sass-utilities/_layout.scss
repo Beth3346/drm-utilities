@@ -15,16 +15,12 @@
     }
 }
 
-// Centers an element horizontally on the page
+@mixin elr-em-height($height) {
+    height: ( $height / $default-font-size )#{rem};
+}
 
-@mixin elr-center-block($width: null) {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-
-    @if $width != null {
-        width: $width;
-    }
+@mixin elr-em-width($width) {
+    width: ( $width / $default-font-size )#{rem};
 }
 
 // calculates em font size from px font size
@@ -51,10 +47,30 @@
 	}
 }
 
-// vertically center element
+// Centers an element horizontally on the page
 
-@mixin elr-vertically-center($container-element-height, $height) {
-	position: absolute;
-	height: $height;
-	top: ($container-element-height / 2) - ($height / 2);
+@mixin elr-center-block($width: null) {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+    @if $width != null {
+        width: $width;
+    }
+}
+
+@mixin elr-centerer($vertical: true, $horizontal: true) {
+    position: absolute;
+
+    @if ( $vertical and $horizontal ) {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    } @else if ( $vertical ) {
+        top: 50%;
+        transform: translate(0, -50%);
+    } @else if ( $horizontal ) {
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
 }

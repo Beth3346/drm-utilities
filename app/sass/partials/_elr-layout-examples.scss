@@ -1,30 +1,49 @@
 // Layout Utilities Examples
 
 .center-block {
+	@include elr-center-block(50%);
 	margin-top: 10px;
 	margin-bottom: 10px;
 	padding: 10px;
 	border: 1px solid $grey;
 	background-color: white;
-	@include elr-center-block(50%);
+}
+
+.horizontal-container {
+	position: relative;
+	height: 400px;
+	height: 500px;
+
+	.horizontally-center {
+		@include elr-centerer(false, true);
+		height: 200px;
+		width: 275px;
+		background-color: purple;
+	}
 }
 
 .vertical-container {
-	margin-top: 10px;
-	margin-bottom: 10px;
-	padding-left: 20px;
-	border: 1px solid $grey;
-	height: 500px;
 	position: relative;
-	@include elr-clearfix();
+	height: 400px;
+	height: 500px;
 
 	.vertically-center {
-		width: 200px;
-		background-color: $main-color;
-		border: 1px solid $main-color;
-		padding: 2%;
-		color: $background-color;
-		text-align: center;
-		@include elr-vertically-center(500px, 200px);
+		@include elr-centerer(true, false);
+		height: 200px;
+		width: 275px;
+		background-color: purple;
 	}
-}	
+}
+
+.center-container {
+	position: relative;
+	height: 400px;
+	height: 500px;
+
+	.centered {
+		@include elr-centerer;
+		height: 200px;
+		width: 275px;
+		background-color: purple;
+	}
+}
