@@ -43,8 +43,8 @@ $lightest-grey: #eee;
 $off-white: #e2e2e2;
 $almost-white: #f1f1f1;
 
-$elr-blue: #00b3bb;
-$elr-blue-light: #89D6DA;
+$elr-blue: #1976D2;
+$elr-blue-light: lighten(#1976D2, 20%);
 $dark-aqua: #096367;
 $dark-pink: #ed145b;
 
