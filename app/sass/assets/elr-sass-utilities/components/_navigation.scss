@@ -2,7 +2,12 @@
 
 // creates a nav-bar with a transparent background
 
-@mixin elr-nav-bar($text-color: $text-color, $hover-color: $link-color, $align: left, $divider-color: $light-grey) {
+@mixin elr-nav-bar(
+    $text-color: $text-color,
+    $hover-color: $link-color,
+    $align: left,
+    $divider-color: $light-grey
+) {
     @include elr-clearfix;
     margin: 0;
     padding: 0;
@@ -76,7 +81,12 @@
 // creates a nav bar with a solid color background
 // hover state will invert text color and background color
 
-@mixin elr-nav-bar-solid($text-color: $background-color, $background-color: $link-color, $align: center, $active-color: $hover-color) {
+@mixin elr-nav-bar-solid(
+    $text-color: $background-color,
+    $background-color: $link-color,
+    $align: center,
+    $active-color: lighten($link-color, 10%)
+) {
     @include elr-nav-bar($text-color, $background-color, $align);
 
     li > ul {
@@ -91,17 +101,22 @@
 
         &.active {
             background-color: $active-color;
-            color: $background-color;
+            color: $text-color;
         }
 
         &:hover, &:focus {
             background-color: $active-color;
-            color: $background-color;
+            color: $text-color;
         }   
     }
 }
 
-@mixin elr-nav-bar-solid-stacked($text-color: $background-color, $background-color: $link-color, $align: left, $active-color: $hover-color) {
+@mixin elr-nav-bar-solid-stacked(
+    $text-color: $background-color,
+    $background-color: $link-color,
+    $align: left,
+    $active-color: lighten($link-color, 10%)
+) {
     @include elr-nav-bar-stacked($text-color, $background-color, $align);
     background-color: $background-color;
 
@@ -116,20 +131,26 @@
 
         &.active {
             background-color: $active-color;
-            color: $background-color;
+            color: $text-color;
         }
 
         &:hover, &:focus {
             background-color: $active-color;
-            color: $background-color;
+            color: $text-color;
         }
     }
 }
 
 // creates a nav-bar with a pill shaped button that shows on hover
 
-@mixin elr-nav-bar-pills($text-color: $link-color, $hover-color: $background-color, $align: left, $border: none ) {
-    @include elr-nav-bar($text-color, $hover-color, $align);
+@mixin elr-nav-bar-pills(
+    $text-color: $link-color,
+    $hover-color: lighten($link-color, 10%),
+    $align: left,
+    $border: none,
+    $active-color: white
+) {
+    @include elr-nav-bar($text-color, lighten($link-color, 10%), $align);
 
     li {
         margin-right: 5px;
@@ -163,18 +184,24 @@
 
         &.active {
             background-color: $text-color;
-            color: $hover-color;
+            color: $active-color;
         }
         
         &:hover, &:focus {
             background-color: $text-color;
-            color: $hover-color;
+            color: $active-color;
         }
     }
 }
 
-@mixin elr-nav-bar-pills-stacked($text-color: $link-color, $hover-color: $background-color, $align: left, $border: none ) {
-    @include elr-nav-bar-pills($text-color, $hover-color, $align, $border);
+@mixin elr-nav-bar-pills-stacked (
+    $text-color: $link-color,
+    $hover-color: lighten($link-color, 10%),
+    $align: left,
+    $border: none,
+    $active-color: white
+) {
+    @include elr-nav-bar-pills($text-color, $hover-color, $align, $border, $active-color);
 
     li {
         float: none;
@@ -200,8 +227,15 @@
 
 // creates a nav-bar with pill shaped buttons
 
-@mixin elr-nav-bar-pills-solid($text-color: $background-color, $background-color: $link-color, $align: left, $border: none, $active-color: $hover-color) {
-    @include elr-nav-bar-pills($text-color, $active-color, $align, $border);
+@mixin elr-nav-bar-pills-solid(
+    $text-color: $background-color,
+    $background-color: $link-color,
+    $align: left,
+    $border: none,
+    $active-color: lighten($link-color, 10%),
+    $hover-text-color: white
+) {
+    @include elr-nav-bar-pills($text-color, $active-color, $align, $border, $hover-text-color);
 
     li {
         margin-left: 0;
@@ -219,19 +253,26 @@
         background-color: $background-color;
 
         &.active {
-            color: $text-color;
+            color: $hover-text-color;
             background-color: $active-color;
         }
         
         &:hover, &:focus {
-            color: $text-color;
+            color: $hover-text-color;
             background-color: $active-color;
         }
     }
 }
 
-@mixin elr-nav-bar-pills-solid-stacked($text-color: $background-color, $background-color: $link-color, $align: left, $border: none, $active-color: $hover-color) {
-    @include elr-nav-bar-pills-stacked($text-color, $background-color, $align, $border);
+@mixin elr-nav-bar-pills-solid-stacked(
+    $text-color: $background-color,
+    $background-color: $link-color,
+    $align: left,
+    $border: none,
+    $active-color: lighten($link-color, 10%),
+    $hover-text-color: white
+) {
+    @include elr-nav-bar-pills-stacked($text-color, $background-color, $align, $border, $hover-text-color);
 
     li {
         margin-top: 0;
@@ -245,12 +286,12 @@
         background-color: $background-color;
 
         &.active {
-            color: $text-color;
+            color: $hover-text-color;
             background-color: $active-color;
         }
         
         &:hover, &:focus {
-            color: $text-color;
+            color: $hover-text-color;
             background-color: $active-color;
         }
     }
