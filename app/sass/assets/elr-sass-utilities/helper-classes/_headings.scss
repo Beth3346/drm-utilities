@@ -10,6 +10,10 @@
     h1 {
         @include elr-em-font(48);
 
+        @include elr-breakpoint(jupiter) {
+            @include elr-em-font(40);
+        }
+
         @include elr-breakpoint(saturn) {
             @include elr-em-font(36);
         }
@@ -21,6 +25,10 @@
 
     h2 {
         @include elr-em-font(36);
+
+        @include elr-breakpoint(jupiter) {
+            @include elr-em-font(33);
+        }
 
         @include elr-breakpoint(saturn) {
             @include elr-em-font(30);
@@ -34,6 +42,10 @@
     h3 {
         @include elr-em-font(30);
 
+        @include elr-breakpoint(jupiter) {
+            @include elr-em-font(26);
+        }
+
         @include elr-breakpoint(saturn) {
             @include elr-em-font(20);
         }
@@ -45,6 +57,10 @@
 
     h4 {
         @include elr-em-font(24);
+
+        @include elr-breakpoint(jupiter) {
+            @include elr-em-font(20);
+        }
 
         @include elr-breakpoint(saturn) {
             @include elr-em-font(18);

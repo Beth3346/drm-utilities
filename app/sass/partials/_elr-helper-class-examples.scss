@@ -30,3 +30,7 @@
         font-weight: 700;
     }
 }
+
+.heading-examples {
+    @include elr-headings();
+}
