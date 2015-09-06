@@ -1,5 +1,6 @@
 // Helper Classes
 @import "alerts";
+@import "buttons";
 @import "headings";
 @import "layout";
 @import "lists";
@@ -9,6 +10,7 @@
 
 @mixin elr-helper-classes() {
     @include elr-reset-classes();
+    @include elr-buttons();
     @include elr-headings();
     @include elr-typography-classes();
     @include elr-layout-classes();

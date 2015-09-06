@@ -34,3 +34,17 @@
 .heading-examples {
     @include elr-headings();
 }
+
+.elr-inline-list li {
+    padding-bottom: 0;
+}
+
+.elr-button,
+.elr-button-danger,
+.elr-button-success,
+.elr-button-warning,
+.elr-button-info,
+.elr-button-muted {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
