@@ -2,20 +2,20 @@
 
 // include elr-helper-classes
 
-@include elr-helper-classes();
+@include elr-helper-classes;
 
 // include elr-grid
 
-@include elr-grid();
+@include elr-grid;
 
-.elr-button {
+.button {
     @include elr-em-font(14);
     @include elr-button-solid($main-color, $background-color, 200px, left, 3px, $main-color);
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
-.elr-button-inline {
+.button-inline {
 	@include elr-button-solid($main-color, $background-color, 200px, null, 3px, $main-color, inline-block);
 }
 
