@@ -1,19 +1,19 @@
 // image styles
 
-@mixin elr-flex-images() {
+@mixin elr-flex-image() {
     max-width: 100%;
     height: auto;
 }
 
 @mixin elr-circle-image( $width ) {
     width: $width;
-    height: $height;
+    height: $width;
     border-radius: ($width / 2);
     overflow: hidden;
 
     img {
+        height: $width;
         max-width: 100%;
-        height: auto;
     }
 }
 
