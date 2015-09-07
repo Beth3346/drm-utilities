@@ -52,8 +52,8 @@
         
         var addButtons = function($container) {
             return {
-                'showButton': createButton('showButton', 'Show All', 'elr-show-all elr-button-inline', $container),
-                'hideButton': createButton('hideButton', 'Hide All', 'elr-hide-all elr-button-inline', $container),
+                'showButton': createButton('showButton', 'Show All', 'elr-show-all elr-button', $container),
+                'hideButton': createButton('hideButton', 'Hide All', 'elr-hide-all elr-button', $container),
             };
         };
 
