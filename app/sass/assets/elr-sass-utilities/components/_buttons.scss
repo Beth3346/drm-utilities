@@ -182,7 +182,14 @@
     }   
 }
 
-@mixin elr-button-group($bk-color: $link-color, $color: white, $border-radius: 0, $border: none) {
+@mixin elr-button-group(
+    $bk-color: $link-color,
+    $color: white,
+    $border-radius: 0,
+    $border: none,
+    $hover-color: lighten($bk-color, 20%),
+    $hover-text-color: white
+) {
     @include elr-clearfix();
     border-collapse: collapse;
 
@@ -208,13 +215,9 @@
             border-left: none;
         }
 
-        &:visited {
-            color: $color;
-        }
-
         &.active {
-            background-color: $color;
-            color: $bk-color;
+            background-color: $hover-color;
+            color: $hover-text-color;
             text-decoration: none;
             text-shadow: none;
             box-shadow: none;
@@ -222,8 +225,8 @@
         }
 
         &:hover {
-            background-color: $color;
-            color: $bk-color;
+            background-color: $hover-color;
+            color: $hover-text-color;
             text-decoration: none;
             text-shadow: none;
             box-shadow: none;

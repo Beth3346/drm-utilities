@@ -1,34 +1,34 @@
 // Button Examples
 
 .button-link {
-    @include elr-button-link($main-color, $background-color, 300px, left, 0, none, inline-block);
+    @include elr-button-link($link-color, $background-color, 300px, left, 0, none, inline-block);
     margin-right: 20px;
 }
 
 .button-link-radius {
-    @include elr-button-link($main-color, $background-color, 300px, left, 3px, none, inline-block);
+    @include elr-button-link($link-color, $background-color, 300px, left, 3px, none, inline-block);
 }
 
 .button-solid {
-    @include elr-button-solid($main-color, $background-color, 300px, left, 0, none, inline-block);
+    @include elr-button-solid($link-color, $background-color, 300px, left, 0, none, inline-block);
     margin-right: 20px;
 }
 
 .button-solid-radius {
-    @include elr-button-solid($main-color, $background-color, 300px, left, 3px, none, inline-block);
+    @include elr-button-solid($link-color, $background-color, 300px, left, 3px, none, inline-block);
 }
 
 .pill-button-link {
-    @include elr-pill-button-link(50px, $main-color, $background-color, 300px, left, none, inline-block);
+    @include elr-pill-button-link(50px, $link-color, $background-color, 300px, left, none, inline-block);
     margin-right: 20px;
 }
 
 .pill-button-solid {
-    @include elr-pill-button-solid(50px, $main-color, $background-color, 300px, left, none, inline-block);
+    @include elr-pill-button-solid(50px, $link-color, $background-color, 300px, left, none, inline-block);
 }
 
 .button-group {
-    @include elr-button-group($background-color, $main-color, 3px, $main-color);
+    @include elr-button-group($background-color, $link-color, 3px, $link-color, $link-color, white);
     margin-bottom: 20px;
 
     button {
@@ -37,7 +37,7 @@
 }
 
 .button-group-no-border {
-    @include elr-button-group($background-color, $main-color, 3px, none);
+    @include elr-button-group($link-color, $background-color, 3px, none);
 
     button {
         @include elr-em-font(14);
@@ -45,7 +45,7 @@
 }
 
 .elr-dropdown-solid-btn-holder {
-    @include elr-dropdown-button-solid($main-color, $background-color, 200px, none, 3px);
+    @include elr-dropdown-button-solid($link-color, $background-color, 200px, none, 3px);
 
     button {
         @include elr-em-font(14);
@@ -53,7 +53,7 @@
 }
 
 .elr-dropdown-split-btn-holder {
-    @include elr-dropdown-button-split($main-color, $background-color, 3px);
+    @include elr-dropdown-button-split($link-color, $background-color, 3px, $light-grey);
 
     button {
         @include elr-em-font(14);

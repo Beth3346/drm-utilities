@@ -12,7 +12,7 @@
         var slideListClass = spec.slideListClass || 'elr-simple-slider-list';
         var isAnimating = false;
         var speed = spec.speed || 500;
-        var interval = spec.interval || 5000;
+        var interval = spec.interval || 10000;
         var auto = spec.auto || true;
         var $slider = $('.' + sliderClass);
 
@@ -197,9 +197,16 @@
             return advanceSlide(current, dir, $slideHolder);                                
         };
 
-        var startShow = function(interval, $slides, $nextControl) {
+        var startShow = function(interval, $slideHolder, $slideList) {
             return setInterval(function() {
-                $nextControl.trigger('click');
+                // $nextControl.trigger('click');
+                var  current = getCurrent($slideHolder);
+                var nextSlide;
+
+                nextSlide = advanceSlide(current, 'next', $slideHolder);
+
+                $slideList.find('button').removeClass('active');
+                $slideList.find('li').eq(nextSlide).find('button').addClass('active');
             }, interval);
         };
 
@@ -233,14 +240,14 @@
                 $slideList = createSlideList($slides).appendTo($currentSlider);
 
                 if ( auto ) {
-                    begin = startShow(interval, $slides, $nextControl);
+                    begin = startShow(interval, $slideHolder, $slideList);
 
                     $slides.on('mouseover', function() {
                         pauseShow(begin);
                     });
 
                     $slides.on('mouseout', function() {
-                        begin = startShow(interval, $slides, $nextControl); 
+                        begin = startShow(interval, $slideHolder, $slideList); 
                     });
                 }
 
@@ -253,6 +260,7 @@
 
                     $slideList.find('button').removeClass('active');
                     $slideList.find('li').eq(nextSlide).find('button').addClass('active');
+                    pauseShow(begin);
 
                     e.preventDefault();
                     e.stopPropagation();
@@ -288,6 +296,7 @@
                     $that.addClass('active');
 
                     goToSlide(current, slideNum, $slideHolder);
+                    pauseShow(begin);
 
                     e.preventDefault();
                     e.stopPropagation();                    

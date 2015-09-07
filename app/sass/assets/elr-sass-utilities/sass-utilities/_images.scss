@@ -17,6 +17,12 @@
     }
 }
 
+@mixin elr-rounded-image( $border-radius ) {
+    height: auto;
+    border-radius: $border-radius;
+    max-width: 100%;
+}
+
 @mixin elr-image-overlay( $width, $height ) {
     img {
         max-width: 100%;

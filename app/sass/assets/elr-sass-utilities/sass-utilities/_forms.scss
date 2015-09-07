@@ -17,8 +17,8 @@
         .elr-col-half,
         .elr-col-third,
         .elr-col-quarter {
-            padding-left: 5px;
-            padding-right: 5px;
+            padding-left: 0;
+            padding-right: 10px;
 
             @include elr-breakpoint(saturn) {
                 padding-left: 0;
@@ -30,7 +30,7 @@
         .elr-col-third:first-child,
         .elr-col-quarter:first-child {
             padding-left: 0;
-            padding-right: 5px;
+            padding-right: 10px;
 
             @include elr-breakpoint(saturn) {
                 padding-right: 0;
@@ -41,7 +41,7 @@
         .elr-col-third:last-child,
         .elr-col-quarter:last-child {
             padding-left: 0;
-            padding-right: 5px;
+            padding-right: 10px;
 
             @include elr-breakpoint(saturn) {
                 padding-right: 0;

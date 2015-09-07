@@ -17,7 +17,7 @@
 @include elr-calendar();
 
 .elr-dropdown-nav {
-    @include elr-dropdown-nav($background-color, $main-color, $main-color);
+    @include elr-dropdown-nav();
     margin-bottom: 200px;
 }
 

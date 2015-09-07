@@ -1,0 +1,13 @@
+// Thumbnails
+
+.elr-thumbnail {
+    @include elr-thumbnail($background-color, 150px, 125px, 0);
+}
+
+.rounded-thumbnail {
+    @include elr-thumbnail($background-color, 150px, 125px, 5px);
+}
+
+.round-thumbnail {
+    @include elr-thumbnail($background-color, 150px, null, round);
+}
