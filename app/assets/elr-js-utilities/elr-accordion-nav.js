@@ -12,7 +12,7 @@
         var collapseIconClass = spec.collapseIconClass  || 'fa-minus';
         var iconClass = spec.iconClass || 'elr-accordion-icon';
         var contentHolderClass = contentHolderClass || 'elr-accordion-nav-inner';
-        var container = $('.' + containerClass);
+        var $container = $('.' + containerClass);
 
         var showDefaultContent = function($expandedContent, $content) {
             $content.hide();
@@ -46,16 +46,49 @@
             $openContentIcons.removeClass(collapseIconClass).addClass(expandIconClass);
         };
 
-        // var showCurrent = function() {
-            
-        // };
+        var getCurrent = function() {
+            var currentPage;
+            var $target;
+            var $currentList;
 
-        if ( container.length ) {
-            var $label = container.children('ul').children('li').children('a');
+            if ( window.location.pathname.slice(0,1) === '/' ) {
+                currentPage = window.location.pathname.slice(1);
+            } else {
+                currentPage = window.location.pathname;
+            }
+
+            $target = $container.find('a[href="' + currentPage + '"]').addClass('active');
+
+            if ( $target.length ) {
+                $currentList = $target.closest('ul').parent('li');
+
+                return $currentList;
+            } else {
+                return false;
+            }
+        };
+
+        var showCurrent = function($currentList) {
+            $currentList.find('ul').show();
+            $currentList.find('.' + iconClass).removeClass(expandIconClass).addClass(collapseIconClass);
+        };
+
+        if ( $container.length ) {
+            var $label = $container.children('ul').children('li').children('a');
             var $content = $label.next('ul');
-            var $expandedContent = container.find('.' + contentHolderClass +'[data-state=expanded]');
+            var $expandedContent = $container.find('.' + contentHolderClass +'[data-state=expanded]');
+            var $currentList = getCurrent();
+            var $icons = $label.find('.' + iconClass);
 
-            showDefaultContent($expandedContent, $content);
+            console.log($currentList);
+
+            if ( !$currentList ) {
+                showDefaultContent($expandedContent, $content);                
+            } else {
+                $content.hide();
+                $icons.removeClass(collapseIconClass).addClass(expandIconClass);
+                showCurrent($currentList);
+            }
 
             $label.on('click', function(e) {
                 var $openContent = $($content).not(':hidden');
