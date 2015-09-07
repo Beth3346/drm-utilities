@@ -53,3 +53,9 @@
 .star-list {
     @include elr-font-awesome-list('\f005');
 }
+
+#lists {
+    h3 {
+        @include elr-em-font(18);
+    }
+}
