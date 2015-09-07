@@ -50,9 +50,11 @@
             var currentPage;
             var $target;
             var $currentList;
+            var startIndex;
 
             if ( window.location.pathname.slice(0,1) === '/' ) {
-                currentPage = window.location.pathname.slice(1);
+                startIndex = window.location.pathname.lastIndexOf('/') + 1;
+                currentPage = window.location.pathname.slice(startIndex);
             } else {
                 currentPage = window.location.pathname;
             }
@@ -80,10 +82,9 @@
             var $currentList = getCurrent();
             var $icons = $label.find('.' + iconClass);
 
-            console.log($currentList);
-
             if ( !$currentList ) {
-                showDefaultContent($expandedContent, $content);                
+                showDefaultContent($expandedContent, $content);
+                console.log('no page');
             } else {
                 $content.hide();
                 $icons.removeClass(collapseIconClass).addClass(expandIconClass);
