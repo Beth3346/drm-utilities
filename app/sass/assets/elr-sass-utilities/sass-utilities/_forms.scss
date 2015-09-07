@@ -6,24 +6,46 @@
     width: 100%;
 
     .elr-container {
-        padding-left: 0 !important;
-        padding-right: 0 !important;
+        padding-left: 0;
+        padding-right: 0;
 
         .elr-col-full {
-            padding-left: 0 !important;
-            padding-right: 0 !important;
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .elr-col-half,
+        .elr-col-third,
+        .elr-col-quarter {
+            padding-left: 5px;
+            padding-right: 5px;
+
+            @include elr-breakpoint(saturn) {
+                padding-left: 0;
+                padding-right: 0;
+            }
         }
 
         .elr-col-half:first-child,
         .elr-col-third:first-child,
         .elr-col-quarter:first-child {
-            padding-left: 0 !important;
+            padding-left: 0;
+            padding-right: 5px;
+
+            @include elr-breakpoint(saturn) {
+                padding-right: 0;
+            }
         }
 
         .elr-col-half:last-child,
         .elr-col-third:last-child,
         .elr-col-quarter:last-child {
-            padding-right: 0 !important;
+            padding-left: 0;
+            padding-right: 5px;
+
+            @include elr-breakpoint(saturn) {
+                padding-right: 0;
+            }
         }
     }
 
@@ -222,7 +244,7 @@
     input[type="submit"], button {   
         @include elr-em-font(14);
         @include elr-button-solid($button-color, white, 180px, null, 3px, $button-color, block);   
-        margin: 5px 0;
+        margin: 5px 5px 5px 0;
     }
 
     .elr-inline-control-group {
@@ -253,7 +275,7 @@
     input[type="submit"], button {
         @include elr-button-solid($button-color, white, 100px, null, 3px, $button-color, inline-block);
         @include elr-em-font(14);
-        margin: 0;
+        margin: 0 5px 5px 0;
     }
 
     .elr-inline-control-group {
@@ -272,7 +294,7 @@
     input[type="submit"][disabled], button[disabled] {      
         @include elr-button-solid(lighten($button-color, 50%), white, 180px, null, 3px, lighten($button-color, 50%), inline-block);
         @include elr-em-font(14);
-        margin: 0;
+        margin: 0 5px 5px 0;
 
         &:hover {
             cursor: not-allowed;
