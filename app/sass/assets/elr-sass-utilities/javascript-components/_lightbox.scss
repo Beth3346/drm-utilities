@@ -27,17 +27,17 @@
     @include elr-lightbox($overlay-color, $opacity);
 
     img {
-        @include elr-center-block(100%);
-        position: relative;
-        height: 80%;
+        @include elr-centerer;
+        height: 70%;
     }
 
     .thumbnail-list {
-        @include elr-clearfix();
+        @include elr-clearfix;
         margin: 0;
         padding: 0;
         position: absolute;
         list-style: none;
+        height: $image-size;
 
         @if $list-position == 'top-right' {
             top: 0;
@@ -46,14 +46,17 @@
             top: 0;
             left: 0;            
         } @else if $list-position == 'bottom-right' {
-            bottom: 0;
+            bottom: -20px;
             right: 0;           
-        } @else {
-            bottom: 0;
+        } @else if $list-position == 'bottom-left' {
+            bottom: -20px;
             left: 0;        
+        } @else {
+            display: none;
         }
 
         li {
+            @include elr-square($image-size);
             float: left;
             margin: 0;
             padding: 0;
@@ -63,6 +66,7 @@
             @include elr-square($image-size);
             padding: 0;
             margin: 0;
+            position: relative;
         }   
     }
 

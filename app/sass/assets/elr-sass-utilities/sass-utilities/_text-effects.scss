@@ -6,8 +6,12 @@
     font-size: ($size / $default-font-size)#{rem};
 }
 
-@mixin elr-font-awesome($icon) {
-    content: $icon;
+@mixin elr-em-line-height($size) {
+    line-height: ($size / $default-font-size)#{rem};
+}
+
+@mixin elr-font-awesome($font-size: 16) {
+    @include elr-em-font($font-size);
     line-height: 1;
     font-weight: normal;
     font-style: normal;
@@ -22,4 +26,17 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+@mixin elr-font-face($name, $file-path: $name, $weight: 500) {
+    @font-face {
+        font-family: $name;
+        src: url('#{$file-path}.eot'); /* IE9 Compat Modes */
+        src: url('#{$file-path}.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+           url('#{$file-path}.woff2') format('woff2'), /* Super Modern Browsers */
+           url('#{$file-path}.woff') format('woff'), /* Pretty Modern Browsers */
+           url('#{$file-path}.ttf')  format('truetype'), /* Safari, Android, iOS */
+           url('#{$file-path}.svg#svgFontName') format('svg'); /* Legacy iOS */
+        font-weight: $weight;
+    }
 }

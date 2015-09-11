@@ -119,7 +119,7 @@ header {
 
                 &:hover, &:active {
                     background-color: $background-color;
-                    color: $main-color;
+                    color: white;
                 }
             }
         }
@@ -144,6 +144,10 @@ header {
                     margin: 0;
                     padding-left: 10px;
                     padding-right: 10px;
+
+                    &:hover, &:active {
+                        color: white;
+                    }
                 }
 
                 ul {

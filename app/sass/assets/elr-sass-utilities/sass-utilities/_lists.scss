@@ -135,7 +135,7 @@
     }
 }
 
-@mixin elr-font-awesome-list($icon, $icon-font-size: 80%) {
+@mixin elr-font-awesome-list($icon, $icon-font-size: 14) {
     @include elr-unstyled-list;
 
     li {
@@ -143,10 +143,10 @@
         padding-left: 10px;
 
         &:before {
-            @include elr-font-awesome($icon);
+            @include elr-font-awesome();
+            content: $icon;
             display: inline;
             padding-right: 10px;
-            font-size: $icon-font-size;
             vertical-align: middle;
         }
     }

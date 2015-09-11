@@ -2,14 +2,8 @@
 
 // Applies a solid 2px drop shadow to an element
 
-@mixin elr-solid-drop-shadow($color) {
-    box-shadow: $color 0 3px 0;
-}
-
-// creates a shadow with two thick borders and one thin border
-
-@mixin elr-triple-shadow($color1, $color2) {
-    box-shadow: 0 0 0 3px $color1, 0 0 0 10px $color2, 0 0 0 11px $color1;
+@mixin elr-solid-drop-shadow($color, $thickness: 3px) {
+    box-shadow: $color 0 $thickness 0;
 }
 
 // creates a thick bottom drop shadow

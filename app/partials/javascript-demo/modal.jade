@@ -14,18 +14,17 @@ section#elr-modal
                     button.elr-modal-open(data-modal="elr-modal-video") See Video
 
                 .elr-modal#elr-modal-info
-                    .header
-                        h1 Modal Window with some info
-                    .body
-                        p. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus officiis repudiandae sed tempora nesciunt mollitia. 
-                            Doloremque, debitis ad veritatis. Illum, iusto officiis hic voluptate earum.
-                    .footer
+                    .elr-header
+                        h3.elr-header-title Modal Window with some info
+                    .elr-body
+                        p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus officiis repudiandae sed tempora nesciunt mollitia. Doloremque, debitis ad veritatis. Illum, iusto officiis hic voluptate earum.
+                    .elr-footer
                         button.elr-modal-close Close
                 
                 .elr-modal#elr-modal-form
-                    .header
-                        h1 Modal Form
-                    .body
+                    .elr-header
+                        h3.elr-header-title Modal Form
+                    .elr-body
                         form(action="")
                             label(for="name") Name:
                             input(type="text" id="name" name="name" placeholder="First Last")
@@ -36,17 +35,17 @@ section#elr-modal
                             label(for="notes") Notes:
                             textarea(name="notes" id="notes" cols="30" rows="10" placeholder="These are some notes")
                             small This is some instructional text
-                    .footer
+                    .elr-footer
                         button(type="submit" id="submit") Submit
                         button.elr-modal-close Cancel
 
                 .elr-modal#elr-modal-video
-                    .header
-                        h1 Modal Video
-                    .body
+                    .elr-header
+                        h3.elr-header-title Modal Video
+                    .elr-body
                         .video-holder
                             iframe(width="420" height="315" src="//www.youtube.com/embed/Na9H0Jdy3fY?rel=0" frameborder="0" allowfullscreen)
-                    .footer
+                    .elr-footer
                         button.elr-modal-close Close
     .elr-container
         .elr-row

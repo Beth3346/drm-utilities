@@ -4,12 +4,11 @@
 @import "headings";
 @import "layout";
 @import "lists";
-@import "reset";
+@import "positioning";
 @import "responsiveness";
 @import "typography";
 
 @mixin elr-helper-classes() {
-    @include elr-reset-classes();
     @include elr-buttons();
     @include elr-headings();
     @include elr-typography-classes();
@@ -17,4 +16,7 @@
     @include elr-list-classes();
     @include elr-alert-classes();
     @include elr-responsive-classes();
+    @include elr-positioning-classes();
+    @include elr-display-classes();
+    @include elr-flex-classes();
 }

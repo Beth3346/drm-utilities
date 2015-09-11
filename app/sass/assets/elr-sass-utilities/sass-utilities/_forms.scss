@@ -1,6 +1,78 @@
 // Forms
 
-@mixin elr-form($glow: $elr-blue, $bk-color: $lightest-grey, $border: $grey, $button-color: $dark-grey) {
+@mixin elr-form-state($glow: $link-color, $bk-color: $lightest-grey, $border: $grey) {
+    background-color: $bk-color;
+    border: 1px solid $border;
+    transition: border .5s ease-out, box-shadow .5s ease-out;
+        
+    @if ( $glow != null) {
+
+        &:hover {
+            border: 1px solid $glow;
+            box-shadow: 0 0 2px $glow;
+            transition: border .5s ease-in, box-shadow .5s ease-in;
+        }
+
+        &:focus {
+            outline: none;
+            border: 1px solid darken($border, 20%);
+            background-color: lighten($bk-color, 20%);
+            transition: border .5s ease-in, background .5s ease-in;
+        }
+    }
+
+    &.elr-form-success {
+        @include elr-form-status($success-color);
+    }
+
+    &.elr-form-warning {
+        @include elr-form-status($warning-color);
+    }
+
+    &.elr-form-danger {
+        @include elr-form-status($danger-color);
+    }
+
+    &[disabled] {
+        background-color: darken($bk-color, 10%);
+        border: 1px solid darken($border, 10%); 
+        transition: none;
+
+        &:hover {
+            cursor: not-allowed;
+            border:  1px solid darken($border, 10%);
+            box-shadow: none;
+            transition: none;
+        }
+
+        &:focus {
+            outline: none;
+            border:  1px solid darken($border, 10%);
+            background-color: darken($bk-color, 10%);
+            transition: none;
+        }
+    }
+}
+
+@mixin elr-placeholder($color) {
+    &::-webkit-input-placeholder {
+      color: $color;
+    }
+
+    &::-moz-placeholder { /* Firefox 19+ */
+      color: $color;
+    }
+
+    &:-ms-input-placeholder {
+      color: $color;
+    }
+
+    &:-moz-placeholder { /* Firefox 18- */
+      color: $color;
+    }
+}
+
+@mixin elr-form($glow: $link-color, $bk-color: $lightest-grey, $border: $grey, $button-color: $dark-grey) {
     padding-top: 10px;
     padding-bottom: 10px;
     width: 100%;
@@ -12,6 +84,7 @@
         .elr-col-full {
             padding-left: 0;
             padding-right: 0;
+            padding-bottom: 10px;
         }
 
         .elr-col-half,
@@ -19,6 +92,7 @@
         .elr-col-quarter {
             padding-left: 0;
             padding-right: 10px;
+            padding-bottom: 10px;
 
             @include elr-breakpoint(saturn) {
                 padding-left: 0;
@@ -57,7 +131,7 @@
     }
 
     .form-notice-holder {
-        @include elr-clearfix();
+        @include elr-clearfix;
         float: left;
     }
 
@@ -164,7 +238,7 @@
     }
 
     .elr-inline-control-group {
-        @include elr-clearfix();
+        @include elr-clearfix;
         float: left;
         margin: 0 0 0 15px;
 
@@ -222,7 +296,7 @@
     }
 }
 
-@mixin elr-tabular-form($glow: $elr-blue, $bk-color: $lightest-grey, $border: $grey, $button-color: $dark-grey) {
+@mixin elr-tabular-form($glow: $link-color, $bk-color: $lightest-grey, $border: $grey, $button-color: $dark-grey) {
     @include elr-form($glow, $bk-color, $border);
 
     label, input, select {
@@ -252,8 +326,8 @@
     }
 }
 
-@mixin elr-inline-form($glow: $elr-blue, $bk-color: $lightest-grey, $border: $grey, $button-color: $dark-grey) {
-    @include elr-clearfix();
+@mixin elr-inline-form($glow: $link-color, $bk-color: $lightest-grey, $border: $grey, $button-color: $dark-grey) {
+    @include elr-clearfix;
     @include elr-form($glow, $bk-color, $border);
 
     padding-left: 0;

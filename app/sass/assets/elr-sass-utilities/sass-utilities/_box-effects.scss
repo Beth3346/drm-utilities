@@ -1,11 +1,5 @@
 // Box Effects
 
-// creates a slight box shadow
-
-@mixin elr-inset-box($shadow-color: $shadow-color) {
-    box-shadow: $shadow-color 1px 1px 0;    
-}
-
 // Creates a slightly transparent background with a hex color backup
 
 @mixin elr-background-transparent($color, $opacity: 0.7) {

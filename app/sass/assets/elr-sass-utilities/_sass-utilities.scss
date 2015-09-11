@@ -38,6 +38,7 @@
 
 // Helper Classes
 
+    @import "helper-classes/reset";
     @import "helper-classes/helper-classes";
 
 // JavaScript Components
@@ -62,7 +63,6 @@
 
 // Sass Utilities 
 
-    @import "sass-utilities/border-effects";
     @import "sass-utilities/box-effects";
     @import "sass-utilities/circles";
     @import "sass-utilities/forms";
