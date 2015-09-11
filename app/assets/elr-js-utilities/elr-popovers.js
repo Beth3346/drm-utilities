@@ -37,7 +37,7 @@
         };
 
         if ( $holder.length ) {
-            $buttons = $holder.find('button');
+            var $buttons = $holder.find('button');
 
             $('body').on('click', '.' + holderClass + ' button', function(e) {
                 togglePopover.call(this);
