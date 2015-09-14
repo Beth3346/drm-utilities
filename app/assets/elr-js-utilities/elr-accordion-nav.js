@@ -84,7 +84,6 @@
 
             if ( !$currentList ) {
                 showDefaultContent($expandedContent, $content);
-                console.log('no page');
             } else {
                 $content.hide();
                 $icons.removeClass(collapseIconClass).addClass(expandIconClass);
@@ -93,11 +92,11 @@
 
             $label.on('click', function(e) {
                 var $openContent = $($content).not(':hidden');
+                e.stopPropagation();
+                e.preventDefault();
                 
                 toggle.call(this, speed, $openContent);
                 replaceIcons.call(this, $openContent, iconClass, expandIconClass, collapseIconClass);
-                e.stopPropagation();
-                e.preventDefault();
             });
         }
 
