@@ -9,18 +9,13 @@
             }
         }
     });
+    
     var $input = $('.regex-tester').find('input');
 
     elrAccordion();
     elrAccordionNav();
     elrAccordionNav({
         containerClass: 'sidebar'
-    });
-
-    $('button.mobile-menu-toggle').on('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        $('ul.mobile-nav').slideToggle();
     });
     
     elrAlert.showAlert('info', 'This is just an informative alert', $('.elr-alert-holder'));
@@ -215,6 +210,12 @@
 
         result = elrTime.getNextDate(dateObj);
         $that.append('<span>: ' + result + '</span>');
+    });
+
+    $('button.mobile-menu-toggle').on('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $('ul.mobile-nav').slideToggle();
     });
 
 })(jQuery);
