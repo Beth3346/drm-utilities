@@ -12,14 +12,14 @@
         $border-color: none,
         $display: inline-block
     ) {
-        width: $width;
+        @include elr-em-padding('all', 10, 0);
+        @include elr-em-width($width);
         max-width: 100%;
         border-width: 1px;
         border-style: solid;
         border-color: $color;
         color: $color;
         text-align: center;
-        padding: 10px 0;
         text-decoration: none;
         cursor: pointer;
         background-color: transparent;
@@ -66,12 +66,12 @@
         $display: inline-block,
         $hover-color: lighten($bk-color, 10%)
     ) {
+        @include elr-em-width($width);
+        @include elr-em-padding('all', 10, 0);
         background-color: $bk-color;
-        width: $width;
         max-width: 100%;
         color: $color;
         text-align: center;
-        padding: 10px 0;
         text-decoration: none;
         cursor: pointer;
         border-radius: $border-radius;
@@ -102,7 +102,7 @@
     }
 
 @mixin elr-pill-button-link($height: 40px, $color: white, $bk-color: $link-color, $width: 300px, $center: left, $border-color: none, $display: inline-block) {
-    width: $width;
+    @include elr-em-width($width);
     max-width: 100%;
     border: 1px solid $color;
     color: $color;
@@ -146,9 +146,17 @@
 // Styles a rounded button with a 1px border and solid background
 // Useful for <button> and <a> elements
 
-@mixin elr-pill-button-solid($height: 40px, $bk-color: $link-color, $color: white, $width: 300px, $center: left, $border-color: none, $display: inline-block) {
+@mixin elr-pill-button-solid(
+    $height: 40px,
+    $bk-color: $link-color,
+    $color: white,
+    $width: 300px,
+    $center: left,
+    $border-color: none,
+    $display: inline-block
+) {
+    @include elr-em-width($width);
     background-color: $bk-color;
-    width: $width;
     max-width: 100%;
     color: $color;
     font-weight: normal;
@@ -177,8 +185,8 @@
     }
 
     &:hover {
-        background-color: $color;
-        color: $bk-color;
+        background-color: lighten($bk-color, 10%);
+        color: $color;
         text-decoration: none;
         text-shadow: none;
         box-shadow: none;
@@ -192,23 +200,22 @@
     $border-radius: 0,
     $border: none,
     $hover-color: lighten($bk-color, 20%),
-    $hover-text-color: white
+    $hover-text-color: $color
 ) {
-    @include elr-clearfix();
+    @include elr-clearfix;
     border-collapse: collapse;
 
     button {
+        @include elr-em-padding('all', 10, 20);
         float: left;
         background-color: $bk-color;
         color: $color;
         text-align: center;
         display: block;
-        padding: 10px 20px;
         text-decoration: none;
         cursor: pointer;
         margin: 0;
         text-shadow: none;
-        
         transition: all, .3s ease-out;
         box-shadow: none;
 
@@ -265,13 +272,110 @@
 
 @mixin elr-font-awesome-button(
         $icon,
+        $icon-position: right,
         $bk-color: $link-color,
         $color: white,
-        $width: 300px,
-        $center: center,
+        $width: 200px,
+        $center: left,
         $border-radius: 0,
-        $display: block,
+        $display: inline-block,
         $border-color: none
-    ) {
-        @include elr-button-solid( $bk-color, $color, $width, $center, $border-radius, $border-color, $display);
+) {
+    @include elr-button-solid( $bk-color, $color, $width, $center, $border-radius, $border-color, $display);
+
+    @if ( $icon-position == 'left' ) {
+        &:before {
+            @include elr-em-padding('right', 10px);
+            @include elr-font-awesome(105%);
+            content: $icon;
+        }        
+    } @else {
+        &:after {
+            @include elr-font-awesome(105%);
+            @include elr-em-padding('left', 10px);
+            content: $icon;
+        } 
     }
+}
+
+@mixin elr-font-awesome-icon-button(
+        $icon,
+        $bk-color: $link-color,
+        $color: white,
+        $center: left,
+        $border-radius: 0,
+        $display: inline-block,
+        $border-color: none
+) {
+    @include elr-button-solid( $bk-color, $color, auto, $center, $border-radius, $border-color, $display);
+    padding-left: 15px;
+    padding-right: 15px;
+
+    &:after {
+        @include elr-font-awesome(105%);
+        content: $icon;
+    } 
+}
+
+@mixin elr-font-awesome-icon-circle(
+        $icon,
+        $bk-color: $link-color,
+        $color: white,
+        $center: left,
+        $width: 40px,
+        $display: inline-block,
+        $border-color: none
+) {
+    @include elr-button-solid( $bk-color, $color, $width, $center, $width, $border-color, $display);
+    @include elr-em-height($width);
+    @include elr-em-line-height($width);
+    padding-top: 0;
+
+    &:after {
+        @include elr-font-awesome(105%);
+        content: $icon;
+    } 
+}
+
+@mixin elr-font-awesome-icon-group(
+    $direction: horizontal,
+    $button-width: auto,
+    $border-radius: 5px,
+    $border-color: none
+) {
+    @include elr-clearfix;
+
+    button {
+        display: block;
+
+        @if ( $direction == 'vertical' ) {
+            @include elr-em-width($button-width);
+            float: none;
+
+            @if ( $border-radius > 0 ) {
+                &:first-child {
+                    border-radius: $border-radius $border-radius 0 0;
+                }
+
+                &:last-child {
+                    border-radius: 0 0 $border-radius $border-radius;
+                }
+            }
+        } @else {
+            float: left;
+
+            @if ( $border-radius > 0 ) {
+                &:first-child {
+                    border-radius: $border-radius 0 0 $border-radius;
+                }
+
+                &:last-child {
+                    border-radius: 0 $border-radius $border-radius 0;
+                }
+            }
+        }
+        
+        border-radius: 0;
+        margin-right: 0;
+    }
+}
