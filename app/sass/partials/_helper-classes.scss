@@ -25,14 +25,10 @@
     border-radius: 5px;
 
     p {
-        @include elr-em-font(14);
+        @include elr-em-font(14px);
         padding: 0;
         font-weight: 700;
     }
-}
-
-.heading-examples {
-    @include elr-headings();
 }
 
 .elr-inline-list li {

@@ -1,8 +1,8 @@
 // Forms Utilities Examples
 
 .form-state {
-	padding: 20px 0;
 	@include elr-tabular-form();
+    @include elr-em-padding('all', 20px, 0);
 }
 
 .tabular-form {
