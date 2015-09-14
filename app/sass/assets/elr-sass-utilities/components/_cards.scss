@@ -8,56 +8,51 @@
     $margin: 20px,
     $border-radius: 0
 ) {
+    @include elr-em-margin('all', $margin);
     background-color: $bg-color;
     color: $color;
     max-width: 100%;
     height: auto;
-    margin: $margin;
 
-    @if $border-radius {
-        border-radius: $border-radius;
-    }
+    @if $border-radius { border-radius: $border-radius; }
 
-    @if $border-color {
-        border: 1px solid $border-color;
-    }
+    @if $border-color { border: 1px solid $border-color; }
 
     .elr-card-title {
-        @include elr-em-font(24);
+        @include elr-em-font(24px);
         color: $color;
         font-weight: 700;
     }
 
     p {
-        @include elr-em-font(14);
+        @include elr-em-font(14px);
         color: $color;
     }
 
     .elr-button {
-        @include elr-em-font(14);
+        @include elr-em-font(14px);
         @include elr-clearfix;
     }
 
     .elr-card-header {
-        padding: $padding $padding + 10 0 $padding + 10;
+        @include elr-em-padding('all', $padding, $padding + 10, 0, $padding + 10);
     }
 
     .elr-card-body {
         @include elr-clearfix;
-        padding: 10px $padding + 10;
+        @include elr-em-padding('all', 10px, $padding + 10);
         clear: both;
     }
 
     .elr-card-footer {
         @include elr-clearfix;
-        padding-top: 10px;
-        padding: $padding $padding + 10 10px $padding + 10;
+        @include elr-em-padding('all', $padding, $padding + 10, 10px, $padding + 10);
         border-top: 1px solid darken($bg-color, 10%);
     }
 
     figure {
+        @include elr-em-padding('all', 5px, 0, 0, 0);
         margin: 0;
-        padding: 5px 0 0 0;
     }
 
     img {
@@ -65,16 +60,14 @@
         height: auto;
     }
 
-    .elr-button {
-        width: 200px;
-    }
+    .elr-button { @include elr-em-width(200px) };
 
     .elr-card-thumbnail {
         @include elr-square(60px);
+        @include elr-em-margin('all', 0, 20px, 10px, 0);
+        padding: 0;
         overflow: hidden;
         float: left;
-        margin: 0 20px 10px 0;
-        padding: 0;
 
         img {
             width: auto;
@@ -83,17 +76,17 @@
 
         & + h2 {
             @include elr-em-font(30);
+            @include elr-em-padding('all', 30px, 0, 0, 0);
             margin: 0;
-            padding: 30px 0 0 0;
             line-height: 1;
         }
     }
 
     .elr-card-thumbnail-round {
         @include elr-circle(80px);
+        @include elr-em-margin('all', 0, 20px, 10px, 0);
         overflow: hidden;
         float: left;
-        margin: 0 20px 10px 0;
         padding: 0;
 
         img {
@@ -103,8 +96,8 @@
 
         & + h2 {
             @include elr-em-font(30);
+            @include elr-em-padding('all', 40px, 0, 0, 0);
             margin: 0;
-            padding: 40px 0 0 0;
             line-height: 1;
         }
     }
@@ -119,8 +112,8 @@
             float: none;
 
             & + h2 {
+                @include elr-em-padding('top', 10px);
                 clear: both;
-                padding-top: 10px;
             }
         }
     }
@@ -135,33 +128,62 @@
 ) {
     @include elr-card($bg-color, $color, $border-color, 0, $margin, $border-radius);
 
-    .elr-card-title {
-        padding: 10px 20px;
+    .elr-card-header {
+        padding: 0;
+
+        figure {
+
+            @if $border-radius {
+                border-radius: $border-radius $border-radius 0 0;
+            }
+        }
+
+        img {
+
+            @if $border-radius {
+                border-radius: $border-radius $border-radius 0 0;
+            }
+        }
     }
 
-    .elr-card-body {
-        padding: 10px 20px;
+    .elr-card-body { padding: 0; }
+
+    .elr-card-title,
+    .elr-card-content {
+        @include elr-em-padding('all', 10px, 20px);
     }
 
-    .elr-card-footer {
-        padding: 20px 20px 10px 20px;
+    .elr-card-footer { 
+        @include elr-em-padding('all', 20px, 0, 0, 0);
+        
+        .elr-card-actions {
+            @include elr-em-margin('left', 20);
+            @include elr-em-margin('bottom', 20);
+        }
+
+        figure {
+
+            @if $border-radius {
+                border-radius: 0 0 $border-radius $border-radius;
+            }
+        }
+
+        img {
+
+            @if $border-radius {
+                border-radius: 0 0 $border-radius $border-radius;
+            }
+        }
     }
 
     figure {
         margin: 0;
         padding: 0;
-
-        @if $border-radius {
-            border-radius: $border-radius $border-radius 0 0;
-        }
+        margin-bottom: -6px;
     }
 
     img {
         width: 100%;
         height: auto;
-
-        @if $border-radius {
-            border-radius: $border-radius $border-radius 0 0;
-        }
     }
 }
