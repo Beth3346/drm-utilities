@@ -1,13 +1,13 @@
 .rounded-heading {
+    @include elr-em-width(400px);
+    @include elr-em-margin('bottom', 10px);
     @include elr-rounded-heading;
-    @include elr-em-font(24);
-    width: 400px;
-    margin-bottom: 10px;
+    @include elr-em-font(20px);
 }
 
 .pill-heading {
+    @include elr-em-width(400px);
+    @include elr-em-margin('bottom', 10px);
     @include elr-pill-heading;
-    @include elr-em-font(24);
-    width: 400px;
-    margin-bottom: 10px;
+    @include elr-em-font(20px);
 }

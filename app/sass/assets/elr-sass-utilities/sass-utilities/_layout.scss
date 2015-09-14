@@ -1,8 +1,8 @@
 // Layout
 
 @mixin elr-reset-element() {
-    @include elr-em-margin('all', 0);
-    @include elr-em-padding('all', 0);
+    margin: 0;
+    padding: 0;
     line-height: 1;
 }
 
@@ -31,106 +31,33 @@
     width: 1px;
 }
 
-@mixin elr-em-height($height) {
-    height: ( $height / $default-font-size )#{rem};
-}
-
-@mixin elr-em-width($width) {
-    width: ( $width / $default-font-size )#{rem};
-}
-
-@mixin elr-em-min-height($height) {
-    min-height: ( $height / $default-font-size )#{rem};
-}
-
-@mixin elr-em-min-width($width) {
-    min-width: ( $width / $default-font-size )#{rem};
-}
-
-@mixin elr-em-max-height($height) {
-    max-height: ( $height / $default-font-size )#{rem};
-}
-
-@mixin elr-em-max-width($width) {
-    max-width: ( $width / $default-font-size )#{rem};
-}
+@mixin elr-em-height($height) { height: to-rems($height); }
+@mixin elr-em-width($width) { width: to-rems($width); }
+@mixin elr-em-min-height($height) { min-height: to-rems($height); }
+@mixin elr-em-min-width($width) { min-width: to-rems($width); }
+@mixin elr-em-max-height($height) { max-height: to-rems($height); }
+@mixin elr-em-max-width($width) { max-width: to-rems($width); }
 
 // calculates em margin from px margin
 
 @mixin elr-em-margin($qualifier: 'all', $top: null, $right: null, $bottom: null, $left: null) {
 
     @if ( $qualifier == 'all' ) {
-        @if ( $top == 0 ) {
-            $top: 0;
-        } @else if ( $top == auto ) {
-            $top: auto;
-        } @else if ( $top != null ) {
-            $top: ($top / $default-font-size)#{rem};
-        }
-
-        @if ( $right == 0 ) {
-            $right: 0;
-        } @else if ( $right == auto ) {
-            $right: auto;
-        } @else if ( $right != null ) {
-            $right: ($right / $default-font-size)#{rem};
-        }
-
-        @if ( $bottom == 0 ) {
-            $bottom: 0;
-        } @else if ( $bottom == auto ) {
-            $bottom: auto;
-        } @else if ( $bottom != null ) {
-            $bottom: ($bottom / $default-font-size)#{rem};
-        }
-
-        @if ( $left == 0 ) {
-            $left: 0;
-        } @else if ( $left == auto ) {
-            $left: auto;
-        } @else if ( $left != null ) {
-            $left: ($left / $default-font-size)#{rem};
-        }
-
         @if ( $right == null ) {
-            margin: $top;
+            margin: to-rems($top);
         } @else if ( $bottom == null ) {
-            margin: $top $right;
+            margin: to-rems($top) to-rems($right);
         } @else {
-            margin: $top $right $bottom $left;
+            margin: to-rems($top) to-rems($right) to-rems($bottom) to-rems($left);
         }
     } @else if ( $qualifier == 'top' ) {
-        @if ( $top == 0 ) {
-            $top: 0;
-        } @else if ( $top != null ) {
-            $top: ($top / $default-font-size)#{rem};
-        }
-
-        margin-top: $top;
+        margin-top: to-rems($top);
     } @else if ( $qualifier == 'right' ) {
-        @if ( $top == 0 ) {
-            $top: 0;
-        } @else if ( $top != null ) {
-            $top: ($top / $default-font-size)#{rem};
-        }
-
-        margin-right: $top;
+        margin-right: to-rems($top);
     } @else if ( $qualifier == 'bottom' ) {
-        @if ( $top == 0 ) {
-            $top: 0;
-        } @else if ( $top != null ) {
-            $top: ($top / $default-font-size)#{rem};
-        }
-
-        margin-bottom: $top;
+        margin-bottom: to-rems($top);
     } @else if ( $qualifier == 'left' ) {
-        @if ( $top == 0 ) {
-            $top: 0;
-        } @else if ( $top != null ) {
-            $top: ($top / $default-font-size)#{rem};
-        }
-
-        margin-left: $top;
+        margin-left: to-rems($top);
     }
 }
 
@@ -138,77 +65,21 @@
 
 @mixin elr-em-padding($qualifier: 'all', $top: null, $right: null, $bottom: null, $left: null) {
     @if ( $qualifier == 'all' ) {
-        @if ( $top == 0 ) {
-            $top: 0;
-        } @else if ( $top == auto ) {
-            $top: auto;
-        } @else if ( $top != null ) {
-            $top: ($top / $default-font-size)#{rem};
-        }
-
-        @if ( $right == 0 ) {
-            $right: 0;
-        } @else if ( $right == auto ) {
-            $right: auto;
-        } @else if ( $right != null ) {
-            $right: ($right / $default-font-size)#{rem};
-        }
-
-        @if ( $bottom == 0 ) {
-            $bottom: 0;
-        } @else if ( $bottom == auto ) {
-            $bottom: auto;
-        } @else if ( $bottom != null ) {
-            $bottom: ($bottom / $default-font-size)#{rem};
-        }
-
-        @if ( $left == 0 ) {
-            $left: 0;
-        } @else if ( $left == auto ) {
-            $left: auto;
-        } @else if ( $left != null ) {
-            $left: ($left / $default-font-size)#{rem};
-        }
-
         @if ( $right == null ) {
-            padding: $top;
+            padding: to-rems($top);
         } @else if ( $bottom == null ) {
-            padding: $top $right;
+            padding: to-rems($top) to-rems($right);
         } @else {
-            padding: $top $right $bottom $left;
+            padding: to-rems($top) to-rems($right) to-rems($bottom) to-rems($left);
         }
     } @else if ( $qualifier == 'top' ) {
-        @if ( $top == 0 ) {
-            $top: 0;
-        } @else if ( $top != null ) {
-            $top: ($top / $default-font-size)#{rem};
-        }
-        
-        padding-top: $top;
+        padding-top: to-rems($top);
     } @else if ( $qualifier == 'right' ) {
-        @if ( $top == 0 ) {
-            $top: 0;
-        } @else if ( $top != null ) {
-            $top: ($top / $default-font-size)#{rem};
-        }
-        
-        padding-right: $top;
+        padding-right: to-rems($top);
     } @else if ( $qualifier == 'bottom' ) {
-        @if ( $top == 0 ) {
-            $top: 0;
-        } @else if ( $top != null ) {
-            $top: ($top / $default-font-size)#{rem};
-        }
-        
-        padding-bottom: $top;
+        padding-bottom: to-rems($top);
     } @else if ( $qualifier == 'left' ) {
-        @if ( $top == 0 ) {
-            $top: 0;
-        } @else if ( $top != null ) {
-            $top: ($top / $default-font-size)#{rem};
-        }
-        
-        padding-left: $top;
+        padding-left: to-rems($top);
     }
 }
 

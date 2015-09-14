@@ -7,16 +7,14 @@
 // positive skew for horizontal diamond
 // negative skew for vertical diamond
 
-@mixin elr-quadrilateral-diamond($size, $skew: 0)
-{
+@mixin elr-quadrilateral-diamond($size, $skew: 0) {
     @include elr-square($size);
     transform: rotate(-45deg) skew($skew#{deg}, $skew#{deg});
 }
 
 // Creates a pentagon
 
-@mixin elr-pentagon($width, $height, $background-color)
-{
+@mixin elr-pentagon($width, $height, $background-color) {
     position: relative;
     width: $width*0.90;
     border-width: $height*0.5 $width*0.18 0;
@@ -38,8 +36,7 @@
 
 // Creates a hexagon
 
-@mixin elr-hexagon($width, $height, $background-color)
-{
+@mixin elr-hexagon($width, $height, $background-color) {
     width: $width;
     height: $height/2;
     background-color: $background-color;
@@ -51,55 +48,20 @@
         position: absolute;
         width: 0;
         height: 0;
-
         left: 0;
-        
         border-left: $width/2 solid transparent;
         border-right: $width/2 solid transparent;
     }
 
-        &:before {
-            top: -$width/3.3;
-            border-bottom: $width/3.3 solid $background-color;
-        }
-
-        &:after {
-            bottom: -$width/3.3;
-            border-top: $width/3.3 solid $background-color;
-        }
-}
-
-// Creates an octagon
-
-@mixin elr-octagon($width, $height, $background-color)
-{
-    width: $width;
-    height: $height*0.42;
-    background: $background-color;
-    position: relative;
-
-    &:before,
-    &:after {
-        content: "";
-        position: absolute;
-        left: 0;
-
-        width: $width*0.42;
-        height: 0;
-        
-        border-left: $width*0.29 solid transparent;
-        border-right: $width*0.29 solid transparent;        
+    &:before {
+        top: -$width/3.3;
+        border-bottom: $width/3.3 solid $background-color;
     }
 
-        &:before {
-            top: -$height*0.29;
-            border-bottom: $height*0.29 solid $background-color;
-        }
-
-        &:after {
-            bottom: -$height*0.29;
-            border-top: $height*0.29 solid $background-color;
-        }
+    &:after {
+        bottom: -$width/3.3;
+        border-top: $width/3.3 solid $background-color;
+    }
 }
 
 // Creates a parallelogram

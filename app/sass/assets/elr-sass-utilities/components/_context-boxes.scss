@@ -2,9 +2,9 @@
 
 @mixin elr-context-box($type: info, $border-radius: 0, $color: none, $width: 100%, $text-color: none) {
     @include elr-clearfix;
-    padding: 10px 20px;
-    width: $width;
-    margin: 20px 0;
+    @include elr-em-padding('all', 10px, 20px);
+    @include elr-em-width($width);
+    @include elr-em-margin('all', 20px, 0);
     position: relative;
 
     @if $border-radius != 0 {
@@ -101,7 +101,7 @@
 
     .close {
         @include elr-square(20px);
-        @include elr-em-font(14);
+        @include elr-em-font(14px);
         padding: 0;
         margin: 0;
         position: absolute;

@@ -1,7 +1,7 @@
 // Labels
 
 @mixin elr-label($type: info, $border-radius: 5px, $color: none, $text-color: none) {
-    padding: 5px 10px;
+    @include elr-em-padding('all', 5px, 10px);
     display: inline-block;
 
     @if $border-radius != 0 {

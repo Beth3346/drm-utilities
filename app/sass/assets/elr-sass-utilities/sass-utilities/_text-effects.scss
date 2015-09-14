@@ -3,15 +3,14 @@
 // calculates em font size from px font size
 
 @mixin elr-em-font($size) {
-    font-size: ($size / $default-font-size)#{rem};
+    font-size: to-rems($size);
 }
 
 @mixin elr-em-line-height($size) {
-    line-height: ($size / $default-font-size)#{rem};
+    line-height: to-rems($size);
 }
 
-@mixin elr-font-awesome($font-size: 16) {
-    @include elr-em-font($font-size);
+@mixin elr-font-awesome($font-size: 80%) {
     line-height: 1;
     font-weight: normal;
     font-style: normal;
@@ -19,6 +18,7 @@
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-size: to-rems($font-size);
 }
 
 @mixin elr-truncate() {
