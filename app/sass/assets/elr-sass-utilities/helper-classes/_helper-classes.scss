@@ -7,14 +7,20 @@
 @import "responsiveness";
 @import "typography";
 
-@mixin elr-helper-classes() {
+@mixin elr-helper-classes($alerts: false, $flex: false) {
     @include elr-buttons();
-    @include elr-typography-classes();
+    @include elr-display-classes();
     @include elr-layout-classes();
     @include elr-list-classes();
-    @include elr-alert-classes();
-    @include elr-responsive-classes();
     @include elr-positioning-classes();
-    @include elr-display-classes();
-    @include elr-flex-classes();
+    @include elr-responsive-classes();
+    @include elr-typography-classes();
+
+    @if ($alerts) {
+        @include elr-alert-classes();
+    }
+
+    @if ($flex) {
+        @include elr-flex-classes();
+    }
 }
