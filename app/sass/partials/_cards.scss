@@ -1,17 +1,20 @@
-.card { @include elr-card(lighten($link-color, 40%), $link-color); }
-
-.card-border { @include elr-card(white, $link-color, $light-grey); }
-
-.image-card { @include elr-card(lighten($link-color, 40%), $link-color); }
-
-.full-image-card { @include elr-full-image-card(lighten($link-color, 40%), $link-color, null, 20px, 5px); }
-
-.thumbnail-image-card {
-    @include elr-card(lighten($link-color, 40%), $link-color);
+.card {
+    @include elr-card(lighten($link-color, 40%), $link-color, null, 20px, 20px);
     
     .elr-card-thumbnail img {
         float: right;
     }
 }
 
-.thumbnail-round-image-card { @include elr-card(white, $link-color, $light-grey, 20px, 20px, 5px); }
+.card-border {
+    @include elr-card(white, $link-color, $light-grey, 20px, 20px, 5px);
+    
+    .elr-card-thumbnail img {
+        float: right;
+    }
+}
+
+.card-border {
+    border: 1px solid $light-grey;
+    background-color: white;
+}

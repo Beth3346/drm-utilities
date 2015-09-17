@@ -15,7 +15,6 @@
     height: auto;
 
     @if $border-radius { border-radius: $border-radius; }
-
     @if $border-color { border: 1px solid $border-color; }
 
     .elr-card-title {
@@ -35,29 +34,82 @@
     }
 
     .elr-card-header {
-        @include elr-em-padding('all', $padding, $padding + 10, 0, $padding + 10);
+        .elr-header-content {
+            @include elr-em-padding('all', $padding, $padding, 0, $padding);
+        }
+
+        figure {
+            margin-top: 0;
+        }
+
+        @if $border-radius {
+
+            .elr-card-full-image {
+                padding-top: 0;
+                border-radius: $border-radius $border-radius 0 0;
+
+                img {
+                    border-radius: $border-radius $border-radius 0 0;
+                }
+            }
+        }
     }
 
     .elr-card-body {
         @include elr-clearfix;
-        @include elr-em-padding('all', 10px, $padding + 10);
         clear: both;
+
+        figure {
+            @include elr-em-margin('all', 20px);
+
+            &.elr-card-full-image {
+                margin: 0;
+            }
+        }
     }
 
     .elr-card-footer {
         @include elr-clearfix;
-        @include elr-em-padding('all', $padding, $padding + 10, 10px, $padding + 10);
+        @include elr-em-padding('all', 20px, 0, 0, 0);
         border-top: 1px solid darken($bg-color, 10%);
+        
+        .elr-card-actions {
+            @include elr-em-margin('left', 20);
+            @include elr-em-margin('bottom', 20);
+        }
+
+        figure {
+            @include elr-em-margin('all', 20px);
+
+            &.elr-card-full-image {
+                margin: 0;
+            }
+        }
+
+        @if $border-radius {
+            .elr-card-full-image {
+                border-radius: 0 0 $border-radius $border-radius;
+
+                img {
+                    border-radius: 0 0 $border-radius $border-radius;
+                }
+            }
+        }
     }
 
-    figure {
-        @include elr-em-padding('all', 5px, 0, 0, 0);
-        margin: 0;
+    .elr-card-content {
+        @include elr-em-padding('all', 10px, 20px);
     }
 
     img {
         width: 100%;
         height: auto;
+    }
+
+    .elr-card-full-image {
+        margin: 0;
+        padding: 0;
+        margin-bottom: -6px !important;
     }
 
     .elr-button { @include elr-em-width(200px) };
@@ -116,74 +168,5 @@
                 clear: both;
             }
         }
-    }
-}
-
-@mixin elr-full-image-card (
-    $bg-color: $main-color,
-    $color: $background-color,
-    $border-color: null,
-    $margin: 20px,
-    $border-radius: 0
-) {
-    @include elr-card($bg-color, $color, $border-color, 0, $margin, $border-radius);
-
-    .elr-card-header {
-        padding: 0;
-
-        figure {
-
-            @if $border-radius {
-                border-radius: $border-radius $border-radius 0 0;
-            }
-        }
-
-        img {
-
-            @if $border-radius {
-                border-radius: $border-radius $border-radius 0 0;
-            }
-        }
-    }
-
-    .elr-card-body { padding: 0; }
-
-    .elr-card-title,
-    .elr-card-content {
-        @include elr-em-padding('all', 10px, 20px);
-    }
-
-    .elr-card-footer { 
-        @include elr-em-padding('all', 20px, 0, 0, 0);
-        
-        .elr-card-actions {
-            @include elr-em-margin('left', 20);
-            @include elr-em-margin('bottom', 20);
-        }
-
-        figure {
-
-            @if $border-radius {
-                border-radius: 0 0 $border-radius $border-radius;
-            }
-        }
-
-        img {
-
-            @if $border-radius {
-                border-radius: 0 0 $border-radius $border-radius;
-            }
-        }
-    }
-
-    figure {
-        margin: 0;
-        padding: 0;
-        margin-bottom: -6px;
-    }
-
-    img {
-        width: 100%;
-        height: auto;
     }
 }
