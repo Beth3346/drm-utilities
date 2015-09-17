@@ -3,6 +3,23 @@
 // Styles a rounded button with a 1px border and transparent background
 // Useful for <button> and <a> elements
 
+@mixin elr-button() {
+    @include elr-em-padding('all', 10, 0);
+    max-width: 100%;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    text-shadow: none;
+    box-shadow: none;
+    font-weight: 700;
+
+    &:hover {
+        text-decoration: none;
+        text-shadow: none;
+        box-shadow: none;
+    }     
+}
+
 @mixin elr-button-link(
         $color: white,
         $bk-color: $link-color,
@@ -11,47 +28,41 @@
         $border-radius: 3px,
         $border-color: none,
         $display: inline-block
-    ) {
-        @include elr-em-padding('all', 10, 0);
-        @include elr-em-width($width);
-        max-width: 100%;
-        border-width: 1px;
-        border-style: solid;
-        border-color: $color;
-        color: $color;
-        text-align: center;
-        text-decoration: none;
-        cursor: pointer;
-        background-color: transparent;
-        border-radius: $border-radius;
-        text-shadow: none;
-        box-shadow: none;
-        transition: all, .3s ease-out;
+) {
+    @include elr-button;
+    @include elr-em-width($width);
+    border-width: 1px;
+    border-style: solid;
+    border-color: $color;
+    color: $color;
+    background-color: transparent;
+    transition: all, .3s ease;
 
-        @if $center == center {
-            margin-left: auto;
-            margin-right: auto;
-            display: block;
+    @if $border-radius {
+        border-radius: $border-radius;
+    }
+
+    @if $center == center {
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    } @else {
+        display: $display;
+    }
+
+    &:hover {
+
+        @if $border-color != none {
+            border-color: $border-color;        
         } @else {
-            display: $display;
+            border-color: $color;
         }
 
-        &:hover {
-
-            @if $border-color != none {
-                border-color: $border-color;        
-            } @else {
-                border-color: $color;
-            }
-
-            background-color: $color;
-            color: $bk-color;
-            text-decoration: none;
-            text-shadow: none;
-            box-shadow: none;
-            transition: all, .3s ease-in;
-        }   
-    }
+        background-color: $color;
+        color: $bk-color;
+        transition: background-color, .3s ease;
+    }   
+}
 
 // Styles a rounded button with a 1px border and solid background
 // Useful for <button> and <a> elements
@@ -76,7 +87,8 @@
         cursor: pointer;
         border-radius: $border-radius;
         text-shadow: none;
-        transition: all, .3s ease-out;
+        transition: all, .3s ease;
+        font-weight: 700;
 
         @if $border-color != none {
             border: 1px solid $border-color;        
@@ -97,7 +109,7 @@
             text-decoration: none;
             text-shadow: none;
             box-shadow: none;
-            transition: all, .3s ease-in;
+            transition: all, .3s ease;
         }   
     }
 
@@ -106,7 +118,6 @@
     max-width: 100%;
     border: 1px solid $color;
     color: $color;
-    font-weight: normal;
     text-align: center;
     padding: 0;
     text-decoration: none;
@@ -116,7 +127,8 @@
     border-radius: ($height / 2);
     text-shadow: none;
     box-shadow: none;
-    transition: all, .3s ease-out;
+    transition: all, .3s ease;
+    font-weight: 700;
 
     @if $center == center {
         margin-left: auto;
@@ -139,7 +151,7 @@
         text-decoration: none;
         text-shadow: none;
         box-shadow: none;
-        transition: all, .3s ease-in;
+        transition: all, .3s ease;
     }   
 }
 
@@ -159,7 +171,6 @@
     background-color: $bk-color;
     max-width: 100%;
     color: $color;
-    font-weight: normal;
     text-align: center;
     padding: 0;
     text-decoration: none;
@@ -168,7 +179,8 @@
     height: $height;
     border-radius: ($height / 2);
     text-shadow: none;
-    transition: all, .3s ease-out;
+    transition: all, .3s ease;
+    font-weight: 700;
 
     @if $border-color != none {
         border: 1px solid $border-color;        
@@ -190,7 +202,7 @@
         text-decoration: none;
         text-shadow: none;
         box-shadow: none;
-        transition: all, .3s ease-in;
+        transition: all, .3s ease;
     }   
 }
 
@@ -216,8 +228,9 @@
         cursor: pointer;
         margin: 0;
         text-shadow: none;
-        transition: all, .3s ease-out;
+        transition: all, .3s ease;
         box-shadow: none;
+        font-weight: 700;
 
         @if $border == none {
             border: none;
@@ -232,7 +245,7 @@
             text-decoration: none;
             text-shadow: none;
             box-shadow: none;
-            transition: all, .3s ease-in;           
+            transition: all, .3s ease;           
         }
 
         &:hover {
@@ -241,7 +254,7 @@
             text-decoration: none;
             text-shadow: none;
             box-shadow: none;
-            transition: all, .3s ease-in;
+            transition: all, .3s ease;
         }
 
         @if $border-radius != 0 {
