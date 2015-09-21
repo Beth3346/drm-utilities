@@ -1,0 +1,46 @@
+// Helper Classes Utilities Examples
+
+.float-boxes {
+    @include elr-clearfix;
+    background-color: $background-color;
+}
+
+.box {
+    @include elr-square(200px);
+    background-color: lighten($main-color, 20%);
+    border: 1px solid $main-color;
+    text-align: center;
+    color: $background-color;
+}
+
+.typography-classes {
+    background-color: $background-color;
+}
+
+.responsive-demo {
+    border: 1px solid $elr-blue;
+    padding: 10px;
+    margin: 20px 0 0;
+    background-color: $elr-blue-light;
+    border-radius: 5px;
+
+    p {
+        @include elr-em-font(14px);
+        padding: 0;
+        font-weight: 700;
+    }
+}
+
+.elr-inline-list li {
+    padding-bottom: 0;
+}
+
+.elr-button,
+.elr-button-danger,
+.elr-button-success,
+.elr-button-warning,
+.elr-button-info,
+.elr-button-muted {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}

@@ -1,0 +1,20 @@
+.context-box-info,
+.context-box-success,
+.context-box-danger,
+.context-box-warning,
+.context-box-muted,
+.custom-context-box {
+    p { @include elr-em-padding('all', 10px, 0); }
+}
+
+.context-box-info { @include elr-context-box('info', 3px); }
+
+.context-box-success { @include elr-context-box('success', 3px); }
+
+.context-box-danger { @include elr-context-box('danger', 3px); }
+
+.context-box-warning { @include elr-context-box('warning', 3px); }
+
+.context-box-muted { @include elr-context-box('muted', 3px); }
+
+.custom-context-box { @include elr-context-box('custom', 3px, $coral, 100%); }

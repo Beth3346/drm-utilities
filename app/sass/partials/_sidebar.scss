@@ -1,62 +1,63 @@
 // Sidebar
 
-.elr-container .elr-row aside.sidebar {
+.main-sidebar {
     padding-top: 20px;
     padding-left: 60px;
 
-    @include elr-breakpoint(saturn) {
+    @include elr-breakpoint('saturn') {
         display: none;
     }
 
     &.sticky-right {
         @include elr-sticky-menu('left');
     }
+}
 
-    ul {
-        @include elr-nav-bar-stacked;
+.sidebar-menu {
+    @include elr-nav-bar-stacked;
 
-        & > li {
-            @include elr-breakpoint(mars) {
-                padding-left: 40px;
-            }
+    &.nav-bar-stacked > li {
+        @include elr-breakpoint('mars') {
+            padding-left: 40px;
         }
+    }
 
-        li {
-            padding-top: 2px;
-            padding-bottom: 2px;
+    li {
+        padding-top: 2px;
+        padding-bottom: 2px;
+    }
 
-            & > a {
-                @include elr-em-font(20);
-                color: $text-color;
-                font-weight: bold;
-                padding: 5px 10px 10px 10px;
+    a {
+        @include elr-em-font(20px);
+        color: $text-color;
+        font-weight: bold;
+        padding: 5px 10px 10px;
 
-                &:hover, &:focus {
-                    text-decoration: none;
-                    color: $text-color;
-                }
-            }
+        &:hover,
+        &:focus {
+            text-decoration: none;
+            color: $text-color;
+        }
+    }
+}
 
-            & > ul {
+.sidebar-sub-menu {
 
-                & > li {
-                    @include elr-breakpoint(mars) {
-                        padding-left: 0;
-                    }
-                }
+    > li {
+        @include elr-breakpoint('mars') {
+            padding-left: 0;
+        }
+    }
 
-                a {
-                    @include elr-em-font(14);
-                    color: $text-color;
-                    font-weight: normal;
-                    padding: 2px 10px;
+    a {
+        @include elr-em-font(14px);
+        color: $text-color;
+        font-weight: normal;
+        padding: 2px 10px;
 
-                    &:hover {
-                        text-decoration: underline;
-                        color: $text-color;
-                    }
-                }
-            }
+        &:hover {
+            text-decoration: underline;
+            color: $text-color;
         }
     }
 }

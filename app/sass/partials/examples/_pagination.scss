@@ -1,0 +1,3 @@
+.pagination-bar { @include elr-pagination-bar; }
+
+.dark-pagination-bar { @include elr-pagination-bar($text-color, 5px, $text-color, $background-color); }

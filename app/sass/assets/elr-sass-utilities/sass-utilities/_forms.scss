@@ -1,23 +1,58 @@
 // Forms
+// scss-lint:disable ImportantRule SelectorFormat QualifyingElement
+
+@mixin elr-form-status($color) {
+    background-color: lighten($color, 30%);
+    border: 1px solid $color;
+
+    &:hover {
+        border: 1px solid $color;
+        box-shadow: 0 0 2px $color;
+        transition: border .5s ease, box-shadow .5s ease;
+    }
+
+    &:focus {
+        outline: none;
+        border: 1px solid darken($color, 20%);
+        background-color: $white;
+        transition: border .5s ease, background .5s ease;
+    }
+}
+
+@mixin elr-form-notice($type: 'info', $font-size: 12) {
+    @include elr-em-font($font-size);
+    margin: 5px 0;
+    padding: 0;
+
+    @if ($type == 'success') {
+        color: $success-color;
+    } @elseif ($type == 'warning') {
+        color: $warning-color;
+    } @elseif ($type == 'danger') {
+        color: $danger-color;
+    } @else {
+        color: $info-color;
+    }
+}
 
 @mixin elr-form-state($glow: $link-color, $bk-color: $lightest-grey, $border: $grey) {
     background-color: $bk-color;
     border: 1px solid $border;
-    transition: border .5s ease-out, box-shadow .5s ease-out;
+    transition: border .5s ease, box-shadow .5s ease;
         
-    @if ( $glow != null) {
+    @if ($glow != null) {
 
         &:hover {
             border: 1px solid $glow;
             box-shadow: 0 0 2px $glow;
-            transition: border .5s ease-in, box-shadow .5s ease-in;
+            transition: border .5s ease, box-shadow .5s ease;
         }
 
         &:focus {
             outline: none;
             border: 1px solid darken($border, 20%);
             background-color: lighten($bk-color, 20%);
-            transition: border .5s ease-in, background .5s ease-in;
+            transition: border .5s ease, background .5s ease;
         }
     }
 
@@ -40,14 +75,14 @@
 
         &:hover {
             cursor: not-allowed;
-            border:  1px solid darken($border, 10%);
+            border: 1px solid darken($border, 10%);
             box-shadow: none;
             transition: none;
         }
 
         &:focus {
             outline: none;
-            border:  1px solid darken($border, 10%);
+            border: 1px solid darken($border, 10%);
             background-color: darken($bk-color, 10%);
             transition: none;
         }
@@ -55,20 +90,60 @@
 }
 
 @mixin elr-placeholder($color) {
-    &::-webkit-input-placeholder {
-      color: $color;
+    &:placeholder {
+        color: $color;
+    }
+}
+
+@mixin elr-form-notices() {
+    .form-notice-holder {
+        @include elr-clearfix;
+        float: left;
     }
 
-    &::-moz-placeholder { /* Firefox 19+ */
-      color: $color;
+    p {
+        &.form-success-notice {
+            @include elr-form-notice('success');
+        }
+
+        &.form-warning-notice {
+            @include elr-form-notice('warning');
+        }
+
+        &.form-danger-notice {
+            @include elr-form-notice('danger');
+        }
+
+        &.form-info-notice,
+        &.form-length-notice {
+            @include elr-form-notice('info'); 
+        }
+
+        &.password-meter-danger {
+            @include elr-password-meter('danger');
+        }
+
+        &.password-meter-warning {
+            @include elr-password-meter('warning');
+        }
+
+        &.password-meter-success {
+            @include elr-password-meter('success');
+        }
     }
 
-    &:-ms-input-placeholder {
-      color: $color;
-    }
+    small {
+        &.password-message-danger {
+            @include elr-form-notice('danger');
+        }
 
-    &:-moz-placeholder { /* Firefox 18- */
-      color: $color;
+        &.password-message-warning {
+            @include elr-form-notice('warning');
+        }
+
+        &.password-message-success {
+            @include elr-form-notice('success');
+        }
     }
 }
 
@@ -80,46 +155,46 @@
     .elr-container {
         padding-left: 0;
         padding-right: 0;
+    }
 
-        .elr-col-full {
+    .elr-col-full {
+        padding-left: 0;
+        padding-right: 0;
+        padding-bottom: 10px;
+    }
+
+    .elr-col-half,
+    .elr-col-third,
+    .elr-col-quarter {
+        padding-left: 0;
+        padding-right: 10px;
+        padding-bottom: 10px;
+
+        @include elr-breakpoint('saturn') {
             padding-left: 0;
             padding-right: 0;
-            padding-bottom: 10px;
         }
+    }
 
-        .elr-col-half,
-        .elr-col-third,
-        .elr-col-quarter {
-            padding-left: 0;
-            padding-right: 10px;
-            padding-bottom: 10px;
+    .elr-col-half:first-child,
+    .elr-col-third:first-child,
+    .elr-col-quarter:first-child {
+        padding-left: 0;
+        padding-right: 10px;
 
-            @include elr-breakpoint(saturn) {
-                padding-left: 0;
-                padding-right: 0;
-            }
+        @include elr-breakpoint('saturn') {
+            padding-right: 0;
         }
+    }
 
-        .elr-col-half:first-child,
-        .elr-col-third:first-child,
-        .elr-col-quarter:first-child {
-            padding-left: 0;
-            padding-right: 10px;
+    .elr-col-half:last-child,
+    .elr-col-third:last-child,
+    .elr-col-quarter:last-child {
+        padding-left: 0;
+        padding-right: 10px;
 
-            @include elr-breakpoint(saturn) {
-                padding-right: 0;
-            }
-        }
-
-        .elr-col-half:last-child,
-        .elr-col-third:last-child,
-        .elr-col-quarter:last-child {
-            padding-left: 0;
-            padding-right: 10px;
-
-            @include elr-breakpoint(saturn) {
-                padding-right: 0;
-            }
+        @include elr-breakpoint('saturn') {
+            padding-right: 0;
         }
     }
 
@@ -130,68 +205,20 @@
         padding: 0;
     }
 
-    .form-notice-holder {
-        @include elr-clearfix;
-        float: left;
-    }
-
-    p {
-        &.form-success-notice {
-            @include elr-form-notice(success);
-        }
-
-        &.form-warning-notice {
-            @include elr-form-notice(warning);
-        }
-
-        &.form-danger-notice {
-            @include elr-form-notice(danger);
-        }
-
-        &.form-info-notice, &.form-length-notice {
-            @include elr-form-notice(info); 
-        }
-
-        &.password-meter-danger {
-            @include elr-password-meter(danger);
-        }
-
-        &.password-meter-warning {
-            @include elr-password-meter(warning);
-        }
-
-        &.password-meter-success {
-            @include elr-password-meter(success);
-        }
-    }
-
-    small {
-        &.password-message-danger {
-            @include elr-form-notice(danger);
-        }
-
-        &.password-message-warning {
-            @include elr-form-notice(warning);
-        }
-
-        &.password-message-success {
-            @include elr-form-notice(success);
-        }
-    }
-
     label {
-        @include elr-em-font(14);
+        @include elr-em-font(14px);
         margin: 0;
         line-height: 2em;
     }
 
-    input, textarea, select {
-        @include elr-em-font(14);
+    input,
+    textarea,
+    select {
+        @include elr-form-state($glow, $bk-color, $border);
+        @include elr-em-font(14px);
         margin: 5px 0;
         padding: 5px 15px;
         border-radius: 3px;
-        
-        @include elr-form-state($glow, $bk-color, $border);
 
         &.hidden-field {
             display: none;
@@ -206,7 +233,8 @@
         height: auto;
     }
 
-    input[type="checkbox"], input[type="radio"] {
+    input[type="checkbox"],
+    input[type="radio"] {
         display: inline;
         padding: 4px 4px 0 0;
     }
@@ -230,7 +258,8 @@
             vertical-align: middle;
         }
 
-        input[type="checkbox"], input[type="radio"] {
+        input[type="checkbox"],
+        input[type="radio"] {
             display: inline-block;
             margin: 0 10px 0 0;
             padding: 0;
@@ -247,12 +276,18 @@
         }
 
         label {
-            @include elr-em-font(14);
+            @include elr-em-font(14px);
             display: inline;
             vertical-align: middle;
         }
 
-        input[type="text"], input[type="tel"], input[type="email"], input[type="password"], input[type="url"], textarea, select {
+        input[type="text"],
+        input[type="tel"],
+        input[type="email"],
+        input[type="password"],
+        input[type="url"],
+        textarea,
+        select {
             width: auto;
             display: inline-block;
             margin: 10px 0 0 15px;
@@ -267,30 +302,38 @@
             margin-right: 15px;
             float: left;
 
-            input[type="checkbox"], input[type="radio"] {
+            input[type="checkbox"],
+            input[type="radio"] {
                 margin-top: 14px;
                 margin-left: 10px;
             }
         }
 
-        input[type="submit"], input[type="button"], button {
+        input[type="submit"],
+        input[type="button"],
+        button {
             margin-top: 5px;
         }
     }
 
-    input[type="submit"], input[type="button"], button {  
-        @include elr-em-font(14);
-        @include elr-button-solid($button-color, white, 180px, null, 3px, $button-color, block);      
+    input[type="submit"],
+    input[type="button"],
+    button {  
+        @include elr-em-font(14px);
+        @include elr-button;
+        @include elr-button-solid($button-color, $white, 180px, null, 3px, $button-color, block);      
         margin: 10px 0;
     }
 
-    input[type="submit"][disabled], button[disabled] {      
-        @include elr-button-solid(lighten($button-color, 50%), white, 180px, null, 3px, lighten($button-color, 50%), block);
+    input[type="submit"][disabled],
+    button[disabled] {
+        @include elr-button;
+        @include elr-button-solid(lighten($button-color, 50%), $white, 180px, null, 3px, lighten($button-color, 50%), block);
 
         &:hover {
             cursor: not-allowed;
             background-color: lighten($button-color, 50%);
-            color: white;
+            color: $white;
             transition: none;
         }
     }
@@ -299,11 +342,18 @@
 @mixin elr-tabular-form($glow: $link-color, $bk-color: $lightest-grey, $border: $grey, $button-color: $dark-grey) {
     @include elr-form($glow, $bk-color, $border);
 
-    label, input, select {
+    label,
+    input,
+    select {
         display: block;
     }
 
-    input[type="text"], input[type="tel"], input[type="email"], input[type="password"], input[type="url"], select {
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    input[type="password"],
+    input[type="url"],
+    select {
         width: 100%;
     }
 
@@ -315,9 +365,11 @@
         width: 100%;
     }
 
-    input[type="submit"], button {   
-        @include elr-em-font(14);
-        @include elr-button-solid($button-color, white, 180px, null, 3px, $button-color, block);   
+    input[type="submit"],
+    button {   
+        @include elr-em-font(14px);
+        @include elr-button;
+        @include elr-button-solid($button-color, $white, 180px, null, 3px, $button-color, block);   
         margin: 5px 5px 5px 0;
     }
 
@@ -333,22 +385,37 @@
     padding-left: 0;
 
     label {
-        @include elr-em-font(14);
+        @include elr-em-font(14px);
         display: inline;
         vertical-align: middle;
     }
 
-    input[type="text"], input[type="tel"], input[type="email"], input[type="password"], input[type="url"], textarea {
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    input[type="password"],
+    input[type="url"],
+    textarea {
         margin: 0 10px;
     }
 
-    label, input[type="text"], input[type="tel"], input[type="email"], input[type="password"], input[type="url"], textarea, input[type="submit"], button {
+    label,
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    input[type="password"],
+    input[type="url"],
+    textarea,
+    input[type="submit"],
+    button {
         display: inline-block;
     }
 
-    input[type="submit"], button {
-        @include elr-button-solid($button-color, white, 100px, null, 3px, $button-color, inline-block);
-        @include elr-em-font(14);
+    input[type="submit"],
+    button {
+        @include elr-button;
+        @include elr-button-solid($button-color, $white, 100px, null, 3px, $button-color, inline-block);
+        @include elr-em-font(14px);
         margin: 0 5px 5px 0;
     }
 
@@ -360,20 +427,22 @@
         margin: 0 20px;
         display: inline-block;
 
-        input[type="checkbox"], input[type="radio"] {
+        input[type="checkbox"],
+        input[type="radio"] {
             margin-top: 14px;
         }
     }
 
-    input[type="submit"][disabled], button[disabled] {      
-        @include elr-button-solid(lighten($button-color, 50%), white, 180px, null, 3px, lighten($button-color, 50%), inline-block);
-        @include elr-em-font(14);
+    input[type="submit"][disabled],
+    button[disabled] {      
+        @include elr-button-solid(lighten($button-color, 50%), $white, 180px, null, 3px, lighten($button-color, 50%), inline-block);
+        @include elr-em-font(14px);
         margin: 0 5px 5px 0;
 
         &:hover {
             cursor: not-allowed;
             background-color: lighten($button-color, 50%);
-            color: white;
+            color: $white;
             transition: none;
         }
     }
@@ -387,14 +456,15 @@
         width: 100% !important;
     }
 
-    .fsBody .fsLabel, .fsBody label {
+    .fsBody .fsLabel,
+    .fsBody label {
         font-weight: normal !important;
     }
 
-    .fsForm input[type=text],
-    .fsForm input[type=name],
-    .fsForm input[type=email],
-    .fsForm input[type=tel],
+    .fsForm [type=text],
+    .fsForm [type=name],
+    .fsForm [type=email],
+    .fsForm [type=tel],
     .fsForm textarea {
         width: 100% !important;
         background-image: none !important;
@@ -408,7 +478,7 @@
     .fsSection:before,
     .fsFieldRow:after,
     .fsFieldRow:before {
-        content: "";
+        content: '';
         display: table;
     }
 
@@ -425,11 +495,11 @@
 
     .fsForm .fsSubmit input {
         border: 0 !important;
-        padding: 0.5em 1em !important;
+        padding: .5em 1em !important;
         font-weight: normal !important;
         border-radius: 2px !important;
         cursor: pointer;
-        transition: all 0.3s ease-in;
+        transition: all .3s ease;
     }
 
     .fsForm input.fsField[type="email"]:focus,
@@ -438,18 +508,18 @@
     .fsForm input.fsField[type="tel"]:focus,
     .fsForm input.fsField[type="text"]:focus,
     .fsForm textarea.fsField:focus {
-        border-color: #ffd100 !important;
+        border-color: $elr-blue !important;
     }
 
     .fsError {
         border: 0 !important;
         background: 0 !important;
-        color: #e7402f !important;
+        color: $danger-color !important;
         text-align: left !important;
     }
 
     .fsForm {
-        color: black !important;
+        color: $black !important;
     }
 
     .fsboxshadow .fsBody .fsForm {

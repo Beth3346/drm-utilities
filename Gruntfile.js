@@ -9,7 +9,10 @@ module.exports = function(grunt) {
         copy: {
             build: {
                 cwd: '<%= appFolder %>',
-                src: [ '**', '!**/partials/**/*',
+                src: [ 
+                    '**',
+                    '!**/partials/**/*',
+                    '!**/templates/**/*',
                     '!**/*.jade' ,
                     '!**/images/**/*',
                     '!**/sass/**/*',
@@ -125,7 +128,7 @@ module.exports = function(grunt) {
                 '<%= appFolder %>assets/elr-validation-utilities.js'],
             options: {
                 maxerr: 10,
-                // unused: true,
+                unused: false,
                 eqnull: true,
                 eqeqeq: true,
                 jquery: true
@@ -158,33 +161,42 @@ module.exports = function(grunt) {
             }
         },
 
-        compass: {
+        sass: {
             dev: {
                 options: {
-                    cssDir: '<%= distFolder %>',
-                    httpPath: '/',
-                    sassDir: '<%= appFolder %>sass',
-                    fontsDir: '<%= distFolder %>fonts',
-                    imagesDir: '<%= distFolder %>images',
-                    javascriptsDir: '<%= distFolder %>js',
-                    outputStyle: 'expanded',
-                    relativeAssets: true,
-                    lineComments: false
-                }
+                    style: 'expanded'
+                },
+                files: [{
+                    expand: true,
+                    cwd: '<%= appFolder %>sass',
+                    src: ['**/*.scss'],
+                    dest: '<%= distFolder %>',
+                    ext: '.css'
+                }]
             },
-
             dist: {
                 options: {
-                    cssDir: '<%= distFolder %>',
-                    httpPath: '/',
-                    sassDir: '<%= appFolder %>sass',
-                    fontsDir: '<%= distFolder %>fonts',
-                    imagesDir: '<%= distFolder %>images',
-                    javascriptsDir: '<%= distFolder %>js',
-                    outputStyle: 'compressed',
-                    relativeAssets: true,
-                    lineComments: false
-                }
+                    style: 'compressed'
+                },
+                files: [{
+                    expand: true,
+                    cwd: '<%= appFolder %>sass',
+                    src: ['**/*.scss'],
+                    dest: '<%= distFolder %>',
+                    ext: '.css'
+                }]
+            }
+        },
+
+        scsslint: {
+            allFiles: [
+                '<%= appFolder %>sass/**/*.scss',
+            ],
+            options: {
+                bundleExec: false,
+                colorizeOutput: true,
+                config: '.scss-lint.yml',
+                reporterOutput: null
             }
         },
 
@@ -208,20 +220,30 @@ module.exports = function(grunt) {
                     "box-sizing": false,
                     "floats": false,
                     "duplicate-background-images": false,
-                    "font-faces": false,
-                    "star-property-hack": false,
                     "qualified-headings": false,
-                    "ids": false,
-                    "text-indent": false,
                     "box-model": false,
                     "adjoining-classes": false,
                     "compatible-vendor-prefixes": false,
-                    "selector-max-approaching": false,
                     "important": false,
                     "shorthand": false,
-                    "selector-max": false
+                    "unqualified-attributes": false,
+                    "fallback-colors": false
                 },
                 src: ['<%= distFolder %>*.css']
+            }
+        },
+
+        browserSync: {
+            dev: {
+                bsFiles: {
+                    src : [
+                        '<%= distFolder %>**/*'
+                    ]
+                },
+                options: {
+                    watchTask: true,
+                    server: '<%= distFolder %>'
+                }
             }
         },
 
@@ -237,10 +259,10 @@ module.exports = function(grunt) {
                 tasks: [ 'imagemin' ],
             },
 
-            compass: {
+            sass: {
                 // We watch and compile sass files as normal but don't live reload here
                 files: ['<%= appFolder %>sass/**/*.scss'],
-                tasks: [ 'compass:dev', 'csslint' ],
+                tasks: [ 'sass:dev', 'scsslint', 'csslint' ],
             },
 
             scripts: {
@@ -266,19 +288,13 @@ module.exports = function(grunt) {
                 '!<%= appFolder %>**/*.{png,jpg,jpeg}' ],
                 tasks: [ 'copy' ]
             },
-
-            livereload: {
-                // These files are sent to the live reload server after sass compiles to them
-                options: { livereload: true },
-                files: ['<%= distFolder %>**/*'],
-            },
         }
 
     });
 
     // Load the plugin that provides the "uglify" task.
     grunt.loadNpmTasks('grunt-contrib-coffee');
-    grunt.loadNpmTasks('grunt-contrib-compass');
+    grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-imagemin');
@@ -291,6 +307,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-rev');
     grunt.loadNpmTasks('grunt-usemin');
     grunt.loadNpmTasks('grunt-autoprefixer');
+    grunt.loadNpmTasks('grunt-scss-lint');
+    grunt.loadNpmTasks('grunt-browser-sync');
 
     // Default task(s).
 
@@ -298,11 +316,12 @@ module.exports = function(grunt) {
         ['clean:build',
         'copy',
         'jade:dev',
-        'imagemin',
         'coffee',
         'concat',
-        'compass:dev',
+        'sass:dev',
         'autoprefixer',
+        'browserSync',
+        'scsslint',
         'csslint',
         'jshint',
         'watch']
@@ -316,10 +335,8 @@ module.exports = function(grunt) {
         'coffee',
         'concat',
         'uglify',
-        'compass:dist',
+        'sass:dist',
         'autoprefixer',
-        'csslint',
-        'jshint',
         'clean:postbuild']
     );
 };

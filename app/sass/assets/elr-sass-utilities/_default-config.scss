@@ -12,9 +12,9 @@ $uranus: 667px;
 $neptune: 568px;
 $pluto: 375px;
 
-$iphone6Landscape: 736px;
-$iphone6Portrait: 414px;
-$iphone5Portrait: 350px;
+$iphone6-landscape: 736px;
+$iphone6-portrait: 414px;
+$iphone5-portrait: 350px;
 
 // font faces
 
@@ -29,10 +29,18 @@ $font-family: $sans-serif-font;
 $default-font-size: 16;
 $default-line-height: 1.5;
 
+$h1: 48px;
+$h2: 36px;
+$h3: 30px;
+$h4: 24px;
+$h5: 18px;
+$h6: 16px;
+
 // colors
 
 // add more colors below
-
+$black: #000;
+$white: #fff;
 $almost-black: #111;
 $dark-grey: #333;
 $darker-grey: #666;
@@ -43,62 +51,33 @@ $lightest-grey: #eee;
 $off-white: #e2e2e2;
 $almost-white: #f1f1f1;
 
-$elr-blue: #1976D2;
-$elr-blue-light: lighten(#1976D2, 20%);
+$coral: #ff7f50;
+$elr-blue: #1976d2;
+$elr-blue-light: lighten($elr-blue, 20%);
 $dark-aqua: #096367;
 $dark-pink: #ed145b;
 
 // font colors
 
 $danger-color: #f7322f; // red
-$warning-color: #D1CB34; // yellow
+$warning-color: #d1cb34; // yellow
 $success-color: #7aba7b; // green
-$info-color: #1DAAF0; // blue
+$info-color: #1daaf0; // blue
 $muted-color: $light-grey;
 
 // color scheme
 
 $link-color: $elr-blue;
-$hover-color: #89D6DA; //#89D6DA
-$background-color: white;
+$hover-color: $elr-blue-light;
+$background-color: $white;
 $main-color: $dark-grey;
 $text-color: $dark-grey;
 $accent-color: $dark-pink;
 $shadow-color: $off-white;
 
-$instagram-color: #5380A6;
-$google-plus-color: #DD4B38;
-$twitter-color: #25AAE1;
-$pinterest-color: #CE2128;
-$facebook-color: #3C5B9A;
-$linkedin-color: #128FC3;
-
-@function strip-units($number) {
-    @return $number / ($number * 0 + 1);
-}
-
-@function is-px($size) {
-    @if ( $size == auto ) {
-        @return false;
-    } @else if ( type-of($size != 'number') ) {
-        @return false;
-    } @else if ( unit($size) == 'px' ) {
-        @return true;
-    } @else {
-        @return false;
-    }
-}
-
-@function to-rems($size) {
-    @if ( $size == 0 ) {
-        @return 0;
-    } @else if ( $size == auto ) {
-        @return auto;
-    } @else if ( is-px($size) ) {
-        @return (strip-units($size) / $default-font-size)#{rem};
-    } @else if ( unitless($size) ) {
-        @return ($size / $default-font-size)#{rem};
-    } @else {
-        @return $size;
-    }
-}
+$instagram-color: #5380a6;
+$google-plus-color: #dd4b38;
+$twitter-color: #25aae1;
+$pinterest-color: #ce2128;
+$facebook-color: #3c5b9a;
+$linkedin-color: #128fc3;

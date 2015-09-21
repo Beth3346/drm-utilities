@@ -1,0 +1,80 @@
+// Button Examples
+
+.button-link,
+.button-solid,
+.pill-button-link {
+    @include elr-em-margin('right', 20px);
+}
+
+.button-group,
+.button-group-no-border,
+.elr-dropdown-solid-btn-holder,
+.elr-dropdown-split-btn-holder {
+    button { @include elr-em-font(14px); }
+}
+
+.button-link { @include elr-button-link($link-color, $background-color, 300px, left, 0, none, inline-block); }
+
+.button-link-radius { @include elr-button-link($link-color, $background-color, 300px, left, 3px, none, inline-block); }
+
+.button-solid { @include elr-button-solid($link-color, $background-color, 300px, left, 0, none, inline-block); }
+
+.button-solid-radius { @include elr-button-solid($link-color, $background-color, 300px, left, 3px, none, inline-block);}
+
+.pill-button-link { @include elr-pill-button-link(50px, $link-color, $background-color, 300px, left, none, inline-block); }
+
+.pill-button-solid { @include elr-pill-button-solid(50px, $link-color, $background-color, 300px, left, none, inline-block); }
+
+.button-group {
+    @include elr-button-group($background-color, $link-color, 3px, $link-color, $link-color, $white);
+    @include elr-em-margin('bottom', 20px);
+}
+
+.button-group-no-border { @include elr-button-group($link-color, $background-color, 3px, none); }
+
+.elr-dropdown-solid-btn-holder {@include elr-dropdown-button-solid($link-color, $background-color, 200px, none, 3px); }
+
+.elr-dropdown-split-btn-holder { @include elr-dropdown-button-split($link-color, $background-color, 3px); }
+
+.icon-button, {
+    @include elr-em-margin('right', 5);
+    @include elr-em-font(14);
+    font-weight: 700;
+}
+
+.icon-only-button,
+.icon-circle {
+    @include elr-em-margin('right', 10);
+    @include elr-em-font(16);
+}
+
+.heart-button { @include elr-font-awesome-button('\f004', right, $link-color, $white, 200px, left, 5px); }
+.star-button { @include elr-font-awesome-button('\f005', right, $link-color, $white, 200px, left, 5px); }
+.download-button { @include elr-font-awesome-button('\f019', left, $link-color, $white, 200px, left, 5px); }
+.add-button { @include elr-font-awesome-button('\f055', left, $link-color, $white, 200px, left, 5px); }
+
+.facebook-button { @include elr-font-awesome-button('\f09a', left, $facebook-color, $white, 140px, left, 5px); }
+.twitter-button { @include elr-font-awesome-button('\f099', left, $twitter-color, $white, 140px, left, 5px); }
+.google-plus-button { @include elr-font-awesome-button('\f0d5', left, $google-plus-color, $white, 140px, left, 5px); }
+.pinterest-button { @include elr-font-awesome-button('\f0d2', left, $pinterest-color, $white, 140px, left, 5px); }
+.instagram-button { @include elr-font-awesome-button('\f16d', left, $instagram-color, $white, 140px, left, 5px); }
+
+.heart-icon-button { @include elr-font-awesome-icon-button('\f004', $link-color, $white, left, 5px); }
+.star-icon-button { @include elr-font-awesome-icon-button('\f005', $link-color, $white, left, 5px); }
+.download-icon-button { @include elr-font-awesome-icon-button('\f019', $link-color, $white, left, 5px); }
+.add-icon-button { @include elr-font-awesome-icon-button('\f055', $link-color, $white, left, 5px); }
+
+.facebook-icon-button { @include elr-font-awesome-icon-button('\f09a', $facebook-color, $white, left, 5px); }
+.twitter-icon-button { @include elr-font-awesome-icon-button('\f099', $twitter-color, $white, left, 5px); }
+.google-plus-icon-button { @include elr-font-awesome-icon-button('\f0d5', $google-plus-color, $white, left, 5px); }
+.pinterest-icon-button { @include elr-font-awesome-icon-button('\f0d2', $pinterest-color, $white, left, 5px); }
+.instagram-icon-button { @include elr-font-awesome-icon-button('\f16d', $instagram-color, $white, left, 5px); }
+
+.facebook-icon-circle { @include elr-font-awesome-icon-circle('\f09a', $facebook-color); }
+.twitter-icon-circle { @include elr-font-awesome-icon-circle('\f099', $twitter-color); }
+.google-plus-icon-circle { @include elr-font-awesome-icon-circle('\f0d5', $google-plus-color); }
+.pinterest-icon-circle { @include elr-font-awesome-icon-circle('\f0d2', $pinterest-color); }
+.instagram-icon-circle { @include elr-font-awesome-icon-circle('\f16d', $instagram-color); }
+
+.icon-button-group { @include elr-font-awesome-icon-group; }
+.icon-button-group-stacked { @include elr-font-awesome-icon-group(vertical, 50px); }

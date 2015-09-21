@@ -1,7 +1,7 @@
 // Lightbox
 
-@mixin elr-lightbox($overlay-color: black, $opacity: 0.8) {
-    @include elr-background-transparent($overlay-color, $opacity);
+@mixin elr-lightbox($overlay-color: $black, $opacity: .8) {
+    background-color: rgba($overlay-color, $opacity);
     position: fixed;
     top: 0;
     left: 0;
@@ -13,9 +13,9 @@
         @include elr-em-font(18);
         margin: 0;
         padding: 20px;
-        border: none;
+        border: 0;
         background: none;
-        color: white;
+        color: $white;
         position: relative;
         top: 20px;
         left: 95%;
@@ -23,7 +23,7 @@
     }
 }
 
-@mixin elr-lightbox-slideshow($overlay-color: black, $opacity: 0.8, $image-size: 75px, $list-position: 'bottom-left') {
+@mixin elr-lightbox-slideshow($overlay-color: $black, $opacity: .8, $image-size: 75px, $list-position: 'bottom-left') {
     @include elr-lightbox($overlay-color, $opacity);
 
     img {
@@ -77,16 +77,14 @@
         width: 100%;
 
         button {
-            @include elr-em-font(36);
+            @include elr-em-font(36px);
             @include elr-square(75px);
-            border: none;
-            background-color: white;
-            background-color: rgba(white, .4);
+            border: 0;
+            background-color: rgba($white, .4);
             cursor: pointer;
 
             &:hover {
-                background-color: white;
-                background-color: rgba(white, .7);    
+                background-color: rgba($white, .7);    
             }
         }
 

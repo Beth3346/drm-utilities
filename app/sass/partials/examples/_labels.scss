@@ -1,0 +1,34 @@
+.label-info,
+.label-danger,
+.label-warning,
+.label-success,
+.label-muted,
+.label-custom {
+    @include elr-em-font(12px);
+    margin-bottom: 5px;
+    margin-right: 10px;
+}
+
+.label-info {
+    @include elr-label('info');
+}
+
+.label-danger {
+    @include elr-label('danger');
+}
+
+.label-warning {
+    @include elr-label('warning');
+}
+
+.label-success {
+    @include elr-label('success');
+}
+
+.label-muted {
+    @include elr-label('muted');
+}
+
+.label-custom {
+    @include elr-label('custom', 5px, $coral);
+}

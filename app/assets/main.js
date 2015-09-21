@@ -15,7 +15,7 @@
     elrAccordion();
     elrAccordionNav();
     elrAccordionNav({
-        containerClass: 'sidebar'
+        containerClass: 'main-sidebar'
     });
     
     elrAlert.showAlert('info', 'This is just an informative alert', $('.elr-alert-holder'));
@@ -215,7 +215,7 @@
     $('button.mobile-menu-toggle').on('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
-        $('ul.mobile-nav').slideToggle();
+        $('ul.mobile-menu').slideToggle();
     });
 
 })(jQuery);

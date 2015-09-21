@@ -1,0 +1,86 @@
+// Mobile Nav
+
+.mobile-nav-holder {
+    @include elr-clearfix;
+    padding-bottom: 0;
+}
+
+.mobile-menu-toggle {
+    @include elr-em-font(20px);
+    background-color: transparent;
+    border: 1px solid $main-color;
+    padding: 5px 10px;
+    border-radius: 3px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    color: $main-color;
+    cursor: pointer;
+    float: right;
+
+    i {
+        margin-left: 5px;
+    }
+
+    &:hover,
+    &:active {
+        background-color: $main-color;
+        color: $background-color;
+    }
+}
+
+.mobile-menu {
+    list-style: none;
+    padding: 0;
+    clear: both;
+    display: none;
+
+    li {
+        margin: 0;
+        padding: 0;
+
+        &:first-child a {
+            padding-top: 10;
+        }
+
+        &:last-child a {
+            padding-bottom: 10;
+        }
+    }
+
+    a {
+        background-color: $main-color;
+        color: $background-color;
+        text-decoration: none;
+        display: block;
+        padding: 10px 20px;
+
+        &:hover,
+        &:active {
+            background-color: $background-color;
+            color: $main-color;
+        }
+    }
+}
+
+.mobile-sub-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+        margin: 0;
+        padding: 0;
+    }
+
+    li:first-child a {
+        padding-top: 10;
+    }
+
+    li:last-child a {
+        padding-bottom: 10;
+    }
+
+    a {
+        padding-left: 40px;
+    }
+}

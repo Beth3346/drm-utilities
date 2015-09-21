@@ -1,0 +1,12 @@
+// Forms Utilities Examples
+
+.form-state {
+    @include elr-em-padding('all', 20px, 0);
+}
+
+.form-state,
+.tabular-form {
+    @include elr-tabular-form;
+}
+
+.inline-form { @include elr-inline-form; }

@@ -1,20 +1,18 @@
 // Simple Slider
 
 @mixin elr-simple-slider($width: 700px, $height: 350px) {
-    margin: 50px auto 0 auto;
+    margin: 50px auto 0;
     z-index: 0;
     position: relative;
     width: $width;
     height: $height;
     overflow: hidden;
-
-    &.slide-left {
-        .elr-simple-slide {
-            float: left;
-        }
-    }
     
     @include elr-clearfix;
+
+    &.slide-left .elr-simple-slide {
+        float: left;
+    }
 
     .elr-simple-slide-holder {  
         @include elr-clearfix;
@@ -43,7 +41,7 @@
             }
 
             figcaption {
-                @include elr-background-transparent(white, 0.5);
+                background-color: rgba($white, .5);
                 position: absolute;
                 top: 75%;
                 left: 0;
@@ -74,15 +72,16 @@
 
         button {
             @include elr-circle(10px);
-            @include elr-background-transparent(white, 0.5);
+            background-color: rgba($white, .5);
             padding: 0;
             margin: 0;
             text-decoration: none;
-            border: none;
+            border: 0;
             cursor: pointer;
 
-            &:hover, &:focus {
-                background-color: white;
+            &:hover,
+            &:focus {
+                background-color: $white;
             }
 
             &.active {
@@ -103,14 +102,13 @@
             @include elr-square(64px);
             padding: 0;
             margin: 0;
-            border: none;
+            border: 0;
             cursor: pointer;
-            background-color: white;
-            background-color: rgba(white, .5);
+            background-color: rgba($white, .5);
 
-            &:hover, &:focus {
-                background-color: white;
-                background-color: rgba(white, .8);
+            &:hover,
+            &:focus {
+                background-color: rgba($white, .8);
             }
         }
 

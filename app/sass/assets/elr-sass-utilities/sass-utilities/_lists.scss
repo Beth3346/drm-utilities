@@ -6,7 +6,7 @@
     height: 1px;
     padding: 0;
     margin: 5px 0;
-    border-bottom: 1px solid $color;    
+    border-bottom: 1px solid $color;
 }
 
 @mixin elr-unstyled-list($align: left) {
@@ -143,7 +143,7 @@
         padding-left: 10px;
 
         &:before {
-            @include elr-font-awesome();
+            @include elr-font-awesome;
             content: $icon;
             display: inline;
             padding-right: 10px;

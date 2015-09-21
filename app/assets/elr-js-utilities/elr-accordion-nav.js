@@ -47,16 +47,21 @@
         };
 
         var getCurrent = function() {
+            var location = window.location.pathname;
+            var hash = window.location.hash;
             var currentPage;
             var $target;
             var $currentList;
             var startIndex;
 
-            if ( window.location.pathname.slice(0,1) === '/' ) {
-                startIndex = window.location.pathname.lastIndexOf('/') + 1;
-                currentPage = window.location.pathname.slice(startIndex);
+            if ( hash ) {
+                startIndex = location.lastIndexOf('/') + 1;
+                currentPage = location.slice(startIndex) + hash;
+            } else if ( location.slice(0,1) === '/' ) {
+                startIndex = location.lastIndexOf('/') + 1;
+                currentPage = location.slice(startIndex);
             } else {
-                currentPage = window.location.pathname;
+                currentPage = location;
             }
 
             $target = $container.find('a[href="' + currentPage + '"]').addClass('active');
@@ -89,6 +94,16 @@
                 $icons.removeClass(collapseIconClass).addClass(expandIconClass);
                 showCurrent($currentList);
             }
+
+            $(window).on('hashchange', function(e){
+                e.preventDefault();
+
+                $container.find('a.active').removeClass('active');
+                $currentList = getCurrent();
+                $content.hide();
+                $icons.removeClass(collapseIconClass).addClass(expandIconClass);
+                showCurrent($currentList);
+            });
 
             $label.on('click', function(e) {
                 var $openContent = $($content).not(':hidden');

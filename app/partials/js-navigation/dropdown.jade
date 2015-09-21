@@ -1,0 +1,68 @@
+section#elr-dropdown-menu
+    .elr-container
+        .elr-row
+            .elr-col-full
+                h1 Elr Dropdown
+                p.
+                    A navigation menu with dropdowns that appear when the user hovers. Supports any number of menu levels.
+                    However, we believe that after 3 levels dropdowns get too unruly to provide an enjoyable UX
+    .elr-container
+        .elr-row
+            .elr-col-full
+                nav
+                    ul.elr-dropdown-nav
+                        li
+                            a.carat(href="#") Animals
+                            ul
+                                li: a(href="#") Dogs
+                                li 
+                                    a.carat-right(href="#") Bears
+                                    ul
+                                        li: a(href="#") Black
+                                        li: a(href="#") Brown
+                                        li: a(href="#") Polar
+                                        li: a(href="#") Grizzly
+                                        li
+                                            a.carat-right(href="#") Panda
+                                            ul
+                                                li: a(href="#") Red (not really a bear)
+                                                li: a(href="#") Giant
+                                li: a(href="#") Lions
+                                li: a(href="#") Birds
+                                li: a(href="#") Fish
+                        li 
+                            a.carat(href="#") Food
+                            ul
+                                li: a(href="#") Meats
+                                li: a(href="#") Dairy
+                                li: a(href="#") Grains
+                                li 
+                                    a.carat-right(href="#") Fruits
+                                    ul
+                                        li: a(href="#") Apples
+                                        li: a(href="#") Oranges
+                                        li: a(href="#") Lemons
+                                        li: a(href="#") Bananas
+                        li
+                            a.carat(href="#") Colors
+                            ul
+                                li: a.text-disabled(href="#") Red
+                                li: a(href="#") Orange
+                                li: a(href="#") Yellow
+                                li.divider
+                                li: a(href="#") Magenta
+                        li: a(href="#") Languages
+                        li
+                            a.carat(href="#") Countries
+                            ul
+                                li: a(href="#") United States
+                                li: a(href="#") France
+                                li: a(href="#") Mexico
+                                li: a(href="#") Canada
+                        li
+                            a.carat(href="#") Furniture
+                            ul
+                                li: a(href="#") Couches
+                                li: a(href="#") Tables
+                                li: a(href="#") Desks
+                                li: a(href="#") Chairs

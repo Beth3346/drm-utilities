@@ -1,0 +1,51 @@
+section#shapes
+    .elr-container
+        .elr-row
+            .elr-col-full
+                h3.elr-bold Circles and Ellipses
+        .elr-row.example-holder
+            .elr-col-third
+                .circle
+    .elr-container
+        .elr-row
+            .elr-col-full
+                h3.elr-bold Rectangles
+                p Easy rectangles and squares.
+        .elr-row
+            .elr-col-full
+                pre @include elr-rectangle($width, $height, $display, $border-radius);
+        .elr-row.example-holder
+            .elr-col-half
+                .elr-rectangle
+            .elr-col-half
+                .elr-rounded-rectangle
+        .elr-row
+            .elr-col-full
+                pre @include elr-rectangle(300px, 200px, block);
+                pre @include elr-rectangle(300px, 200px, block, 5px);
+
+    .elr-container
+        .elr-row
+            .elr-col-full
+                h3.elr-bold Squares
+        .elr-row
+            .elr-col-full
+                pre @include elr-square($width, $display, $border-radius);
+        .elr-row.example-holder
+            .elr-col-half
+                .elr-square
+            .elr-col-half
+                .elr-rounded-square
+        .elr-row
+            .elr-col-full
+                pre @include elr-square(300px, block);
+                pre @include elr-square(300px, block, 5px);
+    .elr-container
+        .elr-row
+            .elr-col-full
+                h3.elr-bold Triangles
+        .elr-row.example-holder
+            .elr-col-half
+                .elr-triangle
+            .elr-col-half
+                .elr-equilateral-triangle

@@ -1,43 +1,34 @@
-/*-----------------------------------------------------------------------------
-	ELR Sass Utilities
------------------------------------------------------------------------------*/
+//  ELR Sass Utilities
 
-/*-----------------------------------------------------------------------------
-	Vendor Dependencies
------------------------------------------------------------------------------*/
+// Authored Dependencies
 
-	@import "compass";
+@import 'assets/config';
+@import 'assets/elr-sass-utilities/sass-utilities';
 
-/*-----------------------------------------------------------------------------
-	Authored Dependencies
------------------------------------------------------------------------------*/
+// Partials
 
-	@import "assets/config";
-	@import "assets/elr-sass-utilities/sass-utilities";
+@import 'partials/general';
+@import 'partials/main-content';
+@import 'partials/header';
+@import 'partials/sidebar';
+@import 'partials/hero-unit';
+@import 'partials/main-navigation';
+@import 'partials/mobile-navigation';
 
-/*-----------------------------------------------------------------------------
-	Partials
------------------------------------------------------------------------------*/
-
-	@import "partials/general";
-	@import "partials/main-content";
-	@import "partials/header";
-	@import "partials/sidebar";
-	@import "partials/layout";
-	@import "partials/forms";
-	@import "partials/grid";
-	@import "partials/helper-classes";
-	@import "partials/media-queries";
-	@import "partials/navigation";
-	@import "partials/shapes";
-	@import "partials/tables";
-	@import "partials/js-components";
-	@import "partials/context-boxes";
-	@import "partials/headings";
-	@import "partials/labels";
-	@import "partials/lists";
-	@import "partials/pagination";
-	@import "partials/buttons";
-	@import "partials/images";
-	@import "partials/cards";
-	@import "partials/tabs";
+@import 'partials/examples/layout';
+@import 'partials/examples/forms';
+@import 'partials/examples/grid';
+@import 'partials/examples/helper-classes';
+@import 'partials/examples/navigation';
+@import 'partials/examples/shapes';
+@import 'partials/examples/tables';
+@import 'partials/examples/js-components';
+@import 'partials/examples/context-boxes';
+@import 'partials/examples/headings';
+@import 'partials/examples/labels';
+@import 'partials/examples/lists';
+@import 'partials/examples/pagination';
+@import 'partials/examples/buttons';
+@import 'partials/examples/images';
+@import 'partials/examples/cards';
+@import 'partials/examples/tabs';

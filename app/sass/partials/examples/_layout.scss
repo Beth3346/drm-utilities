@@ -1,0 +1,38 @@
+// Layout Utilities Examples
+
+.center-block {
+    @include elr-center-block(50%);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid $grey;
+    background-color: $white;
+}
+
+.horizontal-container,
+.vertical-container,
+.center-container {
+    position: relative;
+    height: 400px;
+    width: 500px;
+}
+
+.horizontally-center,
+.vertically-center,
+.centered {
+    height: 200px;
+    width: 275px;
+    background-color: $warning-color;
+}
+
+.horizontal-container .horizontally-center {
+    @include elr-centerer(false, true);
+}
+
+.vertical-container .vertically-center {
+    @include elr-centerer(true, false);
+}
+
+.center-container .centered {
+    @include elr-centerer;
+}

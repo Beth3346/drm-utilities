@@ -51,7 +51,7 @@
 
         .close {
             color: $warning-color;
-        }   
+        }
 
     } @else if $type == success {
         background-color: lighten($success-color, 20%);
@@ -65,7 +65,7 @@
 
         .close {
             color: $success-color;
-        }   
+        }
 
     } @else if $type == muted {
         background-color: lighten($muted-color, 10%);
@@ -79,7 +79,7 @@
 
         .close {
             color: $muted-color;
-        }   
+        }
 
     } @else if $type == custom {
         background-color: lighten($color, 20%);
@@ -93,7 +93,7 @@
 
         .close {
             color: $color;
-        }   
+        }
 
     } @else {
         @warn "#{error("That's not a context box type!")}";
@@ -107,14 +107,14 @@
         position: absolute;
         right: 5px;
         top: 3px;
-        border: none;
+        border: 0;
         background: none;
-        transition: color, .3s, ease-out;
+        transition: color, .3s, ease;
 
         &:hover {
-            color: white;
+            color: $white;
             cursor: pointer;
-            transition: color, .3s, ease-in;
+            transition: color, .3s, ease;
         }
     }
 }

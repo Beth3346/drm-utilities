@@ -7,14 +7,6 @@
     }
 
     .elr-inline-list {
-        @include elr-inline-list();
-    }
-
-    .elr-triangle-list {
-        @include elr-bullet-list("\25B6");
-    }
-
-    .elr-checked-list {
-        @include elr-bullet-list("\2713");
+        @include elr-inline-list;
     }
 }

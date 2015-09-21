@@ -1,24 +1,24 @@
 // Main Content Styles
 
 .main-content {
-    padding: 60px 10px 20px 10px;
+    padding: 60px 10px 20px;
     min-height: 800px;
 
     h1 {
-        @include elr-em-font(30);
+        @include elr-em-font(30px);
     }
 
     h2 {
-        @include elr-em-font(24);
+        @include elr-em-font(24px);
     }
 
     h3 {
-        @include elr-em-font(18);
+        @include elr-em-font(18px);
     }
-}
 
-.elr-container .elr-row article.elr-col-9:first-child {
-    padding-left: 10px;
+    .elr-col-9:first-child {
+        padding-left: 10px;
+    }
 }
 
 .example-holder {
@@ -28,20 +28,20 @@
     background-color: $elr-blue-light;
 
     &.example-holder-light {
-        background-color: white;
+        background-color: $white;
         border-color: $elr-blue-light;
     }
 
     h1 {
-        @include elr-em-font(48);
+        @include elr-em-font(48px);
     }
 
     h2 {
-        @include elr-em-font(36);
+        @include elr-em-font(36px);
     }
 
     h3 {
-        @include elr-em-font(30);
+        @include elr-em-font(30px);
     }
 }
 
@@ -55,19 +55,19 @@ pre {
     padding-left: 0;
 
     h2 {
-        @include elr-em-font(18);
+        @include elr-em-font(18px);
     }
 }
 
 .inline-demo {
     border: 1px solid $elr-blue;
     padding: 10px;
-    margin: 20px 0 0 0;
+    margin: 20px 0 0;
     background-color: $elr-blue-light;
     border-radius: 3px;
 
     &.demo-light {
-        background-color: white;
+        background-color: $white;
         border-color: $elr-blue-light;
     }
 

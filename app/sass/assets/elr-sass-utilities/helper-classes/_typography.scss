@@ -2,76 +2,42 @@
 
 @mixin elr-typography-classes() {
 
-    .elr-bold {
-        font-weight: bold;
-    }   
+    .elr-bold { font-weight: bold; }
 
-    .elr-italic {
-        font-style: italic;
-    }   
+    .elr-italic { font-style: italic; }
 
-    .elr-underline {
-        text-decoration: underline;
-    }   
+    .elr-underline { text-decoration: underline; }
 
-    .elr-uppercase {
-        text-transform: uppercase;
-    }
+    .elr-uppercase { text-transform: uppercase; }
 
-    .elr-capitalize {
-        text-transform: capitalize;
-    }
+    .elr-capitalize { text-transform: capitalize; }
 
-    .elr-smaller-text {
-        @include elr-em-font(10);
-    }
+    .elr-smaller-text { @include elr-em-font(10px); }
 
-    .elr-text-left {
-        text-align: left;
-    }
+    .elr-text-left { text-align: left; }
 
-    .elr-text-right {
-        text-align: right;
-    }
+    .elr-text-right { text-align: right; }
 
-    .elr-text-center {
-        text-align: center;
-    }
+    .elr-text-center { text-align: center; }
 
-    .elr-text-justified {
-        text-align: justify;
-    }
+    .elr-text-justified { text-align: justify; }
 
-    .elr-text-muted {
-        color: $muted-color;
-    }
+    .elr-text-muted { color: $muted-color; }
 
-    .elr-text-disabled {
-        color: $light-grey;
-    }
+    .elr-text-disabled { color: $light-grey; }
 
-    .elr-text-danger {
-        color: $danger-color;   
-    }
+    .elr-text-danger { color: $danger-color; }
 
     .elr-text-error {
         color: $danger-color;
-        font-weight: bold;
+        font-weight: 700;
     }
 
-    .elr-text-info {
-        color: $info-color;
-    }
+    .elr-text-info { color: $info-color; }
 
-    .elr-text-warning {
-        color: $warning-color;
-    }
+    .elr-text-warning { color: $warning-color; }
 
-    .elr-text-success {
-        color: $success-color;
-    }
+    .elr-text-success { color: $success-color; }
 
-    .elr-highlight {
-        color: $main-color;
-    }
+    .elr-highlight { color: $main-color; }
 }

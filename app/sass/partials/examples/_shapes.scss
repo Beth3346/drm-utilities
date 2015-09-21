@@ -1,0 +1,71 @@
+// Shapes Utilities Examples
+
+.circle,
+.ellipse,
+.ellipse-tall,
+.elr-rectangle,
+.elr-rounded-rectangle,
+.elr-square,
+.elr-rounded-square,
+.elr-diamond {
+    background-color: $main-color;
+}
+
+.circle,
+.ellipse,
+.ellipse-tall,
+.elr-rectangle,
+.elr-rounded-rectangle,
+.elr-square,
+.elr-rounded-square,
+.elr-parallelogram {
+    margin: 20px;
+}
+
+.elr-diamond,
+.elr-pentagon,
+.elr-hexagon,
+.elr-paraellelogram,
+.elr-trapezoid,
+.elr-star-8,
+.elr-badge {
+    margin: 60px;
+}
+
+.shapes .elr-col-4 { height: 300px; }
+
+.circle { @include elr-circle(200px); }
+
+.ellipse { @include elr-ellipse(200px, 150px); }
+
+.ellipse-tall { @include elr-ellipse(150px, 200px); }
+
+.elr-rectangle { @include elr-rectangle(300px, 200px); }
+
+.elr-rounded-rectangle { @include elr-rectangle(300px, 200px, null, 5px); }
+
+.elr-square { @include elr-square(200px); }
+
+.elr-rounded-square { @include elr-square(200px, null, 5px); }
+
+.elr-diamond { @include elr-quadrilateral-diamond(100px, 10); }
+
+.elr-pentagon { @include elr-pentagon(160px, 160px, $main-color); }
+
+.elr-hexagon { @include elr-hexagon(160px, 160px, $main-color); }
+
+.elr-parallelogram { @include elr-parallelogram(150px, 100px); }
+
+.elr-trapezoid { @include elr-trapezoid(200px, $main-color); }
+
+.elr-star-5 { @include elr-star-5(100px, $main-color); }
+
+.elr-star-6 { @include elr-star-6(200px, $main-color); }
+
+.elr-star-8 { @include elr-star-8(100px, $main-color); }
+
+.elr-badge { @include elr-badge(100px, $main-color); }
+
+.elr-triangle { @include elr-triangle(top-left, 200px, auto, $main-color); }
+
+.elr-equilateral-triangle { @include elr-equilateral-triangle(top, 200px, $main-color); }

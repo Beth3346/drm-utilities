@@ -1,0 +1,160 @@
+section#buttons
+    .elr-container
+        .elr-row
+            .elr-col-full
+                h3.elr-bold Button Link
+                p Basic button with a solid border and transparent background. Smooth transition to solid background on hover. 
+                .example-holder.example-holder-light
+                    a.elr-button.button-link(href="#") Click Here
+                    a.elr-button.button-link-radius(href="#") Click Here
+                pre @include elr-button-link($color, $bk-color, $width, $center, $border-radius, $border-color, $display);
+        .elr-row
+            .elr-col-full
+                h3.elr-bold Button Solid
+                .example-holder.example-holder-light
+                    a.elr-button.button-solid(href="#") Click Here
+                    a.elr-button.button-solid-radius(href="#") Click Here
+        .elr-row
+            .elr-col-full
+                h3.elr-bold Pill Buttons
+                .example-holder.example-holder-light
+                    a.elr-button.pill-button-link(href="#") Click Here
+                    a.elr-button.pill-button-solid(href="#") Click Here
+        .elr-row
+            .elr-col-full
+                h3.elr-bold Solid Dropdown Button
+        .elr-row.example-holder.example-holder-light
+            .elr-col-quarter
+                .elr-dropdown-solid-btn-holder
+                    button.elr-button Info
+                    ul
+                        li: a(href="#") Info 1
+                        li: a(href="#") Info 2
+                        li: a(href="#") Info 3
+                        li.divider
+                        li: a(href="#") Info 4
+            .elr-col-quarter
+                .elr-dropdown-solid-btn-holder
+                    button.elr-button More Info
+                    ul
+                        li: a.text-disabled(href="#") Info 1
+                        li: a(href="#") Info 2
+                        li: a(href="#") Info 3
+                        li: a(href="#") Info 4
+            .elr-col-quarter
+                .elr-dropdown-solid-btn-holder
+                    button.elr-button Click Me!
+                    ul
+                        li: a(href="#") Info 1
+                        li: a(href="#") Info 2
+                        li: a(href="#") Info 3
+                        li: a(href="#") Info 4
+        .elr-row
+            .elr-col-full
+                h3.elr-bold Split Dropdown Button
+        .elr-row.example-holder.example-holder-light
+            .elr-col-quarter
+                .elr-dropdown-split-btn-holder
+                    .elr-dropdown-button-group
+                        button Alert
+                        button &#9662;
+                        ul
+                            li: a(href="#") Info 1
+                            li: a(href="#") Info 2
+                            li: a(href="#") Info 3
+                            li: a(href="#") Info 4
+            .elr-col-quarter
+                .elr-dropdown-split-btn-holder
+                    .elr-dropdown-button-group
+                        button Choose an Option
+                        button &#9662;
+                        ul
+                            li: a(href="#") Info 1
+                            li: a(href="#") Info 2
+                            li: a(href="#") Info 3
+                            li: a(href="#") Info 4
+        .elr-row
+            .elr-col-full
+                h3.elr-bold Button Groups
+        .elr-row.example-holder.example-holder-light
+            .elr-col-full                
+                .button-group
+                    button Button 1
+                    button Button 2
+                    button Button 3
+                    button Button 4
+                    button Button 5
+                    button Button 6
+                .button-group-no-border
+                    button Button 1
+                    button Button 2
+                    button Button 3
+                    button Button 4
+                    button Button 5
+                    button Button 6
+        .elr-row
+            .elr-col-full
+                h3.elr-bold Font Awesome Icon Buttons
+        .elr-row.example-holder.example-holder-light
+            .elr-col-quarter
+                button.elr-button.icon-button.heart-button Like
+            .elr-col-quarter
+                button.elr-button.icon-button.star-button Save
+            .elr-col-quarter
+                button.elr-button.icon-button.download-button Download
+            .elr-col-quarter
+                button.elr-button.icon-button.add-button Add Item
+        .elr-row
+            .elr-col-full
+                h3.elr-bold Social Media Buttons
+        .elr-row.example-holder.example-holder-light
+            .elr-col-full
+                button.elr-button.icon-button.facebook-button Facebook
+                button.elr-button.icon-button.twitter-button Twitter
+                button.elr-button.icon-button.google-plus-button Google+
+                button.elr-button.icon-button.pinterest-button Pinterest
+                button.elr-button.icon-button.instagram-button Instagram
+        .elr-row
+            .elr-col-full
+                h3.elr-bold Icon Only Buttons
+        .elr-row.example-holder.example-holder-light
+            .elr-col-full
+                button.elr-button.icon-only-button.heart-icon-button
+                button.elr-button.icon-only-button.star-icon-button
+                button.elr-button.icon-only-button.download-icon-button
+                button.elr-button.icon-only-button.add-icon-button
+        .elr-row.example-holder.example-holder-light
+            .elr-col-full
+                button.elr-button.icon-only-button.facebook-icon-button
+                button.elr-button.icon-only-button.twitter-icon-button
+                button.elr-button.icon-only-button.google-plus-icon-button
+                button.elr-button.icon-only-button.pinterest-icon-button
+                button.elr-button.icon-only-button.instagram-icon-button
+        .elr-row
+            .elr-col-full
+                h3.elr-bold Circle Icon Buttons
+        .elr-row.example-holder.example-holder-light
+            .elr-col-full
+                button.elr-button.icon-circle.facebook-icon-circle
+                button.elr-button.icon-circle.twitter-icon-circle
+                button.elr-button.icon-circle.google-plus-icon-circle
+                button.elr-button.icon-circle.pinterest-icon-circle
+                button.elr-button.icon-circle.instagram-icon-circle
+        .elr-row
+            .elr-col-full
+                h3.elr-bold Icon Button Groups
+        .elr-row.example-holder.example-holder-light
+            .elr-col-third
+                .icon-button-group
+                    button.elr-button.icon-only-button.facebook-icon-button
+                    button.elr-button.icon-only-button.twitter-icon-button
+                    button.elr-button.icon-only-button.google-plus-icon-button
+                    button.elr-button.icon-only-button.pinterest-icon-button
+                    button.elr-button.icon-only-button.instagram-icon-button
+            .elr-col-third
+                .icon-button-group-stacked
+                    button.elr-button.icon-only-button.facebook-icon-button
+                    button.elr-button.icon-only-button.twitter-icon-button
+                    button.elr-button.icon-only-button.google-plus-icon-button
+                    button.elr-button.icon-only-button.pinterest-icon-button
+                    button.elr-button.icon-only-button.instagram-icon-button

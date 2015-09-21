@@ -6,7 +6,7 @@
     @include elr-em-height($height);
     display: $display;
 
-    @if ( $border-radius != 0 ) {
+    @if ($border-radius != 0) {
         border-radius: $border-radius;
     }
 }

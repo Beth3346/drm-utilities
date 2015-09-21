@@ -1,0 +1,17 @@
+// Grid Examples
+
+.example-col,
+.example-col-nested {
+    text-align: center;
+    padding: 0;
+    display: block;
+    color: $white;
+    border: 1px solid $main-color;
+
+    p { @include elr-em-padding('all', 10px); }
+}
+
+.example-col {
+    background-color: $link-color;
+    border-collapse: collapse;
+}

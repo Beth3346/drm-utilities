@@ -10,8 +10,9 @@
 // Use instead of overflow:hidden to clear floats
 
 @mixin elr-clearfix() {
-    &:after, &:before {
-        content: "";
+    &:after,
+    &:before {
+        content: '';
         display: table;
     }
 
@@ -42,21 +43,21 @@
 
 @mixin elr-em-margin($qualifier: 'all', $top: null, $right: null, $bottom: null, $left: null) {
 
-    @if ( $qualifier == 'all' ) {
-        @if ( $right == null ) {
+    @if ($qualifier == 'all') {
+        @if ($right == null) {
             margin: to-rems($top);
-        } @else if ( $bottom == null ) {
+        } @else if ($bottom == null) {
             margin: to-rems($top) to-rems($right);
         } @else {
             margin: to-rems($top) to-rems($right) to-rems($bottom) to-rems($left);
         }
-    } @else if ( $qualifier == 'top' ) {
+    } @else if ($qualifier == 'top') {
         margin-top: to-rems($top);
-    } @else if ( $qualifier == 'right' ) {
+    } @else if ($qualifier == 'right') {
         margin-right: to-rems($top);
-    } @else if ( $qualifier == 'bottom' ) {
+    } @else if ($qualifier == 'bottom') {
         margin-bottom: to-rems($top);
-    } @else if ( $qualifier == 'left' ) {
+    } @else if ($qualifier == 'left') {
         margin-left: to-rems($top);
     }
 }
@@ -64,21 +65,21 @@
 // calculates em padding from px padding
 
 @mixin elr-em-padding($qualifier: 'all', $top: null, $right: null, $bottom: null, $left: null) {
-    @if ( $qualifier == 'all' ) {
-        @if ( $right == null ) {
+    @if ($qualifier == 'all') {
+        @if ($right == null) {
             padding: to-rems($top);
-        } @else if ( $bottom == null ) {
+        } @else if ($bottom == null) {
             padding: to-rems($top) to-rems($right);
         } @else {
             padding: to-rems($top) to-rems($right) to-rems($bottom) to-rems($left);
         }
-    } @else if ( $qualifier == 'top' ) {
+    } @else if ($qualifier == 'top') {
         padding-top: to-rems($top);
-    } @else if ( $qualifier == 'right' ) {
+    } @else if ($qualifier == 'right') {
         padding-right: to-rems($top);
-    } @else if ( $qualifier == 'bottom' ) {
+    } @else if ($qualifier == 'bottom') {
         padding-bottom: to-rems($top);
-    } @else if ( $qualifier == 'left' ) {
+    } @else if ($qualifier == 'left') {
         padding-left: to-rems($top);
     }
 }
@@ -99,27 +100,15 @@
 @mixin elr-centerer($vertical: true, $horizontal: true) {
     position: absolute;
 
-    @if ( $vertical and $horizontal ) {
+    @if ($vertical and $horizontal) {
         top: 50%;
         left: 50%;
-        -ms-transform: translate(-50%, -50%);
-        -webkit-transform: translate(-50%, -50%);
-        -moz-transform: translate(-50%, -50%);
-        -o-transform: translate(-50%, -50%);
         transform: translate(-50%, -50%);
-    } @else if ( $vertical ) {
+    } @else if ($vertical) {
         top: 50%;
-        -ms-transform: translate(0, -50%);
-        -webkit-transform: translate(0, -50%);
-        -moz-transform: translate(0, -50%);
-        -o-transform: translate(0, -50%);
         transform: translate(0, -50%);
-    } @else if ( $horizontal ) {
+    } @else if ($horizontal) {
         left: 50%;
-        -ms-transform: translate(-50%, 0);
-        -webkit-transform: translate(-50%, 0);
-        -moz-transform: translate(-50%, 0);
-        -o-transform: translate(-50%, 0);
         transform: translate(-50%, 0);
     }
 }

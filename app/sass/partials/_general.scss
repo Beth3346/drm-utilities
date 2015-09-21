@@ -1,31 +1,13 @@
 // General Styles
 
-// include elr-helper-classes
-
 @include elr-reset;
 @include elr-base;
 @include elr-helper-classes;
-
-// include elr-grid
-
 @include elr-grid;
 
-.button {
-    @include elr-em-font(14);
-    @include elr-button-solid($main-color, $background-color, 200px, left, 3px, $main-color);
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.button-inline {
-	@include elr-button-solid($main-color, $background-color, 200px, null, 3px, $main-color, inline-block);
-}
-
-.options-list {
-	@include elr-em-font(14);
-}
+.options-list { @include elr-em-font(14px); }
 
 .copyright {
-    @include elr-em-font(12);
+    @include elr-em-font(12px);
     text-align: center;
 }

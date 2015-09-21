@@ -21,20 +21,20 @@
     }
 
     .elr-header-title {
-        @include elr-em-font(20);
+        @include elr-em-font(20px);
     }
 
     p {
-        @include elr-em-font(14);
+        @include elr-em-font(14px);
     }
 
     form {
-        @include elr-tabular-form();
+        @include elr-tabular-form;
     }
 
-    button {        
-        @include elr-button-solid($button-color, white, 180px, left, 3px, $button-color, inline-block);
-        @include elr-em-font(14);
+    button {
+        @include elr-button-solid($button-color, $white, 180px, left, 3px, $button-color, inline-block);
+        @include elr-em-font(14px);
     }
 
     .elr-modal-video {

@@ -2,7 +2,7 @@
 
 @mixin elr-flexible-grid($images-per-row: 4, $flex: true, $grid-width: 1040px, $fixed-height: 'no') {
     @include elr-clearfix;
-    background-color: white;
+    background-color: $white;
     position: relative;
     padding: 0;
 
@@ -23,7 +23,7 @@
         
         padding: 0;
         list-style: none;
-        background-color: white;
+        background-color: $white;
         border: 1px solid $light-grey;
         float: left;
         border-radius: 5px;
@@ -43,7 +43,7 @@
     }
 
     .overlay {
-        @include elr-background-transparent(white, .5);  
+        background-color: rgba($white, .5);  
         width: 100%;
         z-index: 100;
         border-radius: 5px 5px 0 0;
@@ -82,7 +82,7 @@
         li {
             margin: 5px 0;
             padding: 2px 10px;
-            color: white;
+            color: $white;
             background-color: $elr-blue;
             border-radius: 3px;
             list-style: none;

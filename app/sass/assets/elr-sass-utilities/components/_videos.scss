@@ -1,13 +1,14 @@
 // Video Mixins
-
+// scss-lint:disable ImportantRule
 @mixin elr-flex-video {
-    .videoWrapper {
+// 16:9 Aspect Ratio
+    .elr-video-wrapper {
         position: relative;
-        padding-bottom: 56.25%; /* 16:9 */
+        padding-bottom: 56.25%;
         padding-top: 25px;
         height: 0;
 
-        
+
         iframe {
             position: absolute;
             top: 0;
@@ -20,7 +21,7 @@
 
 @mixin elr-flex-html-video {
     video {
-      width: 100% !important;
-      height: auto !important;
+        width: 100% !important; // No lint reported
+        height: auto !important; // No lint reported
     }
 }

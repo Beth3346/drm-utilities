@@ -2,12 +2,7 @@
 
 // creates a nav-bar with a transparent background
 
-@mixin elr-nav-bar(
-    $text-color: $text-color,
-    $hover-color: $link-color,
-    $align: left,
-    $divider-color: $light-grey
-) {
+@mixin elr-nav-bar($text-color: $text-color, $hover-color: $link-color, $align: left, $divider-color: $light-grey) {
     @include elr-clearfix;
     margin: 0;
     padding: 0;
@@ -25,14 +20,10 @@
 
             li {
                 float: none;
-
-                &.divider {
-                    @include elr-list-divider($divider-color);
-                }   
             }
 
-            a {
-                @include elr-em-font(12);
+            .divider {
+                @include elr-list-divider($divider-color);
             }
         }   
     }
@@ -44,13 +35,13 @@
         color: $text-color;
         text-decoration: none;
         transition: all, .3s;
-        @include elr-em-font(14);
 
         &.active {
-            color: $hover-color
+            color: $hover-color;
         }
 
-        &:hover, &:focus {
+        &:hover,
+        &:focus {
             color: $hover-color;
             transition: all, .3s;
         }
@@ -81,11 +72,7 @@
 // creates a nav bar with a solid color background
 // hover state will invert text color and background color
 
-@mixin elr-nav-bar-solid(
-    $text-color: $background-color,
-    $background-color: $link-color,
-    $align: center,
-    $active-color: lighten($link-color, 10%)
+@mixin elr-nav-bar-solid($text-color: $background-color, $background-color: $link-color, $align: center, $active-color: lighten($link-color, 10%)
 ) {
     @include elr-nav-bar($text-color, $background-color, $align);
 
@@ -104,19 +91,15 @@
             color: $text-color;
         }
 
-        &:hover, &:focus {
+        &:hover,
+        &:focus {
             background-color: $active-color;
             color: $text-color;
         }   
     }
 }
 
-@mixin elr-nav-bar-solid-stacked(
-    $text-color: $background-color,
-    $background-color: $link-color,
-    $align: left,
-    $active-color: lighten($link-color, 10%)
-) {
+@mixin elr-nav-bar-solid-stacked($text-color: $background-color, $background-color: $link-color, $align: left, $active-color: lighten($link-color, 10%)) {
     @include elr-nav-bar-stacked($text-color, $background-color, $align);
     background-color: $background-color;
 
@@ -134,7 +117,8 @@
             color: $text-color;
         }
 
-        &:hover, &:focus {
+        &:hover,
+        &:focus {
             background-color: $active-color;
             color: $text-color;
         }
@@ -143,28 +127,22 @@
 
 // creates a nav-bar with a pill shaped button that shows on hover
 
-@mixin elr-nav-bar-pills(
-    $text-color: $link-color,
-    $hover-color: lighten($link-color, 10%),
-    $align: left,
-    $border: none,
-    $active-color: white
-) {
+@mixin elr-nav-bar-pills($text-color: $link-color, $hover-color: lighten($link-color, 10%), $align: left, $border: none, $active-color: $white) {
     @include elr-nav-bar($text-color, lighten($link-color, 10%), $align);
 
     li {
         margin-right: 5px;
-        padding: 5px 0 0 0;
+        padding: 5px 0 0;
 
         &:last-child {
             margin-right: 0;
         }
 
-        & > ul {
+        > ul {
             margin-top: 0;
             padding: 0;
 
-            & > li {
+            > li {
                 width: 100%;
             }
         }
@@ -179,7 +157,7 @@
         @if $border != none {
             border: 1px solid $border;      
         } @else {
-            border: none;
+            border: 0;
         }
 
         &.active {
@@ -187,20 +165,15 @@
             color: $active-color;
         }
         
-        &:hover, &:focus {
+        &:hover,
+        &:focus {
             background-color: $text-color;
             color: $active-color;
         }
     }
 }
 
-@mixin elr-nav-bar-pills-stacked (
-    $text-color: $link-color,
-    $hover-color: lighten($link-color, 10%),
-    $align: left,
-    $border: none,
-    $active-color: white
-) {
+@mixin elr-nav-bar-pills-stacked($text-color: $link-color, $hover-color: lighten($link-color, 10%), $align: left, $border: none, $active-color: $white) {
     @include elr-nav-bar-pills($text-color, $hover-color, $align, $border, $active-color);
 
     li {
@@ -227,14 +200,7 @@
 
 // creates a nav-bar with pill shaped buttons
 
-@mixin elr-nav-bar-pills-solid(
-    $text-color: $background-color,
-    $background-color: $link-color,
-    $align: left,
-    $border: none,
-    $active-color: lighten($link-color, 10%),
-    $hover-text-color: white
-) {
+@mixin elr-nav-bar-pills-solid($text-color: $background-color, $background-color: $link-color, $align: left, $border: none, $active-color: lighten($link-color, 10%), $hover-text-color: $white) {
     @include elr-nav-bar-pills($text-color, $active-color, $align, $border, $hover-text-color);
 
     li {
@@ -257,21 +223,15 @@
             background-color: $active-color;
         }
         
-        &:hover, &:focus {
+        &:hover,
+        &:focus {
             color: $hover-text-color;
             background-color: $active-color;
         }
     }
 }
 
-@mixin elr-nav-bar-pills-solid-stacked(
-    $text-color: $background-color,
-    $background-color: $link-color,
-    $align: left,
-    $border: none,
-    $active-color: lighten($link-color, 10%),
-    $hover-text-color: white
-) {
+@mixin elr-nav-bar-pills-solid-stacked($text-color: $background-color, $background-color: $link-color, $align: left, $border: none, $active-color: lighten($link-color, 10%), $hover-text-color: $white) {
     @include elr-nav-bar-pills-stacked($text-color, $background-color, $align, $border, $hover-text-color);
 
     li {
@@ -290,7 +250,8 @@
             background-color: $active-color;
         }
         
-        &:hover, &:focus {
+        &:hover,
+        &:focus {
             color: $hover-text-color;
             background-color: $active-color;
         }

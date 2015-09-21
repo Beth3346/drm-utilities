@@ -1,0 +1,10 @@
+.rounded-heading,
+.pill-heading {
+    @include elr-em-width(400px);
+    @include elr-em-margin('bottom', 10px);
+    @include elr-em-font(20px);
+}
+
+.rounded-heading { @include elr-rounded-heading; }
+
+.pill-heading { @include elr-pill-heading; }

@@ -1,23 +1,16 @@
 // Dropdown Buttons
 
-@mixin elr-dropdown-button-solid (
-    $bk-color: $link-color,
-    $color: $background-color,
-    $width: 200px,
-    $border: none,
-    $border-radius: 0,
-    $divider-color: $light-grey
-) {
+@mixin elr-dropdown-button-solid ($bk-color: $link-color, $color: $background-color, $width: 200px, $border: none, $border-radius: 0, $divider-color: $light-grey) {
     position: relative;
 
-    @if ( unitless($width) or unit($width) == 'px' ) {
+    @if (unitless($width) or unit($width) == 'px') {
         @include elr-em-width($width);
     } @else {
         width: $width;
     }
 
     button {
-        @if $border == none {
+        @if ($border == none) {
             @include elr-button-solid($bk-color, $color, 100%);
         } @else {
             @include elr-button-solid($bk-color, $color, 100%, center, $border-radius, $border);
@@ -25,9 +18,9 @@
 
         margin-bottom: 5px;
         position: relative;
-        
+
         &:after {
-            content: "\25BE";
+            content: '\25BE';
             position: absolute;
             right: 5%;
         }
@@ -35,7 +28,7 @@
         &.clicked {
             color: $color;
             background-color: lighten($bk-color, 10%);
-        }   
+        }
     }
 
     ul {
@@ -45,7 +38,7 @@
         display: none;
         z-index: 100;
 
-        @if ( $border-radius ) {
+        @if ($border-radius) {
             border-radius: $border-radius;
 
             li {
@@ -54,20 +47,13 @@
             }
         }
 
-        @if ( $border != none ) {
+        @if ($border != none) {
             border: 1px solid $border;
         }
     }
-}   
+}
 
-@mixin elr-dropdown-button-split(
-    $bk-color: $link-color,
-    $color: $main-color,
-    $border-radius: 0,
-    $border: none,
-    $divider-color: lighten($link-color, 20%),
-    $width: 200px
-) {
+@mixin elr-dropdown-button-split($bk-color: $link-color, $color: $main-color, $border-radius: 0, $border: none, $divider-color: lighten($link-color, 20%), $width: 200px) {
     @include elr-em-width($width + 50px);
     position: relative;
 
@@ -106,13 +92,14 @@
     }
 
     ul {
+        @include elr-nav-bar-solid-stacked($color, $bk-color, left, $divider-color);
         width: 100%;
         position: absolute;
         top: 100%;
         display: none;
         z-index: 100;
-        
-        @if ( $border-radius ) {
+
+        @if ($border-radius) {
             border-radius: $border-radius;
 
             li {
@@ -121,10 +108,8 @@
             }
         }
 
-        @if ( $border != none ) {
+        @if ($border != none) {
             border: 1px solid $border;
         }
-        
-        @include elr-nav-bar-solid-stacked($color, $bk-color, left, $divider-color);
     }
 }

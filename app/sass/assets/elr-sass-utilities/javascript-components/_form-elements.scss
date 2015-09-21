@@ -1,12 +1,12 @@
 // Form Elements
 
-@mixin elr-select-control($width: 100%, $background-color: #eee, $border-color: #aaa, $text-color: #333, $border-radius: 3px, $font-size: 16, $height: 40px) {
+@mixin elr-select-control($width: 100%, $background-color: $lightest-grey, $border-color: $light-grey, $text-color: $dark-grey, $border-radius: 3px, $font-size: 16, $height: 40px) {
     width: $width;
     position: relative;
 
     .dropdown-label {
         @include elr-em-font($font-size);
-        @include elr-clearfix();
+        @include elr-clearfix;
         width: 100%;
         height: $height;
         display: block;
@@ -22,7 +22,7 @@
             position: relative;
             height: $height;
             color: $text-color;
-            line-height: ($font-size * 2)+2#{px};
+            line-height: ($font-size * 2) + 2#{px};
         }
 
         .dropdown-button {
@@ -30,7 +30,7 @@
             float: right;
             width: 25%;
             text-align: center;
-            line-height: ($font-size * 2)+2#{px};
+            line-height: ($font-size * 2) + 2#{px};
             cursor: pointer;
             height: $height - 2;
             border-left: 1px $border-color solid;
@@ -59,7 +59,7 @@
             height: $height;
             display: block;
             padding: 0 0 0 20px;
-            line-height: ($font-size * 2)+2#{px};
+            line-height: ($font-size * 2) + 2#{px};
             color: lighten($text-color, 5%);
             background-color: $background-color;
 

@@ -2,32 +2,31 @@
 
 @mixin elr-grid($column-count: 12, $gutter: 0, $max-width: $mars, $container-width: 100%, $responsive-container: 'yes') {
     .elr-container {
+        @include elr-clearfix;
         margin: 0 auto;
 
-        @if ( $responsive-container == 'yes' ) {
+        @if ($responsive-container == 'yes') {
             width: 95%;
 
-            @include elr-breakpoint(mercury) {
+            @include elr-breakpoint('mercury') {
                 max-width: $venus;
             }
 
-            @include elr-breakpoint(venus) {
+            @include elr-breakpoint('venus') {
                 max-width: $earth;
             }
 
-            @include elr-breakpoint(earth) {
+            @include elr-breakpoint('earth') {
                 max-width: $mars;
             }
 
-            @include elr-breakpoint(mars) {
+            @include elr-breakpoint('mars') {
                 max-width: $jupiter;
             }
         } @else {
             width: $container-width;
             max-width: $max-width;
         }
-
-        @include elr-clearfix;
     }
 
     .elr-row {
@@ -37,7 +36,7 @@
         @if ($gutter > 0) {
             margin-right: $gutter * 2;
 
-            @include elr-breakpoint(jupiter) {
+            @include elr-breakpoint('jupiter') {
                 margin-right: $gutter;
             }
         }
@@ -57,14 +56,14 @@
         @if ($gutter > 0) {
             padding: 0 $gutter * 2;
 
-            @include elr-breakpoint(jupiter) {
+            @include elr-breakpoint('jupiter') {
                 margin-bottom: $gutter * 2;
                 padding-left: $gutter;
                 padding-right: $gutter;
             }
         }
 
-        @include elr-breakpoint(saturn) {
+        @include elr-breakpoint('saturn') {
             float: none;
         }
     }
@@ -79,7 +78,7 @@
                 padding-left: $gutter * 2;
                 padding-right: $gutter * 2;
 
-                @include elr-breakpoint(jupiter) {
+                @include elr-breakpoint('jupiter') {
                     padding-left: $gutter;
                     padding-right: $gutter;
                 }
@@ -93,7 +92,7 @@
                 margin-right: $gutter * 2;
             }
 
-            @include elr-breakpoint(jupiter) {
+            @include elr-breakpoint('jupiter') {
 
                 @if ($gutter > 0) {
                     margin-left: $gutter;
@@ -123,20 +122,20 @@
     @for $i from 1 through $column-count {
         .elr-col-#{$i} {
             @include elr-clearfix;
-            width: ( 100 / $column-count ) * $i * 1%;
+            width: (100 / $column-count) * $i * 1%;
             float: left;
 
             @if ($gutter > 0) {
                 padding: 0 $gutter * 2;
 
-                @include elr-breakpoint(jupiter) {
+                @include elr-breakpoint('jupiter') {
                     margin-bottom: $gutter * 2;
                     padding-left: $gutter;
                     padding-right: $gutter;
                 }
             }
 
-            @include elr-breakpoint(saturn) {
+            @include elr-breakpoint('saturn') {
                 float: none;
                 width: 100%;
             }
@@ -145,9 +144,9 @@
 
     @for $i from 1 through $column-count {
         .elr-col-offset-#{$i} {
-            margin-left: ( 100 / $column-count ) * $i * 1%;
+            margin-left: (100 / $column-count) * $i * 1%;
 
-            @include elr-breakpoint(jupiter) {
+            @include elr-breakpoint('jupiter') {
                 margin-left: 0;
             }
         }
@@ -164,17 +163,17 @@
     .elr-col-6 {
         width: (100% / 2);
 
-        &:nth-of-type(odd) {
+        @include elr-breakpoint('saturn') {
+            width: 100%;
             padding-left: 0;
-        }
-        
-        &:nth-of-type(even) {
             padding-right: 0;
         }
 
-        @include elr-breakpoint(saturn) {
-            width: 100%;
+        &:nth-of-type(odd) {
             padding-left: 0;
+        }
+
+        &:nth-of-type(even) {
             padding-right: 0;
         }
     }
@@ -183,7 +182,7 @@
     .elr-col-4 {
         width: (100% / 3);
 
-        @include elr-breakpoint(saturn) {
+        @include elr-breakpoint('saturn') {
             width: 100%;
             padding-left: 0;
             padding-right: 0;
@@ -193,7 +192,13 @@
     .elr-col-two-thirds,
     .elr-col-8 {
         width: (100% / 3) * 2;
-        
+
+        @include elr-breakpoint('saturn') {
+            width: 100%;
+            padding-left: 0;
+            padding-right: 0;
+        }
+
         &:first-child {
             padding-left: 0;
         }
@@ -202,13 +207,8 @@
             padding-right: 0;
         }
 
-        & + .elr-col-third, .elr-col-4 {
-            padding-right: 0;
-        }
-
-        @include elr-breakpoint(saturn) {
-            width: 100%;
-            padding-left: 0;
+        + .elr-col-third,
+        .elr-col-4 {
             padding-right: 0;
         }
     }
@@ -226,7 +226,7 @@
     .elr-col-third + .elr-col-8 {
         padding-right: $gutter * 2;
 
-        @include elr-breakpoint(saturn) {
+        @include elr-breakpoint('saturn') {
             padding-right: 0;
         }
     }
@@ -234,21 +234,21 @@
     .elr-col-three-fourths,
     .elr-col-9 {
         width: (100% / 4) * 3;
-        
+
+        @include elr-breakpoint('mars') {
+            width: (100% / 3) * 2;
+        }
+
+        @include elr-breakpoint('saturn') {
+            width: 100%;
+        }
+
         &:first-child {
             padding-left: 0;
         }
 
         &:last-child {
             padding-right: 0;
-        }
-
-        @include elr-breakpoint(mars) {
-            width: (100% / 3) * 2;
-        }
-
-        @include elr-breakpoint(saturn) {
-            width: 100%;
         }
     }
 
@@ -258,31 +258,32 @@
     .elr-col-three-fourths + .elr-col-3 {
         padding-right: 0;
 
-        @include elr-breakpoint(mars) {
+        @include elr-breakpoint('mars') {
             width: (100% / 3);
         }
 
-        @include elr-breakpoint(saturn) {
+        @include elr-breakpoint('saturn') {
             width: 100%;
         }
     }
 
-    .elr-col-quarter, .elr-col-3 {
+    .elr-col-quarter,
+    .elr-col-3 {
         width: (100% / 4);
 
-        @include elr-breakpoint(mars) {
+        @include elr-breakpoint('mars') {
             width: (100% / 2);
 
             &:nth-of-type(odd) {
                 padding-left: 0;
             }
-            
+
             &:nth-of-type(even) {
                 padding-right: 0;
             }
         }
 
-        @include elr-breakpoint(saturn) {
+        @include elr-breakpoint('saturn') {
             width: 50%;
             float: left;
         }
@@ -291,7 +292,7 @@
     .elr-col-fifth {
         width: (100% / 5);
 
-        @include elr-breakpoint(mars) {
+        @include elr-breakpoint('mars') {
             &:first-child,
             &:nth-child(2) {
                 width: 50%;
@@ -320,27 +321,24 @@
             }
         }
 
-        @include elr-breakpoint(saturn) {
-            // width: 100% !important;
-            // padding-left: 0 !important;
-            // padding-right: 0 !important;
+        @include elr-breakpoint('saturn') {
             float: left;
         }
     }
 
     .elr-col-2 {
-        @include elr-breakpoint(mars) {
+        @include elr-breakpoint('mars') {
             width: (100% / 3);
         }
 
-        @include elr-breakpoint(saturn) {
+        @include elr-breakpoint('saturn') {
             width: (100% / 2);
             float: left;
 
             &:nth-of-type(odd) {
                 padding-left: 0;
             }
-            
+
             &:nth-of-type(even) {
                 padding-right: 0;
             }

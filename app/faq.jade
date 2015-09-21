@@ -1,24 +1,12 @@
-doctype html
-html.no-js(lang="en")
-    include partials/head
-    body
-        include partials/header
-        .hero-unit
-            .elr-container
-                .elr-row
-                    .elr-col-full
-                        h1 Frequently Asked Questions&nbsp;
-                            i.fa.fa-wrench
-                        p A collection of reusable, modular Sass and JavaScript components
-        main.main-content.elr-container
-            .elr-row
-                article.elr-col-9
-                    .elr-container
-                        .elr-row
-                            .elr-col-full
-                                h2 Can I use ELR Utilities on my website?
-                                p.
-                                    ELR Utilities is free and open source so feel free to use it on your site.
-                                    However, it is still an ongoing project so there are probably still a lot of bugs and documentation is still incomplete.
-                include partials/sidebar
-        include partials/footer
+extends templates/base
+block pagetitle
+    | Frequently Asked Questions
+block content
+    h2.elr-bold Can I use ELR Utilities on my website?
+    p ELR Utilities is free and open source so feel free to use it on your site. However, it is still an ongoing project so there are probably still a lot of bugs and documentation is still incomplete.
+    h2.elr-bold Why use Sass Mixins instead of Vanilla CSS
+    p Many CSS frameworks contain styles that are rarely used.  With vanilla CSS these unused styles are adding to the weight of all of your pages.  Even worse, if you don't fully understand all of the framework styles your CSS can be unpredictable and full of unnecessary overrides.
+    p Using Sass mixins your end CSS files will only contain the styles you actually use.  You can also configure your own base styles and override base colors and fonts in your config file.
+    p This will make your CSS lighter and more predictable.
+    h2.elr-bold Can I use ELR Utiltiies with Bootstrap?
+    p Yes, all classes and mixins are prefixed 'elr' so they will not conflict with libraries and frameworks like Boostrap.

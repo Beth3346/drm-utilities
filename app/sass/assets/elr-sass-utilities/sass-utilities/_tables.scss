@@ -1,67 +1,68 @@
 // Tables
 
-@mixin elr-table-base($bk-color: white, $color: $dark-grey, $hover-bk: $link-color) {
+@mixin elr-table-base($bk-color: $white, $color: $dark-grey, $hover-bk: $link-color) {
     color: $color;
     border-spacing: 0;
     text-align: left;
-    margin: 10px auto 30px auto;
+    margin: 10px auto 30px;
 
-    @include elr-breakpoint(mercury) {
+    @include elr-breakpoint('mercury') {
         width: 100%;
     }
 
-    @include elr-breakpoint(venus) {
+    @include elr-breakpoint('venus') {
         width: 100%;
     }
 
-    @include elr-breakpoint(mars) {
+    @include elr-breakpoint('mars') {
         width: 600px;
         overflow-x: scroll;
     }
 
-    @include elr-breakpoint(neptune) {
+    @include elr-breakpoint('neptune') {
         width: 400px;
     }
 
     tbody {
         background-color: $bk-color;
+    }
 
-        tr {
-            &.elr-danger-row {
-                background-color: lighten($danger-color, 20%);
-                color: darken($danger-color, 20%);             
-            }
+    tr {
+        &.elr-danger-row {
+            background-color: lighten($danger-color, 20%);
+            color: darken($danger-color, 20%);             
+        }
 
-            &.elr-warning-row {
-                background-color: lighten($warning-color, 20%);
-                color: darken($warning-color, 20%);             
-            }
+        &.elr-warning-row {
+            background-color: lighten($warning-color, 20%);
+            color: darken($warning-color, 20%);             
+        }
 
-            &.elr-success-row {
-                background-color: lighten($success-color, 20%);
-                color: darken($success-color, 20%);             
-            }
+        &.elr-success-row {
+            background-color: lighten($success-color, 20%);
+            color: darken($success-color, 20%);             
+        }
 
-            &.elr-muted-row {
-                background-color: $muted-color;
-                color: darken($muted-color, 20%);             
-            }
+        &.elr-muted-row {
+            background-color: $muted-color;
+            color: darken($muted-color, 20%);             
+        }
 
-            &:hover {
-                background-color: $hover-bk;
-                color: white;
-            }
+        &:hover {
+            background-color: $hover-bk;
+            color: $white;
         }
     }
 
-    th, td {
-        padding: 5px 10px 5px 10px;
+    th,
+    td {
+        padding: 5px 10px;
     }
 
     th {
         @include elr-em-font(14);
         font-weight: bold;
-        color: #666;
+        color: $grey;
     }
 
     td {
@@ -77,24 +78,24 @@
     input {
         display: block;
         width: 100%;
-        margin: 5px 0 5px 0;
-        padding: 5px 10px 5px 10px;
+        margin: 5px 0;
+        padding: 5px 10px;
         border-radius: 5px;
         box-sizing: border-box;
         border: 1px solid darken($lightest-grey, 10%);
         background-color: $lightest-grey;
-        transition: background .5s ease-out;
+        transition: background-color .5s ease;
 
         &:focus {
             outline: none;
-            background-color: white;
-            transition: background .5s ease-in;
+            background-color: $white;
+            transition: background-color .5s ease;
         }
     }
 
     .elr-sortable-table-button {
-        border: none;
-        background: white;
+        border: 0;
+        background: $white;
         color: $link-color;
         padding: 0;
 
@@ -109,16 +110,16 @@
     }
 }
 
-@mixin elr-table($bk-color: white, $color: $dark-grey, $hover-bk: $link-color, $border-color: 'none', $stripes: 'none') {
-    border-collapse: collapse;
+@mixin elr-table($bk-color: $white, $color: $dark-grey, $hover-bk: $link-color, $border-color: 'none', $stripes: 'none') {
     @include elr-table-base($bk-color, $color, $hover-bk);
+    border-collapse: collapse;
 
     tbody tr {
-        @if $border-color != 'none' {
+        @if ($border-color != 'none') {
             border: 1px solid $border-color;
         }
 
-        @if $stripes != 'none' {
+        @if ($stripes != 'none') {
             &:nth-child(even) {
                 background-color: $stripes;
 
@@ -144,20 +145,20 @@
 
                 &:hover {
                     background-color: $hover-bk;
-                    color: white;
+                    color: $white;
                 }
             }
         }
     }
 }
 
-@mixin elr-table-rounded($bk-color: white, $color: $dark-grey, $hover-bk: $link-color, $border-color: 'none', $stripes: 'none') {
-    border-collapse: separate;
+@mixin elr-table-rounded($bk-color: $white, $color: $dark-grey, $hover-bk: $link-color, $border-color: 'none', $stripes: 'none') {
     @include elr-table-base($bk-color, $color, $hover-bk);
+    border-collapse: separate;
 
-    tbody tr {
+    tr {
 
-        @if $stripes != 'none' {
+        @if ($stripes != 'none') {
             &:nth-child(even) {
                 background-color: $stripes;
             
@@ -183,44 +184,44 @@
 
                 &:hover {
                     background-color: $hover-bk;
-                    color: white;
+                    color: $white;
                 }
             }
         }
 
         &:hover {
             background-color: $hover-bk;
-            color: white;
+            color: $white;
+        }
+    }
+
+    tr:first-child {
+
+        td:first-child {
+            border-radius: 5px 0 0;
         }
 
-        &:first-child {
-
-            td:first-child {
-                border-radius: 5px 0 0 0;
-            }
-
-            td:last-child {
-                border-radius: 0 5px 0 0;
-            }
+        td:last-child {
+            border-radius: 0 5px;
         }
+    }
 
-        &:last-child {
-            td {
-                border-bottom: 1px solid $border-color;
+    tr:last-child {
+        td {
+            border-bottom: 1px solid $border-color;
 
-                &:first-child {
-                    border-radius: 0 0 0 5px;
-                }
+            &:first-child {
+                border-radius: 0 0 0 5px;
+            }
 
-                &:last-child {
-                    border-radius: 0 0 5px 0;
-                }
+            &:last-child {
+                border-radius: 0 0 5px;
             }
         }
     }
 
     td {
-        @if $border-color != 'none' {
+        @if ($border-color != 'none') {
             border-top: 1px solid $border-color;
             
             &:first-child {

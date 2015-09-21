@@ -1,0 +1,13 @@
+.main-nav {
+    @include elr-em-font(14px);
+    @include elr-clearfix;
+    float: right;
+    margin: 0;
+    padding: 5px 0 0;
+
+    @include elr-breakpoint(saturn) {
+        display: none;
+    }
+}
+
+.main-menu { @include elr-nav-bar-pills; }
