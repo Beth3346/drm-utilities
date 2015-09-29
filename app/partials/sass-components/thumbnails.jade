@@ -1,17 +1,13 @@
 section#thumbnails
-    .elr-container
+    .elr-container.example-section
         .elr-row
             .elr-col-full
-                h3 Thumbnail
-                .elr-container
-                    .elr-row
-                        .elr-col-third
-                            img.elr-thumbnail(src="http://placehold.it/150/125")
-                        .elr-col-third   
-                            img.rounded-thumbnail(src="http://placehold.it/150/125")
-                        .elr-col-third
-                            img.round-thumbnail(src="http://placehold.it/200/200")
-                pre.
-                    @include elr-thumbnail(white, 150px, 125px, 0);
-                    @include elr-thumbnail(white, 150px, 125px, 5px);
-                    @include elr-thumbnail(white, 150px, null, round);
+                h1 Thumbnails
+        .elr-row
+            .elr-col-full
+                figure.elr-thumbnail
+                    img(src="images/cat11.jpg")
+                figure.rounded-thumbnail
+                    img(src="images/paris3.jpg")
+                figure.round-thumbnail
+                    img(src="images/cat.jpg")

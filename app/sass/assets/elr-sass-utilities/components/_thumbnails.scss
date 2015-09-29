@@ -1,6 +1,8 @@
 // Thumbnails
 
 @mixin elr-thumbnail($border-color: $white, $width: 150px, $height: 125px, $border-radius: 0, $display: block) {
+    overflow: hidden;
+
     @if ($border-color) {
         border: 5px solid $border-color;
         box-shadow: $grey 0 0 0 1px;
@@ -12,6 +14,11 @@
         @include elr-rectangle($width, $height, $display, $border-radius);
     } @else if $border-radius == 0 {
         @include elr-rectangle($width, $height, $display);
+    }
+
+    img {
+        height: 100%;
+        width: auto;
     }
 }
 

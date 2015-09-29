@@ -1,6 +1,6 @@
 (function($) {
     'use strict';
-    
+
     window.elrStickyNav = function(params) {
         var self = {};
         var spec = params || {};
@@ -8,7 +8,7 @@
         var activeClass = spec.activeClass || 'active';
         var $content = spec.content || $('div.sticky-nav-content');
         var sectionEl = spec.sectionEl || 'section';
-        var spy = spec.spy || true;
+        var spy = spec.spy || false;
         var $links = $nav.find('a[href^="#"]');
         var hash = window.location.hash;
 

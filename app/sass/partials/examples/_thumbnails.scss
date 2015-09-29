@@ -1,7 +1,14 @@
 // Thumbnails
 
-.elr-thumbnail { @include elr-thumbnail($background-color, 150px, 125px, 0); }
+.elr-thumbnail,
+.rounded-thumbnail,
+.round-thumbnail {
+    float: left;
+    margin-right: 20px;
+}
 
-.rounded-thumbnail { @include elr-thumbnail($background-color, 150px, 125px, 5px); }
+.elr-thumbnail { @include elr-thumbnail; }
 
-.round-thumbnail { @include elr-thumbnail($background-color, 150px, null, round); }
+.rounded-thumbnail { @include elr-thumbnail($white, 150px, 125px, 5px); }
+
+.round-thumbnail { @include elr-thumbnail($white, 150px, null, round); }

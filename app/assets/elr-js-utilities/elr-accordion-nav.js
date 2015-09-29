@@ -1,6 +1,6 @@
 (function($) {
     'use strict';
-    
+
     // TODO: add feature that leaves accordion open to show current page link so that visitors
     // don't need to keep opeing the content to click to a page in the same ul
     window.elrAccordionNav = function(params) {
@@ -24,7 +24,7 @@
             var $nextContent = $that.next();
 
                 $openContent.slideUp(speed);
-                
+
                 if ($nextContent.is(':hidden')) {
                     $nextContent.slideDown(speed);
                 } else {
@@ -36,7 +36,7 @@
             var $that = $(this);
             var $icon = $that.find('.' + iconClass);
             var $openContentIcons = $openContent.prev().find('.' + iconClass);
-            
+
             if ( $icon.hasClass(expandIconClass) ) {
                 $icon.removeClass(expandIconClass).addClass(collapseIconClass);
             } else {
@@ -65,6 +65,7 @@
             }
 
             $target = $container.find('a[href="' + currentPage + '"]').addClass('active');
+            console.log($target);
 
             if ( $target.length ) {
                 $currentList = $target.closest('ul').parent('li');
@@ -109,7 +110,7 @@
                 var $openContent = $($content).not(':hidden');
                 e.stopPropagation();
                 e.preventDefault();
-                
+
                 toggle.call(this, speed, $openContent);
                 replaceIcons.call(this, $openContent, iconClass, expandIconClass, collapseIconClass);
             });

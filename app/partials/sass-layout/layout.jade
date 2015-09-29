@@ -1,12 +1,10 @@
 section#layout
-    .elr-container
+    .elr-container.example-section
         .elr-row
             .elr-col-full
                 h3.elr-bold Clear Fix
                 p A modern clearfix alternative to overflow: hidden
                 pre @include elr-clearfix();
-
-    .elr-container
         .elr-row
             .elr-col-full
                 h3.elr-bold Em Margin
@@ -18,8 +16,6 @@ section#layout
                     li $bottom: enter value only - no units
                     li $left: enter value only - no units
                 pre @include elr-em-margin(10, 20, 10, 20);
-
-    .elr-container
         .elr-row
             .elr-col-full
                 h3.elr-bold Em Padding
@@ -31,7 +27,6 @@ section#layout
                     li $bottom: enter value only - no units
                     li $left: enter value only - no units
                 pre @include elr-em-padding(10, 20, 10, 20);
-    .elr-container
         .elr-row
             .elr-col-full
                 h3.elr-bold Center Block
@@ -41,23 +36,18 @@ section#layout
                         h1 Center Block
                         p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero, nemo, quia, dolorum, labore ratione quisquam doloribus consectetur officia perferendis tenetur sed nobis corrupti voluptatum. Eligendi, repudiandae velit voluptates cum officia aliquid eos molestiae vel quia nam illo obcaecati molestias expedita eveniet aut exercitationem placeat minus possimus aliquam minima. Nemo, nihil.
                 pre @include elr-center-block($width);
-
-    .elr-container
         .elr-row
             .elr-col-full
                 h3.elr-bold Horizontally Center
                 p Horizontally centers an element using absolute positioning and translate
                 .example-holder.horizontal-container
                     .horizontally-center
-
-    .elr-container
         .elr-row
             .elr-col-full
                 h3.elr-bold Vertically Center
                 p Vertially centers an element using absolute positioning and translate
                 .example-holder.vertical-container
                     .vertically-center
-    .elr-container
         .elr-row
             .elr-col-full
                 h3.elr-bold Centered

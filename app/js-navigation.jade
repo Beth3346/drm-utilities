@@ -1,0 +1,15 @@
+extends templates/base
+block vars
+    - var tech = 'javascript'
+block title
+    | JavaScript Navigation
+block pagetitle
+    | JavaScript Navigation
+block subtitle
+    | Interactive JavaScript components
+block content
+    include partials/js-navigation/back-to-top
+    include partials/js-navigation/dropdown
+    include partials/js-navigation/offscreen-menu
+    //- include partials/js-navigation/sticky-nav
+    include partials/js-navigation/sticky-sidebar

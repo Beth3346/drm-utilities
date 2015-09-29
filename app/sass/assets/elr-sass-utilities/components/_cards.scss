@@ -115,16 +115,10 @@
     .elr-button { @include elr-em-width(200px) };
 
     .elr-card-thumbnail {
-        @include elr-square(60px);
+        @include elr-thumbnail(null, 60px, 60px);
         @include elr-em-margin('all', 0, 20px, 10px, 0);
         padding: 0;
-        overflow: hidden;
         float: left;
-
-        img {
-            width: auto;
-            height: 100%;
-        }
 
         + h2 {
             @include elr-em-font(30);
@@ -135,7 +129,7 @@
     }
 
     .elr-card-thumbnail-round {
-        @include elr-circle(80px);
+        @include elr-thumbnail(null, 80px, 80px, round);
     }
 
     &.card-centered {

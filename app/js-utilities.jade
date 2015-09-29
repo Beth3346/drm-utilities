@@ -1,0 +1,17 @@
+extends templates/base
+block vars
+    - var tech = 'javascript'
+block title
+    | JavaScript Utilities
+block pagetitle
+    | JavaScript Utilities
+block subtitle
+    | A JavaScript utility library
+block content
+    include partials/js-utilities/array-utilities
+    include partials/js-utilities/data-utilities
+    include partials/js-utilities/dom-manipulation-utilities
+    include partials/js-utilities/pattern-utilities
+    include partials/js-utilities/sort-utilities
+    include partials/js-utilities/time-utilities
+    include partials/js-utilities/validation-utilities

@@ -9,7 +9,7 @@ module.exports = function(grunt) {
         copy: {
             build: {
                 cwd: '<%= appFolder %>',
-                src: [ 
+                src: [
                     '**',
                     '!**/partials/**/*',
                     '!**/templates/**/*',
@@ -20,7 +20,7 @@ module.exports = function(grunt) {
                 dest: '<%= distFolder %>',
                 expand: true
             }
-        }, 
+        },
 
         clean: {
             build: {
@@ -96,7 +96,7 @@ module.exports = function(grunt) {
                 src: ['coffee/**/*.coffee'],
                 dest: '<%= distFolder %>js/coffee-compiled',
                 ext: '.js'
-            }  
+            }
         },
 
         concat: {
@@ -316,6 +316,7 @@ module.exports = function(grunt) {
         ['clean:build',
         'copy',
         'jade:dev',
+        'imagemin',
         'coffee',
         'concat',
         'sass:dev',

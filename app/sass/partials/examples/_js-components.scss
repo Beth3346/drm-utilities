@@ -1,5 +1,9 @@
 // JavaScript Examples
 
+@include elr-alert-classes;
+
+.elr-custom-alert { @include elr-context-box(custom, 3px, $link-color, 100%, $white); }
+
 .elr-accordion {
     @include elr-em-max-width(800px);
     @include elr-accordion($main-color, 5px);
@@ -17,6 +21,9 @@
 .elr-dropdown-nav {
     @include elr-em-margin('bottom', 200px);
     @include elr-dropdown-nav;
+    @include elr-em-font(14px);
+
+    .elr-submenu { @include elr-em-font(12px); }
 }
 
 .elr-lightbox-thumbnails { @include elr-thumbnail-list; }
@@ -24,7 +31,7 @@
 .elr-blackout { @include elr-lightbox-slideshow; }
 
 .elr-modal-demo-buttons {
-    @include elr-button-group($main-color, $background-color, 3px, $main-color);
+    @include elr-button-group($link-color, $background-color, 3px, $link-color);
     margin: 10px auto;
     width: 350px;
 
@@ -42,7 +49,7 @@
     margin: 0 auto 20px;
 
     button {
-        @include elr-button-solid($main-color, $background-color, 200px, center, 3px, $main-color, inline-block);
+        @include elr-button-solid($link-color, $white, 200px, left, 3px, $link-color, inline-block);
         @include elr-em-font(14px);
     }
 }
@@ -55,40 +62,56 @@
 
 .elr-popover-right { @include elr-popover(right); }
 
-.elr-offscreen-menu { @include elr-offscreen-menu($main-color); }
+.elr-offscreen-menu {
+    @include elr-offscreen-menu($main-color);
+    @include elr-em-font(14px);
+}
 
 .elr-menu-button {
     @include elr-em-font(18px);
     border: 0;
-    background-color: $text-color;
-    color: $background-color;
+    background-color: $link-color;
+    color: $white;
     padding: 5px 10px;
 
     &:hover {
         cursor: pointer;
-        background-color: $background-color;
-        color: $text-color;
+        background-color: $white;
+        color: $link-color;
     }
 }
 
 .elr-offscreen-nav {
     width: 100%;
-    padding: 10px;
-    background-color: $text-color;
+    padding: 0 10px;
+    background-color: $link-color;
+    color: $white;
+    font-weight: 700;
+    height: 50px;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .elr-offscreen-content {
+    // @include elr-em-height(500px);
     @include elr-clearfix;
-    width: 95%;
+    width: 100%;
     margin: 2px auto;
     position: relative;
     background-color: $background-color;
-    overflow: hidden;
     border: 1px solid $light-grey;
+    padding-top: 50px;
+    overflow: hidden;
 
-    p {     
+    p {
         padding: 10px 20px;
     }
+}
+
+.elr-offscreen-content-holder {
+    @include elr-em-height(500px);
+    overflow-y: scroll;
 }
 
 .elr-simple-slider {
@@ -101,12 +124,14 @@
 
 .elr-sticky-nav {
     &.sticky-top {
-        @include elr-sticky-menu('top');          
+        @include elr-sticky-menu('top');
     }
 
     ul {
         @include elr-nav-bar-pills;
-    }   
+        @include elr-em-font(14px);
+        font-weight: 700;
+    }
 }
 
 .elr-sticky-sidebar {
@@ -117,18 +142,13 @@
 
     &.sticky-left {
         @include elr-sticky-menu('left');
-
-        @include elr-breakpoint(mercury) {            
-            width: 250px;
-        }
-        
-        @include elr-breakpoint(venus) {
-            width: 200px;
-        }
+        @include elr-em-width(250);
     }
 
     ul {
         @include elr-nav-bar-pills-solid-stacked($background-color, $main-color, left, $main-color);
+        @include elr-em-font(14px);
+        font-weight: 700;
     }
 }
 

@@ -1,0 +1,224 @@
+section#forms
+    .elr-container.example-section
+        .elr-row
+            .elr-col-full
+                h2.elr-bold Form State
+                p Adds an active and focus state to form fields
+                form.form-state(role="form" action="")
+                    .elr-container
+                        .elr-row
+                            .elr-col-full
+                                label Name:
+                        .elr-row
+                            .elr-col-half
+                                input(type="text" name="fname" id="fname" placeholder="First")
+                            .elr-col-half
+                                input(type="text" name="lname" id="lname" placeholder="Last")
+        .elr-row
+            .elr-col-full
+                h2.elr-bold Tabular Form
+                form.tabular-form(role="form" action="")
+                    .elr-container
+                        .elr-row
+                            .elr-col-full
+                                label Name:
+                        .elr-row
+                            .elr-col-half
+                                input(type="text" name="fname" id="fname" placeholder="First")
+                            .elr-col-half
+                                input(type="text" name="lname" id="lname" placeholder="Last")
+                        .elr-row
+                            .elr-col-full
+                                label Address:
+                        .elr-row
+                            .elr-col-half
+                                input(type="text" name="address1" id="address1" placeholder="Street Address")
+                            .elr-col-half
+                                input(type="text" name="address2" id="address2" placeholder="Street Address 2")
+                        .elr-row
+                            .elr-col-third
+                                input(type="text" name="city" id="city" placeholder="City")
+                            .elr-col-third
+                                input(type="text" name="state" id="state" placeholder="State")
+                            .elr-col-third
+                                input(type="text" name="zip" id="zip" placeholder="Zip")
+                        .elr-row
+                            .elr-col-half
+                                label(for="email") Email:
+                                input(type="email" id="email" name="email" placeholder="youremail@email.com" required)
+                            .elr-col-half
+                                label(for="phone") Phone:
+                                input(type="tel" id="phone" name="phone" placeholder="212-867-5309" disabled)
+                        .elr-row
+                            .elr-col-full
+                                .elr-inline-control-group
+                                    label(for="fav-animal2") Fav. Animal:
+                                    input(type="text" id="fav-animal2" name="fav-animal2" placeholder="Penguin")
+                                .elr-inline-control-group
+                                    label(for="fav-city") Favorite City:
+                                    input(type="text" id="fav-city" name="fav-city" placeholder="New York City")
+                                .elr-inline-control-group
+                                    .elr-control-group
+                                        label
+                                            input(type="checkbox" value="one")
+                                            | One
+                        .elr-row
+                            .elr-col-full
+                                .elr-control-group
+                                    label
+                                        input(type="checkbox" value="sign up")
+                                        | Sign me up!
+                                .elr-control-group
+                                    label
+                                        input(type="checkbox" value="true" checked)
+                                        | Checked Option
+                        .elr-row
+                            .elr-col-full
+                                .elr-inline-control-group
+                                    .elr-control-group
+                                        label
+                                            input(type="checkbox" value="one")
+                                            | One
+
+                                    .elr-control-group
+                                        label
+                                            input(type="checkbox" value="two")
+                                            | Two
+
+                                    .elr-control-group
+                                        label
+                                            input(type="checkbox" value="three")
+                                            | Three
+
+                                    .elr-control-group
+                                        label
+                                            input(type="checkbox" value="four" disabled)
+                                            | Four
+                        .elr-row
+                            .elr-col-full
+                                .elr-tabular-control-group
+                                    h3.elr-bold.elr-control-label Select an Option
+                                    .elr-control-group
+                                        label
+                                            input(type="radio" name="radio-options" id="option1" value="option1" checked)
+                                            | Option 1
+
+                                    .elr-control-group
+                                        label
+                                            input(type="radio" name="radio-options" id="option2" value="option2")
+                                            | Option 2
+
+                                    .elr-control-group
+                                        label
+                                            input(type="radio" name="radio-options" id="option3" value="option3")
+                                            | Option 3
+
+                                    .elr-control-group
+                                        label
+                                            input(type="radio" name="radio-options" id="option4" value="option4")
+                                            | Option 4
+                        .elr-row
+                            .elr-col-full
+                                .elr-inline-control-group
+                                    h3.elr-bold.elr-control-label Select a Color
+                                    .elr-control-group
+                                        label
+                                            input(type="radio" name="radio-colors" value="red")
+                                            | Red
+
+                                    .elr-control-group
+                                        label
+                                            input(type="radio" name="radio-colors" value="green")
+                                            | Green
+
+                                    .elr-control-group
+                                        label
+                                            input(type="radio" name="radio-colors" value="blue")
+                                            | Blue
+                        .elr-row
+                            .elr-col-half
+                                label(for="fav-num") Favorite Number:
+                                select
+                                    option Favorite Number
+                                    option 1
+                                    option 2
+                                    option 3
+                                    option 4
+                                    option 5
+                            .elr-col-half
+                                label(for="fav-color") Favorite Color:
+                                select(disabled)
+                                    option Favorite Color
+                                    option Red
+                                    option Yellow
+                                    option Green
+                                    option Blue
+                                    option Orange
+                        .elr-row
+                            .elr-col-half
+                                .elr-inline-control-group
+                                    label(for="fav-animal") Favorite Animal:
+                                    select
+                                        option Favorite Animal
+                                        option Pengiun
+                                        option Owl
+                                        option Dog
+                                        option Cat
+                                        option Panda Bear
+                            .elr-col-half
+                                label(for="fav-num-2") Favorite Number:
+                                select(multiple)
+                                    option Favorite Number
+                                    option 1
+                                    option 2
+                                    option 3
+                                    option 4
+                                    option 5
+                        .elr-row
+                            .elr-col-full
+                                label(for="notes") Notes:
+                                textarea(name="notes" id="notes" cols="30" rows="10" placeholder="These are some notes")
+                                small This is some instructional text
+                        .elr-row
+                            .elr-col-full
+                                input.elr-pull-left(type="submit" id="submit" name="submit" value="Submit")
+                                input.elr-pull-left(type="submit" id="disabled" name="disabled" disabled value="Disabled Input")
+                                button.elr-pull-left(type="submit" disabled) Disabled Button
+        .elr-row
+            .elr-col-full
+                h2.elr-bold Inline Form
+                form.inline-form(role="form" action="")
+                    .elr-container
+                        .elr-row
+                            .elr-col-full
+                                .elr-inline-control-group
+                                    label(for="username") Email:
+                                    input(type="text" id="username" name="username" placeholder="youremail@email.com" required)
+                                .elr-inline-control-group
+                                    label(for="password") Password:
+                                    input(type="password" id="password" name="password")
+                                .elr-inline-control-group
+                                    .elr-control-group
+                                        label
+                                            input(type="checkbox" value="remember")
+                                            | Remember Me
+                                .elr-inline-control-group
+                                    input(type="submit" id="submit" name="submit" value="Submit")
+        .elr-row
+            .elr-col-full
+                h2.elr-bold Form Validation Styles
+                form.tabular-form(role="form" action="")
+                    .elr-container
+                        .elr-row
+                            .elr-col-third
+                                label(for="fname") Name:
+                                input(type="text" class="elr-form-success" name="fname" placeholder="First Last")
+                            .elr-col-third
+                                label(for="email-address") Email:
+                                input(type="email" class="elr-form-warning" name="email-address" placeholder="youremail@email.com")
+                            .elr-col-third
+                                label(for="phone-num") Phone:
+                                input(type="tel" class="elr-form-danger" name="phone-num" placeholder="212-867-5309")
+                        .elr-row
+                            .elr-col-full
+                                input(type="submit" id="submit" name="submit" value="Submit")

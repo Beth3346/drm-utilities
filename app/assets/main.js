@@ -1,6 +1,6 @@
 (function($){
     'use strict';
-    
+
     var elrAlert = elrAlerts();
     var formControls = elrFormControls({
         selectOptions: {
@@ -9,7 +9,7 @@
             }
         }
     });
-    
+
     var $input = $('.regex-tester').find('input');
 
     elrAccordion();
@@ -17,7 +17,7 @@
     elrAccordionNav({
         containerClass: 'main-sidebar'
     });
-    
+
     elrAlert.showAlert('info', 'This is just an informative alert', $('.elr-alert-holder'));
     elrAlert.showAlert('danger', 'Danger Danger Danger!', $('.elr-alert-holder'));
     elrAlert.showAlert('warning', 'This is just a gentle warning', $('.elr-alert-holder'));
@@ -38,7 +38,7 @@
     elrDropdownMenu({menuClass: 'main-nav'});
 
     elrFlexibleGrid();
-    
+
     formControls.select();
 
     elrLightbox();
@@ -74,10 +74,15 @@
         });
     }
 
-    elrStickyNav();
+    elrStickyNav({spy: true});
     elrStickyNav({
         nav: $('nav.elr-sticky-sidebar'),
-        content: $('div.sticky-sidebar-content')
+        content: $('div.sticky-sidebar-content'),
+        spy: true
+    });
+    elrStickyNav({
+        nav: $('aside.main-sidebar'),
+        content: $('body')
     });
     elrTableFilter();
     elrTableSorter();

@@ -15,15 +15,15 @@ section#elr-modal
 
                 .elr-modal#elr-modal-info
                     .elr-header
-                        h3.elr-header-title Modal Window with some info
+                        h3.elr-bold.elr-header-title Modal Window with some info
                     .elr-body
                         p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus officiis repudiandae sed tempora nesciunt mollitia. Doloremque, debitis ad veritatis. Illum, iusto officiis hic voluptate earum.
                     .elr-footer
-                        button.elr-modal-close Close
-                
+                        button.elr-button.elr-button-primary.elr-modal-close Close
+
                 .elr-modal#elr-modal-form
                     .elr-header
-                        h3.elr-header-title Modal Form
+                        h3.elr-bold.elr-header-title Modal Form
                     .elr-body
                         form(action="")
                             label(for="name") Name:
@@ -36,17 +36,17 @@ section#elr-modal
                             textarea(name="notes" id="notes" cols="30" rows="10" placeholder="These are some notes")
                             small This is some instructional text
                     .elr-footer
-                        button(type="submit" id="submit") Submit
-                        button.elr-modal-close Cancel
+                        button.elr-button.elr-button-primary(type="submit" id="submit") Submit
+                        button.elr-button.elr-button-primary.elr-modal-close Cancel
 
                 .elr-modal#elr-modal-video
                     .elr-header
-                        h3.elr-header-title Modal Video
+                        h3.elr-bold.elr-header-title Modal Video
                     .elr-body
                         .video-holder
                             iframe(width="420" height="315" src="//www.youtube.com/embed/Na9H0Jdy3fY?rel=0" frameborder="0" allowfullscreen)
                     .elr-footer
-                        button.elr-modal-close Close
+                        button.elr-button.elr-button-primary.elr-modal-close Close
     .elr-container
         .elr-row
             .elr-col-full

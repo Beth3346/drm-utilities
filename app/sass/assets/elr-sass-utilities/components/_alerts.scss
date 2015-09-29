@@ -7,9 +7,7 @@
     .elr-success-alert,
     .elr-muted-alert {
 
-        p {
-            padding: 10px 0;
-        }
+        p { padding: 10px 0; }
     }
 
     .elr-info-alert { @include elr-context-box(info, 3px); }

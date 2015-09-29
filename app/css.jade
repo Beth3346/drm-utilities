@@ -1,8 +1,8 @@
 extends templates/base
 block title
-    | CSS Helpers
+    | CSS &amp; Sass
 block pagetitle
-    | CSS Helpers
+    | CSS &amp; Sass
 block subtitle
     | Base CSS classes and resets
 block content
@@ -14,3 +14,30 @@ block content
     include partials/css-helpers/reset
     include partials/css-helpers/responsive
     include partials/css-helpers/typography
+    include partials/sass-components/cards
+    //- include partials/sass-components/comments
+    include partials/sass-components/labels
+    //- include partials/sass-components/preloaders
+    //- include partials/sass-components/pricing-tables
+    //- include partials/sass-components/progress-meters
+    //- include partials/sass-components/steps
+    include partials/sass-components/thumbnails
+    include partials/sass-elements/images
+    include partials/sass-elements/lists
+    include partials/sass-elements/tables
+    include partials/sass-elements/videos
+    include partials/sass-forms/form-elements
+    include partials/sass-forms/forms
+    include partials/sass-layout/content-blocks
+    include partials/sass-layout/context-boxes
+    include partials/sass-layout/grid
+    include partials/sass-layout/layout
+    include partials/sass-layout/media-queries
+    include partials/sass-layout/shapes
+    include partials/sass-navigation/buttons
+    include partials/sass-navigation/context-buttons
+    include partials/sass-navigation/navbars
+    include partials/sass-navigation/navigation
+    include partials/sass-navigation/pagination
+    include partials/sass-typography/headings
+    include partials/sass-typography/text-effects

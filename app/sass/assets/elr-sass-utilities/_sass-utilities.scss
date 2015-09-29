@@ -13,63 +13,69 @@
 @import 'default-config';
 @import '../config';
 
-// Sass Components
-
-@import 'components/buttons';
+@import 'components/accordion';
+@import 'components/alerts';
+@import 'components/calendar';
 @import 'components/cards';
 @import 'components/comments';
-@import 'components/content-blocks';
-@import 'components/context-boxes';
-@import 'components/context-buttons';
-@import 'components/headings';
+@import 'components/data-patterns';
 @import 'components/labels';
-@import 'components/navbars';
-@import 'components/navigation';
-@import 'components/pagination';
+@import 'components/lightbox';
+@import 'components/modals';
+@import 'components/popovers';
 @import 'components/preloaders';
 @import 'components/pricing-tables';
 @import 'components/progress-meters';
+@import 'components/simple-slider';
 @import 'components/steps';
+@import 'components/tabbed-content';
 @import 'components/thumbnails';
-@import 'components/videos';
+@import 'components/tooltips';
 
-// Helper Classes
+@import 'elements/images';
+@import 'elements/lists';
+@import 'elements/table-base';
+@import 'elements/tables';
+@import 'elements/videos';
 
-@import 'helper-classes/reset';
+@import 'forms/form-base';
+@import 'forms/form-elements';
+@import 'forms/form-inputs';
+@import 'forms/forms';
+@import 'forms/formstack-reset';
+@import 'forms/passwords';
+
 @import 'helper-classes/base';
 @import 'helper-classes/helper-classes';
+@import 'helper-classes/reset';
 
-// JavaScript Components
+@import 'layout/circles';
+@import 'layout/content-blocks';
+@import 'layout/context-boxes';
+@import 'layout/em-conversion';
+@import 'layout/grid';
+@import 'layout/image-grid';
+@import 'layout/layout';
+@import 'layout/media-queries';
+@import 'layout/navbars';
+@import 'layout/rectangles';
+@import 'layout/triangles';
 
-@import 'javascript-components/accordion';
-@import 'javascript-components/back-to-top';
-@import 'javascript-components/calendar';
-@import 'javascript-components/dropdown-buttons';
-@import 'javascript-components/dropdown-nav';
-@import 'javascript-components/form-elements';
-@import 'javascript-components/image-grid';
-@import 'javascript-components/lightbox';
-@import 'javascript-components/modals';
-@import 'javascript-components/offscreen-menu';
-@import 'javascript-components/passwords';
-@import 'javascript-components/popover';
-@import 'javascript-components/simple-slider';
-@import 'javascript-components/sticky-menu';
-@import 'javascript-components/tabbed-content';
-@import 'javascript-components/tooltips';
+@import 'navigation/back-to-top';
+@import 'navigation/breadcrumbs';
+@import 'navigation/button-groups';
+@import 'navigation/buttons';
+@import 'navigation/context-buttons';
+@import 'navigation/dropdown-buttons';
+@import 'navigation/dropdown-nav';
+@import 'navigation/icon-buttons';
+@import 'navigation/nav-bar-pills';
+@import 'navigation/navigation-base';
+@import 'navigation/navigation';
+@import 'navigation/offscreen-menu';
+@import 'navigation/pagination';
+@import 'navigation/pill-buttons';
+@import 'navigation/sticky-menu';
 
-// Sass Utilities 
-
-@import 'sass-utilities/circles';
-@import 'sass-utilities/forms';
-@import 'sass-utilities/grid';
-@import 'sass-utilities/images';
-@import 'sass-utilities/layout';
-@import 'sass-utilities/lists';
-@import 'sass-utilities/media-queries';
-@import 'sass-utilities/rectangles';
-@import 'sass-utilities/shapes';
-@import 'sass-utilities/stars';
-@import 'sass-utilities/tables';
-@import 'sass-utilities/text-effects';
-@import 'sass-utilities/triangles';
+@import 'typography/headings';
+@import 'typography/text-effects';
