@@ -1,3 +1,12 @@
-.pagination-bar { @include elr-pagination-bar; }
+.pagination { @include elr-pagination; }
 
-.dark-pagination-bar { @include elr-pagination-bar($text-color, 5px, $text-color, $background-color); }
+.pagination-base {
+    text-align: center;
+
+    a {
+        @include elr-em-font(14px);
+    }
+}
+
+.pagination-bar { @include elr-pagination-bar; }
+.pink-pagination-bar { @include elr-pagination-bar($white, 5px, $light-grey, $dark-pink, 12px, true); }

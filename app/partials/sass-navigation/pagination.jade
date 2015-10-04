@@ -1,27 +1,49 @@
 section#pagination
-    .elr-container.example-section
+    .elr-container
         .elr-row
             .elr-col-full
-                h1 Pagination
+                h3.elr-bold Pagination
         .elr-row
-            .elr-col-full
-                h3 Pagination
-                nav.pagination-bar
+            .elr-col-full.example-holder.example-holder-light
+                nav.pagination.pagination-base
                     ul
-                        li: a.disabled(href="#" aria-label="Previous") «
-                        li: a.active(href="#") 1
-                        li: a(href="#") 2
+                        li: a(href="#" aria-label="Previous") <i class="fa fa-angle-double-left"></i></i>
+                        li: a(href="#") 1
+                        li: a.active(href="#") 2
                         li: a(href="#") 3
                         li: a(href="#") 4
                         li: a(href="#") 5
-                        li: a(href="#" aria-label="Next") »
-                h3 Dark Pagination
-                nav.dark-pagination-bar
+                        li: a.disabled(href="#" aria-label="Next") <i class="fa fa-angle-double-right"></i>
+        .elr-row
+            .elr-col-full.example-holder.example-holder-light
+                nav.pagination.pagination-bar
                     ul
-                        li: a(href="#" aria-label="Previous") «
-                        li: a.active(href="#") 1
-                        li: a(href="#") 2
+                        li: a.disabled(href="#" aria-label="Previous") <i class="fa fa-angle-double-left"></i></i>
+                        li: a(href="#") 1
+                        li: a.active(href="#") 2
                         li: a(href="#") 3
                         li: a(href="#") 4
                         li: a(href="#") 5
-                        li: a(href="#" aria-label="Next") »
+                        li: a(href="#" aria-label="Next") <i class="fa fa-angle-double-right"></i>
+        .elr-row
+            .elr-col-full.example-holder.example-holder-light
+                nav.pagination.pink-pagination-bar
+                    ul
+                        li: a(href="#" aria-label="Previous") <i class="fa fa-angle-double-left"></i></i>
+                        li: a(href="#") 1
+                        li: a.active(href="#") 2
+                        li: a(href="#") 3
+                        li: a(href="#") 4
+                        li: a(href="#") 5
+                        li: a.disabled(href="#" aria-label="Next") <i class="fa fa-angle-double-right"></i>
+        .elr-row
+            .elr-col-full.example-holder.example-holder-light
+                nav.pagination.pagination-links
+                    ul
+                        li: a(href="#" aria-label="Previous") <i class="fa fa-angle-double-left"></i></i>
+                        li: a(href="#") 1
+                        li: a.active(href="#") 2
+                        li: a(href="#") 3
+                        li: a(href="#") 4
+                        li: a(href="#") 5
+                        li: a.disabled(href="#" aria-label="Next") <i class="fa fa-angle-double-right"></i>
