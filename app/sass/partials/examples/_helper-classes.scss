@@ -11,6 +11,11 @@
     border: 1px solid $main-color;
     text-align: center;
     color: $background-color;
+    position: relative;
+
+    p {
+        @include elr-centerer;
+    }
 }
 
 .typography-classes {

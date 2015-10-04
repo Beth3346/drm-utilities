@@ -1,6 +1,20 @@
 // Navigation Utilities Examples
 
 .nav-bar,
+.nav-bar-stacked,
+.nav-bar-solid,
+.nav-bar-pills,
+.nav-bar-pills-solid,
+.nav-bar-solid-stacked,
+.nav-bar-pills-stacked,
+.nav-bar-pills-solid-stacked {
+    @include elr-em-font(14px);
+
+    .elr-submenu { @include elr-em-font(12px); }
+}
+
+.nav-bar,
+.nav-bar-stacked,
 .nav-bar-solid,
 .nav-bar-pills,
 .nav-bar-pills-solid {

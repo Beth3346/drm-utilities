@@ -13,19 +13,6 @@
         list-style: none;
         display: block;
         float: left;
-
-        > ul {
-            color: $text-color;
-            padding: 0 20px 0 0;
-
-            li {
-                float: none;
-            }
-
-            .divider {
-                @include elr-list-divider($divider-color);
-            }
-        }
     }
 
     a {
@@ -34,17 +21,26 @@
         text-align: $align;
         color: $text-color;
         text-decoration: none;
-        transition: all, .3s;
+        transition: color .3s ease;
 
-        &.active {
-            color: $hover-color;
-        }
+        &.active { color: $hover-color; }
 
         &:hover,
         &:focus {
             color: $hover-color;
-            transition: all, .3s;
+            transition: color .3s ease;
         }
+    }
+
+    .elr-submenu {
+        color: $text-color;
+        padding: 0;
+
+        li { float: none; }
+
+        a { text-decoration: none; }
+
+        .divider { @include elr-list-divider($divider-color); }
     }
 
     .text-disabled {
@@ -58,33 +54,31 @@
 
     li {
         float: none;
+        padding: 0;
+    }
 
-        > ul {
-            padding: 0;
+    .elr-submenu {
+        padding-top: 5px;
+        padding-bottom: 5px;
 
-            a {
-                padding-left: 20px;
-            }
-        }
+        a { padding-left: 20px; }
     }
 }
 
 // creates a nav bar with a solid color background
 // hover state will invert text color and background color
 
-@mixin elr-nav-bar-solid($text-color: $background-color, $background-color: $link-color, $align: center, $active-color: lighten($link-color, 10%)
+@mixin elr-nav-bar-solid($text-color: $background-color, $background-color: $link-color, $align: left, $active-color: lighten($link-color, 10%)
 ) {
     @include elr-nav-bar($text-color, $background-color, $align);
-
-    li > ul {
-        padding: 0;
-    }
 
     a {
         display: block;
         margin: 0;
         background-color: $background-color;
         color: $text-color;
+        padding-left: 20px;
+        padding-right: 20px;
 
         &.active,
         &:hover,
@@ -99,20 +93,18 @@
     @include elr-nav-bar-stacked($text-color, $background-color, $align);
     background-color: $background-color;
 
-    li > ul {
-        padding: 0;
-    }
-
     a {
         display: block;
         background-color: $background-color;
         color: $text-color;
+        transition: color .3s ease, background-color .3s ease;
 
         &.active,
         &:hover,
         &:focus {
             background-color: $active-color;
             color: $text-color;
+            transition: color .3s ease, background-color .3s ease;
         }
     }
 }

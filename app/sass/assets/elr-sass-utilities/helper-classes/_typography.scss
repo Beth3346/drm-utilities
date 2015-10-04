@@ -12,7 +12,7 @@
 
     .elr-capitalize { text-transform: capitalize; }
 
-    .elr-smaller-text { @include elr-em-font(10px); }
+    .elr-smaller-text { font-size: 80%; }
 
     .elr-text-left { text-align: left; }
 
@@ -30,7 +30,7 @@
 
     .elr-text-error {
         color: $danger-color;
-        font-weight: 700;
+        font-weight: $bold;
     }
 
     .elr-text-info { color: $info-color; }
@@ -39,7 +39,7 @@
 
     .elr-text-success { color: $success-color; }
 
-    .elr-highlight { color: $main-color; }
+    .elr-highlight { color: $accent-color; }
 
     .elr-avoid-wrap { display: inline-block; }
 }

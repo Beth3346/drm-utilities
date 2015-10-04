@@ -30,7 +30,7 @@
     a {
         @include elr-em-font(20px);
         color: $text-color;
-        font-weight: bold;
+        font-weight: $bold;
         padding: 5px 10px 10px;
 
         &:hover,
@@ -39,23 +39,26 @@
             color: $text-color;
         }
     }
-}
 
-.sidebar-sub-menu {
+    .elr-submenu {
+        padding-top: 0;
+        padding-left: 15px;
+        padding-bottom: 10px;
 
-    > li {
-        @include elr-breakpoint('mars') {
-            padding-left: 0;
+        li {
+            @include elr-breakpoint('mars') {
+                padding-left: 0;
+            }
         }
-    }
 
-    a {
-        @include elr-em-font(14px);
-        color: $text-color;
-        font-weight: normal;
-        padding: 2px 10px;
+        a {
+            @include elr-em-font(14px);
+            color: $text-color;
+            font-weight: $normal;
+            padding: 2px 10px;
+        }
 
-        &:hover {
+        a:hover {
             text-decoration: underline;
             color: $text-color;
         }

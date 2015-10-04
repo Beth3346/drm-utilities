@@ -60,14 +60,18 @@ $elr-blue: #1976d2;
 $elr-blue-light: lighten($elr-blue, 20%);
 $dark-aqua: #096367;
 $dark-pink: #ed145b;
+$red: #f7322f;
+$yellow: #d1cb34;
+$green: #7aba7b;
+$blue: #1daaf0;
 
 // font colors
 
-$danger-color: #f7322f; // red
-$warning-color: #d1cb34; // yellow
-$success-color: #7aba7b; // green
-$info-color: #1daaf0; // blue
-$muted-color: $light-grey;
+$danger-color: $red;
+$warning-color: $yellow;
+$success-color: $green;
+$info-color: $blue;
+$muted-color: $grey;
 
 // color scheme
 

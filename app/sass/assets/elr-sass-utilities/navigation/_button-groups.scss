@@ -5,7 +5,7 @@
     $color: $white,
     $border-radius: 0,
     $border: none,
-    $hover-color: lighten($bk-color, 20%),
+    $hover-color: lighten($bk-color, 10%),
     $hover-text-color: $color
 ) {
     @include elr-clearfix;

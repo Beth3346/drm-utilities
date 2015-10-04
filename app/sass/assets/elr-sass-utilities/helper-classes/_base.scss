@@ -27,7 +27,7 @@
     }
 
     dt {
-        font-weight: 700;
+        font-weight: $bold;
         padding-bottom: 0;
     }
 
@@ -38,8 +38,8 @@
     h5,
     h6 {
         margin: 0;
-        padding: 5px 0;
-        font-weight: 500;
+        padding: 10px 0;
+        font-weight: $normal;
     }
 
     h1 {
@@ -134,7 +134,7 @@
     }
 
     mark {
-        background-color: $main-color;
+        background-color: $accent-color;
         color: $white;
         padding-left: 3px;
         padding-right: 3px;

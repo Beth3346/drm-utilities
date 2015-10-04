@@ -321,7 +321,7 @@ module.exports = function(grunt) {
         'concat',
         'sass:dev',
         'autoprefixer',
-        'browserSync',
+        // 'browserSync',
         'scsslint',
         'csslint',
         'jshint',

@@ -31,12 +31,14 @@
         }
     }
 
-    ul {
+    .elr-dropdown-list {
         @include elr-nav-bar-solid-stacked($color, $bk-color, left, $divider-color);
+        @include elr-em-font(14px);
         width: 100%;
         position: absolute;
         display: none;
         z-index: 100;
+        font-weight: $bold;
 
         @if ($border-radius) {
             border-radius: $border-radius;
@@ -80,24 +82,26 @@
             height: 40px;
 
             &.clicked {
-                background-color: $bk-color;
                 color: $color;
+                background-color: lighten($bk-color, 10%);
             }
         }
 
         &.clicked {
-            color: $bk-color;
-            background-color: $color;
+            color: $color;
+            background-color: lighten($bk-color, 10%);
         }
     }
 
-    ul {
+    .elr-dropdown-list {
         @include elr-nav-bar-solid-stacked($color, $bk-color, left, $divider-color);
+        @include elr-em-font(14px);
         width: 100%;
         position: absolute;
         top: 100%;
         display: none;
         z-index: 100;
+        font-weight: $bold;
 
         @if ($border-radius) {
             border-radius: $border-radius;

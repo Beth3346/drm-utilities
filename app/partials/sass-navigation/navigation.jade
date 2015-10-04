@@ -4,7 +4,7 @@ section#navigation
             .elr-col-full
                 h3.elr-bold NavBar
                 p Without nested ul
-                .example-holder
+                .example-holder.example-holder-light
                     nav
                         ul.nav-bar
                             li: a.active(href="#") Bears
@@ -13,12 +13,12 @@ section#navigation
                             li: a(href="#") Fish
                             li: a(href="#") Birds
                 p With nested ul
-                .example-holder
+                .example-holder.example-holder-light
                     nav
                         ul.nav-bar
                             li
                                 a.active(href="#") Bears
-                                ul
+                                ul.elr-submenu
                                     li: a(href="#") Grizzly
                                     li: a(href="#") Polar
                                     li: a(href="#") Giant Panda
@@ -26,7 +26,7 @@ section#navigation
                                     li: a(href="#") Brown
                             li
                                 a(href="#") Dogs
-                                ul
+                                ul.elr-submenu
                                     li: a(href="#") Doberman
                                     li: a(href="#") Shetland Sheepdog
                                     li: a(href="#") Siberian Husky
@@ -34,7 +34,7 @@ section#navigation
                                     li: a(href="#") Scottish Terrier
                             li
                                 a(href="#") Big Cats
-                                ul
+                                ul.elr-submenu
                                     li: a(href="#") Lion
                                     li: a(href="#") Tiger
                                     li: a(href="#") Jaguar
@@ -42,7 +42,7 @@ section#navigation
                                     li: a(href="#") Panther
                             li
                                 a(href="#") Fish
-                                ul
+                                ul.elr-submenu
                                     li: a(href="#") Clown Fish
                                     li: a(href="#") Swordfish
                                     li: a(href="#") Angel Fish
@@ -50,7 +50,7 @@ section#navigation
                                     li: a(href="#") Cod
                             li
                                 a(href="#") Birds
-                                ul
+                                ul.elr-submenu
                                     li: a(href="#") Parrot
                                     li: a(href="#") Bald Eagle
                                     li: a(href="#") Hawk
@@ -59,7 +59,7 @@ section#navigation
         .elr-row
             .elr-col-half
                 h3.elr-bold Nav Bar Stacked
-                .example-holder
+                .example-holder.example-holder-light
                     nav
                         ul.nav-bar-stacked
                             li: a.active(href="#") Bears
@@ -68,13 +68,13 @@ section#navigation
                             li: a(href="#") Fish
                             li: a(href="#") Birds
             .elr-col-half
-                h3.elr-bold Nav Bar Stacked With nested ul
-                .example-holder
+                h3.elr-bold Nav Bar Stacked With Nested Ul
+                .example-holder.example-holder-light
                     nav
                         ul.nav-bar-stacked
                             li
                                 a.active(href="#") Bears
-                                ul
+                                ul.elr-submenu
                                     li: a(href="#") Grizzly
                                     li: a(href="#") Polar
                                     li: a(href="#") Giant Panda
@@ -82,7 +82,7 @@ section#navigation
                                     li: a(href="#") Brown
                             li
                                 a(href="#") Dogs
-                                ul
+                                ul.elr-submenu
                                     li: a(href="#") Doberman
                                     li: a(href="#") Shetland Sheepdog
                                     li: a(href="#") Siberian Husky
@@ -90,7 +90,7 @@ section#navigation
                                     li: a(href="#") Scottish Terrier
                             li
                                 a(href="#") Big Cats
-                                ul
+                                ul.elr-submenu
                                     li: a(href="#") Lion
                                     li: a(href="#") Tiger
                                     li: a(href="#") Jaguar
@@ -98,7 +98,7 @@ section#navigation
                                     li: a(href="#") Panther
                             li
                                 a(href="#") Fish
-                                ul
+                                ul.elr-submenu
                                     li: a(href="#") Clown Fish
                                     li: a(href="#") Swordfish
                                     li: a(href="#") Angel Fish
@@ -106,7 +106,7 @@ section#navigation
                                     li: a(href="#") Cod
                             li
                                 a(href="#") Birds
-                                ul
+                                ul.elr-submenu
                                     li: a(href="#") Parrot
                                     li: a(href="#") Bald Eagle
                                     li: a(href="#") Hawk
@@ -131,7 +131,7 @@ section#navigation
                         ul.nav-bar-solid
                             li
                                 a.active(href="#") Bears
-                                ul
+                                ul.elr-submenu
                                     li: a(href="#") Grizzly
                                     li: a(href="#") Polar
                                     li: a(href="#") Giant Panda
@@ -139,7 +139,7 @@ section#navigation
                                     li: a(href="#") Brown
                             li
                                 a(href="#") Dogs
-                                ul
+                                ul.elr-submenu
                                     li: a(href="#") Doberman
                                     li: a(href="#") Shetland Sheepdog
                                     li: a(href="#") Siberian Husky
@@ -147,7 +147,7 @@ section#navigation
                                     li: a(href="#") Scottish Terrier
                             li
                                 a(href="#") Big Cats
-                                ul
+                                ul.elr-submenu
                                     li: a(href="#") Lion
                                     li: a(href="#") Tiger
                                     li: a(href="#") Jaguar
@@ -155,7 +155,7 @@ section#navigation
                                     li: a(href="#") Panther
                             li
                                 a(href="#") Fish
-                                ul
+                                ul.elr-submenu
                                     li: a(href="#") Clown Fish
                                     li: a(href="#") Swordfish
                                     li: a(href="#") Angel Fish
@@ -163,7 +163,7 @@ section#navigation
                                     li: a(href="#") Cod
                             li
                                 a(href="#") Birds
-                                ul
+                                ul.elr-submenu
                                     li: a(href="#") Parrot
                                     li: a(href="#") Bald Eagle
                                     li: a(href="#") Hawk
@@ -187,7 +187,7 @@ section#navigation
                         ul.nav-bar-solid-stacked
                             li
                                 a.active(href="#") Bears
-                                ul
+                                ul.elr-submenu
                                     li: a(href="#") Grizzly
                                     li: a(href="#") Polar
                                     li: a(href="#") Giant Panda
@@ -195,7 +195,7 @@ section#navigation
                                     li: a(href="#") Brown
                             li
                                 a(href="#") Dogs
-                                ul
+                                ul.elr-submenu
                                     li: a(href="#") Doberman
                                     li: a(href="#") Shetland Sheepdog
                                     li: a(href="#") Siberian Husky
@@ -203,7 +203,7 @@ section#navigation
                                     li: a(href="#") Scottish Terrier
                             li
                                 a(href="#") Big Cats
-                                ul
+                                ul.elr-submenu
                                     li: a(href="#") Lion
                                     li: a(href="#") Tiger
                                     li: a(href="#") Jaguar
@@ -211,7 +211,7 @@ section#navigation
                                     li: a(href="#") Panther
                             li
                                 a(href="#") Fish
-                                ul
+                                ul.elr-submenu
                                     li: a(href="#") Clown Fish
                                     li: a(href="#") Swordfish
                                     li: a(href="#") Angel Fish
@@ -219,7 +219,7 @@ section#navigation
                                     li: a(href="#") Cod
                             li
                                 a(href="#") Birds
-                                ul
+                                ul.elr-submenu
                                     li: a(href="#") Parrot
                                     li: a(href="#") Bald Eagle
                                     li: a(href="#") Hawk
@@ -241,7 +241,7 @@ section#navigation
                     ul.nav-bar-pills
                         li
                             a.active(href="#") Bears
-                            ul
+                            ul.elr-submenu
                                 li: a(href="#") Grizzly
                                 li: a(href="#") Polar
                                 li: a(href="#") Giant Panda
@@ -249,7 +249,7 @@ section#navigation
                                 li: a(href="#") Brown
                         li
                             a(href="#") Dogs
-                            ul
+                            ul.elr-submenu
                                 li: a(href="#") Doberman
                                 li: a(href="#") Shetland Sheepdog
                                 li: a(href="#") Siberian Husky
@@ -257,7 +257,7 @@ section#navigation
                                 li: a(href="#") Scottish Terrier
                         li
                             a(href="#") Big Cats
-                            ul
+                            ul.elr-submenu
                                 li: a(href="#") Lion
                                 li: a(href="#") Tiger
                                 li: a(href="#") Jaguar
@@ -265,7 +265,7 @@ section#navigation
                                 li: a(href="#") Panther
                         li
                             a(href="#") Fish
-                            ul
+                            ul.elr-submenu
                                 li: a(href="#") Clown Fish
                                 li: a(href="#") Swordfish
                                 li: a(href="#") Angel Fish
@@ -273,7 +273,7 @@ section#navigation
                                 li: a(href="#") Cod
                         li
                             a(href="#") Birds
-                            ul
+                            ul.elr-submenu
                                 li: a(href="#") Parrot
                                 li: a(href="#") Bald Eagle
                                 li: a(href="#") Hawk
@@ -295,7 +295,7 @@ section#navigation
                     ul.nav-bar-pills-stacked
                         li
                             a.active(href="#") Bears
-                            ul
+                            ul.elr-submenu
                                 li: a(href="#") Grizzly
                                 li: a(href="#") Polar
                                 li: a(href="#") Giant Panda
@@ -303,7 +303,7 @@ section#navigation
                                 li: a(href="#") Brown
                         li
                             a(href="#") Dogs
-                            ul
+                            ul.elr-submenu
                                 li: a(href="#") Doberman
                                 li: a(href="#") Shetland Sheepdog
                                 li: a(href="#") Siberian Husky
@@ -311,7 +311,7 @@ section#navigation
                                 li: a(href="#") Scottish Terrier
                         li
                             a(href="#") Big Cats
-                            ul
+                            ul.elr-submenu
                                 li: a(href="#") Lion
                                 li: a(href="#") Tiger
                                 li: a(href="#") Jaguar
@@ -319,7 +319,7 @@ section#navigation
                                 li: a(href="#") Panther
                         li
                             a(href="#") Fish
-                            ul
+                            ul.elr-submenu
                                 li: a(href="#") Clown Fish
                                 li: a(href="#") Swordfish
                                 li: a(href="#") Angel Fish
@@ -327,7 +327,7 @@ section#navigation
                                 li: a(href="#") Cod
                         li
                             a(href="#") Birds
-                            ul
+                            ul.elr-submenu
                                 li: a(href="#") Parrot
                                 li: a(href="#") Bald Eagle
                                 li: a(href="#") Hawk
@@ -349,7 +349,7 @@ section#navigation
                     ul.nav-bar-pills-solid
                         li
                             a.active(href="#") Bears
-                            ul
+                            ul.elr-submenu
                                 li: a(href="#") Grizzly
                                 li: a(href="#") Polar
                                 li: a(href="#") Giant Panda
@@ -357,7 +357,7 @@ section#navigation
                                 li: a(href="#") Brown
                         li
                             a(href="#") Dogs
-                            ul
+                            ul.elr-submenu
                                 li: a(href="#") Doberman
                                 li: a(href="#") Shetland Sheepdog
                                 li: a(href="#") Siberian Husky
@@ -365,7 +365,7 @@ section#navigation
                                 li: a(href="#") Scottish Terrier
                         li
                             a(href="#") Big Cats
-                            ul
+                            ul.elr-submenu
                                 li: a(href="#") Lion
                                 li: a(href="#") Tiger
                                 li: a(href="#") Jaguar
@@ -373,7 +373,7 @@ section#navigation
                                 li: a(href="#") Panther
                         li
                             a(href="#") Fish
-                            ul
+                            ul.elr-submenu
                                 li: a(href="#") Clown Fish
                                 li: a(href="#") Swordfish
                                 li: a(href="#") Angel Fish
@@ -381,7 +381,7 @@ section#navigation
                                 li: a(href="#") Cod
                         li
                             a(href="#") Birds
-                            ul
+                            ul.elr-submenu
                                 li: a(href="#") Parrot
                                 li: a(href="#") Bald Eagle
                                 li: a(href="#") Hawk
@@ -403,7 +403,7 @@ section#navigation
                     ul.nav-bar-pills-solid-stacked
                         li
                             a.active(href="#") Bears
-                            ul
+                            ul.elr-submenu
                                 li: a(href="#") Grizzly
                                 li: a(href="#") Polar
                                 li: a(href="#") Giant Panda
@@ -411,7 +411,7 @@ section#navigation
                                 li: a(href="#") Brown
                         li
                             a(href="#") Dogs
-                            ul
+                            ul.elr-submenu
                                 li: a(href="#") Doberman
                                 li: a(href="#") Shetland Sheepdog
                                 li: a(href="#") Siberian Husky
@@ -419,7 +419,7 @@ section#navigation
                                 li: a(href="#") Scottish Terrier
                         li
                             a(href="#") Big Cats
-                            ul
+                            ul.elr-submenu
                                 li: a(href="#") Lion
                                 li: a(href="#") Tiger
                                 li: a(href="#") Jaguar
@@ -427,7 +427,7 @@ section#navigation
                                 li: a(href="#") Panther
                         li
                             a(href="#") Fish
-                            ul
+                            ul.elr-submenu
                                 li: a(href="#") Clown Fish
                                 li: a(href="#") Swordfish
                                 li: a(href="#") Angel Fish
@@ -435,7 +435,7 @@ section#navigation
                                 li: a(href="#") Cod
                         li
                             a(href="#") Birds
-                            ul
+                            ul.elr-submenu
                                 li: a(href="#") Parrot
                                 li: a(href="#") Bald Eagle
                                 li: a(href="#") Hawk
