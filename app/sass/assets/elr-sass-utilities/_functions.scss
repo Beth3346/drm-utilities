@@ -6,7 +6,7 @@
     @if ($size == auto) {
         @return false;
     } @else if (type-of($size != 'number')) {
-        @return false;
+        @return true;
     } @else if (unit($size) == 'px') {
         @return true;
     } @else {
