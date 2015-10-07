@@ -27,8 +27,9 @@
             color: $text-color;
             border-radius: 5px;
             width: 100%;
-            padding-left: 20px;
-            padding-right: 20px;
+            padding-left: 10px;
+            padding-right: 10px;
+            transition: color .3s ease, background-color .3s ease;
 
             @if ($border != none) {
                 border: 1px solid $border;
@@ -41,6 +42,7 @@
             &:focus {
                 background-color: $text-color;
                 color: $active-color;
+                transition: color .3s ease, background-color .3s ease;
             }
         }
     }

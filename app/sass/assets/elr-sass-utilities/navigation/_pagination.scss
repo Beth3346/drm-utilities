@@ -1,8 +1,22 @@
 // Pagination
 
 @mixin elr-pagination() {
+    @include elr-clearfix;
 
-    ul {
+    .previous-pager,
+    .next-pager {
+        width: 125px;
+    }
+
+    .previous-pager {
+        float: left;
+    }
+
+    .next-pager {
+        float: right;
+    }
+
+    .pagination-list {
         @include elr-clearfix;
         list-style: none;
         padding: 0;
@@ -24,21 +38,29 @@
         }
     }
 
-    a {
+    a,
+    .previous-pager,
+    .next-pager {
         color: $link-color;
         text-decoration: none;
         display: block;
-
-        &.active {
-            color: $accent-color;
-        }
+        transition: color .3s ease;
 
         &:hover {
             color: lighten($link-color, 10%);
+            transition: color .3s ease;
         }
 
         &.disabled {
+            cursor: not-allowed;
             color: $grey;
+        }
+    }
+
+    a {
+
+        &.active {
+            color: $accent-color;
         }
     }
 }

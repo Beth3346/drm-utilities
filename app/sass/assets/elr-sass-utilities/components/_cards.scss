@@ -76,6 +76,7 @@
 
         .elr-card-actions {
             @include elr-em-margin('left', 20);
+            @include elr-em-margin('right', 20);
             @include elr-em-margin('bottom', 20);
         }
 
@@ -112,7 +113,7 @@
         padding: 0;
     }
 
-    .elr-button { @include elr-em-width(200px) };
+    .elr-button { @include elr-em-width(180px) };
 
     .elr-card-thumbnail {
         @include elr-thumbnail(null, 60px, 60px);
