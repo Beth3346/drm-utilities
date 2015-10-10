@@ -27,3 +27,17 @@
         @return $size;
     }
 }
+
+@function to-ems($size) {
+    @if ($size == 0) {
+        @return 0;
+    } @else if ($size == auto) {
+        @return auto;
+    } @else if (is-px($size)) {
+        @return (strip-units($size) / $default-font-size)#{em};
+    } @else if (unitless($size)) {
+        @return ($size / $default-font-size)#{em};
+    } @else {
+        @return $size;
+    }
+}
