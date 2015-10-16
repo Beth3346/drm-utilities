@@ -2,7 +2,8 @@
 
 @include elr-alert-classes;
 
-.elr-custom-alert { @include elr-context-box(custom, 3px, $link-color, 100%, $white); }
+.elr-custom-alert { @include elr-context-box(custom, 3px, $link-color, $white); }
+.elr-purple-alert { @include elr-context-box(custom, 3px, $dark-pink, $white); }
 
 .elr-accordion {
     @include elr-em-max-width(800px);
@@ -86,7 +87,7 @@
     padding: 0 10px;
     background-color: $link-color;
     color: $white;
-    font-weight: 700;
+    font-weight: $bold;
     height: 50px;
     position: absolute;
     top: 0;
@@ -130,7 +131,7 @@
     ul {
         @include elr-nav-bar-pills;
         @include elr-em-font(14px);
-        font-weight: 700;
+        font-weight: $bold;
     }
 }
 
@@ -142,13 +143,13 @@
 
     &.sticky-left {
         @include elr-sticky-menu('left');
-        @include elr-em-width(250);
+        @include elr-em-width(250px);
     }
 
     ul {
         @include elr-nav-bar-pills-solid-stacked($background-color, $main-color, left, $main-color);
         @include elr-em-font(14px);
-        font-weight: 700;
+        font-weight: $bold;
     }
 }
 

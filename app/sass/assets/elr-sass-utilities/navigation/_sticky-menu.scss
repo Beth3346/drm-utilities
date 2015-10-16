@@ -13,9 +13,10 @@
 
     } @elseif ($position == 'left') {
         position: fixed;
-        top: 5%;
+        top: 50px;
+        right: 23px;
 
-        @include elr-breakpoint('mercury') { left: 10%; }
-        @include elr-breakpoint('venus') { left: 2.5%; }
+        // @include elr-breakpoint('mercury') { left: 20px; }
+        // @include elr-breakpoint('venus') { left: 2.5%; }
     }
 }

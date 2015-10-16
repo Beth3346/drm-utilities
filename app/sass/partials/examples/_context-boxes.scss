@@ -17,4 +17,4 @@
 
 .context-box-muted { @include elr-context-box('muted', 3px); }
 
-.custom-context-box { @include elr-context-box('custom', 3px, $coral, 100%); }
+.custom-context-box { @include elr-context-box('custom', 3px, $coral); }

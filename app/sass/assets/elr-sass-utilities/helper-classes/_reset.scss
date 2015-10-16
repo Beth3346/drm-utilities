@@ -217,6 +217,7 @@
     header,
     menu,
     nav,
+    picture,
     section {
         display: block;
     }
@@ -269,12 +270,13 @@
     menu,
     figcaption,
     i,
-    b {
+    b,
+    picture {
         box-sizing: border-box;
+    }
 
-        &:before,
-        &:after {
-            box-sizing: border-box;
-        }
+    :before,
+    :after {
+        box-sizing: border-box;
     }
 }

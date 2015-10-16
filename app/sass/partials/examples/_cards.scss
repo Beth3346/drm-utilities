@@ -3,5 +3,6 @@
 }
 
 .card { @include elr-card(lighten($link-color, 40%), $link-color, null, 20px, 20px); }
-
 .card-border { @include elr-card($white, $link-color, $light-grey, 20px, 20px, 5px); }
+.card-address { @include elr-address; }
+

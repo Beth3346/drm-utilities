@@ -9,22 +9,21 @@
         var $content = spec.content || $('div.sticky-nav-content');
         var sectionEl = spec.sectionEl || 'section';
         var spy = spec.spy || false;
-        var $links = $nav.find('a[href^="#"]');
-        var hash = window.location.hash;
 
-        var affixNav = function(top) {
+        var affixNav = function(top, navPositionLeft) {
             var scroll = $('body').scrollTop();
             var position = $nav.data('position');
-            var navPositionLeft = $nav.position().left;
             var winHeight = $(window).height();
             var navHeight = $nav.height();
+            var navWidth = $nav.outerWidth();
+            var winWidth = $(window).width();
             var contentHeight = $content.height();
 
             if ( scroll > ( top + contentHeight ) ) {
                 $nav.removeClass('sticky-' + position);
             } else if ( ( scroll > (top - 50) ) && ( navHeight < winHeight ) ) {
+                // positionRight(winWidth - (navPositionLeft + navWidth));
                 $nav.addClass('sticky-' + position);
-                positionRight(navPositionLeft);
             } else {
                 $nav.removeClass('sticky-' + position);
             }
@@ -34,7 +33,7 @@
             var position = $nav.data('position');
 
             if ( position !== 'top' ) {
-                $nav.css({'left': navPositionLeft});
+                $nav.css({'right': navPositionLeft, 'left': 'auto'});
             } else {
                 $nav.css({'left': 0});
             }
@@ -56,24 +55,27 @@
             return false;
         };
 
-        if ( hash ) {
-            var $hashLink = $nav.find("a[href='" + hash + "']");
-
-            $hashLink.addClass(activeClass);
-            $hashLink.trigger('click');
-            $nav.on('click', "a[href='" + hash + "']", function() {
-                gotoSection.call(this, activeClass);
-            });
-        } else {
-            $links.first().addClass(activeClass);
-        }
-
         if ( $nav.length ) {
             var $win = $(window);
             var navPositionTop = $nav.position().top;
+            var $links = $nav.find('a[href^="#"]');
+            var hash = window.location.hash;
+            var navPositionLeft = $nav.offset().left;
+
+            if ( hash ) {
+                var $hashLink = $nav.find("a[href='" + hash + "']");
+
+                $hashLink.addClass(activeClass);
+                $hashLink.trigger('click');
+                $nav.on('click', "a[href='" + hash + "']", function() {
+                    gotoSection.call(this, activeClass);
+                });
+            } else {
+                $links.first().addClass(activeClass);
+            }
 
             $win.on('scroll', function() {
-                affixNav(navPositionTop);
+                affixNav(navPositionTop, navPositionLeft);
             });
 
             if ( spy ) {

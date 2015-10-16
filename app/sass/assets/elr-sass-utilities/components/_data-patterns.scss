@@ -7,6 +7,11 @@
     span {
         display: block;
     }
+
+    .business-name {
+        font-size: 120%;
+        font-weight: $bold;
+    }
 }
 
 @mixin elr-phone($icon: false) {

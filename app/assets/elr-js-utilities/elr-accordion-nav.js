@@ -65,7 +65,6 @@
             }
 
             $target = $container.find('a[href="' + currentPage + '"]').addClass('active');
-            console.log($target);
 
             if ( $target.length ) {
                 $currentList = $target.closest('ul').parent('li');

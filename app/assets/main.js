@@ -24,6 +24,7 @@
     elrAlert.showAlert('success', 'your request was successful', $('.elr-alert-holder'));
     elrAlert.showAlert('muted', 'A muted alert that will probably be ignored', $('.elr-alert-holder'));
     elrAlert.showAlert('custom', 'This is a custom alert', $('.elr-alert-holder'));
+    elrAlert.showAlert('purple', 'This is another custom alert', $('.elr-alert-holder'));
 
     elrBackToTop();
 

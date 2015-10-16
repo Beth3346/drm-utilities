@@ -1,6 +1,6 @@
 (function($) {
     'use strict';
-    
+
     window.elrLightbox = function(params) {
         var self = {};
         var spec = params || {};
@@ -25,7 +25,7 @@
 
         var createLightbox = function(thumbnails, speed) {
             var img = $(this).attr('href');
-            
+
             var $imgVisible = elr.createElement('img', {
                 'class': 'img-visible',
                 'src': img,
@@ -50,7 +50,7 @@
             var $lightbox = elr.createElement('div', {
                 'class': 'elr-blackout'
             });
-            
+
             $lightbox.hide().appendTo('body').fadeIn(speed, function() {
                 $close.appendTo($lightbox);
                 $imgVisible.appendTo($lightbox);
@@ -131,11 +131,17 @@
             });
 
             $body.on('keydown', function(e) {
-                if (e.which === 37) {   
+                if ( e.which === 37 ) {
                     advanceImage('prev');
-                } else if (e.which === 39) {
+                } else if ( e.which === 39 ) {
                     advanceImage('next');
-                } 
+                }
+            });
+
+            $body.on('keydown', function(e) {
+                if ( e.which === 27 ) {
+                    removeLightbox();
+                }
             });
         }
 

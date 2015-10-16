@@ -1,36 +1,11 @@
-section#elr-alerts
+section#alerts
     .elr-container
         .elr-row
             .elr-col-full
-                h1 Elr Alerts
+                h1 ELR Alerts
                 p Show or hide content on click with optional show all and hide all buttons.
 
     .elr-container
         .elr-row
             .elr-col-full
                 .elr-alert-holder
-                    h2 Usage
-                    a(href="https://github.com/dynamicresponsemedia/elr-alerts" target="_blank") Visit GitHub Repo
-                    p Just add class "elr-dismissible-alert" to the element you want to make dismissible. Add the "close" class to the element you want the user to click on to dismiss the alert.
-                    h3.bold Alert Types:
-                    ul
-                        li Info "info-alert"
-                        li Danger "danger-alert"
-                        li Warning "warning-alert"
-                        li Success "success-alert"
-                        li Muted "muted-alert"
-                        li Custom "custom-alert"
-                            p You can create custom alerts using the @mixin elr-context-box
-                    pre.
-                        &lt;div class="info-alert elr-dismissible-alert"&gt;
-                        &lt;button class="close"&gt;x&lt;/button&gt;
-                        This is just an informative alert
-                        &lt;/div&gt;
-                    pre.
-                        var elrAlert = elrAlerts();
-                        elrAlert.showAlert('info', 'This is just an informative alert', $('.elr-alert-holder'));
-                        elrAlert.showAlert('danger', 'Danger Danger Danger!', $('.elr-alert-holder'));
-                        elrAlert.showAlert('warning', 'This is just a gentle warning', $('.elr-alert-holder'));
-                        elrAlert.showAlert('success', 'your request was successful', $('.elr-alert-holder'));
-                        elrAlert.showAlert('muted', 'A muted alert that will probably be ignored', $('.elr-alert-holder'));
-                        elrAlert.showAlert('custom', 'This is a custom alert', $('.elr-alert-holder'));
