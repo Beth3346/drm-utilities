@@ -81,7 +81,7 @@
         };
 
         if ( $container.length ) {
-            var $label = $container.children('ul').children('li').children('a');
+            var $label = $container.children('ul').children('li').has('ul').children('a');
             var $content = $label.next('ul');
             var $expandedContent = $container.find('.' + contentHolderClass +'[data-state=expanded]');
             var $currentList = getCurrent();
