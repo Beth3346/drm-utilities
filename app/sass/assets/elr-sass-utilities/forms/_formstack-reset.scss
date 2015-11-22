@@ -18,11 +18,13 @@
     .fsForm [type=name],
     .fsForm [type=email],
     .fsForm [type=tel],
-    .fsForm textarea {
+    .fsForm textarea,
+    .fsForm select {
         width: 100% !important;
         background-image: none !important;
         max-width: none !important;
         box-shadow: none !important;
+        appearance: none !important;
     }
 
     .fsPage:after,

@@ -1,7 +1,7 @@
 // Forms
 // scss-lint:disable QualifyingElement
 
-@mixin elr-form($glow: $link-color, $bk-color: $lightest-grey, $border: $grey, $button-color: $dark-grey) {
+@mixin elr-form($bk-color: $lightest-grey, $border: $grey, $button-color: $dark-grey) {
     padding-top: 10px;
     padding-bottom: 10px;
     width: 100%;
@@ -68,7 +68,7 @@
     input,
     textarea,
     select {
-        @include elr-form-state($glow, $bk-color, $border);
+        @include elr-form-state($bk-color, $border);
         @include elr-em-font(14px);
         margin: 5px 0;
         padding: 5px 15px;
@@ -79,16 +79,28 @@
         }
     }
 
+    [type="text"],
+    [type="tel"],
+    [type="email"],
+    [type="password"],
+    [type="url"],
+    textarea,
+    select:not([type="multiple"]) {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+    }
+
     select {
         height: 30px;
     }
 
-    select[multiple] {
+    [multiple] {
         height: auto;
     }
 
-    input[type="checkbox"],
-    input[type="radio"] {
+    [type="checkbox"],
+    [type="radio"] {
         display: inline;
         padding: 4px 4px 0 0;
     }
@@ -112,8 +124,8 @@
             vertical-align: middle;
         }
 
-        input[type="checkbox"],
-        input[type="radio"] {
+        [type="checkbox"],
+        [type="radio"] {
             display: inline-block;
             margin: 0 10px 0 0;
             padding: 0;
@@ -135,11 +147,11 @@
             vertical-align: middle;
         }
 
-        input[type="text"],
-        input[type="tel"],
-        input[type="email"],
-        input[type="password"],
-        input[type="url"],
+        [type="text"],
+        [type="tel"],
+        [type="email"],
+        [type="password"],
+        [type="url"],
         textarea,
         select {
             width: auto;
@@ -156,22 +168,22 @@
             margin-right: 15px;
             float: left;
 
-            input[type="checkbox"],
-            input[type="radio"] {
+            [type="checkbox"],
+            [type="radio"] {
                 margin-top: 14px;
                 margin-left: 10px;
             }
         }
 
-        input[type="submit"],
-        input[type="button"],
+        [type="submit"],
+        [type="button"],
         button {
             margin-top: 5px;
         }
     }
 
-    input[type="submit"],
-    input[type="button"],
+    [type="submit"],
+    [type="button"],
     button {
         @include elr-em-font(14px);
         @include elr-button;
@@ -179,7 +191,7 @@
         margin: 10px 0;
     }
 
-    input[type="submit"][disabled],
+    [type="submit"][disabled],
     button[disabled] {
         @include elr-button;
         @include elr-button-solid(lighten($button-color, 50%), $white, 180px, null, 3px, lighten($button-color, 50%), block);

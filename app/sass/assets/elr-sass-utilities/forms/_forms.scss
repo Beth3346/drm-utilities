@@ -1,8 +1,8 @@
 // Forms
 // scss-lint:disable QualifyingElement
 
-@mixin elr-tabular-form($glow: $link-color, $bk-color: $lightest-grey, $border: $grey, $button-color: $dark-grey) {
-    @include elr-form($glow, $bk-color, $border);
+@mixin elr-tabular-form($bk-color: $lightest-grey, $border: $grey, $button-color: $dark-grey) {
+    @include elr-form($bk-color, $border);
 
     label,
     input,
@@ -10,11 +10,11 @@
         display: block;
     }
 
-    input[type="text"],
-    input[type="tel"],
-    input[type="email"],
-    input[type="password"],
-    input[type="url"],
+    [type="text"],
+    [type="tel"],
+    [type="email"],
+    [type="password"],
+    [type="url"],
     select {
         width: 100%;
     }
@@ -27,7 +27,7 @@
         width: 100%;
     }
 
-    input[type="submit"],
+    [type="submit"],
     button {
         @include elr-em-font(14px);
         @include elr-button;
@@ -40,9 +40,9 @@
     }
 }
 
-@mixin elr-inline-form($glow: $link-color, $bk-color: $lightest-grey, $border: $grey, $button-color: $dark-grey) {
+@mixin elr-inline-form($bk-color: $lightest-grey, $border: $grey, $button-color: $dark-grey) {
     @include elr-clearfix;
-    @include elr-form($glow, $bk-color, $border);
+    @include elr-form($bk-color, $border);
 
     padding-left: 0;
 
@@ -52,28 +52,28 @@
         vertical-align: middle;
     }
 
-    input[type="text"],
-    input[type="tel"],
-    input[type="email"],
-    input[type="password"],
-    input[type="url"],
+    [type="text"],
+    [type="tel"],
+    [type="email"],
+    [type="password"],
+    [type="url"],
     textarea {
         margin: 0 10px;
     }
 
     label,
-    input[type="text"],
-    input[type="tel"],
-    input[type="email"],
-    input[type="password"],
-    input[type="url"],
+    [type="text"],
+    [type="tel"],
+    [type="email"],
+    [type="password"],
+    [type="url"],
     textarea,
-    input[type="submit"],
+    [type="submit"],
     button {
         display: inline-block;
     }
 
-    input[type="submit"],
+    [type="submit"],
     button {
         @include elr-button;
         @include elr-button-solid($button-color, $white, 100px, null, 3px, $button-color, inline-block);
@@ -89,13 +89,13 @@
         margin: 0 20px;
         display: inline-block;
 
-        input[type="checkbox"],
-        input[type="radio"] {
+        [type="checkbox"],
+        [type="radio"] {
             margin-top: 14px;
         }
     }
 
-    input[type="submit"][disabled],
+    [type="submit"][disabled],
     button[disabled] {
         @include elr-button-solid(lighten($button-color, 50%), $white, 180px, null, 3px, lighten($button-color, 50%), inline-block);
         @include elr-em-font(14px);

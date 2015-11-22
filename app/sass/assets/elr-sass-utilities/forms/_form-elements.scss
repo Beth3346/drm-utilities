@@ -35,25 +35,16 @@
     }
 }
 
-@mixin elr-form-state($glow: $link-color, $bk-color: $lightest-grey, $border: $grey) {
+@mixin elr-form-state($bk-color: $lightest-grey, $border: $grey) {
     background-color: $bk-color;
     border: 1px solid $border;
     transition: border .5s ease, box-shadow .5s ease;
 
-    @if ($glow != null) {
-
-        &:hover {
-            border: 1px solid $glow;
-            box-shadow: 0 0 2px $glow;
-            transition: border .5s ease, box-shadow .5s ease;
-        }
-
-        &:focus {
-            outline: none;
-            border: 1px solid darken($border, 20%);
-            background-color: lighten($bk-color, 20%);
-            transition: border .5s ease, background .5s ease;
-        }
+    &:focus {
+        outline: none;
+        border: 1px solid darken($border, 20%);
+        background-color: lighten($bk-color, 20%);
+        transition: border .5s ease, background .5s ease;
     }
 
     &.elr-form-success {
