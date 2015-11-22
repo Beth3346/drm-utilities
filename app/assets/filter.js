@@ -17,6 +17,8 @@
         var $filteredByLevel = $();
         var $filteredByIntensity = $();
 
+        // for each applied filter add the matched elements
+
         $.each(appliedFilters.category, function() {
             $filteredByCategory = applyFilter($fullClasses, 'category', this).add($filteredByCategory);
         });
@@ -132,7 +134,7 @@
             removeItems(function() {
                 $(this).remove();
                 appendItem($classes);
-            });            
+            });
         } else {
             emptyClasses();
         }

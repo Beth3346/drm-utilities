@@ -1,6 +1,6 @@
 (function($) {
     'use strict';
-    
+
     // adds case insensitive contains to jQuery
 
     $.extend($.expr[":"], {
@@ -8,6 +8,12 @@
             return (elem.textContent || elem.innerText || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
         }
     });
+
+    if (!Number.isNan) {
+        Number.isNan = function(num) {
+            return num !== num;
+        };
+    }
 
     var elrUtilities = function() {
         var self = {};
@@ -238,18 +244,18 @@
                 return a.toUpperCase();
             });
         };
-        
+
         self.throttle = function(fn, threshold, scope) {
             var last;
             var deferTimer;
-            
+
             threshold = threshold || 500;
-            
+
             return function () {
                 var context = scope || this;
                 var now = +new Date(),
                     args = arguments;
-            
+
                 if (last && now < last + threshold) {
                     // hold on to it
                     clearTimeout(deferTimer);
@@ -280,7 +286,7 @@
                 } else {
                     $that.val('');
                 }
-            });        
+            });
         };
 
         self.cleanString = function(str, re) {
@@ -356,11 +362,11 @@
             if ( selector === null ) {
                 $el.on(eventType, function(e) {
                     e.stopPropagation();
-                });                
+                });
             } else {
                 $el.on(eventType, selector, function(e) {
                     e.stopPropagation();
-                });                  
+                });
             }
         };
 
@@ -453,7 +459,7 @@
 
             self.each(types, function() {
                 var type = this;
-                
+
                 self.each(listItems, function() {
                     var listItem = this;
                     var value = self.trim($(listItem).text());
@@ -621,7 +627,7 @@
                     $('a.' + activeClass).removeClass(activeClass);
                     links.eq(index).addClass(activeClass);
                 }
-            });     
+            });
         };
 
         self.getPosition = function(height, $obj) {
@@ -646,7 +652,7 @@
                 if ( index === 0 ) {
                     position = 0;
                 } else if ( index === ( length - 1 ) ) {
-                    // subtract the bottom container's full height so final scroll value is equivalent 
+                    // subtract the bottom container's full height so final scroll value is equivalent
                     // to last container's position
                     position = self.getPosition( $that.height, $that );
                 } else {
@@ -658,7 +664,7 @@
                 // correct for any elements _that may have a negative position value
 
                 if ( position < 0 ) {
-                    positions.push(0); 
+                    positions.push(0);
                 } else {
                     positions.push(position);
                 }
@@ -675,7 +681,7 @@
 
             if ( ampm === 'am' ) {
                 hour = hour.toString();
-                
+
                 if ( hour === '12' ) {
                     hour = '0';
                 } else if ( hour.length === 1 ) {
