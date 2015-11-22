@@ -1,5 +1,6 @@
 section#grid
     h1 Grid
+    h3.elr-bold Grid System
     .elr-container.example-section
         .elr-row
             .elr-col-12
@@ -98,6 +99,8 @@ section#grid
             .elr-col-1
                 .example-col
                     p .elr-col-1
+    h3.elr-bold Named Column Grid System
+    .elr-container.example-section
         .elr-row
             .elr-col-full
                 .example-col
@@ -162,27 +165,8 @@ section#grid
             .elr-col-fifth
                 .example-col
                     p .elr-col-fifth
-        .elr-row
-            .elr-col-6
-                .example-col
-                    .elr-container
-                        .elr-row
-                            .elr-col-6
-                                .example-col-nested
-                                    p .elr-col-6
-                            .elr-col-6
-                                .example-col-nested
-                                    p .elr-col-6
-            .elr-col-6
-                .example-col
-                    .elr-container
-                        .elr-row
-                            .elr-col-6
-                                .example-col-nested
-                                    p .elr-col-6
-                            .elr-col-6
-                                .example-col-nested
-                                    p .elr-col-6
+    h3.elr-bold Nested Columns
+    .elr-container.example-section
         .elr-row
             .elr-col-two-thirds.example-col
                 .elr-row
@@ -228,6 +212,8 @@ section#grid
                     .elr-col-full
                         .example-col-nested
                             p .elr-col-full
+    h3.elr-bold Offsets
+    .elr-container.example-section
         .elr-row
             .elr-col-half.elr-col-offset-6
                 .example-col
@@ -239,3 +225,19 @@ section#grid
             .elr-col-quarter
                 .example-col
                     p .elr-col-quarter
+    h3.elr-bold Responsive Grid Columns
+    p Named columns will override any responsive grid classes
+    .elr-container.example-section
+        .elr-row
+            .elr-col-3.elr-col-md-6.elr-col-sm-12
+                .example-col
+                    p .elr-col-3.elr-col-md-6.elr-col-sm-12
+            .elr-col-3.elr-col-md-6.elr-col-sm-12
+                .example-col
+                    p .elr-col-3.elr-col-md-6.elr-col-sm-12
+            .elr-col-3.elr-col-md-6.elr-col-sm-12
+                .example-col
+                    p .elr-col-3.elr-col-md-6.elr-col-sm-12
+            .elr-col-3.elr-col-md-6.elr-col-sm-12
+                .example-col
+                    p .elr-col-3.elr-col-md-6.elr-col-sm-12
