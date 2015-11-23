@@ -4,6 +4,12 @@
 
 .unstyled-list-right { @include elr-unstyled-list(right); }
 
+.border-list-left,
+.border-list-center,
+.border-list-right {
+    margin: 0 5px;
+}
+
 .border-list-left { @include elr-border-list(left); }
 
 .border-list-center { @include elr-border-list(center); }
