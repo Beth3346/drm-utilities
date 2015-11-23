@@ -1,6 +1,7 @@
 // Table Base
+// scss-lint:disable NestingDepth
 
-@mixin elr-table-base($bk-color: $white, $color: $dark-grey, $hover-bk: $link-color) {
+@mixin elr-table-base($bk-color: $white, $color: $dark-grey, $hover-bk: $link-color, $border-color: 'none', $stripes: 'none') {
     color: $color;
     border-spacing: 0;
     text-align: left;
@@ -25,6 +26,48 @@
 
     tbody {
         background-color: $bk-color;
+
+        tr {
+            &:hover {
+                background-color: $hover-bk;
+                color: $white;
+            }
+
+            @if ($border-color != 'none') {
+                border: 1px solid $border-color;
+            }
+
+            @if ($stripes != 'none') {
+                &:nth-child(even) {
+                    background-color: $stripes;
+
+                    &.elr-danger-row {
+                        background-color: lighten($danger-color, 20%);
+                        color: darken($danger-color, 20%);
+                    }
+
+                    &.elr-warning-row {
+                        background-color: lighten($warning-color, 20%);
+                        color: darken($warning-color, 20%);
+                    }
+
+                    &.elr-success-row {
+                        background-color: lighten($success-color, 20%);
+                        color: darken($success-color, 20%);
+                    }
+
+                    &.elr-muted-row {
+                        background-color: $muted-color;
+                        color: darken($muted-color, 20%);
+                    }
+
+                    &:hover {
+                        background-color: $hover-bk;
+                        color: $white;
+                    }
+                }
+            }
+        }
     }
 
     tr {
@@ -46,11 +89,6 @@
         &.elr-muted-row {
             background-color: $muted-color;
             color: darken($muted-color, 20%);
-        }
-
-        &:hover {
-            background-color: $hover-bk;
-            color: $white;
         }
     }
 
