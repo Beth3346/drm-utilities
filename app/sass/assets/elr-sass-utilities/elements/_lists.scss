@@ -28,14 +28,6 @@
             @include elr-list-divider;
         }
     }
-
-    a {
-        text-decoration: none;
-
-        &:hover {
-            text-decoration: underline;
-        }
-    }
 }
 
 @mixin elr-border-list($align: left, $border-color: $dark-grey, $shadow-color: none) {
@@ -52,14 +44,6 @@
             border-bottom: 1px solid $border-color;
         }
     }
-
-    a {
-        text-decoration: none;
-
-        &:hover {
-            text-decoration: underline;
-        }
-    }
 }
 
 @mixin elr-inline-list($align: left) {
@@ -70,15 +54,10 @@
     li {
         display: inline-block;
         padding-right: 5px;
+    }
 
-        a {
-            display: inline-block;
-            text-decoration: none;
-
-            &:hover {
-                text-decoration: underline;
-            }
-        }
+    a {
+        display: inline-block;
     }
 }
 
