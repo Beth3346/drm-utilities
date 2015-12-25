@@ -695,6 +695,14 @@
             }
         };
 
+        self.openInTab = function($links) {
+            $links.on('click', function(e) {
+                e.preventDefault();
+                var newHref = $(this).attr('href');
+                window.open(newHref, '_blank');
+            });
+        };
+
         return self;
     };
 
