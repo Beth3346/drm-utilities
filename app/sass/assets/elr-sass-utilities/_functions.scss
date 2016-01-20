@@ -3,10 +3,8 @@
 }
 
 @function is-px($size) {
-    @if ($size == auto) {
+    @if (type-of($size != 'number')) {
         @return false;
-    } @else if (type-of($size != 'number')) {
-        @return true;
     } @else if (unit($size) == 'px') {
         @return true;
     } @else {
