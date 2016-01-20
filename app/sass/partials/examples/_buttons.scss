@@ -36,16 +36,24 @@
 
 .elr-dropdown-split-btn-holder { @include elr-dropdown-button-split($link-color, $background-color, 3px); }
 
+.mobile-toggle-button {
+    @include elr-mobile-toggle-button($white, $link-color);
+}
+
+.mobile-toggle-button-border {
+    @include elr-mobile-toggle-button($link-color, transparent, 16px, 3px, $link-color);
+}
+
 .icon-button, {
     @include elr-em-margin('right', 5);
-    @include elr-em-font(14);
+    @include elr-em-font(14px);
     font-weight: 700;
 }
 
 .icon-only-button,
 .icon-circle {
     @include elr-em-margin('right', 10);
-    @include elr-em-font(16);
+    @include elr-em-font(16px);
 }
 
 .heart-button { @include elr-font-awesome-button('\f004', right, $link-color, $white, 200px, left, 5px); }
