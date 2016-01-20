@@ -1,7 +1,7 @@
 (function($) {
     'use strict';
-    
-    window.drmCalendar = function(params) {
+
+    window.elrCalendar = function(params) {
         var self = {},
             spec = params || {};
 

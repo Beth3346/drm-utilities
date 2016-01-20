@@ -2,8 +2,8 @@
 
 @include elr-alert-classes;
 
-.elr-custom-alert { @include elr-context-box(custom, 3px, $link-color, $white); }
-.elr-purple-alert { @include elr-context-box(custom, 3px, $dark-pink, $white); }
+.elr-custom-alert { @include elr-context-box(custom, 3px, $link-color, 100%, $white); }
+.elr-purple-alert { @include elr-context-box(custom, 3px, $dark-pink, 100%, $white); }
 
 .elr-accordion {
     @include elr-em-max-width(800px);
