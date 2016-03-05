@@ -1,6 +1,6 @@
 (function($) {
     'use strict';
-    
+
     window.elrTabs = function(params) {
         var self = {};
         var spec = params || {};
@@ -14,7 +14,9 @@
         };
 
         var updateHash = function(target) {
+            var scrollmem = $('html, body').scrollTop();
             window.location.hash = target;
+            $('html, body').scrollTop(scrollmem);
         };
 
         var setActive = function(activeClass, $nav, currentId, target) {
@@ -58,6 +60,7 @@
             setupTabs($holders, activeClass);
 
             $holders.on('click', 'nav a[href^="#"]', function(e) {
+                e.preventDefault();
                 var $that = $(this);
                 var $parent = $that.closest('.' + holderClass);
                 var target = getTarget.call(this);
@@ -65,7 +68,6 @@
 
                 setActive(activeClass, $parent.find('nav'), currentId, target);
                 updateHash(target);
-                e.preventDefault();
             });
         }
 
