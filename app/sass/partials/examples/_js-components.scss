@@ -10,6 +10,10 @@
     @include elr-accordion($main-color, 5px);
 }
 
+.elr-accordion-nav {
+    @include elr-accordion-nav;
+}
+
 .back-to-top { @include elr-back-to-top; }
 
 .elr-back-to-top-content {
@@ -203,4 +207,8 @@
         padding: 0;
         line-height: 30px;
     }
+}
+
+.elr-generate-password {
+    @include elr-em-font(14px);
 }
