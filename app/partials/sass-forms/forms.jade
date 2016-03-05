@@ -138,42 +138,46 @@ section#forms
                         .elr-row
                             .elr-col-half
                                 label(for="fav-num") Favorite Number:
-                                select
-                                    option Favorite Number
-                                    option 1
-                                    option 2
-                                    option 3
-                                    option 4
-                                    option 5
+                                .elr-select-wrapper
+                                    select
+                                        option Favorite Number
+                                        option 1
+                                        option 2
+                                        option 3
+                                        option 4
+                                        option 5
                             .elr-col-half
                                 label(for="fav-color") Favorite Color:
-                                select(disabled)
-                                    option Favorite Color
-                                    option Red
-                                    option Yellow
-                                    option Green
-                                    option Blue
-                                    option Orange
+                                .elr-select-wrapper
+                                    select(disabled)
+                                        option Favorite Color
+                                        option Red
+                                        option Yellow
+                                        option Green
+                                        option Blue
+                                        option Orange
                         .elr-row
                             .elr-col-half
-                                .elr-inline-control-group
+                                .elr-control-group
                                     label(for="fav-animal") Favorite Animal:
-                                    select
-                                        option Favorite Animal
-                                        option Pengiun
-                                        option Owl
-                                        option Dog
-                                        option Cat
-                                        option Panda Bear
+                                    .elr-select-wrapper
+                                        select
+                                            option Favorite Animal
+                                            option Pengiun
+                                            option Owl
+                                            option Dog
+                                            option Cat
+                                            option Panda Bear
                             .elr-col-half
-                                label(for="fav-num-2") Favorite Number:
-                                select(multiple)
-                                    option Favorite Number
-                                    option 1
-                                    option 2
-                                    option 3
-                                    option 4
-                                    option 5
+                                .elr-control-group
+                                    label(for="fav-num-2") Favorite Number:
+                                    select(multiple)
+                                        option Favorite Number
+                                        option 1
+                                        option 2
+                                        option 3
+                                        option 4
+                                        option 5
                         .elr-row
                             .elr-col-full
                                 label(for="notes") Notes:

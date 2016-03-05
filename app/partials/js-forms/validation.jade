@@ -8,7 +8,7 @@ section#elr-validation
             .elr-col-full
                 h2 Tabular Form
             .elr-col-full
-                form.tabular-form(role="form" action="" autocomplete="off" )
+                form.tabular-form(role="form" action="")
                     .elr-container
                         .elr-row
                             .elr-col-half
@@ -23,19 +23,19 @@ section#elr-validation
                         .elr-row
                             .elr-col-half
                                 label(for="jksgioj") *Username:
-                                input.elr-valid-alpha-num-underscore#jksgioj( autocomplete="off" type="text" name="jksgioj" placeholder="UserName" required)
+                                input.elr-valid-alpha-num-underscore#jksgioj(type="text" name="jksgioj" placeholder="UserName" required)
                                 small Can include letters, underscores, and numbers
                             .elr-col-half
                                 label(for="annoying") *Password:
-                                input.elr-valid-no-spaces.elr-password#annoying( autocomplete="off" type="password" name="annoying" required)
+                                input.elr-valid-no-spaces.elr-password#annoying(type="password" name="annoying" required)
                     .elr-container
                         .elr-row
                             .elr-col-half
                                 label(for="email") *Email:
-                                input.elr-valid-email#email( autocomplete="off" type="email" name="email" placeholder="youremail@email.com" required)
+                                input.elr-valid-email#email(type="email" name="email" placeholder="youremail@email.com" required)
                             .elr-col-half
                                 label(for="phone") Phone:
-                                input.elr-valid-phone#phone( autocomplete="off" type="tel" name="phone" placeholder="212-867-5309")
+                                input.elr-valid-phone#phone(type="tel" name="phone" placeholder="212-867-5309")
                                 small 212-867-5309x78 no spaces
                     .elr-container
                         .elr-row
@@ -101,13 +101,14 @@ section#elr-validation
                         .elr-row
                             .elr-col-half
                                 label(for="fav-movie") Favorite Movie:
-                                select#fav-movie(data-required-with="other-fav-movie")
-                                    option(value=" ") Pick a Movie
-                                    option(value="1") Casablanca
-                                    option(value="2") Star Wars
-                                    option(value="3") Breakfast at Tiffany's
-                                    option(value="4") Clueless
-                                    option(value="5") Ferris Bueller's Day Off
+                                .elr-select-wrapper
+                                    select#fav-movie(data-required-with="other-fav-movie")
+                                        option(value=" ") Pick a Movie
+                                        option(value="1") Casablanca
+                                        option(value="2") Star Wars
+                                        option(value="3") Breakfast at Tiffany's
+                                        option(value="4") Clueless
+                                        option(value="5") Ferris Bueller's Day Off
                             .elr-col-half
                                 label(for="other-fav-movie") What Do You Like Best About Your Favorite Movie?:
                                 input#other-fav-movie(type="text" name="other_fav_movie" placeholder="Its the best" data-require-with="fav-movie")
@@ -115,14 +116,15 @@ section#elr-validation
                         .elr-row
                             .elr-col-half
                                 label(for="fav-band") Favorite Band:
-                                select#fav-band(data-required-with="other-fav-band:other")
-                                    option(value=" ") Pick a Band
-                                    option(value="1") The National
-                                    option(value="2") Nirvana
-                                    option(value="3") Velvet Underground
-                                    option(value="4") Frightened Rabbit
-                                    option(value="5") Vampire Weekend
-                                    option(value="other") Other
+                                .elr-select-wrapper
+                                    select#fav-band(data-required-with="other-fav-band:other")
+                                        option(value=" ") Pick a Band
+                                        option(value="1") The National
+                                        option(value="2") Nirvana
+                                        option(value="3") Velvet Underground
+                                        option(value="4") Frightened Rabbit
+                                        option(value="5") Vampire Weekend
+                                        option(value="other") Other
                             .elr-col-half
                                 label(for="other-fav-band") Who Is Your Favorite Musician?:
                                 input#other-fav-band(type="text" name="other_fav_band" placeholder="Its the best" data-require-with="fav-band:other")
@@ -130,13 +132,14 @@ section#elr-validation
                         .elr-row
                             .elr-col-half
                                 label(for="fav-city") Favorite City:
-                                select#fav-city(data-allowed-with="why-fav-city")
-                                    option(value=" ") Pick a City
-                                    option(value="1") London
-                                    option(value="2") Paris
-                                    option(value="3") New York City
-                                    option(value="4") San Francisco
-                                    option(value="5") Tokyo
+                                .elr-select-wrapper
+                                    select#fav-city(data-allowed-with="why-fav-city")
+                                        option(value=" ") Pick a City
+                                        option(value="1") London
+                                        option(value="2") Paris
+                                        option(value="3") New York City
+                                        option(value="4") San Francisco
+                                        option(value="5") Tokyo
                             .elr-col-half
                                 label(for="why-fav-city") What Do You Like About Your Favorite City?:
                                 input#why-fav-city(type="text" name="why_fav_city" placeholder="So much fun" disabled)
@@ -144,14 +147,15 @@ section#elr-validation
                         .elr-row
                             .elr-col-half
                                 label(for="fav-color") Favorite Color:
-                                select#fav-color(data-allowed-with="other-fav-color:other")
-                                    option(value=" ") Pick a Color
-                                    option(value="1") Red
-                                    option(value="2") Orange
-                                    option(value="3") Yellow
-                                    option(value="4") Green
-                                    option(value="5") Blue
-                                    option(value="other") Other Color
+                                .elr-select-wrapper
+                                    select#fav-color(data-allowed-with="other-fav-color:other")
+                                        option(value=" ") Pick a Color
+                                        option(value="1") Red
+                                        option(value="2") Orange
+                                        option(value="3") Yellow
+                                        option(value="4") Green
+                                        option(value="5") Blue
+                                        option(value="other") Other Color
                             .elr-col-half
                                 label(for="other-fav-color") Other Favorite Color:
                                 input#other-fav-color(type="text" name="other_fav_color" placeholder="Purple" disabled)
@@ -159,7 +163,7 @@ section#elr-validation
                         .elr-row
                             .elr-col-half
                                 label(for="notes") Notes:
-                                textarea.elr-valid-no-tags#notes(name="notes" cols="30" rows="10" placeholder="These are some notes" data-min-length="50" data-max-length="250") 
+                                textarea.elr-valid-no-tags#notes(name="notes" cols="30" rows="10" placeholder="These are some notes" data-min-length="50" data-max-length="250")
                                 small No html tags allowed. Should be between 50 and 250 characters
                     .elr-container
                         .elr-row

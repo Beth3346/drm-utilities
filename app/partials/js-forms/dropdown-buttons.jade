@@ -9,7 +9,7 @@ section#elr-dropdown-buttons
             .elr-col-quarter
                 .elr-dropdown-solid-btn-holder
                     button Info
-                    ul
+                    ul.elr-dropdown-list
                         li: a(href="#") Info 1
                         li: a(href="#") Info 2
                         li: a(href="#") Info 3
@@ -18,7 +18,7 @@ section#elr-dropdown-buttons
             .elr-col-quarter
                 .elr-dropdown-solid-btn-holder
                     button More Info
-                    ul
+                    ul.elr-dropdown-list
                         li: a.text-disabled(href="#") Info 1
                         li: a(href="#") Info 2
                         li: a(href="#") Info 3
@@ -26,7 +26,7 @@ section#elr-dropdown-buttons
             .elr-col-quarter
                 .elr-dropdown-solid-btn-holder
                     button Click Me!
-                    ul
+                    ul.elr-dropdown-list
                         li: a(href="#") Info 1
                         li: a(href="#") Info 2
                         li: a(href="#") Info 3
@@ -38,7 +38,7 @@ section#elr-dropdown-buttons
                     .elr-dropdown-button-group
                         button Alert
                         button &#9662;
-                        ul
+                        ul.elr-dropdown-list
                             li: a(href="#") Info 1
                             li: a(href="#") Info 2
                             li: a(href="#") Info 3
@@ -48,39 +48,8 @@ section#elr-dropdown-buttons
                     .elr-dropdown-button-group
                         button Choose an Option
                         button &#9662;
-                        ul
+                        ul.elr-dropdown-list
                             li: a(href="#") Info 1
                             li: a(href="#") Info 2
                             li: a(href="#") Info 3
                             li: a(href="#") Info 4
-
-    .elr-container
-        .elr-row
-            .elr-col-full
-                h3 Usage
-                p: a(href="https://github.com/dynamicresponsemedia/elr-dropdown-buttons" target="_blank") Visit GitHub Repo
-                p For a solid button place button and ul elements in a div with class "elr-dropdown-solid-btn-holder"
-
-                pre.prettyprint.
-                    &lt;div class="elr-dropdown-solid-btn-holder"&gt;
-                    &lt;button&gt;Info&lt;/button&gt;
-                    &lt;ul&gt;
-                    &lt;li&gt;&lt;a&gt;Info 1&lt;/a&gt;&lt;/li&gt;
-                    &lt;li&gt;&lt;a&gt;Info 2&lt;/a&gt;&lt;/li&gt;
-                    &lt;li&gt;&lt;a&gt;Info 3&lt;/a&gt;&lt;/li&gt;
-                    &lt;li&gt;&lt;a&gt;Info 4&lt;/a&gt;&lt;/li&gt;
-                    &lt;/ul&gt;
-
-                p For a split button wrap buttons and ul elements in a .button-group and place in a div with a class "elr-dropdown-split-btn-holder"
-
-                pre.prettyprint.
-                    &lt;div class="elr-dropdown-split-btn-holder"&gt;
-                    &lt;div class="button-group"&gt;
-                    &lt;button&gt;This Is Another Alert&lt;/button&gt;
-                    &lt;button&gt;&#9662;&lt;/button&gt;
-                    &lt;ul&gt;
-                    &lt;li&gt;&lt;a&gt;Info 1&lt;/a&gt;&lt;/li&gt;
-                    &lt;li&gt;&lt;a&gt;Info 2&lt;/a&gt;&lt;/li&gt;
-                    &lt;li&gt;&lt;a&gt;Info 3&lt;/a&gt;&lt;/li&gt;
-                    &lt;li&gt;&lt;a&gt;Info 4&lt;/a&gt;&lt;/li&gt;
-                    &lt;/ul&gt;

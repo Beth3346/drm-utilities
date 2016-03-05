@@ -24,65 +24,68 @@ section#elr-calendar
                                 .elr-col-full
                                     .elr-inline-control-group
                                         label(for="recurrance") Recurrance:
-                                        select#recurrance(name="recurrance")
-                                            option(value="none") None
-                                            option(value="daily") Daily
-                                            option(value="weekly") Weekly
-                                            option(value="biweekly") Bi-Weekly
-                                            option(value="monthly") Monthly
-                                            option(value="yearly") Yearly
+                                        .elr-select-wrapper
+                                            select#recurrance(name="recurrance")
+                                                option(value="none") None
+                                                option(value="daily") Daily
+                                                option(value="weekly") Weekly
+                                                option(value="biweekly") Bi-Weekly
+                                                option(value="monthly") Monthly
+                                                option(value="yearly") Yearly
                                 .elr-col-full
                                     .elr-inline-control-group
                                         label(for="month") Month:
-                                        select#month(name="month")
-                                            option(value="") Select Month
-                                            option(value="January") January
-                                            option(value="February") February
-                                            option(value="March") March
-                                            option(value="April") April
-                                            option(value="May") May
-                                            option(value="June") June
-                                            option(value="July") July
-                                            option(value="August") August
-                                            option(value="September") September
-                                            option(value="October") October
-                                            option(value="November") November
-                                            option(value="December") December
+                                        .elr-select-wrapper
+                                            select#month(name="month")
+                                                option(value="") Select Month
+                                                option(value="January") January
+                                                option(value="February") February
+                                                option(value="March") March
+                                                option(value="April") April
+                                                option(value="May") May
+                                                option(value="June") June
+                                                option(value="July") July
+                                                option(value="August") August
+                                                option(value="September") September
+                                                option(value="October") October
+                                                option(value="November") November
+                                                option(value="December") December
                                     .elr-inline-control-group
                                         label(for="event_date") Date:
-                                        select#eventDate(name="event_date")
-                                            option(value="") Select Date
-                                            option(value="1") 1
-                                            option(value="2") 2
-                                            option(value="3") 3
-                                            option(value="4") 4
-                                            option(value="5") 5
-                                            option(value="6") 6
-                                            option(value="7") 7
-                                            option(value="8") 8
-                                            option(value="9") 9
-                                            option(value="10") 10
-                                            option(value="11") 11
-                                            option(value="12") 12
-                                            option(value="13") 13
-                                            option(value="14") 14
-                                            option(value="15") 15
-                                            option(value="16") 16
-                                            option(value="17") 17
-                                            option(value="18") 18
-                                            option(value="19") 19
-                                            option(value="20") 20
-                                            option(value="21") 21
-                                            option(value="22") 22
-                                            option(value="23") 23
-                                            option(value="24") 24
-                                            option(value="25") 25
-                                            option(value="26") 26
-                                            option(value="27") 27
-                                            option(value="28") 28
-                                            option(value="29") 29
-                                            option(value="30") 30
-                                            option(value="31") 31
+                                        .elr-select-wrapper
+                                            select#eventDate(name="event_date")
+                                                option(value="") Select Date
+                                                option(value="1") 1
+                                                option(value="2") 2
+                                                option(value="3") 3
+                                                option(value="4") 4
+                                                option(value="5") 5
+                                                option(value="6") 6
+                                                option(value="7") 7
+                                                option(value="8") 8
+                                                option(value="9") 9
+                                                option(value="10") 10
+                                                option(value="11") 11
+                                                option(value="12") 12
+                                                option(value="13") 13
+                                                option(value="14") 14
+                                                option(value="15") 15
+                                                option(value="16") 16
+                                                option(value="17") 17
+                                                option(value="18") 18
+                                                option(value="19") 19
+                                                option(value="20") 20
+                                                option(value="21") 21
+                                                option(value="22") 22
+                                                option(value="23") 23
+                                                option(value="24") 24
+                                                option(value="25") 25
+                                                option(value="26") 26
+                                                option(value="27") 27
+                                                option(value="28") 28
+                                                option(value="29") 29
+                                                option(value="30") 30
+                                                option(value="31") 31
                                     .elr-inline-control-group
                                         label(for="year") Year:
                                         input.elr-valid-integer#year(type="text" name="year" data-min-value="1" data-min-length="4" data-max-length="4")
@@ -116,13 +119,14 @@ section#elr-calendar
                                 .elr-col-full
                                     .elr-inline-control-group
                                         label(for="day_num") Week Number:
-                                        select#dayNum(name="day_num")
-                                            option(value="") Select Week
-                                            option(value="1") First
-                                            option(value="2") Second
-                                            option(value="3") Third
-                                            option(value="4") Fourth
-                                            option(value="last") Last
+                                        .elr-select-wrapper
+                                            select#dayNum(name="day_num")
+                                                option(value="") Select Week
+                                                option(value="1") First
+                                                option(value="2") Second
+                                                option(value="3") Third
+                                                option(value="4") Fourth
+                                                option(value="last") Last
                         .elr-container
                             .elr-row
                                 .elr-col-full
@@ -132,8 +136,8 @@ section#elr-calendar
                                     input#type(type="text" name="event_type" placeholder="holiday")
                                 .elr-col-half
                                     label(for="event_notes") Event Notes:
-                                    textarea#notes(name="event_notes" cols="30" rows="2" placeholder="These are some notes") 
-                                .elr-col-full    
+                                    textarea#notes(name="event_notes" cols="30" rows="2" placeholder="These are some notes")
+                                .elr-col-full
                                     button.elr-button.addEvent#submit(type="submit") Add Event
                     .elr-container
                         .elr-row
@@ -141,60 +145,62 @@ section#elr-calendar
                                 form.elr-calendar-select#elr-calendar-select(method="Get" action="" role="form")
                                     .elr-inline-control-group
                                         label(for="month") Month:
-                                        select#month(name="month")
-                                            option(value="") Select Month
-                                            option(value=0) January
-                                            option(value=1) February
-                                            option(value=2) March
-                                            option(value=3) April
-                                            option(value=4) May
-                                            option(value=5) June
-                                            option(value=6) July
-                                            option(value=7) August
-                                            option(value=8) September
-                                            option(value=9) October
-                                            option(value=10) November
-                                            option(value=11) December
+                                        .elr-select-wrapper
+                                            select#month(name="month")
+                                                option(value="") Select Month
+                                                option(value=0) January
+                                                option(value=1) February
+                                                option(value=2) March
+                                                option(value=3) April
+                                                option(value=4) May
+                                                option(value=5) June
+                                                option(value=6) July
+                                                option(value=7) August
+                                                option(value=8) September
+                                                option(value=9) October
+                                                option(value=10) November
+                                                option(value=11) December
                                     .elr-inline-control-group
                                         label(for="date") Date:
-                                        select#date(name="date")
-                                            option(value="") Select Date
-                                            option(value="1") 1
-                                            option(value="2") 2
-                                            option(value="3") 3
-                                            option(value="4") 4
-                                            option(value="5") 5
-                                            option(value="6") 6
-                                            option(value="7") 7
-                                            option(value="8") 8
-                                            option(value="9") 9
-                                            option(value="10") 10
-                                            option(value="11") 11
-                                            option(value="12") 12
-                                            option(value="13") 13
-                                            option(value="14") 14
-                                            option(value="15") 15
-                                            option(value="16") 16
-                                            option(value="17") 17
-                                            option(value="18") 18
-                                            option(value="19") 19
-                                            option(value="20") 20
-                                            option(value="21") 21
-                                            option(value="22") 22
-                                            option(value="23") 23
-                                            option(value="24") 24
-                                            option(value="25") 25
-                                            option(value="26") 26
-                                            option(value="27") 27
-                                            option(value="28") 28
-                                            option(value="29") 29
-                                            option(value="30") 30
-                                            option(value="31") 31
+                                        .elr-select-wrapper
+                                            select#date(name="date")
+                                                option(value="") Select Date
+                                                option(value="1") 1
+                                                option(value="2") 2
+                                                option(value="3") 3
+                                                option(value="4") 4
+                                                option(value="5") 5
+                                                option(value="6") 6
+                                                option(value="7") 7
+                                                option(value="8") 8
+                                                option(value="9") 9
+                                                option(value="10") 10
+                                                option(value="11") 11
+                                                option(value="12") 12
+                                                option(value="13") 13
+                                                option(value="14") 14
+                                                option(value="15") 15
+                                                option(value="16") 16
+                                                option(value="17") 17
+                                                option(value="18") 18
+                                                option(value="19") 19
+                                                option(value="20") 20
+                                                option(value="21") 21
+                                                option(value="22") 22
+                                                option(value="23") 23
+                                                option(value="24") 24
+                                                option(value="25") 25
+                                                option(value="26") 26
+                                                option(value="27") 27
+                                                option(value="28") 28
+                                                option(value="29") 29
+                                                option(value="30") 30
+                                                option(value="31") 31
                                     .elr-inline-control-group
                                         label(for="year") Year:
                                         input.elr-valid-integer#year(type="text" name="year" data-min-value="1" data-min-length="4" data-max-length="4")
                                     .elr-inline-control-group
-                                        button.elr-button#submit(type="submit") Select
+                                        button.elr-button.elr-button-primary#submit(type="submit") Select
                     .elr-container
                         .elr-row
                             .elr-col-full
@@ -214,7 +220,7 @@ section#elr-calendar
                                     button.elr-calendar-year-next(data-dir='next') Next Year
 
                 h2 Usage
-                
+
                 a(href="https://github.com/dynamicresponsemedia/elr-calendar" target="_blank") Visit GitHub Repo
                 p at the moment only US style dates and times are used
 
@@ -225,17 +231,17 @@ section#elr-calendar
                 h4.elr-bold Options:
                 ul.elr-unstyled-list
                     li
-                        span.elr-bold calendarClass: 
+                        span.elr-bold calendarClass:
                         | classname of the calendar holder - default: elr-calendar
                     li
-                        span.elr-bold view: 
+                        span.elr-bold view:
                         | first view when the calendar loads - default: month
                         ul
                             li month
                             li week
                             li date
                     li
-                        span.elr-bold addHolidays: 
+                        span.elr-bold addHolidays:
                         | add holidays to calendar (US only for now) - default: yes
 
                 h3.elr-bold Add events dynamically using the createEvent method
@@ -248,62 +254,62 @@ section#elr-calendar
                 h4.elr-bold Options:
                 ul.elr-unstyled-list
                     li
-                        span.elr-bold id: 
+                        span.elr-bold id:
                         | the event id number (ElrCalendar will add this for you - don't add this yourself)
                     li
-                        span.elr-bold name: 
+                        span.elr-bold name:
                         | name of your event
                     li
-                        span.elr-bold recurrance: 
+                        span.elr-bold recurrance:
                         | how often the event will occur
                         ul
                             li
-                                span.elr-bold yearly: 
+                                span.elr-bold yearly:
                                 | once per year
                             li
-                                span.elr-bold monthly: 
+                                span.elr-bold monthly:
                                 | once per month
                             li
-                                span.elr-bold biweekly: 
+                                span.elr-bold biweekly:
                                 | every other week
                             li
-                                span.elr-bold weekly: 
+                                span.elr-bold weekly:
                                 | once per week
                             li
-                                span.elr-bold daily: 
+                                span.elr-bold daily:
                                 | every single day
                             li
-                                span.elr-bold none: 
+                                span.elr-bold none:
                                 | exactly once
                     li
-                        span.elr-bold month: 
+                        span.elr-bold month:
                         | month of your event - full name of month not abbreviations or month number
                     li
-                        span.elr-bold year: 
+                        span.elr-bold year:
                         | year of your event - for non-recurring events only
                     li
-                        span.elr-bold eventDate: 
+                        span.elr-bold eventDate:
                         | date of event
                     li
-                        span.elr-bold time: 
+                        span.elr-bold time:
                         | time of event ex. 2:30pm - omit for all day events
                     li
-                        span.elr-bold day: 
+                        span.elr-bold day:
                         | day of the week - array of days of the week - full name of day not abbreviations or day number - can be an array ex. ['Saturday', 'Sunday']
                     li
-                        span.elr-bold dayNum: 
+                        span.elr-bold dayNum:
                         | day number - ex. 1 for first occurance of day in month - use 'last' for the last occurance in the month
                     li
-                        span.elr-bold type: 
+                        span.elr-bold type:
                         | event type - so far holiday is the only type that has any effect
                     li
-                        span.elr-bold notes: 
+                        span.elr-bold notes:
                         | event notes - show up in the event view
 
                 h4.elr-bold Examples:
 
                 h5.elr-bold Yearly Event:
-                
+
                 pre.
                     elrCalendar.createEvent({
                         name: 'Thanksgiving',
@@ -327,7 +333,7 @@ section#elr-calendar
                     });
 
                 h5.elr-bold Weekly Event:
-                
+
                 pre.
                     elrCalendar.createEvent({
                         name: 'Sleep In!',
@@ -338,7 +344,7 @@ section#elr-calendar
                     });
 
                 h5.elr-bold Daily Event:
-                
+
                 pre.
                     elrCalendar.createEvent({
                         name: 'Eat Lunch',
