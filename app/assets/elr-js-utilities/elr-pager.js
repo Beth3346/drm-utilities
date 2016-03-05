@@ -1,5 +1,6 @@
 (function($) {
     'use strict';
+    // full screen pager
 
     window.elrPager = function(params) {
         var self = {};

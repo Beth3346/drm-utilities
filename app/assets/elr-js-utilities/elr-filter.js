@@ -1,6 +1,7 @@
 (function($) {
     'use strict';
-    
+    // filter any element on the page
+
     window.elrFilter = function(params) {
         var self = {};
         var spec = params || {};
