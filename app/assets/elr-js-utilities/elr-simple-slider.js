@@ -1,6 +1,6 @@
 (function($) {
     'use strict';
-    
+
     window.elrSimpleSlider = function(params) {
         var self = {};
         var spec = params || {};
@@ -37,7 +37,7 @@
             var $slides = $slideHolder.find('.' + slideClass);
 
             if ( effect === 'fade' ) {
-                return $slides.not(':hidden').index();                
+                return $slides.not(':hidden').index();
             } else if ( effect === 'slide-left' ) {
                 return (Math.abs($slideHolder.position().left) / parseInt($slides.first().width(), 10));
             }
@@ -62,7 +62,7 @@
                     slideDiff = -(current - slideNum);
                     newPos = pos - (slideWidth * slideDiff);
                 }
-                
+
                 $slideHolder.stop().animate({
                     left: newPos
                 }, speed);
@@ -109,11 +109,11 @@
                 $oldSlides = $slides;
                 $newSlides = $slides.clone();
                 numSlides = $slides.length;
-                
+
                 $slideHolder.css('width', slideWidth * (numSlides * 2));
                 $slideHolder.append($newSlides);
                 newPos = pos - slideWidth;
-                
+
                 $slideHolder.stop().animate({
                     left: newPos
                 }, speed, 'linear', function() {
@@ -129,7 +129,7 @@
             } else if ( dir === 'next' ) {
                 newPos = pos - slideWidth;
                 nextSlide = (Math.abs(newPos) / slideWidth);
-                
+
                 $slideHolder.stop().animate({
                     left: newPos
                 }, speed, 'linear', function() {
@@ -140,12 +140,12 @@
                 $newSlides = $slides.clone();
                 numSlides = $slides.length;
                 width = slideWidth * numSlides;
-                
+
                 $slideHolder.css('width', width * 2);
                 $slideHolder.prepend($newSlides);
                 $slideHolder.css('left', -width);
                 newPos = -width + slideWidth;
-                
+
                 $slideHolder.stop().animate({
                     left: newPos
                 }, speed, 'linear', function() {
@@ -161,14 +161,14 @@
             } else {
                 newPos = pos + slideWidth;
                 nextSlide = (Math.abs(newPos) / slideWidth);
-                
+
                 $slideHolder.stop().animate({
                     left: newPos
                 }, speed, 'linear', function() {
                     isAnimating = false;
                 });
             }
-            
+
             return nextSlide;
         };
 
@@ -185,8 +185,8 @@
         var pageSlide = function(e, $slideHolder) {
             var current = getCurrent($slideHolder);
             var dir;
-            
-            if (e.which === 37) {   
+
+            if (e.which === 37) {
                 dir = 'prev';
             } else if (e.which === 39) {
                 dir = 'next';
@@ -194,7 +194,7 @@
                 return;
             }
 
-            return advanceSlide(current, dir, $slideHolder);                                
+            return advanceSlide(current, dir, $slideHolder);
         };
 
         var startShow = function(interval, $slideHolder, $slideList) {
@@ -227,6 +227,9 @@
                 var $slideList;
                 var begin;
 
+                // add overflow hidden to make sure only the current slide is visible
+                $slideHolder.css({overflow: 'hidden'});
+
                 if ( effect === 'slide-left' ) {
                     var slideWidth = $slides.first().width(),
                         numSlides = $slides.length;
@@ -247,7 +250,7 @@
                     });
 
                     $slides.on('mouseout', function() {
-                        begin = startShow(interval, $slideHolder, $slideList); 
+                        begin = startShow(interval, $slideHolder, $slideList);
                     });
                 }
 
@@ -269,7 +272,7 @@
                 $currentSlider.on({
                     mouseenter: function () {
                         var $holder = $(this).find('.' + slideHolderClass);
-                        
+
                         $body.keydown(function(e) {
                             if( isAnimating ) {
                                 e.preventDefault();
@@ -299,7 +302,7 @@
                     pauseShow(begin);
 
                     e.preventDefault();
-                    e.stopPropagation();                    
+                    e.stopPropagation();
                 });
             });
         }
