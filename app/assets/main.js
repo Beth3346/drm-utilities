@@ -28,6 +28,8 @@
 
     elrBackToTop();
 
+    elrCalendar();
+
     elrDropdownButton();
     elrDropdownButton({
         containerClass: 'elr-dropdown-split-btn-holder',
