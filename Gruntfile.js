@@ -15,8 +15,7 @@ module.exports = function(grunt) {
                     '!**/templates/**/*',
                     '!**/*.jade' ,
                     '!**/images/**/*',
-                    '!**/sass/**/*',
-                    '!**/coffee/**/*'],
+                    '!**/sass/**/*'],
                 dest: '<%= distFolder %>',
                 expand: true
             }
@@ -45,9 +44,7 @@ module.exports = function(grunt) {
 
             postbuild: {
                 nonull: false,
-                src: ['<%= distFolder %>coffee',
-                    '<%= distFolder %>js/coffee-compiled',
-                    '<%= distFolder %>js/dist',
+                src: ['<%= distFolder %>js/dist',
                     '<%= distFolder %>sass',
                     '<%= distFolder %>partials',
                     '<%= distFolder %>assets',
@@ -88,17 +85,6 @@ module.exports = function(grunt) {
             }
         },
 
-        coffee: {
-            glob_to_multiple: {
-                expand: true,
-                flatten: true,
-                cwd: '<%= appFolder %>',
-                src: ['coffee/**/*.coffee'],
-                dest: '<%= distFolder %>js/coffee-compiled',
-                ext: '.js'
-            }
-        },
-
         concat: {
             options: {
                     // define a string to put between each file in the concatenated output
@@ -112,16 +98,14 @@ module.exports = function(grunt) {
                     '<%= appFolder %>assets/elr-time-utilities.js',
                     '<%= appFolder %>assets/elr-validation-utilities.js',
                     '<%= distFolder %>assets/elr-js-utilities/*.js',
-                    '<%= distFolder %>assets/main.js',
-                    '<%= distFolder %>js/coffee-compiled/*.js'],
+                    '<%= distFolder %>assets/main.js'],
                 // the location of the resulting JS file
                 dest: '<%= distFolder %>js/<%= pkg.name %>.<%= pkg.version %>.js'
             }
         },
 
         jshint: {
-            files: ['<%= distFolder %>js/coffee-compiled/*.js',
-                '<%= appFolder %>assets/elr-js-utilities/*.js',
+            files: ['<%= appFolder %>assets/elr-js-utilities/*.js',
                 '<%= appFolder %>assets/main.js',
                 '<%= appFolder %>assets/elr-utilities.js',
                 '<%= appFolder %>assets/elr-time-utilities.js',
@@ -147,9 +131,9 @@ module.exports = function(grunt) {
             }
         },
 
-        imagemin: {                          // Task
-            dist: {                            // Target
-                options: {                       // Target options
+        imagemin: {
+            dist: {
+                options: {
                     optimizationLevel: 7
                 },
                 files: [{
@@ -200,17 +184,17 @@ module.exports = function(grunt) {
             }
         },
 
-		autoprefixer: {
+        autoprefixer: {
             options: {
                 browsers: ['last 8 versions']
             },
-			build: {
-				expand: false,
+            build: {
+                expand: false,
                 files: {
                     '<%= distFolder %>styles.css': '<%= distFolder %>styles.css'
                 }
-			}
-		},
+            }
+        },
 
         csslint: {
             strict: {
@@ -272,9 +256,8 @@ module.exports = function(grunt) {
                 '<%= appFolder %>assets/el-time-utilities.js',
                 '<%= appFolder %>assets/el-validation-utilities.js',
                 '<%= distFolder %>assets/elr-js-utilities/*.js',
-                '<%= distFolder %>assets/main.js',
-                '<%= appFolder %>coffee/**/*.coffee'],
-                tasks: [ 'coffee', 'concat', 'jshint' ],
+                '<%= distFolder %>assets/main.js'],
+                tasks: [ 'concat', 'jshint' ],
             },
 
             copy: {
@@ -284,7 +267,6 @@ module.exports = function(grunt) {
                 '<%= appFolder %>sass/**/*',
                 '<%= appFolder %>partials/**/*',
                 '!<%= appFolder %>**/*.scss',
-                '!<%= appFolder %>**/*.coffee',
                 '!<%= appFolder %>**/*.{png,jpg,jpeg}' ],
                 tasks: [ 'copy' ]
             },
@@ -293,7 +275,6 @@ module.exports = function(grunt) {
     });
 
     // Load the plugin that provides the "uglify" task.
-    grunt.loadNpmTasks('grunt-contrib-coffee');
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -317,7 +298,6 @@ module.exports = function(grunt) {
         'copy',
         'jade:dev',
         'imagemin',
-        'coffee',
         'concat',
         'sass:dev',
         'autoprefixer',
@@ -333,7 +313,6 @@ module.exports = function(grunt) {
         'copy',
         'jade:dist',
         'imagemin',
-        'coffee',
         'concat',
         'uglify',
         'sass:dist',

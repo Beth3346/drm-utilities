@@ -101,16 +101,7 @@
     }
 
     .elr-select-wrapper {
-        position: relative;
-        padding: 5px 0;
-
-        &::after {
-            @include elr-font-awesome;
-            @include elr-centerer(true, false);
-            content: '\f0d7';
-            right: 15px;
-            pointer-events: none;
-        }
+        @include elr-select;
     }
 
     select {
@@ -237,5 +228,18 @@
             color: $white;
             transition: none;
         }
+    }
+}
+
+@mixin elr-select($icon: '\f0d7', $font-size: 14px) {
+    position: relative;
+    padding: 5px 0;
+
+    &::after {
+        @include elr-font-awesome($font-size);
+        @include elr-centerer(true, false);
+        content: $icon;
+        right: 15px;
+        pointer-events: none;
     }
 }

@@ -92,7 +92,7 @@
         border-color: $link-color !important;
 
         @include elr-placeholder {
-            color: $link-color !important;
+            color: rgba($link-color, .5) !important;
         }
     }
 
