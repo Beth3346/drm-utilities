@@ -1,0 +1,46 @@
+@mixin elr-border-icon($width: 90px, $background: $elr-blue-light, $color: $elr-blue) {
+    @include elr-circle($width);
+    margin: 20px auto 30px;
+    text-align: center;
+    background: rgba($background, .1);
+    transition: background .2s ease;
+    position: relative;
+    cursor: pointer;
+
+    &::after {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        content: '';
+        pointer-events: none;
+        position: absolute;
+        top: -7px;
+        left: -7px;
+        padding: 7px;
+        box-shadow: 0 0 0 1px $color;
+        transition: transform .2s, opacity .2s;
+        transform: scale(.8);
+        box-sizing: content-box;
+        opacity: 0;
+    }
+
+    &:hover {
+        background-color: rgba($color, 1);
+
+        &::after {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .fa {
+            color: $white;
+        }
+    }
+
+    .fa {
+        @include elr-em-font(30px);
+        line-height: $width;
+        color: $color;
+        transition: color .2s ease;
+    }
+}

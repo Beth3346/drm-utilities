@@ -1,0 +1,32 @@
+.fade-box {
+    background-color: $elr-blue;
+    color: $white;
+    padding: 20px 30px;
+    cursor: pointer;
+    margin-bottom: 20px;
+
+    p {
+        padding: 0;
+        margin: 0;
+        line-height: 1;
+    }
+
+    .fade-in {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    &:hover {
+        .fade-in {
+            @include elr-fade('show');
+        }
+
+        .fade-out {
+            @include elr-fade('hide');
+        }
+    }
+}
+
+.border-icon {
+    @include elr-border-icon;
+}
