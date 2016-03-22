@@ -13,7 +13,7 @@
 
         var eventUtilities = {
             // gets the index of an event so we can keep track after events are removed
-            this.getEventIndex = function(eventId) {
+            getEventIndex: function(eventId) {
                 var index = null;
 
                 $.each(events, function(k, v) {
@@ -26,7 +26,7 @@
 
                 return index;
             }
-        }
+        };
 
         if ($calendar.length) {
             var $body = $('body');
@@ -40,7 +40,7 @@
                 'month': 'elr-month',
                 'week': 'elr-week',
                 'date': 'elr-date'
-            }
+            };
             var $calendarNav = $('.elr-calendar-nav');
             var $calendarSelect = $('.elr-calendar-select');
             var $calendarSelectButton = $calendarSelect.find('button[type=submit]');
