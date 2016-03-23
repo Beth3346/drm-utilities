@@ -13,7 +13,10 @@
 @import 'default-config';
 @import '../config';
 
+@import 'animations/animations';
+@import 'animations/icon-circle';
 @import 'animations/border-icon';
+@import 'animations/dash-icon';
 @import 'animations/fade';
 
 @import 'components/accordion';
