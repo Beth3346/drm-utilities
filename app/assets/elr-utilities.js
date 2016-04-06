@@ -703,6 +703,12 @@
             });
         };
 
+        self.isMobile = function(mobileWidth) {
+            var windowWidth = $(window).width();
+
+            return (windowWidth <= mobileWidth) ? true : false;
+        };
+
         return self;
     };
 
