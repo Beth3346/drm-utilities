@@ -19,23 +19,28 @@
             var winWidth = $(window).width();
             var contentHeight = $content.height();
 
-            if ( scroll > ( top + contentHeight ) ) {
+            if (scroll > (top + contentHeight)) {
                 $nav.removeClass('sticky-' + position);
-            } else if ( ( scroll > (top - 50) ) && ( navHeight < winHeight ) ) {
-                // positionRight(winWidth - (navPositionLeft + navWidth));
-                $nav.addClass('sticky-' + position);
+
+                if (position === 'left' || position === 'right') {
+                    $nav.css({'right': ''});
+                }
+            } else if ((scroll > (top - 50)) && (navHeight < winHeight)) {
+                if (position === 'left' || position === 'right') {
+                    $nav.animate({
+                        'right': winWidth - (navPositionLeft + navWidth)
+                    }, 0, function() {
+                        $nav.addClass('sticky-' + position);
+                    });
+                } else {
+                    $nav.addClass('sticky-' + position);
+                }
             } else {
                 $nav.removeClass('sticky-' + position);
-            }
-        };
 
-        var positionRight = function(navPositionLeft) {
-            var position = $nav.data('position');
-
-            if ( position !== 'top' ) {
-                $nav.css({'right': navPositionLeft, 'left': 'auto'});
-            } else {
-                $nav.css({'left': 0});
+                if (position === 'left' || position === 'right') {
+                    $nav.css({'right': ''});
+                }
             }
         };
 
@@ -55,14 +60,14 @@
             return false;
         };
 
-        if ( $nav.length ) {
+        if ($nav.length) {
             var $win = $(window);
-            var navPositionTop = $nav.position().top;
             var $links = $nav.find('a[href^="#"]');
             var hash = window.location.hash;
+            var navPositionTop = $nav.offset().top;
             var navPositionLeft = $nav.offset().left;
 
-            if ( hash ) {
+            if (hash) {
                 var $hashLink = $nav.find("a[href='" + hash + "']");
 
                 $hashLink.addClass(activeClass);
@@ -78,9 +83,13 @@
                 affixNav(navPositionTop, navPositionLeft);
             });
 
-            if ( spy ) {
+            // $win.on('resize', function() {
+            //     positionNav();
+            // });
+
+            if (spy) {
                 $win.on('scroll', function() {
-                    elr.scrollSpy($nav, $content, sectionEl, activeClass );
+                    elr.scrollSpy($nav, $content, sectionEl, activeClass);
                 });
             }
 
