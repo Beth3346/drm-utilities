@@ -709,6 +709,14 @@
             return (windowWidth <= mobileWidth) ? true : false;
         };
 
+        self.randomClass = function(classList, $el) {
+            $.each(classList, function(index, value) {
+                $el.removeClass(value);
+            });
+
+            $el.addClass(classList[Math.floor(Math.random() * classList.length)]);
+        };
+
         return self;
     };
 
