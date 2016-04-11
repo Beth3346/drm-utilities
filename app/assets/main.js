@@ -234,4 +234,24 @@
         $that.addClass('current');
     });
 
+    var gotoSection = function() {
+        var $that = $(this);
+        var target = $that.attr('href');
+        var $content = $('body, html');
+
+        var section = target.split('#').pop();
+
+        var $target = $('#' + section);
+
+        console.log($target);
+
+        $content.stop().animate({
+            'scrollTop': $target.position().top
+        });
+
+        return false;
+    };
+
+    $('.smooth-scroll').on('click', 'a', gotoSection);
+
 })(jQuery);
