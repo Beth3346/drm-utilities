@@ -226,4 +226,12 @@
         $('ul.mobile-menu').slideToggle();
     });
 
+    $('.menu-animated .menu-item').on('click', function(e) {
+        e.preventDefault();
+        var $that = $(this);
+
+        $that.parent('ul').find('.current').removeClass('current');
+        $that.addClass('current');
+    });
+
 })(jQuery);
