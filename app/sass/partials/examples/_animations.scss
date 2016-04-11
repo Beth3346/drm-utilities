@@ -36,14 +36,7 @@
 .icon-border-pull { @include elr-icon-border-pull; }
 .icon-background-fade { @include elr-icon-background-fade; }
 
-.menu-animated {
-    @include menu-animated();
-}
-
-.menu-simple-lines {
-    @include menu-simple-lines();
-}
-
-.menu-double-lines {
-    @include menu-double-lines();
-}
+.menu-animated { @include menu-animated(); }
+.menu-simple-lines { @include menu-simple-lines(); }
+.menu-double-lines { @include menu-double-lines(); }
+.menu-expanding-lines { @include menu-expanding-lines(); }
