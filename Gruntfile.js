@@ -48,6 +48,8 @@ module.exports = function(grunt) {
                     '<%= distFolder %>sass',
                     '<%= distFolder %>partials',
                     '<%= distFolder %>assets',
+                    '<%= distFolder %>coffee',
+                    '<%= distFolder %>templates',
                     '<%= distFolder %>css']
             }
         },
