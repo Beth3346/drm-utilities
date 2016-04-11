@@ -1,11 +1,13 @@
-section#labels
+section#fade
     .elr-container
         .elr-row
             .elr-col-full
                 h3.elr-bold Smooth Fade
-        .elr-row
+        .elr-row.example-section
             .elr-col-full.example-holder.example-holder-light
-                .fade-box
-                    p.fade-in This text is now visible
-                .fade-box
-                    p.fade-out This text will disappear
+                .elr-col-half.fade-box
+                    p This box is now visible
+                    .box-pink.fade-in
+                .elr-col-half.fade-box
+                    p This box will disappear
+                    .box-pink.fade-out
