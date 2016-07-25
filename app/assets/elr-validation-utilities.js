@@ -1,12 +1,12 @@
 (function($) {
     'use strict';
 
-    var elrValidationUtilities = function() {
+    var elrValidate = function() {
         var self = {};
 
         self.evaluate = function(result, value, validate, errorMessage) {
 
-            if ( result && ( value === result ) ) {
+            if (result && (value === result)) {
                 validate.message = null;
                 validate.status = 'success';
             } else {
@@ -24,10 +24,10 @@
                 issuer: issuer
             };
 
-            if ( value ) {
+            if (value) {
                 var result;
 
-                if ( elr.patterns[issuer].exec(value) ) {
+                if (elr.patterns[issuer].exec(value)) {
                     result = elr.trim(elr.patterns[issuer].exec(value)[0]);
                 }
 
@@ -44,7 +44,7 @@
                 issuer: 'required'
             };
 
-            if ( !value ) {
+            if (!value) {
                 validate.message = 'this field is required';
                 validate.status = 'danger';
             } else {
@@ -259,5 +259,5 @@
         return self;
     };
 
-    window.elrVal = elrValidationUtilities();
+    window.elrVal = elrValidate();
 })(jQuery);

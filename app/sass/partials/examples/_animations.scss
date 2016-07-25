@@ -1,3 +1,21 @@
+.spin {
+    @include elr-circle(100px);
+    background-color: lighten($elr-blue, 20%);
+    text-align: center;
+    color: $white;
+    line-height: 90px;
+    border: 4px dashed $elr-blue;
+
+    p {
+        padding: 0;
+        margin: 0;
+    }
+
+    &:hover {
+        @include elr-spin;
+    }
+}
+
 .fade-box {
     color: $elr-blue;
     padding: 20px 30px;
@@ -12,19 +30,47 @@
     .box-pink {
         width: 100%;
         height: 150px;
-        background-color: lighten($dark-pink, 10%);
-        border-color: $dark-pink;
+        background-color: lighten($elr-blue, 10%);
+        border-color: $elr-blue;
         cursor: pointer;
     }
 
-    .fade-in {
-        opacity: 0;
-        visibility: hidden;
+    .fade-in { @include elr-fade('show', .7s); }
+    .fade-out { @include elr-fade('hide', .7s); }
+}
+
+.slide-box {
+    height: 250px;
+}
+
+.slide-down {
+    @include elr-slide;
+
+    // &:hover .elr-slide-down {
+    //     padding-top: 10px;
+    //     padding-bottom: 10px;
+    // }
+
+    p {
+        background-color: $elr-blue;
+        padding: 10px;
+        color: $white;
+        border-radius: 5px;
+        margin-bottom: 5px;
     }
 
-    &:hover {
-        .fade-in { @include elr-fade('show'); }
-        .fade-out { @include elr-fade('hide'); }
+    .elr-slide-down {
+        box-sizing: border-box;
+        background-color: $elr-blue;
+        color: $white;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        border-radius: 5px;
+
+        li {
+            padding: 5px 10px;
+        }
     }
 }
 
@@ -35,8 +81,13 @@
 .icon-dash-rotate { @include elr-icon-dash(true); }
 .icon-border-pull { @include elr-icon-border-pull; }
 .icon-background-fade { @include elr-icon-background-fade; }
+.icon-hamburger { @include elr-hamburger; }
+.icon-close { @include elr-icon-close; }
+.icon-arrow-left { @include elr-icon-arrow('left'); }
+.icon-arrow-right { @include elr-icon-arrow('right'); }
 
 .menu-animated { @include menu-animated(); }
 .menu-simple-lines { @include menu-simple-lines(); }
 .menu-double-lines { @include menu-double-lines(); }
 .menu-expanding-lines { @include menu-expanding-lines(); }
+.menu-drop-lines { @include menu-drop-lines($grey, $elr-blue, 2px); }

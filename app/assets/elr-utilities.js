@@ -73,26 +73,20 @@
             sortTime: new RegExp('^(?:[12][012]:|[0]?[0-9]:)[012345][0-9](?:\/:[012345][0-9])?(?:am|pm|AM|PM)', 'i')
         };
 
-        self.isArray = Array.isArray;
-
-        self.isArrayLike = function(obj) {
-            return obj && typeof obj === "object" && (obj.length === 0 || typeof obj.length === "number" && obj.length > 0 && obj.length - 1 in obj);
-        };
-
         self.each = function(collection, callback) {
-            var i = 0,
-                length = collection.length,
-                isArray = self.isArrayLike( collection );
+            var i = 0;
+            var length = collection.length;
+            var isArray = self.isArrayLike(collection);
 
-            if ( isArray ) {
-                for ( ; i < length; i++ ) {
-                    if ( callback.call( collection[ i ], i, collection[ i ] ) === false ) {
+            if (isArray) {
+                for (; i < length; i++) {
+                    if (callback.call(collection[ i ], i, collection[ i ]) === false) {
                         break;
                     }
                 }
             } else {
-                for ( i in collection ) {
-                    if ( callback.call( collection[ i ], i, collection[ i ] ) === false ) {
+                for (i in collection) {
+                    if (callback.call(collection[ i ], i, collection[ i ]) === false) {
                         break;
                     }
                 }
@@ -102,32 +96,41 @@
         };
 
         self.trim = function(str) {
-            return ( str === null ) ? '' : str.replace(/^\s+|\s+$/g,'');
+            return (str === null) ? '' : str.replace(/^\s+|\s+$/g,'');
         };
 
-        self.unique = function(arr) {
-            var that = this;
-            return arr.filter(function(v, i, that) {
-                return that.indexOf(v) === i;
-            });
+        // filters an array using a callback function
+        // self.exclude = function(arr, fn) {
+        //     var list = [];
+        //     for (var i = 0; i < arr.length; i++) {
+        //         if (fn(arr[i])) {
+        //             list.push(arr[i]);
+        //         }
+        //     }
+
+        //     return list;
+        // };
+
+        self.isOdd = function(val) {
+            return val % 2 === 1;
         };
 
-        self.inArray = function(arr, item, i) {
-            return ( arr == null ) ? -1 : arr.indexOf( item, i );
+        self.isEven = function(val) {
+            return val % 2 === 0;
         };
 
         self.dataTypeChecks = {
-            isDate: function(value) {
-                return ( self.patterns.sortMonthDayYear.test(value) ) ? true : false;
+            isDate: function(val) {
+                return (self.patterns.sortMonthDayYear.test(val)) ? true : false;
             },
-            isNumber: function(value) {
-                return ( self.patterns.sortNumber.test(value) ) ? true : false;
+            isNumber: function(val) {
+                return (self.patterns.sortNumber.test(val)) ? true : false;
             },
-            isAlpha: function(value) {
-                return ( self.patterns.alpha.test(value) ) ? true : false;
+            isAlpha: function(val) {
+                return (self.patterns.alpha.test(val)) ? true : false;
             },
-            isTime: function(value) {
-                return ( self.patterns.sortTime.test(value) ) ? true : false;
+            isTime: function(val) {
+                return (self.patterns.sortTime.test(val)) ? true : false;
             }
         };
 
@@ -136,21 +139,21 @@
             var types = [];
             type = type || null;
 
-            if ( type ) {
+            if (type) {
                 types.push(type);
             } else {
                 self.each(values, function(k,v) {
-                    if ( v === '' ) {
+                    if (v === '') {
                         return;
                     }
 
-                    if ( self.dataTypeChecks.isDate.call(that, v) ) {
+                    if (self.dataTypeChecks.isDate.call(that, v)) {
                         return types.push('date');
-                    } else if ( self.dataTypeChecks.isTime.call(that, v) ) {
+                    } else if (self.dataTypeChecks.isTime.call(that, v)) {
                         return types.push('time');
-                    } else if ( self.dataTypeChecks.isNumber.call(that, v) ) {
+                    } else if (self.dataTypeChecks.isNumber.call(that, v)) {
                         return types.push('number');
-                    } else if ( self.dataTypeChecks.isAlpha.call(that, v) ) {
+                    } else if (self.dataTypeChecks.isAlpha.call(that, v)) {
                         return types.push('alpha');
                     } else {
                         return;
@@ -172,9 +175,9 @@
             return str;
         };
 
-        self.checkBlacklist = function(password, blacklist) {
-            console.log(self.inArray(blacklist, password.toLowerCase()));
-            return self.inArray(blacklist, password.toLowerCase());
+        self.checkBlacklist = function(str, blacklist) {
+            // console.log(self.inArray(blacklist, str.toLowerCase()));
+            return self.inArray(blacklist, str.toLowerCase());
         };
 
         self.checkLength = function(str, reqLength) {
@@ -194,7 +197,7 @@
         self.getValue = function($field) {
             var value = self.trim($field.val());
 
-            if ( value.length > 0 ) {
+            if (value.length > 0) {
                 return value;
             } else {
                 return null;
@@ -281,7 +284,7 @@
         self.clearForm = function($fields) {
             $fields.each(function() {
                 var $that = $(this);
-                if ( $that.attr('type') === 'checkbox' ) {
+                if ($that.attr('type') === 'checkbox') {
                     $that.prop('checked', false);
                 } else {
                     $that.val('');
@@ -301,7 +304,7 @@
             var $fields = $form.find(':input').not('button').not(':checkbox');
             var $checkboxes = $form.find('input:checked');
 
-            if ( $checkboxes.length !== 0 ) {
+            if ($checkboxes.length !== 0) {
                 var boxIds = [];
 
                 $checkboxes.each(function() {
@@ -329,13 +332,13 @@
                 var formInput = [];
                 var input;
 
-                if ( self.trim($that.val()) === '' ) {
+                if (self.trim($that.val()) === '') {
                     input = null;
                 } else {
                     input = self.trim($that.val());
                 }
 
-                if ( input ) {
+                if (input) {
                     formInput[id] = input;
                 }
 
@@ -359,7 +362,7 @@
         self.killEvent = function($el, eventType, selector) {
             selector = selector || null;
 
-            if ( selector === null ) {
+            if (selector === null) {
                 $el.on(eventType, function(e) {
                     e.stopPropagation();
                 });
@@ -371,7 +374,7 @@
         };
 
         // self.scrollEvent = function($el, offset, callback) {
-        //     if ( $(document).scrollTop() > $(window).height() ) {
+        //     if ($(document).scrollTop() > $(window).height()) {
         //         callback();
         //     }
         // };
@@ -382,9 +385,9 @@
                 var height = $(window).height();
                 speed = speed || 300;
 
-                if ( scroll > height ) {
+                if (scroll > height) {
                     $el.fadeIn(speed);
-                } else if ( scroll < height ) {
+                } else if (scroll < height) {
                     $el.fadeOut(speed);
                 }
             };
@@ -392,15 +395,47 @@
             $(window).on('scroll', self.throttle(showElement, 100));
         };
 
-        // create an array of unique items from jQuery object text
-        self.toArray = function($items, unique) {
+        self.strToArray = function(str) {
+            var arr = [];
+            str = str.split(',');
+
+            self.each(str, function() {
+                arr.push(self.trim(this));
+            });
+
+            return arr;
+        };
+
+        // self.isArray = function(arr) {
+        //     return Array.isArray(arr);
+        // };
+
+        self.isArrayLike = function(obj) {
+            return obj && typeof obj === "object" && (obj.length === 0 || typeof obj.length === "number" && obj.length > 0 && obj.length - 1 in obj);
+        };
+
+        self.unique = function(arr) {
+            var that = this;
+            return arr.filter(function(v, i, that) {
+                return that.indexOf(v) === i;
+            });
+        };
+
+        self.inArray = function(arr, item, i) {
+            return (arr == null) ? -1 : arr.indexOf(item, i);
+        };
+
+        // create an array of unique items from a list
+        self.toArray = function(items, unique) {
             var arr = [];
             unique = unique || false;
 
-            self.each($items, function(key, value) {
-                arr.push($(value).text());
+            // console.log(items);
 
-                if ( unique ) {
+            self.each(items, function() {
+                arr.push(this.textContent);
+
+                if (unique) {
                     return self.unique(arr);
                 } else {
                     return arr;
@@ -433,16 +468,16 @@
         self.sortValues = function(a, b, dir) {
             dir = dir || 'ascending';
 
-            if ( self.patterns.alpha.test(a) ) {
-                if ( a < b ) {
-                    return ( dir === 'ascending' ) ? -1 : 1;
-                } else if ( a > b ) {
-                    return ( dir === 'ascending' ) ? 1 : -1;
-                } else if ( a === b ) {
+            if (self.patterns.alpha.test(a)) {
+                if (a < b) {
+                    return (dir === 'ascending') ? -1 : 1;
+                } else if (a > b) {
+                    return (dir === 'ascending') ? 1 : -1;
+                } else if (a === b) {
                     return 0;
                 }
             } else {
-                return ( dir === 'ascending' ) ? a - b : b - a;
+                return (dir === 'ascending') ? a - b : b - a;
             }
         };
 
@@ -464,7 +499,7 @@
                     var listItem = this;
                     var value = self.trim($(listItem).text());
 
-                    if ( self.dataTypeChecks['is' + self.capitalize(type)].call(that, value) ) {
+                    if (self.dataTypeChecks['is' + self.capitalize(type)].call(that, value)) {
                         sortLists[type].push(listItem);
                     } else {
                         return;
@@ -502,7 +537,7 @@
         self.comparators = {
             sortDate: function($items, direction) {
                 var sort = function(a, b) {
-                    if ( self.dataTypeChecks.isDate(self.trim($(a).text())) && self.dataTypeChecks.isDate(self.trim($(b).text())) ) {
+                    if (self.dataTypeChecks.isDate(self.trim($(a).text())) && self.dataTypeChecks.isDate(self.trim($(b).text()))) {
                         a = new Date(self.patterns.sortMonthDayYear.exec(self.trim($(a).text())));
                         b = new Date(self.patterns.sortMonthDayYear.exec(self.trim($(b).text())));
                     }
@@ -518,7 +553,7 @@
                     var time1 = self.patterns.sortTime.exec(self.trim($(a).text()))[0];
                     var time2 = self.patterns.sortTime.exec(self.trim($(b).text()))[0];
 
-                    if ( self.dataTypeChecks.isTime(self.trim($(a).text())) && self.dataTypeChecks.isTime(self.trim($(b).text())) ) {
+                    if (self.dataTypeChecks.isTime(self.trim($(a).text())) && self.dataTypeChecks.isTime(self.trim($(b).text()))) {
                         a = new Date("04-22-2014 " + self.parseTime(time1));
                         b = new Date("04-22-2014 " + self.parseTime(time2));
                     }
@@ -556,7 +591,7 @@
                     a = self.trim($(a).find('td').eq(columnNum).text());
                     b = self.trim($(b).find('td').eq(columnNum).text());
 
-                    if ( self.dataTypeChecks.isDate(a) && self.dataTypeChecks.isDate(b) ) {
+                    if (self.dataTypeChecks.isDate(a) && self.dataTypeChecks.isDate(b)) {
                         a = new Date(self.patterns.monthDayYear.exec(a));
                         b = new Date(self.patterns.monthDayYear.exec(b));
                     } else {
@@ -574,7 +609,7 @@
                     a = self.trim($(a).find('td').eq(columnNum).text());
                     b = self.trim($(b).find('td').eq(columnNum).text());
 
-                    if ( self.dataTypeChecks.isTime(a) && self.dataTypeChecks.isTime(b) ) {
+                    if (self.dataTypeChecks.isTime(a) && self.dataTypeChecks.isTime(b)) {
                         a = new Date('04-22-2014' + self.parseTime(self.patterns.monthDayYear.exec(a)));
                         b = new Date('04-22-2014' + self.parseTime(self.patterns.monthDayYear.exec(b)));
                     } else {
@@ -619,10 +654,10 @@
             var positions = self.findPositions($content, el);
 
             self.each(positions, function(index, value) {
-                if ( scroll === 0 ) {
+                if (scroll === 0) {
                     $('a.' + activeClass).removeClass(activeClass);
                     links.eq(0).addClass(activeClass);
-                } else if ( value < scroll ) {
+                } else if (value < scroll) {
                     // if value is less than scroll add activeClass to link with the same index
                     $('a.' + activeClass).removeClass(activeClass);
                     links.eq(index).addClass(activeClass);
@@ -631,10 +666,10 @@
         };
 
         self.getPosition = function(height, $obj) {
-            if ( height > 200 ) {
-                return $obj.position().top - ( $obj.height() / 4 );
+            if (height > 200) {
+                return $obj.position().top - ($obj.height() / 4);
             } else {
-                return $obj.position().top - ( $obj.height() / 2 );
+                return $obj.position().top - ($obj.height() / 2);
             }
         };
 
@@ -649,21 +684,21 @@
                 var position;
 
                 // the first element's position should always be 0
-                if ( index === 0 ) {
+                if (index === 0) {
                     position = 0;
-                } else if ( index === ( length - 1 ) ) {
+                } else if (index === (length - 1)) {
                     // subtract the bottom container's full height so final scroll value is equivalent
                     // to last container's position
-                    position = self.getPosition( $that.height, $that );
+                    position = self.getPosition($that.height, $that);
                 } else {
                     // for all other elements correct position by only subtracting half of its height
                     // from its top position
-                    position = $that.position().top - ( $that.height() / 4 );
+                    position = $that.position().top - ($that.height() / 4);
                 }
 
                 // correct for any elements _that may have a negative position value
 
-                if ( position < 0 ) {
+                if (position < 0) {
                     positions.push(0);
                 } else {
                     positions.push(position);
@@ -679,18 +714,18 @@
             var minutes = self.patterns.minute.exec(time)[1];
             var ampm = self.patterns.ampm.exec(time)[1].toLowerCase();
 
-            if ( ampm === 'am' ) {
+            if (ampm === 'am') {
                 hour = hour.toString();
 
-                if ( hour === '12' ) {
+                if (hour === '12') {
                     hour = '0';
-                } else if ( hour.length === 1 ) {
+                } else if (hour.length === 1) {
                     hour = '0' + hour;
                 }
 
                 return hour + ':' + minutes;
 
-            } else if ( ampm === 'pm' ) {
+            } else if (ampm === 'pm') {
                 return (hour + 12) + ':' + minutes;
             }
         };

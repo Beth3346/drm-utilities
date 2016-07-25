@@ -31,12 +31,12 @@
     }
 }
 
-@mixin elr-underline($color: $white, $width: 100px, $align: center, $spacing: 30px) {
+@mixin elr-underline($color: $white, $width: 100px, $align: center, $spacing: 30px, $thickness: 1px) {
     &:after {
         content: '';
         width: $width;
-        height: 1px;
-        border-bottom: 1px solid $color;
+        height: $thickness;
+        border-bottom: $thickness solid $color;
         display: block;
 
         @if ($align == center) {

@@ -165,7 +165,7 @@
             } else {
                 status.strength = 'strong';
                 status.message = 'great password';
-                status.status = 'success';             
+                status.status = 'success';
             }
 
             return status;

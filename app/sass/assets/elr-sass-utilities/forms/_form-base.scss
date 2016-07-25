@@ -44,8 +44,8 @@
     .elr-col-half:last-child,
     .elr-col-third:last-child,
     .elr-col-quarter:last-child {
-        padding-left: 0;
-        padding-right: 10px;
+        padding-left: 10px;
+        padding-right: 0;
 
         @include elr-breakpoint('saturn') {
             padding-right: 0;

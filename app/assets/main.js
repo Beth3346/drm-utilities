@@ -243,7 +243,7 @@
 
         var $target = $('#' + section);
 
-        console.log($target);
+        console.log(section);
 
         $content.stop().animate({
             'scrollTop': $target.position().top
@@ -253,5 +253,36 @@
     };
 
     $('.smooth-scroll').on('click', 'a', gotoSection);
+
+    $('.test-box-in-array').each(function() {
+        var $that = $(this);
+        var arr = elr.strToArray($that.find('p.in-array').text());
+        var testValue = $that.find('.test-value').text();
+        var output = elr.inArray(arr, testValue) !== -1 ? 'true' : 'false';
+
+        $that.find('.output-holder').text(output);
+    });
+
+    var cityList = document.querySelectorAll('.city-list li');
+
+    var cities = elr.toArray(cityList);
+    $('.output-holder-city-list').text(cities);
+    console.log(cities);
+
+    var testFunction = function(var1, var2) {
+        return elr.isArrayLike(arguments);
+    };
+
+    var numbers = [1,4,5,3,3,3,5];
+
+    console.log(testFunction(1, 2));
+    console.log(numbers);
+    console.log(elr.unique(numbers));
+
+    console.log(elr.createArrays({animals: 'names'}, ['Dogs', 'Cats', 'Birds']));
+
+    $('.icon-animate').on('click', function() {
+        $(this).toggleClass('active');
+    });
 
 })(jQuery);
