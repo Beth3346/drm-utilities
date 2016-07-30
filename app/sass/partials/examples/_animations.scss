@@ -1,3 +1,27 @@
+.flipper {
+    @include elr-flipper;
+    padding: 40px;
+
+    .flip-container {
+        @include elr-square(200px);
+    }
+
+    .front,
+    .back {
+        @include elr-circle(200px);
+
+        p {
+            @include elr-em-font(18px);
+            color: $white;
+            text-align: center;
+            line-height: 200px;
+        }
+    }
+
+    .front { background-color: $elr-blue; }
+    .back { background-color: $dark-pink; }
+}
+
 .spin {
     @include elr-circle(100px);
     background-color: lighten($elr-blue, 20%);
@@ -32,7 +56,6 @@
         height: 150px;
         background-color: lighten($elr-blue, 10%);
         border-color: $elr-blue;
-        cursor: pointer;
     }
 
     .fade-in { @include elr-fade('show', .7s); }
@@ -45,11 +68,6 @@
 
 .slide-down {
     @include elr-slide;
-
-    // &:hover .elr-slide-down {
-    //     padding-top: 10px;
-    //     padding-bottom: 10px;
-    // }
 
     p {
         background-color: $elr-blue;
