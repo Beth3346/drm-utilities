@@ -7,9 +7,10 @@
     "url": "https://github.com/elr-utilities/elr-utilities.git"
   },
   "devDependencies": {
+    "babel-preset-es2015": "",
     "grunt": "",
     "grunt-autoprefixer": "",
-    "grunt-browser-sync": "",
+    "grunt-babel": "",
     "grunt-contrib-clean": "",
     "grunt-contrib-concat": "",
     "grunt-contrib-copy": "",
@@ -20,9 +21,7 @@
     "grunt-contrib-sass": "",
     "grunt-contrib-uglify": "",
     "grunt-contrib-watch": "",
-    "grunt-rev": "",
     "grunt-scss-lint": "",
-    "grunt-usemin": "",
     "jpegtran-bin": ""
   }
 }
