@@ -42,6 +42,11 @@
     margin: 5px;
     padding: 20px;
 
+    @include elr-breakpoint('saturn') {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
     &:first-child {
         margin-left: 0;
     }
@@ -58,26 +63,4 @@
 
 .flex-demo {
     margin-top: 20px;
-}
-
-.flex-row-3 {
-    @include elr-flex(3);
-}
-
-.flex-row-3-rev {
-    @include elr-flex(3, wrap, row-reverse);
-}
-
-.elr-flex-box {
-    background-color: $dark-pink;
-    color: $white;
-    padding: 20px;
-
-    &:first-child {
-        background-color: $elr-blue;
-    }
-
-    &:last-child {
-        background-color: $dark-grey;
-    }
 }
