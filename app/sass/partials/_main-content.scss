@@ -2,7 +2,8 @@
 
 .main-content {
     padding: 60px 10px 20px;
-    min-height: 800px;
+    flex: 1 0 auto;
+    // min-height: 800px;
 
     h1 {
         @include elr-em-font(30px);
@@ -32,7 +33,7 @@
 
     &.example-holder-light {
         background-color: $white;
-        border-color: $elr-blue-light;
+        border: 1px solid $elr-blue-light;
     }
 
     h1 {
@@ -77,4 +78,10 @@ pre {
     p {
         padding: 0;
     }
+}
+
+.main-footer {
+    background-color: $dark-grey;
+    color: $white;
+    flex: none;
 }

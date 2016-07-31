@@ -3,6 +3,8 @@
 .main-header {
     @include elr-clearfix;
     margin: 10px auto;
+    flex: none; // 2
+    width: 100%;
 }
 
 .site-heading {

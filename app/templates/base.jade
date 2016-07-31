@@ -16,7 +16,7 @@ html.no-js(lang="en")
         link(rel="stylesheet" href="styles.css")
         block headerscripts
         //- script(src="https://maps.googleapis.com/maps/api/js?v=3.exp")
-    body
+    body.main-body
         header.main-header
             .elr-container
                 .elr-row
@@ -36,17 +36,17 @@ html.no-js(lang="en")
                                 | A collection of reusable, modular Sass and JavaScript components
         main.main-content.elr-container
             .elr-row
-                article.elr-col-9
-                    .elr-container
-                        .elr-row
-                            .elr-col-full
-                                block content
                 block sidebar
                     if (tech == 'javascript')
                         include ../partials/sidebar-js
                     else
                         include ../partials/sidebar-css
-        footer
+                article.elr-col-9
+                    .elr-container
+                        .elr-row
+                            .elr-col-full
+                                block content
+        footer.main-footer
             .copyright
                 p: small Built with Care in Houston Texas by: Elizabeth Rogers
         script(src="js/elr-utilities.0.9.3.js")
