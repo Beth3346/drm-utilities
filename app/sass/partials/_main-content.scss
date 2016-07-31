@@ -80,8 +80,16 @@ pre {
     }
 }
 
+.copyright {
+    @include elr-em-font(12px);
+    text-align: center;
+    line-height: 1;
+    padding: 0;
+}
+
 .main-footer {
     background-color: $dark-grey;
     color: $white;
     flex: none;
+    padding: 10px;
 }
