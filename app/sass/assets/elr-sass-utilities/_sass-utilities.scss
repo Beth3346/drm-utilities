@@ -47,6 +47,8 @@
 @import 'elements/tables';
 @import 'elements/videos';
 
+@import 'flex/flex';
+
 @import 'forms/form-base';
 @import 'forms/form-elements';
 @import 'forms/form-inputs';
@@ -64,7 +66,6 @@
 @import 'layout/content-blocks';
 @import 'layout/context-boxes';
 @import 'layout/em-conversion';
-@import 'layout/flex-grid';
 @import 'layout/image-grid';
 @import 'layout/layout';
 @import 'layout/media-queries';

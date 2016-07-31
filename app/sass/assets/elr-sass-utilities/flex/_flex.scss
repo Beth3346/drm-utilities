@@ -1,3 +1,18 @@
+@mixin elr-flex($num-children, $wrap: nowrap, $dir: row) {
+    display: flex;
+    flex-direction: $dir;
+
+    @if ($num-children) {
+        flex-wrap: wrap;
+
+        .elr-flex-box {
+            width: (100% / $num-children);
+        }
+    } @else {
+        flex-wrap: $wrap;
+    }
+}
+
 @mixin elr-flex-grid() {
     .elr-flex-row {
         display: flex;

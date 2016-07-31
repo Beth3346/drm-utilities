@@ -1,0 +1,83 @@
+@include elr-flex-grid;
+
+.demo-box {
+    margin: 10px;
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+    border-radius: 5px;
+    background-color: $dark-pink;
+    // border: 1px solid $dark-grey;
+    color: $white;
+}
+
+// .elr-flex-row {
+//     margin-bottom: 10px;
+// }
+
+// .elr-flex-col {
+//     padding: 20px;
+
+    // .elr-flex-col {
+    //     .demo {
+    //         background-color: $white;
+    //         color: $dark-pink;
+    //     }
+
+    //     .elr-flex-col {
+    //         .demo {
+    //             background-color: $dark-pink;
+    //             color: $white;
+    //         }
+    //     }
+    // }
+// }
+
+.demo {
+    text-align: center;
+    // border-radius: 5px;
+    border: 1px solid $dark-grey;
+    // border-right-width: 0;
+    color: $dark-grey;
+    margin: 5px;
+    padding: 20px;
+
+    &:first-child {
+        margin-left: 0;
+    }
+
+    &:last-child {
+        margin-right: 0;
+    }
+
+    p {
+        padding: 0;
+        margin: 0;
+    }
+}
+
+.flex-demo {
+    margin-top: 20px;
+}
+
+.flex-row-3 {
+    @include elr-flex(3);
+}
+
+.flex-row-3-rev {
+    @include elr-flex(3, wrap, row-reverse);
+}
+
+.elr-flex-box {
+    background-color: $dark-pink;
+    color: $white;
+    padding: 20px;
+
+    &:first-child {
+        background-color: $elr-blue;
+    }
+
+    &:last-child {
+        background-color: $dark-grey;
+    }
+}
