@@ -1,0 +1,215 @@
+// JavaScript Examples
+
+@include elr-alert-classes;
+
+.elr-custom-alert { @include elr-context-box(custom, 3px, $link-color, 100%, $white); }
+.elr-purple-alert { @include elr-context-box(custom, 3px, $dark-pink, 100%, $white); }
+
+.elr-accordion {
+    @include elr-em-max-width(800px);
+    @include elr-accordion($main-color, 5px);
+}
+
+.elr-accordion-nav {
+    @include elr-accordion-nav;
+}
+
+.back-to-top { @include elr-back-to-top; }
+
+.elr-back-to-top-content {
+    padding: 0;
+    margin: 0;
+}
+
+@include elr-calendar;
+
+.elr-dropdown-nav {
+    @include elr-em-margin('bottom', 200px);
+    @include elr-dropdown-nav;
+    @include elr-em-font(14px);
+
+    .elr-submenu { @include elr-em-font(12px); }
+}
+
+.elr-lightbox-thumbnails { @include elr-thumbnail-list; }
+
+.elr-blackout { @include elr-lightbox-slideshow; }
+
+.elr-modal-demo-buttons {
+    @include elr-button-group($link-color, $background-color, 3px, $link-color);
+    margin: 10px auto;
+    width: 350px;
+
+    button { @include elr-em-font(14px); }
+}
+
+.elr-modal {
+    @include elr-modals;
+    display: none;
+}
+
+.popover-holder {
+    position: relative;
+    width: 200px;
+    margin: 0 auto 20px;
+
+    button {
+        @include elr-button-solid($link-color, $white, 200px, left, 3px, $link-color, inline-block);
+        @include elr-em-font(14px);
+    }
+}
+
+.elr-popover-bottom { @include elr-popover(bottom); }
+
+.elr-popover-top { @include elr-popover(top); }
+
+.elr-popover-left { @include elr-popover(left); }
+
+.elr-popover-right { @include elr-popover(right); }
+
+.elr-offscreen-menu {
+    @include elr-offscreen-menu($main-color);
+    @include elr-em-font(14px);
+}
+
+.elr-menu-button {
+    @include elr-em-font(18px);
+    border: 0;
+    background-color: $link-color;
+    color: $white;
+    padding: 5px 10px;
+
+    &:hover {
+        cursor: pointer;
+        background-color: $white;
+        color: $link-color;
+    }
+}
+
+.elr-offscreen-nav {
+    width: 100%;
+    padding: 0 10px;
+    background-color: $link-color;
+    color: $white;
+    font-weight: $bold;
+    height: 50px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.elr-offscreen-content {
+    @include elr-clearfix;
+    width: 100%;
+    margin: 2px auto;
+    background-color: $background-color;
+    border: 1px solid $light-grey;
+    padding-top: 50px;
+    overflow: hidden;
+    position: relative;
+
+    p {
+        padding: 10px 20px;
+    }
+}
+
+.elr-offscreen-content-holder {
+    position: relative;
+
+    .content {
+        @include elr-em-height(500px);
+        overflow-y: scroll;
+    }
+}
+
+.elr-simple-slider {
+    @include elr-simple-slider;
+}
+
+.elr-simple-slider-2 {
+    @include elr-simple-slider;
+}
+
+.elr-sticky-nav {
+    &.sticky-top {
+        @include elr-sticky-menu('top');
+    }
+
+    ul {
+        @include elr-em-font(14px);
+        font-weight: $bold;
+    }
+}
+
+.elr-sticky-sidebar {
+    padding: 0;
+    margin: 0;
+    width: 25%;
+    float: left;
+
+    &.sticky-left {
+        @include elr-sticky-menu('left');
+        @include elr-em-width(250px);
+    }
+
+    ul {
+        @include elr-em-font(14px);
+        font-weight: $bold;
+    }
+}
+
+.sticky-sidebar-content {
+    margin: 0;
+    width: 75%;
+    padding: 0 1% 0 2%;
+    float: right;
+
+    section:first-child {
+        margin-top: 0;
+        padding-top: 0;
+    }
+}
+
+.elr-has-tooltip {
+    text-decoration: underline;
+    color: $main-color;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.elr-tooltip-left { @include elr-tooltip(left, $text-color, $background-color, 100px); }
+
+.elr-tooltip-right { @include elr-tooltip(right, $text-color, $background-color, 100px); }
+
+.elr-tooltip-top { @include elr-tooltip(top, $text-color, $background-color, 100px); }
+
+.elr-tooltip-bottom { @include elr-tooltip(bottom, $text-color, $background-color, 100px); }
+
+.elr-sortable-table { @include elr-table-rounded($background-color, $text-color, $link-color, $light-grey, $lightest-grey); }
+
+.elr-flexible-grid { @include elr-flexible-grid(4); }
+
+.elr-select { @include elr-select-control(200px); }
+
+.password-holder {
+    background-color: $lightest-grey;
+    border: 1px solid $grey;
+    border-radius: 3px;
+    padding: 0 10px;
+    width: 100%;
+    height: 30px;
+    margin-bottom: 5px;
+
+    p {
+        @include elr-em-font(14px);
+        margin: 0;
+        padding: 0;
+        line-height: 30px;
+    }
+}
+
+.elr-generate-password {
+    @include elr-em-font(14px);
+}

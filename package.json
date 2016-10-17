@@ -1,27 +1,37 @@
 {
   "name": "elr-utilities",
-  "version": "0.9.3",
+  "version": "1.0.0",
   "description": "a demonstration of what elr-utilities can do",
+  "main": "js/app.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/elr-utilities/elr-utilities.git"
   },
+  "scripts": {
+    "build": "build"
+  },
+  "dependencies": {
+    "babel-runtime": "^6.0.0",
+    "jquery": "^3.1.1"
+  },
   "devDependencies": {
-    "babel-preset-es2015": "",
-    "grunt": "",
-    "grunt-autoprefixer": "",
-    "grunt-babel": "",
-    "grunt-contrib-clean": "",
-    "grunt-contrib-concat": "",
-    "grunt-contrib-copy": "",
-    "grunt-contrib-csslint": "",
-    "grunt-contrib-imagemin": "",
-    "grunt-contrib-jade": "",
-    "grunt-contrib-jshint": "",
-    "grunt-contrib-sass": "",
-    "grunt-contrib-uglify": "",
-    "grunt-contrib-watch": "",
-    "grunt-scss-lint": "",
-    "jpegtran-bin": ""
+    "babel-core": "^6.0.0",
+    "babel-preset-es2015": "^6.14.0",
+    "browser-sync": "^2.17.2",
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-clean-css": "^2.0.12",
+    "gulp-csslint": "^1.0.0",
+    "gulp-jshint": "^2.0.1",
+    "gulp-pug": "^3.1.0",
+    "gulp-sass": "^2.3.2",
+    "gulp-scss-lint": "^0.4.0",
+    "gulp-sourcemaps": "^2.1.1",
+    "gulp-util": "^3.0.7",
+    "jshint": "^2.9.3",
+    "webpack": "^1.12.2",
+    "webpack-stream": "^3.1.0"
   }
 }

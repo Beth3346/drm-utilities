@@ -1,0 +1,59 @@
+// Modals
+
+@mixin elr-modals($modal-color: $background-color, $button-color: $link-color, $border-radius: 3px, $border-color: $light-grey) {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    // max-height: 600px;
+    max-height: 90vh;
+    z-index: 1000;
+    background-color: $modal-color;
+    padding: 0;
+    width: 60%;
+    max-width: 600px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    @if ($border-radius) {
+        border-radius: $border-radius;
+    }
+
+    @if ($border-color) {
+        border: 1px solid $border-color;
+
+        .elr-header {
+            border-bottom: 1px solid $border-color;
+        }
+
+        .elr-footer {
+            border-top: 1px solid $border-color;
+        }
+    }
+
+    .elr-header,
+    .elr-body,
+    .elr-footer {
+        padding: 10px 20px;
+    }
+
+    .elr-body {
+        overflow: auto;
+    }
+
+    .elr-header-title { @include elr-em-font(20px); }
+
+    p { @include elr-em-font(14px); }
+
+    // form { @include elr-tabular-form; }
+
+    button { @include elr-em-font(14px); }
+
+    .elr-modal-video {
+        @include elr-center-block(90%);
+        text-align: center;
+
+        iframe { display: inline-block; }
+    }
+}

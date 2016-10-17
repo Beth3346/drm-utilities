@@ -1,0 +1,22 @@
+// Offscreen Menu
+
+// works with fluid and fixed layouts
+@mixin elr-offscreen-menu($bk-color: $main-color, $width: 200px) {
+    width: $width;
+    position: absolute;
+    left: -$width;
+    height: 100%;
+    background-color: $bk-color;
+    z-index: 100;
+    left: 0;
+    overflow-y: scroll;
+    top: 0;
+
+    ul {
+        @include elr-nav-bar($white, $white, left, transparent, $bk-color, false);
+
+        li a {
+            padding: 10px 15px;
+        }
+    }
+}

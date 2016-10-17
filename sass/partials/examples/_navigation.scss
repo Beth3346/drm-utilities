@@ -1,0 +1,61 @@
+// Navigation Utilities Examples
+
+.nav-bar,
+.nav-bar-stacked,
+.nav-bar-solid,
+.nav-bar-pills,
+.nav-bar-pills-solid,
+.nav-bar-solid-stacked,
+.nav-bar-pills-stacked,
+.nav-bar-pills-solid-stacked {
+    @include elr-em-font(14px);
+
+    .elr-submenu { @include elr-em-font(12px); }
+}
+
+.nav-bar,
+.nav-bar-stacked,
+.nav-bar-solid,
+.nav-bar-pills,
+.nav-bar-pills-solid {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.nav-bar-solid-stacked,
+.nav-bar-pills-stacked,
+.nav-bar-pills-solid-stacked {
+    width: 300px;
+}
+
+.nav-bar {
+    @include elr-nav-bar;
+}
+
+.nav-bar-solid {
+    @include elr-nav-bar($white, $white, left, transparent, $link-color);
+}
+
+.nav-bar-stacked {
+    @include elr-nav-bar($link-color, $link-color, center, transparent, transparent, true, 0, transparent);
+}
+
+.nav-bar-solid-stacked {
+    @include elr-nav-bar($white, $white, left, transparent, $link-color, false);
+}
+
+.nav-bar-pills {
+    @include elr-nav-bar($link-color, $white, center, transparent, transparent, true, 3px, $link-color);
+}
+
+.nav-bar-pills-stacked {
+    @include elr-nav-bar($link-color, $white, left, transparent, transparent, false, 3px, $link-color);
+}
+
+.nav-bar-pills-solid {
+    @include elr-nav-bar($white, $white, center, transparent, $link-color, true, 3px);
+}
+
+.nav-bar-pills-solid-stacked {
+    @include elr-nav-bar($white, $white, left, transparent, $link-color, false, 3px);
+}
