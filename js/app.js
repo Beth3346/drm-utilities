@@ -9,7 +9,6 @@ import elrCalendar from './elr-calendar';
 import elrDropdownButton from './elr-dropdown-buttons';
 import elrDropdownMenu from './elr-dropdown-menu';
 import elrFilterGrid from './elr-filter-grid';
-// import elrFormControls from './elr-form-controls';
 import elrLightbox from './elr-lightbox';
 import elrModal from './elr-modal';
 import elrOffscreenMenu from './elr-offscreen-menus';
@@ -28,13 +27,6 @@ const $ = require('jquery');
 let elr = elrUtils();
 
 let elrAlert = elrAlerts();
-let formControls = elrFormControls({
-    selectOptions: {
-        fn: function(option) {
-            console.log(option);
-        }
-    }
-});
 
 let $input = $('.regex-tester').find('input');
 
@@ -67,8 +59,6 @@ elrDropdownMenu();
 elrDropdownMenu({menuClass: 'main-nav'});
 
 elrFilterGrid();
-
-// formControls.select();
 
 elrLightbox();
 

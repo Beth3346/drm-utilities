@@ -19,7 +19,7 @@ const elrLightbox = function(params) {
         });
 
         $.each(thumbnailList, function(k, v) {
-            thumbnails += `<li><a href=${v}><img src=${v}/></a></li>`;
+            thumbnails += `<li><a href=${v}><img src=${v}></a></li>`;
         });
 
         return thumbnails;
@@ -68,12 +68,12 @@ const elrLightbox = function(params) {
         const $currentThumb = $list.find(`img[src$="${currentImgSrc}"]`).closest('li').index();
         const len = $list.find('li').length - 1;
         // let $nextImg;
-        // let nextImgIndex;
+        let nextImgIndex;
 
         if ( direction === 'prev' ) {
-            const nextImgIndex = ($currentThumb === 0) ? len : $currentThumb - 1;
+            nextImgIndex = ($currentThumb === 0) ? len : $currentThumb - 1;
         } else {
-            const nextImgIndex = ($currentThumb === len) ? 0 : $currentThumb + 1;
+            nextImgIndex = ($currentThumb === len) ? 0 : $currentThumb + 1;
         }
 
         const $nextImg = $list.find('li').eq(nextImgIndex).find('img').attr('src');
