@@ -29,28 +29,28 @@ const elrLightbox = function(params) {
         const img = $(this).attr('href');
 
         const $imgVisible = elr.createElement('img', {
-            'class': 'img-visible',
-            'src': img,
-            'alt': 'thumbnail'
+            class: 'img-visible',
+            src: img,
+            alt: 'thumbnail'
         });
 
         const $close = elr.createElement('button', {
-            'class': 'close',
+            class: 'close',
             text: 'x'
         });
 
         const $thumbnails = elr.createElement('ul', {
-            'class': 'thumbnail-list',
+            class: 'thumbnail-list',
             html: thumbnails
         });
 
         const $nav = elr.createElement('div', {
-            'class': 'lightbox-nav',
+            class: 'lightbox-nav',
             html: '<button class="prev" data-dir="prev"><i class="fa fa-caret-left"></i></button><button class="next" data-dir="next"><i class="fa fa-caret-right"></i></button>'
         });
 
         const $lightbox = elr.createElement('div', {
-            'class': 'elr-blackout'
+            class: 'elr-blackout'
         });
 
         $lightbox.hide().appendTo('body').fadeIn(speed, function() {
@@ -70,7 +70,7 @@ const elrLightbox = function(params) {
         // let $nextImg;
         let nextImgIndex;
 
-        if ( direction === 'prev' ) {
+        if (direction === 'prev') {
             nextImgIndex = ($currentThumb === 0) ? len : $currentThumb - 1;
         } else {
             nextImgIndex = ($currentThumb === len) ? 0 : $currentThumb + 1;
@@ -87,7 +87,7 @@ const elrLightbox = function(params) {
         const $oldImg = $('div.elr-blackout img.img-visible');
         const oldImgSrc = $oldImg.attr('src');
 
-        if ( oldImgSrc !== img ) {
+        if (oldImgSrc !== img) {
             $oldImg.fadeOut(speed, function() {
                 $(this).attr('src', img).fadeIn(speed);
             });
@@ -100,7 +100,7 @@ const elrLightbox = function(params) {
         });
     };
 
-    if ( $images.length ) {
+    if ($images.length) {
         const thumbnails = createThumbnails($images);
         const $body = $('body');
 
@@ -133,15 +133,15 @@ const elrLightbox = function(params) {
         });
 
         $body.on('keydown', function(e) {
-            if ( e.which === 37 ) {
+            if (e.which === 37) {
                 advanceImage('prev');
-            } else if ( e.which === 39 ) {
+            } else if (e.which === 39) {
                 advanceImage('next');
             }
         });
 
         $body.on('keydown', function(e) {
-            if ( e.which === 27 ) {
+            if (e.which === 27) {
                 removeLightbox();
             }
         });
