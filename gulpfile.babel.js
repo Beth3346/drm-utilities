@@ -5,6 +5,7 @@ import sass from 'gulp-sass';
 import scsslint from 'gulp-scss-lint';
 import autoprefixer from 'gulp-autoprefixer';
 import cleanCSS from 'gulp-clean-css';
+import imagemin from 'gulp-imagemin';
 // import csslint from 'gulp-csslint';
 import jshint from 'gulp-jshint';
 import babel from 'gulp-babel';
@@ -36,7 +37,7 @@ const paths = {
     css: 'css/',
     scripts: 'js/',
     imagesRaw: 'images/raw/',
-    images: 'images/',
+    images: 'images/compressed',
     views: 'views/',
     html: './'
 };
@@ -47,7 +48,7 @@ const files = {
     scripts: `${paths.scripts}**/*.js`,
     imagesRaw: [`${paths.imagesRaw}**/*.jpg`, `${paths.imagesRaw}**/*.png`, `${paths.imagesRaw}**/*.gif`, `${paths.imagesRaw}**/*.svg`],
     images: [`${paths.images}*.jpg`, `${paths.images}*.png`, `${paths.images}*.gif`, `${paths.images}*.svg`],
-    views: `${paths.views}**/*.pug`,
+    views: `${paths.views}*.pug`,
     html: '*.html'
 };
 
@@ -63,11 +64,11 @@ gulp.task('clean:scripts', function() {
     ]);
 });
 
-// // gulp.task('clean:images', function() {
-// //     return del(
-// //         files.images
-// //     );
-// // });
+gulp.task('clean:images', function() {
+    return del(
+        'images/compressed'
+    );
+});
 
 gulp.task('clean:html', function() {
     return del([
@@ -78,8 +79,8 @@ gulp.task('clean:html', function() {
 gulp.task('clean', [
     'clean:html',
     'clean:styles',
-    'clean:scripts'
-    // 'clean:images'
+    'clean:scripts',
+    'clean:images'
 ]);
 
 gulp.task('views', function buildHTML() {
@@ -140,20 +141,20 @@ gulp.task('babel', function() {
         .pipe(babel({
             presets: ['es2015']
         }))
-        .pipe(gulp.dest(`${paths.scripts}/build`));
+        .pipe(gulp.dest(`js/build`));
 });
 
 gulp.task('scripts', ['babel'], function() {
     return gulp.src(['js/build/*.js'])
-        .pipe(gulp.dest(`${paths.scripts}/build`));
+        .pipe(gulp.dest(`js/build`));
 });
 
-// gulp.task('images', ['clean:images'], function() {
-//     return gulp.src(files.imagesRaw)
-//         .pipe(imagemin())
-//         .pipe(gulp.dest(paths.images))
-//         .pipe(browserSync.stream());
-// });
+gulp.task('images', ['clean:images'], function() {
+    return gulp.src(files.imagesRaw)
+        .pipe(imagemin())
+        .pipe(gulp.dest(paths.images))
+        .pipe(browserSync.stream());
+});
 
 gulp.task('webpack', ['scripts'], function() {
     gulp.src('./js/build/app.js')
@@ -171,11 +172,11 @@ gulp.task('webpack', ['scripts'], function() {
         .pipe(gulp.dest('./js/build/'));
 });
 
-gulp.task('default', ['views', 'styles', 'webpack'], () => {
+gulp.task('default', ['views', 'styles', 'images', 'webpack'], () => {
     gulp.watch(files.views, ['views']);
     gulp.watch(files.scss, ['styles']);
     gulp.watch(['js/assets/**/*.js', 'js/app.js'], ['webpack']);
-    // gulp.watch(files.imagesRaw, ['images']);
+    gulp.watch(files.imagesRaw, ['images']);
 
     browserSync.init({
         server: {
@@ -183,3 +184,5 @@ gulp.task('default', ['views', 'styles', 'webpack'], () => {
         }
     })
 });
+
+gulp.task('build', ['views', 'styles', 'images', 'webpack']);
