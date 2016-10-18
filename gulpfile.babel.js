@@ -173,7 +173,7 @@ gulp.task('webpack', ['scripts'], function() {
 });
 
 gulp.task('default', ['views', 'styles', 'images', 'webpack'], () => {
-    gulp.watch(files.views, ['views']);
+    gulp.watch(`${paths.views}**/*.pug`, ['views']);
     gulp.watch(files.scss, ['styles']);
     gulp.watch(['js/assets/**/*.js', 'js/app.js'], ['webpack']);
     gulp.watch(files.imagesRaw, ['images']);
