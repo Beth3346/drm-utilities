@@ -12,51 +12,29 @@ const elrStickyNav = function(params) {
     const sectionEl = spec.sectionEl || 'section';
     const spy = spec.spy || false;
 
-    const affixNav = function(top, navPositionLeft) {
-        const scroll = $('body').scrollTop();
-        const position = $nav.data('position');
-        const winHeight = $(window).height();
-        const navHeight = $nav.height();
-        const navWidth = $nav.outerWidth();
-        const winWidth = $(window).width();
+    const affixElement = function($el, top) {
+        const $win = $(window);
+        const winHeight = $win.height();
+        const scroll = $(document).scrollTop();
+        const position = $el.data('position');
+        const elementHeight = $el.height();
         const contentHeight = $content.height();
 
         if (scroll > (top + contentHeight)) {
-            $nav.removeClass(`sticky-${position}`);
-
-            if (position === 'left' || position === 'right') {
-                $nav.css({'right': ''});
-            }
-        } else if ((scroll > (top - 50)) && (navHeight < winHeight)) {
-            if (position === 'left' || position === 'right') {
-                $nav.animate({
-                    'right': winWidth - (navPositionLeft + navWidth)
-                }, 0, function() {
-                    $nav.addClass(`sticky-${position}`);
-                });
-            } else {
-                $nav.addClass(`sticky-${position}`);
-            }
+            $el.removeClass(`sticky-${position}`);
+        } else if (scroll > (top - 50) && elementHeight < winHeight) {
+            $el.addClass(`sticky-${position}`);
         } else {
-            $nav.removeClass(`sticky-${position}`);
-
-            if (position === 'left' || position === 'right') {
-                $nav.css({'right': ''});
-            }
+            $el.removeClass(`sticky-${position}`);
         }
     };
 
-    const gotoSection = function(activeClass) {
-        const $that = $(this);
-        const target = $that.attr('href');
-        const $content = $('body');
-        const $target = $(target);
-
-        $('a.active').removeClass(activeClass);
-        $that.addClass(activeClass);
+    const gotoSection = function(offset) {
+        const $target = $(`#${$(this).attr('href').slice(1)}`);
+        const $content = $('body, html');
 
         $content.stop().animate({
-            'scrollTop': ($target.position().top - 50)
+            'scrollTop': $target.position().top - offset
         });
 
         return false;
@@ -69,20 +47,20 @@ const elrStickyNav = function(params) {
         const navPositionTop = $nav.offset().top;
         const navPositionLeft = $nav.offset().left;
 
-        if (hash) {
-            const $hashLink = $nav.find("a[href='" + hash + "']");
+        // if (hash) {
+        //     const $hashLink = $nav.find("a[href='" + hash + "']");
 
-            $hashLink.addClass(activeClass);
-            $hashLink.trigger('click');
-            $nav.on('click', `a[href='${hash}']`, function() {
-                gotoSection.call(this, activeClass);
-            });
-        } else {
-            $links.first().addClass(activeClass);
-        }
+        //     $hashLink.addClass(activeClass);
+        //     $hashLink.trigger('click');
+        //     $nav.on('click', `a[href='${hash}']`, function() {
+        //         gotoSection.call(this, activeClass);
+        //     });
+        // } else {
+            // $links.first().addClass(activeClass);
+        // }
 
         $win.on('scroll', function() {
-            affixNav(navPositionTop, navPositionLeft);
+            affixElement($nav, navPositionTop);
         });
 
         // $win.on('resize', function() {
@@ -95,8 +73,11 @@ const elrStickyNav = function(params) {
             });
         }
 
-        $nav.on('click', 'a[href^="#"]', () => {
-            gotoSection(activeClass);
+        $nav.on('click', 'a[href^="#"]', function(e) {
+            e.preventDefault();
+            $links.removeClass(activeClass);
+            $(this).addClass(activeClass);
+            gotoSection.call(this, 70);
         });
     }
 
