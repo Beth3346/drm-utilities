@@ -11,6 +11,7 @@ import elrDropdownMenu from './elr-dropdown-menu';
 import elrFilterGrid from './elr-filter-grid';
 import elrLightbox from './elr-lightbox';
 import elrModal from './elr-modal';
+import elrModalAlert from './elr-modal-alerts';
 import elrOffscreenMenu from './elr-offscreen-menus';
 import elrPasswords from './elr-passwords';
 import elrPopovers from './elr-popovers';
@@ -27,6 +28,7 @@ const $ = require('jquery');
 let elr = elrUtils();
 
 let elrAlert = elrAlerts();
+let modalAlert = elrModalAlert();
 
 let $input = $('.regex-tester').find('input');
 
@@ -43,6 +45,41 @@ elrAlert.showAlert('success', 'your request was successful', $('.elr-alert-holde
 elrAlert.showAlert('muted', 'A muted alert that will probably be ignored', $('.elr-alert-holder'));
 elrAlert.showAlert('custom', 'This is a custom alert', $('.elr-alert-holder'));
 elrAlert.showAlert('purple', 'This is another custom alert', $('.elr-alert-holder'));
+
+$('.js-show-info-alert').on('click', function() {
+    modalAlert.showAlert();
+});
+
+$('.js-show-confirmation-alert').on('click', function() {
+    modalAlert.showAlert({
+        type: 'confirmation',
+        title: 'Please confirm',
+        text: 'Are you sure you want to proceed with this action?',
+        buttons: {
+            confirmButton: {
+                type: 'success',
+                text: 'Confirm',
+                class: 'elr-button elr-button-success',
+                onClick: function() {
+                    modalAlert.clearAlert.call(this, null, function() {
+                        modalAlert.showAlert({
+                            title: 'Success'
+                        });
+                    });
+                }
+            },
+            cancelButton: {
+                type: 'cancel',
+                text: 'Cancel',
+                class: 'elr-button elr-button-danger',
+                onClick: function() {
+                    console.log('cancel');
+                    modalAlert.clearAlert.call(this);
+                }
+            }
+        }
+    });
+});
 
 elrBackToTop();
 
@@ -296,15 +333,15 @@ $('.smooth-scroll').on('click', 'a', gotoSection);
 // $('.output-holder-city-list').text(cities);
 // console.log(cities);
 
-let testFunction = function(let1, let2) {
-    return elr.isArrayLike(arguments);
-};
+// let testFunction = function(let1, let2) {
+//     return elr.isArrayLike(arguments);
+// };
 
-let numbers = [1,4,5,3,3,3,5];
+// let numbers = [1,4,5,3,3,3,5];
 
-console.log(testFunction(1, 2));
-console.log(numbers);
-console.log(elr.unique(numbers));
+// console.log(testFunction(1, 2));
+// console.log(numbers);
+// console.log(elr.unique(numbers));
 
 // console.log(elr.createArrays({animals: 'names'}, ['Dogs', 'Cats', 'Birds']));
 

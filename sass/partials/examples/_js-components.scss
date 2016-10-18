@@ -213,3 +213,56 @@
 .elr-generate-password {
     @include elr-em-font(14px);
 }
+
+.elr-modal-alert {
+    @include elr-modals;
+    width: 300px;
+    display: flex;
+    padding: 10px 10px 0;
+
+    .elr-modal-alert-heading {
+        @include elr-em-font(28px);
+        font-weight: 700;
+
+        .fa {
+            font-size: 140%;
+            color: $success-color;
+            position: relative;
+            top: 3px;
+            left: -10px;
+        }
+    }
+
+    p {
+        @include elr-em-font(14px);
+        text-align: center;
+        padding: 0;
+        margin: 0;
+    }
+
+    .elr-header,
+    .elr-body,
+    .elr-footer {
+        padding: 10px;
+    }
+
+    .elr-footer {
+        padding-left: 0;
+        padding-right: 0;
+
+        &.single-action {
+            align-items: center;
+            flex-direction: column;
+        }
+    }
+
+    .elr-button {
+        margin: 0 5px 0 10px;
+        max-width: 150px;
+
+        &:last-of-type {
+            margin-left: 5px;
+            margin-right: 10px;
+        }
+    }
+}
