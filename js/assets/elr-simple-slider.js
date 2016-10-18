@@ -1,4 +1,7 @@
+import elrUtlities from './elr-utilities';
 const $ = require('jquery');
+
+let elr = elrUtlities();
 
 const elrSimpleSlider = function(params) {
     const self = {};
@@ -182,12 +185,12 @@ const elrSimpleSlider = function(params) {
 
     const pageSlide = function(e, $slideHolder) {
         const current = getCurrent($slideHolder);
-        // const dir;
+        let dir;
 
         if (e.which === 37) {
-            let dir = 'prev';
+            dir = 'prev';
         } else if (e.which === 39) {
-            let dir = 'next';
+            dir = 'next';
         } else {
             return;
         }
@@ -221,7 +224,7 @@ const elrSimpleSlider = function(params) {
             const $nextControl = $currentSlider.find(`.${navClass}`).find("button[data-dir='next']");
             const $body = $('body');
             let $slideList;
-            // let begin;
+            let begin;
 
             // add overflow hidden to make sure only the current slide is visible
             $slideHolder.css({overflow: 'hidden'});
@@ -239,7 +242,7 @@ const elrSimpleSlider = function(params) {
             $slideList = createSlideList($slides).appendTo($currentSlider);
 
             if ( auto ) {
-                let begin = startShow(interval, $slideHolder, $slideList);
+                begin = startShow(interval, $slideHolder, $slideList);
 
                 $slides.on('mouseover', function() {
                     pauseShow(begin);
