@@ -42,6 +42,11 @@
         overflow: auto;
     }
 
+    .elr-footer {
+        display: flex;
+        justify-content: space-between;
+    }
+
     .elr-header-title { @include elr-em-font(20px); }
 
     p { @include elr-em-font(14px); }
