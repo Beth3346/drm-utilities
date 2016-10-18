@@ -223,5 +223,11 @@ dwsync.xml
 *.scssc
 /.sass-cache/
 
+*.html
+/css/
+/images/compressed/
+
+/js/build/
+
 /dist/
 .htaccess
