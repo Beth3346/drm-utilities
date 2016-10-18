@@ -131,6 +131,7 @@
 }
 
 .elr-sticky-nav {
+    margin: 10px 0;
     &.sticky-top {
         @include elr-sticky-menu('top');
     }
