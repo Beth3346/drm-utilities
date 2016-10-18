@@ -300,23 +300,7 @@ $('.menu-animated .menu-item').on('click', function(e) {
     $that.addClass('current');
 });
 
-let gotoSection = function() {
-    let $that = $(this);
-    let target = $that.attr('href');
-    let $content = $('body, html');
-
-    let section = target.split('#').pop();
-
-    let $target = $(`#${section}`);
-
-    $content.stop().animate({
-        'scrollTop': $target.position().top
-    });
-
-    return false;
-};
-
-$('.smooth-scroll').on('click', 'a', gotoSection);
+$('.smooth-scroll').on('click', 'a', elr.gotoSection);
 
 // $('.test-box-in-array').each(function() {
 //     let $that = $(this);

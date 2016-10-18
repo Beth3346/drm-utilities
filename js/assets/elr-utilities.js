@@ -652,18 +652,18 @@ let elrUtilities = function() {
     };
 
     self.scrollSpy = function($nav, $content, el, activeClass) {
-        let scroll = $('body').scrollTop();
-        let links = $nav.find('a[href^="#"]');
+        let scroll = $(document).scrollTop();
+        let $links = $nav.find('a[href^="#"]');
         let positions = self.findPositions($content, el);
 
         self.each(positions, function(index, value) {
             if (scroll === 0) {
-                $('a.' + activeClass).removeClass(activeClass);
-                links.eq(0).addClass(activeClass);
+                $(`a.${activeClass}`).removeClass(activeClass);
+                $links.eq(0).addClass(activeClass);
             } else if (value < scroll) {
                 // if value is less than scroll add activeClass to link with the same index
-                $('a.' + activeClass).removeClass(activeClass);
-                links.eq(index).addClass(activeClass);
+                $(`a.${activeClass}`).removeClass(activeClass);
+                $links.eq(index).addClass(activeClass);
             }
         });
     };
@@ -741,7 +741,7 @@ let elrUtilities = function() {
         });
     };
 
-    self.isMobile = function(mobileWidth) {
+    self.isMobile = function(mobileWidth = 568) {
         let windowWidth = $(window).width();
 
         return (windowWidth <= mobileWidth) ? true : false;
@@ -753,6 +753,22 @@ let elrUtilities = function() {
         });
 
         $el.addClass(classList[Math.floor(Math.random() * classList.length)]);
+    };
+
+    self.gotoSection = function() {
+        let $that = $(this);
+        let target = $that.attr('href');
+        let $content = $('body, html');
+
+        let section = target.split('#').pop();
+
+        let $target = $(`#${section}`);
+
+        $content.stop().animate({
+            'scrollTop': $target.position().top
+        });
+
+        return false;
     };
 
     return self;
