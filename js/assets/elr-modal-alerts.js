@@ -3,12 +3,11 @@ const $ = require('jquery');
 
 let elr = elrUtlities();
 
-const elrModalAlerts = function(params) {
+const elrModalAlerts = function(params = {}) {
     const self = {};
-    const spec = params || {};
 
-    self.alertClass = spec.alertClass || 'elr-modal-alert';
-    self.speed = spec.speed || 300;
+    self.alertClass = params.alertClass || 'elr-modal-alert';
+    self.speed = params.speed || 300;
 
     const $alerts = $(`.${self.alertClass}`);
 
@@ -23,16 +22,7 @@ const elrModalAlerts = function(params) {
                 type: 'info',
                 text: 'Dismiss',
                 class: 'elr-button elr-button-info'
-            },
-            // cancelButton: {
-            //     type: 'cancel',
-            //     text: 'Cancel',
-            //     class: 'elr-button elr-button-danger',
-            //     onClick: function() {
-            //         console.log('cancel');
-            //         self.clearAlert.call(this);
-            //     }
-            // }
+            }
         }
 
         const $body = $('body');
@@ -106,12 +96,10 @@ const elrModalAlerts = function(params) {
 
             if (closeOnClick) {
                 $('.elr-blackout').on('click', function() {
-                    $(this).find($(`.${self.alertClass}`)).fadeOut(self.speed, function() {
-                        $('.elr-blackout').fadeOut(100, function() {
-                            $(this).remove();
-                        });
-
-                        $(this).remove();
+                    $(this).find($(`.${self.alertClass}`))
+                           .fadeOut(self.speed, function() {
+                        elr.clearElement($('.elr-blackout'), 100);
+                        elr.clearElement($(this), 0);
                     });
                 });
 
@@ -124,11 +112,8 @@ const elrModalAlerts = function(params) {
 
     self.clearAlert = function(speed, cb = null) {
         $(this).closest(`.${self.alertClass}`).fadeOut(speed, function() {
-            $('.elr-blackout').fadeOut(100, function() {
-                $(this).remove();
-            });
-
-            $(this).remove();
+            elr.clearElement($('.elr-blackout'), 100);
+            elr.clearElement($(this), 0);
 
             if (cb) {
                 cb();

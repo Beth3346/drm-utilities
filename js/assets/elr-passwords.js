@@ -3,9 +3,8 @@ const $ = require('jquery');
 
 let elr = elrUtlities();
 
-const elrPasswords = function(params) {
+const elrPasswords = function(params = {}) {
     const self = {};
-    const spec = params || {};
     const bl = [
         'password',
         'pass',
@@ -34,12 +33,12 @@ const elrPasswords = function(params) {
         'guest',
         'default'
     ];
-    const fieldClass = spec.fieldClass || 'elr-password';
-    const buttonClass = spec.buttonClass || 'elr-show-password';
-    const blacklist = spec.blacklist || bl;
-    const reqLength = spec.reqLength || 8;
-    const showButtonText = spec.showButtonText || 'Show Password';
-    const hideButtonText = spec.hideButtonText || 'Hide Password';
+    const fieldClass = params.fieldClass || 'elr-password';
+    const buttonClass = params.buttonClass || 'elr-show-password';
+    const blacklist = params.blacklist || bl;
+    const reqLength = params.reqLength || 8;
+    const showButtonText = params.showButtonText || 'Show Password';
+    const hideButtonText = params.hideButtonText || 'Hide Password';
 
     const showPassword = function($field, $button, showButtonText, hideButtonText) {
         const fieldType = $field.attr('type');
@@ -183,7 +182,7 @@ const elrPasswords = function(params) {
     });
 
     $field.on('keyup', elr.throttle(function() {
-        const password = elr.getValue($field);
+        const password = elr.getValue(this);
         const passwordLength = (password) ? password.length : 0;
         const results = {
             blacklist: null,
