@@ -5,23 +5,18 @@ const $ = require('jquery');
 
 let elr = elrUtlities();
 
-const elrBackToTop = function(params) {
+const elrBackToTop = function(params = {}) {
     const self = {};
-    const spec = params || {};
-    const scrollSpeed = spec.scrollSpeed || 900;
-    const $content = spec.content || $('body, html');
+    const scrollSpeed = params.scrollSpeed || 900;
+    const $backToTop = elr.createElement('button', {
+        'class': 'back-to-top fa fa-caret-up'
+    }).appendTo('body').hide();
 
-    if ($content.length) {
-        const $backToTop = elr.createElement('button', {
-            'class': 'back-to-top fa fa-caret-up'
-        }).appendTo('body').hide();
+    elr.scrollToView($backToTop);
 
-        elr.scrollToView($backToTop);
-
-        $backToTop.on('click', function() {
-            elr.toTop($content, scrollSpeed);
-        });
-    }
+    $backToTop.on('click', function() {
+        elr.toTop($('body, html'), scrollSpeed);
+    });
 
     return self;
 };
