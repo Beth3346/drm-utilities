@@ -1,4 +1,7 @@
+import elrUtlities from './elr-utilities';
 const $ = require('jquery');
+
+let elr = elrUtlities();
 
 const elrModal = function(params) {
     const self = {};
@@ -11,13 +14,13 @@ const elrModal = function(params) {
     const $modals = $(`.${modalClass}`);
 
     const createLightbox = function(speed, $modal) {
-        const $close = $('<button></button>', {
-                'class': 'close',
-                text: 'x'
+        const $close = elr.createElement('button', {
+            class: 'close',
+            text: 'x'
         });
 
-        const $lightbox = $('<div></div>', {
-                'class': lightboxClass
+        const $lightbox = elr.createElement('div', {
+            class: lightboxClass
         });
 
         $lightbox.hide().appendTo('body').fadeIn(speed, function() {
@@ -54,7 +57,7 @@ const elrModal = function(params) {
             showModal.call(this, speed);
         });
 
-        $('.' + closeClass).on('click', function(e) {
+        $(`.${closeClass}`).on('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
             hideModal();

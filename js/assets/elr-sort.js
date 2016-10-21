@@ -9,7 +9,7 @@ const elrSort = function(params) {
 
     spec.listsClass = 'elr-sortable';
     spec.autoSort = true;
-    spec.buttonClass = 'elr-sort-list';
+    spec.buttonClass = 'elr-sort-button';
     spec.activeClass = 'active';
     spec.ignoreWords = ['a', 'the'];
 
@@ -23,7 +23,7 @@ const elrSort = function(params) {
         const type = $listItems.parent().data('type');
         let types = [];
 
-        if ( type ) {
+        if (type) {
             types.push(type);
         } else {
             types = ['date', 'time', 'number', 'alpha'];
@@ -37,7 +37,7 @@ const elrSort = function(params) {
 
         $.each(sortedList, function() {
             const value = elr.trim($(this).text());
-            const $listItem = $('<li>', {
+            const $listItem = elr.createElement('li', {
                 text: value
             });
 
@@ -47,7 +47,7 @@ const elrSort = function(params) {
 
     const $lists = $(`.${spec.listsClass}`);
 
-    if ( spec.autoSort ) {
+    if (spec.autoSort) {
         $.each($lists, function() {
             const $list = $(this);
             const $listItems = $list.find('li');
