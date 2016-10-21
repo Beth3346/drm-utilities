@@ -3,6 +3,12 @@ const $ = require('jquery');
 
 let elr = elrUtlities();
 
+$.extend($.expr[':'], {
+    containsNC: function(elem, i, match) {
+        return (elem.textContent || elem.innerText || '').toLowerCase().indexOf((match[3] || '').toLowerCase()) >= 0;
+    }
+});
+
 const elrFilterGrid = function(params) {
     const self = {};
     const spec = params || {};
