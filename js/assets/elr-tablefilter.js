@@ -1,4 +1,13 @@
+import elrUtlities from './elr-utilities';
 const $ = require('jquery');
+
+let elr = elrUtlities();
+
+$.extend($.expr[':'], {
+    containsNC: function(elem, i, match) {
+        return (elem.textContent || elem.innerText || '').toLowerCase().indexOf((match[3] || '').toLowerCase()) >= 0;
+    }
+});
 
 const elrTableFilter = function(params) {
     const self = {};
@@ -10,10 +19,10 @@ const elrTableFilter = function(params) {
     const getFilterValues = function($inputs) {
         let filterValues = [];
 
-        $.each($inputs, function(k,v) {
+        elr.each($inputs, function(k,v) {
             const $that = $(v);
 
-            if ( $.trim($that.val()).length ) {
+            if ( elr.trim($that.val()).length ) {
                 filterValues.push(v);
             }
 
@@ -26,9 +35,9 @@ const elrTableFilter = function(params) {
     const getRows = function($fullRows, filterValues) {
         let $newRows;
 
-        $.each(filterValues, function(k,v) {
+        elr.each(filterValues, function(k,v) {
             const $that = $(v);
-            const input = $.trim($that.val()).toLowerCase();
+            const input = elr.trim($that.val()).toLowerCase();
             const columnNum = $that.closest('th').index();
 
             if ( filterValues.length === 1 ) {
@@ -57,7 +66,7 @@ const elrTableFilter = function(params) {
     const renderTable = function($table, $filteredRows) {
         const $tableBody = $table.find('tbody').empty();
 
-        $.each($filteredRows, function(k,v) {
+        elr.each($filteredRows, function(k,v) {
             $tableBody.append(v);
         });
     };
