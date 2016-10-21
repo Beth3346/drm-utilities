@@ -1,11 +1,11 @@
 const $ = require('jquery');
 // adds case insensitive contains to jQuery
 
-$.extend($.expr[':'], {
-    containsNC: function(elem, i, match) {
-        return (elem.textContent || elem.innerText || '').toLowerCase().indexOf((match[3] || '').toLowerCase()) >= 0;
-    }
-});
+// $.extend($.expr[':'], {
+//     containsNC: function(elem, i, match) {
+//         return (elem.textContent || elem.innerText || '').toLowerCase().indexOf((match[3] || '').toLowerCase()) >= 0;
+//     }
+// });
 
 if (!Number.isNan) {
     Number.isNan = function(num) {
@@ -94,7 +94,11 @@ let elrUtilities = function() {
     };
 
     self.trim = function(str) {
-        return (str === null) ? '' : str.replace(/^\s+|\s+$/g,'');
+        if (str) {
+            return (str === null) ? '' : str.replace(/^\s+|\s+$/g,'');
+        }
+
+        return 'you need to provide a string to trim';
     };
 
     // filters an array using a callback function
@@ -174,7 +178,6 @@ let elrUtilities = function() {
     };
 
     self.checkBlacklist = function(str, blacklist) {
-        // console.log(self.inArray(blacklist, str.toLowerCase()));
         if (str) {
             return self.inArray(blacklist, str.toLowerCase());
         }
@@ -190,18 +193,30 @@ let elrUtilities = function() {
         return;
     };
 
-    self.getText = function($elems) {
+    self.getText = function(elems, separator = ' ') {
         let text = [];
 
-        self.each($elems, function() {
-            text.push($(this).text());
+        self.each(elems, function() {
+            let val = this.innerText || this.textContent;
+            text.push(val);
         });
 
-        return text;
+        return self.trim(text.join(separator));
     };
 
-    self.getValue = function($field) {
-        let value = self.trim($field.val());
+    self.getTextArray = function(elems) {
+        let arr = [];
+
+        self.each(elems, function() {
+            let val = this.innerText || this.textContent;
+            arr.push(val);
+        });
+
+        return arr;
+    };
+
+    self.getValue = function(field) {
+        let value = self.trim(field.value);
 
         if (value.length > 0) {
             return value;
@@ -213,7 +228,7 @@ let elrUtilities = function() {
     self.getColumnList = function(columnNum, $listItems) {
         let $list = [];
 
-        self.each($listItems, function(k,v) {
+        self.each($listItems, function(k, v) {
             $list.push($(v).find('td').eq(columnNum));
 
             return $list;
@@ -254,6 +269,7 @@ let elrUtilities = function() {
         });
     };
 
+    // debounce
     self.throttle = function(fn, threshold, scope) {
         let last;
         let deferTimer;
@@ -354,6 +370,7 @@ let elrUtilities = function() {
         return formInput;
     };
 
+    // wrapper for creating jquery objects
     self.createElement = function(tagName, attrs = {}) {
         return $(`<${tagName}></${tagName}>`, attrs);
     };
@@ -645,8 +662,6 @@ let elrUtilities = function() {
                 return self.sortValues(a, b, dir);
             };
 
-            console.log($listItems);
-
             return $listItems.sort(sort);
         }
     };
@@ -748,7 +763,7 @@ let elrUtilities = function() {
     };
 
     self.randomClass = function(classList, $el) {
-        $.each(classList, function(index, value) {
+        elr.each(classList, function(index, value) {
             $el.removeClass(value);
         });
 
