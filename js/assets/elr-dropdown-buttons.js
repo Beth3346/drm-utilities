@@ -1,42 +1,64 @@
 const $ = require('jquery');
 
-const elrDropdownButton = function(params) {
+const elrDropdownButton = function(params = {}) {
     const self = {};
-    const spec = params || {};
-    const containerClass = spec.containerClass || 'elr-dropdown-solid-btn-holder';
-    const speed = spec.speed || 300;
-    const button = spec.button || 'button';
-    const activeClass = spec.activeClass || 'clicked';
-    const $container = $(`.${containerClass}`);
+    // const containerClass = params.containerClass || 'elr-dropdown-solid-btn-holder';
+    // const speed = params.speed || 300;
+    const buttonClass = params.buttonClass || 'elr-dropdown-button';
+    const activeClass = params.activeClass || 'clicked';
+    // const $container = $(`.${containerClass}`);
+    const $button = $(`.${buttonClass}`);
+    const activeListClass = params.activeListClass || 'active-list';
 
-    if ( $container.length ) {
-        $container.on('click', button, function(e) {
-            const $that = $(this);
-            const $menu = $that.next('ul');
-            const $openButtons = $container.find('ul').not(':hidden').prev('button');
+    // const toggleMenu = function() {
+    //     const $button = $(this);
+    //     const $menu = $button.next('ul');
 
-            $menu.slideDown(speed);
-            $that.addClass(activeClass);
+    //     console.log($button);
+    //     console.log($menu);
 
-            if ( $openButtons.length ) {
-                $openButtons.removeClass(activeClass);
-                $openButtons.next('ul').slideUp(speed);
-            }
+    //     if (!$button.hasClass(activeClass)) {
+    //         $button.addClass('clicked');
+    //         $menu.addClass('active-list');
+    //     } else {
+    //         $button.removeClass(activeClass);
+    //         $menu.removeClass(activeListClass);
+    //     }
+    // };
 
+    if ( $button.length ) {
+        $button.on('click', function(e) {
             e.preventDefault();
-            e.stopPropagation();
-        });
+            // e.stopPropagation();
+            const $openButtons = $(`ul.elr-dropdown-list.${activeListClass}`).prev('button');
+            const $button = $(this);
+            const $menu = $button.next('ul');
 
-        $('body').on('click', function(e) {
-            const $openButtons = $container.find('ul').not(':hidden').prev('button');
+            console.log($button);
+            console.log($menu);
 
-            if ( $openButtons.length ) {
-                $openButtons.removeClass(activeClass);
-                $openButtons.next('ul').slideUp(speed);
+            if (!$button.hasClass(activeClass)) {
+                $button.addClass('clicked');
+                $menu.addClass('active-list');
+            } else {
+                $button.removeClass(activeClass);
+                $menu.removeClass(activeListClass);
             }
 
-            e.stopPropagation();
+            // if ( $openButtons.length ) {
+            //     $openButtons.removeClass(activeClass);
+            //     $openButtons.next('ul').removeClass(activeListClass);
+            // }
         });
+
+        // $('body').on('click', function(e) {
+        //     e.stopPropagation();
+        //     const $openButtons = $container.find('ul').not(':hidden').prev('button');
+
+        //     if ( $openButtons.length ) {
+        //         $openButtons.removeClass(activeClass);
+        //     }
+        // });
     }
 
     return self;

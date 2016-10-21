@@ -9,13 +9,22 @@
     $border-radius: 0
 ) {
     @include elr-nav-bar($white, $white, left, transparent, $link-color, false);
-    @include elr-em-font(14px);
+    @include elr-em-font(12px);
     width: 100%;
     position: absolute;
-    display: none;
     z-index: 100;
     font-weight: $bold;
     top: 100%;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height .5s cubic-bezier(0, 1.05, 0, 1);
+    display: flex;
+    flex-direction: column;
+
+    &.active-list {
+        max-height: 500px;
+        transition: max-height .5s ease-in;
+    }
 
     @if ($border-radius) {
         border-radius: $border-radius;
@@ -54,6 +63,7 @@
             @include elr-button-solid($bk-color, $color, 100%, center, $border-radius, $border);
         }
 
+        @include elr-em-font(14px);
         font-weight: 700;
         height: 40px;
         margin-bottom: 5px;
@@ -63,7 +73,9 @@
             @include elr-em-font(18px);
             content: '\25BE';
             position: absolute;
-            right: 5%;
+            right: 10px;
+            top: 50%;
+            transform: translate(0, -50%);
         }
 
         &.clicked {
@@ -72,7 +84,9 @@
         }
     }
 
-    .elr-dropdown-list { @include elr-dropdown-list($color, $bk-color, left, $divider-color, $border, $border-radius); }
+    .elr-dropdown-list {
+        @include elr-dropdown-list($color, $bk-color, left, $divider-color, $border, $border-radius);
+    }
 }
 
 @mixin elr-dropdown-button-split(
@@ -97,6 +111,7 @@
     }
 
     button {
+        @include elr-em-font(14px);
         position: relative;
         margin: 0;
         width: $width - 50;
