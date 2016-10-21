@@ -21,8 +21,8 @@ const elrValidation = function(params) {
 
         // self.removeValidationClass.call(this, validate.status);
         // self.applyValidationClass.call(this, validate.status);
-        console.log(value);
-        console.log(validate);
+        // console.log(value);
+        // console.log(validate);
     };
 
     const trackLength = function(value) {
@@ -68,11 +68,11 @@ const elrValidation = function(params) {
         e.preventDefault();
     });
 
-    $body.on('keyup', ':input[type=text], :input[type=url], :input[type=email], :input[type=password], :input[type=tel], textarea', function() {
-        const value = elr.getValue($(this));
+    $body.on('keyup', ':input.elr-validate, textarea.elr-validate', function() {
+        const value = elr.getValue(this);
         const validate = trackLength.call(this, value);
 
-        console.log(validate.status);
+        // console.log(validate.status);
     });
 
     $body.on('keyup', ':input.elr-valid-integer', function() {
