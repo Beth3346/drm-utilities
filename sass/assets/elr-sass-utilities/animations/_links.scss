@@ -255,6 +255,8 @@
     }
 
     .menu-item.current a {
+        color: $link-color;
+
         &::after {
             height: $line-thickness;
             opacity: 1;
