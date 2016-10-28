@@ -786,6 +786,18 @@ let elrUtilities = function() {
         return false;
     };
 
+    self.closest = function(el, fn) {
+        while (el) {
+            if (fn(el)) {
+                return el;
+            }
+
+            el = el.parentNode;
+        }
+
+        return el;
+    };
+
     return self;
 };
 
