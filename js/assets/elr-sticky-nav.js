@@ -63,10 +63,6 @@ const elrStickyNav = function(params) {
             affixElement($nav, navPositionTop);
         });
 
-        // $win.on('resize', function() {
-        //     positionNav();
-        // });
-
         if (spy) {
             $win.on('scroll', function() {
                 elr.scrollSpy($nav, $content, sectionEl, activeClass);
