@@ -61,18 +61,54 @@
     }
 }
 
-@mixin elr-ratio-box ($ratio: 1) {
+// provide width and height with no units to calculate ratio
+// for a square provide equal width & height
+@mixin elr-ratiobox ($width, $height) {
 
-    overflow: hidden;
+    $img-ratio: get-aspect-ratio($width, $height);
+
+    display: inline-block;
     position: relative;
 
-    // The container's height, as a percentage of the
-    // container's width, is set by assigning
-    // padding-top to a pseudo-element.
-    &:before {
+    &::after {
         content: '';
+        padding-top: $img-ratio * 100%;
         display: block;
-        height: 0;
-        padding-top: (1 / $ratio) * 100%;
+    }
+
+    .elr-ratiobox-inner {
+        height: 100%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+    }
+
+    .elr-ratiobox-centeredtext {
+        @include elr-centerer(true, false);
+        text-align: center;
+        padding: 0 20px;
+        width: 100%;
+    }
+
+    .elr-ratiobox-img-wrapper {
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .elr-ratiobox-img {
+        transform: translate(-50%, -50%);
+        position: relative;
+        left: 50%;
+        top: 50%;
+        width: auto;
+        max-width: none;
+        height: 100%;
+    }
+
+    .elr-box-link {
+        display: block;
+        height: 100%;
     }
 }
