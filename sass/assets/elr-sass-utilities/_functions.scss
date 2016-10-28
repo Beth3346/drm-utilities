@@ -39,3 +39,11 @@
         @return $size;
     }
 }
+
+@function get-aspect-ratio($width, $height) {
+    @if ($width == $height) {
+        @return .965;
+    } @else {
+        @return ($height / $width);
+    }
+}
