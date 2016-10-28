@@ -4,6 +4,7 @@
     background-color: $main-color;
     color: $background-color;
     line-height: 1.5;
+    margin-top: 60px;
 
     @include elr-breakpoint('neptune') {
         padding-top: 10px;
