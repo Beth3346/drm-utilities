@@ -12,21 +12,18 @@
     }
 }
 
-@mixin elr-slide($final-height: 200px) {
+@mixin elr-slide($final-height: 500px) {
     cursor: pointer;
 
     &:hover {
         .elr-slide-down {
-            height: $final-height;
-            opacity: 1;
-            visibility: visible;
+            max-height: $final-height;
+            transition: max-height .5s ease-in;
         }
     }
 
     .elr-slide-down {
-        height: 0;
-        opacity: 0;
-        visibility: hidden;
-        transition: height .5s, opacity .5s, visibility .5s;
+        max-height: 0;
+        transition: max-height .5s cubic-bezier(0, 1.05, 0, 1);
     }
 }
