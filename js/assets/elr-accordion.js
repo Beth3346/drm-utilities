@@ -69,7 +69,6 @@ const elrAccordion = function(params) {
         const $content = $container.find(`.${contentHolderClass}`);
         const $icons = $label.find(`.${iconClass}`);
         const $expandedContent = $container.find(`.${contentHolderClass}[data-state=expanded]`);
-        // const $buttons;
 
         if ( showButtons ) {
             const $buttons = addButtons($container);
