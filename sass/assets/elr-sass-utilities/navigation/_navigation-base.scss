@@ -16,23 +16,42 @@
     margin: 0;
     padding: 0;
 
-    li {
+    @if $inline {
+        display: flex;
+        flex-direction: row;
+    }
+
+    li,
+    a {
         margin: 0;
         padding: 0;
-        list-style: none;
         display: block;
+    }
 
-        @if ($inline) {
-            float: left;
+    li {
+        list-style: none;
+
+        @if $inline {
+            width: auto;
+
+            @if $border-radius > 0 {
+                margin-right: 5px;
+            }
+
         } @else {
-            // float: none;
             width: 100%;
+
+            @if $border-radius > 0 {
+                margin-bottom: 5px;
+
+                .elr-submenu {
+                    margin-top: 5px;
+                }
+            }
         }
     }
 
     a {
-        margin: 0;
-        padding: 5px 10px;
         width: 100%;
         text-align: $align;
         color: $text-color;
@@ -40,14 +59,16 @@
         transition: color .3s, background-color .3s;
         background-color: $background-color;
 
-        @if ($inline == false) {
-            display: block;
+        @if ($inline and $background-color != transparent) or $background-color != transparent {
+            padding: 5px 20px;
+        } @elseif $inline or $border-radius > 0 {
+            padding: 5px 10px;
+        } @else {
+            padding: 5px 0;
         }
 
-        @if ($border-radius != 0) {
+        @if $border-radius > 0 {
             border-radius: $border-radius;
-            margin-right: 5px;
-            margin-bottom: 5px;
         }
 
         &.active,
@@ -79,5 +100,77 @@
     .text-disabled {
         color: $light-grey;
         cursor: not-allowed;
+    }
+}
+
+@mixin elr-css-dropdown-menu($text-color: $white, $background-color: $link-color) {
+    @include elr-nav-bar($white, $white, left, transparent, $link-color);
+    > li {
+        position: relative;
+
+        &:hover {
+            > ul.elr-submenu {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+
+        &.elr-has-submenu {
+            > a:after {
+                content: '\25BE';
+                position: absolute;
+                right: 10px;
+                font-weight: 700;
+                line-height: 1.7em;
+                font-size: 12px;
+                top: 50%;
+                transform: translate(0, -50%);
+                color: inherit;
+            }
+        }
+
+        > a {
+            padding-left: 30px;
+            padding-right: 30px;
+            display: block;
+        }
+    }
+
+    .elr-submenu {
+        @include elr-nav-bar(
+            $white,
+            $white,
+            left,
+            transparent,
+            $link-color,
+            false
+        );
+        position: absolute;
+        min-width: 130px;
+        width: 120%;
+        top: 100%;
+        z-index: 1000;
+        opacity: 0;
+        visibility: collapse;
+        transition: opacity .5s;
+
+        li {
+            position: relative;
+
+            > a {
+                font-size: 80%;
+                padding: 5px 10px;
+            }
+
+            > ul {
+                display: none;
+                position: absolute;
+                left: 100%;
+                top: 0;
+                z-index: 100;
+                width: 120%;
+                background-color: $background-color;
+            }
+        }
     }
 }
