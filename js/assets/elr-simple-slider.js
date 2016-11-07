@@ -254,6 +254,9 @@ const elrSimpleSlider = function(params) {
             }
 
             $currentSliderControls.on('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
                 const dir = $(this).data('dir');
                 const current = getCurrent($slideHolder);
                 const nextSlide = advanceSlide(current, dir, $slideHolder);
@@ -261,9 +264,6 @@ const elrSimpleSlider = function(params) {
                 $slideList.find('button').removeClass('active');
                 $slideList.find('li').eq(nextSlide).find('button').addClass('active');
                 pauseShow(begin);
-
-                e.preventDefault();
-                e.stopPropagation();
             });
 
             $currentSlider.on({
@@ -288,6 +288,9 @@ const elrSimpleSlider = function(params) {
             });
 
             $currentSlider.on('click', `.${slideListClass} button`, function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
                 const $that = $(this);
                 const current = getCurrent($slideHolder);
                 const slideNum = $that.data('item-num');
@@ -297,9 +300,6 @@ const elrSimpleSlider = function(params) {
 
                 goToSlide(current, slideNum, $slideHolder);
                 pauseShow(begin);
-
-                e.preventDefault();
-                e.stopPropagation();
             });
         });
     }
