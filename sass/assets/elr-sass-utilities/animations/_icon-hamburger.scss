@@ -33,6 +33,8 @@
 @mixin elr-icon-close($width: 30px, $thickness: 4px) {
     span {
         transition: opacity .3s;
+        transition-duration: .4s, .5s;
+        transition-delay: .3s, 0s;
     }
 
     &::before {
@@ -63,6 +65,7 @@
         span {
             opacity: 0;
             visibility: hidden;
+            transition-delay: 0s, .3s;
         }
     }
 }
