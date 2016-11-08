@@ -5,7 +5,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 998;
+    z-index: 9999;
     width: 100%;
     height: 100%;
 
@@ -44,13 +44,13 @@
             right: 0;
         } @else if $list-position == 'top-left' {
             top: 0;
-            left: 0;            
+            left: 0;
         } @else if $list-position == 'bottom-right' {
             bottom: -20px;
-            right: 0;           
+            right: 0;
         } @else if $list-position == 'bottom-left' {
             bottom: -20px;
-            left: 0;        
+            left: 0;
         } @else {
             display: none;
         }
@@ -67,7 +67,7 @@
             padding: 0;
             margin: 0;
             position: relative;
-        }   
+        }
     }
 
     .lightbox-nav {
@@ -84,7 +84,7 @@
             cursor: pointer;
 
             &:hover {
-                background-color: rgba($white, .7);    
+                background-color: rgba($white, .7);
             }
         }
 
