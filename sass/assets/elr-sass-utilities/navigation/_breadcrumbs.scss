@@ -1,17 +1,18 @@
 // Breadcrumbs
 
-@mixin elr-breadcrumbs($separator: '/') {
+@mixin elr-breadcrumbs($separator: '>') {
     margin: 0;
     padding: 0;
 
     li {
         display: inline-block;
+        padding: 0;
+        margin: 0;
 
         &:after {
             content: $separator;
-            padding-left: 5px;
-            padding-right: 3px;
-            color: $grey;
+            padding-left: 6px;
+            padding-right: 4px;
         }
 
         &:last-child {
@@ -20,6 +21,7 @@
             }
         }
 
+        &:after,
         &.active {
             color: $grey;
         }
@@ -30,6 +32,83 @@
 
             &:hover {
                 text-decoration: underline;
+            }
+        }
+    }
+}
+
+@mixin elr-breadcrumbs-arrow($color: $link-color, $active-color: $accent-color, $text-color: $white, $border-color: $text-color) {
+    margin: 0;
+    padding: 0;
+    display: flex;
+
+    li {
+        display: block;
+        padding: 0;
+        margin: 0;
+        background-color: $color;
+        color: $text-color;
+        display: flex;
+        height: 36px;
+        text-align: center;
+        position: relative;
+
+        &::before,
+        &::after {
+            @include elr-triangle('right', 37px, 18px, $color);
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+        }
+
+        &::before {
+            right: -18px;
+            z-index: 1;
+            border-left-color: $border-color;
+        }
+
+        &::after {
+            right: -17px;
+            z-index: 2;
+        }
+
+        &:hover {
+            background-color: lighten($color, 10%);
+
+            &::after {
+                border-left-color: lighten($color, 10%);
+            }
+        }
+
+        &.active {
+            background-color: $active-color;
+
+            &::after {
+                border-left-color: $active-color;
+                right: -18px;
+            }
+        }
+
+        &:first-child a {
+            padding-left: 20px;
+        }
+
+        &.active,
+        a {
+            @include elr-em-font(14px);
+            padding: 0 15px 0 30px;
+            line-height: 36px;
+        }
+
+        a {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            height: 100%;
+
+            &:hover {
+                text-decoration: none;
             }
         }
     }
