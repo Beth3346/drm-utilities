@@ -3,7 +3,7 @@
     ul,
     ol {
         margin: 0;
-        padding: 10px 10px 10px 30px;
+        padding: 0;
     }
 
     ul {
@@ -19,6 +19,10 @@
     dt {
         margin: 0;
         padding: 0 0 10px;
+    }
+
+    li {
+        margin-left: 30px;
     }
 
     dl {
@@ -37,14 +41,16 @@
     h4,
     h5,
     h6 {
+        font-size: 1rem;
         margin: 0;
         padding: 10px 0;
         font-weight: $normal;
+        line-height: 1.2;
     }
 
-    h1 {
+    h1,
+    .h1 {
         @include elr-em-font($h1);
-        line-height: 1.2;
 
         @include elr-breakpoint('jupiter') {
             @include elr-em-font($h1 - 8);
@@ -59,9 +65,9 @@
         }
     }
 
-    h2 {
+    h2,
+    .h2 {
         @include elr-em-font($h2);
-        line-height: 1.2;
 
         @include elr-breakpoint('jupiter') {
             @include elr-em-font($h2 - 5);
@@ -76,9 +82,9 @@
         }
     }
 
-    h3 {
+    h3,
+    .h3 {
         @include elr-em-font($h3);
-        line-height: 1.2;
 
         @include elr-breakpoint('jupiter') {
             @include elr-em-font($h3 - 4);
@@ -93,7 +99,8 @@
         }
     }
 
-    h4 {
+    h4,
+    .h4 {
         @include elr-em-font($h4);
 
         @include elr-breakpoint('jupiter') {
@@ -109,7 +116,8 @@
         }
     }
 
-    h5 {
+    h5,
+    .h5 {
         @include elr-em-font($h5);
 
         @include elr-breakpoint('saturn') {
@@ -121,7 +129,8 @@
         }
     }
 
-    h6 {
+    h6,
+    .h6 {
         @include elr-em-font($h6);
 
         @include elr-breakpoint('saturn') {
@@ -221,6 +230,8 @@
         height: 30px;
         padding: 10px;
         -webkit-appearance: none;
+        -ms-appearance: none;
+        -moz-appearance: none;
     }
 
     select,

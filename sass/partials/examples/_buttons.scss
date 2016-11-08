@@ -32,9 +32,9 @@
 
 .button-group-no-border { @include elr-button-group($link-color, $background-color, 3px, none); }
 
-.elr-dropdown-solid-btn-holder {@include elr-dropdown-button-solid($link-color, $background-color, 200px, none, 3px); }
+.elr-dropdown-button-holder {@include elr-dropdown-button-solid($link-color, $background-color, 200px, none, 3px); }
 
-.elr-dropdown-split-btn-holder { @include elr-dropdown-button-split($link-color, $background-color, 3px); }
+.elr-dropdown-button-holder-split { @include elr-dropdown-button-split($link-color, $background-color, 3px); }
 
 .mobile-toggle-button {
     @include elr-mobile-toggle-button($white, $link-color);

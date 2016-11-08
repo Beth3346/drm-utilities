@@ -28,8 +28,14 @@
     }
 
     .elr-submenu {
-        // @include elr-nav-bar-solid-stacked($text-color, $background-color, left);
-        @include elr-nav-bar($white, $white, left, transparent, $link-color, false);
+        @include elr-nav-bar(
+            $white,
+            $white,
+            left,
+            transparent,
+            $link-color,
+            false
+        );
         position: absolute;
         min-width: 130px;
         width: 120%;

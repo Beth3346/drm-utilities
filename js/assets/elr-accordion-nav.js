@@ -45,7 +45,7 @@ const elrAccordionNav = function(params) {
 
     // remove the hash mark from a url hash
     const trimHash = function(hash) {
-        return hash.slice(0,1);
+        return hash.slice(0, 1);
     };
 
     const getCurrentPage = function(location, hash) {
@@ -53,7 +53,7 @@ const elrAccordionNav = function(params) {
 
         if (hash) {
             return location.slice(startIndex) + hash;
-        } else if (location.slice(0,1) === '/') {
+        } else if (location.slice(0, 1) === '/') {
             return location.slice(startIndex);
         }
 
@@ -103,7 +103,7 @@ const elrAccordionNav = function(params) {
         }
 
         $(window).on('hashchange', function(e){
-            e.preventDefault();
+            // e.preventDefault();
 
             $container.find('a.active').removeClass('active');
             $content.hide();

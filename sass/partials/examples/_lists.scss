@@ -1,20 +1,11 @@
 .unstyled-list-left { @include elr-unstyled-list(left); }
+.divider { @include elr-list-divider(); }
 
-.unstyled-list-center { @include elr-unstyled-list(center); }
-
-.unstyled-list-right { @include elr-unstyled-list(right); }
-
-.border-list-left,
-.border-list-center,
-.border-list-right {
+.border-list-left {
     margin: 0 5px;
 }
 
 .border-list-left { @include elr-border-list(left); }
-
-.border-list-center { @include elr-border-list(center); }
-
-.border-list-right { @include elr-border-list(right); }
 
 .inline-list-left { @include elr-inline-list(left); }
 
@@ -22,14 +13,12 @@
 
 .inline-list-right { @include elr-inline-list(right); }
 
-.breadcrumbs { @include elr-breadcrumbs; }
-
-.bullet-list { @include elr-bullet-list; }
+.bullet-list { @include elr-bullet-list(); }
+.triangle-list { @include elr-bullet-list('\25B6'); }
+.checked-list { @include elr-bullet-list('\2713'); }
 
 .heart-list { @include elr-font-awesome-list('\f004'); }
-
 .paw-list { @include elr-font-awesome-list('\f1b0'); }
-
 .star-list { @include elr-font-awesome-list('\f005'); }
 
 .list-section h3 { @include elr-em-font(18px); }

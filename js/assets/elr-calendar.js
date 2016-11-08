@@ -153,7 +153,7 @@ const elrCalendar = function(params) {
             } else if ((firstDay < 7) && (view === 'week')) {
                 newDate.date = firstDay - 1;
             } else if ((firstDay === 1) && (view === 'date')) {
-                newDate.date = lastDayOfPrevMonth - 6 ;// 30 - 6 1 24
+                newDate.date = lastDayOfPrevMonth - 6 ; // 30 - 6 1 24
                 newDate.year = (newDate.month === 0) ? lastYear : newDate.year;
                 newDate.month = lastMonth;
             } else if ((firstDay < 7) && (view === 'date')) {

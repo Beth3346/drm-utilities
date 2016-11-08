@@ -22,6 +22,10 @@
 
     .elr-text-justified { text-align: justify; }
 
+    .elr-avoid-wrap { display: inline-block; }
+}
+
+@mixin elr-typography-states() {
     .elr-text-muted { color: $muted-color; }
 
     .elr-text-disabled { color: $light-grey; }
@@ -40,6 +44,4 @@
     .elr-text-success { color: $success-color; }
 
     .elr-highlight { color: $accent-color; }
-
-    .elr-avoid-wrap { display: inline-block; }
 }

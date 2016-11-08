@@ -8,7 +8,4 @@
     }
 }
 
-.pagination-bar { @include elr-pagination-bar($white, 5px, $light-grey, $link-color, 12px, true); }
-.pink-pagination-bar { @include elr-pagination-bar($white, 5px, $light-grey, $dark-pink, 12px, true); }
-.pagination-links { @include elr-pagination-links($link-color, 5px, 14px, true); }
 .pagination-links-round { @include elr-pagination-links($link-color, 50%, 14px, true); }

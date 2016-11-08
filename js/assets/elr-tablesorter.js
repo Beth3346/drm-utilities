@@ -15,7 +15,7 @@ const elrTableSorter = function(params) {
         $(this).addClass(className);
     };
 
-    const sortComplexList= function($listItems, dir, columnNum, types) {
+    const sortComplexList = function($listItems, dir, columnNum, types) {
         const that = this;
         const sortLists = {};
 
