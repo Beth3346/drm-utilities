@@ -11,6 +11,11 @@
         box-sizing: border-box;
     }
 
+    :before,
+    :after {
+        box-sizing: border-box;
+    }
+
     body,
     div,
     span,
@@ -152,59 +157,4 @@
     section {
         display: block;
     }
-
-    // add box-sizing to block elements
-
-    // h1,
-    // h2,
-    // h3,
-    // h4,
-    // h5,
-    // h6,
-    // p,
-    // ul,
-    // ol,
-    // dl,
-    // dt,
-    // dd,
-    // li,
-    // blockquote,
-    // cite,
-    // form,
-    // input,
-    // label,
-    // textarea,
-    // div,
-    // section,
-    // aside,
-    // header,
-    // footer,
-    // a,
-    // nav,
-    // button,
-    // span,
-    // button,
-    // span,
-    // article,
-    // main,
-    // pre,
-    // table,
-    // td,
-    // tr,
-    // th,
-    // thead,
-    // tbody,
-    // tfoot,
-    // details,
-    // img,
-    // figure,
-    // menu,
-    // figcaption,
-    // i,
-    // b,
-    // picture,
-    // :before,
-    // :after {
-    //     box-sizing: border-box;
-    // }
 }
