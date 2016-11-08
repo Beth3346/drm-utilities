@@ -18,12 +18,14 @@
     &:hover {
         .elr-slide-down {
             max-height: $final-height;
+            visibility: visible;
             transition: max-height .5s ease-in;
         }
     }
 
     .elr-slide-down {
         max-height: 0;
-        transition: max-height .5s cubic-bezier(0, 1.05, 0, 1);
+        visibility: hidden;
+        transition: max-height .5s cubic-bezier(0, 1.05, 0, 1), visibility .2s;
     }
 }
