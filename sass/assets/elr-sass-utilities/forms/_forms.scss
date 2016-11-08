@@ -2,7 +2,7 @@
 // scss-lint:disable QualifyingElement
 
 @mixin elr-tabular-form($bk-color: $lightest-grey, $border: $grey, $button-color: $dark-grey) {
-    @include elr-form($bk-color, $border);
+    // @include elr-form($bk-color, $border);
 
     label,
     input,
@@ -15,14 +15,8 @@
     [type="email"],
     [type="password"],
     [type="url"],
-    select {
-        width: 100%;
-    }
-
-    label {
-        width: 100%;
-    }
-
+    select,
+    label,
     textarea {
         width: 100%;
     }
@@ -42,7 +36,7 @@
 
 @mixin elr-inline-form($bk-color: $lightest-grey, $border: $grey, $button-color: $dark-grey) {
     @include elr-clearfix;
-    @include elr-form($bk-color, $border);
+    // @include elr-form($bk-color, $border);
 
     padding-left: 0;
 
