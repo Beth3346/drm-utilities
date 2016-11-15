@@ -198,10 +198,10 @@ let elrUtilities = function() {
 
         self.each(elems, function() {
             let val = this.innerText || this.textContent;
-            text.push(val);
+            text.push(self.trim(val));
         });
 
-        return self.trim(text.join(separator));
+        return text.join(separator);
     };
 
     self.getTextArray = function(elems) {
@@ -276,7 +276,7 @@ let elrUtilities = function() {
 
         threshold = threshold || 500;
 
-        return function () {
+        return function() {
             let context = scope || this;
             let now = +new Date(),
                 args = arguments;
@@ -284,7 +284,7 @@ let elrUtilities = function() {
             if (last && now < last + threshold) {
                 // hold on to it
                 clearTimeout(deferTimer);
-                deferTimer = setTimeout(function () {
+                deferTimer = setTimeout(function() {
                     last = now;
                     fn.apply(context, args);
                 }, threshold);
@@ -786,16 +786,220 @@ let elrUtilities = function() {
         return false;
     };
 
-    self.closest = function(el, fn) {
+    self.closest = function(el, selector) {
+        el = el[0];
+        const matchesSelector = el.matches || el.msMatchesSelector;
+        const els = [];
+
         while (el) {
-            if (fn(el)) {
-                return el;
+            if (matchesSelector.call(el, selector)) {
+                break;
+            }
+
+            el = el.parentElement;
+        }
+
+        els.push(el);
+
+        return els;
+    };
+
+    // get element in the collection with the provided index
+    self.eq = function(collection, index) {
+        const els = [];
+
+        const parent = (self.parent(collection).length > 1) ? self.parent(collection)[0] : self.parent(collection);
+
+        console.log(parent);
+
+        const checkLength = function(collection) {
+            // make sure an element with the index exists in the collection
+            if (collection.length < index + 1) {
+                console.log('There is no element with that index');
+
+                return false;
+            }
+
+            return true;
+        };
+
+        const children = checkLength(collection) ? parent[0].children : null;
+
+        els.push(children[index]);
+
+        return els;
+    };
+
+    // get the index of the provided element
+    self.index = function(el) {
+        const parent = self.parent(el);
+
+        return Array.prototype.indexOf.call(parent[0].children, el[0]);;
+    };
+
+    self.matches = function(el, selector) {
+        const matchesSelector = el.matches || el.msMatchesSelector;
+
+        if (matchesSelector.call(el, selector)) {
+            return el;
+        } else {
+            return null;
+        }
+    };
+
+    // get elements not matching the given criteria
+    self.not = function(collection, filter) {
+        const filtered = [];
+
+        for (var i = 0; i < collection.length; i++) {
+            if (!self.matches(collection[i], filter)) {
+                filtered.push(collection[i]);
+            }
+        }
+
+        return filtered;
+    };
+
+    self.even = function(collection) {
+        const filtered = [];
+
+        for (var i = 0; i < collection.length; i++) {
+            if (((self.index([collection[i]]) + 1) % 2) === 0) {
+                filtered.push(collection[i]);
+            }
+        }
+
+        return filtered;
+    };
+
+    self.odd = function(collection) {
+        const filtered = [];
+
+        for (var i = 0; i < collection.length; i++) {
+            if (((self.index([collection[i]]) + 1) % 2) !== 0) {
+                filtered.push(collection[i]);
+            }
+        }
+
+        return filtered;
+    };
+
+    // get the data value from the given element
+    self.data = function(el, dataName) {
+        const data = el[0].dataset[dataName];
+
+        if (typeof data !== 'undefined') {
+            return data;
+        }
+
+        console.log('there is no data attribute with this name');
+
+        return;
+    };
+
+    // get the first element in the collection
+    self.first = function(collection) {
+        return collection[0];
+    };
+
+    // get the last element in the collection
+    self.last = function(collection) {
+        if (collection.length > 1) {
+            return collection[collection.length - 1];
+        }
+
+        return collection[0];
+    };
+
+    // returns parent of the first element if a collection is provided
+    self.parent = function(el, selector = null) {
+        // get the parent elements for each element in the collection
+        // if they are the same parent only return a single item
+        const parents = [];
+
+        for (var i = 0; i < el.length; i++) {
+            if (selector) {
+                parents.push(self.matches(el[i].parentNode, selector));
+            } else {
+                parents.push(el[i].parentNode);
+            }
+        }
+
+        return self.unique(parents);
+    };
+
+    // return all of the element's parents through the entire dom tree
+    self.parents = function(el, selector = null) {
+        el = el[0];
+        const parents = [];
+
+        while (el) {
+            if (el.tagName && typeof el.tagName !== 'undefined' && el.tagName !== 'HTML') {
+                parents.push(el.parentNode);
             }
 
             el = el.parentNode;
         }
 
-        return el;
+        return parents;
+    };
+
+    // children
+    self.children = function(el, selector = null) {
+        return children;
+    };
+
+    self.prev = function(el, selector = null) {
+        return prevElement;
+    };
+
+    self.next = function(el, selector = null) {
+        return nextElement;
+    };
+
+    // find
+    self.find = function(selector, collection = null) {
+        return collection;
+    };
+
+    // hasClass
+    self.hasClass = function(el, className) {
+        return false;
+    };
+
+    // addClass
+    self.addClass = function(el, className) {
+        return;
+    };
+
+    // removeClass
+    self.removeClass = function(el, className) {
+        return;
+    };
+
+    // toggleClass
+    self.toggleClass = function(el, className) {
+        return;
+    };
+
+    // clone
+    self.clone = function(el) {
+        return clone;
+    };
+
+    // css
+    self.css = function(el, css = {}) {
+        return;
+    };
+
+    // appendTo
+    self.appendTo = function(el, target) {
+        return;
+    };
+
+    // prependTo
+    self.prependTo = function(el, target) {
+        return;
     };
 
     return self;
