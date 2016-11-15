@@ -1,41 +1,93 @@
+@mixin elr-hamburger($width: 30px, $color: $elr-blue, $thickness: 4px) {
+    @include elr-square($width);
+    position: relative;
+    border: 0;
+    box-shadow: none;
+    cursor: pointer;
+
+    span,
+    &::before,
+    &::after {
+        content: '';
+        height: $thickness;
+        width: $width;
+        background-color: $color;
+        display: block;
+        position: absolute;
+        left: 0;
+        border-radius: $thickness;
+    }
+
+    span {
+        top: ($width / 2) - ($thickness / 2);
+    }
+
+    &::before {
+        top: ($thickness / 2);
+    }
+
+    &::after {
+        bottom: ($thickness / 2);
+    }
+}
+
 @mixin elr-mobile-toggle-button(
         $color: $link-color,
         $bg-color: transparent,
-        $font-size: 16px,
+        $font-size: 18px,
         $border-radius: 3px,
         $border-color: 'none',
         $hover-color: lighten($bg-color, 10%)
     ) {
-    @include elr-em-font($font-size);
-    box-shadow: none;
+    font-size: to-rems($font-size);
     background-color: $bg-color;
     color: $color;
-    padding: 10px;
+    padding: to-rems(10px);
     line-height: 1;
-    transition: color .3s ease, background-color .3s ease;
+    width: auto;
 
-    @if ($border-radius > 0) {
+    @if $border-radius > 0 {
         border-radius: $border-radius;
     }
 
-    @if ($border-color == 'none') {
+    @if $border-color == 'none' {
         border: 0;
     } @else {
         border: 1px solid $border-color;
     }
 
-    &:hover {
-        @if ($bg-color == transparent) {
-            background-color: $link-color;
-            color: $white;
-        } @else {
-            background-color: $hover-color;
+    .hamburger {
+        @include elr-icon-close(20px, 3px);
+        @include elr-hamburger(20px, $color, 3px);
+        display: inline-block;
+        margin-left: to-rems(5px);
+        margin-right: to-rems(5px);
+    }
+
+    .menu-label {
+        position: relative;
+        top: -3px;
+        padding-right: to-rems(5px);
+
+        ~ .hamburger {
+            margin-right: 0;
         }
     }
 
-    .fa {
-        font-size: 110%;
-        padding-left: 5px;
-        padding-right: 5px;
+    &:hover {
+        @if $bg-color == transparent {
+            background-color: $link-color;
+            color: $white;
+
+            .hamburger {
+                span,
+                &::before,
+                &::after {
+                    background-color: $white;
+                }
+            }
+        } @else {
+            background-color: $hover-color;
+        }
     }
 }
