@@ -37,3 +37,47 @@
 .center-container .centered {
     @include elr-centerer;
 }
+
+.ratiobox,
+.ratiobox-square {
+    width: 50%;
+
+    @include elr-breakpoint(997px) {
+        max-width: none;
+        width: 100%;
+    }
+
+    .elr-ratiobox-inner {
+        background-color: $elr-blue;
+        color: $white;
+    }
+
+    &:nth-child(odd) .elr-ratiobox-inner {
+        margin-right: 20px;
+
+        @include elr-breakpoint(997px) {
+            margin-right: 0;
+        }
+    }
+
+    &:nth-child(even) .elr-ratiobox-inner {
+        margin-left: 20px;
+
+        @include elr-breakpoint(997px) {
+            margin-left: 0;
+        }
+    }
+}
+
+.ratiobox {
+    @include elr-ratiobox(16, 9);
+    margin-bottom: 40px;
+}
+
+.ratiobox-square {
+    @include elr-ratiobox(1, 1);
+}
+
+.comments {
+    @include elr-comments();
+}

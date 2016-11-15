@@ -18,6 +18,30 @@
     }
 }
 
+.box-model {
+    box-sizing: border-box;
+    background-color: $light-grey;
+    height: 200px;
+    width: 250px;
+    border: 1px solid $grey;
+    margin: 20px;
+    padding: 20px;
+}
+
+.box-model-inner {
+    background-color: $link-color;
+    height: 100%;
+    width: 100%;
+}
+
+.box-model-overflow {
+    background-color: $accent-color;
+    height: 150%;
+    width: 150%;
+    padding: 10px;
+    color: $white;
+}
+
 .typography-classes {
     background-color: $background-color;
 }

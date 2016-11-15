@@ -2,10 +2,9 @@
 .divider { @include elr-list-divider(); }
 
 .border-list-left {
+    @include elr-border-list(left);
     margin: 0 5px;
 }
-
-.border-list-left { @include elr-border-list(left); }
 
 .inline-list-left { @include elr-inline-list(left); }
 

@@ -23,6 +23,10 @@
 
 @include elr-calendar;
 
+.elr-calendar {
+    margin-bottom: 40px;
+}
+
 .elr-dropdown-nav {
     @include elr-em-margin('bottom', 200px);
     @include elr-dropdown-nav;
@@ -36,7 +40,7 @@
 .elr-blackout { @include elr-lightbox-slideshow; }
 
 .elr-modal-demo-buttons {
-    @include elr-button-group($link-color, $background-color, 3px, $link-color);
+    @include elr-button-group(3px);
     margin: 10px auto;
     width: 350px;
 
@@ -53,10 +57,9 @@
     width: 200px;
     margin: 0 auto 20px;
 
-    button {
-        @include elr-button-solid($link-color, $white, 200px, left, 3px, $link-color, inline-block);
-        @include elr-em-font(14px);
-    }
+    // button {
+    //     @include elr-button-link();
+    // }
 }
 
 .elr-popover-bottom { @include elr-popover(bottom); }
@@ -132,8 +135,10 @@
 
 .elr-sticky-nav {
     margin: 10px 0;
+
     &.sticky-top {
         @include elr-sticky-menu('top');
+        top: 60px;
     }
 
     ul {
@@ -265,5 +270,51 @@
             margin-left: 5px;
             margin-right: 10px;
         }
+    }
+}
+
+.sort-lists {
+    margin-left: -10px;
+    margin-right: -10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.sort-list-holder {
+    width: 300px;
+    flex-shrink: 1;
+    flex-grow: 1;
+    margin-bottom: 20px;
+}
+
+.sort-list {
+    margin: 10px;
+    padding: 20px;
+    background-color: $lightest-grey;
+    border: 1px solid $light-grey;
+    height: 100%;
+
+    h4 {
+        @include elr-em-font(14px);
+        padding: 0 0 10px;
+    }
+
+    .elr-sortable {
+        padding: 0;
+
+        li {
+            @include elr-em-font(14px);
+            padding: 0 0 5px;
+        }
+    }
+
+    .button-group {
+        margin-bottom: 10px;
+    }
+
+    .elr-sort-button {
+        @include elr-em-font(12px);
+        padding: 5px 10px;
     }
 }

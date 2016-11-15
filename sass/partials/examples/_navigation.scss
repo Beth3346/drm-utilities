@@ -63,3 +63,7 @@
 .css-dropdown-menu {
     @include elr-css-dropdown-menu;
 }
+
+.breadcrumbs { @include elr-breadcrumbs; }
+
+.breadcrumbs-arrow { @include elr-breadcrumbs-arrow(); }

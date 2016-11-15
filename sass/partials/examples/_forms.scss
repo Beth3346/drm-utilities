@@ -4,6 +4,10 @@
     @include elr-em-padding('all', 20px, 0);
 }
 
+.form {
+    @include elr-form($almost-white, $light-grey);
+}
+
 .form-state,
 .tabular-form {
     @include elr-tabular-form;
