@@ -23,9 +23,6 @@
 
     [type="submit"],
     button {
-        @include elr-em-font(14px);
-        @include elr-button;
-        @include elr-button-solid($button-color, $white, 180px, null, 3px, $button-color, block);
         margin: 5px 5px 5px 0;
     }
 
@@ -68,11 +65,11 @@
     }
 
     [type="submit"],
-    button {
-        @include elr-button;
-        @include elr-button-solid($button-color, $white, 100px, null, 3px, $button-color, inline-block);
-        @include elr-em-font(14px);
+    button,
+    [type="submit"][disabled],
+    button[disabled] {
         margin: 0 5px 5px 0;
+        display: inline-block;
     }
 
     .elr-inline-control-group {
@@ -86,20 +83,6 @@
         [type="checkbox"],
         [type="radio"] {
             margin-top: 14px;
-        }
-    }
-
-    [type="submit"][disabled],
-    button[disabled] {
-        @include elr-button-solid(lighten($button-color, 50%), $white, 180px, null, 3px, lighten($button-color, 50%), inline-block);
-        @include elr-em-font(14px);
-        margin: 0 5px 5px 0;
-
-        &:hover {
-            cursor: not-allowed;
-            background-color: lighten($button-color, 50%);
-            color: $white;
-            transition: none;
         }
     }
 }

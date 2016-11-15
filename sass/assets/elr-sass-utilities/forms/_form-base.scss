@@ -1,7 +1,7 @@
 // Forms
 // scss-lint:disable QualifyingElement
 
-@mixin elr-form($bk-color: $lightest-grey, $border: $grey, $button-color: $dark-grey) {
+@mixin elr-form($bk-color: $lightest-grey, $border: $grey, $button-color: $link-color) {
     padding-top: 10px;
     padding-bottom: 10px;
     width: 100%;
@@ -206,17 +206,23 @@
 
     [type="submit"],
     [type="button"],
+    button,
+    [type="submit"][disabled],
+    button[disabled] {
+        @include elr-button(14px, 180px);
+        display: block;
+    }
+
+    [type="submit"],
+    [type="button"],
     button {
-        @include elr-em-font(14px);
-        @include elr-button;
-        @include elr-button-solid($button-color, $white, 180px, null, 3px, $button-color, block);
+        @include elr-button-link($white, $button-color);
         margin: 10px 0;
     }
 
     [type="submit"][disabled],
     button[disabled] {
-        @include elr-button;
-        @include elr-button-solid(lighten($button-color, 50%), $white, 180px, null, 3px, lighten($button-color, 50%), block);
+        @include elr-button-link($white, lighten($button-color, 50%), 3px, lighten($button-color, 50%));
 
         &:hover {
             cursor: not-allowed;

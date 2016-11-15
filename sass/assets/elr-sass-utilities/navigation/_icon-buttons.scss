@@ -1,66 +1,38 @@
-@mixin elr-font-awesome-button(
-        $icon,
-        $icon-position: right,
-        $bk-color: $link-color,
-        $color: $white,
-        $width: 200px,
-        $center: left,
-        $border-radius: 0,
-        $display: inline-block,
-        $border-color: none
-) {
-    @include elr-button-solid($bk-color, $color, $width, $center, $border-radius, $border-color, $display);
+@mixin elr-font-awesome-button($icon-position: null, $round: false, $width: auto) {
+    width: $width;
+    position: relative;
 
-    @if ($icon-position == 'left') {
-        &:before {
-            @include elr-em-padding('right', 10px);
-            @include elr-font-awesome(105%);
-            content: $icon;
+    &::before {
+        @include elr-font-awesome(105%);
+    }
+
+    @if $icon-position == 'left' {
+        padding-left: 40px;
+
+        &::before {
+            @include elr-centerer(true, false);
+            display: block;
+            left: 20px;
+        }
+    } @elseif $icon-position == 'right' {
+        padding-right: 40px;
+
+        &::before {
+            @include elr-centerer(true, false);
+            display: block;
+            right: 20px;
         }
     } @else {
-        &:after {
-            @include elr-font-awesome(105%);
-            @include elr-em-padding('left', 10px);
-            content: $icon;
+        height: $width - 3;
+
+        &::before {
+            @include elr-centerer;
+            font-size: 18px;
         }
     }
-}
 
-@mixin elr-font-awesome-icon-button(
-        $icon,
-        $bk-color: $link-color,
-        $color: $white,
-        $center: left,
-        $border-radius: 0,
-        $display: inline-block,
-        $border-color: none
-) {
-    @include elr-button-solid($bk-color, $color, auto, $center, $border-radius, $border-color, $display);
-    padding-left: 15px;
-    padding-right: 15px;
-
-    &:after {
-        @include elr-font-awesome(105%);
-        content: $icon;
-    }
-}
-
-@mixin elr-font-awesome-icon-circle(
-        $icon,
-        $bk-color: $link-color,
-        $color: $white,
-        $center: left,
-        $width: 40px,
-        $display: inline-block,
-        $border-color: none
-) {
-    @include elr-button-solid($bk-color, $color, $width, $center, $width, $border-color, $display);
-    @include elr-em-height($width);
-    @include elr-em-line-height($width);
-    padding-top: 0;
-
-    &:after {
-        @include elr-font-awesome(105%);
-        content: $icon;
+    @if $icon-position == null and $round == true {
+        border-radius: 50%;
+        height: $width;
     }
 }

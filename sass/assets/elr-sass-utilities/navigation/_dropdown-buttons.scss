@@ -3,14 +3,13 @@
 @mixin elr-dropdown-list(
     $color: $link-color,
     $bk-color: $background-color,
-    $align: left,
-    $divider-color: $light-grey,
     $border: none,
-    $border-radius: 0
+    $border-radius: 3px,
+    $width: 100%
 ) {
     @include elr-nav-bar($white, $white, left, transparent, $link-color, false);
     @include elr-em-font(12px);
-    width: 100%;
+    width: to-rems($width);
     position: absolute;
     z-index: 100;
     font-weight: $bold;
@@ -40,31 +39,10 @@
     }
 }
 
-@mixin elr-dropdown-button-solid (
-    $bk-color: $link-color,
-    $color: $background-color,
-    $width: 200px,
-    $border: none,
-    $border-radius: 0,
-    $divider-color: $light-grey
-) {
+@mixin elr-dropdown-button-solid() {
     position: relative;
 
-    @if (unitless($width) or unit($width) == 'px') {
-        @include elr-em-width($width);
-    } @else {
-        width: $width;
-    }
-
-    button {
-        @if ($border == none) {
-            @include elr-button-solid($bk-color, $color, 100%);
-        } @else {
-            @include elr-button-solid($bk-color, $color, 100%, center, $border-radius, $border);
-        }
-
-        @include elr-em-font(14px);
-        font-weight: 700;
+    .elr-dropdown-button {
         height: 40px;
         margin-bottom: 5px;
         position: relative;
@@ -77,32 +55,13 @@
             top: 50%;
             transform: translate(0, -50%);
         }
-
-        &.clicked {
-            color: $color;
-            background-color: lighten($bk-color, 10%);
-        }
-    }
-
-    .elr-dropdown-list {
-        @include elr-dropdown-list($color, $bk-color, left, $divider-color, $border, $border-radius);
     }
 }
 
-@mixin elr-dropdown-button-split(
-    $bk-color: $link-color,
-    $color: $main-color,
-    $border-radius: 0,
-    $border: none,
-    $divider-color: lighten($link-color, 20%),
-    $width: 200px
-) {
-    @include elr-em-width($width + 50px);
+@mixin elr-dropdown-button-split() {
     position: relative;
 
     .elr-dropdown-button-group {
-        @include elr-button-group($bk-color, $color, $border-radius, $border);
-
         button {
             padding-left: 10px;
             padding-right: 10px;
@@ -111,11 +70,11 @@
     }
 
     button {
-        @include elr-em-font(14px);
-        position: relative;
-        margin: 0;
-        width: $width - 50;
-        height: 40px;
+        // @include elr-em-font(14px);
+        // position: relative;
+        // margin: 0;
+        // width: $width - 50;
+        // height: 40px;
 
         &:last-of-type {
             padding-left: 10px;
@@ -123,17 +82,15 @@
             width: 50px;
             height: 40px;
 
-            &.clicked {
-                color: $color;
-                background-color: lighten($bk-color, 10%);
-            }
+            // &.clicked {
+            //     color: $color;
+            //     background-color: lighten($bk-color, 10%);
+            // }
         }
 
-        &.clicked {
-            color: $color;
-            background-color: lighten($bk-color, 10%);
-        }
+        // &.clicked {
+        //     color: $color;
+        //     background-color: lighten($bk-color, 10%);
+        // }
     }
-
-    .elr-dropdown-list { @include elr-dropdown-list($color, $bk-color, left, $divider-color, $border, $border-radius); }
 }

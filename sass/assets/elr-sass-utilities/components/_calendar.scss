@@ -29,9 +29,11 @@
     }
 
     th {
+        font-size: to-rems(14px);
         height: auto;
         text-align: center;
         color: $grey;
+        line-height: 1.2;
     }
 
     tr:first-child {
@@ -298,7 +300,7 @@
 
     .elr-calendar-nav,
     .elr-calendar-view-nav {
-        @include elr-button-group($main-color, $background-color, 3px, $main-color);
+        @include elr-button-group(3px);
         margin: 10px 0;
 
         button { @include elr-em-font(14px); }
