@@ -4,7 +4,7 @@ const $ = require('jquery');
 let elr = elrUtlities();
 
 const elrTimeUtilities = function() {
-    var self = {};
+    let self = {};
 
     self.now = new Date();
 
@@ -251,6 +251,14 @@ const elrTimeUtilities = function() {
             recurrance: 'yearly'
         },
         {
+            name: 'First Monday',
+            month: 'April',
+            day: ['Monday'],
+            dayNum: 'first',
+            type: 'holiday',
+            recurrance: 'yearly'
+        },
+        {
             name: 'Earth Day',
             month: 'April',
             eventDate: 22,
@@ -291,6 +299,22 @@ const elrTimeUtilities = function() {
             name: 'Memorial Day',
             month: 'May',
             day: ['Monday'],
+            dayNum: 'last',
+            type: 'holiday',
+            recurrance: 'yearly'
+        },
+        {
+            name: 'First Monday',
+            month: 'May',
+            day: ['Monday'],
+            dayNum: 'first',
+            type: 'holiday',
+            recurrance: 'yearly'
+        },
+        {
+            name: 'Last Friday',
+            month: 'May',
+            day: ['Friday'],
             dayNum: 'last',
             type: 'holiday',
             recurrance: 'yearly'
@@ -403,6 +427,13 @@ const elrTimeUtilities = function() {
             eventDate: 31,
             type: 'holiday',
             recurrance: 'yearly'
+        },
+        {
+            name: 'First Tuesday of Month',
+            recurrance: 'monthly',
+            day: ['Tuesday'],
+            dayNum: 'first',
+            type: 'holiday'
         }
     ];
 
@@ -450,7 +481,7 @@ const elrTimeUtilities = function() {
 
         MM: function(date) {
             // two digit month
-            if ( date.getMonth().toString().length === 1 ) {
+            if (date.getMonth().toString().length === 1) {
                 return '0' + date.getMonth().toString();
             } else {
                 return date.getMonth();
@@ -462,7 +493,7 @@ const elrTimeUtilities = function() {
         },
 
         DD: function(date) {
-            if ( date.getDate().toString().length === 1 ) {
+            if (date.getDate().toString().length === 1) {
                 return '0' + date.getDate().toString();
             } else {
                 date.getDate(); // two digit date
@@ -482,7 +513,7 @@ const elrTimeUtilities = function() {
         },
 
         hh: function(date) {
-            if ( self.get12Hours(date).toString().length === 1 ) {
+            if (self.get12Hours(date).toString().length === 1) {
                 return '0' + self.get12Hours(date).toString();
             } else {
                 self.get12Hours(date); // two digit hours
@@ -494,7 +525,7 @@ const elrTimeUtilities = function() {
         },
 
         HH: function(date) {
-            if ( date.getHours().toString().length === 1 ) {
+            if (date.getHours().toString().length === 1) {
                 return '0' + date.getHours().toString();
             } else {
                 date.getHours(); // two digit 24hr format
@@ -506,7 +537,7 @@ const elrTimeUtilities = function() {
         },
 
         mm: function(date) {
-            if ( date.getMinutes().toString().length === 1 ) {
+            if (date.getMinutes().toString().length === 1) {
                 return '0' + date.getMinutes().toString();
             } else {
                 date.getMinutes(); // two digit minutes
@@ -518,7 +549,7 @@ const elrTimeUtilities = function() {
         },
 
         ss: function(date) {
-            if ( date.getSeconds().toString().length === 1 ) {
+            if (date.getSeconds().toString().length === 1) {
                 return '0' + date.getSeconds().toString();
             } else {
                 date.getSeconds().toString(); // two digit seconds
@@ -530,7 +561,7 @@ const elrTimeUtilities = function() {
         },
 
         a: function(date) {
-            if ( date.getHours() >= 12 ) {
+            if (date.getHours() >= 12) {
                 return 'pm';
             } else {
                 return 'am'; // ampm
@@ -538,7 +569,7 @@ const elrTimeUtilities = function() {
         },
 
         A: function(date) {
-            if ( date.getHours() >= 12 ) {
+            if (date.getHours() >= 12) {
                 return 'PM';
             } else {
                 return 'AM'; // AMPM
@@ -572,8 +603,8 @@ const elrTimeUtilities = function() {
         },
 
         convertMsToYears: function(ms) {
-            var days = self.convertMsToDays(ms);
-            if ( (ms/self.factors.days) >= 0 ) {
+            let days = self.convertMsToDays(ms);
+            if ((ms/self.factors.days) >= 0) {
                 days = Math.floor(ms/self.factors.days);
             } else {
                 days = Math.ceil(ms/self.factors.days);
@@ -605,10 +636,10 @@ const elrTimeUtilities = function() {
         },
 
         getSecondsDuration: function(now, date) {
-            var ms = self.getMsDuration(now, date);
-            var seconds = self.conversionUtilities.convertMsToSeconds(ms);
+            let ms = self.getMsDuration(now, date);
+            let seconds = self.conversionUtilities.convertMsToSeconds(ms);
 
-            if ( seconds >= 0 ) {
+            if (seconds >= 0) {
                 return Math.floor(seconds);
             } else {
                 return Math.ceil(seconds);
@@ -616,10 +647,10 @@ const elrTimeUtilities = function() {
         },
 
         getMinutesDuration: function(now, date) {
-            var ms = self.getMsDuration(now, date);
-            var minutes = self.conversionUtilities.convertMsToMinutes(ms);
+            let ms = self.getMsDuration(now, date);
+            let minutes = self.conversionUtilities.convertMsToMinutes(ms);
 
-            if ( minutes >= 0 ) {
+            if (minutes >= 0) {
                 return Math.floor(minutes);
             } else {
                 return Math.ceil(minutes);
@@ -627,10 +658,10 @@ const elrTimeUtilities = function() {
         },
 
         getHoursDuration: function(now, date) {
-            var ms = self.getMsDuration(now, date);
-            var hours = self.conversionUtilities.convertMsToHours(ms);
+            let ms = self.getMsDuration(now, date);
+            let hours = self.conversionUtilities.convertMsToHours(ms);
 
-            if ( hours >= 0 ) {
+            if (hours >= 0) {
                 return Math.floor(hours);
             } else {
                 return Math.ceil(hours);
@@ -638,10 +669,10 @@ const elrTimeUtilities = function() {
         },
 
         getDaysDuration: function(now, date) {
-            var ms = self.getMsDuration(now, date);
-            var days = self.conversionUtilities.convertMsToDays(ms);
+            let ms = self.getMsDuration(now, date);
+            let days = self.conversionUtilities.convertMsToDays(ms);
 
-            if ( days >= 0 ) {
+            if (days >= 0) {
                 return Math.floor(days);
             } else {
                 return Math.ceil(days);
@@ -649,10 +680,10 @@ const elrTimeUtilities = function() {
         },
 
         getWeeksDuration: function(now, date) {
-            var ms = self.getMsDuration(now, date);
-            var weeks = self.conversionUtilities.convertMsToWeeks(ms);
+            let ms = self.getMsDuration(now, date);
+            let weeks = self.conversionUtilities.convertMsToWeeks(ms);
 
-            if ( weeks >= 0 ) {
+            if (weeks >= 0) {
                 return Math.floor(weeks);
             } else {
                 return Math.ceil(weeks);
@@ -660,12 +691,12 @@ const elrTimeUtilities = function() {
         },
 
         getMonthsDuration: function(now, date) {
-            var ms = self.getMsDuration(now, date);
-            var months = self.conversionUtilities.convertMsToMonths(ms);
+            let ms = self.getMsDuration(now, date);
+            let months = self.conversionUtilities.convertMsToMonths(ms);
 
-            if ( Math.abs(months) >= 1 ) {
+            if (Math.abs(months) >= 1) {
                 // round months up to account for number of weeks estimated weirdness
-                if ( months >= 0 ) {
+                if (months >= 0) {
                     return Math.ceil(months);
                 } else {
                     return Math.floor(months);
@@ -676,10 +707,10 @@ const elrTimeUtilities = function() {
         },
 
         getYearsDuration: function(now, date) {
-            var ms = self.getMsDuration(now, date);
-            var years = self.conversionUtilities.convertMsToYears(ms);
+            let ms = self.getMsDuration(now, date);
+            let years = self.conversionUtilities.convertMsToYears(ms);
 
-            if ( years >= 0 ) {
+            if (years >= 0) {
                 return Math.floor(years);
             } else {
                 return Math.ceil(years);
@@ -690,7 +721,7 @@ const elrTimeUtilities = function() {
     self.remainderUtilities = {
         // seconds, minutes, hours need adjustments for countdowns
         getLeftOverSeconds: function(now, date) {
-            if ( ( date.getSeconds() !== 0 ) || ( self.durationUtilities.getMsDuration(now, date) > 0 ) ) {
+            if ((date.getSeconds() !== 0) || (self.durationUtilities.getMsDuration(now, date) > 0)) {
                 return now.getSeconds() - date.getSeconds();
             } else {
                 return now.getSeconds() - 59;
@@ -698,7 +729,7 @@ const elrTimeUtilities = function() {
         },
 
         getLeftOverMinutes: function(now, date) {
-            if ( ( date.getMinutes() !== 0 ) || ( self.durationUtilities.getMsDuration(now, date) > 0 ) ) {
+            if ((date.getMinutes() !== 0) || (self.durationUtilities.getMsDuration(now, date) > 0)) {
                 return now.getMinutes() - date.getMinutes();
             } else {
                 return now.getMinutes() - 59;
@@ -706,7 +737,7 @@ const elrTimeUtilities = function() {
         },
 
         getLeftOverHours: function(now, date) {
-            if ( ( date.getHours() !== 0 ) || ( self.durationUtilities.getMsDuration(now, date) > 0 ) ) {
+            if ((date.getHours() !== 0) || (self.durationUtilities.getMsDuration(now, date) > 0)) {
                 return now.getHours() - date.getHours();
             } else {
                 return now.getHours() - 11;
@@ -714,10 +745,10 @@ const elrTimeUtilities = function() {
         },
 
         getLeftOverDays: function(now, date) {
-            var ms = self.durationUtilities.getMsDuration(now, date);
-            var days = self.conversionUtilities.convertMsToDays(ms % factors.weeks);
+            let ms = self.durationUtilities.getMsDuration(now, date);
+            let days = self.conversionUtilities.convertMsToDays(ms % factors.weeks);
 
-            if ( days >= 0 ) {
+            if (days >= 0) {
                 return Math.floor(days);
             } else {
                 return Math.ceil(days);
@@ -725,16 +756,16 @@ const elrTimeUtilities = function() {
         },
 
         getLeftOverDaysInYear: function(now, date) {
-            var days = self.durationUtilities.getDaysDuration(now, date);
-            var years = self.durationUtilities.getYearsDuration(now, date);
+            let days = self.durationUtilities.getDaysDuration(now, date);
+            let years = self.durationUtilities.getYearsDuration(now, date);
 
-            if ( self.isLeapYear(date.getFullYear()) ) {
+            if (self.isLeapYear(date.getFullYear())) {
                 days = days + 1;
             }
 
             days = days - self.dateUtilities.getYearsToDays(years);
 
-            if ( days >= 0 ) {
+            if (days >= 0) {
                 return Math.floor(days);
             } else {
                 return Math.ceil(days);
@@ -743,9 +774,7 @@ const elrTimeUtilities = function() {
     };
 
     self.isLeapYear = function(year) {
-        // return (year % 4 is 0 and year % 100 isnt 0) or year % 400 is 0
-
-        if ( ( year % 4 === 0 ) && ( year % 100 !== 0 ) || ( year % 400 === 0 )  ) {
+        if ((year % 4 === 0) && (year % 100 !== 0) || (year % 400 === 0) ) {
             return true;
         }
 
@@ -753,7 +782,7 @@ const elrTimeUtilities = function() {
     };
 
     self.getDaysInYear = function(year) {
-        if ( self.isLeapYear(year) ) {
+        if (self.isLeapYear(year)) {
             return 366;
         }
 
@@ -777,9 +806,9 @@ const elrTimeUtilities = function() {
     };
 
     self.getWeeksInMonth = function(dateObj) {
-        var firstDay = self.getFirstDayOfMonth(dateObj);
-        var numberDays = self.getDaysInMonth(dateObj);
-        var dayShift = ( firstDay === self.daysPerWeek ) ? 0 : firstDay;
+        let firstDay = self.getFirstDayOfMonth(dateObj);
+        let numberDays = self.getDaysInMonth(dateObj);
+        let dayShift = (firstDay === self.daysPerWeek) ? 0 : firstDay;
 
         return Math.ceil((numberDays + dayShift) / self.daysPerWeek);
     };
@@ -796,7 +825,7 @@ const elrTimeUtilities = function() {
 
     // dateObj is a date object
     self.getPrevMonth = function(dateObj) {
-        if ( dateObj.month === 0 ) {
+        if (dateObj.month === 0) {
             return 11;
         } else {
             return dateObj.month - 1;
@@ -805,7 +834,7 @@ const elrTimeUtilities = function() {
 
     // dateObj is a date object
     self.getNextMonth = function(dateObj) {
-        if ( dateObj.month === 11 ) {
+        if (dateObj.month === 11) {
             return 0;
         } else {
             return dateObj.month + 1;
@@ -813,10 +842,10 @@ const elrTimeUtilities = function() {
     };
 
     self.getPrevDate = function(dateObj) {
-        var lastMonth = self.getPrevMonth(dateObj);
-        var lastDateInLastMonth = self.getDaysInMonth(lastMonth, dateObj.year);
+        let lastMonth = self.getPrevMonth(dateObj);
+        let lastDateInLastMonth = self.getDaysInMonth(lastMonth, dateObj.year);
 
-        if ( dateObj.date === 1 ) {
+        if (dateObj.date === 1) {
             return lastDateInLastMonth;
         } else {
             return dateObj.date - 1;
@@ -824,9 +853,9 @@ const elrTimeUtilities = function() {
     };
 
     self.getNextDate = function(dateObj) {
-        var lastDateInMonth = self.getDaysInMonth(dateObj.month, dateObj.year);
+        let lastDateInMonth = self.getDaysInMonth(dateObj.month, dateObj.year);
 
-        if ( dateObj.date === lastDateInMonth ) {
+        if (dateObj.date === lastDateInMonth) {
             return 1;
         } else {
             return dateObj.date + 1;
@@ -835,10 +864,10 @@ const elrTimeUtilities = function() {
 
     // today is a date object
     self.getYesterday = function(today) {
-        var lastMonth = self.getPrevMonth(today);
-        var yesterday = {};
+        let lastMonth = self.getPrevMonth(today);
+        let yesterday = {};
 
-        if ( today.date === 1 ) {
+        if (today.date === 1) {
             yesterday.month = lastMonth;
         } else {
             yesterday.month = today.month;
@@ -846,7 +875,7 @@ const elrTimeUtilities = function() {
 
         yesterday.date = self.getPrevDate(today);
 
-        if ( ( today.month === 1 ) && ( today.date === 1 ) ) {
+        if ((today.month === 1) && (today.date === 1)) {
             yesterday.year = today.year - 1;
         } else {
             yesterday.year = today.year;
@@ -865,11 +894,11 @@ const elrTimeUtilities = function() {
 
     // today is a date object
     self.getTomorrow = function(today) {
-        var nextMonth = self.getNextMonth(today);
-        var lastDateInMonth = self.getDaysInMonth(today.month, today.year);
-        var tomorrow = {};
+        let nextMonth = self.getNextMonth(today);
+        let lastDateInMonth = self.getDaysInMonth(today.month, today.year);
+        let tomorrow = {};
 
-        if ( today.date === lastDateInMonth ) {
+        if (today.date === lastDateInMonth) {
             tomorrow.month = nextMonth;
         } else {
             tomorrow.month = today.month;
@@ -877,7 +906,7 @@ const elrTimeUtilities = function() {
 
         tomorrow.date = self.getNextDate(today);
 
-        if ( ( today.month === 12 ) && ( today.date === lastDateInMonth ) ) {
+        if ((today.month === 12) && (today.date === lastDateInMonth)) {
             tomorrow.year = today.year + 1;
         } else {
             tomorrow.year = today.year;
@@ -887,9 +916,9 @@ const elrTimeUtilities = function() {
     };
 
     self.getMonthNum = function(date) {
-        var month = date.match(/^([0]?[1-9]|[1][012]|[1-9])/);
+        let month = date.match(/^([0]?[1-9]|[1][012]|[1-9])/);
 
-        if ( month ) {
+        if (month) {
             return parseInt(month[0], 10) - 1;
         } else {
             return false;
@@ -897,10 +926,10 @@ const elrTimeUtilities = function() {
     };
 
     self.getMonthByName = function(date) {
-        var months = [];
-        var shortMonths = [];
+        let months = [];
+        let shortMonths = [];
         // month or day of the week
-        var dayMonth = date.match(elr.patterns.longMonth);
+        let dayMonth = date.match(elr.patterns.longMonth);
 
         month = $.trim(dayMonth[0]).toLowerCase();
 
@@ -912,9 +941,9 @@ const elrTimeUtilities = function() {
             shortMonths.push(str.toLowerCase());
         });
 
-        if ( $.inArray(month, months) !== -1 ) {
+        if ($.inArray(month, months) !== -1) {
             return $.inArray(month, months);
-        } else if ( $.inArray(month, shortMonths) !== -1 ) {
+        } else if ($.inArray(month, shortMonths) !== -1) {
             return $.inArray(month, shortMonths);
         } else {
             return false;
@@ -922,21 +951,21 @@ const elrTimeUtilities = function() {
     };
 
     self.getMonthName = function(date, style) {
-        var monthNum = self.getMonthNum(date);
-        var monthByName = self.getMonthByName(date);
-        var num;
+        let monthNum = self.getMonthNum(date);
+        let monthByName = self.getMonthByName(date);
+        let num;
 
         style = style || 'MMMM';
 
-        if ( monthNum ) {
+        if (monthNum) {
             num = monthNum;
-        } else if ( monthByName ) {
+        } else if (monthByName) {
             num = monthByName;
         } else {
             return;
         }
 
-        if ( style === 'MMM' ) {
+        if (style === 'MMM') {
             return self.shortMonths[num];
         } else {
             return self.months[num];
@@ -944,13 +973,13 @@ const elrTimeUtilities = function() {
     };
 
     self.getDateNum = function(date) {
-        var d = date.match(elr.patterns.dateNumber);
+        let d = date.match(elr.patterns.dateNumber);
 
-        if ( d[1] ) {
+        if (d[1]) {
             return parseInt(d[1], 10);
-        } else if ( d[2] ) {
+        } else if (d[2]) {
             return parseInt(d[2], 10);
-        } else if ( d[3] ) {
+        } else if (d[3]) {
             return parseInt(d[3], 10);
         } else {
             return false;
@@ -958,24 +987,24 @@ const elrTimeUtilities = function() {
     };
 
     self.getYearNum = function(date) {
-        var year = date.match(/([0-9]{4})$/);
+        let year = date.match(/([0-9]{4})$/);
 
         return parseInt(year[1], 10);
     };
 
     self.getTimeHours = function(time) {
-        var ampm = time.match(/(am|pm)$/i)[1];
-        var hour = time.match(/^(?:([12][012]):|([0]?[0-9]):)/);
+        let ampm = time.match(/(am|pm)$/i)[1];
+        let hour = time.match(/^(?:([12][012]):|([0]?[0-9]):)/);
 
-        if ( hour[1] ) {
+        if (hour[1]) {
             hour = parseInt(hour[1], 10);
         } else {
             hour = parseInt(hour[2], 10);
         }
 
-        if ( ampm === 'am' && hour === 12 ) {
+        if (ampm === 'am' && hour === 12) {
             return 0;
-        } else if ( ampm === 'pm' && hour < 12 ) {
+        } else if (ampm === 'pm' && hour < 12) {
             return hour + 12;
         } else {
             return hour;
@@ -983,14 +1012,14 @@ const elrTimeUtilities = function() {
     };
 
     self.getTimeMinutes = function(time) {
-        var minute = time.match(/\:([012345][0-9])/);
+        let minute = time.match(/\:([012345][0-9])/);
         return parseInt(minute[1], 10);
     };
 
     self.getTimeSeconds = function(time) {
-        var second = time.match(/\:(?:[012345][0-9])\:([012345][0-9])/);
+        let second = time.match(/\:(?:[012345][0-9])\:([012345][0-9])/);
 
-        if ( second ) {
+        if (second) {
             return parseInt(second[1], 10);
         } else {
             return 0;
@@ -999,19 +1028,19 @@ const elrTimeUtilities = function() {
 
     self.parseDate = function(date) {
         // look for date keywords yesterday, today, tomorrow
-        if ( date.search(/^(yesterday|today|tomorrow)/i) !== -1 ) {
-            var keyword = date.match(/^(yesterday|today|tomorrow)/i)[0];
+        if (date.search(/^(yesterday|today|tomorrow)/i) !== -1) {
+            let keyword = date.match(/^(yesterday|today|tomorrow)/i)[0];
 
-            if ( keyword === 'yesterday' ) {
+            if (keyword === 'yesterday') {
                 return self.getYesterday(self.today);
-            } else if ( keyword === 'today' ) {
+            } else if (keyword === 'today') {
                 return self.getToday(self.today);
-            } else if ( keyword === 'tomorrow' ) {
+            } else if (keyword === 'tomorrow') {
                 return self.getTomorrow(self.today);
             } else {
                 console.log('unrecognized date keyword');
             }
-        } else if ( date.search(/^(?:[a-z]*[\.,]?\s)?[a-z]*\.?\s(?:[3][01],?\s|[012][1-9],?\s|[1-9],?\s)[0-9]{4}$/i) !== -1 ) {
+        } else if (date.search(/^(?:[a-z]*[\.,]?\s)?[a-z]*\.?\s(?:[3][01],?\s|[012][1-9],?\s|[1-9],?\s)[0-9]{4}$/i) !== -1) {
 
             return {
                 month: self.getMonthName(date),
@@ -1019,8 +1048,8 @@ const elrTimeUtilities = function() {
                 year: self.getYearNum(date)
             };
 
-        } else if ( date.search(/((?:[0]?[1-9]|[1][012]|[1-9])[-\/.](?:[0]?[1-9]|[12][0-9]|[3][01])[-\/.][0-9]{4})/) !== -1 ) {
-            var fullDate = date.match(/((?:[0]?[1-9]|[1][012]|[1-9])[-\/.](?:[0]?[1-9]|[12][0-9]|[3][01])[-\/.][0-9]{4})/)[0];
+        } else if (date.search(/((?:[0]?[1-9]|[1][012]|[1-9])[-\/.](?:[0]?[1-9]|[12][0-9]|[3][01])[-\/.][0-9]{4})/) !== -1) {
+            let fullDate = date.match(/((?:[0]?[1-9]|[1][012]|[1-9])[-\/.](?:[0]?[1-9]|[12][0-9]|[3][01])[-\/.][0-9]{4})/)[0];
 
             return {
                 month: self.getMonthName(fullDate),
@@ -1034,17 +1063,17 @@ const elrTimeUtilities = function() {
 
     self.parseTime = function(time) {
         // add noon and midnight keywords
-        if ( time.search(/^(noon|midnight)/i) !== -1 ) {
-            var keyword = time.match(/^(noon|midnight)/i)[0];
+        if (time.search(/^(noon|midnight)/i) !== -1) {
+            let keyword = time.match(/^(noon|midnight)/i)[0];
 
-            if ( keyword === 'noon' ) {
+            if (keyword === 'noon') {
                 return self.getNoon(self.today);
-            } else if ( keyword === 'midnight' ) {
+            } else if (keyword === 'midnight') {
                 return self.getMidnight(self.today);
             }
 
-        } else if ( time.search(/((?:[12][012]:|[0]?[0-9]:)[012345][0-9](?:\:[012345][0-9])?(?:am|pm)?)/i) !== -1 ) {
-            var fullTime = time.match(/((?:[12][012]:|[0]?[0-9]:)[012345][0-9](?:\:[012345][0-9])?(?:am|pm)?)/i)[0];
+        } else if (time.search(/((?:[12][012]:|[0]?[0-9]:)[012345][0-9](?:\:[012345][0-9])?(?:am|pm)?)/i) !== -1) {
+            let fullTime = time.match(/((?:[12][012]:|[0]?[0-9]:)[012345][0-9](?:\:[012345][0-9])?(?:am|pm)?)/i)[0];
 
             return {
                 hour: self.getTimeHours(fullTime),
@@ -1057,14 +1086,14 @@ const elrTimeUtilities = function() {
     };
 
     self.parseDateTime = function(dateTime) {
-        var date = self.parseDate(dateTime);
-        var time = self.parseTime(dateTime);
+        let date = self.parseDate(dateTime);
+        let time = self.parseTime(dateTime);
 
-        if ( date && time ) {
+        if (date && time) {
             return new Date(date.year, date.month, date.date, time.hour, time.minute, time.second);
-        } else if ( date && !time ) {
+        } else if (date && !time) {
             return new Date(date.year, date.month, date.date, 0, 0, 0);
-        } else if ( !date && time ) {
+        } else if (!date && time) {
             return new Date(self.today.year, self.today.month, self.today.date, time.hour, time.minute, time.second);
         } else {
             console.log('invalid date string');
@@ -1072,158 +1101,98 @@ const elrTimeUtilities = function() {
     };
 
     self.get12Hours = function(date) {
-        if ( date.getHours() === 0 ) {
+        if (date.getHours() === 0) {
             return 12;
-        } else if ( date.getHours() > 12 ) {
+        } else if (date.getHours() > 12) {
             return date.getHours() - 12;
         } else {
             return date.getHours();
         }
     };
 
-    self.getDatesInWeek = function(dateObj) {
-        var firstDay = self.getFirstDayOfMonth(dateObj);
-        var numberDays = self.getDaysInMonth(dateObj);
-        var currentDay = self.getDayOfWeek(dateObj);
-        var numberWeeks = self.getWeeksInMonth(dateObj);
-        var weekInfo = {};
-        var firstWeek = [];
-        var lastWeek = [];
-        var i;
-        var dayShift;
-        var daysInFirstWeek;
+    self.getDatesFromLastMonth = function(dateObj, dates) {
+        let firstDay = self.getFirstDayOfMonth(dateObj);
+        let prevMonth = self.getPrevMonth(dateObj);
 
-        if ( firstDay === self.daysPerWeek ) {
-            dayShift = 0;
-        } else {
-            dayShift = firstDay;
-        }
+        // if the first day of the month is not a Sunday
+        if (firstDay !== 0) {
+            let remainingDays = firstDay;
+            let prevMonthNumberDays = self.getDaysInMonth({
+                'month': self.getPrevMonth(dateObj),
+                'date': 0,
+                'year': dateObj.year
+            });
+            let leftOverDays = prevMonthNumberDays;
 
-        daysInFirstWeek = self.daysPerWeek - dayShift;
-        weekInfo.datesInWeek = [];
-        i = 1;
-
-        // get the number of dates in each week
-        while ( i <= numberWeeks ) {
-            var dates = [];
-            var currentDate = dateObj.date;
-            var j;
-            var date;
-
-            if ( i === 1 ) {
-            // first week of the month
-                j = 0;
-                while ( j < daysInFirstWeek ) {
-                    j = j + 1;
-                    dates.push(j);
-                }
-            // middle weeks
-            } else if ( i < numberWeeks ) {
-                j = 0;
-
-                if ( i === 2 ) {
-                    date = daysInFirstWeek;
-                }
-
-                while ( j < self.daysPerWeek ) {
-                    j = j + 1;
-                    date = date + 1;
-                    dates.push(date);
-                }
-            } else if ( i === numberWeeks ) {
-            // last week in month
-                while ( date < numberDays ) {
-                    date = date + 1;
-                    dates.push(date);
-                }
+            while (remainingDays > 0) {
+                dates.push({
+                    month: prevMonth,
+                    date: leftOverDays,
+                    year: dateObj.year
+                });
+                remainingDays = remainingDays - 1;
+                leftOverDays = leftOverDays - 1;
             }
 
-            // get the week number
-            if ( elr.inArray(dates, currentDate) !== -1 ) {
-                weekInfo.weekNum = i - 1;
-                weekInfo.datesInWeek = dates;
-                break;
-            } else {
-                i = i + 1;
-            }
-        }
-
-        return weekInfo;
-    };
-
-    // gets the length of the last week of the month
-    self.getLastWeekLength = function(dateObj) {
-        var lastDate = self.getDaysInMonth(dateObj);
-        var lastWeek = self.getDatesInWeek({
-            'month': dateObj.month,
-            'date': lastDate,
-            'year': dateObj.year
-        });
-
-        return lastWeek.datesInWeek.length;
-    };
-
-    //gets the week of the month when an event occurs
-    self.getMonthWeekNum = function(dayNum, day, month, year) {
-        // gets the week of the month which an event occurs
-
-        var firstDay = self.getDayOfWeek(month, 1, year);
-        var numberWeeks = self.getWeeksInMonth(month, year);
-        var lastWeekLength = self.getLastWeekLength(month, year);
-        var dayShift;
-        var eventWeekNum;
-
-        if ( firstDay === self.daysPerWeek ) {
-            dayShift = 0;
+            dates = dates.reverse();
+            return dates;
         } else {
-            dayShift = firstDay;
-        }
-
-        if ( dayNum === 'last' && dayShift <= day ) {
-            if ( lastWeekLength < day ) {
-                eventWeekNum = (numberWeeks - 2);
-            } else {
-                eventWeekNum = numberWeeks - 1;
-            }
-        } else if ( dayNum === 'last' && dayShift > day ) {
-            eventWeekNum = numberWeeks - 2;
-        } else {
-            eventWeekNum = parseInt(dayNum, 10) - 1;
-        }
-
-        if ( dayShift <= day ) {
-            return eventWeekNum;
-        } else {
-            return eventWeekNum + 1;
+            return dates;
         }
     };
 
-    self.getWeekNumber = function(dateObj) {
-        var weekNum = 1;
-        var weekNums = [];
-        var weekInfo = self.getDatesInWeek(dateObj);
+    self.getDatesFromLastYear = function(dateObj) {
+        let firstDay = self.getFirstDayOfMonth(dateObj);
+        let dates = [];
+        let day = 0;
 
-        elr.each(self.months, function(key) {
-            var numberDays = self.getDaysInMonth({
-                'month': key,
-                'date': 1,
-                'year': dateObj.year
+        // since december always has 31 days we can hard code this
+        let startDate = 31 - (firstDay - 1);
+
+        while (day < firstDay) {
+            dates.push({
+                'month': 11,
+                'date': startDate,
+                'year': dateObj.year - 1
             });
 
-            var firstDay = self.getDayOfWeek({
-                'month': key,
-                'date': 1,
-                'year': dateObj.year
-            });
+            day = day + 1;
+            startDate = startDate + 1;
+        }
 
-            var numberWeeks = self.getWeeksInMonth({
-                'month': dateObj.month,
-                'date': 1,
-                'year': dateObj.year
-            });
+        return dates;
+    };
 
-            var week = 1;
-            var dayShift;
+    self.getDatesInFirstWeek = function(dateObj) {
+        let firstDay = self.getFirstDayOfMonth(dateObj);
+        let dates = self.getDatesFromLastMonth(dateObj, []);
+
+        // if its the first week of the year
+        // should probably move this to its own function getDatesFromLastYear
+
+        if (dateObj.month === 0 && firstDay !== 0) {
+            // need to get the last days of the previous year
+            let dates = self.getDatesFromLastYear(dateObj);
+
+            // get the dates from the new year
+
+            let remainingDays = self.daysPerWeek - dates.length;
+            let day = 0;
+
+            while (day < remainingDays) {
+                day = day + 1;
+
+                dates.push({
+                    'month': 0,
+                    'date': day,
+                    'year': dateObj.year
+                });
+            }
+
+            return dates;
+        } else {
+            // not the first week of the year
+            let dayShift;
 
             if (firstDay === self.daysPerWeek) {
                 dayShift = 0;
@@ -1231,24 +1200,324 @@ const elrTimeUtilities = function() {
                 dayShift = firstDay;
             }
 
+            let daysInFirstWeek = self.daysPerWeek - dayShift;
+            let day = 0;
+
+            while (day < daysInFirstWeek) {
+                day = day + 1;
+                dates.push({
+                    month: dateObj.month,
+                    date: day,
+                    year: dateObj.year
+                });
+            }
+        }
+
+        return dates;
+    };
+
+    self.getDatesInLastWeek = function(dateObj) {
+        let numberDays = self.getDaysInMonth(dateObj);
+        let lastDay = self.getDayOfWeek({
+            month: dateObj.month,
+            date: numberDays,
+            year: dateObj.year
+        });
+        let firstDateLastWeek = numberDays - lastDay;
+        let date = firstDateLastWeek;
+        let remainingDays = lastDay + 1;
+        let nextMonthDays = self.daysPerWeek - (lastDay + 1);
+        let dates = [];
+
+        // if its the last week of the year get the first days of the new year
+
+        // get the days left in month
+        while (remainingDays > 0) {
+            dates.push({
+                month: dateObj.month,
+                date: date,
+                year: dateObj.year
+            });
+
+            date = date + 1;
+            remainingDays = remainingDays - 1;
+        }
+
+        // get the days from next month
+        let i = 1;
+        while (nextMonthDays > 0) {
+            dates.push({
+                month: self.getNextMonth(dateObj),
+                date: i,
+                year: dateObj.year
+            });
+            nextMonthDays = nextMonthDays - 1;
+            i = i + 1;
+        }
+
+        return dates;
+    };
+
+    self.getDatesInMiddleWeek = function(dateObj) {
+        let day = 0;
+        let dates = [];
+        let dayOfWeek = self.getDayOfWeek(dateObj);
+        let firstDateOfWeek = dateObj.date - dayOfWeek;
+
+        while (day < self.daysPerWeek) {
+            dates.push({
+                month: dateObj.month,
+                date: firstDateOfWeek,
+                year: dateObj.year
+            });
+            day = day + 1;
+            firstDateOfWeek = firstDateOfWeek + 1;
+        }
+
+        return dates;
+    };
+
+    self.getFirstDateOfWeek = function(dateObj) {
+        let dayOfWeek = self.getDayOfWeek(dateObj);
+        let firstDay = self.getFirstDayOfMonth(dateObj);
+        let prevMonth = self.getPrevMonth(dateObj);
+        let prevMonthNumberDays = self.getDaysInMonth({
+            'month': self.getPrevMonth(dateObj),
+            'date': 0,
+            'year': dateObj.year
+        });
+
+        // if the first day of the week is a Sunday
+        if (dayOfWeek === 0) {
+            return dateObj;
+        // if its the first week of the month
+        } else if (firstDay <= dayOfWeek && firstDay <= self.daysPerWeek) {
+            return self.getDatesInFirstWeek(dateObj)[0];
+        } else {
+            let firstDate = dateObj.date - dayOfWeek;
+
+            return {
+                'month': dateObj.month,
+                'date': firstDate,
+                'year': dateObj.year
+            }
+        }
+    };
+
+    self.getWeekNum = function(dateObj) {
+        let firstDay = self.getFirstDayOfMonth(dateObj);
+        let numberDays = self.getDaysInMonth(dateObj);
+        let lastDay = self.getDayOfWeek({
+            month: dateObj.month,
+            date: numberDays,
+            year: dateObj.year
+        });
+        let date = dateObj.date;
+        let weeksInMonth = self.getWeeksInMonth(dateObj);
+        let dayShift;
+
+        if (firstDay === self.daysPerWeek) {
+            dayShift = 0;
+        } else {
+            dayShift = firstDay;
+        }
+
+        let daysInFirstWeek = self.daysPerWeek - dayShift;
+        let firstDateLastWeek = numberDays - lastDay;
+        let firstDays = [];
+
+        if (firstDay === 0) {
+            firstDays.push(1);
+        } else {
+            let datesInFirstWeek = self.getDatesInFirstWeek(dateObj);
+            firstDays.push(datesInFirstWeek[0].date);
+        }
+
+        let firstDateSecondWeek = (self.daysPerWeek - dayShift) + 1;
+
+        firstDays.push(firstDateSecondWeek);
+
+        let remainingWeeks = weeksInMonth - 2;
+        let prevWeekFirstDate = firstDateSecondWeek;
+
+        while (remainingWeeks > 0) {
+            prevWeekFirstDate = prevWeekFirstDate + 7;
+            firstDays.push(prevWeekFirstDate);
+            remainingWeeks = remainingWeeks - 1;
+        }
+
+        // is first week
+        if (date <= daysInFirstWeek) {
+            return 1;
+        // is last week
+        } else if (date >= firstDateLastWeek) {
+            return self.getWeeksInMonth(dateObj);
+        } else {
+            let num;
+
+            $.each(firstDays, function(key, val) {
+                if (date >= val) {
+                    num = key + 1;
+                }
+
+                return num;
+            });
+
+            return num;
+        }
+    };
+
+    self.getDatesInWeek = function(dateObj) {
+        let numberDays = self.getDaysInMonth(dateObj);
+        let currentDay = self.getDayOfWeek(dateObj);
+        let lastMonthDays = 1;
+        let weekNum = self.getWeekNum(dateObj);
+
+        // console.log(weekNum);
+
+        let weekInfo = {
+            datesInWeek: [],
+            weekNum: weekNum
+        };
+
+        if (weekNum === 1) {
+            weekInfo.datesInWeek = self.getDatesInFirstWeek(dateObj);
+        } else if (weekNum === self.getWeeksInMonth(dateObj)) {
+            weekInfo.datesInWeek = self.getDatesInLastWeek(dateObj);
+        } else {
+            weekInfo.datesInWeek = self.getDatesInMiddleWeek(dateObj);
+        }
+
+        return weekInfo;
+    };
+
+    // gets the length of the last week of the month
+    self.getLastWeekLength = function(dateObj) {
+        // let lastDate = self.getDaysInMonth(dateObj);
+
+        return self.getDayOfWeek({
+            'month': dateObj.month,
+            'date': self.getDaysInMonth(dateObj),
+            'year': dateObj.year
+        });
+    };
+
+    self.getDayShift = function(dayOfWeek) {
+        if (dayOfWeek === self.daysPerWeek) {
+            return 0;
+        }
+
+        return dayOfWeek;
+    };
+
+    //gets the week of the month when an event occurs
+    self.getEventWeekNum = function(evt, year) {
+        // gets the week of the month which an event occurs
+        console.log(evt);
+        console.log(evt.month);
+
+        let dateObj = {
+            'month': elr.inArray(self.months, evt.month),
+            'date': 1,
+            'year': year
+        };
+
+        let firstDay = self.getFirstDayOfMonth(dateObj);
+        let numberWeeks = self.getWeeksInMonth(dateObj);
+        let lastWeekLength = self.getLastWeekLength(dateObj);
+        let dayNum = evt.dayNum;
+        let day = elr.inArray(self.days, evt.day[0]);
+
+        if (dayNum === 'last') {
+            // check if last week in month contains day
+            if (lastWeekLength >= day) {
+                return numberWeeks;
+            } else {
+                return numberWeeks - 1;
+            }
+        }
+
+        if (dayNum === 'first') {
+            // check if first week in month contains day
+            console.log(firstDay);
+            if (firstDay <= day) {
+                return 1;
+            } else {
+                return 2;
+            }
+        }
+
+        // check if you should count from 1st or 2nd week of month
+        if (self.getFirstDayOfMonth(dateObj) > day) {
+            return dayNum + 1;
+        } else {
+            return dayNum;
+        }
+    };
+
+    self.getWeekNumber = function(dateObj) {
+        let weekNum = 1;
+        let weekNums = [];
+        let weekInfo = self.getDatesInWeek(dateObj);
+
+        elr.each(self.months, function(key) {
+            let numberDays = self.getDaysInMonth({
+                'month': key,
+                'date': 1,
+                'year': dateObj.year
+            });
+
+            let firstDay = self.getDayOfWeek({
+                'month': key,
+                'date': 1,
+                'year': dateObj.year
+            });
+
+            let lastDay = self.getDayOfWeek({
+                'month': key,
+                'date': self.getDaysInMonth(dateObj),
+                'year': dateObj.year
+            });
+
+            let numberWeeks = self.getWeeksInMonth({
+                'month': dateObj.month,
+                'date': 1,
+                'year': dateObj.year
+            });
+
             if ($.isNumeric(numberWeeks)) {
+                let week = 0;
+
                 while (week <= numberWeeks) {
-                    if ((week === 1) && (firstDay !== 0)) {
+                    // if the first day of the year is not Sunday, Monday or Tuesday its week 53
+                    // the first week of the year is the first Tuesday
+                    if ((key === 0 && firstDay > 2) && week === 0) {
+                        weekNum = 53;
+                    // if its the first week of the year
+                    } else if (week === 1 && key === 0) {
+                        weekNum = 1;
+                    // if its the first week of the month don't increment the week number
+                    } else if (week === 0 && firstDay !== 0) {
+                        weekNum = weekNum;
+                    // if its the last week of the month don't increment the week number
+                    } else if (week === numberWeeks && lastDay !== 6) {
                         weekNum = weekNum;
                     } else {
                         weekNum = weekNum + 1;
                     }
 
-                    week = week + 1;
-
+                    // when the loop get the the current month add the week
+                    // numbers to the array
                     if (dateObj.month === key) {
                         weekNums.push(weekNum);
                     }
+
+                    week = week + 1;
                 }
             }
         });
 
-        return weekNums[weekInfo.weekNum];
+        return weekNums[weekInfo.weekNum - 1];
     };
 
     return self;
