@@ -3,18 +3,12 @@
 
 .main-sidebar-holder {
     @include elr-clearfix;
-    position: relative;
-    height: 1px;
+    position: sticky;
+    top: 90px;
+    padding-top: 10px;
 }
 
 .main-sidebar {
-    // padding-top: 20px;
-    // padding-left: 60px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: auto;
-
     @include elr-breakpoint('saturn') {
         display: none;
     }
@@ -25,45 +19,26 @@
 }
 
 .sidebar-menu {
-    &.nav-bar-stacked > li {
-        // @include elr-breakpoint('mars') {
-        //     padding-left: 40px;
-        // }
-
-        a {
-            color: $text-color;
-        }
-    }
-
-    li {
-        padding-top: 2px;
-        padding-bottom: 2px;
-    }
-
-    a {
+    > li > a {
         @include elr-em-font(20px);
-        color: $text-color;
+        // color: $text-color;
         font-weight: $bold;
-        padding: 5px 10px 10px;
+        padding-top: 0;
+        padding-bottom: 0;
 
-        &:hover,
-        &:focus {
-            text-decoration: none;
-            color: $text-color;
-        }
+        // &:hover,
+        // &:focus {
+        //     text-decoration: none;
+        //     color: $text-color;
+        // }
     }
 
     .elr-submenu {
-        a {
+        > li > a {
             @include elr-em-font(14px);
-            color: $text-color;
-            font-weight: $normal;
-            padding-left: 20px;
-
-            &:hover {
-                text-decoration: underline;
-                color: $text-color;
-            }
+            padding-top: 0;
+            padding-bottom: 0;
+            padding-left: 10px;
         }
     }
 }

@@ -1,21 +1,8 @@
 // Main Content Styles
 
 .main-content {
-    padding: 60px 10px 20px;
+    padding: 40px 10px 20px;
     flex: 1 0 auto;
-    // min-height: 800px;
-
-    h1 {
-        @include elr-em-font(30px);
-    }
-
-    h2 {
-        @include elr-em-font(24px);
-    }
-
-    h3 {
-        @include elr-em-font(18px);
-    }
 
     .elr-col-9:first-child {
         padding-left: 10px;
@@ -26,27 +13,30 @@
     padding-bottom: 40px;
 }
 
+.example-heading,
+.example-subheading {
+    border-bottom: 1px solid $light-grey;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.example-heading {
+    @include elr-em-font(30px);
+}
+
+.example-subheading {
+    @include elr-em-font(18px);
+}
+
 .example-holder {
-    padding: 20px;
-    // border: 1px solid $elr-blue;
-    // background-color: $elr-blue-light;
+    padding: 20px 0;
+}
 
-    &.example-holder-light {
-        background-color: $white;
-        border: 1px solid $elr-blue-light;
-    }
-
-    h1 {
-        @include elr-em-font(48px);
-    }
-
-    h2 {
-        @include elr-em-font(36px);
-    }
-
-    h3 {
-        @include elr-em-font(30px);
-    }
+.example-holder-light {
+    background-color: $white;
+    border: 1px solid $elr-blue-light;
+    margin: 20px 0;
 }
 
 pre {
@@ -57,10 +47,10 @@ pre {
 
 .argument-list {
     padding-left: 0;
+}
 
-    h2 {
-        @include elr-em-font(18px);
-    }
+.argument-heading {
+    @include elr-em-font(18px);
 }
 
 .inline-demo {
