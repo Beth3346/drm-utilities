@@ -1,5 +1,5 @@
 import elrUtils from './elr-utilities';
-import elrTime from './elr-time-utilities';
+import elrTimeUtilities from './elr-time-utilities';
 
 import elrAccordion from './elr-accordion';
 import elrAccordionNav from './elr-accordion-nav';
@@ -24,8 +24,34 @@ import elrTabs from './elr-tabs';
 import elrValidation from './elr-validation';
 
 const $ = require('jquery');
+const jQuery = require('jquery');
 
 let elr = elrUtils();
+let elrTime = elrTimeUtilities();
+
+$('button.mobile-menu-toggle').on('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    $('.mobile-nav-holder').toggleClass('active');
+});
+
+$('.menu-animated .menu-item').on('click', function(e) {
+    e.preventDefault();
+    let $that = $(this);
+
+    $that.parent('ul').find('.current').removeClass('current');
+    $that.addClass('current');
+});
+
+$('.icon-animate').on('click', function() {
+    $(this).toggleClass('active');
+});
+
+$('.mobile-toggle-button, .mobile-toggle-button-border').on('click', function() {
+    $(this).find('.hamburger').toggleClass('active');
+});
+
+$('.smooth-scroll').on('click', 'a', elr.gotoSection);
 
 let elrAlert = elrAlerts();
 let modalAlert = elrModalAlert();
@@ -83,17 +109,19 @@ $('.js-show-confirmation-alert').on('click', function() {
 
 elrBackToTop();
 
-elrCalendar();
-
-elrDropdownButton();
-elrDropdownButton({
-    containerClass: 'elr-dropdown-split-btn-holder',
-    speed: 300,
-    button: 'button:last()'
+elrCalendar({
+    view: 'week',
+    currentDate: elrTime.today
+    // currentDate: {
+    //     'month': 11,
+    //     'date': 31,
+    //     'year': 2015
+    // }
 });
 
+elrDropdownButton();
+
 elrDropdownMenu();
-elrDropdownMenu({menuClass: 'main-nav'});
 
 elrFilterGrid();
 
@@ -149,7 +177,6 @@ elrTabs();
 elrValidation();
 
 // $('.now').text(elrTime.now);
-// // console.log(elrTime.today);
 // // console.log(elrTime.daysPerWeek);
 // // console.log(elrTime.unitTokens);
 
@@ -286,22 +313,6 @@ elrValidation();
 //     $that.append('<span>: ' + result + '</span>');
 // });
 
-$('button.mobile-menu-toggle').on('click', function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    $('ul.mobile-menu').slideToggle();
-});
-
-$('.menu-animated .menu-item').on('click', function(e) {
-    e.preventDefault();
-    let $that = $(this);
-
-    $that.parent('ul').find('.current').removeClass('current');
-    $that.addClass('current');
-});
-
-$('.smooth-scroll').on('click', 'a', elr.gotoSection);
-
 // $('.test-box-in-array').each(function() {
 //     let $that = $(this);
 //     let arr = elr.strToArray($that.find('p.in-array').text());
@@ -329,6 +340,40 @@ $('.smooth-scroll').on('click', 'a', elr.gotoSection);
 
 // console.log(elr.createArrays({animals: 'names'}, ['Dogs', 'Cats', 'Birds']));
 
-$('.icon-animate').on('click', function() {
-    $(this).toggleClass('active');
-});
+// console.log(`Say ${elr.trim('Hello   ')} everybody`);
+
+// console.log(elr.getText(document.getElementsByClassName('page-title')));
+// console.log(elr.getText(document.getElementsByClassName('main-nav-item')));
+// console.log(elr.getText(document.getElementsByClassName('main-nav-item'), ', '));
+
+// const navItems = document.getElementsByClassName('main-nav-item');
+// const pageTitle = document.getElementsByClassName('page-title');
+// const html = document.getElementsByTagName('html');
+
+// const wrapper = elr.closest(pageTitle, 'div.hero-unit');
+// const mainNav = elr.closest(navItems, 'ul');
+// const mainHeader = elr.closest(navItems, '#main-header');
+// const navParent = elr.parent(navItems, 'li');
+// const titleWrapper = elr.parent(pageTitle, '.hero-unit-content');
+// const titleWrappers = elr.parents(pageTitle);
+// const thirdNavItem = elr.eq(navItems, 2);
+// const notListItem = elr.not(navItems, '.active');
+// const evenListItem = elr.even(navItems);
+// const oddListItem = elr.odd(navItems);
+
+// console.log(wrapper);
+// console.log(mainNav);
+// console.log(mainHeader);
+// console.log(navParent);
+// console.log($('.main-nav-item').eq(0));
+
+// console.log(titleWrapper);
+// console.log(titleWrappers);
+// console.log(thirdNavItem);
+// console.log(elr.index(thirdNavItem));
+// console.log(notListItem);
+// console.log(evenListItem);
+// console.log(oddListItem);
+// console.log(elr.data(elr.eq(navItems, 3), 'link'));
+// console.log(elr.first(navItems));
+// console.log(elr.last(navItems));
