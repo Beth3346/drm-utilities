@@ -151,8 +151,8 @@
         top: 100%;
         z-index: 1000;
         opacity: 0;
-        visibility: collapse;
-        transition: opacity .5s;
+        visibility: hidden;
+        transition: opacity .5s, visibility .5s;
 
         li {
             position: relative;
