@@ -2,4 +2,51 @@ section#comments
     .elr-container.example-section
         .elr-row
             .elr-col-full
-                h1 Comments
+                h2.example-heading Comments
+            .elr-col-full.example-holder
+                .comments
+                    h3.example-subheading Responses
+                    .comment
+                        figure.avatar
+                            img(src="images/compressed/cat5.jpg")
+                        .comment-content
+                            .comment-heading
+                                h3.comment-author Joe
+                                p.comment-timestamp 10 minutes ago
+                            .comment-body
+                                p This article is so interesting!
+                                a(href="#").comment-reply Reply
+                        .comment.comment-nested
+                            figure.avatar
+                                img(src="images/compressed/cat1.jpg")
+                            .comment-content
+                                .comment-heading
+                                    h3.comment-author Kate Brewster
+                                    p.comment-timestamp Just Now
+                                .comment-body
+                                    p Yes! this site always has the best articles.
+                                    a(href="#").comment-reply Reply
+                    .comment
+                        figure.avatar
+                            img(src="images/compressed/cat2.jpg")
+                        .comment-content
+                            .comment-heading
+                                h3.comment-author Mike Kittle
+                                p.comment-timestamp 2 weeks ago
+                            .comment-body
+                                p This is a really really long comment. This person is just going on and on and on forever and ever. Jerry: You want me to take an overview? I see a very cheap man holding a sweater trying to get away with something. That's my overview. Newman: I'm a little offended, Jerry. Jerry: You're not a little anything, Newman." George: I would give up red meat just to get a glimpse of you in a bra? Newman: But you remember this: when you control the mail, you control... information. Kramer: I don’t know. But I woke up in the Hudson river in a SACK. Homeless man: The government! Jerry: Women don't respect salad eaters. Jerry: You want me to take an overview? I see a very cheap man holding a sweater trying to get away with something. That's my overview. Jerry: People with guns don't understand. That's why they get guns: too many misunderstandings. Jerry: So, has the summer of George begun? Or are you still decomposing. Newman: You see, my dear, all certified mail is registered… but registered mail is not necessarily certified.
+                                a(href="#").comment-reply Reply
+                    .comment
+                        figure.avatar
+                            img(src="images/compressed/cat3.jpg")
+                        .comment-content
+                            .comment-heading
+                                h3.comment-author Joe
+                                p.comment-timestamp 10 minutes ago
+                            .comment-body
+                                p This article is so interesting!
+                                a(href="#").comment-reply Reply
+                    h4.example-subheading Post a Comment
+                    form.form.tabular-form.comment-reply-form
+                        textarea(rows=5 placeholder="Post Reply")
+                        input(type="submit" value="Add Comment")

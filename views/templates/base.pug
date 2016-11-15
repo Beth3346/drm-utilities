@@ -17,35 +17,36 @@ html.no-js(lang="en")
         block headerscripts
         //- script(src="https://maps.googleapis.com/maps/api/js?v=3.exp")
     body.main-body
-        header.main-header
+        header.main-header#main-header
             .elr-container
                 .elr-row
                     .elr-col-full
                         h1.site-heading: a(href="/") ELR Utilities
+                        button.mobile-menu-toggle.elr-hide-desktop Menu
+                            i.fa.fa-bars
                         include ../partials/navigation
         .hero-unit
             .elr-container
                 .elr-row
-                    .elr-col-full
+                    .elr-col-full.hero-unit-content
                         h1.page-title
                             block pagetitle
                             |&nbsp;
                             i.fa.fa-wrench
-                        p.sub-title
+                        p.hero-unit-subtitle
                             block subtitle
                                 | A collection of reusable, modular Sass and JavaScript components
         main.main-content.elr-container
             .elr-row
-                block sidebar
-                    if (tech == 'javascript')
-                        include ../partials/sidebar-js
-                    else
-                        include ../partials/sidebar-css
-                article.elr-col-9
-                    .elr-container
-                        .elr-row
-                            .elr-col-full
-                                block content
+                .elr-col-2.main-sidebar-holder
+                    block sidebar
+                        if (tech == 'javascript')
+                            include ../partials/sidebar-js
+                        else
+                            include ../partials/sidebar-css
+                article.content-holder.elr-col-10
+                    section.content
+                        block content
         footer.main-footer
             p.copyright: small Built with Care by: Elizabeth Rogers
         script(src="js/build/bundle.js")

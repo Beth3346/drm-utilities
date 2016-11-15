@@ -1,177 +1,117 @@
 section#buttons
     .elr-container.example-section
-        .elr-row
+        .elr-row.example-holder
             .elr-col-full
-                h3.elr-bold Button Link
+                h3.example-heading Buttons
+            .elr-col-full
+                h4.example-subheading Button Link
                 p Basic button with a solid border and transparent background. Smooth transition to solid background on hover.
             .elr-col-full
                 a.elr-button.button-link(href="#") Click Here
-                a.elr-button.button-link-radius(href="#") Click Here
-                pre @include elr-button-link($color, $bk-color, $width, $center, $border-radius, $border-color, $display);
-        .elr-row
-            .elr-col-full
-                h3.elr-bold Button Solid
-            .elr-col-full
                 a.elr-button.button-solid(href="#") Click Here
-                a.elr-button.button-solid-radius(href="#") Click Here
-        .elr-row
             .elr-col-full
-                h3.elr-bold Pill Buttons
+                h4.example-subheading Pill Buttons
             .elr-col-full
                 a.elr-button.pill-button-link(href="#") Click Here
                 a.elr-button.pill-button-solid(href="#") Click Here
-        .elr-row
             .elr-col-full
-                h3.elr-bold Solid Dropdown Button
-        .elr-row
-            .elr-col-quarter
-                .elr-dropdown-solid-btn-holder
-                    button.elr-button Info
-                    ul.elr-dropdown-list
-                        li: a(href="#") Info 1
-                        li: a(href="#") Info 2
-                        li: a(href="#") Info 3
-                        li.divider
-                        li: a(href="#") Info 4
-            .elr-col-quarter
-                .elr-dropdown-solid-btn-holder
-                    button.elr-button More Info
-                    ul.elr-dropdown-list
-                        li: a.text-disabled(href="#") Info 1
-                        li: a(href="#") Info 2
-                        li: a(href="#") Info 3
-                        li: a(href="#") Info 4
-            .elr-col-quarter
-                .elr-dropdown-solid-btn-holder
-                    button.elr-button Click Me!
-                    ul.elr-dropdown-list
-                        li: a(href="#") Info 1
-                        li: a(href="#") Info 2
-                        li: a(href="#") Info 3
-                        li: a(href="#") Info 4
-        .elr-row
+                h4.example-subheading Mobile Navigation Buttons
             .elr-col-full
-                h3.elr-bold Split Dropdown Button
-        .elr-row
-            .elr-col-quarter
-                .elr-dropdown-split-btn-holder
-                    .elr-dropdown-button-group
-                        button Alert
-                        button &#9662;
-                        ul.elr-dropdown-list
-                            li: a(href="#") Info 1
-                            li: a(href="#") Info 2
-                            li: a(href="#") Info 3
-                            li: a(href="#") Info 4
-            .elr-col-quarter
-                .elr-dropdown-split-btn-holder
-                    .elr-dropdown-button-group
-                        button Choose an Option
-                        button &#9662;
-                        ul.elr-dropdown-list
-                            li: a(href="#") Info 1
-                            li: a(href="#") Info 2
-                            li: a(href="#") Info 3
-                            li: a(href="#") Info 4
-        .elr-row
+                button.elr-button.mobile-toggle-button
+                    .hamburger
+                        span
+                button.elr-button.mobile-toggle-button
+                    span.menu-label Menu
+                    .hamburger
+                        span
+                button.elr-button.mobile-toggle-button-border
+                    .hamburger
+                        span
+                button.elr-button.mobile-toggle-button-border
+                    span.menu-label Menu
+                    .hamburger
+                        span
+        .elr-row.example-holder
             .elr-col-full
-                h3.elr-bold Mobile Navigation Buttons
-        .elr-row
-            .elr-col-quarter
-                button.mobile-toggle-button: i.fa.fa-bars
-            .elr-col-quarter
-                button.mobile-toggle-button Menu
-                    i.fa.fa-bars
-            .elr-col-quarter
-                button.mobile-toggle-button-border: i.fa.fa-bars
-            .elr-col-quarter
-                button.mobile-toggle-button-border Menu
-                    i.fa.fa-bars
-        .elr-row
-            .elr-col-full
-                h3.elr-bold Button Groups
-        .elr-row
+                h4.example-subheading Button Groups
             .elr-col-full
                 .button-group
-                    button Button 1
-                    button Button 2
-                    button Button 3
-                    button Button 4
-                    button Button 5
-                    button Button 6
-                .button-group-no-border
-                    button Button 1
-                    button Button 2
-                    button Button 3
-                    button Button 4
-                    button Button 5
-                    button Button 6
+                    button.elr-button.elr-button-muted Tigers
+                    button.elr-button.elr-button-success Shetland Sheepdogs
+                    button.elr-button.elr-button-warning Leopards
+                    button.elr-button.elr-button-danger Cats
+                    button.elr-button.elr-button-primary Kangaroos
+                    button.elr-button.elr-button-info Red Pandas
+                .button-group-stacked
+                    a(href="#").elr-button.elr-button-primary Tigers
+                    a(href="#").elr-button.elr-button-primary Shetland Sheepdogs
+                    a(href="#").elr-button.elr-button-primary Leopards
+                    a(href="#").elr-button.elr-button-primary Cats
+                    a(href="#").elr-button.elr-button-primary Kangaroos
+                    a(href="#").elr-button.elr-button-primary Red Pandas
         .elr-row
             .elr-col-full
-                h3.elr-bold Font Awesome Icon Buttons
-        .elr-row
-            .elr-col-quarter
-                button.elr-button.icon-button.heart-button Like
-            .elr-col-quarter
-                button.elr-button.icon-button.star-button Save
-            .elr-col-quarter
-                button.elr-button.icon-button.download-button Download
-            .elr-col-quarter
-                button.elr-button.icon-button.add-button Add Item
+                h4.example-subheading Font Awesome Icon Buttons
         .elr-row
             .elr-col-full
-                h3.elr-bold Social Media Buttons
+                button.elr-button.elr-button-primary.icon-button.heart-button Like
+                button.elr-button.elr-button-primary.icon-button.star-button Save
+                button.elr-button.elr-button-primary.icon-button-left.download-button Download
+                button.elr-button.elr-button-primary.icon-button-left.add-button Add Item
         .elr-row
             .elr-col-full
-                button.elr-button.icon-button.facebook-button Facebook
-                button.elr-button.icon-button.twitter-button Twitter
-                button.elr-button.icon-button.google-plus-button Google+
-                button.elr-button.icon-button.pinterest-button Pinterest
-                button.elr-button.icon-button.instagram-button Instagram
+                h4.example-subheading Social Media Buttons
         .elr-row
             .elr-col-full
-                h3.elr-bold Icon Only Buttons
+                a(href="#").elr-button.icon-button-left.facebook-button Facebook
+                a(href="#").elr-button.icon-button-left.twitter-button Twitter
+                a(href="#").elr-button.icon-button-left.google-plus-button Google+
+                a(href="#").elr-button.icon-button-left.pinterest-button Pinterest
+                a(href="#").elr-button.icon-button-left.instagram-button Instagram
         .elr-row
             .elr-col-full
-                button.elr-button.icon-only-button.heart-icon-button
-                button.elr-button.icon-only-button.star-icon-button
-                button.elr-button.icon-only-button.download-icon-button
-                button.elr-button.icon-only-button.add-icon-button
+                h4.example-subheading Icon Only Buttons
         .elr-row
             .elr-col-full
-                h3.elr-bold Icon Only Social Media Buttons
+                button.elr-button.elr-button-success.icon-only-button.heart-button
+                button.elr-button.elr-button-success.icon-only-button.star-button
+                button.elr-button.elr-button-success.icon-only-button.download-button
+                button.elr-button.elr-button-success.icon-only-button.add-button
         .elr-row
             .elr-col-full
-                button.elr-button.icon-only-button.facebook-icon-button
-                button.elr-button.icon-only-button.twitter-icon-button
-                button.elr-button.icon-only-button.google-plus-icon-button
-                button.elr-button.icon-only-button.pinterest-icon-button
-                button.elr-button.icon-only-button.instagram-icon-button
+                h4.example-subheading Icon Only Social Media Buttons
         .elr-row
             .elr-col-full
-                h3.elr-bold Circle Icon Buttons
+                a(href="#").elr-button.icon-only-button.facebook-button
+                a(href="#").elr-button.icon-only-button.twitter-button
+                a(href="#").elr-button.icon-only-button.google-plus-button
+                a(href="#").elr-button.icon-only-button.pinterest-button
+                a(href="#").elr-button.icon-only-button.instagram-button
         .elr-row
             .elr-col-full
-                button.elr-button.icon-circle.facebook-icon-circle
-                button.elr-button.icon-circle.twitter-icon-circle
-                button.elr-button.icon-circle.google-plus-icon-circle
-                button.elr-button.icon-circle.pinterest-icon-circle
-                button.elr-button.icon-circle.instagram-icon-circle
+                h4.example-subheading Circle Icon Buttons
         .elr-row
             .elr-col-full
-                h3.elr-bold Icon Button Groups
+                a(href="#").elr-button.icon-circle.facebook-button
+                a(href="#").elr-button.icon-circle.twitter-button
+                a(href="#").elr-button.icon-circle.google-plus-button
+                a(href="#").elr-button.icon-circle.pinterest-button
+                a(href="#").elr-button.icon-circle.instagram-button
         .elr-row
-            .elr-col-third
+            .elr-col-full
+                h4.example-subheading Icon Button Groups
+        .elr-row
+            .elr-col-full
                 .icon-button-group
-                    button.elr-button.icon-only-button.facebook-icon-button
-                    button.elr-button.icon-only-button.twitter-icon-button
-                    button.elr-button.icon-only-button.google-plus-icon-button
-                    button.elr-button.icon-only-button.pinterest-icon-button
-                    button.elr-button.icon-only-button.instagram-icon-button
-            .elr-col-third
+                    a(href="#").elr-button.icon-only-button.facebook-button
+                    a(href="#").elr-button.icon-only-button.twitter-button
+                    a(href="#").elr-button.icon-only-button.google-plus-button
+                    a(href="#").elr-button.icon-only-button.pinterest-button
+                    a(href="#").elr-button.icon-only-button.instagram-button
+            .elr-col-full
                 .icon-button-group-stacked
-                    button.elr-button.icon-only-button.facebook-icon-button
-                    button.elr-button.icon-only-button.twitter-icon-button
-                    button.elr-button.icon-only-button.google-plus-icon-button
-                    button.elr-button.icon-only-button.pinterest-icon-button
-                    button.elr-button.icon-only-button.instagram-icon-button
+                    a(href="#").elr-button.icon-only-button.facebook-button
+                    a(href="#").elr-button.icon-only-button.twitter-button
+                    a(href="#").elr-button.icon-only-button.google-plus-button
+                    a(href="#").elr-button.icon-only-button.pinterest-button
+                    a(href="#").elr-button.icon-only-button.instagram-button

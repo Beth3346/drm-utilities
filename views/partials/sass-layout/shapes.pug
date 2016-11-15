@@ -2,46 +2,38 @@ section#shapes
     .elr-container.example-section
         .elr-row
             .elr-col-full
-                h3.elr-bold Circles and Ellipses
-        .elr-row.example-holder
-            .elr-col-third
+                h3.example-heading Circles and Ellipses
+            .elr-col-full.example-holder
                 .circle
-        .elr-row
             .elr-col-full
-                h3.elr-bold Rectangles
+                h3.example-heading Rectangles
                 p Easy rectangles and squares.
-        .elr-row
             .elr-col-full
                 pre @include elr-rectangle($width, $height, $display, $border-radius);
-        .elr-row.example-holder
-            .elr-col-half
-                .elr-rectangle
-            .elr-col-half
-                .elr-rounded-rectangle
-        .elr-row
+            .elr-col-full.example-holder
+                .elr-col-half
+                    .elr-rectangle
+                .elr-col-half
+                    .elr-rounded-rectangle
             .elr-col-full
                 pre @include elr-rectangle(300px, 200px, block);
                 pre @include elr-rectangle(300px, 200px, block, 5px);
-        .elr-row
             .elr-col-full
-                h3.elr-bold Squares
-        .elr-row
+                h3.example-heading Squares
             .elr-col-full
                 pre @include elr-square($width, $display, $border-radius);
-        .elr-row.example-holder
-            .elr-col-half
-                .elr-square
-            .elr-col-half
-                .elr-rounded-square
-        .elr-row
+            .elr-col-full.example-holder
+                .elr-col-half
+                    .elr-square
+                .elr-col-half
+                    .elr-rounded-square
             .elr-col-full
                 pre @include elr-square(300px, block);
                 pre @include elr-square(300px, block, 5px);
-        .elr-row
             .elr-col-full
-                h3.elr-bold Triangles
-        .elr-row.example-holder
-            .elr-col-half
-                .elr-triangle
-            .elr-col-half
-                .elr-equilateral-triangle
+                    h3.example-heading Triangles
+            .elr-full.example-holder
+                .elr-col-half
+                    .elr-triangle
+                .elr-col-half
+                    .elr-equilateral-triangle

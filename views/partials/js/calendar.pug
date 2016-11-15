@@ -204,151 +204,17 @@ section#elr-calendar
                     .elr-container
                         .elr-row
                             .elr-col-full
-                                //- .elr-calendar-view-nav
-                                //-     button.elr-calendar-view(data-view='month') Month
-                                //-     button.elr-calendar-view(data-view='week') Week
-                                //-     button.elr-calendar-view(data-view='date') Day
-                                .elr-calendar-nav
-                                    button.elr-calendar-year-prev(data-dir='prev') Previous Year
-                                    button.elr-calendar-month-prev(data-dir='prev') Previous Month
-                                    button.elr-calendar-week-prev(data-dir='prev') Previous Week
-                                    button.elr-calendar-date-prev(data-dir='prev') Yesterday
-                                    button.elr-calendar-current Today
-                                    button.elr-calendar-date-next(data-dir='next') Tomorrow
-                                    button.elr-calendar-week-next(data-dir='next') Next Week
-                                    button.elr-calendar-month-next(data-dir='next') Next Month
-                                    button.elr-calendar-year-next(data-dir='next') Next Year
-
-                //- h2 Usage
-
-                //- a(href="https://github.com/dynamicresponsemedia/elr-calendar" target="_blank") Visit GitHub Repo
-                //- p at the moment only US style dates and times are used
-
-                //- h3.elr-bold Initialize:
-
-                //- pre new ElrCalendar(calendarClass = 'elr-calendar', @view = 'month', @addHolidays = yes);
-
-                //- h4.elr-bold Options:
-                //- ul.elr-unstyled-list
-                //-     li
-                //-         span.elr-bold calendarClass:
-                //-         | classname of the calendar holder - default: elr-calendar
-                //-     li
-                //-         span.elr-bold view:
-                //-         | first view when the calendar loads - default: month
-                //-         ul
-                //-             li month
-                //-             li week
-                //-             li date
-                //-     li
-                //-         span.elr-bold addHolidays:
-                //-         | add holidays to calendar (US only for now) - default: yes
-
-                //- h3.elr-bold Add events dynamically using the createEvent method
-                //- p createEvent takes an object as its only argument
-
-                //- pre.
-                //-     elrCalendar = new ElrCalendar();
-                //-     elrCalendar.createEvent(newEvent);
-
-                //- h4.elr-bold Options:
-                //- ul.elr-unstyled-list
-                //-     li
-                //-         span.elr-bold id:
-                //-         | the event id number (ElrCalendar will add this for you - don't add this yourself)
-                //-     li
-                //-         span.elr-bold name:
-                //-         | name of your event
-                //-     li
-                //-         span.elr-bold recurrance:
-                //-         | how often the event will occur
-                //-         ul
-                //-             li
-                //-                 span.elr-bold yearly:
-                //-                 | once per year
-                //-             li
-                //-                 span.elr-bold monthly:
-                //-                 | once per month
-                //-             li
-                //-                 span.elr-bold biweekly:
-                //-                 | every other week
-                //-             li
-                //-                 span.elr-bold weekly:
-                //-                 | once per week
-                //-             li
-                //-                 span.elr-bold daily:
-                //-                 | every single day
-                //-             li
-                //-                 span.elr-bold none:
-                //-                 | exactly once
-                //-     li
-                //-         span.elr-bold month:
-                //-         | month of your event - full name of month not abbreviations or month number
-                //-     li
-                //-         span.elr-bold year:
-                //-         | year of your event - for non-recurring events only
-                //-     li
-                //-         span.elr-bold eventDate:
-                //-         | date of event
-                //-     li
-                //-         span.elr-bold time:
-                //-         | time of event ex. 2:30pm - omit for all day events
-                //-     li
-                //-         span.elr-bold day:
-                //-         | day of the week - array of days of the week - full name of day not abbreviations or day number - can be an array ex. ['Saturday', 'Sunday']
-                //-     li
-                //-         span.elr-bold dayNum:
-                //-         | day number - ex. 1 for first occurance of day in month - use 'last' for the last occurance in the month
-                //-     li
-                //-         span.elr-bold type:
-                //-         | event type - so far holiday is the only type that has any effect
-                //-     li
-                //-         span.elr-bold notes:
-                //-         | event notes - show up in the event view
-
-                //- h4.elr-bold Examples:
-
-                //- h5.elr-bold Yearly Event:
-
-                //- pre.
-                //-     elrCalendar.createEvent({
-                //-         name: 'Thanksgiving',
-                //-         month: 'November',
-                //-         dayNum: 'last',
-                //-         day: ['Thursday'],
-                //-         type: 'holiday',
-                //-         recurrance: 'yearly',
-                //-         notes: 'Thanksgiving occurs on the last Thursday in November'
-                //-     });
-
-                //- h5.elr-bold Monthly Event:
-
-                //- pre.
-                //-     elrCalendar.createEvent({
-                //-         name: 'Rabbit Rabbit Day',
-                //-         eventDate: 1,
-                //-         type: 'fun day',
-                //-         recurrance: 'monthly',
-                //-         notes: 'Say Rabbit Rabbit for good luck this month'
-                //-     });
-
-                //- h5.elr-bold Weekly Event:
-
-                //- pre.
-                //-     elrCalendar.createEvent({
-                //-         name: 'Sleep In!',
-                //-         day: ['Sunday', 'Saturday']
-                //-         time: '9:00am'
-                //-         recurrance: 'weekly',
-                //-         notes: 'Thanksgiving occurs on the last Thursday in November'
-                //-     });
-
-                //- h5.elr-bold Daily Event:
-
-                //- pre.
-                //-     elrCalendar.createEvent({
-                //-         name: 'Eat Lunch',
-                //-         time: '12:00pm'
-                //-         recurrance: 'daily',
-                //-         notes: 'Eat a healthy lunch'
-                //-     });
+                                .elr-calendar-view-nav.elr-button-group
+                                    button.elr-button.elr-button-primary.elr-calendar-view(data-view='month') Month
+                                    button.elr-button.elr-button-primary.elr-calendar-view(data-view='week') Week
+                                    button.elr-button.elr-button-primary.elr-calendar-view(data-view='date') Day
+                                .elr-calendar-nav.elr-button-group
+                                    button.elr-button.elr-button-primary.elr-calendar-year-prev(data-dir='prev') Previous Year
+                                    button.elr-button.elr-button-primary.elr-calendar-month-prev(data-dir='prev') Previous Month
+                                    button.elr-button.elr-button-primary.elr-calendar-week-prev(data-dir='prev') Previous Week
+                                    button.elr-button.elr-button-primary.elr-calendar-date-prev(data-dir='prev') Yesterday
+                                    button.elr-button.elr-button-primary.elr-calendar-current Today
+                                    button.elr-button.elr-button-primary.elr-calendar-date-next(data-dir='next') Tomorrow
+                                    button.elr-button.elr-button-primary.elr-calendar-week-next(data-dir='next') Next Week
+                                    button.elr-button.elr-button-primary.elr-calendar-month-next(data-dir='next') Next Month
+                                    button.elr-button.elr-button-primary.elr-calendar-year-next(data-dir='next') Next Year

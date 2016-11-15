@@ -1,7 +1,5 @@
 nav.mobile-nav-holder.elr-hide-desktop
-    button.mobile-menu-toggle Menu
-        i.fa.fa-bars
-    ul.mobile-menu.nav-bar-solid-stacked
+    ul.mobile-menu
         li: a(href="get-started.html") Get Started
         li: a(href="css.html") CSS &amp; Sass
         li: a(href="javscript.html") JavaScript Components
@@ -11,10 +9,10 @@ nav.mobile-nav-holder.elr-hide-desktop
         li: a(href="https://github.com/Beth3346/elr-utilities") GitHub
 nav.main-nav.elr-hide-tablet.elr-hide-mobile
     ul.main-menu.nav-bar-pills
-        li: a(href="get-started.html") Get Started
-        li: a(href="css.html") CSS &amp; Sass
-        li: a(href="javascript.html") JavaScript Components
-        li: a(href="about.html") About
-        li: a(href="contact.html") Contact Me
-        li: a(href="faq.html") FAQ
-        li: a(href="https://github.com/Beth3346/elr-utilities") GitHub
+        li: a.main-nav-item(href="get-started.html") Get Started
+        li: a.main-nav-item(href="css.html") CSS &amp; Sass
+        li: a.main-nav-item(href="javascript.html") JavaScript Components
+        li(data-link="about"): a.main-nav-item(href="about.html") About
+        li: a.main-nav-item(href="contact.html") Contact Me
+        li: a.main-nav-item(href="faq.html") FAQ
+        li: a.main-nav-item(href="https://github.com/Beth3346/elr-utilities") GitHub

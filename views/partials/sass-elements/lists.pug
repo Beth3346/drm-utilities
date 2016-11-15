@@ -1,8 +1,12 @@
 section.list-section#lists
     .elr-container.example-section
-        .elr-row.example-holder
-            .elr-col-third
-                h3.elr-bold Unstyled List Left
+        .elr-row
+            .elr-col-full
+                h3.example-heading Lists
+        .elr-row
+            .elr-col-full
+                h4.example-subheading Unstyled List
+            .elr-col-full.example-holder
                 ul.unstyled-list-left
                     li Item One
                     li Item Two
@@ -10,146 +14,94 @@ section.list-section#lists
                     li.divider
                     li Item Four
                     li Item Five
-            .elr-col-third
-                h3.elr-bold.elr-text-center Unstyled List Centered
-                ul.unstyled-list-center
-                    li Item One
-                    li Item Two
-                    li Item Three
-                    li Item Four
-                    li Item Five
-            .elr-col-third
-                h3.elr-bold.elr-text-right Unstyled List Right
-                ul.unstyled-list-right
-                    li Item One
-                    li Item Two
-                    li Item Three
-                    li Item Four
-                    li Item Five
-        .elr-row
             .elr-col-full
                 pre @include elr-unstyled-list(left);
-                pre @include elr-unstyled-list(center);
-                pre @include elr-unstyled-list(right);
-    .elr-container
-        .elr-row.example-holder
-            .elr-col-third
-                h3.elr-bold Border List Left
+        .elr-row
+            .elr-col-full
+                h4.example-subheading Border List
+            .elr-col-full.example-holder
                 ul.border-list-left
                     li Item One
                     li Item Two
                     li Item Three
                     li Item Four
                     li Item Five
-            .elr-col-third
-                h3.elr-bold.elr-text-center Border List Center
-                ul.border-list-center
-                    li Item One
-                    li Item Two
-                    li Item Three
-                    li Item Four
-                    li Item Five
-            .elr-col-third
-                h3.elr-bold.elr-text-right Border List Right
-                ul.border-list-right
-                    li Item One
-                    li Item Two
-                    li Item Three
-                    li Item Four
-                    li Item Five
-        .elr-row
             .elr-col-full
                 pre @include elr-border-list(left);
-                pre @include elr-border-list(center);
-                pre @include elr-border-list(right);
-    .elr-container
-        .elr-row.example-holder
+        .elr-row
             .elr-col-full
-                h3.elr-bold Inline List Left
+                h4.example-subheading Inline Lists
+            .elr-col-full.example-holder
                 ul.inline-list-left
                     li Item One
                     li Item Two
                     li Item Three
                     li Item Four
                     li Item Five
-            .elr-col-full
-                h3.elr-bold.elr-text-center Inline Centered
+            .elr-col-full.example-holder
                 ul.inline-list-center
                     li Item One
                     li Item Two
                     li Item Three
                     li Item Four
                     li Item Five
-            .elr-col-full
-                h3.elr-bold.elr-text-right Inline List Right
+            .elr-col-full.example-holder
                 ul.inline-list-right
                     li Item One
                     li Item Two
                     li Item Three
                     li Item Four
                     li Item Five
-        .elr-row
             .elr-col-full
                 pre @include elr-inline-list();
                 pre @include elr-inline-list(center);
                 pre @include elr-inline-list(right);
-    .elr-container
-        .elr-row.example-holder
-            .elr-col-third
-                h3.elr-bold Bullet List
-                ul.bullet-list
-                    li Item One
-                    li Item Two
-                    li Item Three
-                    li Item Four
-                    li Item Five
-            .elr-col-third
-                h3.elr-bold Triangle List
-                ul.elr-triangle-list
-                    li Item One
-                    li Item Two
-                    li Item Three
-                    li Item Four
-                    li Item Five
-            .elr-col-third
-                h3.elr-bold Checked List
-                ul.elr-checked-list
-                    li Item One
-                    li Item Two
-                    li Item Three
-                    li Item Four
-                    li Item Five
         .elr-row
             .elr-col-full
-                pre @include elr-bullet-list();
-                pre @include elr-bullet-list("\25B6");
-                pre @include elr-bullet-list("\2713");
-    .elr-container
-        .elr-row.example-holder
+                h4.example-subheading Custom Bullet List
+            .elr-row.example-holder
+                .elr-col-third
+                    ul.triangle-list
+                        li Item One
+                        li Item Two
+                        li Item Three
+                        li Item Four
+                        li Item Five
+                .elr-col-third
+                    ul.checked-list
+                        li Item One
+                        li Item Two
+                        li Item Three
+                        li Item Four
+                        li Item Five
             .elr-col-full
-                h3.elr-bold Icon lists with Font Awesome
-            .elr-col-third
-                ul.heart-list
-                    li Item One
-                    li Item Two
-                    li Item Three
-                    li Item Four
-                    li Item Five
-            .elr-col-third
-                ul.paw-list
-                    li Item One
-                    li Item Two
-                    li Item Three
-                    li Item Four
-                    li Item Five
-            .elr-col-third
-                ul.star-list
-                    li Item One
-                    li Item Two
-                    li Item Three
-                    li Item Four
-                    li Item Five
+                pre @include elr-bullet-list('\25B6');
+                pre @include elr-bullet-list('\2713');
         .elr-row
+            .elr-col-full
+                h4.example-subheading Icon lists with Font Awesome
+            .elr-row.example-holder
+                .elr-col-third
+                    ul.heart-list
+                        li Item One
+                        li Item Two
+                        li Item Three
+                        li Item Four
+                        li Item Five
+                .elr-col-third
+                    ul.paw-list
+                        li Item One
+                        li Item Two
+                        li Item Three
+                        li Item Four
+                        li Item Five
+                .elr-col-third
+                    ul.star-list
+                        li Item One
+                        li Item Two
+                        li Item Three
+                        li Item Four
+                        li Item Five
             .elr-col-full
                 pre @include elr-font-awesome-list('\f004');
                 pre @include elr-font-awesome-list('\f1b0');

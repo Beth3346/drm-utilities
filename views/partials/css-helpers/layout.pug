@@ -2,27 +2,101 @@ section#layout
     .elr-container
         .elr-row.example-section
             .elr-col-full
-                h3.elr-bold Float Boxes Left or Right
-            .elr-col-full.example-holder.example-holder-light
+                h3.example-heading.elr-bold Float Boxes Left or Right
+            .elr-col-full.example-holder
                 .elr-pull-left.box
                     p Left
-            .elr-col-full
-                pre .elr-pull-left
-        .elr-row.example-section
-            .elr-col-full.example-holder.example-holder-light
                 .elr-pull-right.box
                     p Right
             .elr-col-full
+                pre .elr-pull-left
                 pre .elr-pull-right
         .elr-row.example-section
             .elr-col-full
-                h3.elr-bold Clearfix
-                pre .elr-clear
-        .elr-row.example-section
-            .elr-col-full
-                h3.elr-bold Center Block
-            .elr-col-full.example-holder.example-holder-light
+                h3.example-heading.elr-bold Center Block
+            .elr-col-full.example-holder
                 .box.elr-center-block
                     p Center Block
             .elr-col-full
                 pre .elr-center-block
+        .elr-row.example-section
+            .elr-col-full
+                h3.example-heading.elr-bold Clearfix
+                pre .elr-clear
+            .elr-col-full
+                pre .elr-screen-reader
+        .elr-row.example-section
+            .elr-col-full
+                h3.example-heading.elr-bold Layout Reset Classes
+            .elr-col-full
+                .box-model
+                    .box-model-inner
+                p Default Box
+            .elr-col-full
+                .box-model.elr-no-margin
+                    .box-model-inner
+                pre .elr-no-margin
+            .elr-col-full
+                .box-model.elr-no-padding
+                    .box-model-inner
+                pre .elr-no-padding
+            .elr-col-full
+                .box-model
+                    .box-model-inner
+                pre .elr-no-float
+            .elr-col-full
+                .box-model.elr-no-background
+                    .box-model-inner
+                pre .elr-no-background
+            .elr-col-full
+                .box-model.elr-no-border
+                    .box-model-inner
+                pre .elr-no-border
+            .elr-col-full
+                h3.example-heading.elr-bold Overflow Classes
+            .elr-col-full
+                .box-model(style="margin-bottom: 80px")
+                    .box-model-inner
+                        .box-model-overflow
+                            p This box is too big for its container
+                p Default Box
+            .elr-col-full
+                .box-model
+                    .box-model-inner.elr-o-hidden
+                        .box-model-overflow
+                            p This box is too big for its container
+                pre .elr-o-hidden
+            .elr-col-full
+                .box-model
+                    .box-model-inner.elr-o-scroll
+                        .box-model-overflow
+                            p This box is too big for its container
+                pre .elr-o-scroll
+            .elr-col-full
+                .box-model
+                    .box-model-inner.elr-o-scroll-x
+                        .box-model-overflow
+                            p This box is too big for its container
+                pre .elr-o-scroll-x
+            .elr-col-full
+                .box-model
+                    .box-model-inner.elr-o-scroll-y
+                        .box-model-overflow
+                            p This box is too big for its container
+                pre .elr-o-scroll-y
+        .elr-row.example-section
+            .elr-col-full
+                h3.example-heading.elr-bold Flex Layout Classes
+                pre .flex
+                pre .flex-column
+                pre .flex-wrap
+                pre .flex-center
+                pre .flex-baseline
+                pre .flex-stretch
+                pre .flex-start
+                pre .flex-end
+                pre .flex-justify
+                pre .flex-auto
+                pre .flex-grow
+                pre .flex-first
+                pre .flex-last

@@ -1,56 +1,66 @@
 section#layout
     .elr-container.example-section
         .elr-row
-            .elr-col-full
-                h3.elr-bold Clear Fix
+            .elr-col-full.example-holder
+                h3.example-heading Clear Fix
                 p A modern clearfix alternative to overflow: hidden
                 pre @include elr-clearfix();
-        .elr-row
-            .elr-col-full
-                h3.elr-bold Em Margin
+            .elr-col-full.example-holder
+                h3.example-heading Em Margin
                 p Converts px margin to ems; enter value only - no units
-                h3.elr-bold Arguments:
+                h4.example-subheading Arguments:
                 ul.elr-unstyled-list
                     li $top: enter value only - no units
                     li $right: enter value only - no units
                     li $bottom: enter value only - no units
                     li $left: enter value only - no units
                 pre @include elr-em-margin(10, 20, 10, 20);
-        .elr-row
-            .elr-col-full
-                h3.elr-bold Em Padding
+            .elr-col-full.example-holder
+                h3.example-heading Em Padding
                 p Converts px padding to ems; enter value only - no units
-                h3.elr-bold Arguments:
+                h4.example-subheading Arguments:
                 ul.elr-unstyled-list
                     li $top: enter value only - no units
                     li $right: enter value only - no units
                     li $bottom: enter value only - no units
                     li $left: enter value only - no units
                 pre @include elr-em-padding(10, 20, 10, 20);
-        .elr-row
             .elr-col-full
-                h3.elr-bold Center Block
+                h3.example-heading Center Block
                 p horizontally centers an element within its container using display block and margin auto.
-                .example-holder
-                    .center-block
-                        h1 Center Block
-                        p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero, nemo, quia, dolorum, labore ratione quisquam doloribus consectetur officia perferendis tenetur sed nobis corrupti voluptatum. Eligendi, repudiandae velit voluptates cum officia aliquid eos molestiae vel quia nam illo obcaecati molestias expedita eveniet aut exercitationem placeat minus possimus aliquam minima. Nemo, nihil.
+            .elr-col-full.example-holder
+                .center-block
+                    h1 Center Block
+                    p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero, nemo, quia, dolorum, labore ratione quisquam doloribus consectetur officia perferendis tenetur sed nobis corrupti voluptatum. Eligendi, repudiandae velit voluptates cum officia aliquid eos molestiae vel quia nam illo obcaecati molestias expedita eveniet aut exercitationem placeat minus possimus aliquam minima. Nemo, nihil.
                 pre @include elr-center-block($width);
-        .elr-row
             .elr-col-full
-                h3.elr-bold Horizontally Center
+                h3.example-heading Horizontally Center
                 p Horizontally centers an element using absolute positioning and translate
-                .example-holder.example-holder-light.horizontal-container
+            .elr-col-full.example-holder.example-holder-light.horizontal-container
                     .horizontally-center
-        .elr-row
             .elr-col-full
-                h3.elr-bold Vertically Center
+                h3.example-heading Vertically Center
                 p Vertially centers an element using absolute positioning and translate
-                .example-holder.example-holder-light.vertical-container
+            .elr-col-full.example-holder.example-holder-light.vertical-container
                     .vertically-center
-        .elr-row
             .elr-col-full
-                h3.elr-bold Centered
+                h3.example-heading Centered
                 p Vertically and horizontally centers an element within its container
-                .example-holder.example-holder-light.center-container
+            .elr-col-full.example-holder.example-holder-light.center-container
                     .centered
+            .elr-col-full
+                h3.example-heading Ratio Box
+                p These boxes keep their aspect ratio at all times. This one is 16:9
+            .elr-col-full.example-holder
+                    .ratiobox
+                        .elr-ratiobox-inner
+                            h3.elr-ratiobox-centeredtext Some Centered Text
+                    .ratiobox
+                        .elr-ratiobox-inner
+                            h3.elr-ratiobox-centeredtext Some Centered Text
+                    .ratiobox-square
+                        .elr-ratiobox-inner
+                            h3.elr-ratiobox-centeredtext Some Centered Text
+                    .ratiobox-square
+                        .elr-ratiobox-inner
+                            h3.elr-ratiobox-centeredtext Some Centered Text

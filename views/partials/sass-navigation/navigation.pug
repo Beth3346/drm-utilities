@@ -2,40 +2,45 @@ section#navigation
     .elr-container.example-section
         .elr-row
             .elr-col-full
-                h3.elr-bold Nav Bar
-                p Without nested ul
-                nav
-                    ul.nav-bar
-                        li: a.active(href="#") Bears
-                        li: a(href="#") Dogs
-                        li: a(href="#") Big Cats
-                        li: a(href="#") Fish
-                        li: a(href="#") Birds
-    .elr-container.example-section
-        .elr-row
-            .elr-col-full
-                h3.elr-bold Nav Bar Solid
-                p Without nested ul
-                nav
-                    ul.nav-bar-solid
-                        li: a.active(href="#") Bears
-                        li: a(href="#") Dogs
-                        li: a(href="#") Big Cats
-                        li: a(href="#") Fish
-                        li: a(href="#") Birds
-    .elr-container.example-section
-        .elr-row
-            .elr-col-half
-                h3.elr-bold Nav Bar Solid Stacked
-                nav
-                    ul.nav-bar-solid-stacked
-                        li: a.active(href="#") Bears
-                        li: a(href="#") Dogs
-                        li: a(href="#") Big Cats
-                        li: a(href="#") Fish
-                        li: a(href="#") Birds
-            .elr-col-half
-                h3.elr-bold Nav Bar Solid Stacked With nested ul
+                h3.example-heading Navigation
+            .elr-col-full.example-holder
+                h4.example-subheading Nav Bar
+                .elr-col-half
+                    nav
+                        ul.nav-bar
+                            li: a.active(href="#") Bears
+                            li: a(href="#") Dogs
+                            li: a(href="#") Big Cats
+                            li: a(href="#") Fish
+                            li: a(href="#") Birds
+                .elr-col-half
+                    nav
+                        ul.nav-bar-stacked
+                            li: a.active(href="#") Bears
+                            li: a(href="#") Dogs
+                            li: a(href="#") Big Cats
+                            li: a(href="#") Fish
+                            li: a(href="#") Birds
+            .elr-col-full.example-holder
+                h4.example-subheading Nav Bar Solid
+                .elr-col-half
+                    nav
+                        ul.nav-bar-solid
+                            li: a.active(href="#") Bears
+                            li: a(href="#") Dogs
+                            li: a(href="#") Big Cats
+                            li: a(href="#") Fish
+                            li: a(href="#") Birds
+                .elr-col-half
+                    nav
+                        ul.nav-bar-solid-stacked
+                            li: a.active(href="#") Bears
+                            li: a(href="#") Dogs
+                            li: a(href="#") Big Cats
+                            li: a(href="#") Fish
+                            li: a(href="#") Birds
+            .elr-col-full.example-holder
+                h4.example-subheading Nav Bar Solid Stacked With nested ul
                 nav
                     ul.nav-bar-solid-stacked
                         li
@@ -54,10 +59,8 @@ section#navigation
                                 li: a(href="#") Siberian Husky
                                 li: a(href="#") Poodle
                                 li: a(href="#") Scottish Terrier
-    .elr-container.example-section
-        .elr-row
-            .elr-col-full
-                h3.elr-bold Nav Bar Pills
+            .elr-col-full.example-holder
+                h4.example-subheading Nav Bar Pills
                 p Without nested ul
                 nav
                     ul.nav-bar-pills
@@ -66,42 +69,39 @@ section#navigation
                         li: a(href="#") Big Cats
                         li: a(href="#") Fish
                         li: a(href="#") Birds
-    .elr-container.example-section
-        .elr-row
-            h3.elr-bold Nav Bar Pills Stacked
-            .elr-col-half
-                p Without nested ul
-                nav
-                    ul.nav-bar-pills-stacked
-                        li: a.active(href="#") Bears
-                        li: a(href="#") Dogs
-                        li: a(href="#") Big Cats
-                        li: a(href="#") Fish
-                        li: a(href="#") Birds
-            .elr-col-half
-                p With nested ul
-                nav
-                    ul.nav-bar-pills-stacked
-                        li
-                            a.active(href="#") Bears
-                            ul.elr-submenu
-                                li: a(href="#") Grizzly
-                                li: a(href="#") Polar
-                                li: a(href="#") Giant Panda
-                                li: a(href="#") Black
-                                li: a(href="#") Brown
-                        li
-                            a(href="#") Dogs
-                            ul.elr-submenu
-                                li: a(href="#") Doberman
-                                li: a(href="#") Shetland Sheepdog
-                                li: a(href="#") Siberian Husky
-                                li: a(href="#") Poodle
-                                li: a(href="#") Scottish Terrier
-    .elr-container.example-section
-        .elr-row
-            .elr-col-full
-                h3.elr-bold Nav Bar Pills Solid
+            .elr-col-full.example-holder
+                h4.example-subheading Nav Bar Pills Stacked
+                .elr-col-half
+                    p Without nested ul
+                    nav
+                        ul.nav-bar-pills-stacked
+                            li: a.active(href="#") Bears
+                            li: a(href="#") Dogs
+                            li: a(href="#") Big Cats
+                            li: a(href="#") Fish
+                            li: a(href="#") Birds
+                .elr-col-half
+                    p With nested ul
+                    nav
+                        ul.nav-bar-pills-stacked
+                            li
+                                a.active(href="#") Bears
+                                ul.elr-submenu
+                                    li: a(href="#") Grizzly
+                                    li: a(href="#") Polar
+                                    li: a(href="#") Giant Panda
+                                    li: a(href="#") Black
+                                    li: a(href="#") Brown
+                            li
+                                a(href="#") Dogs
+                                ul.elr-submenu
+                                    li: a(href="#") Doberman
+                                    li: a(href="#") Shetland Sheepdog
+                                    li: a(href="#") Siberian Husky
+                                    li: a(href="#") Poodle
+                                    li: a(href="#") Scottish Terrier
+            .elr-col-full.example-holder
+                h4.example-subheading Nav Bar Pills Solid
                 p Without nested ul
                 nav
                     ul.nav-bar-pills-solid
@@ -110,31 +110,50 @@ section#navigation
                         li: a(href="#") Big Cats
                         li: a(href="#") Fish
                         li: a(href="#") Birds
-    .elr-container.example-section
-        .elr-row
-            h3.elr-bold Nav Bar Pills Solid Stacked
-            .elr-col-half
-                p Without nested ul
-                nav
-                    ul.nav-bar-pills-solid-stacked
-                        li: a.active(href="#") Bears
-                        li: a(href="#") Dogs
-                        li: a(href="#") Big Cats
-                        li: a(href="#") Fish
-                        li: a(href="#") Birds
-            .elr-col-half
-                p With nested ul
-                nav
-                    ul.nav-bar-pills-solid-stacked
-                        li
-                            a.active(href="#") Bears
+            .elr-col-full.example-holder
+                h4.example-subheading Nav Bar Pills Solid Stacked
+                .elr-col-half
+                    p Without nested ul
+                    nav
+                        ul.nav-bar-pills-solid-stacked
+                            li: a.active(href="#") Bears
+                            li: a(href="#") Dogs
+                            li: a(href="#") Big Cats
+                            li: a(href="#") Fish
+                            li: a(href="#") Birds
+                .elr-col-half
+                    p With nested ul
+                    nav
+                        ul.nav-bar-pills-solid-stacked
+                            li
+                                a.active(href="#") Bears
+                                ul.elr-submenu
+                                    li: a(href="#") Grizzly
+                                    li: a(href="#") Polar
+                                    li: a(href="#") Giant Panda
+                                    li: a(href="#") Black
+                                    li: a(href="#") Brown
+                            li
+                                a(href="#") Dogs
+                                ul.elr-submenu
+                                    li: a(href="#") Doberman
+                                    li: a(href="#") Shetland Sheepdog
+                                    li: a(href="#") Siberian Husky
+                                    li: a(href="#") Poodle
+                                    li: a(href="#") Scottish Terrier
+            .elr-col-full.example-holder
+                h4.example-subheading Pure CSS dropdown nav
+                nav.css-dropdown-nav
+                    ul.css-dropdown-menu
+                        li.elr-has-submenu
+                            a(href="#") Bears
                             ul.elr-submenu
                                 li: a(href="#") Grizzly
                                 li: a(href="#") Polar
                                 li: a(href="#") Giant Panda
                                 li: a(href="#") Black
                                 li: a(href="#") Brown
-                        li
+                        li.elr-has-submenu
                             a(href="#") Dogs
                             ul.elr-submenu
                                 li: a(href="#") Doberman
@@ -142,23 +161,27 @@ section#navigation
                                 li: a(href="#") Siberian Husky
                                 li: a(href="#") Poodle
                                 li: a(href="#") Scottish Terrier
-    .elr-container.example-section
-        .elr-row
-            .elr-col-full
-                h3.elr-bold Breadcrumbs
+                        li: a(href="#") Big Cats
+                        li: a(href="#") Fish
+                        li: a(href="#") Birds
+            .elr-col-full.example-holder
+                h3.example-heading Breadcrumbs
                 ul.breadcrumbs
                     li: a(href="#") Home
                     li: a(href="#") Services
                     li.active Service One
-    .elr-container.example-section
-        .elr-row
             .elr-col-full
-                h3.elr-bold Drop Down Navigation
+                h3.example-heading JavaScript Navigation
+            .elr-col-full.example-holder
+                h4.example-subheading Drop Down Navigation
                 p: a(href="js-dropdown-navigation.html") Dropdown Menu Example
-                h3.elr-bold Offscreen Menu
+            .elr-col-full.example-holder
+                h4.example-subheading Offscreen Menu
                 p: a(href="js-offscreen-menu.html") Offscreen Menu Example
-                h3.elr-bold Sticky Menu
+            .elr-col-full.example-holder
+                h4.example-subheading Sticky Menu
                 p: a(href="js-sticky-nav.html") Sticky Menu Example
                 //- p: a(href="js-sticky-sidebar.html") Sticky Sidebar Menu Example
-                h3.elr-bold Back to Top
+            .elr-col-full.example-holder
+                h4.example-subheading Back to Top
                 p: a(href="js-back-to-top.html") Back to Top Example
