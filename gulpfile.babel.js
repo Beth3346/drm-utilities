@@ -96,7 +96,7 @@ gulp.task('styles', ['scsslint'], function() {
         .pipe(sass().on('error', sass.logError))
             .pipe(gulp.dest(paths.css))
         .pipe(autoprefixer({
-            browsers: ['last 5 versions'],
+            browsers: ['last 3 versions'],
             cascade: false
         }))
         .pipe(gulp.dest(paths.css))
@@ -120,7 +120,7 @@ gulp.task('styles', ['scsslint'], function() {
         //     'order-alphabetical': false
         // }))
         // .pipe(csslint.formatter())
-        .pipe(cleanCSS({debug: true}))
+        // .pipe(cleanCSS({debug: true}))
         .pipe(gulp.dest(paths.css))
         .pipe(browserSync.stream());
 });
