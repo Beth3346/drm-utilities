@@ -19,9 +19,9 @@
     background-color: $bg-color;
 
     figure {
-        @include elr-rectangle(140px, auto);
+        @include elr-rectangle(200px, auto);
         float: left;
-        margin: 20px 20px 0 0;
+        margin: 10px 20px 0 0;
     }
 
     img {
@@ -33,8 +33,10 @@
     }
 
     .elr-tab-title {
-        @include elr-em-font(24);
+        @include elr-em-font(24px);
         color: $text-color;
+        border-bottom: 1px solid $light-grey;
+        margin-bottom: 20px;
     }
 
     p {
@@ -110,6 +112,6 @@
             background-color: $white;
             border-color: $light-grey;
             transition: all, .3s;
-        } 
+        }
     }
 }
