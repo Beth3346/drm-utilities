@@ -47,18 +47,6 @@ const elrStickyNav = function(params) {
         const navPositionTop = $nav.offset().top;
         const navPositionLeft = $nav.offset().left;
 
-        // if (hash) {
-        //     const $hashLink = $nav.find("a[href='" + hash + "']");
-
-        //     $hashLink.addClass(activeClass);
-        //     $hashLink.trigger('click');
-        //     $nav.on('click', `a[href='${hash}']`, function() {
-        //         gotoSection.call(this, activeClass);
-        //     });
-        // } else {
-            // $links.first().addClass(activeClass);
-        // }
-
         $win.on('scroll', function() {
             affixElement($nav, navPositionTop);
         });
