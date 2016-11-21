@@ -1,6 +1,7 @@
 // EM Conversion Mixins
 
 // calculates em font size from px font size
+// should be deprecated in favor of to-rems function
 
 @mixin elr-em-font($size) {
     font-size: to-rems($size);
