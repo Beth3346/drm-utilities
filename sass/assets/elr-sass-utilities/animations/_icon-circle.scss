@@ -1,6 +1,6 @@
 @mixin elr-icon-animated($width: 90px, $background: $elr-blue-light, $color: $elr-blue) {
     @include elr-circle($width);
-    margin: 20px auto 30px;
+    margin: to-rems(20px) auto to-rems(30px);
     text-align: center;
     background: rgba($background, .2);
     position: relative;
@@ -18,7 +18,7 @@
     }
 
     .fa {
-        @include elr-em-font(48px);
+        font-size: to-rems(48px);
         line-height: $width;
         color: $color;
         transition: color .2s ease;

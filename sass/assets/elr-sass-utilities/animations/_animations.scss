@@ -13,19 +13,15 @@
 }
 
 @mixin elr-slide($final-height: 500px) {
-    cursor: pointer;
+    // cursor: pointer;
+    max-height: 0;
+    visibility: hidden;
+    overflow: hidden;
+    transition: max-height .5s cubic-bezier(0, 1.05, 0, 1), visibility .2s;
 
-    &:hover {
-        .elr-slide-down {
-            max-height: $final-height;
-            visibility: visible;
-            transition: max-height .5s ease-in;
-        }
-    }
-
-    .elr-slide-down {
-        max-height: 0;
-        visibility: hidden;
-        transition: max-height .5s cubic-bezier(0, 1.05, 0, 1), visibility .2s;
+    &.active {
+        max-height: to-rems($final-height);
+        visibility: visible;
+        transition: max-height .5s ease-in;
     }
 }
