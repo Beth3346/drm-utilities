@@ -23,6 +23,110 @@ const elrCalendarEvents = function(params) {
         'date': 'elr-date'
     };
 
+    // these events occur once per year
+    const addYearlyEvents = (evt, evtDates, $calendarInner) => {
+        // need to add support for multi-day events
+        if (evt.day) {
+            elr.each(evt.day, function() {
+                let day = elr.inArray(elrTime.days, this);
+                let evtMonth = $calendarInner.data('month');
+                let evtYear = $calendarInner.data('year');
+                let weeks = $calendarInner.find('.elr-week');
+                let evtWeekNum = elrTime.getEventWeekNum(evt, evtYear);
+
+                weeks.each(function() {
+                    let $that = $(this);
+                    let firstDate = $that.find(`.${classes.date}`).first().data('date');
+                    let weekInfo = elrTime.getDatesInWeek({
+                        'month': evtMonth,
+                        'date': firstDate,
+                        'year': evtYear
+                    });
+
+                    if (evtWeekNum && evtWeekNum === weekInfo.weekNum) {
+                        let evtDate = $that.find(`.${classes.date}[data-day="${day}"]`);
+                        evtDates.push(evtDate.data('date'));
+                    }
+                });
+            });
+        } else {
+            evtDates.push(parseInt(evt.eventDate, 10));
+        }
+    };
+
+    // these events occur once per month
+    const addMonthlyEvents = (evt, evtDates, $calendarInner) => {
+        let weeks = $calendarInner.find('.elr-week');
+
+        // events that occur on a specific day of the week
+        // eg. event occurs on the first Tuesday of every month
+        if (evt.day) {
+            elr.each(evt.day, function() {
+                let evtMonth = $calendarInner.data('month');
+                let evtYear = $calendarInner.data('year');
+                let day = elr.inArray(elrTime.days, this);
+
+                evt.month = elrTime.months[evtMonth];
+                let evtWeekNum = elrTime.getEventWeekNum(evt, evtYear);
+
+                weeks.each(function() {
+                    let $that = $(this);
+                    let firstDate = $that.find('.elr-date').first().data('date');
+                    let weekInfo = elrTime.getDatesInWeek({
+                        'month': evtMonth,
+                        'date': firstDate,
+                        'year': evtYear
+                    });
+
+                    if (evtWeekNum === weekInfo.weekNum) {
+                        evtDates.push($that.find(`.elr-date[data-day="${day}"]`).data('date'));
+                    }
+                });
+            });
+        } else {
+            evtDates.push(parseInt(evt.eventDate, 10));
+        }
+    };
+
+    // these events occur every 2 weeks
+    // they occur on odd or even weeks
+    const addBiWeeklyEvents = (evts, eventDates) => {
+
+    };
+
+    // these events occur every week
+    // can be multiple days eg. Monday, Wendesday, Friday or Weekends
+    const addWeeklyEvents = (evts, eventDates) => {
+
+    };
+
+    // these events occur every day
+    // can be all day events or can occur at a set time
+    const addDailyEvents = (evts, eventDates) => {
+
+    };
+
+    // these events occur once
+    // can be all day events or can occur at a set time
+    const addOneTimeEvents = (evts, eventDates) => {
+
+    };
+
+    // gets the index of an evt so we can keep track after evts are removed
+    const getEventIndex = (evtId) => {
+        let index = null;
+
+        $.each(evts, function(k, v) {
+            if (value.id === evtId) {
+                index = key;
+            }
+
+            return index;
+        });
+
+        return index;
+    };
+
     let self = {
         addEvents: (evt, $calendar) => {
             let $calendarInner = $calendar.find(`div.${calendarInnerClass}`);
@@ -31,17 +135,17 @@ const elrCalendarEvents = function(params) {
             let evtDates = [];
 
             if (evt.recurrance === 'yearly' && evtMonth === month) {
-                self.addYearlyEvents(evt, evtDates, $calendarInner);
+                addYearlyEvents(evt, evtDates, $calendarInner);
             } else if (evt.recurrance === 'monthly') {
-                self.addMonthlyEvents(evt, evtDates, $calendarInner);
+                addMonthlyEvents(evt, evtDates, $calendarInner);
             } else if (evt.recurrance === 'biweekly') {
-                self.addBiWeeklyEvents(evt, evtDates, $calendarInner);
+                addBiWeeklyEvents(evt, evtDates, $calendarInner);
             } else if (evt.recurrance === 'weekly') {
-                self.addWeeklyEvents(evt, evtDates, $calendarInner);
+                addWeeklyEvents(evt, evtDates, $calendarInner);
             } else if (evt.recurrance === 'daily') {
-                self.addDailyEvents(evt, evtDates, $calendarInner);
+                addDailyEvents(evt, evtDates, $calendarInner);
             } else if (evt.recurrance === 'one-time') {
-                self.addOneTimeEvents(evt, evtDates, $calendarInner);
+                addOneTimeEvents(evt, evtDates, $calendarInner);
             } else if (evt.recurrance === 'yearly') {
                 // console.log(`event does not occur in this month: ${evt.name}`);
                 return
@@ -95,98 +199,6 @@ const elrCalendarEvents = function(params) {
                 $eventList.find(`a:contains(${evt.name})`)
                     .addClass(classes.holiday);
             }
-        },
-
-        addYearlyEvents: (evt, evtDates, $calendarInner) => {
-            // need to add support for multi-day events
-            if (evt.day) {
-                elr.each(evt.day, function() {
-                    let day = elr.inArray(elrTime.days, this);
-                    let evtMonth = $calendarInner.data('month');
-                    let evtYear = $calendarInner.data('year');
-                    let weeks = $calendarInner.find('.elr-week');
-                    let evtWeekNum = elrTime.getEventWeekNum(evt, evtYear);
-
-                    weeks.each(function() {
-                        let $that = $(this);
-                        let firstDate = $that.find(`.${classes.date}`).first().data('date');
-                        let weekInfo = elrTime.getDatesInWeek({
-                            'month': evtMonth,
-                            'date': firstDate,
-                            'year': evtYear
-                        });
-
-                        if (evtWeekNum && evtWeekNum === weekInfo.weekNum) {
-                            let evtDate = $that.find(`.${classes.date}[data-day="${day}"]`);
-                            evtDates.push(evtDate.data('date'));
-                        }
-                    });
-                });
-            } else {
-                evtDates.push(parseInt(evt.eventDate, 10));
-            }
-        },
-
-        addMonthlyEvents: (evt, evtDates, $calendarInner) => {
-            let weeks = $calendarInner.find('.elr-week');
-
-            if (evt.day) {
-                elr.each(evt.day, function() {
-                    let evtMonth = $calendarInner.data('month');
-                    let evtYear = $calendarInner.data('year');
-                    let day = elr.inArray(elrTime.days, this);
-
-                    evt.month = elrTime.months[evtMonth];
-                    let evtWeekNum = elrTime.getEventWeekNum(evt, evtYear);
-
-                    weeks.each(function() {
-                        let $that = $(this);
-                        let firstDate = $that.find('.elr-date').first().data('date');
-                        let weekInfo = elrTime.getDatesInWeek({
-                            'month': evtMonth,
-                            'date': firstDate,
-                            'year': evtYear
-                        });
-
-                        if (evtWeekNum === weekInfo.weekNum) {
-                            evtDates.push($that.find(`.elr-date[data-day="${day}"]`).data('date'));
-                        }
-                    });
-                });
-            } else {
-                evtDates.push(parseInt(evt.eventDate, 10));
-            }
-        },
-
-        addBiWeeklyEvents: (evts, eventDates) => {
-
-        },
-
-        addWeeklyEvents: (evts, eventDates) => {
-
-        },
-
-        addDailyEvents: (evts, eventDates) => {
-
-        },
-
-        addOneTimeEvents: (evts, eventDates) => {
-
-        },
-
-        // gets the index of an evt so we can keep track after evts are removed
-        getEventIndex: (evtId) => {
-            let index = null;
-
-            $.each(evts, function(k, v) {
-                if (value.id === evtId) {
-                    index = key;
-                }
-
-                return index;
-            });
-
-            return index;
         },
 
         closeEvent: (e) => {
