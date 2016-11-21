@@ -2,20 +2,101 @@
 
 // makes a rounded heading
 
-@mixin elr-rounded-heading($bk-color: $dark-grey, $text-color: $white, $border-radius: 3px) {
-    @include elr-em-padding('all', 5px, 10px);
+@mixin elr-heading-rounded(
+    $bk-color: $text-color,
+    $text-color: $white,
+    $border-radius: 3px
+) {
+    padding: to-rems(10px);
     background-color: $bk-color;
     color: $text-color;
-    border-radius: $border-radius;
+
+    @if $border-radius > 0 {
+        border-radius: $border-radius;
+    }
 }
 
 // makes a pill heading
 
-@mixin elr-pill-heading($bk-color: $dark-grey, $text-color: $white, $height: 40px) {
-    @include elr-em-height($height);
-    @include elr-em-line-height($height);
-    @include elr-em-padding('all', 0, 10px, 0, 20px);
+@mixin elr-heading-pill($bk-color: $text-color, $text-color: $white) {
+    padding: 10px 20px;
     background-color: $bk-color;
     color: $text-color;
-    border-radius: ($height / 2);
+    border-radius: 50px;
+}
+
+@mixin elr-heading-underline($bdr-color: $light-grey) {
+    border-bottom: 1px solid $bdr-color;
+    padding-bottom: 5px;
+}
+
+@mixin elr-heading-shortline(
+    $bdr-color: $accent-color,
+    $align: center,
+    $width: 80px,
+    $font-size: 24px
+) {
+    @include elr-underline($bdr-color, $width, $align, $font-size);
+    text-align: $align;
+}
+
+@mixin elr-heading-divider(
+    $line-width: 80px,
+    $line-color: $accent-color,
+    $max-width: 550px
+) {
+    text-align: center;
+    position: relative;
+    width: auto;
+    max-width: $max-width;
+    max-width: max-content;
+    padding-left: to-rems($line-width + 20);
+    padding-right: to-rems($line-width + 20);
+
+    &::before,
+    &::after {
+        content: '';
+        width: $line-width;
+        height: 1px;
+        background-color: $line-color;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        display: block;
+    }
+
+    &::after {
+        left: auto;
+        right: 0;
+    }
+}
+
+@mixin elr-heading-icon($icon, $icon-color: $accent-color, $font-size: 24px) {
+    font-size: to-rems($font-size);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    line-height: 1.2;
+
+    &::before {
+        @include elr-font-awesome(120%);
+        content: $icon;
+        color: $icon-color;
+        margin-right: $font-size * .6;
+        display: block;
+    }
+
+    .icon-group-heading,
+    .icon-group-subheading {
+        padding: 0;
+        margin: 0;
+    }
+
+    .icon-group-heading {
+        font-size: to-rems($font-size);
+    }
+
+    .icon-group-subheading {
+        font-size: to-rems(50%);
+    }
 }
