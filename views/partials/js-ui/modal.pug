@@ -2,16 +2,13 @@ section#elr-modal
     .elr-container
         .elr-row
             .elr-col-full
-                h1 Elr Modals
-                h2 Modal Demo
+                h2.example-heading ELR Modals
                 p display modal content with a click of a button
-    .elr-container
-        .elr-row
-            .elr-col-full
-                .elr-modal-demo-buttons
-                    button.elr-modal-open(data-modal="elr-modal-info") More Info
-                    button.elr-modal-open(data-modal="elr-modal-form") View Form
-                    button.elr-modal-open(data-modal="elr-modal-video") See Video
+            .elr-col-full.example-holder
+                .button-group
+                    button.elr-button.elr-button-primary.elr-modal-open(data-modal="elr-modal-info") More Info
+                    button.elr-button.elr-button-primary.elr-modal-open(data-modal="elr-modal-form") View Form
+                    button.elr-button.elr-button-primary.elr-modal-open(data-modal="elr-modal-video") See Video
 
                 .elr-modal#elr-modal-info
                     .elr-header
@@ -25,7 +22,7 @@ section#elr-modal
                     .elr-header
                         h3.elr-bold.elr-header-title Modal Form
                     .elr-body
-                        form.tabular-form(action="")
+                        form.form.tabular-form(action="")
                             label(for="name") Name:
                             input(type="text" id="name" name="name" placeholder="First Last")
 
@@ -47,8 +44,3 @@ section#elr-modal
                             iframe(width="420" height="315" src="//www.youtube.com/embed/Na9H0Jdy3fY?rel=0" frameborder="0" allowfullscreen)
                     .elr-footer
                         button.elr-button.elr-button-primary.elr-modal-close Close
-    .elr-container
-        .elr-row
-            .elr-col-full
-                h2 Usage
-                p: a(href="https://github.com/Beth3346/elr-modals" target="_blank") Visit GitHub Repo

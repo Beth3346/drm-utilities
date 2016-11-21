@@ -2,13 +2,11 @@ section#flexible-grid
     .elr-container
         .elr-row
             .elr-col-full
-                h1 Elr Filter Grid
+                h2.example-heading ELR Filter Grid
                 p Filter grid items by tag
-    .elr-container
-        .elr-row
             .elr-col-full
                 .button-group.elr-grid-nav
-                    button.elr-grid-filter(data-filter="all") All
+                    button.elr-button.elr-button-primary.elr-grid-filter(data-filter="all") All
                 .elr-flexible-grid
                     .elr-grid-item
                         .overlay
@@ -139,8 +137,3 @@ section#flexible-grid
                             p.caption-descr A really cute cat
                             ul.caption-tags
                                 li(data-filter="cat") cat
-    .elr-container
-        .elr-row
-            .elr-col-full
-                h2 Usage
-                p: a(href="https://github.com/dynamicresponsemedia/elr-flexible-grid" target="_blank") Visit GitHub Repo

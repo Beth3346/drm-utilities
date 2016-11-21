@@ -2,7 +2,7 @@ section#elr-sort
     .elr-container
         .elr-row
             .elr-col-full
-                h1 Elr Sort
+                h2.example-heading ELR Sort
                 p Sort list items quickly
         .elr-row
             .elr-col-full.sort-lists
@@ -10,8 +10,8 @@ section#elr-sort
                     .sort-list
                         h4 Numeric list
                         .button-group
-                            button.elr-sort-button(data-sort="ascending" data-list="numbers") &#9650;
-                            button.elr-sort-button(data-sort="descending" data-list="numbers") &#9660;
+                            button.elr-button.elr-button-primary.elr-sort-button(data-sort="ascending" data-list="numbers") &#9650;
+                            button.elr-button.elr-button-primary.elr-sort-button(data-sort="descending" data-list="numbers") &#9660;
                         ul.elr-unstyled-list.elr-sortable#numbers
                             li 7
                             li 101
@@ -23,8 +23,8 @@ section#elr-sort
                     .sort-list
                         h4 Can sort lists with multiple data types
                         .button-group
-                            button.elr-sort-button(data-sort="ascending" data-list="alpha-num") &#9650;
-                            button.elr-sort-button(data-sort="descending" data-list="alpha-num") &#9660;
+                            button.elr-button.elr-button-primary.elr-sort-button(data-sort="ascending" data-list="alpha-num") &#9650;
+                            button.elr-button.elr-button-primary.elr-sort-button(data-sort="descending" data-list="alpha-num") &#9660;
                         ul.elr-unstyled-list.elr-sortable#alpha-num
                             li 7
                             li 101
@@ -42,8 +42,8 @@ section#elr-sort
                     .sort-list
                         h4 Sorts lists of items that begin with numbers as a numeric list
                         .button-group
-                            button.elr-sort-button(data-sort="ascending" data-list="miles") &#9650;
-                            button.elr-sort-button(data-sort="descending" data-list="miles") &#9660;
+                            button.elr-button.elr-button-primary.elr-sort-button(data-sort="ascending" data-list="miles") &#9650;
+                            button.elr-button.elr-button-primary.elr-sort-button(data-sort="descending" data-list="miles") &#9660;
                         ul.elr-unstyled-list.elr-sortable#miles
                             li 7 miles
                             li 101 miles
@@ -55,8 +55,8 @@ section#elr-sort
                     .sort-list
                         h4 Numeric list sorted as alpha with data-type value
                         .button-group
-                            button.elr-sort-button(data-sort="ascending" data-list="alpha-miles") &#9650;
-                            button.elr-sort-button(data-sort="descending" data-list="alpha-miles") &#9660;
+                            button.elr-button.elr-button-primary.elr-sort-button(data-sort="ascending" data-list="alpha-miles") &#9650;
+                            button.elr-button.elr-button-primary.elr-sort-button(data-sort="descending" data-list="alpha-miles") &#9660;
                         ul.elr-unstyled-list.elr-sortable#alpha-miles(data-type="alpha")
                             li 7 miles
                             li 101 miles
@@ -68,8 +68,8 @@ section#elr-sort
                     .sort-list
                         h4 Sorts lists with decimal values
                         .button-group
-                            button.elr-sort-button(data-sort="ascending" data-list="decimals") &#9650;
-                            button.elr-sort-button(data-sort="descending" data-list="decimals") &#9660;
+                            button.elr-button.elr-button-primary.elr-sort-button(data-sort="ascending" data-list="decimals") &#9650;
+                            button.elr-button.elr-button-primary.elr-sort-button(data-sort="descending" data-list="decimals") &#9660;
                         ul.elr-unstyled-list.elr-sortable#decimals
                             li 3.64
                             li 101.33
@@ -81,8 +81,8 @@ section#elr-sort
                     .sort-list
                         h4 Sorts lists with decimal values and units
                         .button-group
-                            button.elr-sort-button(data-sort="ascending" data-list="gallons") &#9650;
-                            button.elr-sort-button(data-sort="descending" data-list="gallons") &#9660;
+                            button.elr-button.elr-button-primary.elr-sort-button(data-sort="ascending" data-list="gallons") &#9650;
+                            button.elr-button.elr-button-primary.elr-sort-button(data-sort="descending" data-list="gallons") &#9660;
                         ul.elr-unstyled-list.elr-sortable#gallons
                             li 3.64 gallons
                             li 101.33 gallons
@@ -94,8 +94,8 @@ section#elr-sort
                     .sort-list
                         h4 Can ignore leading words like 'the' and 'a' when sorting
                         .button-group
-                            button.elr-sort-button(data-sort="ascending" data-list="movies") &#9650;
-                            button.elr-sort-button(data-sort="descending" data-list="movies") &#9660;
+                            button.elr-button.elr-button-primary.elr-sort-button(data-sort="ascending" data-list="movies") &#9650;
+                            button.elr-button.elr-button-primary.elr-sort-button(data-sort="descending" data-list="movies") &#9660;
                         ul.elr-unstyled-list.elr-sortable#movies
                             li Casablanca
                             li Star Wars
@@ -110,8 +110,8 @@ section#elr-sort
                     .sort-list
                         h4 Alpha lists
                         .button-group
-                            button.elr-sort-button(data-sort="ascending" data-list="animals") &#9650;
-                            button.elr-sort-button(data-sort="descending" data-list="animals") &#9660;
+                            button.elr-button.elr-button-primary.elr-sort-button(data-sort="ascending" data-list="animals") &#9650;
+                            button.elr-button.elr-button-primary.elr-sort-button(data-sort="descending" data-list="animals") &#9660;
                         ul.elr-unstyled-list.elr-sortable#animals
                             li Cat
                             li Dog
@@ -127,8 +127,8 @@ section#elr-sort
                         h4 Will ignore trailing numbers when sorting alpha lists
                         p.elr-text-small All characters following numbers will be ignored
                         .button-group
-                            button.elr-sort-button(data-sort="ascending" data-list="animals2") &#9650;
-                            button.elr-sort-button(data-sort="descending" data-list="animals2") &#9660;
+                            button.elr-button.elr-button-primary.elr-sort-button(data-sort="ascending" data-list="animals2") &#9650;
+                            button.elr-button.elr-button-primary.elr-sort-button(data-sort="descending" data-list="animals2") &#9660;
                         ul.elr-unstyled-list.elr-sortable#animals2
                             li Cat 12
                             li Cat 10
@@ -142,8 +142,8 @@ section#elr-sort
                 .sort-list-holder
                     .sort-list
                         .button-group
-                            button.elr-sort-button(data-sort="ascending" data-list="history") &#9650;
-                            button.elr-sort-button(data-sort="descending" data-list="history") &#9660;
+                            button.elr-button.elr-button-primary.elr-sort-button(data-sort="ascending" data-list="history") &#9650;
+                            button.elr-button.elr-button-primary.elr-sort-button(data-sort="descending" data-list="history") &#9660;
                         ul.elr-unstyled-list.elr-sortable#history
                             li 3/7/1945
                             li 7/4/1776
@@ -153,8 +153,8 @@ section#elr-sort
                 .sort-list-holder
                     .sort-list
                         .button-group
-                            button.elr-sort-button(data-sort="ascending" data-list="history-events") &#9650;
-                            button.elr-sort-button(data-sort="descending" data-list="history-events") &#9660;
+                            button.elr-button.elr-button-primary.elr-sort-button(data-sort="ascending" data-list="history-events") &#9650;
+                            button.elr-button.elr-button-primary.elr-sort-button(data-sort="descending" data-list="history-events") &#9660;
                         ul.elr-unstyled-list.elr-sortable#history-events
                             li 3/7/1945 - VE Day
                             li 7/4/1776 - United States declares independence from England
@@ -164,8 +164,8 @@ section#elr-sort
                 .sort-list-holder
                     .sort-list
                         .button-group
-                            button.elr-sort-button(data-sort="ascending" data-list="hours") &#9650;
-                            button.elr-sort-button(data-sort="descending" data-list="hours") &#9660;
+                            button.elr-button.elr-button-primary.elr-sort-button(data-sort="ascending" data-list="hours") &#9650;
+                            button.elr-button.elr-button-primary.elr-sort-button(data-sort="descending" data-list="hours") &#9660;
                         ul.elr-unstyled-list.elr-sortable#hours
                             li 3:00pm
                             li 8:23AM
@@ -178,8 +178,8 @@ section#elr-sort
                 .sort-list-holder
                     .sort-list
                         .button-group
-                            button.elr-sort-button(data-sort="ascending" data-list="hours2") &#9650;
-                            button.elr-sort-button(data-sort="descending" data-list="hours2") &#9660;
+                            button.elr-button.elr-button-primary.elr-sort-button(data-sort="ascending" data-list="hours2") &#9650;
+                            button.elr-button.elr-button-primary.elr-sort-button(data-sort="descending" data-list="hours2") &#9660;
                         ul.elr-unstyled-list.elr-sortable#hours2
                             li 3:00pm Some Event
                             li 8:23AM Some Event
@@ -192,8 +192,8 @@ section#elr-sort
                 .sort-list-holder
                     .sort-list
                         .button-group
-                            button.elr-sort-button(data-sort="ascending" data-list="cal-events") &#9650;
-                            button.elr-sort-button(data-sort="descending" data-list="cal-events") &#9660;
+                            button.elr-button.elr-button-primary.elr-sort-button(data-sort="ascending" data-list="cal-events") &#9650;
+                            button.elr-button.elr-button-primary.elr-sort-button(data-sort="descending" data-list="cal-events") &#9660;
                         ul.elr-unstyled-list.elr-sortable#cal-events
                             li Birthday
                             li 9:45am Some Event
