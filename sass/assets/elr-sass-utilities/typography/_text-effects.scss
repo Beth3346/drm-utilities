@@ -31,7 +31,17 @@
     }
 }
 
-@mixin elr-underline($color: $white, $width: 100px, $align: center, $spacing: 30px, $thickness: 1px) {
+@mixin elr-underline(
+    $color: $white,
+    $width: 100px,
+    $align: center,
+    $spacing: 30px,
+    $thickness: 1px
+) {
+    @if $align == right {
+        position: relative;
+    }
+
     &:after {
         content: '';
         width: $width;
@@ -41,6 +51,10 @@
 
         @if ($align == center) {
             margin: $spacing auto;
+        } @elseif ($align == right) {
+            margin-top: $spacing;
+            position: absolute;
+            right: 0;
         } @else {
             margin: $spacing 0;
         }
