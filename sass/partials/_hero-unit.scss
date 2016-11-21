@@ -8,6 +8,7 @@
 
     @include elr-breakpoint('neptune') {
         padding: 10px;
+        margin-top: 0;
     }
 
     a {
