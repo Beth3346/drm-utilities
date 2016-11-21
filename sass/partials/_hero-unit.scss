@@ -1,13 +1,13 @@
 .hero-unit {
-    padding-top: 40px;
-    padding-bottom: 40px;
+    padding-top: to-rems(40px);
+    padding-bottom: to-rems(40px);
     background-color: $main-color;
     color: $background-color;
     line-height: 1.5;
-    margin-top: 56px;
+    margin-top: to-rems(56px);
 
     @include elr-breakpoint('neptune') {
-        padding: 10px;
+        padding: to-rems(10px);
         margin-top: 0;
     }
 
@@ -24,8 +24,8 @@
 .page-title,
 .hero-unit-subtitle {
     margin: 0;
-    padding: 0 0 0 10px;
-    font-weight: 700;
+    padding: 0 0 0 to-rems(10px);
+    font-weight: $bold;
 
     @include elr-breakpoint('saturn') {
         padding: 0;

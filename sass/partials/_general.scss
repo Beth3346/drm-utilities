@@ -1,0 +1,15 @@
+// General Styles
+
+@include elr-reset;
+@include elr-base;
+@include elr-helper-classes;
+@include elr-action-helper-classes;
+@include elr-grid;
+
+.options-list { font-size: to-rems(14px); }
+
+.main-body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}

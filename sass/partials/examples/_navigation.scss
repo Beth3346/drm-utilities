@@ -8,9 +8,9 @@
 .nav-bar-solid-stacked,
 .nav-bar-pills-stacked,
 .nav-bar-pills-solid-stacked {
-    @include elr-em-font(14px);
+    font-size: to-rems(14px);
 
-    .elr-submenu { @include elr-em-font(12px); }
+    .elr-submenu { font-size: to-rems(12px); }
 }
 
 .nav-bar,
@@ -18,19 +18,15 @@
 .nav-bar-solid,
 .nav-bar-pills,
 .nav-bar-pills-solid {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: to-rems(10px);
+    margin-bottom: to-rems(10px);
 }
 
 .nav-bar-solid-stacked,
 .nav-bar-pills-stacked,
-.nav-bar-pills-solid-stacked {
-    width: 300px;
-}
+.nav-bar-pills-solid-stacked { width: to-rems(300px); }
 
-.nav-bar {
-    @include elr-nav-bar;
-}
+.nav-bar { @include elr-nav-bar; }
 
 .nav-bar-solid {
     @include elr-nav-bar($white, $white, left, transparent, $link-color);
@@ -65,5 +61,4 @@
 }
 
 .breadcrumbs { @include elr-breadcrumbs; }
-
-.breadcrumbs-arrow { @include elr-breadcrumbs-arrow(); }
+.breadcrumbs-arrow { @include elr-breadcrumbs-arrow; }

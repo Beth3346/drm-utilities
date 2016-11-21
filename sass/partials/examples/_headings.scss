@@ -1,71 +1,50 @@
 .heading {
     width: to-rems(400px);
+}
+
+.heading,
+.heading-divider {
     font-size: to-rems(24px);
     margin-bottom: to-rems(10px);
-    font-weight: 300;
-}
-
-.heading-rounded { @include elr-heading-rounded; }
-
-.heading-pill { @include elr-heading-pill; }
-
-.heading-underline { @include elr-heading-underline; }
-
-.heading-shortline { @include elr-heading-shortline; }
-
-.heading-shortline-left {
-    @include elr-heading-shortline($link-color, left, 50px);
-}
-
-.heading-shortline-right {
-    @include elr-heading-shortline($link-color, right, 50px);
+    font-weight: $light;
 }
 
 .heading-divider {
     @include elr-heading-divider;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    font-weight: 300;
-    font-size: to-rems(24px);
-    margin-bottom: to-rems(10px);
+    padding-top: to-rems(10px);
+    padding-bottom: to-rems(10px);
 }
 
-.icon-heading {
-    @include elr-heading-icon('\f004');
-}
+.heading-rounded { @include elr-heading-rounded; }
+.heading-pill { @include elr-heading-pill; }
+.heading-underline { @include elr-heading-underline; }
+.heading-shortline { @include elr-heading-shortline; }
+.heading-shortline-left { @include elr-heading-shortline($link-color, left, 50px); }
+.heading-shortline-right { @include elr-heading-shortline($link-color, right, 50px); }
+
+.icon-heading { @include elr-heading-icon('\f004'); }
 
 .icon-heading-group {
     @include elr-heading-icon('\f004', $link-color, 30px);
-
-    .icon-group-subheading {
-        color: $grey;
-    }
+    border-bottom: 1px solid $light-grey;
+    padding-bottom: to-rems(10px);
 }
+
+.icon-group-subheading { color: $grey; }
 
 .icon-content-block {
     border: 1px solid $light-grey;
-    border-radius: 5px;
-    padding: 15px 20px;
-    max-width: 550px;
-
-    .icon-heading-group {
-        border-bottom: 1px solid $light-grey;
-        padding-bottom: 10px;
-        // margin-bottom: 10px;
-    }
+    border-radius: to-rems(5px);
+    padding: to-rems(15px) to-rems(20px);
+    max-width: to-rems(550px);
 
     p {
         font-size: to-rems(14px);
         line-height: 1.5;
-        padding: 5px 0;
+        padding: to-rems(5px) 0;
         margin: 0;
 
-        &:first-of-type {
-            padding-top: 10px;
-        }
-
-        &:last-of-type {
-            padding-bottom: 10px;
-        }
+        &:first-of-type { padding-top: to-rems(10px); }
+        &:last-of-type { padding-bottom: to-rems(10px); }
     }
 }

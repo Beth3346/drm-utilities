@@ -4,11 +4,9 @@
 .rounded-thumbnail,
 .round-thumbnail {
     float: left;
-    margin-right: 20px;
+    margin-right: to-rems(20px);
 }
 
 .elr-thumbnail { @include elr-thumbnail; }
-
 .rounded-thumbnail { @include elr-thumbnail($white, 150px, 125px, 5px); }
-
 .round-thumbnail { @include elr-thumbnail($white, 150px, null, round); }

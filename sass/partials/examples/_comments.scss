@@ -1,0 +1,8 @@
+.comments {
+    @include elr-comments;
+
+    .heading-underline {
+        font-size: to-rems(24px);
+        margin-bottom: to-rems(20px);
+    }
+}

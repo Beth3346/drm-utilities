@@ -1,13 +1,8 @@
 // JavaScript Examples
 
-@include elr-alert-classes;
-
-.elr-custom-alert { @include elr-context-box(custom, 3px, $link-color, 100%, $white); }
-.elr-purple-alert { @include elr-context-box(custom, 3px, $dark-pink, 100%, $white); }
-
 .elr-accordion {
-    @include elr-em-max-width(800px);
     @include elr-accordion($main-color, 5px);
+    max-width: to-rems(800px);
 }
 
 .elr-accordion-nav {
@@ -24,15 +19,15 @@
 @include elr-calendar;
 
 .elr-calendar {
-    margin-bottom: 40px;
+    margin-bottom: to-rems(40px);
 }
 
 .elr-dropdown-nav {
     @include elr-em-margin('bottom', 200px);
     @include elr-dropdown-nav;
-    @include elr-em-font(14px);
+    font-size: to-rems(14px);
 
-    .elr-submenu { @include elr-em-font(12px); }
+    .elr-submenu { font-size: to-rems(12px); }
 }
 
 .elr-lightbox-thumbnails { @include elr-thumbnail-list; }
@@ -41,10 +36,10 @@
 
 .elr-modal-demo-buttons {
     @include elr-button-group(3px);
-    margin: 10px auto;
-    width: 350px;
+    margin: to-rems(10px) auto;
+    width: to-rems(350px);
 
-    button { @include elr-em-font(14px); }
+    button { font-size: to-rems(14px); }
 }
 
 .elr-modal {
@@ -54,28 +49,25 @@
 
 .popover-holder {
     position: relative;
-    width: 200px;
-    margin: 0 auto 20px;
+    width: to-rems(200px);
+    margin: 0 auto to-rems(20px);
 }
 
 .elr-popover-bottom { @include elr-popover(bottom); }
-
 .elr-popover-top { @include elr-popover(top); }
-
 .elr-popover-left { @include elr-popover(left); }
-
 .elr-popover-right { @include elr-popover(right); }
 
 .elr-offscreen-menu {
     @include elr-offscreen-menu($main-color);
-    @include elr-em-font(14px);
+    font-size: to-rems(14px);
 }
 
 .elr-menu-button {
     background-color: $link-color;
     display: inline-block;
     border-radius: 0;
-    padding: 7px;
+    padding: to-rems(7px);
 
     .hamburger {
         @include elr-icon-arrow('left', 30px, 4px);
@@ -85,11 +77,11 @@
 
 .elr-offscreen-nav {
     width: 100%;
-    padding: 3px 10px;
+    padding: to-rems(3px) to-rems(10px);
     background-color: $link-color;
     color: $white;
     font-weight: $bold;
-    height: 70px;
+    height: to-rems(70px);
     position: absolute;
     top: 0;
     left: 0;
@@ -98,15 +90,15 @@
 .elr-offscreen-content {
     @include elr-clearfix;
     width: 100%;
-    margin: 2px auto;
+    margin: to-rems(2px) auto;
     background-color: $background-color;
-    border: 1px solid $light-grey;
-    padding-top: 70px;
+    border: to-rems(1px) solid $light-grey;
+    padding-top: to-rems(70px);
     overflow: hidden;
     position: relative;
 
     p {
-        padding: 10px 20px;
+        padding: to-rems(10px) to-rems(20px);
     }
 }
 
@@ -114,29 +106,25 @@
     position: relative;
 
     .content {
-        @include elr-em-height(500px);
+        height: to-rems(500px);
         overflow-y: scroll;
     }
 }
 
-.elr-simple-slider {
-    @include elr-simple-slider;
-}
+.elr-simple-slider { @include elr-simple-slider; }
 
-.elr-simple-slider-2 {
-    @include elr-simple-slider;
-}
+.elr-simple-slider-2 { @include elr-simple-slider; }
 
 .elr-sticky-nav {
-    margin: 10px 0;
+    margin: to-rems(10px) 0;
 
     &.sticky-top {
         @include elr-sticky-menu('top');
-        top: 60px;
+        top: to-rems(60px);
     }
 
     ul {
-        @include elr-em-font(14px);
+        font-size: to-rems(14px);
         font-weight: $bold;
     }
 }
@@ -149,11 +137,11 @@
 
     &.sticky-left {
         @include elr-sticky-menu('left');
-        @include elr-em-width(250px);
+        width: to-rems(250px);
     }
 
     ul {
-        @include elr-em-font(14px);
+        font-size: to-rems(14px);
         font-weight: $bold;
     }
 }
@@ -180,11 +168,8 @@
 }
 
 .elr-tooltip-left { @include elr-tooltip(left, $text-color, $background-color, 100px); }
-
 .elr-tooltip-right { @include elr-tooltip(right, $text-color, $background-color, 100px); }
-
 .elr-tooltip-top { @include elr-tooltip(top, $text-color, $background-color, 100px); }
-
 .elr-tooltip-bottom { @include elr-tooltip(bottom, $text-color, $background-color, 100px); }
 
 .elr-sortable-table { @include elr-table-rounded($background-color, $text-color, $link-color, $light-grey, $lightest-grey); }
@@ -196,119 +181,20 @@
 .password-holder {
     background-color: $lightest-grey;
     border: 1px solid $grey;
-    border-radius: 3px;
-    padding: 0 10px;
+    border-radius: to-rems(3px);
+    padding: 0 to-rems(10px);
     width: 100%;
-    height: 30px;
-    margin-bottom: 5px;
+    height: to-rems(30px);
+    margin-bottom: to-rems(5px);
 
     p {
-        @include elr-em-font(14px);
+        font-size: to-rems(14px);
         margin: 0;
         padding: 0;
-        line-height: 30px;
+        line-height: to-rems(30px);
     }
 }
 
 .elr-generate-password {
-    @include elr-em-font(14px);
-}
-
-.elr-modal-alert {
-    @include elr-modals;
-    width: 300px;
-    display: flex;
-    padding: 10px 10px 0;
-
-    .elr-modal-alert-heading {
-        @include elr-em-font(28px);
-        font-weight: 700;
-
-        .fa {
-            font-size: 140%;
-            color: $success-color;
-            position: relative;
-            top: 3px;
-            left: -10px;
-        }
-    }
-
-    p {
-        @include elr-em-font(14px);
-        text-align: center;
-        padding: 0;
-        margin: 0;
-    }
-
-    .elr-header,
-    .elr-body,
-    .elr-footer {
-        padding: 10px;
-    }
-
-    .elr-footer {
-        padding-left: 0;
-        padding-right: 0;
-
-        &.single-action {
-            align-items: center;
-            flex-direction: column;
-        }
-    }
-
-    .elr-button {
-        margin: 0 5px 0 10px;
-        max-width: 150px;
-
-        &:last-of-type {
-            margin-left: 5px;
-            margin-right: 10px;
-        }
-    }
-}
-
-.sort-lists {
-    margin-left: -10px;
-    margin-right: -10px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-.sort-list-holder {
-    width: 300px;
-    flex-shrink: 1;
-    flex-grow: 1;
-    margin-bottom: 20px;
-}
-
-.sort-list {
-    margin: 10px;
-    padding: 20px;
-    background-color: $lightest-grey;
-    border: 1px solid $light-grey;
-    height: 100%;
-
-    h4 {
-        @include elr-em-font(14px);
-        padding: 0 0 10px;
-    }
-
-    .elr-sortable {
-        padding: 0;
-
-        li {
-            @include elr-em-font(14px);
-            padding: 0 0 5px;
-        }
-    }
-
-    .button-group {
-        margin-bottom: 10px;
-    }
-
-    .elr-sort-button {
-        @include elr-em-font(12px);
-        padding: 5px 10px;
-    }
+    font-size: to-rems(14px);
 }

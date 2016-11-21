@@ -13,7 +13,7 @@
 
 .round-image {
     @include elr-circle-image(300px);
-    margin: 20px;
+    margin: to-rems(20px);
     padding: 0;
 
     @include elr-breakpoint(1403px) {
@@ -37,6 +37,6 @@
 .image-section {
     figure {
         padding: 0;
-        margin: 0 5px;
+        margin: 0 to-rems(5px);
     }
 }

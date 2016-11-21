@@ -1,16 +1,9 @@
 // Forms Utilities Examples
 
-.form-state {
-    @include elr-em-padding('all', 20px, 0);
-}
-
-.form {
-    @include elr-form($almost-white, $light-grey);
-}
+.form-state { padding: to-rems(20px) 0; }
+.form { @include elr-form($almost-white, $light-grey); }
 
 .form-state,
-.tabular-form {
-    @include elr-tabular-form;
-}
+.tabular-form { @include elr-tabular-form; }
 
 .inline-form { @include elr-inline-form; }

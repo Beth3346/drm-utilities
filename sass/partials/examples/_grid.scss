@@ -8,7 +8,9 @@
     color: $white;
     border: 1px solid $main-color;
 
-    p { @include elr-em-padding('all', 10px); }
+    p {
+        padding: to-rems(10px);
+    }
 }
 
 .example-col {

@@ -3,9 +3,7 @@
 .pagination-base {
     text-align: center;
 
-    a {
-        @include elr-em-font(14px);
-    }
+    a { font-size: to-rems(14px); }
 }
 
 .pagination-links-round { @include elr-pagination-links($link-color, 50%, 14px, true); }

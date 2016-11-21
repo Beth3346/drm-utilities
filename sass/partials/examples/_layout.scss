@@ -3,9 +3,9 @@
 
 .center-block {
     @include elr-center-block(50%);
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding: 10px;
+    margin-top: to-rems(10px);
+    margin-bottom: to-rems(10px);
+    padding: to-rems(10px);
     border: 1px solid $grey;
     background-color: $white;
 }
@@ -14,15 +14,15 @@
 .vertical-container,
 .center-container {
     position: relative;
-    height: 400px;
-    width: 500px;
+    height: to-rems(400px);
+    width: to-rems(500px);
 }
 
 .horizontally-center,
 .vertically-center,
 .centered {
-    height: 200px;
-    width: 275px;
+    height: to-rems(200px);
+    width: to-rems(275px);
     background-color: $warning-color;
 }
 
@@ -53,7 +53,7 @@
     }
 
     &:nth-child(odd) .elr-ratiobox-inner {
-        margin-right: 20px;
+        margin-right: to-rems(20px);
 
         @include elr-breakpoint(997px) {
             margin-right: 0;
@@ -61,7 +61,7 @@
     }
 
     &:nth-child(even) .elr-ratiobox-inner {
-        margin-left: 20px;
+        margin-left: to-rems(20px);
 
         @include elr-breakpoint(997px) {
             margin-left: 0;
@@ -71,13 +71,9 @@
 
 .ratiobox {
     @include elr-ratiobox(16, 9);
-    margin-bottom: 40px;
+    margin-bottom: to-rems(40px);
 }
 
 .ratiobox-square {
     @include elr-ratiobox(1, 1);
-}
-
-.comments {
-    @include elr-comments();
 }

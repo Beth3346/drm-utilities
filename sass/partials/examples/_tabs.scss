@@ -2,5 +2,5 @@
 
 .elr-tabs {
     @include elr-tabs;
-    margin-bottom: 40px;
+    margin-bottom: to-rems(40px);
 }

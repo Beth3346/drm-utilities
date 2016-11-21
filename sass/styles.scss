@@ -2,8 +2,8 @@
 
 // Authored Dependencies
 
-@import 'assets/config';
 @import 'assets/elr-sass-utilities/main';
+@import 'config';
 
 // Partials
 
@@ -15,9 +15,11 @@
 @import 'partials/main-navigation';
 @import 'partials/mobile-navigation';
 
+@import 'partials/examples/alerts';
 @import 'partials/examples/animations';
 @import 'partials/examples/buttons';
 @import 'partials/examples/cards';
+@import 'partials/examples/comments';
 @import 'partials/examples/context-boxes';
 @import 'partials/examples/flex';
 @import 'partials/examples/forms';
@@ -32,6 +34,7 @@
 @import 'partials/examples/navigation';
 @import 'partials/examples/pagination';
 @import 'partials/examples/shapes';
+@import 'partials/examples/sort';
 @import 'partials/examples/tables';
 @import 'partials/examples/tabs';
 @import 'partials/examples/text-effects';

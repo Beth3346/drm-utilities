@@ -1,73 +1,54 @@
 // Main Content Styles
 
 .main-content {
-    padding: 40px 10px 20px;
+    padding: to-rems(40px) to-rems(10px) to-rems(20px);
     flex: 1 0 auto;
 
-    .elr-col-9:first-child {
-        padding-left: 10px;
-    }
+    @include elr-breakpoint('neptune') { padding-top: to-rems(5px); }
+
+    .elr-col-9:first-child { padding-left: to-rems(10px); }
 }
 
-.example-section {
-    padding-bottom: 40px;
+.example-section { padding-bottom: to-rems(80px); }
+
+.example-headings {
+    border: 1px solid $light-grey;
+    border-radius: to-rems(3px);
+    padding: to-rems(20px) to-rems(40px);
+    padding-right: 20%;
+    margin-bottom: to-rems(40px);
 }
 
 .example-heading,
 .example-subheading {
-    border-bottom: 1px solid $light-grey;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    font-weight: 700;
+    @include elr-heading-underline;
+    font-weight: $bold;
 }
 
 .example-heading {
     @include elr-em-font(30px);
+    margin-bottom: to-rems(30px);
+    padding-top: 0;
+
+    ~ p:first-of-type { margin-top: -10px; }
 }
 
 .example-subheading {
     @include elr-em-font(18px);
+    margin-top: to-rems(10px);
+    margin-bottom: to-rems(5px);
 }
 
-.example-holder {
-    padding: 20px 0;
-}
+.example-holder { padding: to-rems(20px) 0; }
 
-.example-holder-light {
-    background-color: $white;
-    border: 1px solid $elr-blue-light;
-    margin: 20px 0;
+.source-holder {
+    @include elr-slide(1500px);
 }
 
 pre {
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: to-rems(20px);
+    margin-bottom: to-rems(20px);
     width: 100%;
-}
-
-.argument-list {
-    padding-left: 0;
-}
-
-.argument-heading {
-    @include elr-em-font(18px);
-}
-
-.inline-demo {
-    border: 1px solid $elr-blue;
-    padding: 10px;
-    margin: 20px 0 0;
-    background-color: $elr-blue-light;
-    border-radius: 3px;
-
-    &.demo-light {
-        background-color: $white;
-        border-color: $elr-blue-light;
-    }
-
-    p {
-        padding: 0;
-    }
 }
 
 .copyright {
@@ -81,5 +62,5 @@ pre {
     background-color: $dark-grey;
     color: $white;
     flex: none;
-    padding: 10px;
+    padding: to-rems(10px);
 }

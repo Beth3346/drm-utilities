@@ -1,59 +1,29 @@
 @include elr-flex-grid;
 
 .demo-box {
-    margin: 10px;
+    margin: to-rems(10px);
     text-align: center;
-    padding: 20px;
+    padding: to-rems(20px);
     width: 100%;
-    border-radius: 5px;
+    border-radius: to-rems(5px);
     background-color: $dark-pink;
-    // border: 1px solid $dark-grey;
     color: $white;
 }
 
-// .elr-flex-row {
-//     margin-bottom: 10px;
-// }
-
-// .elr-flex-col {
-//     padding: 20px;
-
-    // .elr-flex-col {
-    //     .demo {
-    //         background-color: $white;
-    //         color: $dark-pink;
-    //     }
-
-    //     .elr-flex-col {
-    //         .demo {
-    //             background-color: $dark-pink;
-    //             color: $white;
-    //         }
-    //     }
-    // }
-// }
-
 .demo {
     text-align: center;
-    // border-radius: 5px;
     border: 1px solid $dark-grey;
-    // border-right-width: 0;
     color: $dark-grey;
-    margin: 5px;
-    padding: 20px;
+    margin: to-rems(5px);
+    padding: to-rems(20px);
 
     @include elr-breakpoint('saturn') {
         margin-left: 0;
         margin-right: 0;
     }
 
-    &:first-child {
-        margin-left: 0;
-    }
-
-    &:last-child {
-        margin-right: 0;
-    }
+    &:first-child { margin-left: 0; }
+    &:last-child { margin-right: 0; }
 
     p {
         padding: 0;
@@ -61,6 +31,4 @@
     }
 }
 
-.flex-demo {
-    margin-top: 20px;
-}
+.flex-demo { margin-top: to-rems(20px); }

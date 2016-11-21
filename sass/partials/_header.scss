@@ -8,46 +8,44 @@
     position: fixed;
     top: 0;
     background-color: $white;
-    padding: 10px 0;
+    padding: to-rems(10px) 0;
     z-index: 1000;
     transition: background-color .3s, opacity .3s;
-
-    @include elr-breakpoint($neptune + 1, 'min-width') {
-        &.fixed-header {
-            background-color: $elr-blue;
-            opacity: .8;
-
-            .main-nav-item {
-                color: $white;
-
-                &:hover {
-                    color: $white;
-                }
-            }
-
-            .site-heading a {
-                color: $white;
-            }
-        }
-    }
 
     @include elr-breakpoint('neptune') {
         position: relative;
     }
 }
 
-.site-heading {
-    @include elr-em-font(30px);
-    float: left;
-    padding: 0 0 0 10px;
+@include elr-breakpoint($neptune + 1, 'min-width') {
+    &.fixed-header {
+        background-color: $elr-blue;
+        opacity: .8;
 
-    @include elr-breakpoint('saturn') {
-        text-align: center;
+        .main-nav-item {
+            color: $white;
+
+            &:hover {
+                color: $white;
+            }
+        }
+
+        .site-heading a {
+            color: $white;
+        }
     }
+}
+
+.site-heading {
+    font-size: to-rems(30px);
+    float: left;
+    padding: 0 0 0 to-rems(10px);
+
+    @include elr-breakpoint('saturn') { text-align: center; }
 
     a {
         color: $main-color;
-        font-weight: bold;
+        font-weight: $bold;
         text-decoration: none;
     }
 }

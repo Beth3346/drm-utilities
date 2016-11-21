@@ -13,19 +13,17 @@
     color: $background-color;
     position: relative;
 
-    p {
-        @include elr-centerer;
-    }
+    p { @include elr-centerer; }
 }
 
 .box-model {
     box-sizing: border-box;
     background-color: $light-grey;
-    height: 200px;
-    width: 250px;
+    height: to-rems(200px);
+    width: to-rems(250px);
     border: 1px solid $grey;
-    margin: 20px;
-    padding: 20px;
+    margin: to-rems(20px);
+    padding: to-rems(20px);
 }
 
 .box-model-inner {
@@ -38,31 +36,27 @@
     background-color: $accent-color;
     height: 150%;
     width: 150%;
-    padding: 10px;
+    padding: to-rems(10px);
     color: $white;
 }
 
-.typography-classes {
-    background-color: $background-color;
-}
+.typography-classes { background-color: $background-color; }
 
 .responsive-demo {
     border: 1px solid $elr-blue;
-    padding: 10px;
-    margin: 20px 0 0;
+    padding: to-rems(10px);
+    margin: to-rems(20px) 0 0;
     background-color: $elr-blue-light;
-    border-radius: 5px;
+    border-radius: to-rems(5px);
 
     p {
         @include elr-em-font(14px);
         padding: 0;
-        font-weight: 700;
+        font-weight: $bold;
     }
 }
 
-.elr-inline-list li {
-    padding-bottom: 0;
-}
+.elr-inline-list li { padding-bottom: 0; }
 
 .elr-button,
 .elr-button-danger,
@@ -70,6 +64,6 @@
 .elr-button-warning,
 .elr-button-info,
 .elr-button-muted {
-    margin-right: 10px;
-    margin-bottom: 10px;
+    margin-right: to-rems(10px);
+    margin-bottom: to-rems(10px);
 }

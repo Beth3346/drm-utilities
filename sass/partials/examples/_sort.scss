@@ -1,0 +1,45 @@
+.sort-lists {
+    margin-left: -10px;
+    margin-right: -10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.sort-list-holder {
+    width: to-rems(300px);
+    flex-shrink: 1;
+    flex-grow: 1;
+    margin-bottom: to-rems(20px);
+}
+
+.sort-list {
+    margin: to-rems(10px);
+    padding: to-rems(20px);
+    background-color: $lightest-grey;
+    border: 1px solid $light-grey;
+    height: 100%;
+
+    h4 {
+        font-size: to-rems(14px);
+        padding: 0 0 to-rems(10px);
+    }
+
+    .elr-sortable {
+        padding: 0;
+
+        li {
+            font-size: to-rems(14px);
+            padding: 0 0 to-rems(5px);
+        }
+    }
+
+    .button-group {
+        margin-bottom: to-rems(10px);
+    }
+
+    .elr-sort-button {
+        font-size: to-rems(12px);
+        padding: to-rems(5px) to-rems(10px);
+    }
+}

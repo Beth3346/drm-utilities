@@ -1,11 +1,7 @@
 .main-nav {
-    @include elr-em-font(14px);
     @include elr-clearfix;
     float: right;
-    margin: 5px;
+    margin: to-rems(5px);
     padding: 0;
-
-    // @include elr-breakpoint('saturn') {
-    //     display: none;
-    // }
+    font-size: to-rems(14px);
 }
