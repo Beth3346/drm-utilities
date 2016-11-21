@@ -1,11 +1,13 @@
+//- TODO Add JavaScript to show from on nested comment replies
 section#comments
     .elr-container.example-section
         .elr-row
             .elr-col-full.example-headings
                 h2.example-heading Comments
+                p Comment feed thread for blog posts and articles.
             .elr-col-full.example-holder
                 .comments
-                    h3.example-subheading Responses
+                    h3.heading-underline Responses
                     .comment
                         figure.avatar
                             img(src="images/compressed/cat5.jpg")
@@ -50,10 +52,65 @@ section#comments
                     form.form.tabular-form.comment-reply-form
                         textarea(rows=5 placeholder="Post Reply")
                         input(type="submit" value="Add Comment")
-        //- .elr-row.source-section
-        //-     button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
-        //-     .elr-col-full.source-holder
-        //-         h4.example-subheading HTML
-        //-         pre.
-        //-         h4.example-subheading Sass
-        //-         pre.
+        .elr-row.source-section
+            button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+            .elr-col-full.source-holder
+                h4.example-subheading HTML
+                pre.
+                    &lt;div class=&quot;comments&quot;&gt;
+                        &lt;h3 class=&quot;heading-underline&quot;&gt;Responses&lt;/h3&gt;
+                        &lt;div class=&quot;comment&quot;&gt;
+                            &lt;figure class=&quot;avatar&quot;&gt;
+                                &lt;img src=&quot;images/compressed/cat5.jpg&quot; /&gt;
+                            &lt;div class=&quot;comment-content&quot;&gt;
+                                &lt;div class=&quot;comment-heading&quot;&gt;
+                                    &lt;h3 class=&quot;comment-author&quot;&gt;Joe&lt;/h3&gt;
+                                    &lt;p class=&quot;comment-timestamp&quot;&gt;10 minutes ago&lt;/p&gt;
+                                &lt;div class=&quot;comment-body&quot;&gt;
+                                    &lt;p&gt;This article is so interesting!&lt;/p&gt;
+                                    &lt;a href=&quot;#&quot; class=&quot;comment-reply&quot;&gt;Reply&lt;/a&gt;
+                            &lt;div class=&quot;comment comment-nested&quot;&gt;
+                                &lt;figure class=&quot;avatar&quot;&gt;
+                                    &lt;img src=&quot;images/compressed/cat1.jpg&quot; /&gt;
+                                &lt;div class=&quot;comment-content&quot;&gt;
+                                    &lt;div class=&quot;comment-heading&quot;&gt;
+                                        &lt;h3 class=&quot;comment-author&quot;&gt;Kate Brewster&lt;/h3&gt;
+                                        &lt;p class=&quot;comment-timestamp&quot;&gt;Just Now&lt;/p&gt;
+                                    &lt;div class=&quot;comment-body&quot;&gt;
+                                        &lt;p&gt;Yes! this site always has the best articles.&lt;/p&gt;
+                                        &lt;a href=&quot;#&quot; class=&quot;comment-reply&quot;&gt;Reply&lt;/a&gt;
+                        &lt;div class=&quot;comment&quot;&gt;
+                            &lt;figure class=&quot;avatar&quot;&gt;
+                                &lt;img src=&quot;images/compressed/cat2.jpg&quot; /&gt;
+                            &lt;div class=&quot;comment-content&quot;&gt;
+                                &lt;div class=&quot;comment-heading&quot;&gt;
+                                    &lt;h3 class=&quot;comment-author&quot;&gt;Mike Kittle&lt;/h3&gt;
+                                    &lt;p class=&quot;comment-timestamp&quot;&gt;2 weeks ago&lt;/p&gt;
+                                &lt;div class=&quot;comment-body&quot;&gt;
+                                    &lt;p&gt;This is a really really long comment. This person is just going on and on and on forever and ever. Jerry: You want me to take an overview? I see a very cheap man holding a sweater trying to get away with something. That's my overview. Newman: I'm a little offended, Jerry. Jerry: You're not a little anything, Newman." George: I would give up red meat just to get a glimpse of you in a bra? Newman: But you remember this: when you control the mail, you control... information. Kramer: I don’t know. But I woke up in the Hudson river in a SACK. Homeless man: The government! Jerry: Women don't respect salad eaters. Jerry: You want me to take an overview? I see a very cheap man holding a sweater trying to get away with something. That's my overview. Jerry: People with guns don't understand. That's why they get guns: too many misunderstandings. Jerry: So, has the summer of George begun? Or are you still decomposing. Newman: You see, my dear, all certified mail is registered… but registered mail is not necessarily certified.&lt;/p&gt;
+                                    &lt;a href=&quot;#&quot; class=&quot;comment-reply&quot;&gt;Reply&lt;/a&gt;
+                        &lt;div class=&quot;comment&quot;&gt;
+                            &lt;figure class=&quot;avatar&quot;&gt;
+                                &lt;img src=&quot;images/compressed/cat3.jpg&quot; /&gt;
+                            &lt;div class=&quot;comment-content&quot;&gt;
+                                &lt;div class=&quot;comment-heading&quot;&gt;
+                                    &lt;h3 class=&quot;comment-author&quot;&gt;Joe&lt;/h3&gt;
+                                    &lt;p class=&quot;comment-timestamp&quot;&gt;10 minutes ago&lt;/p&gt;
+                                &lt;div class=&quot;comment-body&quot;&gt;
+                                    &lt;p&gt;This article is so interesting!&lt;/p&gt;
+                                    &lt;a href=&quot;#&quot; class=&quot;comment-reply&quot;&gt;Reply&lt;/a&gt;
+                        &lt;h4 class=&quot;example-subheading&quot;&gt;Post a Comment&lt;/h4&gt;
+                        &lt;form class=&quot;form tabular-form comment-reply-form&quot;&gt;
+                            &lt;textarea rows=5 placeholder=&quot;Post Reply&quot;&gt;&lt;/textarea&gt;
+                            &lt;input type=&quot;submit&quot; value=&quot;Add Comment&quot; /&gt;
+                        &lt;/form&gt;
+                h4.example-subheading Sass
+                pre.
+                    .comments {
+                        @include elr-comments;
+
+                        .heading-underline {
+                            font-size: to-rems(24px);
+                            margin-bottom: 20px;
+                        }
+                    }

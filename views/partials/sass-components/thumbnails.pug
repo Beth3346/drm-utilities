@@ -3,6 +3,8 @@ section#thumbnails
         .elr-row
             .elr-col-full.example-headings
                 h3.example-heading Thumbnails
+                p Thumbnails are smaller images typically used in content boxes or cards. Sometimes they are links to the larger version of an image.
+                p They can have rounded corners or be made into circles.
             .elr-col-full
                 figure.elr-thumbnail
                     img(src="images/compressed/cat11.jpg")
@@ -10,10 +12,29 @@ section#thumbnails
                     img(src="images/compressed/paris3.jpg")
                 figure.round-thumbnail
                     img(src="images/compressed/cat.jpg")
-        //- .elr-row.source-section
-        //-     button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
-        //-     .elr-col-full.source-holder
-        //-         h4.example-subheading HTML
-        //-         pre.
-        //-         h4.example-subheading Sass
-        //-         pre.
+        .elr-row.source-section
+            button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+            .elr-col-full.source-holder
+                h4.example-subheading HTML
+                pre.
+                    &lt;figure class=&quot;elr-thumbnail&quot;&gt;
+                        &lt;img src=&quot;images/compressed/cat11.jpg&quot; /gt;
+                    &lt;/figure&gt;
+                    &lt;figure class=&quot;rounded-thumbnail&quot;&gt;
+                        &lt;img src=&quot;images/compressed/paris3.jpg&quot; /gt;
+                    &lt;/figure&gt;
+                    &lt;figure class=&quot;round-thumbnail&quot;&gt;
+                        &lt;img src=&quot;images/compressed/cat.jpg&quot; /gt;
+                    &lt;/figure&gt;
+                h4.example-subheading Sass
+                pre.
+                    .elr-thumbnail,
+                    .rounded-thumbnail,
+                    .round-thumbnail {
+                        float: left;
+                        margin-right: 20px;
+                    }
+
+                    .elr-thumbnail { @include elr-thumbnail; }
+                    .rounded-thumbnail { @include elr-thumbnail($white, 150px, 125px, 5px); }
+                    .round-thumbnail { @include elr-thumbnail($white, 150px, null, round); }

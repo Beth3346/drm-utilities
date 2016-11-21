@@ -3,6 +3,8 @@ section#labels
         .elr-row
             .elr-col-full.example-headings
                 h3.example-heading Labels
+                p Labels can display small amounts to information to users. They are expecially useful when the user needs to complete an action such as liking a post.
+                p They can also be used to display groups of data. Ex. Tags on a blog post.
             .elr-col-full.example-holder
                 .label
                     span.label-title Label
@@ -13,16 +15,35 @@ section#labels
                 .label
                     span.label-icon.fa.fa-heart
                     span.label-value 20
-        //- .elr-row.source-section
-        //-     button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
-        //-     .elr-col-full.source-holder
-        //-         h4.example-subheading HTML
-        //-         pre.
-        //-         h4.example-subheading Sass
-        //-         pre.
+        .elr-row.source-section
+            button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+            .elr-col-full.source-holder
+                h4.example-subheading HTML
+                pre.
+                    &lt;div class=&quot;label&quot;&gt;
+                        &lt;span class=&quot;label-title&quot;&gt;Label&lt;/span&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;label&quot;&gt;
+                        &lt;span class=&quot;label-icon fa.fa-heart&quot;&gt;&lt;/span&gt;
+                        &lt;span class=&quot;label-title&quot;&gt;Likes&lt;/span&gt;
+                        &lt;span class=&quot;label-value&quot;&gt;20&lt;/span&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;label&quot;&gt;
+                        &lt;span class=&quot;label-icon fa.fa-heart&quot;&gt;&lt;/span&gt;
+                        &lt;span class=&quot;label-value&quot;&gt;20&lt;/span&gt;
+                    &lt;/div&gt;
+                h4.example-subheading Sass
+                pre.
+                    .label {
+                        @include elr-label;
+                        margin-bottom: 5px;
+                        margin-right: 10px;
+                    }
         .elr-row
             .elr-col-full.example-headings
                 h3.example-heading Dismissible Labels
+                p These labels are useful when you need to communicate feedback to the user.
+                p Requires JavaScript to make the label dismissible. Example JavaScript is included in the source code below.
             .elr-col-full.example-holder
                 .label
                     span.label-icon.fa.fa-paw
@@ -32,16 +53,38 @@ section#labels
                     span.label-icon.fa.fa-paw
                     span.label-title Cats
                     span.fa.fa-times.label-close
-        //- .elr-row.source-section
-        //-     button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
-        //-     .elr-col-full.source-holder
-        //-         h4.example-subheading HTML
-        //-         pre.
-        //-         h4.example-subheading Sass
-        //-         pre.
+        .elr-row.source-section
+            button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+            .elr-col-full.source-holder
+                h4.example-subheading HTML
+                pre.
+                    &lt;div class=&quot;label&quot;&gt;
+                        &lt;span class=&quot;label-icon fa fa-paw&quot;&gt;&lt;/span&gt;
+                        &lt;span class=&quot;label-title&quot;&gt;Dogs&lt;/span&gt;
+                        &lt;span class=&quot;fa.fa-times label-close&quot;&gt;&lt;/span&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;label&quot;&gt;
+                        &lt;span class=&quot;label-icon fa fa-paw&quot;&gt;&lt;/span&gt;
+                        &lt;span class=&quot;label-title&quot;&gt;Cats&lt;/span&gt;
+                        &lt;span class=&quot;fa.fa-times label-close&quot;&gt;&lt;/span&gt;
+                    &lt;/div&gt;
+                h4.example-subheading Sass
+                pre.
+                    .label {
+                        @include elr-label;
+                        margin-bottom: 5px;
+                        margin-right: 10px;
+                    }
+                h4.example-subheading JavaScript
+                pre.
+                    $('.label-close').on('click', function() {
+                        elr.clearElement($(this).parent('.label'));
+                    });
         .elr-row
             .elr-col-full.example-headings
                 h3.example-heading Context Labels
+                p These labels contain some type of context that lets the user know that they should take action.
+                p These are ideal when you want to give the user a nudge to complete an action or warn them of a potentially destructive action like deleting content.
             .elr-col-full.example-holder
                 .label.label-info
                     span.label-title Information
@@ -53,16 +96,44 @@ section#labels
                     span.label-title Success
                 .label.label-muted
                     span.label-title Muted
-        //- .elr-row.source-section
-        //-     button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
-        //-     .elr-col-full.source-holder
-        //-         h4.example-subheading HTML
-        //-         pre.
-        //-         h4.example-subheading Sass
-        //-         pre.
+        .elr-row.source-section
+            button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+            .elr-col-full.source-holder
+                h4.example-subheading HTML
+                pre.
+                    &lt;div class=&quot;label label-info&quot;&gt;
+                        &lt;span class=&quot;label-title&quot;&gt;Information&lt;/span&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;label label-danger&quot;&gt;
+                        &lt;span class=&quot;label-title&quot;&gt;Danger&lt;/span&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;label label-warning&quot;&gt;
+                        &lt;span class=&quot;label-title&quot;&gt;Warning&lt;/span&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;label label-success&quot;&gt;
+                        &lt;span class=&quot;label-title&quot;&gt;Success&lt;/span&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;label label-muted&quot;&gt;
+                        &lt;span class=&quot;label-title&quot;&gt;Muted&lt;/span&gt;
+                    &lt;/div&gt;
+                h4.example-subheading Sass
+                pre.
+                    .label {
+                        @include elr-label;
+                        margin-bottom: 5px;
+                        margin-right: 10px;
+                    }
+
+                    .label-info { @include elr-label-context('info'); }
+                    .label-danger { @include elr-label-context('danger'); }
+                    .label-warning { @include elr-label-context('warning'); }
+                    .label-success { @include elr-label-context('success'); }
+                    .label-muted { @include elr-label-context('muted'); }
         .elr-row
             .elr-col-full.example-headings
                 h3.example-heading Corner Labels
+                p These labels should be used to add information or context to content blocks. Ex. New articles or &quot;liked&quot; posts.
+                p Note: Corner labels must be placed in a container with position relative or absolute.
             .elr-col-full.example-holder
                 .corner-label-box
                     .label-corner
@@ -80,24 +151,76 @@ section#labels
                     .label-corner-bottom-right
                         .label-triangle
                         span.label-icon.fa.fa-save
-        //- .elr-row.source-section
-        //-     button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
-        //-     .elr-col-full.source-holder
-        //-         h4.example-subheading HTML
-        //-         pre.
-        //-         h4.example-subheading Sass
-        //-         pre.
+        .elr-row.source-section
+            button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+            .elr-col-full.source-holder
+                h4.example-subheading HTML
+                pre.
+                    &lt;div class=&quot;corner-label-box&quot;&gt;
+                        &lt;div class=&quot;label-corner&quot;&gt;
+                            &lt;div class=&quot;label-triangle&quot;&gt;&lt;/div&gt;
+                            &lt;span class=&quot;label-icon fa fa-heart&quot;&gt;&lt;/span&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;corner-label-box&quot;&gt;
+                        &lt;button class=&quot;label-corner-right&quot;&gt;
+                            &lt;div class=&quot;label-triangle&quot;&gt;&lt;/div&gt;
+                            &lt;span class=&quot;label-icon fa fa-save&quot;&gt;&lt;/span&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                        &lt;/button&gt;
+                    &lt;div class=&quot;corner-label-box&quot;&gt;
+                        &lt;div class=&quot;label-corner-bottom&quot;&gt;
+                            &lt;div class=&quot;label-triangle&quot;&gt;&lt;/div&gt;
+                            &lt;span class=&quot;label-icon fa fa-heart&quot;&gt;&lt;/span&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;corner-label-box&quot;&gt;
+                        &lt;div class=&quot;label-corner-bottom-right&quot;&gt;
+                            &lt;div class=&quot;label-triangle&quot;&gt;&lt;/div&gt;
+                            &lt;span class=&quot;label-icon fa fa-save&quot;&gt;&lt;/span&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                h4.example-subheading Sass
+                pre.
+                    .label-corner { @include elr-label-corner(top, left, $accent-color); }
+                    .label-corner-right { @include elr-label-corner(top, right, $success-color); }
+                    .label-corner-bottom { @include elr-label-corner(bottom, left, $link-color); }
+                    .label-corner-bottom-right { @include elr-label-corner(bottom, right, $success-color); }
+
+                    .corner-label-box {
+                        @include elr-square(250px);
+                        background-color: $light-grey;
+                        position: relative;
+                        float: left;
+                        margin-right: 10px;
+                        margin-bottom: 10px;
+
+                        &:nth-child(3) {
+                            clear: left;
+                        }
+                    }
         .elr-row
             .elr-col-full.example-headings
                 h3.example-heading Ribbon Labels
+                p These labels should be used to add information or context to content blocks. Ex. New articles or &quot;liked&quot; posts.
+                p Note: Corner labels must be placed in a container with position relative or absolute.
             .elr-col-full.example-holder
                 .corner-label-box
                     .label-ribbon
                         span.label-title New Article!
-        //- .elr-row.source-section
-        //-     button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
-        //-     .elr-col-full.source-holder
-        //-         h4.example-subheading HTML
-        //-         pre.
-        //-         h4.example-subheading Sass
-        //-         pre.
+        .elr-row.source-section
+            button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+            .elr-col-full.source-holder
+                h4.example-subheading HTML
+                pre.
+                    &lt;div class=&quot;corner-label-box&quot;&gt;
+                        &lt;div class=&quot;label-ribbon&quot;&gt;
+                            &lt;span class=&quot;label-title&quot;&gt;New Article!&lt;/span&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                h4.example-subheading Sass
+                pre.
+                    .label-ribbon {
+                        @include elr-label-ribbon;
+                    }
