@@ -29,6 +29,24 @@ const jQuery = require('jquery');
 let elr = elrUtils();
 let elrTime = elrTimeUtilities();
 
+$('.slide-down').on('click', function() {
+    $(this).find('.elr-slide-down').toggleClass('active');
+});
+
+$('.js-reveal').on('click', function() {
+    let target = $(this).data('target');
+
+    $(this).parent().find(target).toggleClass('active');
+});
+
+$('.flipper-container').on('click', function() {
+    $(this).toggleClass('active');
+});
+
+$('.label-close').on('click', function() {
+    elr.clearElement($(this).parent('.label'));
+});
+
 $('button.mobile-menu-toggle').on('click', function(e) {
     e.preventDefault();
     e.stopPropagation();
@@ -45,6 +63,10 @@ $('.menu-animated .menu-item').on('click', function(e) {
 
 $('.icon-animate').on('click', function() {
     $(this).toggleClass('active');
+});
+
+$('.icon-card').hover(function() {
+    $(this).find('.icon-animated').toggleClass('active');
 });
 
 $('.mobile-toggle-button, .mobile-toggle-button-border').on('click', function() {
@@ -110,7 +132,7 @@ $('.js-show-confirmation-alert').on('click', function() {
 elrBackToTop();
 
 elrCalendar({
-    view: 'week',
+    view: 'month',
     currentDate: elrTime.today
     // currentDate: {
     //     'month': 11,
@@ -159,17 +181,6 @@ elrSort();
 // }
 
 elrStickyNav({spy: true});
-
-elrStickyNav({
-    nav: $('nav.elr-sticky-sidebar'),
-    content: $('div.sticky-sidebar-content'),
-    spy: true
-});
-
-// elrStickyNav({
-//     nav: $('aside.main-sidebar'),
-//     content: $('body')
-// });
 
 elrTableFilter();
 elrTableSorter();
@@ -377,3 +388,27 @@ elrValidation();
 // console.log(elr.data(elr.eq(navItems, 3), 'link'));
 // console.log(elr.first(navItems));
 // console.log(elr.last(navItems));
+
+$(window).on('scroll', function() {
+    let $sidebar = $('.main-sidebar-holder');
+    let sidebarPos = $sidebar.offset().top;
+    let sidebarLeft = $sidebar.offset().left;
+    let scrollPos = $(document).scrollTop();
+    let $header = $('.main-header');
+
+    if (scrollPos > 0) {
+        $header.addClass(`fixed-header`);
+    } else {
+        $header.removeClass(`fixed-header`);
+    }
+
+    if (scrollPos > (sidebarPos - 80)) {
+        $sidebar.find('.main-sidebar')
+            .addClass(`sticky-left`)
+            .css({'left': sidebarLeft});
+    } else {
+        $sidebar.find('.main-sidebar')
+            .removeClass(`sticky-left`)
+            .css({'left': 0});
+    }
+});
