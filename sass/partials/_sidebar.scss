@@ -3,13 +3,13 @@
 
 .main-sidebar-holder {
     @include elr-clearfix;
-    padding-top: 10px;
+    padding-top: to-rems(5px);
     position: relative;
 }
 
 .main-sidebar {
     position: absolute;
-    top: 20px;
+    // top: to-rems(20px);
     left: 0;
 
     @include elr-breakpoint('saturn') {
@@ -18,32 +18,25 @@
 
     &.sticky-left {
         position: fixed;
-        top: 100px;
+        top: to-rems(100px);
         padding: 0;
     }
 }
 
-.sidebar-menu {
+.main-sidebar-menu {
     > li > a {
-        @include elr-em-font(20px);
-        // color: $text-color;
+        font-size: to-rems(20px);
         font-weight: $bold;
         padding-top: 0;
         padding-bottom: 0;
-
-        // &:hover,
-        // &:focus {
-        //     text-decoration: none;
-        //     color: $text-color;
-        // }
     }
+}
 
-    .elr-submenu {
-        > li > a {
-            @include elr-em-font(14px);
-            padding-top: 0;
-            padding-bottom: 0;
-            padding-left: 10px;
-        }
+.main-sidebar-submenu {
+    > li > a {
+        font-size: to-rems(14px);
+        padding-top: 0;
+        padding-bottom: 0;
+        padding-left: to-rems(10px);
     }
 }
