@@ -23,7 +23,11 @@
 
         &:after,
         &.active {
-            color: $grey;
+            color: $darker-grey;
+        }
+
+        &.active {
+            font-weight: $bold;
         }
 
         a {
