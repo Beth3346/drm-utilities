@@ -1,26 +1,27 @@
 .flipper {
     @include elr-flipper;
     padding: 40px;
-
-    .flip-container {
-        @include elr-square(200px);
-    }
-
-    .front,
-    .back {
-        @include elr-circle(200px);
-
-        p {
-            @include elr-em-font(18px);
-            color: $white;
-            text-align: center;
-            line-height: 200px;
-        }
-    }
-
-    .front { background-color: $elr-blue; }
-    .back { background-color: $dark-pink; }
 }
+
+.flipper-container {
+    @include elr-circle(200px);
+}
+
+.flipper-front,
+.flipper-back {
+    @include elr-circle(200px);
+
+    p {
+        @include elr-centerer(true, false);
+        @include elr-em-font(18px);
+        width: 100%;
+        color: $white;
+        text-align: center;
+    }
+}
+
+.flipper-front { background-color: $elr-blue; }
+.flipper-back { background-color: $dark-pink; }
 
 .spin {
     @include elr-circle(100px);
@@ -51,15 +52,30 @@
         line-height: 1.3;
     }
 
-    .box-pink {
+    .box {
         width: 100%;
         height: 150px;
         background-color: lighten($elr-blue, 10%);
         border-color: $elr-blue;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        color: $white;
+
+        p {
+            width: 100%;
+            font-size: to-rems(24px);
+        }
     }
 
-    .fade-in { @include elr-fade('show', .7s); }
-    .fade-out { @include elr-fade('hide', .7s); }
+    .fade-in,
+    .fade-out {
+        padding: 10px;
+        background-color: $lightest-grey;
+    }
+
+    .fade-in { @include elr-fade('show', .3s); }
+    .fade-out { @include elr-fade('hide', .3s); }
 }
 
 .slide-box {
@@ -67,9 +83,9 @@
 }
 
 .slide-down {
-    @include elr-slide;
+    cursor: pointer;
 
-    p {
+    h4 {
         background-color: $elr-blue;
         padding: 10px;
         color: $white;
@@ -78,7 +94,7 @@
     }
 
     .elr-slide-down {
-        box-sizing: border-box;
+        @include elr-slide;
         background-color: $elr-blue;
         color: $white;
         list-style: none;
@@ -89,6 +105,26 @@
         li {
             padding: 5px 10px;
         }
+    }
+}
+
+.icon-card {
+    width: 350px;
+
+    &:hover {
+        h3 {
+            color: lighten($link-color, 10%);
+        }
+    }
+
+    p {
+        font-size: to-rems(14px);
+    }
+
+    h3 {
+        transition: color .3s;
+        font-weight: $bold;
+        color: $link-color;
     }
 }
 
@@ -109,4 +145,4 @@
 .menu-simple-lines { @include menu-simple-lines(); }
 .menu-double-lines { @include menu-double-lines(); }
 .menu-expanding-lines { @include menu-expanding-lines(); }
-.menu-drop-lines { @include menu-drop-lines($grey, $elr-blue, 2px); }
+.menu-drop-lines { @include menu-drop-lines($grey, $link-color, 2px); }
