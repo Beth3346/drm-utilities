@@ -1,6 +1,10 @@
 @mixin elr-comments($background-color: transparent) {
     max-width: 700px;
 
+    .example-subheading {
+        margin-bottom: 20px;
+    }
+
     .comment {
         width: 100%;
         display: flex;
