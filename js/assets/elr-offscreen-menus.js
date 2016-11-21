@@ -56,9 +56,9 @@ const elrOffscreenMenu = function(params) {
         });
 
         $button.on('click', function(e) {
-            e.preventDefault();
             e.stopPropagation();
 
+            $(this).find('div').toggleClass('active');
             toggleMenu(menuWidth, $menu, $content);
         });
     }
