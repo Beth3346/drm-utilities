@@ -1413,8 +1413,6 @@ const elrTimeUtilities = function() {
     //gets the week of the month when an event occurs
     self.getEventWeekNum = function(evt, year) {
         // gets the week of the month which an event occurs
-        console.log(evt);
-        console.log(evt.month);
 
         let dateObj = {
             'month': elr.inArray(self.months, evt.month),
@@ -1439,7 +1437,6 @@ const elrTimeUtilities = function() {
 
         if (dayNum === 'first') {
             // check if first week in month contains day
-            console.log(firstDay);
             if (firstDay <= day) {
                 return 1;
             } else {
