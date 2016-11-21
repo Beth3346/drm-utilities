@@ -7,10 +7,10 @@ const elrAlerts = function(params) {
     const self = {};
     const spec = params || {};
     const speed = spec.speed || 300;
-    const alertClass = spec.alertClass || 'elr-dismissible-alert';
+    const alertClass = spec.alertClass || 'js-dismissible-alert';
 
     self.showAlert = function(type, message, $holder) {
-        const className = `elr-${type}-alert ${alertClass}`;
+        const className = `elr-alert elr-${type}-alert ${alertClass}`;
         const $newAlert = $('<div></div>', {
             text: message,
             'class': className
