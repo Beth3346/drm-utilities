@@ -24,7 +24,7 @@ const elrFilterGrid = function(params) {
 
         $.each(tags, function(k, v) {
             const $tagButton = $('<button></button>', {
-                'class': 'elr-grid-filter',
+                'class': 'elr-button elr-button-primary elr-grid-filter',
                 'text': elr.capitalize(v),
                 'data-filter': v
             });
