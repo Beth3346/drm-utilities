@@ -1,34 +1,32 @@
-.label-info,
-.label-danger,
-.label-warning,
-.label-success,
-.label-muted,
-.label-custom {
-    @include elr-em-font(12px);
+.label {
+    @include elr-label();
     margin-bottom: 5px;
     margin-right: 10px;
 }
 
-.label-info {
-    @include elr-label('info');
+.label-info { @include elr-label-context('info'); }
+.label-danger { @include elr-label-context('danger'); }
+.label-warning { @include elr-label-context('warning'); }
+.label-success { @include elr-label-context('success'); }
+.label-muted { @include elr-label-context('muted'); }
+.label-corner { @include elr-label-corner(top, left, $accent-color); }
+.label-corner-right { @include elr-label-corner(top, right, $success-color); }
+.label-corner-bottom { @include elr-label-corner(bottom, left, $link-color); }
+.label-corner-bottom-right { @include elr-label-corner(bottom, right, $success-color); }
+
+.corner-label-box {
+    @include elr-square(250px);
+    background-color: $light-grey;
+    position: relative;
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px;
+
+    &:nth-child(3) {
+        clear: left;
+    }
 }
 
-.label-danger {
-    @include elr-label('danger');
-}
-
-.label-warning {
-    @include elr-label('warning');
-}
-
-.label-success {
-    @include elr-label('success');
-}
-
-.label-muted {
-    @include elr-label('muted');
-}
-
-.label-custom {
-    @include elr-label('custom', 5px, $coral);
+.label-ribbon {
+    @include elr-label-ribbon;
 }

@@ -56,10 +56,6 @@
     position: relative;
     width: 200px;
     margin: 0 auto 20px;
-
-    // button {
-    //     @include elr-button-link();
-    // }
 }
 
 .elr-popover-bottom { @include elr-popover(bottom); }
@@ -76,26 +72,24 @@
 }
 
 .elr-menu-button {
-    @include elr-em-font(18px);
-    border: 0;
     background-color: $link-color;
-    color: $white;
-    padding: 5px 10px;
+    display: inline-block;
+    border-radius: 0;
+    padding: 7px;
 
-    &:hover {
-        cursor: pointer;
-        background-color: $white;
-        color: $link-color;
+    .hamburger {
+        @include elr-icon-arrow('left', 30px, 4px);
+        @include elr-hamburger(30px, $white, 4px);
     }
 }
 
 .elr-offscreen-nav {
     width: 100%;
-    padding: 0 10px;
+    padding: 3px 10px;
     background-color: $link-color;
     color: $white;
     font-weight: $bold;
-    height: 50px;
+    height: 70px;
     position: absolute;
     top: 0;
     left: 0;
@@ -107,7 +101,7 @@
     margin: 2px auto;
     background-color: $background-color;
     border: 1px solid $light-grey;
-    padding-top: 50px;
+    padding-top: 70px;
     overflow: hidden;
     position: relative;
 

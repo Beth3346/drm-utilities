@@ -1,12 +1,7 @@
 .card-holder {
-    // max-width: 500px;
     width: 50%;
     padding: 20px;
 }
-
-// .elr-card-thumbnail img {
-//     float: right;
-// }
 
 .card {
     @include elr-card(lighten($link-color, 40%), $link-color, null, 20px, 0, 5px);
