@@ -32,6 +32,11 @@
         }
     }
 
+    @include elr-breakpoint('neptune') {
+        width: 90%;
+        max-width: none;
+    }
+
     .elr-header,
     .elr-body,
     .elr-footer {
