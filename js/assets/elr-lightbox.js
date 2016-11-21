@@ -111,8 +111,8 @@ const elrLightbox = function(params) {
 
         $body.on('click', 'div.elr-blackout button.close', removeLightbox);
         $body.on('click', 'div.elr-blackout', function(e) {
-            removeLightbox();
             e.stopPropagation();
+            removeLightbox();
         });
 
         $body.on('click', 'div.elr-blackout ul.thumbnail-list a', function(e) {
@@ -122,13 +122,14 @@ const elrLightbox = function(params) {
         });
 
         elr.killEvent($body, 'click', 'div.elr-blackout .img-visible');
-        elr.killEvent($body, 'click', 'div.elr-blackout .lightbox-nav');
+        elr.killEvent($body, 'click', 'div.elr-blackout .lightbox-nav button');
 
         $body.on('click', 'div.elr-blackout .lightbox-nav button', function(e) {
-            const direction = $(this).data('dir');
-
             e.preventDefault();
             e.stopPropagation();
+
+            const direction = $(this).data('dir');
+
             advanceImage(direction);
         });
 
