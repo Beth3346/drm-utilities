@@ -62,35 +62,21 @@
     position: relative;
 
     .elr-dropdown-button-group {
+        margin-bottom: 5px;
+
         button {
             padding-left: 10px;
             padding-right: 10px;
-            margin-bottom: 5px;
+            margin-bottom: 0;
         }
     }
 
     button {
-        // @include elr-em-font(14px);
-        // position: relative;
-        // margin: 0;
-        // width: $width - 50;
-        // height: 40px;
-
         &:last-of-type {
             padding-left: 10px;
             padding-right: 10px;
             width: 50px;
             height: 40px;
-
-            // &.clicked {
-            //     color: $color;
-            //     background-color: lighten($bk-color, 10%);
-            // }
         }
-
-        // &.clicked {
-        //     color: $color;
-        //     background-color: lighten($bk-color, 10%);
-        // }
     }
 }
