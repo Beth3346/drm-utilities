@@ -1,27 +1,60 @@
-//- section#spin
-//-     .elr-container
-//-         .elr-row
-//-             .elr-col-full
-//-                 h3.elr-bold Spin
-//-         .elr-row.example-section
-//-             .elr-col-full.example-holder.example-holder-light
-//-                 .elr-col-half.spin-box
-//-                     p Hover and the circle will rotate
-//-                     .spin
-//-                         p Some Text
-
 section#flipper
     .elr-container.example-section
         .elr-row
-            .elr-col-full
+            .elr-col-full.example-headings
                 h3.example-heading Flipper
+                p Reveal content on click.
             .elr-col-full.example-holder
                 .elr-col-half.flip-box
-                    p Hover and the circle will flip
                     .flipper
-                        .flip-container
-                            .front
-                                p Front
-                            .back
-                                p Back
+                        .flipper-container
+                            .flipper-front
+                                p Click Me!
+                            .flipper-back
+                                p Here is some content.
+        .elr-row.source-section
+            button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+            .elr-col-full.source-holder
+                h4.example-subheading HTML
+                pre.
+                    &lt;div class=&quot;flipper&quot;&gt;
+                        &lt;div class=&quot;flipper-container&quot;&gt;
+                            &lt;div class=&quot;flipper-front&quot;&gt;
+                                &lt;p&gt;Click Me!&lt;/p&gt;
+                            &lt;/div&gt;
+                            &lt;div class=&quot;flipper-back&quot;&gt;
+                                &lt;p&gt;Here is some content.&lt;/p&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                h4.example-subheading Sass
+                pre.
+                    .flipper {
+                        @include elr-flipper;
+                        padding: 40px;
+                    }
 
+                    .flipper-container {
+                        @include elr-circle(200px);
+                    }
+
+                    .flipper-front,
+                    .flipper-back {
+                        @include elr-circle(200px);
+
+                        p {
+                            @include elr-centerer(true, false);
+                            @include elr-em-font(18px);
+                            width: 100%;
+                            color: $white;
+                            text-align: center;
+                        }
+                    }
+
+                    .flipper-front { background-color: $elr-blue; }
+                    .flipper-back { background-color: $dark-pink; }
+                h4.example-subheading JavaScript
+                pre.
+                    $('.flipper-container').on('click', function() {
+                        $(this).toggleClass('active');
+                    });

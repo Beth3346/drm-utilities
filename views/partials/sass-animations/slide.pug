@@ -1,0 +1,62 @@
+section#slide
+    .elr-container.example-section
+        .elr-row
+            .elr-col-full.example-headings
+                h3.example-heading Slide Down
+                p Pure CSS alternative to jQuery's slide down animation. Uses max-height to animate element. Useful for menus and accordion content.
+                p Requires JavaScript to toggle active class.
+            .elr-col-full.example-holder
+                .elr-col-half.slide-box
+                    .slide-down
+                        h4 Slide Down
+                        ul.elr-slide-down.elr-unstyled-list
+                            li Item One
+                            li Item Two
+                            li Item Three
+                            li Item Four
+        .elr-row.source-section
+            button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+            .elr-col-full.source-holder
+                h4.example-subheading HTML
+                pre.
+                    &lt;div class=&quot;slide-down&quot;&gt;
+                        &lt;h4&gt;Slide Down&lt;/h4&gt;
+                        &lt;ul class=&quot;elr-slide-down elr-unstyled-list&quot;&gt;
+                            &lt;li&gt;Item One&lt;/li&gt;
+                            &lt;li&gt;Item Two&lt;/li&gt;
+                            &lt;li&gt;Item Three&lt;/li&gt;
+                            &lt;li&gt;Item Four&lt;/li&gt;
+                        &lt;/ul&gt;
+                    &lt;/div&gt;
+                h4.example-subheading Sass
+                pre.
+                    .slide-down {
+                        cursor: pointer;
+
+                        h4 {
+                            background-color: $elr-blue;
+                            padding: 10px;
+                            color: $white;
+                            border-radius: 5px;
+                            margin-bottom: 5px;
+                        }
+
+                        .elr-slide-down {
+                            @include elr-slide;
+                            background-color: $elr-blue;
+                            color: $white;
+                            list-style: none;
+                            margin: 0;
+                            padding: 0;
+                            border-radius: 5px;
+
+                            li {
+                                padding: 5px 10px;
+                            }
+                        }
+                    }
+                h4.example-subheading JavaScript
+                pre.
+                    $('.slide-down').on('click', function() {
+                        $(this).find('.elr-slide-down').toggleClass('active');
+                    });

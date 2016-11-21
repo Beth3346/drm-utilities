@@ -1,8 +1,10 @@
 section#icons
     .elr-container.example-section
         .elr-row
-            .elr-col-full
+            .elr-col-full.example-headings
                 h3.example-heading Animated Icons
+                p Use animated icons in content blocks that require user interaction. When the user hovers over the icon the animation will occur.
+                p Animation will also run when active class is dynamically added to icon. Use this if you want the animation to occur when the user hovers over a content block that contains the icon. Example JavaScript is included in the source code below.
             .elr-col-full.example-holder
                 .elr-row
                     .elr-col-2
@@ -23,9 +25,63 @@ section#icons
                     .elr-col-2
                         .icon-animated.icon-background-fade
                             i.fa.fa-paw
+            .elr-col-full.example-holder
+                .card-border.card-centered.icon-card
+                    .elr-card-header
+                        .elr-header-content
+                            .icon-animated.icon-border-pop
+                                    i.fa.fa-gift
+                            h3 Content Title
+                    .elr-card-body
+                        .elr-card-content
+                            p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dapibus nisi eget enim vehicula, a rutrum nulla eleifend. Morbi et ante vitae nunc tincidunt finibus ut eu lectus. Cras ut est urna. Etiam sit amet tellus fermentum, eleifend ex ac, pharetra neque. Nam fermentum sem sed ornare faucibus.
+                        .elr-card-footer
+                            .elr-card-actions
+                                button.elr-button.elr-button-primary Button Text
+        .elr-row.source-section
+            button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+            .elr-col-full.source-holder
+                h4.example-subheading HTML
+                pre.
+                    &lt;div class="icon-animated icon-border"&gt;
+                        &lt;i class="fa fa-phone"&gt;&lt;/i&gt;
+                    &lt;/div&gt;
+                    &lt;div class="icon-animated icon-border-pop"&gt;
+                        &lt;i class="fa fa-gift"&gt;&lt;/i&gt;
+                    &lt;/div&gt;
+                    &lt;div class="icon-animated icon-dash"&gt;
+                        &lt;i class="fa fa-home"&gt;&lt;/i&gt;
+                    &lt;/div&gt;
+                    &lt;div class="icon-animated icon-dash-rotate"&gt;
+                        &lt;i class="fa fa-leaf"&gt;&lt;/i&gt;
+                    &lt;/div&gt;
+                    &lt;div class="icon-animated icon-border-pull"&gt;
+                        &lt;i class="fa fa-lock"&gt;&lt;/i&gt;
+                    &lt;/div&gt;
+                    &lt;div class="icon-animated icon-background-fade"&gt;
+                        &lt;i class="fa fa-paw"&gt;&lt;/i&gt;
+                    &lt;/div&gt;
+                h4.example-subheading Sass
+                pre.
+                    .icon-animated { @include elr-icon-animated; }
+                    .icon-border { @include elr-icon-border; }
+                    .icon-border-pop { @include elr-icon-border-pop; }
+                    .icon-dash { @include elr-icon-dash; }
+                    .icon-dash-rotate { @include elr-icon-dash(true); }
+                    .icon-border-pull { @include elr-icon-border-pull; }
+                    .icon-background-fade { @include elr-icon-background-fade; }
+                h4.example-subheading JavaScript
+                pre.
+                    $('.icon-holder').hover(function() {
+                        $(this).find('.icon-animated').toggleClass('active');
+                    });
+section#icons-hamburger
+    .elr-container.example-section
         .elr-row
-            .elr-col-full
+            .elr-col-full.example-headings
                 h3.example-heading Hamburger Icons
+                p Adds some extra clarity to the traditional hamburger style menu icons.  Icon animates to active state;
+                p Requires JavaScript to add an active class when a DOM event occurs. We recommend using a click event or adding the active class when a menu is opened. Example JavaScript is included in the source code below.
             .elr-col-full.example-holder
                 .elr-row
                     .elr-col-2
@@ -37,3 +93,28 @@ section#icons
                     .elr-col-2
                         button.icon-animate.icon-hamburger.icon-arrow-right
                             span
+        .elr-row.source-section
+            button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+            .elr-col-full.source-holder
+                h4.example-subheading HTML
+                pre.
+                    &lt;button class=&quot;icon-animate icon-hamburger icon-close&quot;&gt;
+                        &lt;span&gt;&lt;/span&gt;
+                    &lt;/button&gt;
+                    &lt;button class=&quot;icon-animate icon-hamburger icon-arrow-left&quot;&gt;
+                        &lt;span&gt;&lt;/span&gt;
+                    &lt;/button&gt;
+                    &lt;button class=&quot;icon-animate icon-hamburger icon-arrow-right&quot;&gt;
+                        &lt;span&gt;&lt;/span&gt;
+                    &lt;/button&gt;
+                h4.example-subheading Sass
+                pre.
+                    .icon-hamburger { @include elr-hamburger; }
+                    .icon-close { @include elr-icon-close; }
+                    .icon-arrow-left { @include elr-icon-arrow('left'); }
+                    .icon-arrow-right { @include elr-icon-arrow('right'); }
+                h4.example-subheading JavaScript
+                pre.
+                    $('.icon-animate').on('click', function() {
+                        $(this).toggleClass('active');
+                    });

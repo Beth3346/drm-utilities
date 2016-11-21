@@ -1,68 +1,218 @@
-section#links
+section#tab-transitions
     .elr-container.example-section
         .elr-row
+            .elr-col-full.example-headings
+                h3.example-heading Tab Bar Transitions
+                p These are simple line transitions that take place when a link is clicked. These animations can be incorporated into tab-based content. They are not recommended for navbars that link to other pages as the animation will not be visible to the user.
+                p Requires some JavaScript to toggle the current class when a link is clicked. Example JavaScript is included in the source code below.
             .elr-col-full
-                h3.example-heading Simple Navigation Bar Transitions
                 h4.example-subheading Simple Line
-            .elr-col-full.example-holder.example-holder-light
+            .elr-col-full.example-holder
                 nav.menu-animated.menu-simple-lines
                     ul.menu
                         li.menu-item.current
-                            a(href="#links") Article 1
+                            a(href="#") Article 1
                         li.menu-item
-                            a(href="#links") Article 2
+                            a(href="#") Article 2
                         li.menu-item
-                            a(href="#links") Article 3
+                            a(href="#") Article 3
                         li.menu-item
-                            a(href="#links") Article 4
+                            a(href="#") Article 4
                         li.menu-item
-                            a(href="#links") Article 5
+                            a(href="#") Article 5
                         li.menu-line
+        .elr-row.source-section
+            button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+            .elr-col-full.source-holder
+                h4.example-subheading HTML
+                pre.
+                    &lt;nav class=&quot;menu-animated menu-simple-lines&quot;&gt;
+                        &lt;ul class=&quot;menu&quot;&gt;
+                            &lt;li class=&quot;menu-item current&quot;&gt;
+                                &lt;a href=&quot;#&quot;&gt;Article 1&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li class=&quot;menu-item&quot;&gt;
+                                &lt;a href=&quot;#&quot;&gt;Article 2&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li class=&quot;menu-item&quot;&gt;
+                                &lt;a href=&quot;#&quot;&gt;Article 3&lt;/a&gt;
+                            &lt;li class=&quot;menu-item&quot;&gt;
+                                &lt;a href=&quot;#&quot;&gt;Article 4&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li class=&quot;menu-item&quot;&gt;
+                                &lt;a href=&quot;#&quot;&gt;Article 5&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li class=&quot;menu-line&quot;&gt;&lt;/li&gt;
+                        &lt;/ul&gt;
+                    &lt;/nav&gt;
+                h4.example-subheading Sass
+                pre.
+                    .menu-animated { @include menu-animated(); }
+                    .menu-simple-lines { @include menu-simple-lines(); }
+                h4.example-subheading JavaScript
+                pre.
+                    $('.menu-animated .menu-item').on('click', function(e) {
+                        e.preventDefault();
+                        let $that = $(this);
+
+                        $that.parent('ul').find('.current').removeClass('current');
+                        $that.addClass('current');
+                    });
         .elr-row
             .elr-col-full
                 h4.example-subheading Double Line
-            .elr-col-full.example-holder.example-holder-light
+            .elr-col-full.example-holder
                 nav.menu-animated.menu-double-lines
                     ul.menu
                         li.menu-item.current
-                            a(href="#links") Article 1
+                            a(href="#") Article 1
                         li.menu-item
-                            a(href="#links") Article 2
+                            a(href="#") Article 2
                         li.menu-item
-                            a(href="#links") Article 3
+                            a(href="#") Article 3
                         li.menu-item
-                            a(href="#links") Article 4
+                            a(href="#") Article 4
                         li.menu-item
-                            a(href="#links") Article 5
+                            a(href="#") Article 5
+        .elr-row.source-section
+            button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+            .elr-col-full.source-holder
+                h4.example-subheading HTML
+                pre.
+                    &lt;nav class=&quot;menu-animated menu-double-lines&quot;&gt;
+                        &lt;ul class=&quot;menu&quot;&gt;
+                            &lt;li class=&quot;menu-item current&quot;&gt;
+                                &lt;a href=&quot;#&quot;&gt;Article 1&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li class=&quot;menu-item&quot;&gt;
+                                &lt;a href=&quot;#&quot;&gt;Article 2&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li class=&quot;menu-item&quot;&gt;
+                                &lt;a href=&quot;#&quot;&gt;Article 3&lt;/a&gt;
+                            &lt;li class=&quot;menu-item&quot;&gt;
+                                &lt;a href=&quot;#&quot;&gt;Article 4&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li class=&quot;menu-item&quot;&gt;
+                                &lt;a href=&quot;#&quot;&gt;Article 5&lt;/a&gt;
+                            &lt;/li&gt;
+                        &lt;/ul&gt;
+                    &lt;/nav&gt;
+                h4.example-subheading Sass
+                pre.
+                    .menu-animated { @include menu-animated(); }
+                h4.example-subheading JavaScript
+                pre.
+                    $('.menu-animated .menu-item').on('click', function(e) {
+                        e.preventDefault();
+                        let $that = $(this);
+
+                        $that.parent('ul').find('.current').removeClass('current');
+                        $that.addClass('current');
+                    });
+section#link-transitions
+    .elr-container.example-section
+        .elr-row
+            .elr-col-full.example-headings
+                h3.example-heading Navigation Bar Transitions
+                p These are simple line transitions that take place when a user hovers over a link. These animations can be incorporated into traditional navigation menus or tabbed content.
+                p We recommend using some JavaScript to toggle the current class when a link is clicked. This helps the user to navigation your site's menu structure. Example JavaScript is included in the source code below.
         .elr-row
             .elr-col-full
                 h4.example-subheading Expanding Line
-            .elr-col-full.example-holder.example-holder-light
+            .elr-col-full.example-holder
                 nav.menu-animated.menu-expanding-lines
                     ul.menu
                         li.menu-item.current
-                            a(href="#links") Article 1
+                            a(href="#") Article 1
                         li.menu-item
-                            a(href="#links") Article 2
+                            a(href="#") Article 2
                         li.menu-item
-                            a(href="#links") Article 3
+                            a(href="#") Article 3
                         li.menu-item
-                            a(href="#links") Article 4
+                            a(href="#") Article 4
                         li.menu-item
-                            a(href="#links") Article 5
+                            a(href="#") Article 5
+        .elr-row.source-section
+            button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+            .elr-col-full.source-holder
+                h4.example-subheading HTML
+                pre.
+                    &lt;nav class=&quot;menu-animated menu-expanding-lines&quot;&gt;
+                        &lt;ul class=&quot;menu&quot;&gt;
+                            &lt;li class=&quot;menu-item current&quot;&gt;
+                                &lt;a href=&quot;#&quot;&gt;Article 1&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li class=&quot;menu-item&quot;&gt;
+                                &lt;a href=&quot;#&quot;&gt;Article 2&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li class=&quot;menu-item&quot;&gt;
+                                &lt;a href=&quot;#&quot;&gt;Article 3&lt;/a&gt;
+                            &lt;li class=&quot;menu-item&quot;&gt;
+                                &lt;a href=&quot;#&quot;&gt;Article 4&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li class=&quot;menu-item&quot;&gt;
+                                &lt;a href=&quot;#&quot;&gt;Article 5&lt;/a&gt;
+                            &lt;/li&gt;
+                        &lt;/ul&gt;
+                    &lt;/nav&gt;
+                h4.example-subheading Sass
+                pre.
+                    .menu-animated { @include menu-animated(); }
+                h4.example-subheading JavaScript
+                pre.
+                    $('.menu-animated .menu-item').on('click', function() {
+                        let $that = $(this);
+
+                        $that.parent('ul').find('.current').removeClass('current');
+                        $that.addClass('current');
+                    });
         .elr-row
             .elr-col-full
                 h4.example-subheading Drop Line
-            .elr-col-full.example-holder.example-holder-light
+            .elr-col-full.example-holder
                 nav.menu-animated.menu-drop-lines
                     ul.menu
                         li.menu-item.current
-                            a(href="#links") Article 1
+                            a(href="#") Article 1
                         li.menu-item
-                            a(href="#links") Article 2
+                            a(href="#") Article 2
                         li.menu-item
-                            a(href="#links") Article 3
+                            a(href="#") Article 3
                         li.menu-item
-                            a(href="#links") Article 4
+                            a(href="#") Article 4
                         li.menu-item
-                            a(href="#links") Article 5
+                            a(href="#") Article 5
+        .elr-row.source-section
+            button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+            .elr-col-full.source-holder
+                h4.example-subheading HTML
+                pre.
+                    &lt;nav class=&quot;menu-animated menu-drop-lines&quot;&gt;
+                        &lt;ul class=&quot;menu&quot;&gt;
+                            &lt;li class=&quot;menu-item current&quot;&gt;
+                                &lt;a href=&quot;#&quot;&gt;Article 1&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li class=&quot;menu-item&quot;&gt;
+                                &lt;a href=&quot;#&quot;&gt;Article 2&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li class=&quot;menu-item&quot;&gt;
+                                &lt;a href=&quot;#&quot;&gt;Article 3&lt;/a&gt;
+                            &lt;li class=&quot;menu-item&quot;&gt;
+                                &lt;a href=&quot;#&quot;&gt;Article 4&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li class=&quot;menu-item&quot;&gt;
+                                &lt;a href=&quot;#&quot;&gt;Article 5&lt;/a&gt;
+                            &lt;/li&gt;
+                        &lt;/ul&gt;
+                    &lt;/nav&gt;
+                h4.example-subheading Sass
+                pre.
+                    .menu-animated { @include menu-animated(); }
+                h4.example-subheading JavaScript
+                pre.
+                    $('.menu-animated .menu-item').on('click', function() {
+                        let $that = $(this);
+
+                        $that.parent('ul').find('.current').removeClass('current');
+                        $that.addClass('current');
+                    });

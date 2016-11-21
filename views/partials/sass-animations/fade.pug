@@ -1,26 +1,53 @@
 section#fade
     .elr-container.example-section
         .elr-row
-            .elr-col-full
+            .elr-col-full.example-headings
                 h3.example-heading Smooth Fade
+                p Element fades when user hovers over its container
             .elr-col-full.example-holder
                 .elr-col-half.fade-box
                     p Hover and the box will appear
-                    .box-pink.fade-in
+                    .fade-in
+                        .box
+                            p Now you can see me
                 .elr-col-half.fade-box
                     p Hover and box will disappear
-                    .box-pink.fade-out
-section#slide
-    .elr-container.example-section
-        .elr-row
-            .elr-col-full
-                h3.example-heading Slide Down
-            .elr-col-full.example-holder
-                .elr-col-half.slide-box
-                    .slide-down
-                        p Slide Down
-                        ul.elr-slide-down.elr-unstyled-list
-                            li Item One
-                            li Item Two
-                            li Item Three
-                            li Item Four
+                    .fade-out
+                        .box
+                            p Now you can see me
+        .elr-row.source-section
+            button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+            .elr-col-full.source-holder
+                h4.example-subheading HTML
+                pre.
+                    &lt;div class="fade-in"&gt;
+                        &lt;div class="box"&gt;
+                            &lt;p&gt;Now you can see me&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                h4.example-subheading Sass
+                pre.
+                    .box {
+                        width: 100%;
+                        height: 150px;
+                        background-color: lighten($elr-blue, 10%);
+                        border-color: $elr-blue;
+                        text-align: center;
+                        display: flex;
+                        align-items: center;
+                        color: $white;
+
+                        p {
+                            width: 100%;
+                            font-size: to-rems(24px);
+                        }
+                    }
+
+                    .fade-in,
+                    .fade-out {
+                        padding: 10px;
+                        background-color: $lightest-grey;
+                    }
+
+                    .fade-in { @include elr-fade('show', .3s); }
+                    .fade-out { @include elr-fade('hide', .3s); }

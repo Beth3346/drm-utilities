@@ -1,10 +1,11 @@
 section#cards
     .elr-container.example-section
         .elr-row
-            .elr-col-full
+            .elr-col-full.example-headings
                 h3.example-heading Cards
+                p Useful for grouping information into distinct content blocks. Can be placed in multiple configurations depending on the type of information you need to display. With minimal CSS you can create multiple card layouts.
             .elr-col-full
-                h4.example-subheading Basic Cards
+                h4.example-subheading Basic Card
             .elr-col-full.elr-flex.elr-flex-justify.elr-flex-wrap
                 .card-holder
                     .card
@@ -17,6 +18,36 @@ section#cards
                         .elr-card-footer
                             .elr-card-actions
                                 a.elr-button.elr-button-primary Button Link
+            .elr-col-full.source-section
+                button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+                .elr-col-full.source-holder
+                    h4.example-subheading HTML
+                    pre.
+                        &lt;div class=&quot;card&quot;&gt;
+                            &lt;div class=&quot;elr-card-header&quot;&gt;
+                                &lt;div class=&quot;elr-header-content&quot;&gt;
+                                    &lt;h2 class=&quot;elr-card-title&quot;&gt;Title of Card&lt;/h2&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                            &lt;div class=&quot;elr-card-body&quot;&gt;
+                                &lt;div class=&quot;elr-card-content&quot;&gt;
+                                    &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem aspernatur cum culpa quasi deleniti. Accusamus nobis quo labore iure amet non, nihil corporis?&lt;/p&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                            &lt;div class=&quot;elr-card-footer&quot;&gt;
+                                &lt;div class=&quot;elr-card-actions&quot;&gt;
+                                    &lt;a href=&quot;#&quot; class=&quot;elr-button elr-button-primary&quot;&gt;Button Link&lt;/a&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    h4.example-subheading Sass
+                    pre.
+                        .card {
+                            @include elr-card(lighten($link-color, 40%), $link-color, null, 20px, 0, 5px);
+                        }
+            .elr-col-full
+                h4.example-subheading Basic Card with Centered Content
+            .elr-col-full.elr-flex.elr-flex-justify.elr-flex-wrap
                 .card-holder
                     .card-border.card-centered
                         .elr-card-header
@@ -28,6 +59,33 @@ section#cards
                         .elr-card-footer
                             .elr-card-actions
                                 a.elr-button.elr-button-primary Button Link
+            .elr-col-full.source-section
+                button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+                .elr-col-full.source-holder
+                    h4.example-subheading HTML
+                    pre.
+                        &lt;div class=&quot;card-border card-centered&quot;&gt;
+                            &lt;div class=&quot;elr-card-header&quot;&gt;
+                                &lt;div class=&quot;elr-header-content&quot;&gt;
+                                    &lt;h2 class=&quot;elr-card-title&quot;&gt;Title of Card&lt;/h2&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                            &lt;div class=&quot;elr-card-body&quot;&gt;
+                                &lt;div class=&quot;elr-card-content&quot;&gt;
+                                    &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem aspernatur cum culpa quasi deleniti. Accusamus nobis quo labore iure amet non, nihil corporis?&lt;/p&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                            &lt;div class=&quot;elr-card-footer&quot;&gt;
+                                &lt;div class=&quot;elr-card-actions&quot;&gt;
+                                    &lt;a href=&quot;#&quot; class=&quot;elr-button elr-button-primary&quot;&gt;Button Link&lt;/a&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    h4.example-subheading Sass
+                    pre.
+                        .card-border {
+                            @include elr-card($white, $link-color, $light-grey, 20px, 0, 5px);
+                        }
             .elr-col-full
                 h4.example-subheading Image Cards
             .elr-col-full.elr-flex.elr-flex-justify.elr-flex-wrap
@@ -44,6 +102,39 @@ section#cards
                         .elr-card-footer
                             .elr-card-actions
                                 a.elr-button.elr-button-primary Button Link
+            .elr-col-full.source-section
+                button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+                .elr-col-full.source-holder
+                    h4.example-subheading HTML
+                    pre.
+                        &lt;div class=&quot;card-border&quot;&gt;
+                            &lt;div class=&quot;elr-card-header&quot;&gt;
+                                &lt;div class=&quot;elr-header-content&quot;&gt;
+                                    &lt;figure class=&quot;elr-card-image&quot;&gt;
+                                        &lt;img src=&quot;images/compressed/cat11.jpg&quot; /&gt;
+                                    &lt;/figure&gt;
+                                    &lt;h2 class=&quot;elr-card-title&quot;&gt;Title of Card&lt;/h2&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                            &lt;div class=&quot;elr-card-body&quot;&gt;
+                                &lt;div class=&quot;elr-card-content&quot;&gt;
+                                    &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem aspernatur cum culpa quasi deleniti. Accusamus nobis quo labore iure amet non, nihil corporis?&lt;/p&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                            &lt;div class=&quot;elr-card-footer&quot;&gt;
+                                &lt;div class=&quot;elr-card-actions&quot;&gt;
+                                    &lt;a href=&quot;#&quot; class=&quot;elr-button elr-button-primary&quot;&gt;Button Link&lt;/a&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    h4.example-subheading Sass
+                    pre.
+                        .card-border {
+                            @include elr-card($white, $link-color, $light-grey, 20px, 0, 5px);
+                        }
+            .elr-col-full
+                h4.example-subheading Full-Width Image Card
+            .elr-col-full.elr-flex.elr-flex-justify.elr-flex-wrap
                 .card-holder
                     .card
                         .elr-card-header
@@ -57,6 +148,37 @@ section#cards
                         .elr-card-footer
                             .elr-card-actions
                                 a.elr-button.elr-button-primary Button Link
+            .elr-col-full.source-section
+                button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+                .elr-col-full.source-holder
+                    h4.example-subheading HTML
+                    pre.
+                        &lt;div class=&quot;card&quot;&gt;
+                            &lt;div class=&quot;elr-card-header&quot;&gt;
+                                &lt;figure class=&quot;elr-card-full-image&quot;&gt;
+                                    &lt;img src=&quot;images/compressed/cat11.jpg&quot; /&gt;
+                                &lt;/figure&gt;
+                                &lt;div class=&quot;elr-header-content&quot;&gt;
+                                    &lt;h2 class=&quot;elr-card-title&quot;&gt;Title of Card&lt;/h2&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                            &lt;div class=&quot;elr-card-body&quot;&gt;
+                                &lt;div class=&quot;elr-card-content&quot;&gt;
+                                    &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem aspernatur cum culpa quasi deleniti. Accusamus nobis quo labore iure amet non, nihil corporis?&lt;/p&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                            &lt;div class=&quot;elr-card-footer&quot;&gt;
+                                &lt;div class=&quot;elr-card-actions&quot;&gt;
+                                    &lt;a href=&quot;#&quot; class=&quot;elr-button elr-button-primary&quot;&gt;Button Link&lt;/a&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    h4.example-subheading Sass
+                    pre.
+                        .card {
+                            @include elr-card(lighten($link-color, 40%), $link-color, null, 20px, 0, 5px);
+                        }
+            .elr-col-full.elr-flex.elr-flex-justify.elr-flex-wrap
                 .card-holder
                     .card-border
                         .elr-card-header
@@ -70,6 +192,37 @@ section#cards
                         .elr-card-footer
                             .elr-card-actions
                                 a.elr-button.elr-button-primary Button Link
+            .elr-col-full.source-section
+                button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+                .elr-col-full.source-holder
+                    h4.example-subheading HTML
+                    pre.
+                        &lt;div class=&quot;card-border&quot;&gt;
+                            &lt;div class=&quot;elr-card-header&quot;&gt;
+                                &lt;div class=&quot;elr-header-content&quot;&gt;
+                                    &lt;h2 class=&quot;elr-card-title&quot;&gt;Title of Card&lt;/h2&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                            &lt;div class=&quot;elr-card-body&quot;&gt;
+                                &lt;figure class=&quot;elr-card-image&quot;&gt;
+                                    &lt;img src=&quot;images/compressed/cat11.jpg&quot; /&gt;
+                                &lt;/figure&gt;
+                                &lt;div class=&quot;elr-card-content&quot;&gt;
+                                    &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem aspernatur cum culpa quasi deleniti. Accusamus nobis quo labore iure amet non, nihil corporis?&lt;/p&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                            &lt;div class=&quot;elr-card-footer&quot;&gt;
+                                &lt;div class=&quot;elr-card-actions&quot;&gt;
+                                    &lt;a href=&quot;#&quot; class=&quot;elr-button elr-button-primary&quot;&gt;Button Link&lt;/a&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    h4.example-subheading Sass
+                    pre.
+                        .card-border {
+                            @include elr-card($white, $link-color, $light-grey, 20px, 0, 5px);
+                        }
+            .elr-col-full.elr-flex.elr-flex-justify.elr-flex-wrap
                 .card-holder
                     .card
                         .elr-card-header
@@ -83,6 +236,37 @@ section#cards
                         .elr-card-footer
                             .elr-card-actions
                                 a.elr-button.elr-button-primary Button Link
+            .elr-col-full.source-section
+                button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+                .elr-col-full.source-holder
+                    h4.example-subheading HTML
+                    pre.
+                        &lt;div class=&quot;card&quot;&gt;
+                            &lt;div class=&quot;elr-card-header&quot;&gt;
+                                &lt;div class=&quot;elr-header-content&quot;&gt;
+                                    &lt;h2 class=&quot;elr-card-title&quot;&gt;Title of Card&lt;/h2&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                            &lt;div class=&quot;elr-card-body&quot;&gt;
+                                &lt;div class=&quot;elr-card-content&quot;&gt;
+                                    &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem aspernatur cum culpa quasi deleniti. Accusamus nobis quo labore iure amet non, nihil corporis?&lt;/p&gt;
+                                &lt;/div&gt;
+                                &lt;figure class=&quot;elr-card-full-image&quot;&gt;
+                                    &lt;img src=&quot;images/compressed/cat11.jpg&quot; /&gt;
+                                &lt;/figure&gt;
+                            &lt;/div&gt;
+                            &lt;div class=&quot;elr-card-footer&quot;&gt;
+                                &lt;div class=&quot;elr-card-actions&quot;&gt;
+                                    &lt;a href=&quot;#&quot; class=&quot;elr-button elr-button-primary&quot;&gt;Button Link&lt;/a&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    h4.example-subheading Sass
+                    pre.
+                        .card {
+                            @include elr-card(lighten($link-color, 40%), $link-color, null, 20px, 0, 5px);
+                        }
+            .elr-col-full.elr-flex.elr-flex-justify.elr-flex-wrap
                 .card-holder
                     .card
                         .elr-card-header
@@ -96,6 +280,37 @@ section#cards
                                 a.elr-button.elr-button-primary Button Link
                             figure.elr-card-image
                                 img(src="images/compressed/cat2.jpg")
+            .elr-col-full.source-section
+                button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+                .elr-col-full.source-holder
+                    h4.example-subheading HTML
+                    pre.
+                        &lt;div class=&quot;card-border&quot;&gt;
+                            &lt;div class=&quot;elr-card-header&quot;&gt;
+                                &lt;div class=&quot;elr-header-content&quot;&gt;
+                                    &lt;h2 class=&quot;elr-card-title&quot;&gt;Title of Card&lt;/h2&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                            &lt;div class=&quot;elr-card-body&quot;&gt;
+                                &lt;div class=&quot;elr-card-content&quot;&gt;
+                                    &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem aspernatur cum culpa quasi deleniti. Accusamus nobis quo labore iure amet non, nihil corporis?&lt;/p&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                            &lt;div class=&quot;elr-card-footer&quot;&gt;
+                                &lt;div class=&quot;elr-card-actions&quot;&gt;
+                                    &lt;a href=&quot;#&quot; class=&quot;elr-button elr-button-primary&quot;&gt;Button Link&lt;/a&gt;
+                                &lt;/div&gt;
+                                &lt;figure class=&quot;elr-card-image&quot;&gt;
+                                    &lt;img src=&quot;images/compressed/cat11.jpg&quot; /&gt;
+                                &lt;/figure&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    h4.example-subheading Sass
+                    pre.
+                        .card {
+                            @include elr-card(lighten($link-color, 40%), $link-color, null, 20px, 0, 5px);
+                        }
+            .elr-col-full.elr-flex.elr-flex-justify.elr-flex-wrap
                 .card-holder
                     .card-border
                         .elr-card-header
@@ -109,22 +324,39 @@ section#cards
                                 a.elr-button.elr-button-primary Button Link
                             figure.elr-card-full-image
                                 img(src="images/compressed/paris4.jpg")
+            .elr-col-full.source-section
+                button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+                .elr-col-full.source-holder
+                    h4.example-subheading HTML
+                    pre.
+                        &lt;div class=&quot;card&quot;&gt;
+                            &lt;div class=&quot;elr-card-header&quot;&gt;
+                                &lt;div class=&quot;elr-header-content&quot;&gt;
+                                    &lt;h2 class=&quot;elr-card-title&quot;&gt;Title of Card&lt;/h2&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                            &lt;div class=&quot;elr-card-body&quot;&gt;
+                                &lt;div class=&quot;elr-card-content&quot;&gt;
+                                    &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem aspernatur cum culpa quasi deleniti. Accusamus nobis quo labore iure amet non, nihil corporis?&lt;/p&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                            &lt;div class=&quot;elr-card-footer&quot;&gt;
+                                &lt;div class=&quot;elr-card-actions&quot;&gt;
+                                    &lt;a href=&quot;#&quot; class=&quot;elr-button elr-button-primary&quot;&gt;Button Link&lt;/a&gt;
+                                &lt;/div&gt;
+                                &lt;figure class=&quot;elr-card-full-image&quot;&gt;
+                                    &lt;img src=&quot;images/compressed/cat11.jpg&quot; /&gt;
+                                &lt;/figure&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    h4.example-subheading Sass
+                    pre.
+                        .card-border {
+                            @include elr-card($white, $link-color, $light-grey, 20px, 0, 5px);
+                        }
             .elr-col-full
                 h4.example-subheading Thumbnail Cards
             .elr-col-full.elr-flex.elr-flex-justify.elr-flex-wrap
-                .card-holder
-                    .card
-                        .elr-card-header
-                            .elr-header-content
-                                figure.elr-card-thumbnail
-                                    img(src="images/compressed/cat4.jpg")
-                                h2.elr-card-title Title of Card
-                        .elr-card-body
-                            .elr-card-content
-                                p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat soluta, delectus alias, dolor sapiente a cumque, eum corporis eligendi vero quasi dolore minus illum neque.
-                        .elr-card-footer
-                            .elr-card-actions
-                                a.elr-button.elr-button-primary Button
                 .card-holder
                     .card-border
                         .elr-card-header
@@ -139,19 +371,37 @@ section#cards
                             .elr-card-actions
                                 a.elr-button.elr-button-success Complete Action
                                 a.elr-button.elr-button-danger Cancel
-                .card-holder
-                    .card.card-centered
-                        .elr-card-header
-                            .elr-header-content
-                                figure.elr-card-thumbnail
-                                    img(src="images/compressed/cat5.jpg")
-                                h2.elr-card-title Title of Card
-                        .elr-card-body
-                            .elr-card-content
-                                p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat soluta, delectus alias, dolor sapiente a cumque, eum corporis eligendi vero quasi dolore minus illum neque.
-                        .elr-card-footer
-                            .elr-card-actions
-                                a.elr-button.elr-button-primary Button
+            .elr-col-full.source-section
+                button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+                .elr-col-full.source-holder
+                    h4.example-subheading HTML
+                    pre.
+                        &lt;div class=&quot;card-border&quot;&gt;
+                            &lt;div class=&quot;elr-card-header&quot;&gt;
+                                &lt;div class=&quot;elr-header-content&quot;&gt;
+                                    &lt;figure class=&quot;elr-card-thumbnail elr-card-thumbnail-round&quot;&gt;
+                                        &lt;img src=&quot;images/compressed/paris5.jpg&quot; /&gt;
+                                    &lt;/figure&gt;
+                                    &lt;h2 class=&quot;elr-card-title&quot;&gt;Title of Card&lt;/h2&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                            &lt;div class=&quot;elr-card-body&quot;&gt;
+                                &lt;div class=&quot;elr-card-content&quot;&gt;
+                                    &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem aspernatur cum culpa quasi deleniti. Accusamus nobis quo labore iure amet non, nihil corporis?&lt;/p&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                            &lt;div class=&quot;elr-card-footer&quot;&gt;
+                                &lt;div class=&quot;elr-card-actions&quot;&gt;
+                                    &lt;a href=&quot;#&quot; class=&quot;elr-button elr-button-primary&quot;&gt;Button Link&lt;/a&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    h4.example-subheading Sass
+                    pre.
+                        .card-border {
+                            @include elr-card($white, $link-color, $light-grey, 20px, 0, 5px);
+                        }
+            .elr-col-full.elr-flex.elr-flex-justify.elr-flex-wrap
                 .card-holder
                     .card-border.card-centered
                         .elr-card-header
@@ -165,6 +415,36 @@ section#cards
                         .elr-card-footer
                             .elr-card-actions
                                 a.elr-button.elr-button-primary Button
+            .elr-col-full.source-section
+                button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+                .elr-col-full.source-holder
+                    h4.example-subheading HTML
+                    pre.
+                        &lt;div class=&quot;card-border card-centered&quot;&gt;
+                            &lt;div class=&quot;elr-card-header&quot;&gt;
+                                &lt;div class=&quot;elr-header-content&quot;&gt;
+                                    &lt;figure class=&quot;elr-card-thumbnail elr-card-thumbnail-round&quot;&gt;
+                                        &lt;img src=&quot;images/compressed/paris5.jpg&quot; /&gt;
+                                    &lt;/figure&gt;
+                                    &lt;h2 class=&quot;elr-card-title&quot;&gt;Title of Card&lt;/h2&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                            &lt;div class=&quot;elr-card-body&quot;&gt;
+                                &lt;div class=&quot;elr-card-content&quot;&gt;
+                                    &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem aspernatur cum culpa quasi deleniti. Accusamus nobis quo labore iure amet non, nihil corporis?&lt;/p&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                            &lt;div class=&quot;elr-card-footer&quot;&gt;
+                                &lt;div class=&quot;elr-card-actions&quot;&gt;
+                                    &lt;a href=&quot;#&quot; class=&quot;elr-button elr-button-primary&quot;&gt;Button Link&lt;/a&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    h4.example-subheading Sass
+                    pre.
+                        .card-border {
+                            @include elr-card($white, $link-color, $light-grey, 20px, 0, 5px);
+                        }
             .elr-col-full
                 h4.example-subheading Contact Cards
             .elr-col-full.elr-flex.elr-flex-justify.elr-flex-wrap
@@ -183,3 +463,15 @@ section#cards
                         .elr-card-footer
                             .elr-card-actions
                                 a.elr-button.elr-button-primary Button
+            .elr-col-full.source-section
+                button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+                .elr-col-full.source-holder
+                    h4.example-subheading HTML
+                    pre.
+                    h4.example-subheading Sass
+                    pre.
+                        .card-border {
+                            @include elr-card($white, $link-color, $light-grey, 20px, 0, 5px);
+                        }
+
+                        .card-address { @include elr-address; }
