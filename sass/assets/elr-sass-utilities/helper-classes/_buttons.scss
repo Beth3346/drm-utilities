@@ -4,6 +4,10 @@
         @include elr-button(14px, 250px);
     }
 
+    .elr-button-small {
+        width: auto;
+    }
+
     .elr-button-primary {
         @include elr-button-link($color, $bg-color);
     }
