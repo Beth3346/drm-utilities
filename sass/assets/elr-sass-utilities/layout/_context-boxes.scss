@@ -2,9 +2,8 @@
 
 @mixin elr-context-box($type: info, $border-radius: 0, $color: none, $width: 100%, $text-color: none) {
     @include elr-clearfix;
-    @include elr-em-padding('all', 10px, 20px);
-    @include elr-em-width($width);
-    @include elr-em-margin('all', 20px, 0);
+    padding: to-rems(10px) to-rems(20px);
+    max-width: $width;
     position: relative;
 
     @if $border-radius != 0 {
@@ -82,8 +81,8 @@
         }
 
     } @else if $type == custom {
-        background-color: lighten($color, 20%);
-        border: 1px solid $color;
+        background-color: $color;
+        border: 1px solid darken($color, 10%);
 
         @if ($text-color != 'none') {
             color: $text-color;
