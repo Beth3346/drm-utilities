@@ -1,0 +1,20 @@
+.elr-alert {
+    @include elr-alert(3px);
+    margin-bottom: to-rems(10px);
+}
+
+@include elr-alert-classes;
+
+.elr-custom-alert {
+    background-color: lighten($link-color, 20%);
+    border-color: $link-color;
+    color: $white;
+}
+
+.elr-purple-alert {
+    background-color: lighten($accent-color, 20%);
+    border-color: $accent-color;
+    color: $white;
+}
+
+.elr-modal-alert { @include elr-modal-alert; }
