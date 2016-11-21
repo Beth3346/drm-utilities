@@ -9,7 +9,7 @@
     font-size: to-rems(12px);
     padding: to-rems(5px) to-rems(15px);
     display: inline-block;
-    font-weight: 900;
+    font-weight: $extra-bold;
     color: $text-color;
     border-width: 1px;
     border-style: solid;
@@ -26,10 +26,10 @@
     }
 
     span {
-        margin-right: 5px;
+        margin-right: to-rems(5px);
 
         &:first-child {
-            margin-right: 10px;
+            margin-right: to-rems(10px);
         }
 
         &:only-child,
@@ -84,8 +84,8 @@
         font-size: to-rems(14px);
         position: absolute;
         color: $color;
-        #{$position-x}: 10px;
-        #{$position-y}: 10px;
+        #{$position-x}: to-rems(10px);
+        #{$position-y}: to-rems(10px);
     }
 };
 
@@ -93,13 +93,13 @@
     color: $color;
     background-color: $bg-color;
     text-align: right;
-    font-weight: 900;
+    font-weight: $extra-bold;
     position: absolute;
-    top: 20px;
-    padding-left: 20px;
+    top: to-rems(20px);
+    padding-left: to-rems(20px);
     left: -14px;
     line-height: 1;
-    border-radius: 0 3px 3px 0;
+    border-radius: 0 to-rems(3px) to-rems(3px) 0;
 
     &::before {
         @include elr-triangle('top-right', 15px, 'auto', darken($bg-color, 10%));
@@ -111,15 +111,9 @@
     }
 
     .label-title {
-        padding: 10px 20px 10px 0;
+        padding: to-rems(10px) to-rems(20px) to-rems(10px) 0;
         color: $white;
         display: inline-block;
         font-size: to-rems(12px);
     }
 }
-
-// TODO: Icon Labels,
-//       Labels with Details
-//       Grouped Labels
-//       Ribbon Label
-//       Corner Label

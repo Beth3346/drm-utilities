@@ -1,68 +1,68 @@
 @mixin elr-comments($background-color: transparent) {
-    max-width: 700px;
+    max-width: to-rems(700px);
 
     .example-subheading {
-        margin-bottom: 20px;
+        margin-bottom: to-rems(20px);
     }
 
     .comment {
         width: 100%;
         display: flex;
         flex-wrap: wrap;
-        margin-bottom: 20px;
+        margin-bottom: to-rems(20px);
 
         @if ($background-color != transparent) {
             background-color: $background-color;
-            border-radius: 5px;
-            padding: 20px;
+            border-radius: to-rems(5px);
+            padding: to-rems(20px);
         }
     }
 
     .comment-nested {
-        padding-left: 30px;
-        padding-top: 10px;
+        padding-left: to-rems(30px);
+        padding-top: to-rems(10px);
         padding-bottom: 0;
         margin-bottom: 0;
     }
 
     p {
-        @include elr-em-font(14px);
+        font-size: to-rems(14px);
         margin: 0;
         padding: 0;
     }
 
     .avatar {
         @include elr-thumbnail(null, 50px, 50px, 3px);
-        margin-right: 20px;
+        margin-right: to-rems(20px);
     }
 
     .comment-content {
-        max-width: 630px - 40;
+        max-width: to-rems(630px - 40);
     }
 
     .comment-heading {
-        padding-bottom: 5px;
+        padding-bottom: to-rems(5px);
         display: flex;
     }
 
     .comment-author {
-        @include elr-em-font(16px);
-        font-weight: 700;
+        font-size: to-rems(16px);
+        font-weight: $bold;
         color: $dark-grey;
         padding: 0;
-        margin: 0 10px 0 0;
+        margin: 0 to-rems(10px) 0 0;
     }
 
     .comment-timestamp {
-        @include elr-em-font(14px);
-        font-weight: 500;
+        font-size: to-rems(14px);
+        font-weight: $normal;
         color: $darker-grey;
         padding: 0;
         margin: 0;
     }
 
     .comment-reply {
-        @include elr-em-font(12px);
+        font-size: to-rems(12px);
         text-decoration: none;
         color: $link-color;
     }

@@ -1,6 +1,12 @@
 // Content Boxes
 
-@mixin elr-context-box($type: info, $border-radius: 0, $color: none, $width: 100%, $text-color: none) {
+@mixin elr-context-box(
+    $type: info,
+    $border-radius: 0,
+    $color: none,
+    $width: 100%,
+    $text-color: none
+) {
     @include elr-clearfix;
     padding: to-rems(10px) to-rems(20px);
     max-width: $width;

@@ -10,14 +10,14 @@
     height: 100%;
 
     .close {
-        @include elr-em-font(18);
+        font-size: to-rems(18px);
         margin: 0;
-        padding: 20px;
+        padding: to-rems(20px);
         border: 0;
         background: none;
         color: $white;
         position: relative;
-        top: 20px;
+        top: to-rems(20px);
         left: 95%;
         cursor: pointer;
     }
@@ -37,7 +37,7 @@
         padding: 0;
         position: absolute;
         list-style: none;
-        height: $image-size;
+        height: to-rems($image-size);
 
         @if $list-position == 'top-right' {
             top: 0;
@@ -77,8 +77,8 @@
         width: 100%;
 
         button {
-            @include elr-em-font(36px);
             @include elr-square(75px);
+            font-size: to-rems(36px);
             border: 0;
             background-color: rgba($white, .4);
             cursor: pointer;
@@ -88,12 +88,32 @@
             }
         }
 
-        .prev {
-            float: left;
-        }
+        .prev { float: left; }
 
-        .next {
-            float: right;
+        .next { float: right; }
+    }
+}
+
+@mixin elr-thumbnail-list($border-color: $white, $width: 150px, $height: 120px, $glow: $elr-blue) {
+    @include elr-clearfix;
+    padding: to-rems(10px) 0;
+    list-style: none;
+
+    li {
+        margin: 0 to-rems(10px) to-rems(10px) 0;
+        float: left;
+        padding: 0;
+    }
+
+    img {
+        @include elr-thumbnail($border-color);
+        padding: 0;
+        margin: 0;
+        transition: box-shadow, .3s, ease;
+
+        &:hover {
+            transition: box-shadow, .3s, ease;
+            box-shadow: $grey 0 0 0 1px, $glow 0 0 3px 2px;
         }
     }
 }

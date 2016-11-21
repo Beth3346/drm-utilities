@@ -21,27 +21,3 @@
         width: auto;
     }
 }
-
-@mixin elr-thumbnail-list($border-color: $white, $width: 150px, $height: 120px, $glow: $elr-blue) {
-    @include elr-clearfix;
-    padding: 10px 0;
-    list-style: none;
-
-    li {
-        margin: 0 10px 10px 0;
-        float: left;
-        padding: 0;
-    }
-
-    img {
-        @include elr-thumbnail($border-color);
-        padding: 0;
-        margin: 0;
-        transition: box-shadow, .3s, ease;
-
-        &:hover {
-            transition: box-shadow, .3s, ease;
-            box-shadow: $grey 0 0 0 1px, $glow 0 0 3px 2px;
-        }
-    }
-}
