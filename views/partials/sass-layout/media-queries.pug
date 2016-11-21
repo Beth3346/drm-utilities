@@ -25,11 +25,12 @@ section#media-queries
                     li iphone6pPortrait: 414px - iphone6plus portrait
                     li iphone5Portrait: 350px - iphone5 portrait
                 p These breakpoints include the most common device widths.
-
+        .elr-row.source-section
+            .elr-col-full.source-holder
+                h4.example-subheading HTML
                 pre.
-                    @include elr-breakpoint($point, $modifier, $secondary-point, $secondary-modifier) {
-                        //css rules go here
-                    }
+                h4.example-subheading Sass
+                pre.
 
                 p You can use a named breakpoint or a custom breakpoint.  If you choose to use a named breakpoint you should not include a modifier.
                 p If you use a custom breakpoint you can specify a modifier.  This should be 'min-width' or 'max-width'.  If you do not include a modifier elr-breakpoint will use 'max-width' by default.

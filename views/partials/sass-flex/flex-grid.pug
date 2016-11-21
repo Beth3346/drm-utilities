@@ -170,77 +170,111 @@ section#flex-grid
                 p 1 / 12
             .elr-flex-col.demo
                 p 1 / 12
-        .elr-col-full
-            h4.example-subheading Unequal width columns
-            .elr-flex-row
-                .elr-flex-row.elr-flex-col
-                    .elr-flex-col.demo
-                        p 1 / 2
+        .elr-row.source-section
+            .elr-col-full.source-holder
+                h4.example-subheading HTML
+                pre.
+                h4.example-subheading Sass
+                pre.
+        .elr-row
+            .elr-col-full
+                h4.example-subheading Unequal width columns
+                .elr-flex-row
                     .elr-flex-row.elr-flex-col
                         .elr-flex-col.demo
                             p 1 / 2
-                        .elr-flex-col.demo
-                            p 1 / 2
-                .elr-flex-col.demo
-                    p 1 / 2
-            .elr-flex-row
-                .elr-flex-col.elr-flex-col-full.demo
-                    p Full
-            .elr-flex-row
-                .elr-flex-col.elr-flex-col-half.demo
-                    p 1 / 2
-                .elr-flex-col.demo
-                    p auto
-                .elr-flex-col.demo
-                    p auto
-            .elr-flex-row
-                .elr-flex-col.demo
-                    p auto
-                .elr-flex-col.demo
-                    p auto
-                .elr-flex-col.elr-flex-col-half.demo
-                    p 1 / 2
-            .elr-flex-row
-                .elr-flex-col.elr-flex-col-third.demo
-                    p 1 / 3
-                .elr-flex-col.demo
-                    p auto
-            .elr-flex-row
-                .elr-flex-col.elr-flex-col-quarter.demo
-                    p 1 / 4
-                .elr-flex-col.demo
-                    p auto
-            .elr-flex-row
-                .elr-flex-col.elr-flex-col-fifth.demo
-                    p 1 / 5
-                .elr-flex-col.elr-flex-col-fifth.demo
-                    p 1 / 5
-                .elr-flex-col.demo
-                    p auto
-        .elr-col-full
-            h4.example-subheading Align to the top
-            .elr-flex-row.elr-flex-row-top
-                .elr-flex-col.demo
-                    p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit deleniti molestiae minus, ab dicta qui ullam voluptas ratione, rem quo non consequuntur sequi aut, fuga quidem. Alias molestiae, nisi vitae.
-                .elr-flex-col.demo
-                    p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus commodi dicta ullam doloribus expedita cupiditate esse animi temporibus ratione praesentium ab hic, iste soluta accusamus repellat saepe, quod iusto. Quos asperiores nesciunt rerum itaque blanditiis nisi nemo, obcaecati, nulla maxime.
-                .elr-flex-col.demo
-                    p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas, doloremque.
-        .elr-col-full
-            h4.example-subheading Align along a center axis
-            .elr-flex-row.elr-flex-row-center
-                .elr-flex-col.demo
-                    p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit deleniti molestiae minus, ab dicta qui ullam voluptas ratione, rem quo non consequuntur sequi aut, fuga quidem. Alias molestiae, nisi vitae.
-                .elr-flex-col.demo
-                    p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus commodi dicta ullam doloribus expedita cupiditate esse animi temporibus ratione praesentium ab hic, iste soluta accusamus repellat saepe, quod iusto. Quos asperiores nesciunt rerum itaque blanditiis nisi nemo, obcaecati, nulla maxime.
-                .elr-flex-col.demo
-                    p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas, doloremque.
-        .elr-col-full
-            h4.example-subheading Align to the bottom
-            .elr-flex-row.elr-flex-row-bottom
-                .elr-flex-col.demo
-                    p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit deleniti molestiae minus, ab dicta qui ullam voluptas ratione, rem quo non consequuntur sequi aut, fuga quidem. Alias molestiae, nisi vitae.
-                .elr-flex-col.demo
-                    p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus commodi dicta ullam doloribus expedita cupiditate esse animi temporibus ratione praesentium ab hic, iste soluta accusamus repellat saepe, quod iusto. Quos asperiores nesciunt rerum itaque blanditiis nisi nemo, obcaecati, nulla maxime.
-                .elr-flex-col.demo
-                    p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas, doloremque.
+                        .elr-flex-row.elr-flex-col
+                            .elr-flex-col.demo
+                                p 1 / 2
+                            .elr-flex-col.demo
+                                p 1 / 2
+                    .elr-flex-col.demo
+                        p 1 / 2
+                .elr-flex-row
+                    .elr-flex-col.elr-flex-col-full.demo
+                        p Full
+                .elr-flex-row
+                    .elr-flex-col.elr-flex-col-half.demo
+                        p 1 / 2
+                    .elr-flex-col.demo
+                        p auto
+                    .elr-flex-col.demo
+                        p auto
+                .elr-flex-row
+                    .elr-flex-col.demo
+                        p auto
+                    .elr-flex-col.demo
+                        p auto
+                    .elr-flex-col.elr-flex-col-half.demo
+                        p 1 / 2
+                .elr-flex-row
+                    .elr-flex-col.elr-flex-col-third.demo
+                        p 1 / 3
+                    .elr-flex-col.demo
+                        p auto
+                .elr-flex-row
+                    .elr-flex-col.elr-flex-col-quarter.demo
+                        p 1 / 4
+                    .elr-flex-col.demo
+                        p auto
+                .elr-flex-row
+                    .elr-flex-col.elr-flex-col-fifth.demo
+                        p 1 / 5
+                    .elr-flex-col.elr-flex-col-fifth.demo
+                        p 1 / 5
+                    .elr-flex-col.demo
+                        p auto
+        .elr-row.source-section
+            .elr-col-full.source-holder
+                h4.example-subheading HTML
+                pre.
+                h4.example-subheading Sass
+                pre.
+        .elr-row
+            .elr-col-full
+                h4.example-subheading Align to the top
+                .elr-flex-row.elr-flex-row-top
+                    .elr-flex-col.demo
+                        p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit deleniti molestiae minus, ab dicta qui ullam voluptas ratione, rem quo non consequuntur sequi aut, fuga quidem. Alias molestiae, nisi vitae.
+                    .elr-flex-col.demo
+                        p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus commodi dicta ullam doloribus expedita cupiditate esse animi temporibus ratione praesentium ab hic, iste soluta accusamus repellat saepe, quod iusto. Quos asperiores nesciunt rerum itaque blanditiis nisi nemo, obcaecati, nulla maxime.
+                    .elr-flex-col.demo
+                        p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas, doloremque.
+        .elr-row.source-section
+            .elr-col-full.source-holder
+                h4.example-subheading HTML
+                pre.
+                h4.example-subheading Sass
+                pre.
+        .elr-row
+            .elr-col-full
+                h4.example-subheading Align along a center axis
+                .elr-flex-row.elr-flex-row-center
+                    .elr-flex-col.demo
+                        p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit deleniti molestiae minus, ab dicta qui ullam voluptas ratione, rem quo non consequuntur sequi aut, fuga quidem. Alias molestiae, nisi vitae.
+                    .elr-flex-col.demo
+                        p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus commodi dicta ullam doloribus expedita cupiditate esse animi temporibus ratione praesentium ab hic, iste soluta accusamus repellat saepe, quod iusto. Quos asperiores nesciunt rerum itaque blanditiis nisi nemo, obcaecati, nulla maxime.
+                    .elr-flex-col.demo
+                        p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas, doloremque.
+        .elr-row.source-section
+            .elr-col-full.source-holder
+                h4.example-subheading HTML
+                pre.
+                h4.example-subheading Sass
+                pre.
+        .elr-row
+            .elr-col-full
+                h4.example-subheading Align to the bottom
+                .elr-flex-row.elr-flex-row-bottom
+                    .elr-flex-col.demo
+                        p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit deleniti molestiae minus, ab dicta qui ullam voluptas ratione, rem quo non consequuntur sequi aut, fuga quidem. Alias molestiae, nisi vitae.
+                    .elr-flex-col.demo
+                        p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus commodi dicta ullam doloribus expedita cupiditate esse animi temporibus ratione praesentium ab hic, iste soluta accusamus repellat saepe, quod iusto. Quos asperiores nesciunt rerum itaque blanditiis nisi nemo, obcaecati, nulla maxime.
+                    .elr-flex-col.demo
+                        p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas, doloremque.
+        .elr-row.source-section
+            .elr-col-full.source-holder
+                h4.example-subheading HTML
+                pre.
+                h4.example-subheading Sass
+                pre.
