@@ -9,7 +9,6 @@
 
 .main-sidebar {
     position: absolute;
-    // top: to-rems(20px);
     left: 0;
 
     @include elr-breakpoint('saturn') {
@@ -24,6 +23,8 @@
 }
 
 .main-sidebar-menu {
+    @include elr-accordion-nav(transparent, false);
+
     > li > a {
         font-size: to-rems(20px);
         font-weight: $bold;

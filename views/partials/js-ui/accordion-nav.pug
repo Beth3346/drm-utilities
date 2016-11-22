@@ -5,13 +5,13 @@ section#elr-accordion-nav
                 h2.example-heading Accordion Navigation
                 p Show or hide navigation options on click
             .elr-col-full.example-holder
-                nav.elr-accordion-nav
-                    ul.nav-bar-solid-stacked
+                nav
+                    ul.nav-bar-solid-stacked.elr-accordion-nav
                         li
-                            a.elr-accordion-nav-label(href="#")
-                                span.elr-accordion-icon.fa.fa-minus
+                            a.elr-accordion-nav-label.active(href="#")
+                                span.elr-accordion-icon.fa.fa-caret-down
                                 | &nbsp;Bears
-                            ul.elr-accordion-nav-inner(data-state="expanded")
+                            ul.elr-accordion-nav-inner.active
                                 li: a(href="#") Grizzly
                                 li: a(href="#") Polar
                                 li: a(href="#") Giant Panda
@@ -19,7 +19,7 @@ section#elr-accordion-nav
                                 li: a(href="#") Brown Bear
                         li
                             a.elr-accordion-nav-label(href="#")
-                                span.elr-accordion-icon.fa.fa-plus
+                                span.elr-accordion-icon.fa.fa-caret-down
                                 | &nbsp;Dogs
                             ul.elr-accordion-nav-inner
                                 li: a(href="#") Doberman
@@ -29,7 +29,7 @@ section#elr-accordion-nav
                                 li: a(href="#") Scottish Terrier
                         li
                             a.elr-accordion-nav-label(href="#")
-                                span.elr-accordion-icon.fa.fa-plus
+                                span.elr-accordion-icon.fa.fa-caret-down
                                 | &nbsp;Big Cats
                             ul.elr-accordion-nav-inner
                                 li: a(href="#") Lion
@@ -39,7 +39,7 @@ section#elr-accordion-nav
                                 li: a(href="#") Panther
                         li
                             a.elr-accordion-nav-label(href="#")
-                                span.elr-accordion-icon.fa.fa-plus
+                                span.elr-accordion-icon.fa.fa-caret-down
                                 | &nbsp;Fish
                             ul.elr-accordion-nav-inner
                                 li: a(href="#") Clown Fish
@@ -49,7 +49,7 @@ section#elr-accordion-nav
                                 li: a(href="#") Cod
                         li
                             a.elr-accordion-nav-label(href="#")
-                                span.elr-accordion-icon.fa.fa-plus
+                                span.elr-accordion-icon.fa.fa-caret-down
                                 | &nbsp;Birds
                             ul.elr-accordion-nav-inner
                                 li: a(href="#") Parrot

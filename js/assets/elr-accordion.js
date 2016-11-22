@@ -69,6 +69,7 @@ const elrAccordion = function(params) {
         // showDefaultContent($expandedContent, $content);
 
         $label.on('click', function(e) {
+            e.preventDefault();
             e.stopPropagation();
             const $openContent = $content.filter('.active');
             const $openLabel = $label.filter('.active');

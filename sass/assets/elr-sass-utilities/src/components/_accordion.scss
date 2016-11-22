@@ -50,8 +50,8 @@
         // background-color: $red;
         line-height: 1;
         position: absolute;
-        left: 15px;
-        top: 9px;
+        left: to-rems(15px);
+        top: to-rems(9px);
         transition: transform .3s ease-in-out;
     }
 
@@ -69,16 +69,39 @@
     }
 }
 
-@mixin elr-accordion-nav() {
-    .elr-accordion-icon {
-        padding-right: to-rems(5px);
+@mixin elr-accordion-nav($color: transparent, $icon: true) {
+    background-color: $color;
+
+    @if $icon {
+        .elr-accordion-icon {
+            font-size: to-rems(14px);
+            transform: rotate(-90deg);
+            line-height: 1;
+            position: absolute;
+            left: to-rems(10px);
+            top: to-rems(8px);
+            color: $white;
+            transition: transform .3s ease-in-out;
+        }
     }
 
     .elr-accordion-nav-label {
         font-weight: $bold;
+        position: relative;
+
+        @if $icon {
+            padding-left: to-rems(25px);
+
+            &.active {
+                .elr-accordion-icon {
+                    transform: rotate(0deg);
+                }
+        }
+        }
     }
 
     .elr-accordion-nav-inner {
+        @include elr-slide;
         padding: 0;
 
         a {

@@ -6,7 +6,7 @@
 }
 
 .elr-accordion-nav {
-    @include elr-accordion-nav;
+    @include elr-accordion-nav($link-color);
 }
 
 .back-to-top { @include elr-back-to-top; }

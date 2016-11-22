@@ -85,7 +85,7 @@ elrAccordion();
 elrAccordionNav();
 
 elrAccordionNav({
-    containerClass: 'main-sidebar'
+    containerClass: 'main-sidebar-menu'
 });
 
 elrAlert.showAlert(

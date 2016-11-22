@@ -1,46 +1,23 @@
 const $ = require('jquery');
 
-const elrAccordionNav = function(params) {
+const elrAccordionNav = function(params = {}) {
     const self = {};
-    const spec = params || {};
-    const speed = spec.speed || 300;
-    const containerClass = spec.containerClass || 'elr-accordion-nav';
-    const expandIconClass = spec.expandIconClass  || 'fa-plus';
-    const collapseIconClass = spec.collapseIconClass  || 'fa-minus';
-    const iconClass = spec.iconClass || 'elr-accordion-icon';
+    const containerClass = params.containerClass || 'elr-accordion-nav';
+    const labelClass = params.labelClass || 'elr-accordion-nav-label';
     const contentHolderClass = contentHolderClass || 'elr-accordion-nav-inner';
     const $container = $(`.${containerClass}`);
 
-    const showDefaultContent = function($expandedContent, $content) {
-        $content.hide();
-        $expandedContent.show();
-    };
-
-    const toggle = function(speed, $openContent) {
+    const toggle = function($openContent, $openLabel) {
         const $that = $(this);
         const $nextContent = $that.next();
 
-            $openContent.slideUp(speed);
-
-            if ($nextContent.is(':hidden')) {
-                $nextContent.slideDown(speed);
-            } else {
-                $nextContent.slideUp(speed);
-            }
-    };
-
-    const replaceIcons = function($openContent, iconClass, expandIconClass, collapseIconClass) {
-        const $that = $(this);
-        const $icon = $that.find(`.${iconClass}`);
-        const $openContentIcons = $openContent.prev().find(`.${iconClass}`);
-
-        if ($icon.hasClass(expandIconClass)) {
-            $icon.removeClass(expandIconClass).addClass(collapseIconClass);
-        } else {
-            $icon.removeClass(collapseIconClass).addClass(expandIconClass);
+        if (!$nextContent.hasClass('active')) {
+            $that.addClass('active');
+            $nextContent.addClass('active');
         }
 
-        $openContentIcons.removeClass(collapseIconClass).addClass(expandIconClass);
+        $openLabel.removeClass('active');
+        $openContent.removeClass('active');
     };
 
     // remove the hash mark from a url hash
@@ -52,7 +29,7 @@ const elrAccordionNav = function(params) {
         const startIndex = location.lastIndexOf('/') + 1;
 
         if (hash) {
-            return location.slice(startIndex) + hash;
+            return `${location.slice(startIndex)}${hash}`;
         } else if (location.slice(0, 1) === '/') {
             return location.slice(startIndex);
         }
@@ -64,12 +41,14 @@ const elrAccordionNav = function(params) {
         const location = window.location.pathname;
         const hash = window.location.hash;
         const currentPage = getCurrentPage(location, hash);
-        const $target = $container.find(`a[href="${currentPage}"]`).addClass('active');
+        const $target = $container.find(`a[href="${currentPage}"]`)
+            .addClass('active');
 
         if ($target.length) {
             return $target.closest('ul').parent('li');
         } else if (hash) {
-            // if the hash doesn't exist in the menu remove it and use the url instead
+            // if the hash doesn't exist in the menu remove it
+            // and use the url instead
             return $container.find(`a[href="${location.slice(location.lastIndexOf('/') + 1)}"]`)
                 .addClass('active')
                 .closest('ul')
@@ -80,34 +59,24 @@ const elrAccordionNav = function(params) {
     };
 
     const showCurrent = function($currentList) {
-        $currentList.find('ul').show();
-        $currentList.find(`.${iconClass}`).removeClass(expandIconClass).addClass(collapseIconClass);
+        $currentList.find('ul').addClass('active');
     };
 
     if ($container.length) {
-        const $label = $container.children('ul')
-            .children('li')
-            .has('ul')
-            .children('a');
+        const $label = $container.find(`.${labelClass}`);
         const $content = $label.next('ul');
-        const $expandedContent = $container.find(`.${contentHolderClass}[data-state=expanded]`);
         const $currentList = getCurrent();
-        const $icons = $label.find(`.${iconClass}`);
 
         if (!$currentList) {
-            showDefaultContent($expandedContent, $content);
+            // showDefaultContent($expandedContent, $content);
         } else {
-            $content.hide();
-            $icons.removeClass(collapseIconClass).addClass(expandIconClass);
+            $content.removeClass('active');
             showCurrent($currentList);
         }
 
-        $(window).on('hashchange', function(e){
-            // e.preventDefault();
-
+        $(window).on('hashchange', function(){
             $container.find('a.active').removeClass('active');
-            $content.hide();
-            $icons.removeClass(collapseIconClass).addClass(expandIconClass);
+            $content.removeClass('active');
             showCurrent(getCurrent());
         });
 
@@ -115,10 +84,10 @@ const elrAccordionNav = function(params) {
             e.stopPropagation();
             e.preventDefault();
 
-            const $openContent = $($content).not(':hidden');
+            const $openContent = $content.filter('.active');
+            const $openLabel = $label.filter('.active');
 
-            toggle.call(this, speed, $openContent);
-            replaceIcons.call(this, $openContent, iconClass, expandIconClass, collapseIconClass);
+            toggle.call(this, $openContent, $openLabel);
         });
     }
 
