@@ -1,7 +1,7 @@
 // JavaScript Examples
 
 .elr-accordion {
-    @include elr-accordion($main-color, 5px);
+    @include elr-accordion($text-color, 5px, $white, $link-color, $link-color);
     max-width: to-rems(800px);
 }
 

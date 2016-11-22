@@ -81,18 +81,40 @@ let modalAlert = elrModalAlert();
 let $input = $('.regex-tester').find('input');
 
 elrAccordion();
+
 elrAccordionNav();
+
 elrAccordionNav({
     containerClass: 'main-sidebar'
 });
 
-elrAlert.showAlert('info', 'This is just an informative alert', $('.elr-alert-holder'));
-elrAlert.showAlert('danger', 'Danger Danger Danger!', $('.elr-alert-holder'));
-elrAlert.showAlert('warning', 'This is just a gentle warning', $('.elr-alert-holder'));
-elrAlert.showAlert('success', 'your request was successful', $('.elr-alert-holder'));
-elrAlert.showAlert('muted', 'A muted alert that will probably be ignored', $('.elr-alert-holder'));
-elrAlert.showAlert('custom', 'This is a custom alert', $('.elr-alert-holder'));
-elrAlert.showAlert('purple', 'This is another custom alert', $('.elr-alert-holder'));
+elrAlert.showAlert(
+    'info', 'This is just an informative alert', $('.elr-alert-holder')
+);
+
+elrAlert.showAlert(
+    'danger', 'Danger Danger Danger!', $('.elr-alert-holder')
+);
+
+elrAlert.showAlert(
+    'warning', 'This is just a gentle warning', $('.elr-alert-holder')
+);
+
+elrAlert.showAlert(
+    'success', 'your request was successful', $('.elr-alert-holder')
+);
+
+elrAlert.showAlert(
+    'muted', 'A muted alert that will probably be ignored', $('.elr-alert-holder')
+);
+
+elrAlert.showAlert(
+    'custom', 'This is a custom alert', $('.elr-alert-holder')
+);
+
+elrAlert.showAlert(
+    'purple', 'This is another custom alert', $('.elr-alert-holder')
+);
 
 $('.js-show-info-alert').on('click', function() {
     modalAlert.showAlert();

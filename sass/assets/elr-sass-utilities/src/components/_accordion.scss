@@ -1,13 +1,17 @@
 // Accordion
 
-@mixin elr-accordion($label-color: $link-color, $border-radius: 0, $color: $white, $border-color: $grey) {
-    @include elr-em-margin('top', 10px);
-    @include elr-em-margin('bottom', 10px);
+@mixin elr-accordion(
+    $label-color: $text-color,
+    $border-radius: 0,
+    $color: $white,
+    $border-color: none,
+    $icon-color: $link-color
+) {
+    margin-top: to-rems(10px);
+    margin-bottom: to-rems(10px);
 
     .elr-accordion-label,
-    .elr-accordion-inner {
-        @include elr-em-margin('all', 5px, 0);
-        @include elr-em-padding('all', 5px, 10px);
+    .elr-accordion-content {
         background-color: $color;
 
         @if ($border-color != none) {
@@ -20,30 +24,54 @@
     }
 
     .elr-accordion-label {
-        h1,
-        h2,
-        h3,
-        p {
-            @include elr-em-font(18px);
-            padding: 0;
-            margin: 0;
-            color: $label-color;
-            font-weight: normal;
-        }
+        margin: 0 0 to-rems(5px);
+        padding: to-rems(5px) to-rems(10px);
+        font-size: to-rems(18px);
+        color: $label-color;
+        font-weight: normal;
+        position: relative;
+        padding-left: to-rems(30px);
 
         &:hover {
             cursor: pointer;
         }
+
+        &.active {
+            .elr-accordion-icon {
+                transform: rotate(0deg);
+            }
+        }
+    }
+
+    .elr-accordion-icon {
+        font-size: to-rems(14px);
+        color: $icon-color;
+        transform: rotate(-90deg);
+        // background-color: $red;
+        line-height: 1;
+        position: absolute;
+        left: 15px;
+        top: 9px;
+        transition: transform .3s ease-in-out;
+    }
+
+    .elr-accordion-content {
+        @include elr-slide;
+        padding: 0;
+
+        &.active {
+            margin-bottom: to-rems(5px);
+        }
     }
 
     .elr-accordion-inner {
-        display: none;
+        padding: to-rems(10px) to-rems(20px);
     }
 }
 
 @mixin elr-accordion-nav() {
     .elr-accordion-icon {
-        padding-right: 5px;
+        padding-right: to-rems(5px);
     }
 
     .elr-accordion-nav-label {
@@ -54,8 +82,8 @@
         padding: 0;
 
         a {
-            @include elr-em-font(13px);
-            padding-left: 30px;
+            font-size: to-rems(13px);
+            padding-left: to-rems(30px);
         }
     }
 }

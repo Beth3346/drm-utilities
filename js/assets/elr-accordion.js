@@ -1,52 +1,36 @@
+import elrUtils from './elr-utilities';
+
 const $ = require('jquery');
+let elr = elrUtils();
 
 const elrAccordion = function(params) {
     const self = {};
     const spec = params || {};
     const containerClass = spec.containerClass || 'elr-accordion';
     const labelClass = spec.labelClass || 'elr-accordion-label';
-    const contentHolderClass = spec.contentHolderClass || 'elr-accordion-inner';
+    const contentHolderClass = spec.contentHolderClass || 'elr-accordion-content';
     const showButtons = (typeof spec.showButtons === 'undefined') ? true : spec.showButtons;
-    const speed = spec.speed || 300;
-    const expandIconClass = spec.expandIconClass  || 'fa-plus';
-    const collapseIconClass = spec.collapseIconClass  || 'fa-minus';
-    const iconClass = spec.iconClass || 'elr-accordion-icon';
     const $container = $(`.${containerClass}`);
 
-    const showDefaultContent = function($expandedContent, $content) {
-        $content.hide();
-        $expandedContent.show();
-    };
-
-    const toggle = function(speed, $openContent) {
+    const toggle = function($openContent, $openLabel) {
+        // toggle active classes on accordion label and content
         const $that = $(this);
         const $nextContent = $that.next();
 
-        $openContent.slideUp(speed);
-
-        if ( $($nextContent).is(':hidden') ) {
-            $nextContent.slideDown(speed);
-        } else {
-            $nextContent.slideUp(speed);
-        }
-    };
-
-    const replaceIcons = function($openContent, iconClass, expandIconClass, collapseIconClass) {
-        const $that = $(this);
-        const $icon = $that.find(`.${iconClass}`);
-        const $openContentIcons = $openContent.prev().find(`.${iconClass}`);
-
-        if ( $icon.hasClass(expandIconClass) ) {
-            $icon.removeClass(expandIconClass).addClass(collapseIconClass);
-        } else {
-            $icon.removeClass(collapseIconClass).addClass(expandIconClass);
+        if (!$nextContent.hasClass('active')) {
+            $that.addClass('active');
+            $nextContent.addClass('active');
         }
 
-        $openContentIcons.removeClass(collapseIconClass).addClass(expandIconClass);
+        $openLabel.removeClass('active');
+        $openContent.removeClass('active');
     };
 
     const createButton = function(button, message, className, $container) {
-        return $('<button></button>', {text: message, 'class': className}).prependTo($container);
+        return elr.createElement('button', {
+            text: message,
+            'class': className
+        }).prependTo($container);
     };
 
     const addButtons = function($container) {
@@ -56,42 +40,40 @@ const elrAccordion = function(params) {
         };
     };
 
-    const showAll = function(speed, $content) {
-        $content.slideDown(speed);
+    const showAll = function($content, $label) {
+        $content.addClass('active');
+        $label.addClass('active');
     };
 
-    const hideAll = function(speed, $content) {
-        $content.slideUp(speed);
+    const hideAll = function($content, $label) {
+        $content.removeClass('active');
+        $label.removeClass('active');
     };
 
     if ( $container.length ) {
         const $label = $container.find(`.${labelClass}`);
         const $content = $container.find(`.${contentHolderClass}`);
-        const $icons = $label.find(`.${iconClass}`);
-        const $expandedContent = $container.find(`.${contentHolderClass}[data-state=expanded]`);
 
-        if ( showButtons ) {
+        if (showButtons) {
             const $buttons = addButtons($container);
 
             $buttons.showButton.on('click', function() {
-                showAll(speed, $content);
-                $icons.removeClass(expandIconClass).addClass(collapseIconClass);
+                showAll($content, $label);
             });
 
             $buttons.hideButton.on('click', function() {
-                hideAll(speed, $content);
-                $icons.removeClass(collapseIconClass).addClass(expandIconClass);
+                hideAll($content, $label);
             });
         }
 
-        showDefaultContent($expandedContent, $content);
+        // showDefaultContent($expandedContent, $content);
 
         $label.on('click', function(e) {
-            const $openContent = $($content).not(':hidden');
-
-            replaceIcons.call(this, $openContent, iconClass, expandIconClass, collapseIconClass);
-            toggle.call(this, speed, $openContent);
             e.stopPropagation();
+            const $openContent = $content.filter('.active');
+            const $openLabel = $label.filter('.active');
+
+            toggle.call(this, $openContent, $openLabel);
         });
     }
 
