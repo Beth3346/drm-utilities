@@ -8,7 +8,7 @@
     $width: 100%
 ) {
     @include elr-nav-bar($white, $white, left, transparent, $link-color, false);
-    @include elr-em-font(12px);
+    font-size: to-rems(12px);
     width: to-rems($width);
     position: absolute;
     z-index: 100;
@@ -21,7 +21,7 @@
     flex-direction: column;
 
     &.active-list {
-        max-height: 500px;
+        max-height: to-rems(500px);
         transition: max-height .5s ease-in;
     }
 
@@ -43,15 +43,15 @@
     position: relative;
 
     .elr-dropdown-button {
-        height: 40px;
-        margin-bottom: 5px;
+        height: to-rems(40px);
+        margin-bottom: to-rems(5px);
         position: relative;
 
         &:after {
-            @include elr-em-font(18px);
+            font-size: to-rems(18px);
             content: '\25BE';
             position: absolute;
-            right: 10px;
+            right: to-rems(10px);
             top: 50%;
             transform: translate(0, -50%);
         }
@@ -62,21 +62,25 @@
     position: relative;
 
     .elr-dropdown-button-group {
-        margin-bottom: 5px;
+        margin-bottom: to-rems(5px);
+
+        @include elr-breakpoint('neptune') {
+            flex-direction: row;
+        }
 
         button {
-            padding-left: 10px;
-            padding-right: 10px;
+            padding-left: to-rems(10px);
+            padding-right: to-rems(10px);
             margin-bottom: 0;
         }
     }
 
     button {
         &:last-of-type {
-            padding-left: 10px;
-            padding-right: 10px;
-            width: 50px;
-            height: 40px;
+            padding-left: to-rems(10px);
+            padding-right: to-rems(10px);
+            width: to-rems(50px);
+            height: to-rems(40px);
         }
     }
 }

@@ -21,7 +21,7 @@
 }
 
 .mobile-menu-toggle {
-    @include elr-em-font(20px);
+    font-size: to-rems(20px);
     background-color: transparent;
     border: 1px solid $main-color;
     padding: to-rems(5px) to-rems(10px);

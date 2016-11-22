@@ -2,8 +2,8 @@
 // Creates a rectangular element
 
 @mixin elr-rectangle($width, $height, $display: block, $border-radius: 0) {
-    @include elr-em-width($width);
-    @include elr-em-height($height);
+    width: to-rems($width);
+    height: to-rems($height);
     display: $display;
 
     @if ($border-radius != 0) {

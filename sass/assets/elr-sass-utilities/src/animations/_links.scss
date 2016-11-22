@@ -1,6 +1,6 @@
 @mixin menu-animated($font-size: 16px, $color: $link-color) {
     line-height: 1;
-    margin: 0 auto 20px;
+    margin: 0 auto to-rems(20px);
 
     .menu {
         position: relative;
@@ -23,8 +23,8 @@
     }
 
     a {
-        @include elr-em-font($font-size);
-        font-weight: 700;
+        font-size: to-rems($font-size);
+        font-weight: $bold;
         display: block;
         padding: $font-size;
         cursor: pointer;
@@ -49,8 +49,8 @@
     }
 
     a {
-        width: 120px;
-        height: 48px;
+        width: to-rems(120px);
+        height: to-rems(48px);
         text-align: center;
         color: $color;
         transition: color .3s;
@@ -65,7 +65,7 @@
         position: absolute;
         top: 100%;
         left: -30px;
-        width: 120px;
+        width: to-rems(120px);
         height: $line-thickness;
         pointer-events: none;
         border: $line-thickness solid $white;
@@ -221,8 +221,6 @@
 
 @mixin menu-drop-lines($color: $grey, $link-color: $elr-blue, $line-thickness: 1px) {
     a {
-        // padding-bottom: 10px;
-        // text-decoration: none;
         margin: 0 1.5em;
         padding: .75em 0;
         text-align: center;

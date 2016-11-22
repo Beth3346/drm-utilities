@@ -23,11 +23,11 @@
 
     [type="submit"],
     button {
-        margin: 5px 5px 5px 0;
+        margin: to-rems(5px) to-rems(5px) to-rems(5px) 0;
     }
 
     .elr-inline-control-group {
-        margin-top: 5px;
+        margin-top: to-rems(5px);
     }
 }
 
@@ -38,7 +38,7 @@
     padding-left: 0;
 
     label {
-        @include elr-em-font(14px);
+        font-size: to-rems(14px);
         display: inline;
         vertical-align: middle;
     }
@@ -49,7 +49,7 @@
     [type="password"],
     [type="url"],
     textarea {
-        margin: 0 10px;
+        margin: 0 to-rems(10px);
     }
 
     label,
@@ -68,21 +68,21 @@
     button,
     [type="submit"][disabled],
     button[disabled] {
-        margin: 0 5px 5px 0;
+        margin: 0 to-rems(5px) to-rems(5px) 0;
         display: inline-block;
     }
 
     .elr-inline-control-group {
-        height: 50px;
+        height: to-rems(50px);
     }
 
     .elr-control-group {
-        margin: 0 20px;
+        margin: 0 to-rems(20px);
         display: inline-block;
 
         [type="checkbox"],
         [type="radio"] {
-            margin-top: 14px;
+            margin-top: to-rems(14px);
         }
     }
 }

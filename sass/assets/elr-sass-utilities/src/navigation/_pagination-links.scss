@@ -5,7 +5,7 @@
 
     .previous-pager,
     .next-pager {
-        @include elr-em-font($font-size);
+        font-size: to-rems($font-size);
         border: 0;
         color: $white;
         background-color: $color;
@@ -40,7 +40,7 @@
     }
 
     a {
-        @include elr-em-font($font-size);
+        font-size: to-rems($font-size);
         color: $color;
         padding: 10px 13px;
         margin-right: 5px;

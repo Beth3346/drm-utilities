@@ -27,12 +27,12 @@
     }
 
     @include elr-breakpoint('mars') {
-        width: 600px;
+        width: to-rems(600px);
         overflow-x: scroll;
     }
 
     @include elr-breakpoint('neptune') {
-        width: 400px;
+        width: to-rems(400px);
     }
 
     tbody {
@@ -136,13 +136,13 @@
     }
 
     th {
-        @include elr-em-font(14);
+        font-size: to-rems(14px);
         font-weight: bold;
         color: $grey;
     }
 
     td {
-        @include elr-em-font(14);
+        font-size: to-rems(14px);
         font-weight: normal;
 
         @if $border-color != 'none' {
@@ -177,7 +177,6 @@
         &:focus {
             outline: none;
             background-color: $white;
-            transition: background-color .5s ease;
         }
     }
 

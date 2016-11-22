@@ -23,8 +23,8 @@
 }
 
 .elr-dropdown-nav {
-    @include elr-em-margin('bottom', 200px);
     @include elr-dropdown-nav;
+    margin-bottom: to-rems(200px);
     font-size: to-rems(14px);
 
     .elr-submenu { font-size: to-rems(12px); }
@@ -176,7 +176,7 @@
 
 .elr-flexible-grid { @include elr-flexible-grid(4); }
 
-.elr-select { @include elr-select-control(200px); }
+// .elr-select { @include elr-select-control(200px); }
 
 .password-holder {
     background-color: $lightest-grey;

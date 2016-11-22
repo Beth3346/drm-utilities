@@ -2,22 +2,22 @@
 // scss-lint:disable QualifyingElement
 
 @mixin elr-form($bk-color: $lightest-grey, $border: $grey, $button-color: $link-color) {
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: to-rems(10px);
+    padding-bottom: to-rems(10px);
     width: 100%;
 
     .elr-col-full {
         padding-left: 0;
         padding-right: 0;
-        // padding-bottom: 10px;
+        // padding-bottom: to-rems(10px);
     }
 
     .elr-col-half,
     .elr-col-third,
     .elr-col-quarter {
         padding-left: 0;
-        padding-right: 10px;
-        // padding-bottom: 10px;
+        padding-right: to-rems(10px);
+        // padding-bottom: to-rems(10px);
 
         @include elr-breakpoint('saturn') {
             padding-left: 0;
@@ -29,7 +29,7 @@
     .elr-col-third:first-child,
     .elr-col-quarter:first-child {
         padding-left: 0;
-        padding-right: 10px;
+        padding-right: to-rems(10px);
 
         @include elr-breakpoint('saturn') {
             padding-right: 0;
@@ -39,7 +39,7 @@
     .elr-col-half:last-child,
     .elr-col-third:last-child,
     .elr-col-quarter:last-child {
-        padding-left: 10px;
+        padding-left: to-rems(10px);
         padding-right: 0;
 
         @include elr-breakpoint('saturn') {
@@ -50,12 +50,12 @@
     small {
         display: block;
         color: $grey;
-        margin: 0 0 20px 5px;
+        margin: 0 0 to-rems(20px) to-rems(5px);
         padding: 0;
     }
 
     label {
-        @include elr-em-font(14px);
+        font-size: to-rems(14px);
         margin: 0;
         // line-height: 2em;
     }
@@ -64,8 +64,8 @@
     textarea,
     select {
         @include elr-form-state($bk-color, $border);
-        @include elr-em-font(14px);
-        border-radius: 3px;
+        font-size: to-rems(14px);
+        border-radius: to-rems(3px);
 
         &.hidden-field {
             display: none;
@@ -74,13 +74,13 @@
 
     input,
     textarea {
-        margin: 5px 0;
-        padding: 5px 15px;
+        margin: to-rems(5px) 0;
+        padding: to-rems(5px) to-rems(15px);
     }
 
     select {
         margin: 0;
-        padding: 0 10px;
+        padding: 0 to-rems(10px);
     }
 
     [type="text"],
@@ -100,28 +100,28 @@
     }
 
     select {
-        height: 30px;
+        height: to-rems(30px);
     }
 
     [multiple] {
         height: auto;
-        padding: 10px;
-        margin-top: 5px;
+        padding: to-rems(10px);
+        margin-top: to-rems(5px);
     }
 
     [type="checkbox"],
     [type="radio"] {
         display: inline;
-        padding: 4px 4px 0 0;
+        padding: to-rems(4px) to-rems(4px) 0 0;
     }
 
     .elr-control-label {
         margin: 0;
-        padding: 5px 0 0;
+        padding: to-rems(5px) 0 0;
     }
 
     .elr-tabular-control-group {
-        padding: 15px 0;
+        padding: to-rems(15px) 0;
     }
 
     .elr-control-group {
@@ -137,7 +137,7 @@
         [type="checkbox"],
         [type="radio"] {
             display: inline-block;
-            margin: 0 10px 0 0;
+            margin: 0 to-rems(10px) 0 0;
             padding: 0;
         }
     }
@@ -145,14 +145,14 @@
     .elr-inline-control-group {
         @include elr-clearfix;
         float: left;
-        margin: 0 0 10px 15px;
+        margin: 0 0 to-rems(10px) to-rems(15px);
 
         &:first-child {
             margin-left: 0;
         }
 
         label {
-            @include elr-em-font(14px);
+            font-size: to-rems(14px);
             display: inline;
             vertical-align: middle;
         }
@@ -166,16 +166,16 @@
         select {
             width: auto;
             display: inline-block;
-            margin: 0 0 0 15px;
+            margin: 0 0 0 to-rems(15px);
         }
 
         select {
             margin-top: 0;
-            padding-right: 30px;
+            padding-right: to-rems(30px);
         }
 
         .elr-select-wrapper {
-            padding-top: 10px;
+            padding-top: to-rems(10px);
             display: inline;
 
             &:after {
@@ -186,14 +186,14 @@
 
         .elr-control-group {
             margin-left: -10px;
-            margin-right: 15px;
+            margin-right: to-rems(15px);
             float: left;
 
             [type="checkbox"],
             [type="radio"] {
                 // margin-top: 14px;
                 margin-top: 0;
-                margin-left: 10px;
+                margin-left: to-rems(10px);
             }
         }
 
@@ -217,7 +217,7 @@
     [type="button"],
     button {
         @include elr-button-link($white, $button-color);
-        margin: 10px 0;
+        margin: to-rems(10px) 0;
     }
 
     [type="submit"][disabled],
@@ -242,7 +242,7 @@
         @include elr-font-awesome($font-size);
         @include elr-centerer(true, false);
         content: $icon;
-        right: 15px;
+        right: to-rems(15px);
         pointer-events: none;
     }
 }

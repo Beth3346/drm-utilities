@@ -4,8 +4,8 @@
 // Useful for <button> and <a> elements
 
 @mixin elr-button($font-size: 14px, $width: null, $border-radius: 3px) {
-    @include elr-em-padding('all', 10px, 20px);
-    @include elr-em-font($font-size);
+    padding: to-rems(10px) to-rems(20px);
+    font-size: to-rems($font-size);
     max-width: 100%;
     text-align: center;
     text-decoration: none;
@@ -51,7 +51,7 @@
     }
 
     @if $pill {
-        border-radius: 100px;
+        border-radius: to-rems(100px);
     }
 
     &:hover,

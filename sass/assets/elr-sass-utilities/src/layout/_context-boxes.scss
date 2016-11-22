@@ -104,7 +104,7 @@
 
     .close {
         @include elr-square(20px);
-        @include elr-em-font(14px);
+        font-size: to-rems(14px);
         padding: 0;
         margin: 0;
         position: absolute;
@@ -112,12 +112,11 @@
         top: 3px;
         border: 0;
         background: none;
-        transition: color, .3s, ease;
+        transition: color, .3s;
 
         &:hover {
             color: $white;
             cursor: pointer;
-            transition: color, .3s, ease;
         }
     }
 }

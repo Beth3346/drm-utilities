@@ -3,7 +3,7 @@
 .button-link,
 .button-solid,
 .pill-button-link {
-    @include elr-em-margin('right', 20px);
+    margin-right: to-rems(20px);
 }
 
 .button-link {
@@ -38,7 +38,7 @@
 }
 
 .icon-button-group {
-    @include elr-button-group();
+    @include elr-button-group;
 }
 
 .icon-button-group-stacked {
@@ -47,21 +47,17 @@
 
 .elr-dropdown-button-holder {
     @include elr-dropdown-button-solid;
-    margin-right: 20px;
+    margin-right: to-rems(20px);
 }
 
 .elr-dropdown-button-holder-split {
     @include elr-dropdown-button-split;
-    margin-right: 20px;
+    margin-right: to-rems(20px);
 }
 
 .elr-dropdown-list {
     @include elr-dropdown-list($link-color, $background-color, none, 3px, 250px);
 }
-
-// .elr-dropdown-button-holder-split {
-//     @include elr-dropdown-button-split($link-color, $background-color, 3px);
-// }
 
 .mobile-toggle-button,
 .mobile-toggle-button-border {

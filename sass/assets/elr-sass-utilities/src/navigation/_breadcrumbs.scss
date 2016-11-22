@@ -100,7 +100,7 @@
 
         &.active,
         a {
-            @include elr-em-font(14px);
+            font-size: to-rems(14px);
             padding: 0 15px 0 30px;
             line-height: 36px;
         }

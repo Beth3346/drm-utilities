@@ -33,20 +33,20 @@
         padding: 10px;
 
         h1 {
-            @include elr-em-font(16);
+            font-size: to-rems(16px);
             color: $elr-blue;
             margin: 0;
             padding: 0;
         }
 
         h2 {
-            @include elr-em-font(14);
+            font-size: to-rems(14px);
             margin: 0;
             padding: 0;
         }
 
         p {
-            @include elr-em-font(14);
+            font-size: to-rems(14px);
             margin: 0;
             padding: 0;
         }

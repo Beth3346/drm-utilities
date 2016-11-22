@@ -8,12 +8,12 @@
     right: 5%;
     border: 0;
     cursor: pointer;
-    padding: 0 0 5px;
+    padding: 0 0 to-rems(5px);
     line-height: 0;
     background-color: rgba($bk-color, .7);
 
     &.fa {
-        @include elr-em-font(36px);
+        font-size: to-rems(36px);
     }
 
     @include elr-breakpoint('mercury') {

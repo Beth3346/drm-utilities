@@ -1,17 +1,17 @@
 // Popovers
 
 @mixin elr-popover($direction: 'left', $bk-color: $link-color, $color: $white, $width: 200px) {
-    @include elr-em-font(14px);
-    width: $width;
-    padding: 10px;
-    margin: 10px 0 5px;
+    font-size: to-rems(14px);
+    width: to-rems($width);
+    padding: to-rems(10px);
+    margin: to-rems(10px) 0 to-rems(5px);
     position: absolute;
     background-color: $bk-color;
     color: $color;
     display: none;
-    min-height: 50px;
+    min-height: to-rems(50px);
     z-index: 100;
-    border-radius: 5px;
+    border-radius: to-rems(5px);
 
     @if ($direction == 'left') {
         top: -13px;
@@ -21,12 +21,12 @@
             @include elr-triangle(right, 20px, half, $bk-color);
             content: '';
             position: absolute;
-            top: 20px;
-            left: $width;
+            top: to-rems(20px);
+            left: to-rems($width);
         }
 
     } @else if ($direction == 'top') {
-        bottom: 55px;
+        bottom: to-rems(55px);
 
         &:before {
             @include elr-triangle(bottom, 20px, half, $bk-color);
