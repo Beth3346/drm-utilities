@@ -1,10 +1,10 @@
 const $ = require('jquery');
 
-const elrDropdownMenu = function(params) {
-    const self = {};
-    const spec = params || {};
-    const menuClass = spec.menuClass || 'elr-dropdown-nav';
-    const speed = spec.speed || 500;
+const elrDropdownMenu = function({
+    menuClass = 'elr-dropdown-nav',
+    speed = 500
+} = {}) {
+    // const self = {};
     const $menu = $(`.${menuClass}`);
 
     const showMenu = function() {
@@ -29,7 +29,7 @@ const elrDropdownMenu = function(params) {
         });
     }
 
-    return self;
+    // return self;
 };
 
 export default elrDropdownMenu;

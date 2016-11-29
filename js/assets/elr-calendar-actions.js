@@ -7,11 +7,11 @@ let elr = elrUtlities();
 let elrTime = elrTimeUtlities();
 let elrCreate = elrCalendarCreate();
 
-const elrCalendarActions = function(params) {
-    let spec = params || {};
-    let view = spec.view || 'month';
-    let calendarInnerClass = `elr-calendar-${view}-view`;
-    let classes = {
+const elrCalendarActions = function({
+    view = 'month'
+} = {}) {
+    const calendarInnerClass = `elr-calendar-${view}-view`;
+    const classes = {
         'weekend': 'elr-cal-weekend',
         'muted': 'elr-cal-muted',
         'holiday': 'elr-cal-holiday',
@@ -21,10 +21,10 @@ const elrCalendarActions = function(params) {
         'date': 'elr-date'
     };
 
-    let self = {
+    const self = {
         advanceYear: (dir, evts, $cal) => {
-            let $calendarInner = $cal.find(`.${calendarInnerClass}`);
-            let dateObj = {
+            const $calendarInner = $cal.find(`.${calendarInnerClass}`);
+            const dateObj = {
                 'month': $calendarInner.data('month'),
                 'year': $calendarInner.data('year')
             };
@@ -35,30 +35,30 @@ const elrCalendarActions = function(params) {
             elrCreate.changeCalendar(view, dateObj, $cal, evts);
         },
         advanceDate: (dir, evts, $cal) => {
-            let $calendarInner = $cal.find(`.${calendarInnerClass}`);
-            let month = $calendarInner.data('month');
-            let date = $calendarInner.find(`.${classes.date}`).data('date');
-            let year = $calendarInner.data('year');
-            let dateObj = {
+            const $calendarInner = $cal.find(`.${calendarInnerClass}`);
+            const month = $calendarInner.data('month');
+            const date = $calendarInner.find(`.${classes.date}`).data('date');
+            const year = $calendarInner.data('year');
+            const dateObj = {
                 'month': month,
                 'date': 1,
                 'year': year
             };
         },
         advanceWeek: (dir, evts, $cal) => {
-            let $calendarInner = $cal.find(`.${calendarInnerClass}`);
-            let month = $calendarInner.data('month');
-            let year = $calendarInner.data('year');
-            let dateObj = {
+            const $calendarInner = $cal.find(`.${calendarInnerClass}`);
+            const month = $calendarInner.data('month');
+            const year = $calendarInner.data('year');
+            const dateObj = {
                 'month': month,
                 'date': 1,
                 'year': year
             };
-            let nextYear = dateObj.year + 1;
-            let lastYear = dateObj.year - 1;
-            let nextMonth = (dateObj.month === 11) ? 0 : dateObj.month + 1;
-            let lastMonth = (dateObj.month === 0) ? 11 : dateObj.month - 1;
-            let view = 'week';
+            const nextYear = dateObj.year + 1;
+            const lastYear = dateObj.year - 1;
+            const nextMonth = (dateObj.month === 11) ? 0 : dateObj.month + 1;
+            const lastMonth = (dateObj.month === 0) ? 11 : dateObj.month - 1;
+            const view = 'week';
             let firstDay;
             let lastDayOfPrevMonth;
             let lastDay;
@@ -109,10 +109,10 @@ const elrCalendarActions = function(params) {
             }
         },
         advanceMonth: (dir, evts, $cal) => {
-            let $calendarInner = $cal.find(`.${calendarInnerClass}`);
-            let month = $calendarInner.data('month');
-            let year = $calendarInner.data('year');
-            let dateObj = {
+            const $calendarInner = $cal.find(`.${calendarInnerClass}`);
+            const month = $calendarInner.data('month');
+            const year = $calendarInner.data('year');
+            const dateObj = {
                 'month': month,
                 'date': (month === elrTime.today.month) ? elrTime.today.date : 1,
                 'year': year

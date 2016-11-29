@@ -3,12 +3,12 @@ const $ = require('jquery');
 
 let elr = elrUtlities();
 
-const elrTableSorter = function(params) {
-    const self = {};
-    const spec = params || {};
-    const $table = spec.table || $('.elr-sortable-table');
-    const buttonClass = spec.buttonClass || 'elr-sortable-table-button';
-    const activeClass = spec.activeClass || 'active';
+const elrTableSorter = function({
+    $table = $('.elr-sortable-table'),
+    buttonClass = 'elr-sortable-table-button',
+    activeClass = 'active'
+} = {}) {
+    // const self = {};
 
     const toggleActiveClass = function(className, $parent) {
         $(this).closest($parent).find(`.${className}`).removeClass(className);
@@ -26,7 +26,7 @@ const elrTableSorter = function(params) {
             const value = $.trim($(listItem).find('td').eq(columnNum).text());
 
             $.each(types, function() {
-                if ( elr.dataTypeChecks[`is${elr.capitalize(this)}`].call(that, value) ) {
+                if ( elr[`is${elr.capitalize(this)}`](value) ) {
                     sortLists[this].push(listItem);
                 }
 
@@ -35,7 +35,7 @@ const elrTableSorter = function(params) {
         });
 
         $.each(sortLists, function(k) {
-            elr.comparators[`sortColumn${elr.capitalize(k)}`](sortLists[k], dir, columnNum);
+            elr[`sortColumn${elr.capitalize(k)}`](sortLists[k], dir, columnNum);
         });
 
         return elr.concatArrays(sortLists);
@@ -67,7 +67,7 @@ const elrTableSorter = function(params) {
         renderSort($sortedRows, $tableBody);
     });
 
-    return self;
+    // return self;
 };
 
 export default elrTableSorter;

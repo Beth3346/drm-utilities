@@ -1,28 +1,24 @@
 const $ = require('jquery');
 
-const elrAccordionNav = function(params = {}) {
-    const self = {};
-    const containerClass = params.containerClass || 'elr-accordion-nav';
-    const labelClass = params.labelClass || 'elr-accordion-nav-label';
+const elrAccordionNav = function({
+    containerClass = 'elr-accordion-nav',
+    labelClass = 'elr-accordion-nav-label'
+} = {}) {
     const contentHolderClass = contentHolderClass || 'elr-accordion-nav-inner';
     const $container = $(`.${containerClass}`);
+    const self = {
+        toggle($openContent, $openLabel) {
+            const $that = $(this);
+            const $nextContent = $that.next();
 
-    const toggle = function($openContent, $openLabel) {
-        const $that = $(this);
-        const $nextContent = $that.next();
+            if (!$nextContent.hasClass('active')) {
+                $that.addClass('active');
+                $nextContent.addClass('active');
+            }
 
-        if (!$nextContent.hasClass('active')) {
-            $that.addClass('active');
-            $nextContent.addClass('active');
+            $openLabel.removeClass('active');
+            $openContent.removeClass('active');
         }
-
-        $openLabel.removeClass('active');
-        $openContent.removeClass('active');
-    };
-
-    // remove the hash mark from a url hash
-    const trimHash = function(hash) {
-        return hash.slice(0, 1);
     };
 
     const getCurrentPage = function(location, hash) {
@@ -58,19 +54,23 @@ const elrAccordionNav = function(params = {}) {
         }
     };
 
-    const showCurrent = function($currentList) {
-        $currentList.find('ul').addClass('active');
+    const showCurrent = function($currentList = null) {
+        if ($currentList) {
+            $currentList.find('ul.active').removeClass('active');
+            $currentList.find('ul').addClass('active');
+        }
+
+        return;
     };
 
     if ($container.length) {
-        const $label = $container.find(`.${labelClass}`);
+        const $label = $container.find(`.${labelClass}`).parent('li').has('ul').children('a');
         const $content = $label.next('ul');
         const $currentList = getCurrent();
 
-        if (!$currentList) {
-            // showDefaultContent($expandedContent, $content);
-        } else {
+        if ($currentList) {
             $content.removeClass('active');
+            $label.removeClass('active');
             showCurrent($currentList);
         }
 
@@ -81,13 +81,13 @@ const elrAccordionNav = function(params = {}) {
         });
 
         $label.on('click', function(e) {
-            e.stopPropagation();
+            // e.stopPropagation();
             e.preventDefault();
 
             const $openContent = $content.filter('.active');
             const $openLabel = $label.filter('.active');
 
-            toggle.call(this, $openContent, $openLabel);
+            self.toggle.call(this, $openContent, $openLabel);
         });
     }
 

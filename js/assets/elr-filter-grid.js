@@ -9,77 +9,74 @@ $.extend($.expr[':'], {
     }
 });
 
-const elrFilterGrid = function(params) {
-    const self = {};
-    const spec = params || {};
-    const gridClass = spec.gridClass || 'elr-flexible-grid';
-    const $grid = $(`.${gridClass}`);
+const elrFilterGrid = function({
+    gridClass = 'elr-flexible-grid'
+} = {}) {
+    const self = {
+        $grid: $(`.${gridClass}`),
+        addListItems($items) {
+            this.$grid.empty();
+            $items.appendTo(this.$grid);
+        },
+        filterListItems(filter, $items, tags) {
+            // filter list items by tag
+            let $filteredItems;
 
-    const addListItems = function($items) {
-        $grid.empty();
-        $items.appendTo($grid);
-    };
+            window.location.hash = filter;
 
-    const addFilterButtons = function(tags, $nav) {
+            if (($.inArray(filter, tags) !== -1) || filter === 'all') {
+                if (filter === 'all') {
+                    $filteredItems = $items;
+                } else {
+                    $filteredItems = $items.has(`ul.caption-tags li:containsNC(${filter})`);
+                }
 
-        $.each(tags, function(k, v) {
-            const $tagButton = $('<button></button>', {
-                'class': 'elr-button elr-button-primary elr-grid-filter',
-                'text': elr.capitalize(v),
-                'data-filter': v
+                this.addListItems($filteredItems);
+            } else {
+                elr.createElement('p', {
+                    text: 'no items match'
+                }).appendTo(this.$grid);
+            }
+        },
+        addFilterButtons(tags, $nav) {
+
+            $.each(tags, function(k, v) {
+                const $tagButton = elr.createElement('button', {
+                    'class': 'elr-button elr-button-primary elr-grid-filter',
+                    'text': elr.capitalize(v),
+                    'data-filter': v
+                });
+
+                $tagButton.appendTo($nav);
             });
 
-            $tagButton.appendTo($nav);
-        });
+            $nav.find('.elr-grid-filter').first().addClass('active');
+        },
+        setActiveButton(button, $buttons) {
+            const $button = $buttons.find(`button[data-filter=${button}]`);
 
-        $nav.find('.elr-grid-filter').first().addClass('active');
-    };
-
-    const filterListItems = function(filter, $items, tags) {
-        // filter list items by tag
-        let $filteredItems;
-
-        window.location.hash = filter;
-
-        if (($.inArray(filter, tags) !== -1) || filter === 'all') {
-            if (filter === 'all') {
-                $filteredItems = $items;
-            } else {
-                $filteredItems = $items.has(`ul.caption-tags li:containsNC(${filter})`);
-            }
-
-            addListItems($filteredItems);
-        } else {
-            $('<p></p>', {
-                text: 'no items match'
-            }).appendTo($grid);
+            $button.siblings('button').removeClass('active');
+            $button.addClass('active');
         }
     };
 
-    const setActiveButton = function(button, $buttons) {
-        const $button = $buttons.find(`button[data-filter=${button}]`);
-
-        $button.siblings('button').removeClass('active');
-        $button.addClass('active');
-    }
-
-    if ($grid.length) {
+    if (self.$grid.length) {
         const hash = window.location.hash;
         const $gridNav = $('.elr-grid-nav');
-        const $items = $grid.find('.elr-grid-item');
-        const tags = elr.unique(elr.toArray($grid.find('ul.caption-tags li')));
+        const $items = self.$grid.find('.elr-grid-item');
+        const tags = elr.unique(elr.toArray(self.$grid.find('ul.caption-tags li')));
         let filter = (window.location.hash) ? filter : 'all';
 
         $(window).on('load', function() {
-            addFilterButtons(tags, $gridNav);
+            self.addFilterButtons(tags, $gridNav);
 
             if (hash) {
-                filterListItems(hash.slice(1), $items, tags);
-                setActiveButton(hash.slice(1), $gridNav);
+                self.filterListItems(hash.slice(1), $items, tags);
+                self.setActiveButton(hash.slice(1), $gridNav);
             }
 
             if (typeof filter !== 'undefined') {
-                setActiveButton('all', $gridNav);
+                self.setActiveButton('all', $gridNav);
             }
         });
 
@@ -88,16 +85,16 @@ const elrFilterGrid = function(params) {
             const $that = $(this);
             const filter = $that.data('filter').toLowerCase();
 
-            filterListItems(filter, $items, tags);
-            setActiveButton(filter, $gridNav);
+            self.filterListItems(filter, $items, tags);
+            self.setActiveButton(filter, $gridNav);
         });
 
-        $grid.on('click', '.caption-tags li', function(e) {
+        self.$grid.on('click', '.caption-tags li', function(e) {
             e.preventDefault();
             const filter = $(this).data('filter').toLowerCase();
 
-            filterListItems(filter, $items, tags);
-            setActiveButton(filter, $gridNav);
+            self.filterListItems(filter, $items, tags);
+            self.setActiveButton(filter, $gridNav);
         });
     }
 

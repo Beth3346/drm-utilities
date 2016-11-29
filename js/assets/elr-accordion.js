@@ -3,27 +3,38 @@ import elrUtils from './elr-utilities';
 const $ = require('jquery');
 let elr = elrUtils();
 
-const elrAccordion = function(params) {
-    const self = {};
-    const spec = params || {};
-    const containerClass = spec.containerClass || 'elr-accordion';
-    const labelClass = spec.labelClass || 'elr-accordion-label';
-    const contentHolderClass = spec.contentHolderClass || 'elr-accordion-content';
-    const showButtons = (typeof spec.showButtons === 'undefined') ? true : spec.showButtons;
-    const $container = $(`.${containerClass}`);
+const elrAccordion = function({
+    containerClass = 'elr-accordion',
+    labelClass = 'elr-accordion-label',
+    contentHolderClass = 'elr-accordion-content',
+    showButtons = true
+} = {}) {
+    const self = {
+        $container: $(`.${containerClass}`),
+        toggle($content, $label) {
+            // toggle active classes on accordion label and content
+            // collapse any open content so only one panel is open at a time
+            const $that = $(this);
+            const $openContent = $content.filter('.active');
+            const $openLabel = $label.filter('.active');
+            const $nextContent = $that.next();
 
-    const toggle = function($openContent, $openLabel) {
-        // toggle active classes on accordion label and content
-        const $that = $(this);
-        const $nextContent = $that.next();
+            if (!$nextContent.hasClass('active')) {
+                $that.addClass('active');
+                $nextContent.addClass('active');
+            }
 
-        if (!$nextContent.hasClass('active')) {
-            $that.addClass('active');
-            $nextContent.addClass('active');
+            $openLabel.removeClass('active');
+            $openContent.removeClass('active');
+        },
+        showAll($content, $label) {
+            $content.addClass('active');
+            $label.addClass('active');
+        },
+        hideAll($content, $label) {
+            $content.removeClass('active');
+            $label.removeClass('active');
         }
-
-        $openLabel.removeClass('active');
-        $openContent.removeClass('active');
     };
 
     const createButton = function(button, message, className, $container) {
@@ -40,29 +51,19 @@ const elrAccordion = function(params) {
         };
     };
 
-    const showAll = function($content, $label) {
-        $content.addClass('active');
-        $label.addClass('active');
-    };
-
-    const hideAll = function($content, $label) {
-        $content.removeClass('active');
-        $label.removeClass('active');
-    };
-
-    if ( $container.length ) {
-        const $label = $container.find(`.${labelClass}`);
-        const $content = $container.find(`.${contentHolderClass}`);
+    if ( self.$container.length ) {
+        const $label = self.$container.find(`.${labelClass}`);
+        const $content = self.$container.find(`.${contentHolderClass}`);
 
         if (showButtons) {
-            const $buttons = addButtons($container);
+            const $buttons = addButtons(self.$container);
 
             $buttons.showButton.on('click', function() {
-                showAll($content, $label);
+                self.showAll($content, $label);
             });
 
             $buttons.hideButton.on('click', function() {
-                hideAll($content, $label);
+                self.hideAll($content, $label);
             });
         }
 
@@ -70,11 +71,8 @@ const elrAccordion = function(params) {
 
         $label.on('click', function(e) {
             e.preventDefault();
-            e.stopPropagation();
-            const $openContent = $content.filter('.active');
-            const $openLabel = $label.filter('.active');
 
-            toggle.call(this, $openContent, $openLabel);
+            self.toggle.call(this, $content, $label);
         });
     }
 

@@ -3,70 +3,67 @@ const $ = require('jquery');
 
 let elr = elrUtlities();
 
-const elrSort = function(params) {
-    const self = {};
-    const spec = params || {};
+const elrSort = function({
+    listsClass = 'elr-sortable',
+    autoSort = true,
+    buttonClass = 'elr-sort-button',
+    activeClass = 'active',
+    ignoreWords = ['a', 'the']
+} = {}) {
+    const sortButton = `.${buttonClass}`;
+    const self = {
+        sortList(direction, $listItems) {
+            const type = $listItems.parent().data('type');
+            let types;
 
-    spec.listsClass = 'elr-sortable';
-    spec.autoSort = true;
-    spec.buttonClass = 'elr-sort-button';
-    spec.activeClass = 'active';
-    spec.ignoreWords = ['a', 'the'];
+            if (type) {
+                types = [type];
+            } else {
+                types = ['date', 'time', 'number', 'alpha'];
+            }
 
-    const buttonClass = `.${spec.buttonClass}`;
+            return elr.sortComplexList(types, $listItems, direction);
+        },
+        renderSort(sortedList, $list) {
+            $list.empty();
+
+            $.each(sortedList, function() {
+                const value = elr.trim($(this).text());
+                const $listItem = elr.createElement('li', {
+                    text: value
+                });
+
+                $list.append($listItem);
+            });
+        }
+    };
 
     const toggleActiveClass = function(className, parent) {
         $(this).closest(parent).find(`.${className}`).removeClass(className).end().end().addClass(className);
     };
 
-    const sortList = function(direction, $listItems) {
-        const type = $listItems.parent().data('type');
-        let types = [];
+    const $lists = $(`.${listsClass}`);
 
-        if (type) {
-            types.push(type);
-        } else {
-            types = ['date', 'time', 'number', 'alpha'];
-        }
-
-        return elr.sortComplexList(types, $listItems, direction);
-    };
-
-    const renderSort = function(sortedList, $list) {
-        $list.empty();
-
-        $.each(sortedList, function() {
-            const value = elr.trim($(this).text());
-            const $listItem = elr.createElement('li', {
-                text: value
-            });
-
-            $list.append($listItem);
-        });
-    };
-
-    const $lists = $(`.${spec.listsClass}`);
-
-    if (spec.autoSort) {
+    if (autoSort) {
         $.each($lists, function() {
             const $list = $(this);
             const $listItems = $list.find('li');
-            const $sortedList = sortList('ascending', $listItems);
+            const $sortedList = self.sortList('ascending', $listItems);
 
-            renderSort($sortedList, $list);
-            $(`button.${spec.buttonClass}[data-sort='ascending']`).addClass(spec.activeClass);
+            self.renderSort($sortedList, $list);
+            $(`button.${buttonClass}[data-sort='ascending']`).addClass(activeClass);
         });
     }
 
-    $('body').on('click', buttonClass, function() {
+    $('body').on('click', sortButton, function() {
         const $that = $(this);
         const listId = $that.data('list');
         const $list = $(`ul#${listId}`);
         const direction = $that.data('sort');
         const $listItems = $list.find('li');
-        const $sortedList = sortList(direction, $listItems);
+        const $sortedList = self.sortList(direction, $listItems);
 
-        renderSort($sortedList, $list);
+        self.renderSort($sortedList, $list);
         toggleActiveClass.call(this, 'active', '.button-group');
     });
 

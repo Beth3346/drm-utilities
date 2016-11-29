@@ -11,21 +11,19 @@ let elrEvents = elrCalendarEvents();
 let elrMonths = elrCalendarMonths();
 let elrWeeks = elrCalendarWeeks();
 
-const elrCalendarCreate = function(params) {
-    let spec = params || {};
-    let view = spec.view || 'month';
-
+const elrCalendarCreate = function({
+    view = 'month'
+} = {}) {
     let self = {
         renderDate: (dateObj, $cal, evts) => {
+            // create date view
         },
-
         changeCalendar: (view, dateObj, $cal, evts) => {
             $cal.find('.calendar-inner').fadeOut(300).queue(function(next) {
                 $.when($(this).remove()).then(self.buildCalendar(view, dateObj, $cal, evts));
                 next();
             });
         },
-
         buildCalendar: (view, dateObj, $cal, evts) => {
             if (view === 'month') {
                 elrMonths.renderMonth(dateObj, $cal, evts);

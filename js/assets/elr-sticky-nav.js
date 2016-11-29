@@ -3,15 +3,16 @@ const $ = require('jquery');
 
 let elr = elrUtlities();
 
-const elrStickyNav = function(params) {
-    const self = {};
-    const spec = params || {};
-    const $nav = spec.nav || $('nav.elr-sticky-nav');
-    const activeClass = spec.activeClass || 'active';
-    const $content = spec.content || $('div.sticky-nav-content');
-    const sectionEl = spec.sectionEl || 'section';
-    const spy = spec.spy || false;
+const elrStickyNav = function({
+    $nav = $('nav.elr-sticky-nav'),
+    activeClass = 'active',
+    $content = $('div.sticky-nav-content'),
+    sectionEl = 'section',
+    spy = false
+} = {}) {
+    // const self = {};
 
+    // make a more general function and add to elr utilities
     const affixElement = function($el, top) {
         const $win = $(window);
         const winHeight = $win.height();
@@ -65,7 +66,7 @@ const elrStickyNav = function(params) {
         });
     }
 
-    return self;
+    // return self;
 };
 
 export default elrStickyNav;

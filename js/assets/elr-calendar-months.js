@@ -7,9 +7,9 @@ let elr = elrUtlities();
 let elrTime = elrTimeUtlities();
 let elrEvents = elrCalendarEvents();
 
-const elrCalendarMonths = function(params) {
-    let spec = params || {};
-    let view = spec.view || 'month';
+const elrCalendarMonths = function({
+    view = 'month'
+} = {}) {
     let calendarInnerClass = `elr-calendar-${view}-view`;
     let classes = {
         'weekend': 'elr-cal-weekend',
@@ -124,11 +124,10 @@ const elrCalendarMonths = function(params) {
         $.each(elrTime.days, function(k) {
             // finish adding cells for the current month
             if (renderDate.date <= numberDays) {
-                lastWeekHtml += '<td class=' + classes.date + ' data-month=' + renderDate.month + ' data-date=' + renderDate.date + ' data-year=' + renderDate.year + ' data-day=' + k + '>' + renderDate.date + '</td>';
+                lastWeekHtml += `<td class=${classes.date} data-month=${renderDate.month} data-date=${renderDate.date} data-year=${renderDate.year} data-day=${k}>${renderDate.date}</td>`;
             // start adding cells for next month
             } else {
-                lastWeekHtml += '<td class=' + classes.muted + ' data-day=' + k + '>' + nextDates + '</td>';
-
+                lastWeekHtml += `<td class=${classes.muted} data-day=${k}>${nextDates}</td>`;
                 nextDates += 1;
             }
 
@@ -142,8 +141,7 @@ const elrCalendarMonths = function(params) {
         let middleWeeksHtml = '';
 
         $.each(elrTime.days, function(k) {
-            middleWeeksHtml += '<td class=' + classes.date + ' data-month=' + renderDate.month + ' data-date=' + renderDate.date + ' data-year=' + renderDate.year + ' data-day=' + k + '>' + renderDate.date + '</td>';
-
+            middleWeeksHtml += `<td class=${classes.date} data-month=${renderDate.month} data-date=${renderDate.date} data-year=${renderDate.year} data-day=${k}>${renderDate.date}</td>`;
             renderDate.date += 1;
         });
 
@@ -158,7 +156,7 @@ const elrCalendarMonths = function(params) {
         };
 
         let weekCount = 1;
-        let weeks = '<tbody class="' + classes.month +  '">';
+        let weeks = `<tbody class="${classes.month}">`;
         let numberWeeks = elrTime.getWeeksInMonth(tempDate);
         let firstDay = elrTime.getFirstDayOfMonth(tempDate);
 
@@ -176,11 +174,11 @@ const elrCalendarMonths = function(params) {
                 weeks += createMiddleWeeks(tempDate);
             }
 
-            weeks += '</tr>';
+            weeks += `</tr>`;
             weekCount += 1;
         }
 
-        weeks += '</tbody></table>';
+        weeks += `</tbody></table>`;
 
         return weeks;
     };
@@ -188,7 +186,7 @@ const elrCalendarMonths = function(params) {
     let createMonth = function(renderDate) {
         let html = createWeekdays(renderDate) + createWeeks(renderDate);
 
-        return $('<div></div>', {
+        return elr.createElement('div', {
             'class': `calendar-inner ${calendarInnerClass}`,
             'data-month': renderDate.month,
             'data-year': renderDate.year,
@@ -197,9 +195,9 @@ const elrCalendarMonths = function(params) {
     };
 
     let createHeading = function(renderDate) {
-        return $('<h1></h1>', {
+        return elr.createElement('h1', {
             'class': 'elr-calendar-header',
-            'text': elrTime.months[renderDate.month] + ' ' + renderDate.year
+            'text': `${elrTime.months[renderDate.month]}' '${renderDate.year}`
         });
     };
 

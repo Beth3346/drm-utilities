@@ -76,7 +76,7 @@ $('.mobile-toggle-button, .mobile-toggle-button-border').on('click', function() 
 $('.smooth-scroll').on('click', 'a', elr.gotoSection);
 
 let elrAlert = elrAlerts();
-let modalAlert = elrModalAlert();
+let modalAlert = elrModalAlert({speed: 300});
 
 let $input = $('.regex-tester').find('input');
 
@@ -117,7 +117,7 @@ elrAlert.showAlert(
 );
 
 $('.js-show-info-alert').on('click', function() {
-    modalAlert.showAlert();
+    modalAlert.showAlert({type: 'info'});
 });
 
 $('.js-show-confirmation-alert').on('click', function() {
@@ -130,7 +130,7 @@ $('.js-show-confirmation-alert').on('click', function() {
                 type: 'success',
                 text: 'Confirm',
                 class: 'elr-button elr-button-success',
-                onClick: function() {
+                onClick() {
                     modalAlert.clearAlert.call(this, null, function() {
                         modalAlert.showAlert({
                             title: 'Success'
@@ -142,7 +142,7 @@ $('.js-show-confirmation-alert').on('click', function() {
                 type: 'cancel',
                 text: 'Cancel',
                 class: 'elr-button elr-button-danger',
-                onClick: function() {
+                onClick() {
                     console.log('cancel');
                     modalAlert.clearAlert.call(this);
                 }
@@ -155,7 +155,7 @@ elrBackToTop();
 
 elrCalendar({
     view: 'month',
-    currentDate: elrTime.today
+    currentDate: elrTime.today()
     // currentDate: {
     //     'month': 11,
     //     'date': 31,

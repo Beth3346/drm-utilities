@@ -5,11 +5,11 @@ const $ = require('jquery');
 let elr = elrUtlities();
 let elrTime = elrTimeUtlities();
 
-const elrCalendarEvents = function(params) {
-    let spec = params || {};
-    let calendarClass = spec.calendarClass || 'elr-calendar';
-    let view = spec.view || 'month';
-    let newEvents = spec.newEvents || [];
+const elrCalendarEvents = function({
+    calendarClass = 'elr-calendar',
+    view = 'month',
+    newEvents = []
+} = {}) {
     let $calendar = $(`.${calendarClass}`);
     let calendarInnerClass = `elr-calendar-${view}-view`;
     let evtClass = 'elr-events';
@@ -128,7 +128,7 @@ const elrCalendarEvents = function(params) {
     };
 
     let self = {
-        addEvents: (evt, $calendar) => {
+        addEvents(evt, $calendar) {
             let $calendarInner = $calendar.find(`div.${calendarInnerClass}`);
             let evtMonth = $calendarInner.data('month');
             let month = elr.inArray(elrTime.months, evt.month);
@@ -159,7 +159,7 @@ const elrCalendarEvents = function(params) {
             });
         },
 
-        addEventsToCalendar: (evt, date, $calendarInner) => {
+        addEventsToCalendar(evt, date, $calendarInner) {
             let $calendarItem;
             let eventContent;
 

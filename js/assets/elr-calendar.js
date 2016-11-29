@@ -9,17 +9,17 @@ let elrTime = elrTimeUtlities();
 let elrCreate = elrCalendarCreate();
 let elrActions = elrCalendarActions();
 
-const elrCalendar = function(params) {
-    let self = {};
-    let spec = params || {};
-    let calendarClass = spec.calendarClass || 'elr-calendar';
+const elrCalendar = function({
+    calendarClass = 'elr-calendar',
+    view = 'month',
+    addHolidays = true,
+    currentDate = elrTime.today(),
+    newEvents = []
+} = {}) {
+    // let self = {};
     let $calendar = $(`.${calendarClass}`);
 
     if ($calendar.length) {
-        let view = spec.view || 'month';
-        let addHolidays = (typeof spec.addHoldays === 'undefined') ? true : spec.addHoldays;
-        let currentDate = spec.currentDate || elrTime.today;
-        let newEvents = spec.newEvents || [];
         let $body = $('body');
         let evtClass = 'elr-events';
         let classes = {
@@ -57,7 +57,7 @@ const elrCalendar = function(params) {
             });
 
             $cal.on('click', '.elr-calendar-current', function() {
-                elrCreate.changeCalendar(view, elrTime.today, $cal, evts);
+                elrCreate.changeCalendar(view, elrTime.today(), $cal, evts);
             });
 
             $cal.on('click', 'button.elr-calendar-view', function() {
@@ -76,7 +76,7 @@ const elrCalendar = function(params) {
         });
     }
 
-    return self;
+    // return self;
 };
 
 export default elrCalendar;

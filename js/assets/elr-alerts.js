@@ -3,33 +3,31 @@ const $ = require('jquery');
 
 let elr = elrUtlities();
 
-const elrAlerts = function(params) {
-    const self = {};
-    const spec = params || {};
-    const speed = spec.speed || 300;
-    const alertClass = spec.alertClass || 'js-dismissible-alert';
+const elrAlerts = function({
+    speed = 300,
+    alertClass = 'js-dismissible-alert'
+} = {}) {
+    const self = {
+        showAlert(type, message, $holder) {
+            const className = `elr-alert elr-${type}-alert ${alertClass}`;
+            const $newAlert = elr.createElement('div', {
+                text: message,
+                'class': className
+            });
 
-    self.showAlert = function(type, message, $holder) {
-        const className = `elr-alert elr-${type}-alert ${alertClass}`;
-        const $newAlert = $('<div></div>', {
-            text: message,
-            'class': className
-        });
+            const $close = $('<button></button>', {
+                text: 'x',
+                'class': 'close'
+            });
 
-        const $close = $('<button></button>', {
-            text: 'x',
-            'class': 'close'
-        });
-
-        $newAlert.prependTo($holder);
-        $close.prependTo($newAlert);
+            $newAlert.prependTo($holder);
+            $close.prependTo($newAlert);
+        }
     };
 
     $('body').on('click', `.${alertClass} button.close`, function(e) {
         e.preventDefault();
-        const $alert = $(this).parent();
-
-        elr.clearElement($alert, speed);
+        elr.clearElement($(this).parent(), speed);
     });
 
     return self;

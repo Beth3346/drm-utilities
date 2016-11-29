@@ -9,20 +9,18 @@ $.extend($.expr[':'], {
     }
 });
 
-const elrTableFilter = function(params) {
-    const self = {};
-    const spec = params || {};
-    const tableClass = spec.tableClass || 'elr-searchable-table';
-    const searchInput = spec.searchInput || 'elr-search-table';
+const elrTableFilter = function({
+    tableClass = 'elr-searchable-table',
+    searchInput = 'elr-search-table'
+} = {}) {
+    // const self = {};
     const $table = $(`.${tableClass}`);
 
     const getFilterValues = function($inputs) {
         let filterValues = [];
 
-        elr.each($inputs, function(k,v) {
-            const $that = $(v);
-
-            if ( elr.trim($that.val()).length ) {
+        elr.each($inputs, function(k, v) {
+            if (elr.trim($(v).val())) {
                 filterValues.push(v);
             }
 
@@ -35,18 +33,22 @@ const elrTableFilter = function(params) {
     const getRows = function($fullRows, filterValues) {
         let $newRows;
 
-        elr.each(filterValues, function(k,v) {
+        const filter = function(k, v, $newRows, $fullRows) {
             const $that = $(v);
             const input = elr.trim($that.val()).toLowerCase();
             const columnNum = $that.closest('th').index();
 
-            if ( filterValues.length === 1 ) {
-                $newRows = $fullRows.has(`td:eq(${columnNum}):containsNC(${input})`);
-            } else if ( k === 0 ) {
-                $newRows = $fullRows.has(`td:eq(${columnNum}):containsNC(${input})`);
+            if (filterValues.length === 1) {
+                return $fullRows.has(`td:eq(${columnNum}):containsNC(${input})`);
+            } else if (k === 0) {
+                return $fullRows.has(`td:eq(${columnNum}):containsNC(${input})`);
             } else {
-                $newRows = $newRows.has(`td:eq(${columnNum}):containsNC(${input})`);
+                return $newRows.has(`td:eq(${columnNum}):containsNC(${input})`);
             }
+        };
+
+        elr.each(filterValues, function(k, v) {
+            $newRows = filter(k, v, $newRows, $fullRows);
 
             return $newRows;
         });
@@ -55,12 +57,11 @@ const elrTableFilter = function(params) {
     };
 
     const filterRows = function($fullRows, filterValues) {
-
-        if ( filterValues.length === 0 ) {
+        if (filterValues.length === 0) {
             return $fullRows;
-        } else {
-            return getRows($fullRows, filterValues);
         }
+
+        return getRows($fullRows, filterValues);
     };
 
     const renderTable = function($table, $filteredRows) {
@@ -84,7 +85,7 @@ const elrTableFilter = function(params) {
         });
     });
 
-    return self;
+    // return self;
 };
 
 export default elrTableFilter;
