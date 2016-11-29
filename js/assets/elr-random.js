@@ -1,3 +1,5 @@
+// generate random pieces of data
+
 // export default elrRandom = function(params) {
 //     const self = {};
 //     const spec = params || {};
@@ -14,5 +16,8 @@
 // // random phone
 // // random zip
 // // random email
-// // random un
+// // random username
 // // random password
+// // random country
+// // random state
+// // random city
