@@ -8,17 +8,17 @@
     @include elr-breakpoint('neptune') {
         flex-direction: column;
 
-        @if $border-radius != 0 {
-            .elr-button {
-                &:first-of-type {
-                    border-radius: $border-radius $border-radius 0 0;
-                }
+        // @if $border-radius != 0 {
+        //     .elr-button {
+        //         &:first-of-type {
+        //             border-radius: $border-radius $border-radius 0 0;
+        //         }
 
-                &:last-of-type {
-                    border-radius: 0 0 $border-radius $border-radius;
-                }
-            }
-        }
+        //         &:last-of-type {
+        //             border-radius: 0 0 $border-radius $border-radius;
+        //         }
+        //     }
+        // }
     }
 
     .elr-button {
@@ -42,15 +42,15 @@
                 border-radius: 0 $border-radius $border-radius 0;
             }
 
-            @include elr-breakpoint('saturn') {
-                &:first-of-type {
-                    border-radius: $border-radius $border-radius 0 0;
-                }
+            // @include elr-breakpoint('saturn') {
+            //     &:first-of-type {
+            //         border-radius: $border-radius $border-radius 0 0;
+            //     }
 
-                &:last-of-type {
-                    border-radius: 0 0 $border-radius $border-radius;
-                }
-            }
+            //     &:last-of-type {
+            //         border-radius: 0 0 $border-radius $border-radius;
+            //     }
+            // }
         } @elseif $border-radius != 0 and $direction == column {
             display: inline-block;
 

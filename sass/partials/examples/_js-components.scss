@@ -18,9 +18,7 @@
 
 @include elr-calendar;
 
-.elr-calendar {
-    margin-bottom: to-rems(40px);
-}
+.elr-calendar { margin-bottom: to-rems(40px); }
 
 .elr-dropdown-nav {
     @include elr-dropdown-nav;
@@ -68,20 +66,23 @@
     display: inline-block;
     border-radius: 0;
     padding: to-rems(7px);
+    margin: 0;
+    position: absolute;
+    top: 5px;
 
     .hamburger {
-        @include elr-icon-arrow('left', 30px, 4px);
-        @include elr-hamburger(30px, $white, 4px);
+        @include elr-icon-close(24px, 3px);
+        @include elr-hamburger(24px, $white, 3px);
     }
 }
 
 .elr-offscreen-nav {
     width: 100%;
-    padding: to-rems(3px) to-rems(10px);
+    padding: 0 to-rems(10px);
     background-color: $link-color;
     color: $white;
     font-weight: $bold;
-    height: to-rems(70px);
+    height: to-rems(50px);
     position: absolute;
     top: 0;
     left: 0;
@@ -93,7 +94,7 @@
     margin: to-rems(2px) auto;
     background-color: $background-color;
     border: to-rems(1px) solid $light-grey;
-    padding-top: to-rems(70px);
+    padding-top: to-rems(50px);
     overflow: hidden;
     position: relative;
 
@@ -173,8 +174,6 @@
 .elr-tooltip-bottom { @include elr-tooltip(bottom, $text-color, $background-color, 100px); }
 
 .elr-sortable-table { @include elr-table-rounded($background-color, $text-color, $link-color, $light-grey, $lightest-grey); }
-
-.elr-flexible-grid { @include elr-flexible-grid(4); }
 
 // .elr-select { @include elr-select-control(200px); }
 

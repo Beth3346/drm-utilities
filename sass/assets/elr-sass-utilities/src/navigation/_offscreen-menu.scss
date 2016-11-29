@@ -2,7 +2,7 @@
 
 // works with fluid and fixed layouts
 @mixin elr-offscreen-menu($bk-color: $main-color, $width: 200px) {
-    width: $width;
+    width: to-rems($width);
     position: absolute;
     left: -$width;
     height: 100%;
@@ -15,7 +15,7 @@
         @include elr-nav-bar($white, $white, left, transparent, $bk-color, false);
 
         li a {
-            padding: 10px 15px;
+            padding: to-rems(10px) to-rems(15px);
         }
     }
 }

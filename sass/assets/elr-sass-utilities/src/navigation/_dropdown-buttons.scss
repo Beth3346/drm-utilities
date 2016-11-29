@@ -19,6 +19,7 @@
     transition: max-height .5s cubic-bezier(0, 1.05, 0, 1);
     display: flex;
     flex-direction: column;
+    margin-top: to-rems(5px);
 
     &.active-list {
         max-height: to-rems(500px);
@@ -44,7 +45,7 @@
 
     .elr-dropdown-button {
         height: to-rems(40px);
-        margin-bottom: to-rems(5px);
+        margin-bottom: 0;
         position: relative;
 
         &:after {
@@ -62,16 +63,21 @@
     position: relative;
 
     .elr-dropdown-button-group {
-        margin-bottom: to-rems(5px);
+        margin-bottom: 0;
 
         @include elr-breakpoint('neptune') {
             flex-direction: row;
+            margin-bottom: to-rems(10px);
         }
 
         button {
             padding-left: to-rems(10px);
             padding-right: to-rems(10px);
             margin-bottom: 0;
+
+            @include elr-breakpoint('saturn') {
+                border-radius: 0;
+            }
         }
     }
 

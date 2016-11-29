@@ -45,14 +45,28 @@
     @include elr-button-group(3px, column, 43px);
 }
 
+.dropdown-buttons {
+    @include elr-breakpoint($saturn - 1, 'min-width') {
+        display: flex;
+    }
+}
+
 .elr-dropdown-button-holder {
     @include elr-dropdown-button-solid;
     margin-right: to-rems(20px);
+
+    @include elr-breakpoint('saturn') {
+        width: 100%;
+    }
 }
 
 .elr-dropdown-button-holder-split {
     @include elr-dropdown-button-split;
     margin-right: to-rems(20px);
+
+    @include elr-breakpoint('saturn') {
+        width: 100%;
+    }
 }
 
 .elr-dropdown-list {
