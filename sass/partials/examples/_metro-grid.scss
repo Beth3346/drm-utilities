@@ -1,0 +1,44 @@
+.elr-flexible-grid { @include elr-flexible-grid(4); }
+.elr-grid-item { @include elr-grid-item; }
+
+.metro-grid {
+    @include elr-flexible-grid(3);
+
+    .grid-item {
+        background-color: $elr-blue;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        padding: 10px 20px;
+        color: $white;
+        width: 100%;
+        height: 200px;
+        display: inline-block;
+        position: relative;
+
+        &:nth-child(2),
+        &:nth-child(5),
+        &:nth-child(7) {
+            background-color: $accent-color;
+            height: 150px;
+        }
+
+        &:nth-child(3),
+        &:nth-child(6),
+        &:nth-child(9) {
+            background-color: $success-color;
+            height: 340px;
+        }
+
+        &:nth-child(4),
+        &:nth-child(8),
+        &:nth-child(10) {
+            background-color: $warning-color;
+            height: 250px;
+        }
+    }
+
+    .grid-item-heading {
+        font-size: to-rems(18px);
+        text-align: center;
+    }
+}

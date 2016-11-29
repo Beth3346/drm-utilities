@@ -1,23 +1,21 @@
 // Grids
+// TODO: need the ability to have tiles that are 2 columns wide
+// http://bulma.io/documentation/grid/tiles/
 
 @mixin elr-grid-item() {
     padding: 0;
-    background-color: $white;
-    border: 1px solid $light-grey;
-    // float: left;
+    background-color: $lightest-grey;
     border-radius: 5px;
     color: $dark-grey;
-    box-shadow: $lightest-grey 1px 1px 1px;
     position: relative;
     margin-bottom: 10px;
-    column-break-inside: avoid;
     display: inline-block;
     width: 100%;
+    overflow: hidden;
 
     img {
         margin: 0;
         width: 100%;
-        border-radius: 5px 5px 0 0;
     }
 
     .overlay {
@@ -78,29 +76,32 @@
     background-color: $white;
     position: relative;
     padding: 0;
-    // display: flex;
-    -moz-column-count: $images-per-row;
-    -webkit-column-count: $images-per-row;
+    // -moz-column-count: $images-per-row;
+    // -webkit-column-count: $images-per-row;
     column-count: $images-per-row;
-    -moz-column-gap: 10px;
-    -webkit-column-gap: 10px;
+    // -moz-column-gap: 10px;
+    // -webkit-column-gap: 10px;
     column-gap: 10px;
     width: 100%;
     transition: all;
 
     @include elr-breakpoint('saturn') {
-        -moz-column-count: ($images-per-row / 2);
-        -webkit-column-count: ($images-per-row / 2);
+        // -moz-column-count: ($images-per-row / 2);
+        // -webkit-column-count: ($images-per-row / 2);
+        // TODO: need to check if images-per-row is an odd #
         column-count: ($images-per-row / 2);
     }
 
     @include elr-breakpoint('neptune') {
-        -moz-column-count: 1;
-        -webkit-column-count: 1;
+        // -moz-column-count: 1;
+        // -webkit-column-count: 1;
         column-count: 1;
     }
 
-    .elr-grid-item {
-        @include elr-grid-item();
-    }
+    // .grid-item {
+    //     -webkit-column-break-inside: avoid; // Chrome, Safari
+    //     page-break-inside: avoid;           // Theoretically FF 20+
+    //     break-inside: avoid-column;         // IE 11
+    //     display: table;
+    // }
 }
