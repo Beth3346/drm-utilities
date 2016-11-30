@@ -1,4 +1,4 @@
-import elrUtlities from './elr-utilities';
+import elrUtlities from 'elr-utility-lib';
 import elrValidationUtils from './elr-validation-utilities';
 const $ = require('jquery');
 

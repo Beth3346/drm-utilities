@@ -15,6 +15,7 @@ import path from 'path';
 import webpackStream from'webpack-stream';
 import sourcemaps from 'gulp-sourcemaps';
 import browserSync from 'browser-sync';
+import plumber from'gulp-plumber';
 
 let firstBuildReady = false;
 
@@ -93,6 +94,7 @@ gulp.task('views', function buildHTML() {
 gulp.task('styles', ['scsslint'], function() {
 
     return gulp.src(files.scss)
+        .pipe(plumber())
         .pipe(sass().on('error', sass.logError))
             .pipe(gulp.dest(paths.css))
         .pipe(autoprefixer({
@@ -158,6 +160,7 @@ gulp.task('images', ['clean:images'], function() {
 
 gulp.task('webpack', ['scripts'], function() {
     gulp.src('./js/build/app.js')
+        .pipe(plumber())
         .pipe(webpackStream({
             watch: true,
             entry: {

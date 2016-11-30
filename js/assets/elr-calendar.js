@@ -1,5 +1,5 @@
-import elrUtlities from './elr-utilities';
-import elrTimeUtlities from './elr-time-utilities';
+import elrUtlities from 'elr-utility-lib';
+import elrTimeUtlities from 'elr-time-utilities';
 import elrCalendarCreate from './elr-calendar-create';
 import elrCalendarActions from './elr-calendar-actions';
 const $ = require('jquery');
