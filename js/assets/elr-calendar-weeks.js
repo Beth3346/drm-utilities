@@ -8,7 +8,7 @@ let elrTime = elrTimeUtlities();
 let elrEvents = elrCalendarEvents();
 
 const elrCalendarWeeks = function() {
-    let classes = {
+    const classes = {
         'weekend': 'elr-cal-weekend',
         'muted': 'elr-cal-muted',
         'holiday': 'elr-cal-holiday',
@@ -18,7 +18,7 @@ const elrCalendarWeeks = function() {
         'date': 'elr-date'
     };
 
-    let createWeekdayHtml = function(datesInWeek, weekNum) {
+    const createWeekdayHtml = function(datesInWeek, weekNum) {
         let weekdayHtml = `<thead><tr><th></th>`;
 
         $.each(datesInWeek.datesInWeek, function(k) {
@@ -31,13 +31,13 @@ const elrCalendarWeeks = function() {
         return weekdayHtml;
     };
 
-    let createWeekHtml = function(datesInWeek, weekNum) {
-        let weekClass = (weekNum % 2 === 0) ? 'even-week' : 'odd-week';
+    const createWeekHtml = function(datesInWeek, weekNum) {
+        const weekClass = (weekNum % 2 === 0) ? 'even-week' : 'odd-week';
         let weekHtml = `<tbody class="${classes.week} ${weekClass}" data-week="${weekNum}">`;
 
         $.each(elrTime.hours, function() {
             // need to account for first and last weeks of the month
-            let hour = this.name;
+            const hour = this.name;
 
             weekHtml += `<tr><td><span class="hour">${hour}</span></td>`;
 
@@ -60,20 +60,19 @@ const elrCalendarWeeks = function() {
         return weekHtml;
     };
 
-    let createWeekHeading = function(dateObj, datesInWeek, weekNum) {
-        let month = elrTime.months[dateObj.month];
-        let startDate = {
+    const createWeekHeading = function(dateObj, datesInWeek, weekNum) {
+        const month = elrTime.months[dateObj.month];
+        const startDate = {
             month: elrTime.months[datesInWeek.datesInWeek[0].month],
             date: datesInWeek.datesInWeek[0].date
         };
-        let endDate = {
+        const endDate = {
             month: elrTime.months[datesInWeek.datesInWeek[datesInWeek.datesInWeek.length - 1].month],
             date: datesInWeek.datesInWeek[datesInWeek.datesInWeek.length - 1].date
         };
-        let year = dateObj.year;
-        let text = `${startDate.month} ${startDate.date} - ${endDate.month} ${endDate.date}: Week ${weekNum} of ${year}`;
-
-        let $heading = elr.createElement('h1', {
+        const year = dateObj.year;
+        const text = `${startDate.month} ${startDate.date} - ${endDate.month} ${endDate.date}: Week ${weekNum} of ${year}`;
+        const $heading = elr.createElement('h1', {
             'class': 'elr-calendar-header',
             'text': text
         });
@@ -81,23 +80,23 @@ const elrCalendarWeeks = function() {
         return $heading;
     };
 
-    let self = {
+    const self = {
         renderWeek: function(dateObj, $cal, evts) {
-            let weekNum = elrTime.getWeekNumber(dateObj);
-            let lastYear = elrTime.getPrevYear(dateObj);
-            let nextYear = elrTime.getNextYear(dateObj);
-            let lastMonth = elrTime.getPrevMonth(dateObj);
-            let nextMonth = elrTime.getNextMonth(dateObj);
-            let datesInWeek = elrTime.getDatesInWeek(dateObj);
-            let $heading = createWeekHeading(dateObj, datesInWeek, weekNum);
-            let weekdayHtml = createWeekdayHtml(datesInWeek, weekNum);
-            let weekHtml = createWeekHtml(datesInWeek, weekNum);
+            const weekNum = elrTime.getWeekNumber(dateObj);
+            const lastYear = elrTime.getPrevYear(dateObj);
+            const nextYear = elrTime.getNextYear(dateObj);
+            const lastMonth = elrTime.getPrevMonth(dateObj);
+            const nextMonth = elrTime.getNextMonth(dateObj);
+            const datesInWeek = elrTime.getDatesInWeek(dateObj);
+            const $heading = createWeekHeading(dateObj, datesInWeek, weekNum);
+            const weekdayHtml = createWeekdayHtml(datesInWeek, weekNum);
+            const weekHtml = createWeekHtml(datesInWeek, weekNum);
 
-            let weekView = elr.createElement('table', {
+            const weekView = elr.createElement('table', {
                 'html': weekdayHtml + weekHtml
             });
 
-            let calendarHtml = elr.createElement('div', {
+            const calendarHtml = elr.createElement('div', {
                 'class': 'calendar-inner calendar-week-view',
                 'data-month': dateObj.month,
                 'data-year': dateObj.year,
