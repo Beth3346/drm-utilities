@@ -1,23 +1,26 @@
 @mixin elr-pricing-table() {
-    border-radius: 5px;
-    border: 1px solid $light-grey;
-    margin: 0 10px;
-    flex-grow: 1;
-    text-align: center;
-    max-width: 300px;
-    align-self: center;
-    height: 100%;
+    height: 450px;
     min-height: min-content;
-    font-size: 16px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
 
-    &.pricing-package-popular {
+    .pricing-package {
+        border-radius: 5px;
+        border: 1px solid $light-grey;
+        margin: 0 10px;
+        flex-grow: 1;
+        text-align: center;
+        max-width: 300px;
+        align-self: center;
+        height: 100%;
+        font-size: 16px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .pricing-package-popular {
         flex-grow: 2;
         max-width: 350px;
         height: 115%;
-        min-height: min-content;
     }
 
     .pricing-package-header,
@@ -100,10 +103,5 @@
 }
 
 .pricing-table-container {
-    height: 450px;
-    min-height: min-content;
-}
-
-.pricing-package {
     @include elr-pricing-table;
 }
