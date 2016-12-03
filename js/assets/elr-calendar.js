@@ -16,7 +16,6 @@ const elrCalendar = function({
     currentDate = elrTime.today(),
     newEvents = []
 } = {}) {
-    // let self = {};
     let $calendar = $(`.${calendarClass}`);
 
     if ($calendar.length) {
@@ -75,8 +74,6 @@ const elrCalendar = function({
             })
         });
     }
-
-    // return self;
 };
 
 export default elrCalendar;
