@@ -197,7 +197,7 @@ const elrCalendarMonths = function({
     let createHeading = function(renderDate) {
         return elr.createElement('h1', {
             'class': 'elr-calendar-header',
-            'text': `${elrTime.months[renderDate.month]}' '${renderDate.year}`
+            'text': `${elrTime.months[renderDate.month]} ${renderDate.year}`
         });
     };
 
