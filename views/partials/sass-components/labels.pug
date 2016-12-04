@@ -1,5 +1,5 @@
 section#labels
-    .elr-container
+    .elr-container.example-section
         .elr-row
             .elr-col-full.example-headings
                 h3.example-heading Labels
@@ -39,6 +39,7 @@ section#labels
                         margin-bottom: 5px;
                         margin-right: 10px;
                     }
+    .elr-container.example-section
         .elr-row
             .elr-col-full.example-headings
                 h3.example-heading Dismissible Labels
@@ -80,6 +81,7 @@ section#labels
                     $('.label-close').on('click', function() {
                         elr.clearElement($(this).parent('.label'));
                     });
+    .elr-container.example-section
         .elr-row
             .elr-col-full.example-headings
                 h3.example-heading Context Labels
@@ -129,6 +131,7 @@ section#labels
                     .label-warning { @include elr-label-context('warning'); }
                     .label-success { @include elr-label-context('success'); }
                     .label-muted { @include elr-label-context('muted'); }
+    .elr-container.example-section
         .elr-row
             .elr-col-full.example-headings
                 h3.example-heading Corner Labels
@@ -200,6 +203,7 @@ section#labels
                             clear: left;
                         }
                     }
+    .elr-container.example-section
         .elr-row
             .elr-col-full.example-headings
                 h3.example-heading Ribbon Labels

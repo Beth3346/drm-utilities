@@ -2,13 +2,26 @@
     @include elr-flex-image;
 }
 
-.image-container {
-    margin: 0;
-    padding: 0;
+// .image-container {
+//     margin: 0;
+//     padding: 0;
+// }
+
+.rounded-image-holder {
+    margin-bottom: 10px;
+
+    &:first-of-type {
+        margin-right: 5px;
+    }
+
+    &:last-of-type {
+        margin-left: 5px;
+    }
 }
 
 .rounded-image {
     @include elr-rounded-image(10px);
+    display: block;
 }
 
 .round-image {
@@ -31,12 +44,5 @@
     @include elr-breakpoint(saturn) {
         @include elr-circle-image(300px);
         margin: 20px auto;
-    }
-}
-
-.image-section {
-    figure {
-        padding: 0;
-        margin: 0 to-rems(5px);
     }
 }

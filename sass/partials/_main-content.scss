@@ -12,11 +12,17 @@
 .example-section { padding-bottom: to-rems(80px); }
 
 .example-headings {
-    border: 1px solid $light-grey;
-    border-radius: to-rems(3px);
-    padding: to-rems(20px) to-rems(40px);
-    padding-right: 20%;
+    // border: 1px solid $light-grey;
+    // border-radius: to-rems(3px);
+    // padding: to-rems(20px) to-rems(40px);
+    // padding-right: 20%;
     margin-bottom: to-rems(40px);
+    margin-top: to-rems(10px);
+
+    p {
+        font-size: to-rems(14px);
+        color: $grey;
+    }
 }
 
 .example-heading,
@@ -30,7 +36,7 @@
     margin-bottom: to-rems(30px);
     padding-top: 0;
 
-    ~ p:first-of-type { margin-top: -10px; }
+    ~ p:first-of-type { margin-top: -20px; }
 }
 
 .example-subheading {
