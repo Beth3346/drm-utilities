@@ -1,10 +1,19 @@
-@mixin elr-pricing-table() {
-    height: 450px;
+@mixin elr-pricing-table($config: ()) {
+    $config: extend((
+        container-height: 460px,
+        border-color: $light-grey,
+        background-color: $white,
+        color: $text-color,
+        border-radius: 3px
+    ), $config);
+
+    height: map-get($config, container-height);
     min-height: min-content;
 
     .pricing-package {
-        border-radius: 5px;
-        border: 1px solid $light-grey;
+        background-color: map-get($config, background-color);
+        border-radius: map-get($config, border-radius);
+        border: 1px solid map-get($config, border-color);
         margin: 0 10px;
         flex-grow: 1;
         text-align: center;
@@ -15,6 +24,7 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        color: map-get($config, color);
     }
 
     .pricing-package-popular {
@@ -40,17 +50,18 @@
         p {
             padding: 0;
             margin: 0;
+            color: map-get($config, color);
         }
 
         span {
             display: block;
-            line-height: 1;
+            line-height: 1.2;
         }
     }
 
     .pricing-package-price {
         font-size: 36px;
-        font-weight: $extra-bold;
+        font-weight: $bold;
     }
 
     .pricing-package-duration {
@@ -60,7 +71,7 @@
 
     .pricing-package-name,
     .pricing-package-description {
-        line-height: 1;
+        line-height: 1.2;
         font-weight: $light;
         padding: 0;
     }
@@ -70,14 +81,14 @@
     }
 
     .pricing-package-body {
-        border-top: 1px solid $light-grey;
+        border-top: 1px solid map-get($config, border-color);
         padding: 20px 0;
     }
 
     .pricing-package-description {
         font-size: 14px;
         padding-bottom: 20px;
-        border-bottom: 1px solid $light-grey;
+        border-bottom: 1px solid map-get($config, border-color);
         width: 100%;
     }
 
@@ -86,15 +97,19 @@
         padding: 20px 0 10px;
 
         li {
-            padding: 5px 0;
+            padding: 0 0 5px;
             margin: 0;
-            font-weight: $light;
+            // font-weight: $light;
+
+            &:last-child {
+                padding-bottom: 0;
+            }
         }
     }
 
     .pricing-package-footer {
         padding: 20px 10px 10px;
-        border-top: 1px solid $light-grey;
+        border-top: 1px solid map-get($config, border-color);
 
         .elr-button {
             margin-right: 0;
@@ -103,5 +118,12 @@
 }
 
 .pricing-table-container {
-    @include elr-pricing-table;
+    @include elr-pricing-table(
+        $config: (
+            border-color: $white,
+            background-color: lighten($elr-blue, 30%),
+            color: darken($elr-blue, 15%),
+            border-radius: 5px
+        )
+    );
 }

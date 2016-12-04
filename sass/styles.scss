@@ -2,6 +2,10 @@
 
 // Authored Dependencies
 
+@function extend($obj, $ext-obj) {
+    @return map-merge($obj, $ext-obj);
+}
+
 @import 'node_modules/elr-sass-utilities/main';
 @import 'config';
 
