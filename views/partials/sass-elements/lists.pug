@@ -1,28 +1,35 @@
 section.list-section#lists
     .elr-container.example-section
         .elr-row
-            .elr-col-full
-                h3.example-heading Lists
-        .elr-row
-            .elr-col-full
-                h4.example-subheading Unstyled List
+            .elr-col-full.example-headings
+                h2.example-heading Unstyled List
+                p An unordered list with no list styles.
             .elr-col-full.example-holder
                 ul.unstyled-list-left
                     li Item One
                     li Item Two
                     li Item Three
-                    li.divider
                     li Item Four
                     li Item Five
         .elr-row.source-section
+            button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
             .elr-col-full.source-holder
-                h4.example-subheading HTML
+                h3.example-subheading HTML
                 pre.
-                h4.example-subheading Sass
+                    &lt;ul class=&quot;unstyled-list-left&quot; &gt;
+                        &lt;li&gt;Item One&lt;/li&gt;
+                        &lt;li&gt;Item Two&lt;/li&gt;
+                        &lt;li&gt;Item Three&lt;/li&gt;
+                        &lt;li&gt;Item Four&lt;/li&gt;
+                        &lt;li&gt;Item Five&lt;/li&gt;
+                    &lt;/ul&gt;
+                h3.example-subheading Sass
                 pre.
+                    .unstyled-list-left { @include elr-unstyled-list(left); }
+    .elr-container.example-section
         .elr-row
-            .elr-col-full
-                h4.example-subheading Border List
+            .elr-col-full.example-headings
+                h2.example-heading Border List
             .elr-col-full.example-holder
                 ul.border-list-left
                     li Item One
@@ -31,14 +38,27 @@ section.list-section#lists
                     li Item Four
                     li Item Five
         .elr-row.source-section
+            button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
             .elr-col-full.source-holder
-                h4.example-subheading HTML
+                h3.example-subheading HTML
                 pre.
-                h4.example-subheading Sass
+                    &lt;ul class=&quot;border-list-left&quot; &gt;
+                        &lt;li&gt;Item One&lt;/li&gt;
+                        &lt;li&gt;Item Two&lt;/li&gt;
+                        &lt;li&gt;Item Three&lt;/li&gt;
+                        &lt;li&gt;Item Four&lt;/li&gt;
+                        &lt;li&gt;Item Five&lt;/li&gt;
+                    &lt;/ul&gt;
+                h3.example-subheading Sass
                 pre.
+                    .border-list-left {
+                        @include elr-border-list(left);
+                        margin: 0;
+                    }
+    .elr-container.example-section
         .elr-row
-            .elr-col-full
-                h4.example-subheading Inline Lists
+            .elr-col-full.example-headings
+                h2.example-heading Inline Lists
             .elr-col-full.example-holder
                 ul.inline-list-left
                     li Item One
@@ -61,14 +81,40 @@ section.list-section#lists
                     li Item Four
                     li Item Five
         .elr-row.source-section
+            button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
             .elr-col-full.source-holder
-                h4.example-subheading HTML
+                h3.example-subheading HTML
                 pre.
-                h4.example-subheading Sass
+                    &lt;ul class=&quot;inline-list-left&quot; &gt;
+                        &lt;li&gt;Item One&lt;/li&gt;
+                        &lt;li&gt;Item Two&lt;/li&gt;
+                        &lt;li&gt;Item Three&lt;/li&gt;
+                        &lt;li&gt;Item Four&lt;/li&gt;
+                        &lt;li&gt;Item Five&lt;/li&gt;
+                    &lt;/ul&gt;
+                    &lt;ul class=&quot;inline-list-center&quot; &gt;
+                        &lt;li&gt;Item One&lt;/li&gt;
+                        &lt;li&gt;Item Two&lt;/li&gt;
+                        &lt;li&gt;Item Three&lt;/li&gt;
+                        &lt;li&gt;Item Four&lt;/li&gt;
+                        &lt;li&gt;Item Five&lt;/li&gt;
+                    &lt;/ul&gt;
+                    &lt;ul class=&quot;inline-list-right&quot; &gt;
+                        &lt;li&gt;Item One&lt;/li&gt;
+                        &lt;li&gt;Item Two&lt;/li&gt;
+                        &lt;li&gt;Item Three&lt;/li&gt;
+                        &lt;li&gt;Item Four&lt;/li&gt;
+                        &lt;li&gt;Item Five&lt;/li&gt;
+                    &lt;/ul&gt;
+                h3.example-subheading Sass
                 pre.
+                    .inline-list-left { @include elr-inline-list(left); }
+                    .inline-list-center { @include elr-inline-list(center); }
+                    .inline-list-right { @include elr-inline-list(right); }
+    .elr-container.example-section
         .elr-row
-            .elr-col-full
-                h4.example-subheading Custom Bullet List
+            .elr-col-full.example-headings
+                h2.example-heading Custom Bullet List
             .elr-row.example-holder
                 .elr-col-third
                     ul.triangle-list
@@ -85,14 +131,44 @@ section.list-section#lists
                         li Item Four
                         li Item Five
         .elr-row.source-section
+            button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
             .elr-col-full.source-holder
-                h4.example-subheading HTML
+                h3.example-subheading HTML
                 pre.
-                h4.example-subheading Sass
+                    &lt;ul class=&quot;triangle-list&quot; &gt;
+                        &lt;li&gt;Item One&lt;/li&gt;
+                        &lt;li&gt;Item Two&lt;/li&gt;
+                        &lt;li&gt;Item Three&lt;/li&gt;
+                        &lt;li&gt;Item Four&lt;/li&gt;
+                        &lt;li&gt;Item Five&lt;/li&gt;
+                    &lt;/ul&gt;
+                    &lt;ul class=&quot;checked-list&quot; &gt;
+                        &lt;li&gt;Item One&lt;/li&gt;
+                        &lt;li&gt;Item Two&lt;/li&gt;
+                        &lt;li&gt;Item Three&lt;/li&gt;
+                        &lt;li&gt;Item Four&lt;/li&gt;
+                        &lt;li&gt;Item Five&lt;/li&gt;
+                    &lt;/ul&gt;
+                h3.example-subheading Sass
                 pre.
+                    .bullet-list {
+                        @include elr-bullet-list;
+                        padding-left: 0;
+                    }
+
+                    .triangle-list {
+                        @include elr-bullet-list('\25B6');
+                        padding-left: 0;
+                    }
+
+                    .checked-list {
+                        @include elr-bullet-list('\2713');
+                        padding-left: 0;
+                    }
+    .elr-container.example-section
         .elr-row
-            .elr-col-full
-                h4.example-subheading Icon lists with Font Awesome
+            .elr-col-full.example-headings
+                h2.example-heading Icon lists with Font Awesome
             .elr-row.example-holder
                 .elr-col-third
                     ul.heart-list
@@ -117,8 +193,44 @@ section.list-section#lists
                         li Item Five
             .elr-col-full
         .elr-row.source-section
+            button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
             .elr-col-full.source-holder
-                h4.example-subheading HTML
+                h3.example-subheading HTML
                 pre.
-                h4.example-subheading Sass
+                    &lt;ul class=&quot;heart-list&quot; &gt;
+                        &lt;li&gt;Item One&lt;/li&gt;
+                        &lt;li&gt;Item Two&lt;/li&gt;
+                        &lt;li&gt;Item Three&lt;/li&gt;
+                        &lt;li&gt;Item Four&lt;/li&gt;
+                        &lt;li&gt;Item Five&lt;/li&gt;
+                    &lt;/ul&gt;
+                    &lt;ul class=&quot;paw-list&quot; &gt;
+                        &lt;li&gt;Item One&lt;/li&gt;
+                        &lt;li&gt;Item Two&lt;/li&gt;
+                        &lt;li&gt;Item Three&lt;/li&gt;
+                        &lt;li&gt;Item Four&lt;/li&gt;
+                        &lt;li&gt;Item Five&lt;/li&gt;
+                    &lt;/ul&gt;
+                    &lt;ul class=&quot;star-list&quot; &gt;
+                        &lt;li&gt;Item One&lt;/li&gt;
+                        &lt;li&gt;Item Two&lt;/li&gt;
+                        &lt;li&gt;Item Three&lt;/li&gt;
+                        &lt;li&gt;Item Four&lt;/li&gt;
+                        &lt;li&gt;Item Five&lt;/li&gt;
+                    &lt;/ul&gt;
+                h3.example-subheading Sass
                 pre.
+                    .heart-list {
+                        @include elr-font-awesome-list('\f004');
+                        padding-left: 0;
+                    }
+
+                    .paw-list {
+                        @include elr-font-awesome-list('\f1b0');
+                        padding-left: 0;
+                    }
+
+                    .star-list {
+                        @include elr-font-awesome-list('\f005');
+                        padding-left: 0;
+                    }
