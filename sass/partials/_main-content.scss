@@ -16,8 +16,12 @@
     // border-radius: to-rems(3px);
     // padding: to-rems(20px) to-rems(40px);
     // padding-right: 20%;
-    margin-bottom: to-rems(40px);
+    // margin-bottom: to-rems(40px);
     margin-top: to-rems(10px);
+
+    + .example-subheadings {
+        margin-top: to-rems(40px);
+    }
 
     p {
         font-size: to-rems(14px);
@@ -36,7 +40,7 @@
     margin-bottom: to-rems(30px);
     padding-top: 0;
 
-    ~ p:first-of-type { margin-top: -20px; }
+    + p:first-of-type { margin-top: -20px; }
 }
 
 .example-subheading {

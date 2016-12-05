@@ -1,16 +1,28 @@
+.unstyled-list-left,
+.border-list-left {
+    max-width: 300px;
+}
+
 .unstyled-list-left { @include elr-unstyled-list(left); }
 .divider { @include elr-list-divider; }
 
 .border-list-left {
     @include elr-border-list(left);
-    margin: 0 to-rems(5px);
+    margin: 0;
 }
 
 .inline-list-left { @include elr-inline-list(left); }
-
 .inline-list-center { @include elr-inline-list(center); }
-
 .inline-list-right { @include elr-inline-list(right); }
+
+.bullet-list,
+.triangle-list,
+.checked-list,
+.heart-list,
+.paw-list,
+.star-list {
+    padding-left: 0;
+}
 
 .bullet-list { @include elr-bullet-list; }
 .triangle-list { @include elr-bullet-list('\25B6'); }
