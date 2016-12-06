@@ -39,7 +39,7 @@ const elrCalendar = function({
             let $addEventForm = $cal.find('form.elr-calendar-new-evt').hide();
             let $showEventFormButton = $cal.find('button.elr-show-evt-form');
             let $calendarViewActiveButton = $cal.find(`.elr-calendar-view-nav button[data-view=${view}]`).addClass('active');
-            let evts = elrTime.holidays;
+            let evts = addHolidays ? newEvents.concat(elrTime.holidays) : newEvents;
 
             elrCreate.buildCalendar(view, currentDate, $calendar, evts);
 
@@ -71,7 +71,7 @@ const elrCalendar = function({
                 $(this).addClass('active');
 
                 elrCreate.changeCalendar($(this).data('view'), dateObj, $cal, evts);
-            })
+            });
         });
     }
 };

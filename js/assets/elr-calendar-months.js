@@ -226,7 +226,7 @@ const elrCalendarMonths = function({
             addWeekNumbers($cal, renderDate);
 
             elr.each(evts, function() {
-                elrEvents.addEvents(this, $cal);
+                elrEvents.addEvent(this, $cal);
             });
 
             // add and remove navigation buttons
