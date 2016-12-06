@@ -6,8 +6,9 @@ import scsslint from 'gulp-scss-lint';
 import autoprefixer from 'gulp-autoprefixer';
 import cleanCSS from 'gulp-clean-css';
 import imagemin from 'gulp-imagemin';
-// import csslint from 'gulp-csslint';
+import csslint from 'gulp-csslint';
 import jshint from 'gulp-jshint';
+import eslint from 'gulp-eslint';
 import babel from 'gulp-babel';
 import pug from 'gulp-pug';
 import webpack from 'webpack';
@@ -53,25 +54,25 @@ const files = {
     html: '*.html'
 };
 
-gulp.task('clean:styles', function() {
+gulp.task('clean:styles', () => {
     return del([
         paths.css
     ]);
 });
 
-gulp.task('clean:scripts', function() {
+gulp.task('clean:scripts', () => {
     return del([
         'js/build/'
     ]);
 });
 
-gulp.task('clean:images', function() {
+gulp.task('clean:images', () => {
     return del(
         'images/compressed'
     );
 });
 
-gulp.task('clean:html', function() {
+gulp.task('clean:html', () => {
     return del([
         files.html
     ]);
@@ -91,7 +92,7 @@ gulp.task('views', function buildHTML() {
         .pipe(browserSync.stream());
 });
 
-gulp.task('styles', ['scsslint'], function() {
+gulp.task('styles', ['scsslint'], () => {
 
     return gulp.src(files.scss)
         .pipe(plumber())
@@ -122,43 +123,66 @@ gulp.task('styles', ['scsslint'], function() {
         //     'order-alphabetical': false
         // }))
         // .pipe(csslint.formatter())
-        // .pipe(cleanCSS({debug: true}))
+        .pipe(cleanCSS({debug: true}))
         .pipe(gulp.dest(paths.css))
         .pipe(browserSync.stream());
 });
 
-gulp.task('scsslint', function() {
+gulp.task('scsslint', () => {
     return gulp.src(`${paths.scss}partials/**/*.scss`)
         .pipe(scsslint());
 });
 
-gulp.task('jshint', function() {
+gulp.task('lint', () => {
     return gulp.src(['js/assets/**/*.js'])
         .pipe(jshint())
         .pipe(jshint.reporter('default'));
 });
 
-gulp.task('babel', function() {
+// gulp.task('lint', () => {
+//     // ESLint ignores files with "node_modules" paths.
+//     // So, it's best to have gulp ignore the directory as well.
+//     // Also, Be sure to return the stream from the task;
+//     // Otherwise, the task may end before the stream has finished.
+//     return gulp.src(['js/assets/*.js', 'js/app.js'])
+//         // eslint() attaches the lint output to the "eslint" property
+//         // of the file object so it can be used by other modules.
+//         .pipe(eslint({
+//             globals: [
+//                 'jQuery',
+//                 '$'
+//             ]
+//         }))
+//         // eslint.format() outputs the lint results to the console.
+//         // Alternatively use eslint.formatEach() (see Docs).
+//         .pipe(eslint.format())
+//         // To have the process exit with an error code (1) on
+//         // lint error, return the stream and pipe to failAfterError last.
+//         .pipe(eslint.failAfterError());
+// });
+
+gulp.task('babel', ['lint'], () => {
     return gulp.src(['js/assets/*.js', 'js/app.js'])
+        // .pipe(plumber())
         .pipe(babel({
             presets: ['es2015']
         }))
         .pipe(gulp.dest(`js/build`));
 });
 
-gulp.task('scripts', ['babel'], function() {
+gulp.task('scripts', ['babel'], () => {
     return gulp.src(['js/build/*.js'])
         .pipe(gulp.dest(`js/build`));
 });
 
-gulp.task('images', ['clean:images'], function() {
+gulp.task('images', ['clean:images'], () => {
     return gulp.src(files.imagesRaw)
         .pipe(imagemin())
         .pipe(gulp.dest(paths.images))
         .pipe(browserSync.stream());
 });
 
-gulp.task('webpack', ['scripts'], function() {
+gulp.task('webpack', ['scripts'], () => {
     gulp.src('./js/build/app.js')
         .pipe(plumber())
         .pipe(webpackStream({
