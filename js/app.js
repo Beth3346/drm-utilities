@@ -210,6 +210,10 @@ elrCalendar({
             'day': ['Friday']
         },
         {
+            'name': 'Wake Up',
+            'recurrance': 'daily'
+        },
+        {
             'name': 'Special Event',
             'recurrance': 'one-time',
             'month': 11,

@@ -170,15 +170,46 @@ const elrCalendarEvents = function({
     // these events occur every week
     // can be multiple days eg. Monday, Wendesday, Friday or Weekends
     const addWeeklyEvent = (evt, $calendarInner) => {
+        const $weeks = $calendarInner.find('.elr-week');
         const dates = [];
+
+        if (evt.day) {
+            elr.each(evt.day, function() {
+                let evtDay = this;
+                $weeks.each(function() {
+                    const $week = $(this);
+                    const mod = $week.data('week') % 2;
+                    const day = elr.inArray(elrTime.days, evtDay);
+                    const date = $week
+                        .find(`.elr-date[data-day="${day}"]`)
+                        .data('date');
+
+                    dates.push(date);
+
+                    return dates;
+                });
+
+                return dates;
+            });
+        } else {
+            return;
+        }
 
         return dates;
     };
 
     // these events occur every day
     // can be all day events or can occur at a set time
-    const addDailyEvent = (evt, $calendarInner) => {
+    const addDailyEvent = ($calendarInner) => {
+        const $days = $calendarInner.find('.elr-date');
         const dates = [];
+
+        elr.each($days, function() {
+            const date = $(this).data('date');
+            dates.push(date);
+
+            return dates;
+        });
 
         return dates;
     };
@@ -186,7 +217,18 @@ const elrCalendarEvents = function({
     // these events occur once
     // can be all day events or can occur at a set time
     const addOneTimeEvent = (evt, $calendarInner) => {
+        const $days = $calendarInner.find('.elr-date');
         const dates = [];
+
+        elr.each($days, function() {
+            const date = $(this).data('date');
+
+            if (date === evt.eventDate) {
+                dates.push(date);
+            }
+
+            return dates;
+        });
 
         return dates;
     };
@@ -222,7 +264,7 @@ const elrCalendarEvents = function({
             } else if (evt.recurrance === 'weekly') {
                 evtDates = addWeeklyEvent(evt, $calendarInner);
             } else if (evt.recurrance === 'daily') {
-                evtDates = addDailyEvent(evt, $calendarInner);
+                evtDates = addDailyEvent($calendarInner);
             } else if (evt.recurrance === 'one-time') {
                 evtDates = addOneTimeEvent(evt, $calendarInner);
             } else if (evt.recurrance === 'yearly') {
