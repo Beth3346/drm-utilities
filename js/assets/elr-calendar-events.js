@@ -22,57 +22,39 @@ const elrCalendarEvents = function({
         'date': 'elr-date'
     };
 
+    const getYearlyEventDay = (evt, $calendarInner, evtDay) => {
+        const day = elr.inArray(elrTime.days, evtDay);
+        const year = $calendarInner.data('year');
+        const $weeks = $calendarInner.find('.elr-week');
+        const weekNum = elrTime.getEventWeekNum(evt, year);
+
+        return $weeks.eq(weekNum - 1).find(`.${classes.date}[data-day="${day}"]`).data('date');
+    };
+
     // these events occur once per year
     const addYearlyEvent = (evt, $calendarInner) => {
         // need to add support for multi-day events
+        const dates = [];
+
         if (evt.day) {
-            const dates = [];
+            // events that occur on a specific day of the month
+            // ex. Thanksgiving is the 4th Thursday in November
             elr.each(evt.day, function() {
-                const day = elr.inArray(elrTime.days, this);
-                const evtMonth = $calendarInner.data('month');
-                const evtYear = $calendarInner.data('year');
-                const weeks = $calendarInner.find('.elr-week');
-                const evtWeekNum = elrTime.getEventWeekNum(evt, evtYear);
-
-                weeks.each(function() {
-                    const $that = $(this);
-                    const firstDate = $that.find(`.${classes.date}`)
-                        .first()
-                        .data('date');
-                    const weekInfo = elrTime.getDatesInWeek({
-                        'month': evtMonth,
-                        'date': firstDate,
-                        'year': evtYear
-                    });
-
-                    if (evtWeekNum && evtWeekNum === weekInfo.weekNum) {
-                        const evtDate = $that.find(`.${classes.date}[data-day="${day}"]`);
-                        dates.push(evtDate.data('date'));
-                    }
-                });
+                dates.push(getYearlyEventDay(evt, $calendarInner, this));
 
                 return dates;
             });
-
-            return dates;
-        } else {
-            const dates = [];
-            dates.push(parseInt(evt.eventDate, 10));
-
-            return dates;
         }
+
+        dates.push(parseInt(evt.eventDate, 10));
+
+        return dates;
     };
 
-    const addEventToWeek = (week, evtDay, $cal, evt) => {
-        let $week = $(week);
+    const getMonthlyEventDay = (evtDay, $cal, evt) => {
+        const $weeks = $cal.find('.elr-week');
         let evtMonth = $cal.data('month');
         let evtYear = $cal.data('year');
-        let firstDate = $week.find('.elr-date').first().data('date');
-        let weekInfo = elrTime.getDatesInWeek({
-            'month': evtMonth,
-            'date': firstDate,
-            'year': evtYear
-        });
 
         // copy event so we can add update properties without changing
         // the original
@@ -87,29 +69,9 @@ const elrCalendarEvents = function({
 
         let weekNum = elrTime.getEventWeekNum(tempEvt, evtYear);
 
-        if (weekNum === weekInfo.weekNum) {
-            // for monthly events
-            return $week
-                .find(`.elr-date[data-day="${elr.inArray(elrTime.days, evtDay)}"]`)
-                .data('date');
-        }
-
-        return;
-    };
-
-    const addDayEvent = (evtDay, $cal, evt) => {
-        const $weeks = $cal.find('.elr-week');
-        let evtDate;
-
-        $weeks.each(function() {
-            const date = addEventToWeek(this, evtDay, $cal, evt);
-
-            if (date) {
-                evtDate = date;
-            }
-        });
-
-        return evtDate;
+        return $weeks.eq(weekNum - 1)
+            .find(`.elr-date[data-day="${elr.inArray(elrTime.days, evtDay)}"]`)
+            .data('date');
     };
 
     // these events occur once per month
@@ -119,7 +81,7 @@ const elrCalendarEvents = function({
         // eg. event occurs on the first Tuesday of every month
         if (evt.day) {
             elr.each(evt.day, function() {
-                dates.push(addDayEvent(this, $calendarInner, evt));
+                dates.push(getMonthlyEventDay(this, $calendarInner, evt));
 
                 return dates;
             });
@@ -350,7 +312,7 @@ const elrCalendarEvents = function({
 
         //         evts.push(obj);
 
-        //         this.addEvents(evts[obj.id], calendar);
+        //         this.addEvent(evts[obj.id], calendar);
         //     }
         // },
 

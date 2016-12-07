@@ -156,12 +156,12 @@ elrBackToTop();
 
 elrCalendar({
     view: 'month',
-    // addHolidays: false,
+    addHolidays: false,
     currentDate: elrTime.today(),
     // currentDate: {
-    //     'month': 11,
-    //     'date': 31,
-    //     'year': 2015
+    //     'month': 10,
+    //     'date': 23,
+    //     'year': 2016
     // }
     newEvents: [
         {
@@ -187,39 +187,39 @@ elrCalendar({
             'recurrance': 'monthly',
             'eventDate': 1
         },
-        {
-            'name': 'Pay Day',
-            'recurrance': 'biweekly',
-            'day': ['Monday', 'Friday'],
-            'week': 'even'
-        },
-        {
-            'name': 'Lawn Day',
-            'recurrance': 'biweekly',
-            'day': ['Thursday'],
-            'week': 'odd'
-        },
-        {
-            'name': 'Day Off',
-            'recurrance': 'weekly',
-            'day': ['Saturday', 'Sunday']
-        },
-        {
-            'name': 'Work Day',
-            'recurrance': 'weekly',
-            'day': ['Friday']
-        },
-        {
-            'name': 'Wake Up',
-            'recurrance': 'daily'
-        },
-        {
-            'name': 'Special Event',
-            'recurrance': 'one-time',
-            'month': 11,
-            'eventDate': 7,
-            'year': 2016
-        }
+        // {
+        //     'name': 'Pay Day',
+        //     'recurrance': 'biweekly',
+        //     'day': ['Monday', 'Friday'],
+        //     'week': 'even'
+        // },
+        // {
+        //     'name': 'Lawn Day',
+        //     'recurrance': 'biweekly',
+        //     'day': ['Thursday'],
+        //     'week': 'odd'
+        // },
+        // {
+        //     'name': 'Day Off',
+        //     'recurrance': 'weekly',
+        //     'day': ['Saturday', 'Sunday']
+        // },
+        // {
+        //     'name': 'Work Day',
+        //     'recurrance': 'weekly',
+        //     'day': ['Friday']
+        // },
+        // {
+        //     'name': 'Wake Up',
+        //     'recurrance': 'daily'
+        // },
+        // {
+        //     'name': 'Special Event',
+        //     'recurrance': 'one-time',
+        //     'month': 11,
+        //     'eventDate': 7,
+        //     'year': 2016
+        // }
     ]
 });
 
