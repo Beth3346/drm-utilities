@@ -34,14 +34,14 @@ let webpackChangeHandler = function (err, stats) {
 };
 
 const paths = {
-    app: './',
+    app: 'dist/',
     scss: 'sass/',
-    css: 'css/',
+    css: 'dist/css/',
     scripts: 'js/',
-    imagesRaw: 'images/raw/',
-    images: 'images/compressed',
+    imagesRaw: 'images/',
+    images: 'dist/images',
     views: 'views/',
-    html: './'
+    html: 'dist/'
 };
 
 const files = {
@@ -51,7 +51,7 @@ const files = {
     imagesRaw: [`${paths.imagesRaw}**/*.jpg`, `${paths.imagesRaw}**/*.png`, `${paths.imagesRaw}**/*.gif`, `${paths.imagesRaw}**/*.svg`],
     images: [`${paths.images}*.jpg`, `${paths.images}*.png`, `${paths.images}*.gif`, `${paths.images}*.svg`],
     views: `${paths.views}*.pug`,
-    html: '*.html'
+    html: 'dist/*.html'
 };
 
 gulp.task('clean:styles', () => {
@@ -68,7 +68,7 @@ gulp.task('clean:scripts', () => {
 
 gulp.task('clean:images', () => {
     return del(
-        'images/compressed'
+        paths.images
     );
 });
 
@@ -78,12 +78,12 @@ gulp.task('clean:html', () => {
     ]);
 });
 
-gulp.task('clean', [
-    'clean:html',
-    'clean:styles',
-    'clean:scripts',
-    'clean:images'
-]);
+gulp.task('clean', () => {
+    return del([
+        'dist',
+        'js/build/'
+    ]);
+});
 
 gulp.task('views', function buildHTML() {
     return gulp.src(files.views)
@@ -103,26 +103,6 @@ gulp.task('styles', ['scsslint'], () => {
             cascade: false
         }))
         .pipe(gulp.dest(paths.css))
-        // .pipe(csslint({
-        //     'unique-headings': false,
-        //     'font-sizes': false,
-        //     'box-sizing': false,
-        //     'floats': false,
-        //     'duplicate-background-images': false,
-        //     'font-faces': false,
-        //     'star-property-hack': false,
-        //     'qualified-headings': false,
-        //     'ids': false,
-        //     'text-indent': false,
-        //     'box-model': false,
-        //     'adjoining-classes': false,
-        //     'compatible-vendor-prefixes': false,
-        //     'important': false,
-        //     'unqualified-attributes': false,
-        //     'fallback-colors': false,
-        //     'order-alphabetical': false
-        // }))
-        // .pipe(csslint.formatter())
         .pipe(cleanCSS({debug: true}))
         .pipe(gulp.dest(paths.css))
         .pipe(browserSync.stream());
@@ -139,31 +119,8 @@ gulp.task('lint', () => {
         .pipe(jshint.reporter('default'));
 });
 
-// gulp.task('lint', () => {
-//     // ESLint ignores files with "node_modules" paths.
-//     // So, it's best to have gulp ignore the directory as well.
-//     // Also, Be sure to return the stream from the task;
-//     // Otherwise, the task may end before the stream has finished.
-//     return gulp.src(['js/assets/*.js', 'js/app.js'])
-//         // eslint() attaches the lint output to the "eslint" property
-//         // of the file object so it can be used by other modules.
-//         .pipe(eslint({
-//             globals: [
-//                 'jQuery',
-//                 '$'
-//             ]
-//         }))
-//         // eslint.format() outputs the lint results to the console.
-//         // Alternatively use eslint.formatEach() (see Docs).
-//         .pipe(eslint.format())
-//         // To have the process exit with an error code (1) on
-//         // lint error, return the stream and pipe to failAfterError last.
-//         .pipe(eslint.failAfterError());
-// });
-
 gulp.task('babel', ['lint'], () => {
     return gulp.src(['js/assets/*.js', 'js/app.js'])
-        // .pipe(plumber())
         .pipe(babel({
             presets: ['es2015']
         }))
@@ -191,12 +148,12 @@ gulp.task('webpack', ['scripts'], () => {
                 app: './js/build/app.js'
             },
             output: {
-                path: path.join(__dirname, 'js/build'),
-                publicPath: '/js/build',
+                path: path.join(__dirname, 'dist'),
+                publicPath: '/dist',
                 filename: 'bundle.js'
             },
         }, null, webpackChangeHandler))
-        .pipe(gulp.dest('./js/build/'));
+        .pipe(gulp.dest('./dist/'));
 });
 
 gulp.task('default', ['views', 'styles', 'images', 'webpack'], () => {
@@ -207,7 +164,7 @@ gulp.task('default', ['views', 'styles', 'images', 'webpack'], () => {
 
     browserSync.init({
         server: {
-            baseDir: "./"
+            baseDir: paths.app
         }
     })
 });
