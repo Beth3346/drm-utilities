@@ -156,6 +156,23 @@ gulp.task('webpack', ['scripts'], () => {
         .pipe(gulp.dest('./dist/'));
 });
 
+gulp.task('webpack:build', ['scripts'], () => {
+    gulp.src('./js/build/app.js')
+        .pipe(plumber())
+        .pipe(webpackStream({
+            watch: false,
+            entry: {
+                app: './js/build/app.js'
+            },
+            output: {
+                path: path.join(__dirname, 'dist'),
+                publicPath: '/dist',
+                filename: 'bundle.js'
+            },
+        }, null, webpackChangeHandler))
+        .pipe(gulp.dest('./dist/'));
+});
+
 gulp.task('default', ['views', 'styles', 'images', 'webpack'], () => {
     gulp.watch(`${paths.views}**/*.pug`, ['views']);
     gulp.watch(files.scss, ['styles']);
@@ -169,4 +186,4 @@ gulp.task('default', ['views', 'styles', 'images', 'webpack'], () => {
     })
 });
 
-gulp.task('build', ['views', 'styles', 'images', 'webpack']);
+gulp.task('build', ['views', 'styles', 'images', 'webpack:build']);
