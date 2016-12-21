@@ -4,7 +4,9 @@
     padding: to-rems(40px) to-rems(10px) to-rems(20px);
     flex: 1 0 auto;
 
-    @include elr-breakpoint('neptune') { padding-top: to-rems(5px); }
+    @include elr-breakpoint($config: (point: 'neptune')) {
+        padding-top: to-rems(5px);
+    }
 
     .elr-col-9:first-child { padding-left: to-rems(10px); }
 }
@@ -52,7 +54,7 @@
 .example-holder { padding: to-rems(20px) 0; }
 
 .source-holder {
-    @include elr-slide(1500px);
+    @include elr-slide($config: (finalheight: 1500px));
 }
 
 pre {

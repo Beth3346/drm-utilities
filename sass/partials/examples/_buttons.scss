@@ -7,19 +7,38 @@
 }
 
 .button-link {
-    @include elr-button-link($link-color, transparent, $link-color, $link-color);
+    @include elr-button-link(
+        $config: (
+            color: $link-color,
+            bg-color: transparent,
+            border-color: $link-color,
+            hover-color: $link-color
+        )
+    );
 }
 
-.button-solid {
-    @include elr-button-link($white, $link-color);
-}
+.button-solid { @include elr-button-link; }
 
 .pill-button-link {
-    @include elr-button-link($link-color, transparent, $link-color, $link-color, true);
+    @include elr-button-link(
+        $config: (
+            color: $link-color,
+            bg-color: transparent,
+            border-color: $link-color,
+            hover-color: $link-color,
+            pill: true
+        )
+    );
 }
 
 .pill-button-solid {
-    @include elr-button-link($white, $link-color, null, lighten($link-color, 10%), true);
+    @include elr-button-link(
+        $config: (
+            color: $white,
+            bg-color: $link-color,
+            pill: true
+        )
+    );
 }
 
 .button-group,
@@ -30,11 +49,16 @@
 }
 
 .button-group {
-    @include elr-button-group(3px, row, auto);
+    @include elr-button-group($config: (direction: row));
 }
 
 .button-group-stacked {
-    @include elr-button-group(3px, column, 200px);
+    @include elr-button-group(
+        $config: (
+            direction: column,
+            width: 200px
+        )
+    );
 }
 
 .icon-button-group {
@@ -42,11 +66,21 @@
 }
 
 .icon-button-group-stacked {
-    @include elr-button-group(3px, column, 43px);
+    @include elr-button-group(
+        $config: (
+            direction: column,
+            width: 43px
+        )
+    );
 }
 
 .dropdown-buttons {
-    @include elr-breakpoint($saturn - 1, 'min-width') {
+    @include elr-breakpoint(
+        $config: (
+            point: $saturn - 1,
+            modifier: 'min-width'
+        )
+    ) {
         display: flex;
     }
 }
@@ -55,7 +89,7 @@
     @include elr-dropdown-button-solid;
     margin-right: to-rems(20px);
 
-    @include elr-breakpoint('saturn') {
+    @include elr-breakpoint($config: (point: 'saturn')) {
         width: 100%;
     }
 }
@@ -64,13 +98,13 @@
     @include elr-dropdown-button-split;
     margin-right: to-rems(20px);
 
-    @include elr-breakpoint('saturn') {
+    @include elr-breakpoint($config: (point: 'saturn')) {
         width: 100%;
     }
 }
 
 .elr-dropdown-list {
-    @include elr-dropdown-list($link-color, $background-color, none, 3px, 250px);
+    @include elr-dropdown-list($config: (width: 250px));
 }
 
 .mobile-toggle-button,
@@ -79,91 +113,81 @@
 }
 
 .mobile-toggle-button {
-    @include elr-mobile-toggle-button($white, $link-color);
+    @include elr-mobile-toggle-button(
+        $config: (
+            color: $white,
+            bg-color: $link-color
+        )
+    );
 }
 
 .mobile-toggle-button-border {
-    @include elr-mobile-toggle-button($link-color, transparent, 18px, 3px, $link-color);
+    @include elr-mobile-toggle-button($config: (border-color: $link-color));
 }
 
 .icon-button {
-    @include elr-font-awesome-button('right');
+    @include elr-font-awesome-button($config: (icon-position: 'right'));
 }
 
 .icon-button-left {
-    @include elr-font-awesome-button('left');
+    @include elr-font-awesome-button($config: (icon-position: 'left'));
 }
 
 .icon-only-button {
-    @include elr-font-awesome-button(null, false, 43px);
+    @include elr-font-awesome-button($config: (width: 43px));
 }
 
 .icon-circle {
-    @include elr-font-awesome-button(null, true, 40px);
+    @include elr-font-awesome-button(
+        $config: (
+            round: true,
+            width: 40px
+        )
+    );
 }
 
 .heart-button {
-    &::before {
-        content: '\f004';
-    }
+    &::before { content: '\f004'; }
 }
 
 .star-button {
-    &::before {
-        content: '\f005';
-    }
+    &::before { content: '\f005'; }
 }
 
 .download-button {
-    &::before {
-        content: '\f019';
-    }
-
+    &::before { content: '\f019'; }
 }
 
 .add-button {
-    &::before {
-        content: '\f055';
-    }
-
+    &::before { content: '\f055'; }
 }
 
 .facebook-button {
-    @include elr-button-link($white, $facebook-color);
+    @include elr-button-link($config: (bg-color: $facebook-color));
 
-    &::before {
-        content: '\f09a';
-    }
+    &::before { content: '\f09a'; }
 }
 
 .twitter-button {
-    @include elr-button-link($white, $twitter-color);
+    @include elr-button-link($config: (bg-color: $twitter-color));
 
-    &::before {
-        content: '\f099';
-    }
+    &::before { content: '\f099'; }
 }
 
 .google-plus-button {
-    @include elr-button-link($white, $google-plus-color);
+    @include elr-button-link($config: (bg-color: $google-plus-color));
 
-    &::before {
-        content: '\f0d5';
-    }
+    &::before { content: '\f0d5'; }
 }
 
 .pinterest-button {
-    @include elr-button-link($white, $pinterest-color);
+    @include elr-button-link($config: (bg-color: $pinterest-color));
 
-    &::before {
-        content: '\f0d2';
-    }
+    &::before { content: '\f0d2'; }
 }
 
 .instagram-button {
-    @include elr-button-link($white, $instagram-color);
+    @include elr-button-link($config: (bg-color: $instagram-color));
 
-    &::before {
-        content: '\f16d';
-    }
+    &::before { content: '\f16d'; }
 }

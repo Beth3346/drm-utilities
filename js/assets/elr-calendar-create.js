@@ -1,13 +1,14 @@
-import elrUtlities from 'elr-utility-lib';
-import elrTimeUtlities from 'elr-time-utilities';
-import elrCalendarEvents from './elr-calendar-events';
+// import elrUtlities from 'elr-utility-lib';
+// import elrTimeUtlities from 'elr-time-utilities';
+// import elrCalendarEvents from './elr-calendar-events';
 import elrCalendarMonths from './elr-calendar-months';
 import elrCalendarWeeks from './elr-calendar-weeks';
+import elrCalendarDates from './elr-calendar-dates';
 const $ = require('jquery');
 
-let elr = elrUtlities();
-let elrTime = elrTimeUtlities();
-let elrEvents = elrCalendarEvents();
+// let elr = elrUtlities();
+// let elrTime = elrTimeUtlities();
+// let elrEvents = elrCalendarEvents();
 let elrMonths = elrCalendarMonths();
 let elrWeeks = elrCalendarWeeks();
 

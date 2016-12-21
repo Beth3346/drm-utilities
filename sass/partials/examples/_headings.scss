@@ -19,13 +19,37 @@
 .heading-pill { @include elr-heading-pill; }
 .heading-underline { @include elr-heading-underline; }
 .heading-shortline { @include elr-heading-shortline; }
-.heading-shortline-left { @include elr-heading-shortline($link-color, left, 50px); }
-.heading-shortline-right { @include elr-heading-shortline($link-color, right, 50px); }
 
-.icon-heading { @include elr-heading-icon('\f004'); }
+.heading-shortline-left {
+    @include elr-heading-shortline(
+        $config: (
+            bdr-color: $link-color,
+            align: left,
+            width: 50px
+        )
+    );
+}
+
+.heading-shortline-right {
+    @include elr-heading-shortline(
+        $config: (
+            bdr-color: $link-color,
+            align: right,
+            width: 50px
+        )
+    );
+}
+
+.icon-heading { @include elr-heading-icon($config: (icon: '\f004')); }
 
 .icon-heading-group {
-    @include elr-heading-icon('\f004', $link-color, 30px);
+    @include elr-heading-icon(
+        $config: (
+            icon: '\f004',
+            icon-color: $link-color,
+            font-size: 30px
+        )
+    );
     border-bottom: 1px solid $light-grey;
     padding-bottom: to-rems(10px);
 }

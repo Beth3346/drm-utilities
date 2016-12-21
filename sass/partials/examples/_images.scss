@@ -20,29 +20,29 @@
 }
 
 .rounded-image {
-    @include elr-rounded-image(10px);
+    @include elr-rounded-image($config: (border-radius: 10px));
     display: block;
 }
 
 .round-image {
-    @include elr-circle-image(300px);
+    @include elr-circle-image($config: (width: 300px));
     margin: to-rems(20px);
     padding: 0;
 
-    @include elr-breakpoint(1403px) {
-        @include elr-circle-image(250px);
+    @include elr-breakpoint($config: (point: 1403px)) {
+        @include elr-circle-image($config: (width: 250px));
     }
 
-    @include elr-breakpoint(1193px) {
-        @include elr-circle-image(200px);
+    @include elr-breakpoint($config: (point: 1193px)) {
+        @include elr-circle-image($config: (width: 200px));
     }
 
-    @include elr-breakpoint(972px) {
-        @include elr-circle-image(150px);
+    @include elr-breakpoint($config: (point: 972px)) {
+        @include elr-circle-image($config: (width: 150px));
     }
 
-    @include elr-breakpoint(saturn) {
-        @include elr-circle-image(300px);
+    @include elr-breakpoint($config: (point: saturn)) {
+        @include elr-circle-image($config: (width: 300px));
         margin: 20px auto;
     }
 }

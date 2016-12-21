@@ -12,12 +12,17 @@
     z-index: 1000;
     transition: background-color .3s, opacity .3s;
 
-    @include elr-breakpoint('neptune') {
+    @include elr-breakpoint($config: (point: 'neptune')) {
         position: relative;
     }
 }
 
-@include elr-breakpoint($neptune + 1, 'min-width') {
+@include elr-breakpoint(
+    $config: (
+        point: $neptune + 1,
+        modifier: 'min-width'
+    )
+) {
     &.fixed-header {
         background-color: $elr-blue;
         opacity: .8;
@@ -41,7 +46,9 @@
     float: left;
     padding: 0 0 0 to-rems(10px);
 
-    @include elr-breakpoint('saturn') { text-align: center; }
+    @include elr-breakpoint($config: (point: 'saturn')) {
+        text-align: center;
+    }
 
     a {
         color: $main-color;

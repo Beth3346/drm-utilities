@@ -4,18 +4,68 @@
     margin-right: to-rems(10px);
 }
 
-.label-info { @include elr-label-context('info'); }
-.label-danger { @include elr-label-context('danger'); }
-.label-warning { @include elr-label-context('warning'); }
-.label-success { @include elr-label-context('success'); }
-.label-muted { @include elr-label-context('muted'); }
-.label-corner { @include elr-label-corner(top, left, $accent-color); }
-.label-corner-right { @include elr-label-corner(top, right, $success-color); }
-.label-corner-bottom { @include elr-label-corner(bottom, left, $link-color); }
-.label-corner-bottom-right { @include elr-label-corner(bottom, right, $success-color); }
+.label-info {
+    @include elr-label-context($config: (type: 'info'));
+}
+
+.label-danger {
+    @include elr-label-context($config: (type: 'danger'));
+}
+
+.label-warning {
+    @include elr-label-context($config: (type: 'warning'));
+}
+
+.label-success {
+    @include elr-label-context($config: (type: 'success'));
+}
+
+.label-muted {
+    @include elr-label-context($config: (type: 'muted'));
+}
+
+.label-corner {
+    @include elr-label-corner(
+        $config: (
+          position-y:   top,
+            position-x: left,
+            bg-color: $accent-color
+        )
+    );
+}
+
+.label-corner-right {
+    @include elr-label-corner(
+        $config: (
+          position-y:   top,
+            position-x: right,
+            bg-color: $success-color
+        )
+    );
+}
+
+.label-corner-bottom {
+    @include elr-label-corner(
+        $config: (
+            position-y: bottom,
+            position-x: left,
+            bg-color: $link-color
+        )
+    );
+}
+
+.label-corner-bottom-right {
+    @include elr-label-corner(
+        $config: (
+            position-y: bottom,
+            position-x: right,
+            bg-color: $success-color
+        )
+    );
+}
 
 .corner-label-box {
-    @include elr-square(250px);
+    @include elr-square($config: (width: 250px));
     background-color: $light-grey;
     position: relative;
     float: left;

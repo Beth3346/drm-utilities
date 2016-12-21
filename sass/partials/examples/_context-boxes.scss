@@ -11,9 +11,57 @@
     }
 }
 
-.context-box-info { @include elr-context-box('info', 3px); }
-.context-box-success { @include elr-context-box('success', 3px); }
-.context-box-danger { @include elr-context-box('danger', 3px); }
-.context-box-warning { @include elr-context-box('warning', 3px); }
-.context-box-muted { @include elr-context-box('muted', 3px); }
-.custom-context-box { @include elr-context-box('custom', 3px, lighten($coral, 20%)); }
+.context-box-info {
+    @include elr-context-box(
+        $config: (
+            type: 'info',
+            border-radius: 3px
+        )
+    );
+}
+
+.context-box-success {
+    @include elr-context-box(
+        $config: (
+            type: 'success',
+            border-radius: 3px
+        )
+    );
+}
+
+.context-box-danger {
+    @include elr-context-box(
+        $config: (
+            type: 'danger',
+            border-radius: 3px
+        )
+    );
+}
+
+.context-box-warning {
+    @include elr-context-box(
+        $config: (
+            type: 'warning',
+            border-radius: 3px
+        )
+    );
+}
+
+.context-box-muted {
+    @include elr-context-box(
+        $config: (
+            type: 'muted',
+            border-radius: 3px
+        )
+    );
+}
+
+.custom-context-box {
+    @include elr-context-box(
+        $config: (
+            type: 'custom',
+            border-radius: 3px,
+            color: lighten($coral, 20%)
+        )
+    );
+}

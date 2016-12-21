@@ -6,4 +6,12 @@
     a { font-size: to-rems(14px); }
 }
 
-.pagination-links-round { @include elr-pagination-links($link-color, 50%, 14px, true); }
+.pagination-links-round {
+    @include elr-pagination-links(
+        $config: (
+            color: $link-color,
+            border-radius: 50%,
+            centered: true
+        )
+    );
+}

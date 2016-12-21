@@ -1,5 +1,5 @@
 .elr-alert {
-    @include elr-alert(3px);
+    @include elr-alert($config: (border-radius: 3px));
     margin-bottom: to-rems(10px);
 }
 

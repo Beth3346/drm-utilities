@@ -4,11 +4,26 @@
 }
 
 .card {
-    @include elr-card(lighten($link-color, 40%), $link-color, null, 20px, 0, 5px);
+    @include elr-card(
+        $config: (
+            bg-color: lighten($link-color, 40%),
+            color: $link-color,
+            padding: 20px,
+            border-radius: 5px
+        )
+    );
 }
 
 .card-border {
-    @include elr-card($white, $link-color, $light-grey, 20px, 0, 5px);
+    @include elr-card(
+        $config: (
+            bg-color: $white,
+            color: $link-color,
+            border-color: $light-grey,
+            padding: 20px,
+            border-radius: 5px
+        )
+    );
 
     .elr-card-thumbnail {
         @include elr-card-thumbnail;

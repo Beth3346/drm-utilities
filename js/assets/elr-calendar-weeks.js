@@ -1,10 +1,12 @@
 import elrUtlities from 'elr-utility-lib';
 import elrTimeUtlities from 'elr-time-utilities';
+import elrUI from 'elr-ui';
 import elrCalendarEvents from './elr-calendar-events';
 const $ = require('jquery');
 
 let elr = elrUtlities();
 let elrTime = elrTimeUtlities();
+let ui = elrUI();
 let elrEvents = elrCalendarEvents();
 
 const elrCalendarWeeks = function() {
@@ -35,13 +37,13 @@ const elrCalendarWeeks = function() {
         const weekClass = (weekNum % 2 === 0) ? 'even-week' : 'odd-week';
         let weekHtml = `<tbody class="${classes.week} ${weekClass}" data-week="${weekNum}">`;
 
-        $.each(elrTime.hours, function() {
+        elr.each(elrTime.hours, function() {
             // need to account for first and last weeks of the month
             const hour = this.name;
 
             weekHtml += `<tr><td><span class="hour">${hour}</span></td>`;
 
-            $.each(datesInWeek.datesInWeek, function(k) {
+            elr.each(datesInWeek.datesInWeek, function(k) {
                 weekHtml += `<td `;
                 weekHtml += `class="${classes.date}"`;
                 weekHtml += ` data-month="${(this.month + 1)}"`;
@@ -72,7 +74,7 @@ const elrCalendarWeeks = function() {
         };
         const year = dateObj.year;
         const text = `${startDate.month} ${startDate.date} - ${endDate.month} ${endDate.date}: Week ${weekNum} of ${year}`;
-        const $heading = elr.createElement('h1', {
+        const $heading = ui.createElement('h1', {
             'class': 'elr-calendar-header',
             'text': text
         });
@@ -92,11 +94,11 @@ const elrCalendarWeeks = function() {
             const weekdayHtml = createWeekdayHtml(datesInWeek, weekNum);
             const weekHtml = createWeekHtml(datesInWeek, weekNum);
 
-            const weekView = elr.createElement('table', {
+            const weekView = ui.createElement('table', {
                 'html': weekdayHtml + weekHtml
             });
 
-            const calendarHtml = elr.createElement('div', {
+            const calendarHtml = ui.createElement('div', {
                 'class': 'calendar-inner calendar-week-view',
                 'data-month': dateObj.month,
                 'data-year': dateObj.year,

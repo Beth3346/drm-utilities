@@ -1,8 +1,8 @@
-.elr-flexible-grid { @include elr-flexible-grid(4); }
+.elr-flexible-grid { @include elr-flexible-grid($config: (images-per-row: 4)); }
 .elr-grid-item { @include elr-grid-item; }
 
 .metro-grid {
-    @include elr-flexible-grid(3);
+    @include elr-flexible-grid($config: (images-per-row: 3));
 
     .grid-item {
         background-color: $elr-blue;

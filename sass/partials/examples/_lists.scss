@@ -3,17 +3,17 @@
     max-width: 300px;
 }
 
-.unstyled-list-left { @include elr-unstyled-list(left); }
+.unstyled-list-left { @include elr-unstyled-list($config: (align: left)); }
 .divider { @include elr-list-divider; }
 
 .border-list-left {
-    @include elr-border-list(left);
+    @include elr-border-list($config: (align: left));
     margin: 0;
 }
 
-.inline-list-left { @include elr-inline-list(left); }
-.inline-list-center { @include elr-inline-list(center); }
-.inline-list-right { @include elr-inline-list(right); }
+.inline-list-left { @include elr-inline-list($config: (align: left)); }
+.inline-list-center { @include elr-inline-list($config: (align: center)); }
+.inline-list-right { @include elr-inline-list($config: (align: right)); }
 
 .bullet-list,
 .triangle-list,
@@ -25,11 +25,11 @@
 }
 
 .bullet-list { @include elr-bullet-list; }
-.triangle-list { @include elr-bullet-list('\25B6'); }
-.checked-list { @include elr-bullet-list('\2713'); }
+.triangle-list { @include elr-bullet-list($config: (icon: '\25B6')); }
+.checked-list { @include elr-bullet-list($config: (icon: '\2713')); }
 
-.heart-list { @include elr-font-awesome-list('\f004'); }
-.paw-list { @include elr-font-awesome-list('\f1b0'); }
-.star-list { @include elr-font-awesome-list('\f005'); }
+.heart-list { @include elr-font-awesome-list($config: (icon: '\f004')); }
+.paw-list { @include elr-font-awesome-list($config: (icon: '\f1b0')); }
+.star-list { @include elr-font-awesome-list($config: (icon: '\f005')); }
 
 .list-section h3 { font-size: to-rems(18px); }

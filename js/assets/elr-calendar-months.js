@@ -1,9 +1,11 @@
 import elrUtlities from 'elr-utility-lib';
+import elrUI from 'elr-ui';
 import elrTimeUtlities from 'elr-time-utilities';
 import elrCalendarEvents from './elr-calendar-events';
 const $ = require('jquery');
 
 let elr = elrUtlities();
+let ui = elrUI();
 let elrTime = elrTimeUtlities();
 let elrEvents = elrCalendarEvents();
 
@@ -80,7 +82,7 @@ const elrCalendarMonths = function({
     let createWeekdays = function(renderDate) {
         let weekdays = '<table><thead><tr>';
 
-        $.each(elrTime.days, function() {
+        elr.each(elrTime.days, function() {
             weekdays += `<th>${this}</th>`;
         });
 
@@ -186,7 +188,7 @@ const elrCalendarMonths = function({
     let createMonth = function(renderDate) {
         let html = createWeekdays(renderDate) + createWeeks(renderDate);
 
-        return elr.createElement('div', {
+        return ui.createElement('div', {
             'class': `calendar-inner ${calendarInnerClass}`,
             'data-month': renderDate.month,
             'data-year': renderDate.year,
@@ -195,7 +197,7 @@ const elrCalendarMonths = function({
     };
 
     let createHeading = function(renderDate) {
-        return elr.createElement('h1', {
+        return ui.createElement('h1', {
             'class': 'elr-calendar-header',
             'text': `${elrTime.months[renderDate.month]} ${renderDate.year}`
         });

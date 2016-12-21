@@ -6,7 +6,7 @@
 }
 
 .box {
-    @include elr-square(200px);
+    @include elr-square($config: (width: 200px));
     background-color: lighten($main-color, 20%);
     border: 1px solid $main-color;
     text-align: center;

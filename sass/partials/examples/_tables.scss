@@ -1,5 +1,14 @@
 // Tables Examples
 
 .elr-table-bordered {
-    @include elr-table-base($background-color, $text-color, $link-color, $light-grey, $lightest-grey, 5px);
+    @include elr-table-base(
+        $config: (
+            bk-color: $background-color,
+            color: $text-color,
+            hover-bk: $link-color,
+            border-color: $light-grey,
+            stripes: $lightest-grey,
+            border-radius: 5px
+        )
+    );
 }

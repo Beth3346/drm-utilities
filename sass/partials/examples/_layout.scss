@@ -2,7 +2,7 @@
 // Layout Utilities Examples
 
 .center-block {
-    @include elr-center-block(50%);
+    @include elr-center-block($config: (width: 50%));
     margin-top: to-rems(10px);
     margin-bottom: to-rems(10px);
     padding: to-rems(10px);
@@ -27,11 +27,21 @@
 }
 
 .horizontal-container .horizontally-center {
-    @include elr-centerer(false, true);
+    @include elr-centerer(
+        $config: (
+            vertical: false,
+            horizontal: true
+        )
+    );
 }
 
 .vertical-container .vertically-center {
-    @include elr-centerer(true, false);
+    @include elr-centerer(
+        $config: (
+            vertical: true,
+            horizontal: false
+        )
+    );
 }
 
 .center-container .centered {
@@ -42,7 +52,7 @@
 .ratiobox-square {
     width: 50%;
 
-    @include elr-breakpoint(997px) {
+    @include elr-breakpoint($config: (point: 997px)) {
         max-width: none;
         width: 100%;
     }
@@ -55,7 +65,7 @@
     &:nth-child(odd) .elr-ratiobox-inner {
         margin-right: to-rems(20px);
 
-        @include elr-breakpoint(997px) {
+        @include elr-breakpoint($config: (point: 997px)) {
             margin-right: 0;
         }
     }
@@ -63,17 +73,17 @@
     &:nth-child(even) .elr-ratiobox-inner {
         margin-left: to-rems(20px);
 
-        @include elr-breakpoint(997px) {
+        @include elr-breakpoint($config: (point: 997px)) {
             margin-left: 0;
         }
     }
 }
 
 .ratiobox {
-    @include elr-ratiobox(16, 9);
+    @include elr-ratiobox($config: (width: 16, height: 9));
     margin-bottom: to-rems(40px);
 }
 
 .ratiobox-square {
-    @include elr-ratiobox(1, 1);
+    @include elr-ratiobox($config: (width: 1, height: 1));
 }

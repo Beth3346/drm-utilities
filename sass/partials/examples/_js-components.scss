@@ -1,12 +1,17 @@
 // JavaScript Examples
 
 .elr-accordion {
-    @include elr-accordion($text-color, 5px, $white, $link-color, $link-color);
+    @include elr-accordion(
+        $config: (
+            border-radius: 5px,
+            border-color: $link-color
+        )
+    );
     max-width: to-rems(800px);
 }
 
 .elr-accordion-nav {
-    @include elr-accordion-nav($link-color);
+    @include elr-accordion-nav($config: (color: $link-color));
 }
 
 .back-to-top { @include elr-back-to-top; }
@@ -33,7 +38,7 @@
 .elr-blackout { @include elr-lightbox-slideshow; }
 
 .elr-modal-demo-buttons {
-    @include elr-button-group(3px);
+    @include elr-button-group($config: (border-radius: 3px));
     margin: to-rems(10px) auto;
     width: to-rems(350px);
 
@@ -51,13 +56,13 @@
     margin: 0 auto to-rems(20px);
 }
 
-.elr-popover-bottom { @include elr-popover(bottom); }
-.elr-popover-top { @include elr-popover(top); }
-.elr-popover-left { @include elr-popover(left); }
-.elr-popover-right { @include elr-popover(right); }
+.elr-popover-bottom { @include elr-popover($config: (direction: 'bottom')); }
+.elr-popover-top { @include elr-popover($config: (direction: 'top')); }
+.elr-popover-left { @include elr-popover($config: (direction: 'left')); }
+.elr-popover-right { @include elr-popover($config: (direction: 'right')); }
 
 .elr-offscreen-menu {
-    @include elr-offscreen-menu($main-color);
+    @include elr-offscreen-menu($config: (bk-color: $main-color));
     font-size: to-rems(14px);
 }
 
@@ -71,8 +76,19 @@
     top: 5px;
 
     .hamburger {
-        @include elr-icon-close(24px, 3px);
-        @include elr-hamburger(24px, $white, 3px);
+        @include elr-icon-close(
+            $config: (
+                width: 24px,
+                thickness: 3px
+            )
+        );
+        @include elr-hamburger(
+            $config: (
+                width: 24px,
+                color: $white,
+                thickness: 3px
+            )
+        );
     }
 }
 
@@ -120,7 +136,7 @@
     margin: to-rems(10px) 0;
 
     &.sticky-top {
-        @include elr-sticky-menu('top');
+        @include elr-sticky-menu($config: (position: 'top'));
         top: to-rems(60px);
     }
 
@@ -137,7 +153,7 @@
     float: left;
 
     &.sticky-left {
-        @include elr-sticky-menu('left');
+        @include elr-sticky-menu($config: (position: 'left'));
         width: to-rems(250px);
     }
 
@@ -168,12 +184,55 @@
     }
 }
 
-.elr-tooltip-left { @include elr-tooltip(left, $text-color, $background-color, 100px); }
-.elr-tooltip-right { @include elr-tooltip(right, $text-color, $background-color, 100px); }
-.elr-tooltip-top { @include elr-tooltip(top, $text-color, $background-color, 100px); }
-.elr-tooltip-bottom { @include elr-tooltip(bottom, $text-color, $background-color, 100px); }
+.elr-tooltip-left {
+    @include elr-tooltip(
+        $config: (
+            direction: left,
+            bk-color: $text-color,
+            color: $background-color
+        )
+    );
+}
 
-.elr-sortable-table { @include elr-table-rounded($background-color, $text-color, $link-color, $light-grey, $lightest-grey); }
+.elr-tooltip-right {
+    @include elr-tooltip(
+        $config: (
+            direction: right,
+            bk-color: $text-color,
+            color: $background-color
+        )
+    );
+}
+
+.elr-tooltip-top {
+    @include elr-tooltip(
+        $config: (
+            direction: top,
+            bk-color: $text-color,
+            color: $background-color
+        )
+    );
+}
+
+.elr-tooltip-bottom {
+    @include elr-tooltip(
+        $config: (
+            direction: bottom,
+            bk-color: $text-color,
+            color: $background-color
+        )
+    );
+}
+
+.elr-sortable-table {
+    @include elr-table-rounded(
+        $config: (
+            bk-color: $background-color,
+            border-color: $light-grey,
+            stripes: $lightest-grey
+        )
+    );
+}
 
 // .elr-select { @include elr-select-control(200px); }
 

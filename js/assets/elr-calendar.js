@@ -1,10 +1,10 @@
-import elrUtlities from 'elr-utility-lib';
+// import elrUtlities from 'elr-utility-lib';
 import elrTimeUtlities from 'elr-time-utilities';
 import elrCalendarCreate from './elr-calendar-create';
 import elrCalendarActions from './elr-calendar-actions';
 const $ = require('jquery');
 
-let elr = elrUtlities();
+// let elr = elrUtlities();
 let elrTime = elrTimeUtlities();
 let elrCreate = elrCalendarCreate();
 let elrActions = elrCalendarActions();

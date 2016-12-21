@@ -14,10 +14,54 @@
 .elr-rounded-square { margin: to-rems(20px); }
 
 .shapes .elr-col-4 { height: to-rems(300px); }
-.circle { @include elr-circle(200px); }
-.elr-rectangle { @include elr-rectangle(300px, 200px); }
-.elr-rounded-rectangle { @include elr-rectangle(300px, 200px, null, 5px); }
-.elr-square { @include elr-square(200px); }
-.elr-rounded-square { @include elr-square(200px, null, 5px); }
-.elr-triangle { @include elr-triangle(top-left, 200px, auto, $main-color); }
-.elr-equilateral-triangle { @include elr-equilateral-triangle(top, 200px, $main-color); }
+
+.circle {
+    @include elr-circle($config: (diameter: 200px));
+}
+
+.elr-rectangle {
+    @include elr-rectangle($config: (height: 200px));
+}
+
+.elr-rounded-rectangle {
+    @include elr-rectangle(
+        $config: (
+            height: 200px,
+            border-radius: 5px
+        )
+    );
+}
+
+.elr-square {
+    @include elr-square($config: (width: 200px));
+}
+
+.elr-rounded-square {
+    @include elr-square(
+        $config: (
+            width: 200px,
+            border-radius: 5px
+        )
+    );
+}
+
+.elr-triangle {
+    @include elr-triangle(
+        $config: (
+            direction: top-left,
+            base: 200px,
+            height: auto,
+            color: $main-color
+        )
+    );
+}
+
+.elr-equilateral-triangle {
+    @include elr-equilateral-triangle(
+        $config: (
+            direction: top,
+            base: 200px,
+            color: $main-color
+        )
+    );
+}

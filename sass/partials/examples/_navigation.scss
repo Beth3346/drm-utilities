@@ -29,31 +29,91 @@
 .nav-bar { @include elr-nav-bar; }
 
 .nav-bar-solid {
-    @include elr-nav-bar($white, $white, left, transparent, $link-color);
+    @include elr-nav-bar(
+        $config: (
+            text-color: $white,
+            hover-color: $white,
+            divider-color: transparent,
+            background-color: $link-color,
+            active-color: lighten($link-color, 10%)
+        )
+    );
 }
 
 .nav-bar-stacked {
-    @include elr-nav-bar($text-color, $link-color, left, transparent, transparent, false, 0, transparent);
+    @include elr-nav-bar(
+        $config: (
+            divider-color: transparent,
+            inline: false,
+            active-color: transparent
+        )
+    );
 }
 
 .nav-bar-solid-stacked {
-    @include elr-nav-bar($white, $white, left, transparent, $link-color, false);
+    @include elr-nav-bar(
+        $config: (
+            text-color: $white,
+            hover-color: $white,
+            divider-color: transparent,
+            background-color: $link-color,
+            inline: false,
+            active-color: lighten($link-color, 10%)
+        )
+    );
 }
 
 .nav-bar-pills {
-    @include elr-nav-bar($link-color, $white, center, transparent, transparent, true, 3px, $link-color);
+    @include elr-nav-bar(
+        $config: (
+            hover-color: $white,
+            align: center,
+            divider-color: transparent,
+            border-radius: 3px,
+            active-color: $link-color
+        )
+    );
 }
 
 .nav-bar-pills-stacked {
-    @include elr-nav-bar($link-color, $white, left, transparent, transparent, false, 3px, $link-color);
+    @include elr-nav-bar(
+        $config: (
+            text-color: $link-color,
+            hover-color: $white,
+            divider-color: transparent,
+            inline: false,
+            border-radius: 3px,
+            active-color: $link-color
+        )
+    );
 }
 
 .nav-bar-pills-solid {
-    @include elr-nav-bar($white, $white, center, transparent, $link-color, true, 3px);
+    @include elr-nav-bar(
+        $config: (
+            text-color: $white,
+            hover-color: $white,
+            align: center,
+            divider-color: transparent,
+            background-color: $link-color,
+            border-radius: 3px,
+            active-color: lighten($link-color, 10%)
+        )
+    );
 }
 
 .nav-bar-pills-solid-stacked {
-    @include elr-nav-bar($white, $white, left, transparent, $link-color, false, 3px);
+    @include elr-nav-bar(
+        $config: (
+            text-color: $white,
+            hover-color: $white,
+            divider-color: transparent,
+            background-color: $link-color,
+            border-radius: 3px,
+            active-color: lighten($link-color, 10%),
+            inline: false
+        )
+    );
 }
 
 .css-dropdown-menu {

@@ -4,15 +4,20 @@
 }
 
 .flipper-container {
-    @include elr-circle(200px);
+    @include elr-circle($config: (width: 200px));
 }
 
 .flipper-front,
 .flipper-back {
-    @include elr-circle(200px);
+    @include elr-circle($config: (width: 200px));
 
     p {
-        @include elr-centerer(true, false);
+        @include elr-centerer(
+            $config: (
+                vertical: true,
+                horizontal: false
+            )
+        );
         font-size: to-rems(18px);
         width: 100%;
         color: $white;
@@ -24,7 +29,7 @@
 .flipper-back { background-color: $dark-pink; }
 
 .spin {
-    @include elr-circle(100px);
+    @include elr-circle($config: (width: 100px));
     background-color: lighten($elr-blue, 20%);
     text-align: center;
     color: $white;
@@ -74,8 +79,13 @@
         background-color: $lightest-grey;
     }
 
-    .fade-in { @include elr-fade('show', .3s); }
-    .fade-out { @include elr-fade('hide', .3s); }
+    .fade-in {
+        @include elr-fade($config: (type: 'show'));
+    }
+
+    .fade-out {
+        @include elr-fade($config: (type: 'hide'));
+    }
 }
 
 .slide-box {
@@ -102,9 +112,7 @@
         padding: 0;
         border-radius: to-rems(5px);
 
-        li {
-            padding: to-rems(5px) to-rems(10px);
-        }
+        li { padding: to-rems(5px) to-rems(10px); }
     }
 }
 
@@ -112,14 +120,10 @@
     width: to-rems(350px);
 
     &:hover {
-        h3 {
-            color: lighten($link-color, 10%);
-        }
+        h3 { color: lighten($link-color, 10%); }
     }
 
-    p {
-        font-size: to-rems(14px);
-    }
+    p { font-size: to-rems(14px); }
 
     h3 {
         transition: color .3s;
@@ -132,17 +136,17 @@
 .icon-border { @include elr-icon-border; }
 .icon-border-pop { @include elr-icon-border-pop; }
 .icon-dash { @include elr-icon-dash; }
-.icon-dash-rotate { @include elr-icon-dash(true); }
+.icon-dash-rotate { @include elr-icon-dash($config: (rotate: true)); }
 .icon-border-pull { @include elr-icon-border-pull; }
 .icon-background-fade { @include elr-icon-background-fade; }
 .icon-hamburger { @include elr-hamburger; }
 
 .icon-close { @include elr-icon-close; }
-.icon-arrow-left { @include elr-icon-arrow('left'); }
-.icon-arrow-right { @include elr-icon-arrow('right'); }
+.icon-arrow-left { @include elr-icon-arrow($config: (direction: 'left')); }
+.icon-arrow-right { @include elr-icon-arrow($config: (direction: 'right')); }
 
-.menu-animated { @include menu-animated(); }
-.menu-simple-lines { @include menu-simple-lines(); }
-.menu-double-lines { @include menu-double-lines(); }
-.menu-expanding-lines { @include menu-expanding-lines(); }
-.menu-drop-lines { @include menu-drop-lines($grey, $link-color, 2px); }
+.menu-animated { @include menu-animated; }
+.menu-simple-lines { @include menu-simple-lines; }
+.menu-double-lines { @include menu-double-lines; }
+.menu-expanding-lines { @include menu-expanding-lines; }
+.menu-drop-lines { @include menu-drop-lines($config: (line-thickness: 2px)); }

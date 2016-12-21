@@ -17,7 +17,7 @@
     margin: to-rems(5px);
     padding: to-rems(20px);
 
-    @include elr-breakpoint('saturn') {
+    @include elr-breakpoint($config: (point: 'saturn')) {
         margin-left: 0;
         margin-right: 0;
     }
