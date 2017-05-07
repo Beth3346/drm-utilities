@@ -3,6 +3,7 @@
 .main-content {
     padding: to-rems(40px) to-rems(10px) to-rems(20px);
     flex: 1 0 auto;
+    min-height: 90vh;
 
     @include elr-breakpoint($config: (point: 'neptune')) {
         padding-top: to-rems(5px);

@@ -17,6 +17,9 @@ import webpackStream from'webpack-stream';
 import sourcemaps from 'gulp-sourcemaps';
 import browserSync from 'browser-sync';
 import plumber from'gulp-plumber';
+import mocha from 'gulp-mocha';
+import notify from 'gulp-notify';
+import notifierReporter from 'mocha-notifier-reporter';
 
 let firstBuildReady = false;
 
@@ -62,7 +65,8 @@ gulp.task('clean:styles', () => {
 
 gulp.task('clean:scripts', () => {
     return del([
-        'js/build/'
+        'js/build/',
+        'dist/bundle.js'
     ]);
 });
 
@@ -113,7 +117,7 @@ gulp.task('scsslint', () => {
         .pipe(scsslint());
 });
 
-gulp.task('lint', () => {
+gulp.task('lint', ['test'], () => {
     return gulp.src(['js/assets/**/*.js'])
         .pipe(jshint())
         .pipe(jshint.reporter('default'));
@@ -184,6 +188,13 @@ gulp.task('default', ['views', 'styles', 'images', 'webpack'], () => {
             baseDir: paths.app
         }
     })
+});
+
+gulp.task('test', function() {
+  return gulp.src(['test/test.js'], { read: false })
+    .pipe(mocha({
+      reporter: notifierReporter.decorate('spec')
+    }));
 });
 
 gulp.task('build', ['views', 'styles', 'images', 'webpack:build']);

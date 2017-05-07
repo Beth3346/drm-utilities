@@ -15,16 +15,16 @@
     "report-coverage": "cat ./coverage/lcov.info | codecov"
   },
   "dependencies": {
-    "babel-runtime": "6.20.0",
+    "babel-runtime": "6.23.0",
     "elr-accordion": "2.1.1",
     "elr-accordion-nav": "2.0.2",
-    "elr-alerts": "1.2.0",
+    "elr-alerts": "1.2.1",
     "elr-back-to-top": "1.1.0",
     "elr-dropdown-buttons": "1.0.3",
     "elr-dropdown-menu": "1.0.3",
-    "elr-filter-grid": "1.1.0",
-    "elr-lightbox": "1.1.0",
-    "elr-modal": "1.1.0",
+    "elr-filter-grid": "1.1.2",
+    "elr-lightbox": "1.2.0",
+    "elr-modal": "1.1.2",
     "elr-modal-alerts": "1.1.0",
     "elr-offscreen-menus": "1.0.2",
     "elr-password": "1.2.0",
@@ -37,31 +37,31 @@
     "elr-tablesorter": "1.1.2",
     "elr-tabs": "1.0.4",
     "elr-time-utilities": "1.2.1",
-    "elr-ui": "0.1.2",
+    "elr-ui": "0.2.1",
     "elr-utility-lib": "2.0.1",
     "jquery": "3.1.1"
   },
   "devDependencies": {
-    "babel-core": "6.21.0",
-    "babel-preset-es2015": "6.18.0",
-    "browser-sync": "2.18.5",
+    "babel-core": "6.23.1",
+    "babel-preset-es2015": "6.22.0",
+    "browser-sync": "2.18.8",
     "del": "2.2.2",
     "gulp": "3.9.1",
     "gulp-autoprefixer": "3.1.1",
     "gulp-babel": "6.1.2",
-    "gulp-clean-css": "2.3.2",
+    "gulp-clean-css": "3.0.3",
     "gulp-csslint": "1.0.0",
     "gulp-eslint": "3.0.1",
     "gulp-imagemin": "3.1.1",
     "gulp-jshint": "2.0.4",
     "gulp-plumber": "1.1.0",
     "gulp-pug": "3.2.0",
-    "gulp-sass": "3.0.0",
+    "gulp-sass": "3.1.0",
     "gulp-scss-lint": "0.4.0",
-    "gulp-sourcemaps": "2.1.1",
-    "gulp-util": "3.0.7",
+    "gulp-sourcemaps": "2.4.1",
+    "gulp-util": "3.0.8",
     "jshint": "2.9.4",
-    "webpack": "1.14.0",
+    "webpack": "2.2.1",
     "webpack-stream": "3.2.0",
     "mocha": "^3.2.0",
     "mocha-notifier-reporter": "^0.1.2",
@@ -73,12 +73,12 @@
     "chai-subset": "^1.3.0",
     "codecov": "^1.0.1",
     "ghooks": "^2.0.0",
-    "gulp-mocha": "^3.0.1",
-    "gulp-notify": "^2.2.0"
+    "gulp-mocha": "^4.0.1",
+    "gulp-notify": "^3.0.0"
   },
   "config": {
     "ghooks": {
-      "pre-commit": "gulp"
+      "pre-commit": "gulp build"
     }
   },
   "nyc": {
