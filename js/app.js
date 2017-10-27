@@ -42,7 +42,7 @@ $('.js-reveal').on('click', function() {
     $(this).parent().find(target).toggleClass('active');
 });
 
-$('.flipper-container').on('click', function() {
+$('.js-flipper-container').on('click', function() {
     $(this).toggleClass('active');
 });
 

@@ -4,11 +4,24 @@
 }
 
 .flipper-container {
+    cursor: pointer;
+}
+
+.flipper-circle-container {
     @include elr-circle($config: (width: 200px));
 }
 
-.flipper-front,
-.flipper-back {
+.flipper-circle-front {
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+}
+
+.flipper-circle-back {
+    opacity: 1;
+}
+
+.flipper-circle-front,
+.flipper-circle-back {
     @include elr-circle($config: (width: 200px));
 
     p {
@@ -25,8 +38,32 @@
     }
 }
 
-.flipper-front { background-color: $elr-blue; }
-.flipper-back { background-color: $dark-pink; }
+.flipper-front,
+.flipper-square-front { background-color: $elr-blue; }
+.flipper-back,
+.flipper-square-back { background-color: $dark-pink; }
+
+.flipper-square-container {
+    @include elr-square($config: (width: 300px));
+}
+
+.flipper-square-front,
+.flipper-square-back {
+    @include elr-square($config: (width: 300px));
+
+    p {
+        @include elr-centerer(
+            $config: (
+                vertical: true,
+                horizontal: false
+            )
+        );
+        font-size: to-rems(18px);
+        width: 100%;
+        color: $white;
+        text-align: center;
+    }
+}
 
 .spin {
     @include elr-circle($config: (width: 100px));

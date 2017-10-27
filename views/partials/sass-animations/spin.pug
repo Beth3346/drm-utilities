@@ -7,10 +7,18 @@ section#flipper
             .elr-col-full.example-holder
                 .elr-col-half.flip-box
                     .flipper
-                        .flipper-container
-                            .flipper-front
+                        .flipper-container.flipper-circle-container.js-flipper-container
+                            p(style="color: red") Click Me!
+                            .flipper-front.flipper-circle-front
                                 p Click Me!
-                            .flipper-back
+                            .flipper-back.flipper-circle-back
+                                p Here is some content.
+                .elr-col-half.flip-box
+                    .flipper
+                        .flipper-container.flipper-square-container.js-flipper-container
+                            .flipper-front.flipper-square-front
+                                p Click Me!
+                            .flipper-back.flipper-square-back
                                 p Here is some content.
         .elr-row.source-section
             button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
@@ -51,8 +59,27 @@ section#flipper
                         }
                     }
 
-                    .flipper-front { background-color: $elr-blue; }
-                    .flipper-back { background-color: $dark-pink; }
+                    .flipper-container {
+                        @include elr-square(200px);
+                    }
+
+                    .flipper-front,
+                    .flipper-back {
+                        @include elr-square(200px);
+
+                        p {
+                            @include elr-centerer(true, false);
+                            @include elr-em-font(18px);
+                            width: 100%;
+                            color: $white;
+                            text-align: center;
+                        }
+                    }
+
+                    .flipper-front,
+                    .flipper-square-front { background-color: $elr-blue; }
+                    .flipper-back,
+                    .flipper-square-back { background-color: $dark-pink; }
                 h4.example-subheading JavaScript
                 pre.
                     $('.flipper-container').on('click', function() {
