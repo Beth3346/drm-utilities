@@ -54,12 +54,19 @@
 
 .example-holder { padding: to-rems(20px) 0; }
 
+.source-section {
+    margin-bottom: 20px;
+}
+
 .source-holder {
     @include elr-slide($config: (finalheight: 9000px));
-    overflow-y: scroll;
-    border: 1px solid $light-grey;
-    border-radius: 3px;
-    padding: 20px;
+
+    &.active {
+        overflow-y: scroll;
+        border: 1px solid $light-grey;
+        border-radius: 3px;
+        padding: 10px 20px;
+    }
 }
 
 pre {

@@ -79,7 +79,9 @@ section#labels
                 h4.example-subheading JavaScript
                 pre.
                     $('.label-close').on('click', function() {
-                        elr.clearElement($(this).parent('.label'));
+                        $(this).parent('.label').fadeOut(300, function() {
+                            $(this).remove()
+                        });
                     });
     .elr-container.example-section
         .elr-row

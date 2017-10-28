@@ -5,9 +5,16 @@ section#buttons
                 h3.example-heading Defualt Button
             .elr-col-full.example-holder.button-examples
                 a.elr-button.elr-button-primary Button
-            .elr-col-full
-                pre
-                    | .elr-button.elr-button-primary
+        .elr-row.source-section
+            button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+            .elr-col-full.source-holder
+                h4.example-subheading HTML
+                pre.
+                    &lt;a class="elr-button elr-button-primary"&gt;Button&lt;/a&gt;
+                h4.example-subheading Sass
+                pre.
+                    @include elr-helper-classes;
+        .elr-row.example-section
             .elr-col-full
                 h3.example-heading Simple Context Buttons
             .elr-col-full.example-holder.button-examples
@@ -16,10 +23,16 @@ section#buttons
                 a.elr-button.elr-button-success Success
                 a.elr-button.elr-button-info Info
                 a.elr-button.elr-button-muted Muted
-            .elr-col-full
-                pre
-                    | .elr-button.elr-button-danger
-                    | .elr-button.elr-button-warning
-                    | .elr-button.elr-button-success
-                    | .elr-button.elr-button-info
-                    | .elr-button.elr-button-muted
+        .elr-row.source-section
+            button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+            .elr-col-full.source-holder
+                h4.example-subheading HTML
+                pre.
+                    &lt;a class="elr-button elr-button-danger"&gt;Button&lt;/a&gt;
+                    &lt;a class="elr-button elr-button-warning"&gt;Button&lt;/a&gt;
+                    &lt;a class="elr-button elr-button-success"&gt;Button&lt;/a&gt;
+                    &lt;a class="elr-button elr-button-info"&gt;Button&lt;/a&gt;
+                    &lt;a class="elr-button elr-button-muted"&gt;Button&lt;/a&gt;
+                h4.example-subheading Sass
+                pre.
+                    @include elr-helper-classes;

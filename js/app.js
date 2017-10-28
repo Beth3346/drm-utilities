@@ -47,7 +47,9 @@ $('.js-flipper-container').on('click', function() {
 });
 
 $('.label-close').on('click', function() {
-    elr.clearElement($(this).parent('.label'));
+    $(this).parent('.label').fadeOut(300, function() {
+        $(this).remove()
+    });
 });
 
 $('button.mobile-menu-toggle').on('click', function(e) {
