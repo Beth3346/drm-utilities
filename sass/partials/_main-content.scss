@@ -59,7 +59,7 @@
 }
 
 .source-holder {
-    @include elr-slide($config: (finalheight: 9000px));
+    // @include elr-slide($config: (finalheight: 9000px));
 
     &.active {
         overflow-y: scroll;

@@ -1,8 +1,12 @@
 section#layout
     .elr-container
+        .elr-row
+            .elr-col-full
+                p Layout helper classes can be used to style layouts using just CSS classes.  They can be especially useful in CMS content where CSS is not easily accessed.
         .elr-row.example-section
             .elr-col-full
                 h3.example-heading.elr-bold Float Boxes Left or Right
+                p Uses traditional CSS floats to position content.
             .elr-col-full.example-holder
                 .elr-pull-left.box
                     p Left
@@ -11,79 +15,239 @@ section#layout
             .elr-col-full
                 pre .elr-pull-left
                 pre .elr-pull-right
+        .elr-row.source-section
+            button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+            .elr-col-full.source-holder
+                h4.example-subheading HTML
+                pre.
+                    &lt;div class="elr-pull-left"&gt;
+                        &lt;p&gt;Left&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div class="elr-pull-right"&gt;
+                        &lt;p&gt;Right&lt;/p&gt;
+                    &lt;/div&gt;
+                h4.example-subheading Sass
+                pre.
+                    @include elr-helper-classes;
         .elr-row.example-section
             .elr-col-full
                 h3.example-heading.elr-bold Center Block
+                p Uses margin auto to position a block in the center of its container.  Block must have a set width.
             .elr-col-full.example-holder
                 .box.elr-center-block
                     p Center Block
             .elr-col-full
                 pre .elr-center-block
+        .elr-row.source-section
+            button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+            .elr-col-full.source-holder
+                h4.example-subheading HTML
+                pre.
+                    &lt;div class="box elr-center-block"&gt;
+                        &lt;p&gt;Center Block&lt;/p&gt;
+                    &lt;/div&gt;
+                h4.example-subheading Sass
+                pre.
+                    @include elr-helper-classes;
         .elr-row.example-section
             .elr-col-full
                 h3.example-heading.elr-bold Clearfix
+                p Clears a container.
+            .elr-col-full.example-holder
+                .elr-clear(style="background-color: #ccc; border: 1px solid #999; padding: 20px")
+                    .elr-pull-left.box
+                        p Left
+                    .elr-pull-right.box
+                        p Right
+            .elr-col-full
                 pre .elr-clear
+        .elr-row.example-section
+            .elr-col-full
+                h3.example-heading.elr-bold Screen Readers
+                p Add content for screen readers only. This content will be hidden visually.
+            .elr-col-full.example-holder
+                p.elr-screen-reader Hello Screen Reader
             .elr-col-full
                 pre .elr-screen-reader
         .elr-row.example-section
             .elr-col-full
                 h3.example-heading.elr-bold Layout Reset Classes
+                p Remove layout styles from elements
             .elr-col-full
                 .box-model
                     .box-model-inner
-                p Default Box
+                p Default Box. Has margin, padding, background color, and border applied.
+        .elr-row.source-section
+            button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+            .elr-col-full.source-holder
+                h4.example-subheading HTML
+                pre.
+
+                h4.example-subheading Sass
+                pre.
+                    @include elr-helper-classes;
+        .elr-row.example-section
             .elr-col-full
                 .box-model.elr-no-margin
                     .box-model-inner
                 pre .elr-no-margin
+        .elr-row.source-section
+            button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+            .elr-col-full.source-holder
+                h4.example-subheading HTML
+                pre.
+
+                h4.example-subheading Sass
+                pre.
+                    @include elr-helper-classes;
+        .elr-row.example-section
             .elr-col-full
                 .box-model.elr-no-padding
                     .box-model-inner
                 pre .elr-no-padding
+        .elr-row.source-section
+            button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+            .elr-col-full.source-holder
+                h4.example-subheading HTML
+                pre.
+
+                h4.example-subheading Sass
+                pre.
+                    @include elr-helper-classes;
+        .elr-row.example-section
             .elr-col-full
                 .box-model
                     .box-model-inner
                 pre .elr-no-float
+        .elr-row.source-section
+            button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+            .elr-col-full.source-holder
+                h4.example-subheading HTML
+                pre.
+
+                h4.example-subheading Sass
+                pre.
+                    @include elr-helper-classes;
+        .elr-row.example-section
             .elr-col-full
                 .box-model.elr-no-background
                     .box-model-inner
                 pre .elr-no-background
+        .elr-row.source-section
+            button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+            .elr-col-full.source-holder
+                h4.example-subheading HTML
+                pre.
+
+                h4.example-subheading Sass
+                pre.
+                    @include elr-helper-classes;
+        .elr-row.example-section
             .elr-col-full
                 .box-model.elr-no-border
                     .box-model-inner
                 pre .elr-no-border
+        .elr-row.source-section
+            button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+            .elr-col-full.source-holder
+                h4.example-subheading HTML
+                pre.
+
+                h4.example-subheading Sass
+                pre.
+                    @include elr-helper-classes;
+        .elr-row.example-section
             .elr-col-full
                 h3.example-heading.elr-bold Overflow Classes
+        .elr-row.source-section
+            button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+            .elr-col-full.source-holder
+                h4.example-subheading HTML
+                pre.
+
+                h4.example-subheading Sass
+                pre.
+                    @include elr-helper-classes;
+        .elr-row.example-section
             .elr-col-full
                 .box-model(style="margin-bottom: 80px")
                     .box-model-inner
                         .box-model-overflow
                             p This box is too big for its container
                 p Default Box
+        .elr-row.source-section
+            button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+            .elr-col-full.source-holder
+                h4.example-subheading HTML
+                pre.
+
+                h4.example-subheading Sass
+                pre.
+                    @include elr-helper-classes;
+        .elr-row.example-section
             .elr-col-full
                 .box-model
                     .box-model-inner.elr-o-hidden
                         .box-model-overflow
                             p This box is too big for its container
                 pre .elr-o-hidden
+        .elr-row.source-section
+            button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+            .elr-col-full.source-holder
+                h4.example-subheading HTML
+                pre.
+
+                h4.example-subheading Sass
+                pre.
+                    @include elr-helper-classes;
+        .elr-row.example-section
             .elr-col-full
                 .box-model
                     .box-model-inner.elr-o-scroll
                         .box-model-overflow
                             p This box is too big for its container
                 pre .elr-o-scroll
+        .elr-row.source-section
+            button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+            .elr-col-full.source-holder
+                h4.example-subheading HTML
+                pre.
+
+                h4.example-subheading Sass
+                pre.
+                    @include elr-helper-classes;
+        .elr-row.example-section
             .elr-col-full
                 .box-model
                     .box-model-inner.elr-o-scroll-x
                         .box-model-overflow
                             p This box is too big for its container
                 pre .elr-o-scroll-x
+        .elr-row.source-section
+            button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+            .elr-col-full.source-holder
+                h4.example-subheading HTML
+                pre.
+
+                h4.example-subheading Sass
+                pre.
+                    @include elr-helper-classes;
+        .elr-row.example-section
             .elr-col-full
                 .box-model
                     .box-model-inner.elr-o-scroll-y
                         .box-model-overflow
                             p This box is too big for its container
                 pre .elr-o-scroll-y
+        .elr-row.source-section
+            button.elr-button.elr-button-small.elr-button-info.js-reveal(data-target=".source-holder") View Source &lt;&gt;
+            .elr-col-full.source-holder
+                h4.example-subheading HTML
+                pre.
+
+                h4.example-subheading Sass
+                pre.
+                    @include elr-helper-classes;
         .elr-row.example-section
             .elr-col-full
                 h3.example-heading.elr-bold Flex Layout Classes
