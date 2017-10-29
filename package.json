@@ -12,7 +12,8 @@
     "test": "nyc mocha test/test.js --compilers js:babel-core/register",
     "test watch": "nyc mocha test/test.js watch --compilers js:babel-core/register",
     "cover": "nyc --reporter=lcov npm test",
-    "report-coverage": "cat ./coverage/lcov.info | codecov"
+    "report-coverage": "cat ./coverage/lcov.info | codecov",
+    "precommit": "gulp build"
   },
   "dependencies": {
     "babel-runtime": "6.26.0",
@@ -78,11 +79,6 @@
     "nyc": "^11.2.1",
     "webpack": "3.8.1",
     "webpack-stream": "4.0.0"
-  },
-  "config": {
-    "ghooks": {
-      "pre-commit": "gulp build"
-    }
   },
   "nyc": {
     "check-coverage": true,
