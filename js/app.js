@@ -158,74 +158,74 @@ $('.js-show-confirmation-alert').on('click', function() {
 
 elrBackToTop();
 
-elrCalendar({
-    view: 'month',
-    addHolidays: true,
-    currentDate: elrTime.today(),
-    // currentDate: {
-    //     'month': 10,
-    //     'date': 23,
-    //     'year': 2016
-    // }
-    newEvents: [
-        {
-            'name': 'First Tuesday of Month',
-            'recurrance': 'monthly',
-            'day': ['Tuesday'],
-            'dayNum': 'first'
-        },
-        {
-            'name': 'First MWF',
-            'recurrance': 'monthly',
-            'day': ['Monday', 'Wednesday', 'Friday'],
-            'dayNum': 'first'
-        },
-        {
-            'name': 'Last Friday',
-            'recurrance': 'monthly',
-            'day': ['Friday'],
-            'dayNum': 'last'
-        },
-        {
-            'name': 'Rabbit Rabbit Day',
-            'recurrance': 'monthly',
-            'eventDate': 1
-        },
-        {
-            'name': 'Pay Day',
-            'recurrance': 'biweekly',
-            'day': ['Monday', 'Friday'],
-            'week': 'even'
-        },
-        {
-            'name': 'Lawn Day',
-            'recurrance': 'biweekly',
-            'day': ['Thursday'],
-            'week': 'odd'
-        },
-        {
-            'name': 'Day Off',
-            'recurrance': 'weekly',
-            'day': ['Saturday', 'Sunday']
-        },
-        {
-            'name': 'Work Day',
-            'recurrance': 'weekly',
-            'day': ['Friday']
-        },
-        {
-            'name': 'Wake Up',
-            'recurrance': 'daily'
-        },
-        {
-            'name': 'Special Event',
-            'recurrance': 'one-time',
-            'month': 11,
-            'eventDate': 7,
-            'year': 2016
-        }
-    ]
-});
+// elrCalendar({
+//     view: 'month',
+//     addHolidays: true,
+//     currentDate: elrTime.today(),
+//     // currentDate: {
+//     //     'month': 10,
+//     //     'date': 23,
+//     //     'year': 2016
+//     // }
+//     newEvents: [
+//         {
+//             'name': 'First Tuesday of Month',
+//             'recurrance': 'monthly',
+//             'day': ['Tuesday'],
+//             'dayNum': 'first'
+//         },
+//         {
+//             'name': 'First MWF',
+//             'recurrance': 'monthly',
+//             'day': ['Monday', 'Wednesday', 'Friday'],
+//             'dayNum': 'first'
+//         },
+//         {
+//             'name': 'Last Friday',
+//             'recurrance': 'monthly',
+//             'day': ['Friday'],
+//             'dayNum': 'last'
+//         },
+//         {
+//             'name': 'Rabbit Rabbit Day',
+//             'recurrance': 'monthly',
+//             'eventDate': 1
+//         },
+//         {
+//             'name': 'Pay Day',
+//             'recurrance': 'biweekly',
+//             'day': ['Monday', 'Friday'],
+//             'week': 'even'
+//         },
+//         {
+//             'name': 'Lawn Day',
+//             'recurrance': 'biweekly',
+//             'day': ['Thursday'],
+//             'week': 'odd'
+//         },
+//         {
+//             'name': 'Day Off',
+//             'recurrance': 'weekly',
+//             'day': ['Saturday', 'Sunday']
+//         },
+//         {
+//             'name': 'Work Day',
+//             'recurrance': 'weekly',
+//             'day': ['Friday']
+//         },
+//         {
+//             'name': 'Wake Up',
+//             'recurrance': 'daily'
+//         },
+//         {
+//             'name': 'Special Event',
+//             'recurrance': 'one-time',
+//             'month': 11,
+//             'eventDate': 7,
+//             'year': 2016
+//         }
+//     ]
+// });
 
 elrDropdownButton();
 
@@ -244,7 +244,7 @@ elrPasswords();
 elrPopovers();
 
 elrSimpleSlider({effect: 'fade'});
-elrSimpleSlider({sliderClass: 'elr-simple-slider-2', effect: 'slide-left'});
+// elrSimpleSlider({sliderClass: 'elr-simple-slider-2', effect: 'slide-left'});
 
 elrSort();
 

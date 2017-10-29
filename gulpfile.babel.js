@@ -100,8 +100,10 @@ gulp.task('styles', ['scsslint'], () => {
 
     return gulp.src(files.scss)
         .pipe(plumber())
-        .pipe(sass().on('error', sass.logError))
-            .pipe(gulp.dest(paths.css))
+        .pipe(sass({
+            includePaths: ['node_modules']
+        }).on('error', sass.logError))
+        .pipe(gulp.dest(paths.css))
         .pipe(autoprefixer({
             browsers: ['last 3 versions'],
             cascade: false
@@ -126,7 +128,7 @@ gulp.task('lint', ['test'], () => {
 gulp.task('babel', ['lint'], () => {
     return gulp.src(['js/assets/*.js', 'js/app.js'])
         .pipe(babel({
-            presets: ['es2015']
+            presets: ['env']
         }))
         .pipe(gulp.dest(`js/build`));
 });
